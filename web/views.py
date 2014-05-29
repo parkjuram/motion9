@@ -1,5 +1,6 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
+from motion9.const import *
 from web.models import Product
 
 # # def get_product_list(page_num=1, category_key=None):
@@ -35,12 +36,13 @@ from web.models import Product
 #     return product_list
 
 def _get_product_list(category_id=None, page_num=1):
-    product = Product.objects.all()
+    product = Product.objects
 
-    # if category_id is not None:
-    #     product.filter(category_id=category_id)
+    if category_id is not None:
+        product.filter(category_id=category_id)
 
-    product = product.all()
+    products = product.all()
+
 
     print product
 
