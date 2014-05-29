@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+CHARSET = 'utf-8'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -22,7 +23,7 @@ SECRET_KEY = 'atgl$8^42a$nspf0@9o9t6-*$33foid5nlxl0fzt!@*_%cl1e5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -36,6 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
+    'web',
+    'mobile',
+    'users',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,8 +62,12 @@ WSGI_APPLICATION = 'motion9.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'motion9',
+        'USER': 'arsdale',
+        'PASSWORD': 'gksehrjs0710',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

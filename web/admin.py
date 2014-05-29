@@ -1,3 +1,8 @@
 from django.contrib import admin
+from web.models import Category, Product, Set, CustomSet, CustomSetDetail
 
-# Register your models here.
+admin.site.register(Category)
+admin.site.register(Product)
+admin.site.register(Set)
+admin.site.register(CustomSet)
+admin.site.register(CustomSetDetail)
