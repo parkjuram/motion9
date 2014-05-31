@@ -164,7 +164,7 @@ def _get_set_list(category_id, user):
             'discount_price': discount_price
         })
 
-        sets_.append(sets_)
+        sets_.append(set_)
 
     return sets_
 
@@ -265,6 +265,8 @@ def shop_set_view(request, category_id=None, page_num=None):
         current_category = 'all'
     else:
         current_category = Category.objects.get(id=category_id).name
+
+    print sets['data']
 
     return render(request, 'shopping_set_web.html',
                   {
