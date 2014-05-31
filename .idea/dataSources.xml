@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="Django default" uuid="f35c4cdc-1d1f-4301-9c8c-fcfd7a36bfd2">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1/motion9</jdbc-url>
+      <jdbc-url>jdbc:postgresql://175.126.82.107/motion9</jdbc-url>
       <user-name>arsdale</user-name>
       <user-password>dfcddfc1dfd9dfcfdfc2dfd8dfc0dfd9df9adf9ddf9bdf9a</user-password>
       <libraries />

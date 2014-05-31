@@ -112,7 +112,7 @@ DATABASES = {
         'NAME': 'motion9',
         'USER': 'arsdale',
         'PASSWORD': 'gksehrjs0710',
-        'HOST': 'localhost',
+        'HOST': '175.126.82.107',
         'PORT': '',
     }
 }
