@@ -126,6 +126,15 @@ def _get_product(product_id, user):
     except ObjectDoesNotExist as e:
         logger.error(e)
 
+def _get_set_list(category_id=None):
+    sets = Set.objects
+    if category_id is not None:
+        sets = sets.filter(category_id=category_id)
+
+    sets = sets.all()
+    sets_ = []
+
+    # for set in sets:
 
 
 # # def get_set_list(page_num=1, category_key=None):
@@ -290,7 +299,7 @@ def product_view(request, product_id=None):
         return render(request, "product_detail_web.html",
                       {
                           'product': product,
-                          'blogReviews': blog_reivews
+                          'blog_reviews': blog_reivews
                       })
     else:
         logger.error( 'product_id is wrong in product_view')
