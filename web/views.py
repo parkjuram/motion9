@@ -6,6 +6,7 @@ from motion9.const import *
 from web.models import Product, Category, BlogReview
 
 import math
+import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -190,6 +191,7 @@ def shop_product_view(request, category_id=None, page_num=None):
 
     return render(request, 'shopping_product_web.html',
                   {
+
                       'products': products_,
                       'current_category': current_category,
                       'categories': categories,
@@ -202,17 +204,44 @@ def product_view(request, product_id=None):
     if product_id is not None:
         product = _get_product(product_id, _get_user())
         blog_reivews = _get_blog_reviews(product_id)
+
+        return render(request, "product_detail_web.html",
+                      {
+                          'product': product,
+                          'blogReviews': blog_reivews
+                      })
     else:
         logger.error( 'product_id is wrong in product_view')
+        return render(request, "404.html")
 
     logger.info( 'def product_view(request, product_id=None): end')
 
-# def productWeb(product_key):
+def product_json_view(request, product_id=None):
+    logger.info( 'def product_json_view(request, product_id=None): start')
+
+    if product_id is not None:
+        product = _get_product(product_id, _get_user())
+        product = {
+            'data': product
+        }
+        return json.dumps(product, ensure_ascii=False)
+    else:
+        logger.error( 'product_id is wrong in product_view')
+        return render(request, "404.html")
+
+    logger.info( 'def product_json_view(request, product_id=None): end')
+
+# @app.route('/product/json/<int:product_key>', methods = ['POST'])
+# def productWebJson(product_key):
 #     product = getProduct(product_key)
-#     blogList = getBlogReviewList(product_key, False)
-#     return render_template('product_detail_web.html', product=product, blogReviews=blogList)
-
-
+#     product_dict = dict( product.__dict__ )
+#     del product_dict['_sa_instance_state']
+#
+#     product_json = {
+#         'data': product_dict
+#     }
+#
+#     return json.dumps(product_json, ensure_ascii=False)
 
 
 
