@@ -1,0 +1,99 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail_web.css') }}"/>
+{% block subHeader %}
+{% endblock %}
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">제품 상세 설명</h4>
+                    </div>
+                    <div class="product-contents">
+                        <div class="product-img">
+                            <img src="{{ product.big_img_url}}" alt="" />
+                        </div>
+                        <div class="product-description">
+                            <h4  class="contents-header" style="padding-left:0px;">상세 설명 <a href="#" class="btn btn-info btn-for-interest"><span class="glyphicon glyphicon-star"></span> 관심</a></h4>
+                            {{ product.description }}
+                        </div>
+                    </div>
+                </div>
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">비포 애프터 동영상</h4>
+                    </div>
+                    <div class="product-sub-contents">
+                        <div class="video-review">
+                            <iframe width="100%" height="325" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-4">
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">구매</h4>
+                    </div>
+                    <div class="price-area">
+                        <div class="product-price"><span>{{ product.discount_price }}</span>원</div>
+                        <div class="product-name">{{product.name  }}</div>
+                        <div class="product-how-many">
+                            구매수량 :
+                            <select id="howManySelectBox">
+                                {% for number in range(1, 11) %}
+                                <option value="{{ number }}">
+                                    {{ number }}개
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="product-btn-area">
+                            <a href="{{ url_for('purchaseProductWeb', product_key = product.key) }}" class="btn btn-success "><span class="glyphicon glyphicon-heart"></span> 구매하기</a>
+                            <a href="#" class="btn btn-danger btn-for-cart" data-product = "{{ product.key }}"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">블로거 리뷰</h4>
+                    </div>
+                    <div id="blogger-review" class="product-sub-contents">
+                        <div>
+                             {% for blogReview in blogReviews %}
+                            <div class="blog-info blog-item">
+                                <div class="blog-contents">
+                                    <div class="blog-desc">
+                                        <div class="blog-img">
+                                            <img src="{{blogReview.big_img_url }}" alt="" />
+                                        </div>
+                                        {% if (blogReview.summary|length) > 30 %}
+                                            {{blogReview.summary[0:30]  }}
+                                        {% else %}
+                                            {{blogReview.summary  }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="blog-referer">
+                                        {{ blogReview.writer }}
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <hr/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

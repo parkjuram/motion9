@@ -122,4 +122,10 @@ $(function(){
 		});
 	});
 
+    $('#loginBox').jqm({modal:false});
+    $('.login-btn').click(function(e){
+        e.preventDefault();
+        $('#loginBox').jqmShow();
+    });
+
 });

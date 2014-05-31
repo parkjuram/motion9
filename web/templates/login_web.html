@@ -1,0 +1,27 @@
+{% extends "backup_web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login_web.css') }}"/>
+{% endblock %}
+{% block content %}
+
+    <div class="login-box">
+        <div class="login-box-header">
+            로그인
+        </div>
+        <form method="post" action="{{url_for('login', next = url_for_login_next )}}" >
+            <div class="form-box">
+                <label for="email">이메일</label>
+                <input type="text" name="email" id="email"/>
+            </div>
+            <div class="form-box">
+                <label for="password">비밀번호</label>
+                <input type="text" name="password" id="password"/>
+            </div>
+            <div class="form-btns">
+                <a href="#" class="basic-btn" style="padding : 8px 40px;">로그인</a> &nbsp;&nbsp;&nbsp;
+                <a href="#" class="facebook-btn">페이스북으로 로그인</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

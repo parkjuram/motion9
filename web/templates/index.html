@@ -1,0 +1,72 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+
+<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="{{ url_for('static', filename='img/post-img-6.jpg') }}" alt="" />
+      <div class="carousel-caption">
+        이니스프리
+      </div>
+    </div>
+    <div class="item">
+      <img src="{{ url_for('static', filename='img/post-img-7.jpg') }}" alt="" />
+      <div class="carousel-caption">
+        꽃을 든 남자
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    <span style="color:white; position: absolute; top : 40%;"><</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    <span style="color:white; position: absolute; top : 40%;">></span>
+  </a>
+</div>
+
+
+<div id="productList">
+  <div id="productGrid">
+        {% for product in products.data %}
+            <div class="service-list team">
+                <div class="service-item boxed bg-image-star2">
+                    <div class="service-content">
+                        <div class="service-image ">
+                            <a href="{{ url_for('productMobile', product_key = product.key) }}" data-ajax="false"><img src="{{ product.big_img_url }}" alt="" /></a>
+                        </div>
+                        <div class="service-title profile-interesting-title">
+                             {{ product.name}}
+                            <div class="product-price-box">
+                                Price : <b>{{ product.discount_price }}원</b><br/>
+                                Category : <b>{{ product.category_name}}</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-meta-bot">
+                        <ul class="service-links clearfix">
+                            {% if product.isInterested  %}
+                                <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9-disable">관심</a></li>
+                            {%  else  %}
+                                <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-interest">관심</a></li>
+                            {% endif %}
+                            <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-cart">장바구니</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+  </div>
+</div>
+{% endblock %}

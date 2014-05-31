@@ -1,0 +1,23 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index_web.css') }}"/>
+<script src="{{ url_for('static', filename='js/index_web.js') }}"></script>
+{% endblock %}
+{% block ad_area %}
+<div class="ad-area">
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="index-content-wrapper">
+    <div class="index-content">
+        <a href="#" class="index-content-img"><img src="{{ url_for('static', filename='img/surfer.jpg') }}"/></a>
+    </div>
+    <div class="index-content">
+        <a href="#" class="index-content-img"><img src="{{ url_for('static', filename='img/surfer.jpg') }}"/></a>
+    </div>
+    <div class="index-content">
+        <a href="#" class="index-content-img"><img src="{{ url_for('static', filename='img/surfer.jpg') }}"/></a>
+    </div>
+</div>
+{% endblock %}

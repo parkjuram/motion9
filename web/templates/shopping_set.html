@@ -1,0 +1,59 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_set.css') }}"/>
+
+<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/shopping_set.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+    <h2 class="ui-title">세트 구성 쇼핑</h2>
+{% endblock %}
+
+{% block content %}
+<div>
+    <div data-role="controlgroup" data-type="horizontal">
+        <select id="categoryList">
+            <option value="#">카테고리 선택</option>
+            <option value="all">모두 보기</option>
+            {% for category in categories %}
+               <option value="{{ category.key }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% for product in products %}
+    <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
+        <div class="product-img">
+            <img src="{{ product.big_img_url}}" alt="" />
+        </div>
+        <div class="product-contents">
+            <div class="product-info">
+                [{{ product.brandname }}]<br/>
+                <a href="{{ url_for('setMobile', set_key = product.key) }}">{{product.name }}</a>
+                <div class="product-price-box">
+                    Price : <b>￦{{ product.discount_price }} ({{product.capacity }})</b><br/>
+                    Category : <b>{{ product.category_name}}</b>
+                </div>
+            </div>
+        </div>
+        <div class="product-bottom-menu">
+            <ul class="menu-links clearfix">
+               {% if product.isInterested  %}
+                <li class=""><a href="#" data-product="{{ product.key }}" data-type="s" class="btn-for-interest btn-motion9-disable">관심</a></li>
+            {%  else  %}
+                <li class=""><a href="#" data-product="{{ product.key }}" data-type="s" class="btn-for-interest">관심</a></li>
+            {% endif %}
+                <li class=""><a href="#" class="btn-for-cart" data-type="s" data-product="{{ product.key }}">장바구니</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

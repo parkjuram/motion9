@@ -1,0 +1,42 @@
+{% extends "mypage_web.html" %}
+{% block subHeader %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_purchase_web.css') }}"/>
+
+{% endblock %}
+{% block productGrid %}
+    {% for product in carts.data%}
+    <div class="product-info product-item">
+        <div class="product-contents">
+            <h5><a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name  }}</a></h5>
+            <div class="product-price-box">
+                Price : <b>￦{{product.discount_price}}</b> ({{ product.capacity  }})<br/>
+            </div>
+        </div>
+        <div class="list-btn-wrapper btn-group-vertical">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">다시 구매</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">반품 신청</button>
+            </div>
+        </div>
+        <div class="product-img">
+            <img src="{{product.big_img_url }}" alt="" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr/>
+    {% endfor %}
+
+{% endblock %}
+
+{% block productPaging %}
+
+    <ul class="pagination">
+      <li {% if not carts.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
+      {% for pageNum in range(carts.page_left_count, carts.page_right_count+1 )%}
+      <li><a href="{{ url_for('myPageWebPurchase', pageNum = pageNum) }}">{{ pageNum  }}</a></li>
+      {% endfor %}
+      <li {% if not carts.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+    </ul>
+{% endblock %}

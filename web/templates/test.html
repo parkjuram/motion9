@@ -1,0 +1,45 @@
+{% extends "mypage_web.html" %}
+{% block subHeader %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_interesting_web.css') }}"/>
+
+<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mypage_interesting_web.js') }}"></script>
+{% endblock %}
+{% block productGrid %}
+
+<div>
+    <div class="product-item">
+        <div class="product-item-img">
+            <div class="product-opacity-bg product-hover-area">
+                <a href="#"><img src="detail.png" class="icon"/></a>
+            </div>
+            <img src="../static/img/c_n.jpg"/>
+        </div>
+        <div class="product-item-info">
+            <div class="product-item-category">
+                카테고리 > 스킨
+            </div>
+            <div class="product-item-name">
+                미샤 포맨 리뉴 스킨
+            </div>
+            <div class="product-item-price">
+                ￦ 27,000
+            </div>
+            <div class="product-hover-area">
+                <div class="product-item-desc">
+                    토탈 리페어 스킨. <br/>
+                    남자도 이젠 꼼꼼한 피부 관리가 필요하다.
+                    거칠어진 피부 결과 주름을 집중적으로..
+                </div>
+                <div class="product-item-btn-group">
+                    <div class="product-item-btn"><a href="#"><img src="interest.png"/> 관심하기</a></div>
+                    <div class="product-item-btn"><a href="#"><img src="Add_to_basket.png"/> 장바구니</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

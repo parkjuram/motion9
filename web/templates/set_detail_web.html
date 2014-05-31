@@ -1,0 +1,128 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/set_detail_web.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='magnific_popup/magnific-popup.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='spinner/jquery.spinner.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='tab/easy-responsive-tabs.css') }}"/>
+<script src="{{ url_for('static', filename='magnific_popup/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/set_detail_web.js') }}"></script>
+<script src="{{ url_for('static', filename='spinner/jquery.spinner.js') }}"></script>
+<script src="{{ url_for('static', filename='tab/easyResponsiveTabs.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="row" style="margin-top: 20px;">
+    <div class="main-container float-left">
+        <div class="box-css">
+            <div class="box-header">
+                Collection > 라이프 스타일 컬렉션 > 깜둥이를 위한 세트
+            </div>
+            <div class="set-category-box">
+                카테고리 > 흑인세트
+            </div>
+            <div class="product-contents">
+                <div class="float-left">
+                    <div class="set-img">
+                        <img src="http://image.auction.co.kr/itemimage/63/c0/fd/63c0fda73.jpg" alt="" />
+                    </div>
+                </div>
+                <div class="float-right">
+                    <div class="set-img-gallery">
+                        <a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_s.jpg" ></a>
+                        <a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_s.jpg" ></a>
+                        <a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_s.jpg" ></a>
+                        <a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_s.jpg" ></a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div>
+                    <div class="tag-header">태그</div>
+                    <div class="tag-list">
+                        <a href="#">여드름</a>, <a href="#">하얀피부</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-css" style="background-color: #F3F3F3;">
+            <div id="setTabs">
+                <ul class="resp-tabs-list">
+                    <li>상세설명</li>
+                    <li style="margin-left: -1px;">상품정보고시</li>
+                </ul>
+
+                <div class="resp-tabs-container">
+                    <div> 상품 정보가 어쩌구 저쩌구</div>
+                    <div> 고시가 어쩌구</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-container float-left">
+        <div class="box-css">
+            <div class="box-header">
+                구매
+            </div>
+
+            <div class="price-area">
+                <div class="product-price price-origin">원래 가격 : 113,000원 (<span class="price-discount">할인율 : 20%</span>)<!--<span>{{ set.original_price }}</span>--></div>
+                <div class="product-how-many">
+                    <div style="width :80px; margin-top : 6px; float: left;">
+                        구매수량 :
+                    </div>
+                    <div style="width : 100px; margin-left:2px; float:left;">
+                        <input type="text" class="cnt-spinner"/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="product-price price-saled">판매가 : <!--<span>{{ set.discount_price }}</span>--><span>99,000원</span></div>
+                <div class="product-price price-total">
+                    총 상품 금액 : 99,300원
+                </div>
+                <div class="product-btn-area">
+                    <a href="#" class="basic-btn">구매하기</a>
+                    <a href="#" class="basic-btn btn-for-cart">장바구니</a>
+                </div>
+            </div>
+        </div>
+        <div class="box-css">
+           <div class="box-header">
+               세트 구성
+           </div>
+           <div class="col-xs-12" style="padding-top: 4px; padding-bottom: 8px; ">
+           {% for number in range(0,2) %}
+               <div class="belong-to-set-item">
+                   <div class="product-opacity-bg product-hover-area">
+                       <a href="#" class="view-product-detail-btn"><img src="{{ url_for('static', filename='img/detail.png') }}" class="icon"/></a>
+                   </div>
+                   <div class="belong-product-img">
+                       <img src="http://file.beautynet.co.kr/updata/shop/pimg_b/11/20/pr_img555111.gif" alt="" />
+                   </div>
+                   <div class="belong-product-info">
+                       <div class="belong-product-name">
+                           미샤 포맨 익스트림 리뉴
+                       </div>
+                       <div class="belong-product-contents">
+                           카테고리 > 로션
+                       </div>
+                       <div class="belong-product-contents">
+                           브랜드 : 미샤
+                       </div>
+                       <div class="belong-product-contents">
+                           가격 : 19,000원
+                       </div>
+                       <div class="belong-product-contents">
+                           용량 : 120ml
+                       </div>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+           {% endfor %}
+           </div>
+        </div>
+    </div>
+</div>
+
+<div id="productDetailModal" class="jqmWindow">
+
+</div>
+{% endblock %}

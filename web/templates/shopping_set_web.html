@@ -1,0 +1,120 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_set_web.css') }}"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="{{ url_for('static', filename='js/shopping_set_web.js') }}"></script>
+{% endblock %}
+
+{% block ad_area %}
+<div class="ad-area">
+    <div class="ad-area-info">
+        <div class="ad-area-info-title">
+            서퍼들을 위한 세트
+        </div>
+        <div class="ad-area-info-contents">
+            -abcdefekjlefkef
+        </div>
+        <div style="margin-top : 20px;">
+            <a href="#" class="ad-area-btn">View Collection</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="main-container float-left">
+        <div class="box-css">
+            <div class="set-category">
+                Collection >
+            </div>
+            <div class="set-item">
+                <div class="set-item-info">
+                    <div class="set-item-info-title">
+                        간략설명
+                    </div>
+                    <div class="set-item-info-contents">
+                        디자이너가 존나 우유부단해서 디자인이 자주바낌<br/>
+                        짜증나지만 돈벌면 많이 나눠 줄거라 참고 있음<br/>
+                        하아
+                    </div>
+                    <div class="set-item-info-title">
+                        세트구성
+                    </div>
+                    <div class="set-item-info-contents">
+                        BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
+                    </div>
+                    <div class="set-item-info-bottom">
+                        \120,150 &nbsp;&nbsp;<a href="#" class="basic-btn">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="set-item">
+                <div class="set-item-info">
+                    <div class="set-item-info-title">
+                        간략설명
+                    </div>
+                    <div class="set-item-info-contents">
+                        디자이너가 존나 우유부단해서 디자인이 자주바낌<br/>
+                        짜증나지만 돈벌면 많이 나눠 줄거라 참고 있음<br/>
+                        하아
+                    </div>
+                    <div class="set-item-info-title">
+                        세트구성
+                    </div>
+                    <div class="set-item-info-contents">
+                        BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
+                    </div>
+                    <div class="set-item-info-bottom">
+                        \120,150 &nbsp;&nbsp;<a href="#" class="basic-btn">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-container float-left">
+        <div class="box-css">
+            <div class="filter-area">
+                <div class="set-item-info-title">
+                    Filter by 가격
+                </div>
+                <div class="filter-area-contents">
+                    <div class="price-ranger">
+                        <div id="priceRange"></div>
+                    </div>
+                    <div class="price-filter">
+                        가격 : <span id="sPrice"></span>원 - <span id="fPrice"></span>원 &nbsp; <a href="#" class="basic-btn">filter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-area">
+                <div class="set-item-info-title">
+                    Filter by 태그
+                </div>
+                <div class="filter-area-contents">
+                    <ul>
+                        <li><a href="#" class="filter-selected">검은 피부</a></li>
+                        <li><a href="#">노화 방지</a></li>
+                        <li><a href="#">프리미엄</a></li>
+                        <li><a href="#">잦은 자외선 노출</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter-area">
+                <div class="set-item-info-title">
+                    Filter by 컬렉션
+                </div>
+                <div class="filter-area-contents">
+                    <ul>
+                        <li><a href="#" class="filter-selected">라이프 스타일 컬렉션</a></li>
+                        <li><a href="#">계절 컬렉션</a></li>
+                        <li><a href="#">피부상태에 따른 컬렉션</a></li>
+                        <li><a href="#">프리미엄 컬렉션</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Motion9</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
+    <script type="text/javascript">
+        var url_for_login_next = "{{ url_for('login', next=request.url ) }}";
+    </script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_js.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_js_web.js') }}"></script>
+    <style>
+        body{
+            min-width: 970px;
+            padding-top : 70px;
+            font-size: 14px;
+        }
+    </style>
+    {% block header %}
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container-fluid" style="  min-width: 970px;">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="/index">The Motion9</a>
+      </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+      <ul class="nav navbar-nav">
+          <li {% if current_page == 'shopping1' %}class="active"{% endif %}><a href="{{ url_for('shoppingSet') }}">쇼핑1</a></li>
+          <li {% if current_page == 'shopping2' %}class="active"{% endif %}><a href="{{ url_for('shoppingProduct') }}">쇼핑2</a></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">What is the Motion9?</a></li>
+            <li><a href="#">Contact the Motion9</a></li>
+            <li class="divider"></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li class="divider"></li>
+            <li><a href="#">privacy</a></li>
+          </ul>
+        </li>
+
+      </ul>
+      <form class="navbar-form navbar-right" style="width : 240px;" role="search">
+        <div class="form-group">
+           <div class="input-group">
+               <input type="text" class="form-control" placeholder="Search">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> </button>
+               </span>
+           </div>
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
+        {% if g.user %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ g.user.name }} 님<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ url_for('myPageWeb') }}">My 페이지</a></li>
+                <li class="divider"></li>
+                <li><a href="/logout">로그아웃</a></li>
+            </ul>
+        </li>
+        {% else %}
+        <li>
+            <a href="/login">로그인</a>
+        </li>
+        {% endif %}
+      </ul>
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container" style="  min-width: 980px;">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- show flash message if exist -->
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div><br/>
+        {% endfor %}
+        <!-- ------------------------------ -->
+        </div>
+    </div>
+
+
+    {% block content %}
+    {% endblock %}
+    <p/>
+</div>
+<div class="container-fluid">
+    <div class="row footer-div">
+        <div class="col-xs-12">
+            <div class="">
+                (주) 아스델 | 대표이사 : 한도건 | 사업자 등록번호 : 119-86-58979<br/>
+                통신판매업신고 : 2013-서울관악-0392 | 개인정보관리책임자 : parkjuram@naver.com<br/>
+                서울시 관악구 관악로1 서울대학교 35동 214-7호 | Tel : 02-871-4510 <br/>
+                © Arsdale Co.,Ltd. All rights reserved.
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Motion9</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+    <script type="text/javascript">
+        var url_for_login_next = "{{ url_for('login', next=request.url ) }}";
+    </script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/common_js.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_js_mobile.js') }}"></script>
+    {% block header %}
+    {% endblock %}
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="panel" id="menuPanel" data-position="left" data-display="push" data-position-fixed="true">
+	    <!-- panel content goes here -->
+	   <div>
+	   		<h1 id="menuPanelTitle">Motion9</h1>
+	   </div>
+	   <ul data-role="listview" id="menuListView">
+		    <li data-icon="false"><a href="/">홈</a></li>
+		    <li data-icon="false"><a href="{{ url_for('myPageMobile') }}" data-ajax="false">프로필</a></li>
+		    <li data-icon="false"><a href="/mshopping1" data-ajax="false">쇼핑1</a></li>
+		    <li data-icon="false"><a href="{{ url_for('mshoppingProduct') }}" data-ajax="false">쇼핑2</a></li>
+		    <li data-icon="false"><a href="#">About</a></li>
+		    <li data-icon="false"><a href="#">Help</a></li>
+           {% if g.user %}
+		    <li data-icon="false"><a href="{{url_for('logout')}}">로그아웃</a></li>
+           {% endif %}
+		</ul>
+	</div><!-- /panel -->
+	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="loginForm">
+        {% if g.user %}
+            <div class="ui-grid-solo">
+                <div class="ui-block-a">
+                    <a href="{{url_for('logout')}}" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">로그아웃</a>
+                </div>
+            </div>
+        {% else %}
+            <form method="post" action="{{url_for('login')}}" data-ajax="false">
+                <h2>로그인</h2>
+                <label for="name">Email:</label>
+                <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a">
+                        <input type="submit" data-mini="true" value="로그인"/>
+                    </div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a"><a href="/join" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">회원가입</a></div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
+                </div>
+            </form>
+        {% endif %}
+    </div><!-- /panel -->
+	<div data-role="header" data-position="fixed">
+		<a href="#menuPanel" class="ui-btn-left ui-btn ui-btn-inline ui-btn-icon-notext ui-corner-all ui-icon-grid">Menu</a>
+        {% block title %}
+    	<h2 class="ui-title">Motion9</h2>
+        {% endblock %}
+    	<div  class="ui-btn-right">
+	    	<a href="{{ url_for('cartMobile') }}" data-ajax="false" class="ui-btn ui-btn-inline ui-icon-shop ui-btn-icon-notext ui-corner-all">No text</a>
+	    	<a href="#loginForm" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-notext ui-corner-all">No text</a>
+    	</div>
+        {% block special_header %}
+        {% endblock %}
+	</div>
+	<div data-role="main" class="ui-content">
+        
+        <!-- show flash message if exist -->
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div><br/>
+        {% endfor %}
+        <!-- ------------------------------ -->
+
+		{% block content %}
+        {% endblock %}
+	</div>
+    {% block footer %}
+	<div data-role="footer">
+		<div class="footer-div">
+                (주) 아스델 | 대표이사 : 한도건 <br/> 사업자 등록번호 : 119-86-58979<br/>
+                통신판매업신고 : 2013-서울관악-0392 <br/>
+                서울시 관악구 관악로1 서울대학교 35동 214-7호 <br/> Tel : 02-871-4510 <br/>
+                © Arsdale Co.,Ltd. All rights reserved.
+        </div>
+	</div>
+    {% endblock %}
+</div>
+
+</body>
+</html>

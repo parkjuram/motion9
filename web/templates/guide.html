@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Guide</title>
+    <style>
+        @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+        body{
+            font-family: 'Nanum Gothic';
+            margin: 0;
+            padding : 0;
+        }
+        #header{
+            width : 100%;
+            margin-top : 0px;
+            margin-bottom : 25px;
+            position: relative;
+            border-bottom : 1px solid #d9d9d9;
+        }
+
+        #header-wrapper{
+            position: relative;
+            width : 1024px;
+            margin-left: auto;
+            margin-right : auto;
+        }
+
+        #brand{
+            z-index: 1;
+            position: absolute;
+            top : -30px;
+            left : 20px;
+        }
+
+        #header-top-menu{
+            position: relative;
+            width : 100%;
+            height : 27px;
+            /*
+            background: #c5b591;
+            */
+            letter-spacing: 1px;
+            font-weight: bold;
+            font-size : 11px;
+            color : #c5b591;
+        }
+
+        #header-top-menu a{
+            color : inherit;
+            text-decoration: none;
+        }
+
+        #header-top-menu a:hover{
+            color : inherit;
+            text-decoration: none;
+        }
+
+        #header-top-menu-list{
+            margin : 0 20px 0 0 ;
+            padding : 0;
+            list-style: none;
+            position: absolute;
+            top : 30%;
+            right : 0;
+
+        }
+        #header-top-menu-list li{
+            float : left;
+            margin-left : 10px;
+            padding-right: 10px;
+            text-align: center;
+            border-right : 1px solid #c5b591;
+        }
+
+        div.arrow-down {
+            z-index: 5;
+            position: absolute;
+            bottom:-10px;
+            right : 50px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #c5b591;
+            font-size: 0;
+            line-height: 0;
+        }
+
+        #header-main-menu{
+            position: relative;
+            background-color: #fff;
+            font-size: 14px;
+            width : 100%;
+            padding : 30px 0 40px 0;
+
+        }
+
+        #header-main-menu a{
+            color : inherit;
+            text-decoration: none;
+        }
+
+        #header-main-menu a:hover{
+            color : inherit;
+            text-decoration: none;
+        }
+
+        .header-main-menu-list{
+            margin : 0 20px 0 0;
+            list-style: none;
+            position: absolute;
+            top : 40%;
+            right : 0;
+        }
+
+        .header-main-menu-list li{
+            margin-left : 40px;
+            float: left;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+
+        #nav-top-btn{
+            display: none;
+            width : 100px;
+            margin-right :auto;
+        }
+
+        .header-main-sub-menu{
+            margin : 0;
+            padding : 0;
+            z-index: 1;
+            list-style: none;
+            display: none;
+            position: absolute;
+            top :40px;
+            left : -35px;
+            border-top : 3px solid #94867a;
+            box-shadow: 0 3px 10px rgba(50, 50, 50, 0.15);
+        }
+
+        .sub-menu-arrow-up{
+            position: absolute;
+            top : -8px;
+            left : 42%;
+            z-index: 1;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;  /* left arrow slant */
+            border-right: 8px solid transparent; /* right arrow slant */
+            border-bottom: 8px solid #94867a; /* bottom, add background color here */
+            font-size: 0;
+            line-height: 0;
+        }
+
+        .header-main-sub-menu li{
+            margin: 0;
+            float: none;
+            width : 80px;
+            padding : 13px 30px 13px 15px;
+            border-top: 1px solid transparent;
+            line-height: 14px;
+            text-align: left;
+            letter-spacing: normal;
+            font-size: 15px;
+            color : black;
+            background-color: rgba(255,255,255,0.7);
+        }
+
+        .header-main-sub-menu li:hover{
+            background-color: rgba(197,181,145,0.7);
+            color : #fff;
+        }
+
+
+
+
+
+
+        .product-item{
+            margin-left : 180px;
+            margin-top : 60px;
+            width : 230px;
+            /*height : 369px;*/
+            height : 350px;
+            border : 1px solid #e5e5e5;
+        }
+
+        .product-item-info{
+            padding : 15px 15px 15px 15px;
+            width: 200px;
+            height : 86px;
+            font-size: 14px;
+            overflow-y: hidden;
+            background-color: #e5e5e5;
+            color : black;
+            line-height: 30px;
+        }
+
+
+        .product-opacity-bg{
+            background-color: black;
+            position: absolute;
+            top :0;
+            left : 0;
+            width : 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .product-opacity-bg .icon{
+            position: absolute;
+            width : 90px;
+            height : 68px;
+            left: 70px;
+            top : 80px;
+        }
+
+        .product-item-btn-group{
+            margin-top : 14px;
+        }
+
+        .product-item-btn{
+            text-align: center;
+            width : 50%;
+            color : white;
+            float:left;
+            font-size: 14px;
+        }
+
+        .product-item-btn a{
+            vertical-align: top;
+            color : inherit;
+            text-decoration: none;
+        }
+
+        .product-item-btn a:hover{
+            color : inherit;
+            text-decoration: none;
+        }
+
+        .product-item-btn img{
+            width : 26px;
+            height : 20px;
+            vertical-align: middle;
+        }
+
+
+        .product-item-name{
+            font-size : 20px;
+        }
+
+        .product-expand-info-mode .product-item-name{
+            color: black;
+            font-weight: 800;
+        }
+
+        .product-item-category{
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .product-expand-info-mode .product-item-category{
+            color:white;
+        }
+
+        .product-item-price{
+            font-size: 18px;;
+            color : black;
+            margin-top : 2px;
+        }
+
+        .product-expand-info-mode .product-item-price{
+            color : white;
+         }
+
+        .product-item-desc{
+            color : black;
+            margin-top : 8px;
+            font-size: 12px;
+            line-height: 20px;
+        }
+
+        .product-hover-area{
+            display: none;
+            width : 100%;
+        }
+
+        .product-expand-info-mode{
+            height : 216px;
+            background-color: #c7b273;
+        }
+
+        .product-expand-mode{
+            height : 480px;
+            border : 1px solid #444444;
+            outline : 3px solid #444444;
+        }
+
+        .product-item-img {
+            position: relative;
+        }
+
+        .product-item-img img{
+            width : 230px;
+            height : 230px;
+            border: 0;
+        }
+
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+
+        $(function(){
+
+            var closeSubMenu = function(){
+                $('ul.header-main-sub-menu').each(function(idx, val){
+                   $(this).css({display :'none'});
+                });
+            };
+
+            $('.has-sub-menu').hover(function(e){
+                closeSubMenu();
+
+                var subMenu = $(this).children('ul.header-main-sub-menu');
+                subMenu.css({display : 'block'});
+            });
+
+            $('#header').hover(function(){
+
+            }, function(e){
+                    closeSubMenu();
+            });
+
+
+            var fixDiv = function() {
+                var b = $(window).scrollTop();
+                var d = $("#header").offset().top + 80;
+                var c = $("#nav-top-btn");
+                if (b > d) {
+                    console.log(b + ' here ' + d);
+                    c.css({position:"fixed", top:"90%", display:"block"});
+                } else {
+                    c.css({position:"absolute",top:"0px", display : 'none'});
+                }
+            };
+
+            $(window).scroll(fixDiv);
+
+            $('.product-item').hover(function(e){
+                var id = $(this).attr('data-attr');
+                $('.product-hover-area').css({display:'block'});
+                $('.product-opacity-bg').css({opacity:0.7});
+                $(this).find('.product-item-info').addClass('product-expand-info-mode');
+                $(this).addClass('product-expand-mode');
+                //hoverArea.css({display:'block'});
+
+            }, function(e){
+                var hoverArea = $('.product-hover-area');
+                //hoverArea.appendTo($('body'));
+                hoverArea.css({display:'none'});
+                $(this).find('.product-item-info').removeClass('product-expand-info-mode');
+                $(this).removeClass('product-expand-mode');
+            });
+        });
+
+
+
+    </script>
+</head>
+<body id="top">
+    <div id="nav-top-btn">
+        <a href="#top">TOP 으로</a>
+    </div>
+    <div id="header">
+        <div id="header-wrapper">
+            <div id="brand">
+                <img src="http://www.levelshoedistrict.com/sites/all/themes/level/img/logo.jpg">
+            </div>
+            <div id="header-top-menu">
+                <ul id="header-top-menu-list">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+                <!--
+                <div class="arrow-down"></div>
+                -->
+            </div>
+
+            <div id="header-main-menu">
+                <ul class="header-main-menu-list">
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">메뉴바</a></li>
+                    <li class="has-sub-menu">
+                        <a href="#">STORE</a>
+                        <ul class="header-main-sub-menu">
+                            <div class="sub-menu-arrow-up"></div>
+                            <li><a href="#">Black Set</a></li>
+                            <li><a href="#">Sports Set</a></li>
+                            <li><a href="#">W_Free Set</a></li>
+                            <li><a href="#">Basic Set</a></li>
+                        </ul>
+
+                    </li>
+                    <li><a href="#">TEAM</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li class="has-sub-menu">
+                        <a href="#">BLOG</a>
+                        <ul class="header-main-sub-menu">
+                            <div class="sub-menu-arrow-up"></div>
+                            <li><a href="#">Black Set</a></li>
+                            <li><a href="#">Sports Set</a></li>
+                            <li><a href="#">W_Free Set</a></li>
+                            <li><a href="#">Basic Set</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="product-item">
+            <div class="product-item-img">
+                <div class="product-opacity-bg product-hover-area">
+                    <a href="#"><img src="detail.png" class="icon"/></a>
+                </div>
+                <img src="../static/img/c_n.jpg"/>
+            </div>
+            <div class="product-item-info">
+                <div class="product-item-category">
+                    카테고리 > 스킨
+                </div>
+                <div class="product-item-name">
+                    미샤 포맨 리뉴 스킨
+                </div>
+                <div class="product-item-price">
+                    ￦ 27,000
+                </div>
+                <div class="product-hover-area">
+                    <div class="product-item-desc">
+                        토탈 리페어 스킨. <br/>
+                        남자도 이젠 꼼꼼한 피부 관리가 필요하다.
+                        거칠어진 피부 결과 주름을 집중적으로..
+                    </div>
+                    <div class="product-item-btn-group">
+                        <div class="product-item-btn"><a href="#"><img src="interest.png"/> 관심하기</a>&nbsp;</div>
+                        <div class="product-item-btn">&nbsp;<a href="#"><img src="Add_to_basket.png"/> 장바구니</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+</body>
+</html>

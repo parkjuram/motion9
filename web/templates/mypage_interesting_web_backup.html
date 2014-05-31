@@ -1,0 +1,69 @@
+{% extends "mypage_web.html" %}
+{% block subHeader %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_interesting_web.css') }}"/>
+
+<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mypage_interesting_web.js') }}"></script>
+{% endblock %}
+{% block productGrid %}
+<div id="productHoverArea">
+    <div id="opacityBg"></div>
+    <div id="hoverButtonList">
+        <div class="btn-group-vertical">
+          <div class="btn-group">
+            <button type="button" id="addCartBtn" class="btn btn-default btn-for-cart">장바구니 넣기</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default">바로 구매</button>
+          </div>
+          <div class="btn-group">
+            <a href="#" id="cancelInterestBtn"class="btn btn-danger">삭제</a>
+          </div>
+        </div>
+    </div>
+</div>
+{% if interests.data|length > 0 %}
+    {% for product in interests.data %}
+
+    <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
+        <div class="product-img">
+            <img src="{{ product.big_img_url}}" alt="" />
+        </div>
+        <div class="product-info">
+            [{{ product.brandname }}]<br/>
+            {% if (product.name|length) > 17 %}
+                <a href="{{ url_for('productWeb',product_key=product.key) }}">{{product.name[:17] }}..</a>
+            {% else %}
+                <a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name  }}</a>
+            {% endif %}
+
+            <div class="product-price-box">
+                Price : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
+                Category : <b>{{ product.category_name }}</b>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
+
+{% block productPaging %}
+{% if interests.data|length > 0  %}
+    <ul class="pagination">
+      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
+      {% for pageNum in range(interests.page_left_count, interests.page_right_count+1 )%}
+      <li><a href="{{ url_for('myPageWeb', pageNum = pageNum) }}">{{ pageNum  }}</a></li>
+      {% endfor %}
+      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+    </ul>
+{% else %}
+        <div class="clearfix"></div>
+        <div style="padding : 20px;">
+            아직 관심하신 단품이 없습니다.
+        </div>
+    {% endif %}
+
+{% endblock %}

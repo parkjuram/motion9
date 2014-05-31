@@ -281,6 +281,28 @@ ol, ul {
 }
 
 
+.facebook-btn {
+  width: 60px;
+  height : 30px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #fff;
+  font-size: 12px;
+  background: #3c599b;
+  padding: 8px 10px;
+  text-decoration: none;
+}
+
+.facebook-btn:visited{
+    color : #fff;
+}
+
+.facebook-btn:hover {
+  text-decoration: none;
+  color : #e5e5e5;
+}
+
 
 .category-list a:hover{
     color : #ffffff;
