@@ -37,7 +37,6 @@ class Product(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
-
 class Set(models.Model):
     name = models.TextField(null=False)
     category = models.ForeignKey('Category')
@@ -46,12 +45,15 @@ class Set(models.Model):
     small_img_url = models.TextField(null=False, blank=True)
     discount_difference = models.IntegerField(null=False, default=0)
 
+class SetProduct(models.Model):
+    set = models.ForeignKey('Set')
+    product = models.ForeignKey('Product')
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
 class CustomSet(models.Model):
     user = models.ForeignKey('users.UserProfile')
     set = models.ForeignKey('Set')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
-
 
 class CustomSetDetail(models.Model):
     custom_set = models.ForeignKey('CustomSet')

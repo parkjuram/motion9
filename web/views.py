@@ -126,68 +126,47 @@ def _get_product(product_id, user):
     except ObjectDoesNotExist as e:
         logger.error(e)
 
-def _get_set_list(category_id=None):
+def _get_set_list(category_id, user):
     sets = Set.objects
     if category_id is not None:
-        sets = sets.filter(category_id=category_id)
+        sets.filter(category__id=category_id)
 
+    set_count = sets.count()
     sets = sets.all()
     sets_ = []
 
-    # for set in sets:
+    for set in sets:
+        is_interest = False
+        if user is not None:
+            if set.interest_set.filter(user=user).count()>0:
+                is_interest = True
 
+        set_ = {}
+        set_.update({
+            'name': set.name,
+            'is_interest': is_interest,
+            'category_name': set.category.name,
+            'description': set.description,
+            'big_img_url': set.big_img_url,
+            'small_img_url': set.small_img_url,
+            'discount_differenct': set.discount_difference
+        })
 
-# # def get_set_list(page_num=1, category_key=None):
-# def getSetList(page_num=1, category_key=None, original_to_custom_set_key_dict={}, original_to_custom_product_key_set_dict={}):
-#     stmt = g.db.session.query(Interest).filter(Interest.user_key == g.user.key if g.user else -1).subquery()
-#
-#     query = g.db.session.query(Set, Category.name.label('category_name'), stmt.c.key).\
-#         outerjoin(stmt, Set.key == stmt.c.set_key).\
-#         filter(Category.key == Set.category_key)
-#
-#     if len(original_to_custom_set_key_dict) > 0:
-#         query = query.filter(Set.key.in_(original_to_custom_set_key_dict.keys()))
-#
-#     query = query.filter(Set.category_key == category_key) if category_key is not None else query
-#
-#     pager_indicator_total_length = int(math.ceil(float(query.count()) / ITEM_COUNT_PER_PAGE))
-#     sets_and_category_name_and_is_interested = \
-#         query.order_by(Set.key).all() \
-#         if page_num == 0 else \
-#         query.order_by(Set.key).slice((page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE).all()
-#
-#     set_list = []
-#     for set_, category_name, is_interested in sets_and_category_name_and_is_interested:
-#         set_.category_name = category_name
-#         set_.is_interested = True if is_interested is not None else False
-#         set_.original_price = 0
-#         set_.discount_price = 0
-#         # original_to_custom_product_key_set_dict
-#         set_products = set_.set_products.all()
-#
-#         recalc_set_price = None
-#         if original_to_custom_set_key_dict.has_key(set_.key):
-#             recalc_set_price = original_to_custom_product_key_set_dict[original_to_custom_set_key_dict[set_.key]]
-#
-#         for set_product in set_products:
-#             product = set_product.product
-#             if recalc_set_price.has_key(product.key):
-#                 product = g.db.session.query(Product).filter(Product.key == recalc_set_price[product.key]).first()
-#             set_.original_price += product.original_price
-#             set_.discount_price += product.discount_price
-#
-#         columns = get_table_columns(Set, ['category_name', 'is_interested', 'original_price', 'discount_price'])
-#         set_dict = get_dict_from_model(set_, columns)
-#         if original_to_custom_set_key_dict.has_key(set_dict['key']):
-#             set_dict['custom_set_key']=original_to_custom_set_key_dict[set_dict.pop('key')]
-#         set_list.append(set_dict)
-#
-#     if page_num is not 0:
-#         set_list = make_data_to_paging_format_dict(pager_indicator_total_length, page_num, set_list)
-#     else:
-#         set_list = {'data': set_list}
-#
-#     return set_list
+        set_products = set.setproduct_set.all()
+        original_price = 0
+        discount_price = 0
+        for set_product in set_products:
+            original_price += set_product.product.original_price
+            discount_price += set_product.product.discount_price
+
+        set_.update({
+            'original_price': original_price,
+            'discount_price': discount_price
+        })
+
+        sets_.append(sets_)
+
+    return sets_
 
 def shop_product_view(request, category_id=None, page_num=None):
 
@@ -201,8 +180,8 @@ def shop_product_view(request, category_id=None, page_num=None):
 
     for product in products:
         is_interest = False
-        if request.user and request.user.is_authenticated():
-            if product.interest_set.filter(user=request.user).count()>0:
+        if _get_user(request) is not None:
+            if product.interest_set.filter(user=_get_user(request)).count()>0:
                 is_interest = True
 
         product_ = {}
@@ -262,15 +241,39 @@ def shop_product_view(request, category_id=None, page_num=None):
 
 def shop_set_view(request, category_id=None, page_num=None):
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): start')
-    sets = Set.objects
-    if category_id is not None:
-        sets.filter(category__id=category_id)
+    sets = _get_set_list(category_id, _get_user(request))
 
-    set_count = sets.count()
-    sets = sets.all()
-    sets_ = []
+    if page_num is not None:
+        pager_total_length = math.ceil(len(sets)/float(ITEM_COUNT_PER_PAGE))
+        sets = {
+            'data': sets,
+            'page_total_count': pager_total_length,
+            'page_left_count': page_num-(page_num%PAGER_INDICATOR_LENGTH)+1,
+            'page_right_count': pager_total_length
+            if pager_total_length < page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH
+            else page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH,
+            }
+        sets.update({
+            'page_hasPrev': True if sets['page_left_count'] is not 1 else False,
+            'page_hasNext': True if sets['page_right_count'] is not pager_total_length else False,
+        })
+    else:
+        sets = {'data': sets}
 
+    categories = Category.objects.filter(is_set=True).all()
+    if category_id is None:
+        current_category = 'all'
+    else:
+        current_category = Category.objects.get(id=category_id).name
 
+    return render(request, 'shopping_set_web.html',
+                  {
+                      'sets': sets,
+                      'current_category': current_category,
+                      'categories': categories
+                  })
+
+    logger.info( 'def shop_set_view(request, category_id=None, page_num=None): end')
 
 
 # def shoppingSet(pageNum=None,category_key=None):
