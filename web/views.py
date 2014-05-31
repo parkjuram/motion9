@@ -3,7 +3,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.template.context import RequestContext
 from motion9.const import *
-from web.models import Product, Category, BlogReview
+from web.models import Product, Category, BlogReview, Set
 
 import math
 import json
@@ -127,11 +127,64 @@ def _get_product(product_id, user):
         logger.error(e)
 
 
+
+# # def get_set_list(page_num=1, category_key=None):
+# def getSetList(page_num=1, category_key=None, original_to_custom_set_key_dict={}, original_to_custom_product_key_set_dict={}):
+#     stmt = g.db.session.query(Interest).filter(Interest.user_key == g.user.key if g.user else -1).subquery()
+#
+#     query = g.db.session.query(Set, Category.name.label('category_name'), stmt.c.key).\
+#         outerjoin(stmt, Set.key == stmt.c.set_key).\
+#         filter(Category.key == Set.category_key)
+#
+#     if len(original_to_custom_set_key_dict) > 0:
+#         query = query.filter(Set.key.in_(original_to_custom_set_key_dict.keys()))
+#
+#     query = query.filter(Set.category_key == category_key) if category_key is not None else query
+#
+#     pager_indicator_total_length = int(math.ceil(float(query.count()) / ITEM_COUNT_PER_PAGE))
+#     sets_and_category_name_and_is_interested = \
+#         query.order_by(Set.key).all() \
+#         if page_num == 0 else \
+#         query.order_by(Set.key).slice((page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE).all()
+#
+#     set_list = []
+#     for set_, category_name, is_interested in sets_and_category_name_and_is_interested:
+#         set_.category_name = category_name
+#         set_.is_interested = True if is_interested is not None else False
+#         set_.original_price = 0
+#         set_.discount_price = 0
+#         # original_to_custom_product_key_set_dict
+#         set_products = set_.set_products.all()
+#
+#         recalc_set_price = None
+#         if original_to_custom_set_key_dict.has_key(set_.key):
+#             recalc_set_price = original_to_custom_product_key_set_dict[original_to_custom_set_key_dict[set_.key]]
+#
+#         for set_product in set_products:
+#             product = set_product.product
+#             if recalc_set_price.has_key(product.key):
+#                 product = g.db.session.query(Product).filter(Product.key == recalc_set_price[product.key]).first()
+#             set_.original_price += product.original_price
+#             set_.discount_price += product.discount_price
+#
+#         columns = get_table_columns(Set, ['category_name', 'is_interested', 'original_price', 'discount_price'])
+#         set_dict = get_dict_from_model(set_, columns)
+#         if original_to_custom_set_key_dict.has_key(set_dict['key']):
+#             set_dict['custom_set_key']=original_to_custom_set_key_dict[set_dict.pop('key')]
+#         set_list.append(set_dict)
+#
+#     if page_num is not 0:
+#         set_list = make_data_to_paging_format_dict(pager_indicator_total_length, page_num, set_list)
+#     else:
+#         set_list = {'data': set_list}
+#
+#     return set_list
+
 def shop_product_view(request, category_id=None, page_num=None):
 
     products = Product.objects
     if category_id is not None:
-        products.filter(category_id=category_id)
+        products.filter(category__id=category_id)
 
     product_count = products.count()
     products = products.all()
@@ -198,11 +251,40 @@ def shop_product_view(request, category_id=None, page_num=None):
                       'current_page': 'shop_product'
                   })
 
+def shop_set_view(request, category_id=None, page_num=None):
+    logger.info( 'def shop_set_view(request, category_id=None, page_num=None): start')
+    sets = Set.objects
+    if category_id is not None:
+        sets.filter(category__id=category_id)
+
+    set_count = sets.count()
+    sets = sets.all()
+    sets_ = []
+
+
+
+
+# def shoppingSet(pageNum=None,category_key=None):
+#
+#     if pageNum == None:
+#         if category_key == None:
+#             sets = getSetList(1)
+#         else :
+#             sets = getSetList(1,category_key)
+#     else :
+#         if category_key == None:
+#             sets = getSetList(pageNum)
+#         else :
+#             sets = getSetList(pageNum, category_key)
+#     print sets['data'][0]['discount_price']
+#     categories = getCategoryList(True)
+#     return render_template('shopping_set_web.html', products = sets, current_page='shopping1',current_category=category_key, categories=categories)
+
 def product_view(request, product_id=None):
     logger.info( 'def product_view(request, product_id=None): start')
 
     if product_id is not None:
-        product = _get_product(product_id, _get_user())
+        product = _get_product(product_id, _get_user(request))
         blog_reivews = _get_blog_reviews(product_id)
 
         return render(request, "product_detail_web.html",
@@ -220,7 +302,7 @@ def product_json_view(request, product_id=None):
     logger.info( 'def product_json_view(request, product_id=None): start')
 
     if product_id is not None:
-        product = _get_product(product_id, _get_user())
+        product = _get_product(product_id, _get_user(request))
         product = {
             'data': product
         }
