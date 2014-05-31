@@ -1,0 +1,109 @@
+{% extends "web_base.html" %}
+{% block header %}
+{% load static %}
+
+{#<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_product_web.css') }}"/>#}
+<link rel="stylesheet" href="{% static "css/shopping_product_web.css" %}" type="text/css" media="screen" />
+
+{#<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>#}
+<script src="{% static "js/imagesloaded.pkgd.min.js" %}"></script>
+{#<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>#}
+<script src="{% static "js/masonry.pkgd.min.js" %}"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+{#<script src="{{ url_for('static', filename='js/shopping_product_web.js') }}"></script>#}
+<script src="{% static "js/shopping_product_web.js" %}"></script>
+{% endblock %}
+
+{% block ad_area %}
+<div class="ad-area">
+    <div class="ad-area-info">
+        <div class="ad-area-info-title">
+            서퍼들을 위한 세트
+        </div>
+        <div class="ad-area-info-contents">
+            -abcdefekjlefkef
+        </div>
+        <div style="margin-top : 20px;">
+            <a href="#" class="ad-area-btn">View Collection</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="main-container float-left">
+        <div class="box-css" style="margin-bottom: 50px;">
+            <div class="product-category">
+                단일제품 >  {{ current_category }}
+            </div>
+            <div id="productGrid" style="margin-left: 20px; margin-bottom: 20px;">
+                {% for product in products.data %}
+                <div class="product-item">
+                    <div class="product-item-img"  id="item-{{product.id}}" data-attr="{{product.id}}">
+                        <div class="product-opacity-bg product-hover-area">
+                            <a href="#"><img src="{% static "img/detail.png" %}" class="icon"/></a>
+                        </div>
+                        <img src="{{product.big_img_url}}"/>
+                    </div>
+                    <div class="product-item-info">
+                        <div class="product-item-category">
+                            카테고리 > {{ product.category_name }}
+                        </div>
+                        <div class="product-item-name">
+                            <a href="{% url 'web.views.product_view' product_id=product.id %}">{{product.name|truncatechars:13}}</a>
+                        </div>
+                       <div class="product-item-info-contents">
+                           브랜드 : {{ product.brandname }}<br/>
+                           가격 :￦ {{ product.discount_price }}<br/>
+                           용량 : {{ product.capacity }}
+                        </div>
+                        <div class="product-hover-area">
+                            <div class="product-item-desc">
+                                {{ product.description }}
+                            </div>
+                            <div class="product-item-btn-group">
+                                <div class="product-item-btn"><a href="#" data-product="{{ product.id }}" class="btn-for-interest"><img src="{% static "img/interest.png" %}"/> 관심하기</a></div>
+                                <div class="product-item-btn"><a href="#" data-product="{{ product.id }}" class="btn-for-cart"><img src="{% static "img/Add_to_basket.png" %}"/> 장바구니</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="nav-container float-left">
+        <div class="box-css">
+            <div class="filter-area">
+                <div class="product-category">
+                    Filter by 가격
+                </div>
+                <div class="filter-area-contents">
+                    <div class="price-ranger">
+                        <div id="priceRange"></div>
+                    </div>
+                    <div class="price-filter">
+                        가격 : <span id="sPrice"></span>원 - <span id="fPrice"></span>원  <a href="#" class="basic-btn">filter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-area">
+                <div class="product-category">
+                    Filter by 브랜드
+                </div>
+                <div class="filter-area-contents">
+                    <ul>
+                        <li><a href="#" class="filter-selected">Hera</a></li>
+                        <li><a href="#">이니스프리</a></li>
+                        <li><a href="#">미샤</a></li>
+                        <li><a href="#">설화수</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

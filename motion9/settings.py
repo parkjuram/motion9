@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
+MEDIA_ROOT = PROJECT_PATH + '/media/'
+
+TEMPLATE_DIRS = (
+    PROJECT_PATH + '/templates/'
+)
+
 CHARSET = 'utf-8'
 
 # Quick-start development settings - unsuitable for production
@@ -57,6 +65,44 @@ ROOT_URLCONF = 'motion9.urls'
 WSGI_APPLICATION = 'motion9.wsgi.application'
 
 
+# Logging
+
+from datetime import datetime
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file_all': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': datetime.now().strftime('log/all_%d_%m_%Y.log'),
+            'formatter': 'verbose'
+        },
+        'file_web': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': datetime.now().strftime('log/web_%d_%m_%Y.log'),
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'web': {
+            'handlers': ['file_all', 'file_web'],
+            'level': 'DEBUG',
+        },
+    }
+}
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -89,3 +135,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')

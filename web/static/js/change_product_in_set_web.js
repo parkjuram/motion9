@@ -1,0 +1,133 @@
+$(function(){
+     $('.product-info-btn').click(function(e){
+        e.preventDefault();
+        $('#product-detail-modal').modal('show');
+    });
+
+     $('.available-product').hover(function(e){
+       $(this).children('.available-product-hover-menu').show();
+    },function(e){
+       $(this).children('.available-product-hover-menu').hide();
+    });
+
+     $('.available-item').hover(function(e){
+       $(this).children('.available-item-hover-menu').show();
+    },function(e){
+       $(this).children('.available-item-hover-menu').hide();
+    });
+
+    var fixDiv = function() {
+        var b = $(window).scrollTop();
+        var d = $("#changeProductWrapper").offset().top;
+        var c = $("#originProductWrapper");
+        if (b > d-50) {
+            c.css({position:"fixed",top:"60px"})
+        } else {
+            c.css({position:"absolute",top:"0px"})
+        }
+    };
+
+    $('.available-product-btn').click(function(e){
+        e.preventDefault();
+        var target = $(this).attr('data-target');
+
+        if($(target).css('display') == 'block'){
+            $(target).hide();
+        }else{
+            $(target).show();
+        }
+    })
+
+    var updateCustomView = function(product, originalKey, newKey){
+         var target = $('#customSetTableItem-'+originalKey);
+         target.attr('data-new-key', newKey);
+         target.find('.set-table-item-img img').attr('src', product.big_img_url);
+         target.find('.set-table-item-category').text(product.category_name)
+         target.find('.set-table-item-info').text(product.name);
+    };
+
+    $('.available-item-btn').click(function(e){
+        e.preventDefault();
+        var originalKey = $(this).attr('data-original-key');
+        var newKey = $(this).attr('data-product');
+
+         $.ajax({
+				  url: '/product/json/'+newKey,
+				  dataType: 'json',
+				  async : true,
+				  type:'POST',
+				  success: function(data){
+                      var product = data.data;
+					  if(product != null){
+                          updateCustomView(product, originalKey, newKey);
+                      }else{
+                          alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+                      }
+				  },
+				  error:function(jqXHR, textStatus, errorThrown){
+					  alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+				  }
+		});
+    });
+
+    var preForSubmit = function(setKey){
+
+        var params = {setKey : setKey, customData : [], changedCnt : 0};
+        var changedCnt = 0;
+        $('.custom-set-item-tr').each(function(idx, val){
+            var originalKey = $(this).attr('data-original-key');
+            var newKey = $(this).attr('data-new-key');
+            if(newKey != originalKey)
+                changedCnt++;
+            params.customData.push({originalKey : originalKey, newKey : newKey});
+        });
+        params.changedCnt = changedCnt;
+
+        return params;
+    };
+
+    var submitCustomSet = function(setKey, addToCart){
+        var param = preForSubmit(setKey);
+        if(param.changedCnt == 0){
+            alert('커스터 마이징 한 제품이 없습니다.');
+            return ;
+        }
+        $.ajax({
+				  url: '/customize/set/add',
+				  dataType: 'json',
+                  data: {'param' : JSON.stringify(param), 'addToCart': addToCart},
+				  async : true,
+				  type:'POST',
+				  success: function(data){
+                      var result = data.result;
+					  if(result == 'success'){
+                          if(addToCart)
+                            alert('장바구니에 추가 되었습니다.');
+                          else
+                            alert('저장');
+                      }else{
+                          alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+                      }
+				  },
+				  error:function(jqXHR, textStatus, errorThrown){
+					  alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+				  }
+		});
+    };
+
+    $('#submitCustomBtn').click(function(e){
+        e.preventDefault();
+        var setKey = $(this).attr('data-set');
+        submitCustomSet(setKey, true);
+    });
+
+    $('#addCustomBtn').click(function(e){
+        e.preventDefault();
+        var setKey = $(this).attr('data-set');
+        submitCustomSet(setKey, false);
+    });
+
+
+   $(window).scroll(fixDiv);
+   fixDiv();
+});

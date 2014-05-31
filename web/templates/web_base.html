@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Motion9</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
+    <script type="text/javascript">
+{#        var url_for_login_next = "{% url 'users.login_view' next=request.url %}";#}
+    </script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static "js/common_js.js" %}"></script>
+    <script src="{% static "js/common_js_web.js" %}"></script>
+    <style>
+        body {
+            min-width: 970px;
+            font-size: 14px;
+        }
+    </style>
+    {% block header %}
+    {% endblock %}
+</head>
+<body id="top">
+<div id="nav-top-btn">
+    <a href="#top">TOP 으로</a>
+</div>
+<div id="header">
+    <div id="header-wrapper">
+        <div id="brand">
+            Motion 9
+        </div>
+
+        <div id="header-main-menu">
+            <ul id="header-main-menu-list">
+                <li><a href="#">Motion9?</a></li>
+                <li><a href="#">BEST</a></li>
+                <li><a href="#" class="selected">Collection</a></li>
+                <li><a href="#">단일제품</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Combination</a></li>
+                <li class="clearfix"></li>
+            </ul>
+            <ul id="header-right-menu-list">
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">장바구니</a></li>
+                <li><a href="#">로그인</a></li>
+                <li class="clearfix"></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div id="header-sub-menu-wrapper">
+        <div id="collection" class="header-sub-menu">
+            <a href="#">전체</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">라이프 스타일 컬렉션</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">계절 컬렉션</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">피부 상태에 따른 컬렉션</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">프리미엄 컬렉션</a>
+        </div>
+    </div>
+</div>
+
+{% block ad_area %}
+{% endblock %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+
+
+    {% block content %}
+    {% endblock %}
+    <p/>
+    <div class="clearfix"></div>
+</div>
+<div class="footer-div">
+    <div class="footer-contents">
+        (주) 아스델 | 대표이사 : 한도건 | 사업자 등록번호 : 119-86-58979<br/>
+        통신판매업신고 : 2013-서울관악-0392 | 개인정보관리책임자 : parkjuram@naver.com<br/>
+        서울시 관악구 관악로1 서울대학교 35동 214-7호 | Tel : 02-871-4510 <br/>
+        © Arsdale Co.,Ltd. All rights reserved.
+    </div>
+</div>
+</body>
+</html>
