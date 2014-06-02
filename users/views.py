@@ -7,3 +7,4 @@ def registration_view(request):
     password_confirm = request.POST.get('password_confirm')
 
     if password is not password_confirm:
+        pass
