@@ -2,7 +2,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.template.context import RequestContext
+
 from motion9.const import *
+from common_controller.util import helper_get_user, helper_get_product
 from web.models import Product, Category, BlogReview, Set
 
 import math
@@ -92,40 +94,6 @@ def _get_blog_reviews(product_id):
 
     return blog_reviews_
 
-def _get_user(request):
-    if request.user and request.user.is_authenticated():
-        return request.user
-    else:
-        return None
-
-def _get_product(product_id, user):
-    try:
-        product = Product.objects.get(id=product_id)
-
-        product_ = {
-            'id': product.id,
-            'name': product.name,
-            'category_name': product.category.name,
-            'description': product.description,
-            'big_img_url': product.big_img_url,
-            'small_img_url': product.small_img_url,
-            'video_url': product.description,
-            'brandname': product.brandname,
-            'maker': product.maker,
-            'capacity': product.capacity,
-            'original_price': product.original_price,
-            'discount_price': product.discount_price,
-            'fit_skin_type': product.fit_skin_type,
-            'color_description': product.color_description,
-            'color_rgb': product.color_rgb,
-            'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False
-        }
-
-        return product_
-
-    except ObjectDoesNotExist as e:
-        logger.error(e)
-
 def _get_set_list(category_id, user):
     sets = Set.objects
     if category_id is not None:
@@ -169,7 +137,7 @@ def _get_set(set_id, user=None):
         original_price += product.original_price
         discount_price += product.discount_price
 
-        product_ = _get_product( product.id, user)
+        product_ = helper_get_product( product.id, user)
         set_['products'].append(product_)
 
     set_.update({
@@ -323,7 +291,7 @@ def product_view(request, product_id=None):
     logger.info( 'def product_view(request, product_id=None): start')
 
     if product_id is not None:
-        product = _get_product(product_id, _get_user(request))
+        product = helper_get_product(product_id, _get_user(request))
         blog_reivews = _get_blog_reviews(product_id)
 
         return render(request, "product_detail_web.html",
@@ -341,7 +309,7 @@ def product_json_view(request, product_id=None):
     logger.info( 'def product_json_view(request, product_id=None): start')
 
     if product_id is not None:
-        product = _get_product(product_id, _get_user(request))
+        product = helper_get_product(product_id, _get_user(request))
         product = {
             'data': product
         }

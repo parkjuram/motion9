@@ -88,16 +88,46 @@ LOGGING = {
             'filename': datetime.now().strftime('log/all_%d_%m_%Y.log'),
             'formatter': 'verbose'
         },
+        'file_common_controller': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': datetime.now().strftime('log/common_controller_%d_%m_%Y.log'),
+            'formatter': 'verbose'
+        },
         'file_web': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': datetime.now().strftime('log/web_%d_%m_%Y.log'),
             'formatter': 'verbose'
         },
+        'file_mobile': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': datetime.now().strftime('log/mobile_%d_%m_%Y.log'),
+            'formatter': 'verbose'
+        },
+        'file_users': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': datetime.now().strftime('log/users_%d_%m_%Y.log'),
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
+        'common_controller': {
+            'handlers': ['file_all', 'file_common_controller'],
+            'level': 'DEBUG',
+        },
         'web': {
             'handlers': ['file_all', 'file_web'],
+            'level': 'DEBUG',
+        },
+        'mobile': {
+            'handlers': ['file_all', 'file_mobile'],
+            'level': 'DEBUG',
+        },
+        'users': {
+            'handlers': ['file_all', 'file_users'],
             'level': 'DEBUG',
         },
     }
@@ -136,3 +166,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+
+# Login
+LOGIN_URL = '/users/login_page/'
