@@ -20,9 +20,9 @@ signals.post_save.connect(create_user_profile, sender=User)
 
 class Interest(models.Model):
     user = models.ForeignKey('auth.User')
-    product = models.ForeignKey('web.Product')
-    set = models.ForeignKey('web.Set')
-    custom_set = models.ForeignKey('web.CustomSet')
+    product = models.ForeignKey('web.Product',null=True)
+    set = models.ForeignKey('web.Set',null=True)
+    custom_set = models.ForeignKey('web.CustomSet',null=True)
     type = models.CharField(max_length=1, null=False, default='p')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 

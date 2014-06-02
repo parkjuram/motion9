@@ -13,6 +13,13 @@ urlpatterns = patterns('',
     url(r'^mypage/set/$', 'users.views.mypage_set_view', name='mypage_set'),
     url(r'^mypage/set/(?P<page_num>(\d+))/$', 'users.views.mypage_set_view', name='mypage_set'),
 
+    url(r'^mypage/purchase/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
+    url(r'^mypage/purchase/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
+
+
+    url(r'^interest/add/$', 'users.views.add_interest', name='add_interest'),
+    # @app.route('/interest/add', methods = ['POST'])
+
 
 
 # @app.route('/mypage/set', methods = ['GET'])

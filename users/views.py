@@ -1,6 +1,7 @@
 from django.db import IntegrityError
 from django.db.utils import DataError
 from django.contrib.auth import authenticate, login as auth_login, logout
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
@@ -31,6 +32,8 @@ def registration(request):
 
     else:
         logger.error('password and confirm is not identical')
+
+    return HttpResponse('temporary response')
 
 @csrf_exempt
 def login(request):
@@ -123,6 +126,39 @@ def mypage_set_view(request, page_num=None):
 
     else:
         logger.error('have_to_login')
+
+@login_required
+def mypage_purchase_view(request, page_num=None):
+    pass
+
+
+def add_product_interest(user, product_id):
+    print 'here'
+    try:
+        print 'here1'
+        Interest.objects.create(user=user, product_id=product_id, type='p')
+        print 'here2'
+    except Exception as e:
+        print e
+
+    print 'here3'
+
+def add_set_interest(user, set_id):
+    Interest.objects.create(user=user, set_id=set_id, type='s')
+
+@csrf_exempt
+@login_required
+def add_interest(request):
+    user = helper_get_user(request)
+    type = request.POST.get('type', 'p')
+
+    product_or_set_id = request.POST.get('product_or_set_id')
+    if type=='p':
+        add_product_interest(user, product_or_set_id)
+    elif type=='s':
+        add_set_interest(user, product_or_set_id)
+
+    return HttpResponse('temporary response')
 
 # return render(request, 'shopping_product_web.html',
 #                   {
