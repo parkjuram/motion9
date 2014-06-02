@@ -4,7 +4,7 @@ from django.shortcuts import render, render_to_response
 from django.template.context import RequestContext
 
 from motion9.const import *
-from common_controller.util import helper_get_user, helper_get_product
+from common_controller.util import helper_get_user, helper_get_product, helper_get_set
 from web.models import Product, Category, BlogReview, Set
 
 import math
@@ -94,7 +94,7 @@ def _get_blog_reviews(product_id):
 
     return blog_reviews_
 
-def _get_set_list(category_id, user):
+def helper_get_set_list(category_id, user):
     sets = Set.objects
     if category_id is not None:
         sets.filter(category__id=category_id)
@@ -109,43 +109,10 @@ def _get_set_list(category_id, user):
             if set.interest_set.filter(user=user).count()>0:
                 is_interest = True
 
-        set_ = _get_set(set.id, user)
+        set_ = helper_get_set(set.id, user)
         sets_.append(set_)
 
     return sets_
-
-def _get_set(set_id, user=None):
-    set = Set.objects.get(id=set_id)
-    set_ = {}
-    set_.update({
-        'id': set.id,
-        'name': set.name,
-        'category_name': set.category.name,
-        'description': set.description,
-        'big_img_url': set.big_img_url,
-        'small_img_url': set.small_img_url,
-        'discount_difference': set.discount_difference,
-        'products': []
-    })
-
-    set_products = set.setproduct_set.all()
-    original_price = 0
-    discount_price = 0
-    for set_product in set_products:
-        product = set_product.product
-
-        original_price += product.original_price
-        discount_price += product.discount_price
-
-        product_ = helper_get_product( product.id, user)
-        set_['products'].append(product_)
-
-    set_.update({
-        'original_price': original_price,
-        'discount_price': discount_price
-    })
-
-    return set_
 
 def shop_product_view(request, category_id=None, page_num=None):
 
@@ -220,7 +187,7 @@ def shop_product_view(request, category_id=None, page_num=None):
 
 def shop_set_view(request, category_id=None, page_num=None):
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): start')
-    sets = _get_set_list(category_id, helper_get_user(request))
+    sets = helper_get_set_list(category_id, helper_get_user(request))
 
     if page_num is not None:
         pager_total_length = math.ceil(len(sets)/float(ITEM_COUNT_PER_PAGE))
@@ -257,7 +224,7 @@ def shop_set_view(request, category_id=None, page_num=None):
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): end')
 
 def set_view(request, set_id):
-    set = _get_set(set_id)
+    set = helper_get_set(set_id)
 
     return render(request, 'set_detail_web.html',
                 {

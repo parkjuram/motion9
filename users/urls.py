@@ -10,6 +10,9 @@ urlpatterns = patterns('',
     url(r'^mypage/$', 'users.views.mypage_view', name='mypage'),
     url(r'^mypage/(?P<page_num>(\d+))/$', 'users.views.mypage_view', name='mypage'),
 
+    url(r'^mypage/set/$', 'users.views.mypage_set_view', name='mypage_set'),
+    url(r'^mypage/set/(?P<page_num>(\d+))/$', 'users.views.mypage_set_view', name='mypage_set'),
+
 
 
 # @app.route('/mypage/set', methods = ['GET'])

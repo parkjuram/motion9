@@ -1,4 +1,4 @@
-from web.models import Product
+from web.models import Product, Set
 from django.core.exceptions import ObjectDoesNotExist
 
 import logging
@@ -49,3 +49,36 @@ def helper_get_product(product_id_or_object, user):
 
     except ObjectDoesNotExist as e:
         logger.error(e)
+
+def helper_get_set(set_id, user=None):
+    set = Set.objects.get(id=set_id)
+    set_ = {}
+    set_.update({
+        'id': set.id,
+        'name': set.name,
+        'category_name': set.category.name,
+        'description': set.description,
+        'big_img_url': set.big_img_url,
+        'small_img_url': set.small_img_url,
+        'discount_difference': set.discount_difference,
+        'products': []
+    })
+
+    set_products = set.setproduct_set.all()
+    original_price = 0
+    discount_price = 0
+    for set_product in set_products:
+        product = set_product.product
+
+        original_price += product.original_price
+        discount_price += product.discount_price
+
+        product_ = helper_get_product( product.id, user)
+        set_['products'].append(product_)
+
+    set_.update({
+        'original_price': original_price,
+        'discount_price': discount_price
+    })
+
+    return set_

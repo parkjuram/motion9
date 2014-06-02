@@ -1,12 +1,12 @@
 from django.db import IntegrityError
 from django.db.utils import DataError
 from django.contrib.auth import authenticate, login as auth_login, logout
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from common_controller.util import helper_get_user, helper_get_product
+from common_controller.util import helper_get_user, helper_get_product, helper_get_set
 
 from .models import Interest
 
@@ -42,6 +42,7 @@ def login(request):
         user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
+            return redirect('shop_product')
         else:
             logger.error('login fail')
 
@@ -74,10 +75,9 @@ def update(request):
 
 @login_required
 def mypage_view(request, page_num=None):
-
     user = helper_get_user(request)
     if user is not None:
-        interests = user.interest_set.all()
+        interests = user.interest_set.filter(type='p').all()
         products = []
         for interest in interests:
             product = interest.product
@@ -87,6 +87,26 @@ def mypage_view(request, page_num=None):
         return render(request, 'mypage_interesting_web.html',
             {
                 'interests': products,
+                'tab_name': 'interesting_set'
+            })
+
+    else:
+        logger.error('have_to_login')
+
+@login_required
+def mypage_set_view(request, page_num=None):
+    user = helper_get_user(request)
+    if user is not None:
+        interests = user.interest_set.filter(type='s').all()
+        sets = []
+        for interest in interests:
+            set = interest.product
+            set_ = helper_get_set(set.id, user)
+            sets.append(set_)
+
+        return render(request, 'mypage_interesting_web.html',
+            {
+                'interests': sets,
                 'tab_name': 'interesting_set'
             })
 
