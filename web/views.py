@@ -141,32 +141,42 @@ def _get_set_list(category_id, user):
             if set.interest_set.filter(user=user).count()>0:
                 is_interest = True
 
-        set_ = {}
-        set_.update({
-            'name': set.name,
-            'is_interest': is_interest,
-            'category_name': set.category.name,
-            'description': set.description,
-            'big_img_url': set.big_img_url,
-            'small_img_url': set.small_img_url,
-            'discount_differenct': set.discount_difference
-        })
-
-        set_products = set.setproduct_set.all()
-        original_price = 0
-        discount_price = 0
-        for set_product in set_products:
-            original_price += set_product.product.original_price
-            discount_price += set_product.product.discount_price
-
-        set_.update({
-            'original_price': original_price,
-            'discount_price': discount_price
-        })
-
+        set_ = _get_set(set.id, user)
         sets_.append(set_)
 
     return sets_
+
+def _get_set(set_id, user=None):
+    set = Set.objects.get(id=set_id)
+    set_ = {}
+    set_.update({
+        'name': set.name,
+        'category_name': set.category.name,
+        'description': set.description,
+        'big_img_url': set.big_img_url,
+        'small_img_url': set.small_img_url,
+        'discount_difference': set.discount_difference,
+        'products': []
+    })
+
+    set_products = set.setproduct_set.all()
+    original_price = 0
+    discount_price = 0
+    for set_product in set_products:
+        product = set_product.product
+
+        original_price += product.original_price
+        discount_price += product.discount_price
+
+        product_ = _get_product( product.id, user)
+        set_['products'].append(product_)
+
+    set_.update({
+        'original_price': original_price,
+        'discount_price': discount_price
+    })
+
+    return set_
 
 def shop_product_view(request, category_id=None, page_num=None):
 
@@ -276,6 +286,20 @@ def shop_set_view(request, category_id=None, page_num=None):
                   })
 
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): end')
+
+def set_view(request, set_id):
+    set = _get_set(set_id)
+
+    return render(request, 'set_detail_web.html',
+                {
+                    'set':set
+                })
+
+
+# def setDetailWeb(set_key):
+#     set = getSet(set_key)
+#     blogReviews = getBlogReviewList(set_key, True)
+#     return render_template('set_detail_web.html', set = set, blogReviews = blogReviews)
 
 
 # def shoppingSet(pageNum=None,category_key=None):
