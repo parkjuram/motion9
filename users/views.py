@@ -50,7 +50,7 @@ def logout(request):
     logout(request)
 
 @login_required
-def update_view(request):
+def update(request):
 
     if helper_get_user(request) is not None:
         user_profile = request.user.profile

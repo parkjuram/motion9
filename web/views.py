@@ -159,8 +159,8 @@ def shop_product_view(request, category_id=None, page_num=None):
 
     for product in products:
         is_interest = False
-        if _get_user(request) is not None:
-            if product.interest_set.filter(user=_get_user(request)).count()>0:
+        if helper_get_user(request) is not None:
+            if product.interest_set.filter(user=helper_get_user(request)).count()>0:
                 is_interest = True
 
         product_ = {}
@@ -220,7 +220,7 @@ def shop_product_view(request, category_id=None, page_num=None):
 
 def shop_set_view(request, category_id=None, page_num=None):
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): start')
-    sets = _get_set_list(category_id, _get_user(request))
+    sets = _get_set_list(category_id, helper_get_user(request))
 
     if page_num is not None:
         pager_total_length = math.ceil(len(sets)/float(ITEM_COUNT_PER_PAGE))
@@ -291,7 +291,7 @@ def product_view(request, product_id=None):
     logger.info( 'def product_view(request, product_id=None): start')
 
     if product_id is not None:
-        product = helper_get_product(product_id, _get_user(request))
+        product = helper_get_product(product_id, helper_get_user(request))
         blog_reivews = _get_blog_reviews(product_id)
 
         return render(request, "product_detail_web.html",
@@ -309,7 +309,7 @@ def product_json_view(request, product_id=None):
     logger.info( 'def product_json_view(request, product_id=None): start')
 
     if product_id is not None:
-        product = helper_get_product(product_id, _get_user(request))
+        product = helper_get_product(product_id, helper_get_user(request))
         product = {
             'data': product
         }
