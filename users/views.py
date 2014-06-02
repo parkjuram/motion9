@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 from common_controller.util import helper_get_user, helper_get_product
 
@@ -13,6 +14,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+@csrf_exempt
 def registration(request):
     email = request.POST.get('email')
     password = request.POST.get('password')
@@ -29,6 +31,7 @@ def registration(request):
     else:
         logger.error('password and confirm is not identical')
 
+@csrf_exempt
 def login(request):
     email = request.POST.get('email')
     password = request.POST.get('password')
@@ -42,6 +45,7 @@ def login(request):
         else:
             logger.error('login fail')
 
+@csrf_exempt
 def login_view(request):
     return render(request, 'login_web.html')
 
