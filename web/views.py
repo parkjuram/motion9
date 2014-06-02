@@ -150,6 +150,7 @@ def _get_set(set_id, user=None):
     set = Set.objects.get(id=set_id)
     set_ = {}
     set_.update({
+        'id': set.id,
         'name': set.name,
         'category_name': set.category.name,
         'description': set.description,
@@ -292,7 +293,7 @@ def set_view(request, set_id):
 
     return render(request, 'set_detail_web.html',
                 {
-                    'set':set
+                    'set': set
                 })
 
 
