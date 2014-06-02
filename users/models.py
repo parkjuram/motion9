@@ -19,7 +19,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 signals.post_save.connect(create_user_profile, sender=User)
 
 class Interest(models.Model):
-    user = models.ForeignKey('users.UserProfile')
+    user = models.ForeignKey('auth.User')
     product = models.ForeignKey('web.Product')
     set = models.ForeignKey('web.Set')
     custom_set = models.ForeignKey('web.CustomSet')
