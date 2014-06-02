@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from django.db.utils import DataError
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout
 from django.shortcuts import render
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
@@ -41,7 +41,7 @@ def login(request):
     else:
         user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
-            login(request, user)
+            auth_login(request, user)
         else:
             logger.error('login fail')
 

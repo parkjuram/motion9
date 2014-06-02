@@ -12,7 +12,9 @@ urlpatterns = patterns('',
 
 
 
-#
-# @app.route('/mypage/purchase', methods = ['GET'])
-# @app.route('/mypage/purchase/<int:pageNum>', methods = ['GET'])
+# @app.route('/mypage/set', methods = ['GET'])
+# @app.route('/mypage/set/<int:pageNum>', methods = ['GET'])
+# @login_required
+# def myPageSetWeb(pageNum=None):
+
 )
