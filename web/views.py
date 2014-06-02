@@ -4,7 +4,7 @@ from django.shortcuts import render, render_to_response
 from django.template.context import RequestContext
 
 from motion9.const import *
-from common_controller.util import helper_get_user, helper_get_product, helper_get_set
+from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data
 from web.models import Product, Category, BlogReview, Set
 
 import math
@@ -120,7 +120,6 @@ def shop_product_view(request, category_id=None, page_num=None):
     if category_id is not None:
         products.filter(category__id=category_id)
 
-    product_count = products.count()
     products = products.all()
     products_ = []
 
@@ -153,19 +152,7 @@ def shop_product_view(request, category_id=None, page_num=None):
         products_.append(product_)
 
     if page_num is not None:
-        pager_total_length = math.ceil(product_count/float(ITEM_COUNT_PER_PAGE))
-        products_ = {
-            'data': products_,
-            'page_total_count': pager_total_length,
-            'page_left_count': page_num-(page_num%PAGER_INDICATOR_LENGTH)+1,
-            'page_right_count': pager_total_length
-            if pager_total_length < page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH
-            else page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH,
-            }
-        products_.update({
-            'page_hasPrev': True if products_['page_left_count'] is not 1 else False,
-            'page_hasNext': True if products_['page_right_count'] is not pager_total_length else False,
-        })
+        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
     else:
         products_ = {'data': products_}
 
@@ -185,24 +172,13 @@ def shop_product_view(request, category_id=None, page_num=None):
                       'current_page': 'shop_product'
                   })
 
+
 def shop_set_view(request, category_id=None, page_num=None):
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): start')
     sets = helper_get_set_list(category_id, helper_get_user(request))
 
     if page_num is not None:
-        pager_total_length = math.ceil(len(sets)/float(ITEM_COUNT_PER_PAGE))
-        sets = {
-            'data': sets,
-            'page_total_count': pager_total_length,
-            'page_left_count': page_num-(page_num%PAGER_INDICATOR_LENGTH)+1,
-            'page_right_count': pager_total_length
-            if pager_total_length < page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH
-            else page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH,
-            }
-        sets.update({
-            'page_hasPrev': True if sets['page_left_count'] is not 1 else False,
-            'page_hasNext': True if sets['page_right_count'] is not pager_total_length else False,
-        })
+        sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
     else:
         sets = {'data': sets}
 

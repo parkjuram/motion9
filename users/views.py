@@ -6,7 +6,8 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from common_controller.util import helper_get_user, helper_get_product, helper_get_set
+from motion9.const import *
+from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data
 
 from .models import Interest
 
@@ -81,13 +82,18 @@ def mypage_view(request, page_num=None):
         products = []
         for interest in interests:
             product = interest.product
-            product_ = helper_get_product(product.id, user)
+            product_ = helper_get_product(product, user)
             products.append(product_)
+
+        if page_num is not None:
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        else:
+            products = {'data':products}
 
         return render(request, 'mypage_interesting_web.html',
             {
                 'interests': products,
-                'tab_name': 'interesting_set'
+                'tab_name': 'interesting_product'
             })
 
     else:
@@ -100,11 +106,16 @@ def mypage_set_view(request, page_num=None):
         interests = user.interest_set.filter(type='s').all()
         sets = []
         for interest in interests:
-            set = interest.product
-            set_ = helper_get_set(set.id, user)
+            set = interest.set
+            set_ = helper_get_set(set, user)
             sets.append(set_)
 
-        return render(request, 'mypage_interesting_web.html',
+        if page_num is not None:
+            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        else:
+            sets = {'data':sets}
+
+        return render(request, 'mypage_interesting_set_web.html',
             {
                 'interests': sets,
                 'tab_name': 'interesting_set'
