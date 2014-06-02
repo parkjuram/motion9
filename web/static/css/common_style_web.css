@@ -11,6 +11,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: #F3F3F3;
+    font-size: 12px;
     /*background: url(../img/body-bg.png) top left repeat;*/
 }
 
@@ -86,7 +87,7 @@ a:visited{
     margin-right : 30px;
     font-size: 18px;
     font-weight: bold;
-    padding-top : 8px;
+    padding-top : 14px;
     float : left;
 }
 
@@ -94,7 +95,6 @@ a:visited{
 #header-main-menu{
     position: relative;
     font-size: 12px;
-    font-weight: bold;
     width : 850px;
     float : left;
 }
@@ -113,7 +113,7 @@ a:visited{
 #header-right-menu-list{
     padding : 0;
     list-style: none;
-    width : 240px;
+    width : 370px;
     float : right;
 
 }
@@ -123,29 +123,31 @@ a:visited{
 }
 
 #header-right-menu-list a{
-    padding : 12px 11px;
+    padding : 18px 11px;
 }
 
 #header-right-menu-list a:hover{
-    color: #c7b273;
+    color: #d2bb8f;
 }
 
 
 #header-main-menu-list a{
-    padding : 12px;
+    padding : 18px 18px;
+
 }
 
 #header-main-menu-list a:hover{
-    background-color: #c7b273;
+    background-color: #d2bb8f;
+
 }
 
 #header-main-menu a.selected{
-    background-color: #c7b273;
+    background-color: #d2bb8f;
 }
 
 #header-main-menu-list{
     list-style: none;
-    width : 610px;
+    width : 480px;
     float :left;
 }
 
@@ -165,7 +167,11 @@ a:visited{
     margin : 0 auto 0 auto;
     padding : 12px 0 12px 0;
     font-size: 12px;
-    font-weight: bold;
+    display: none;
+}
+
+.header-sub-menu-selected{
+    display: block;
 }
 
 .header-sub-menu a:hover{
@@ -257,6 +263,28 @@ ol, ul {
 /* flash message style */
 .flash          { background: #CEE5F5; padding: 0.5em; }
 
+.menu-search-btn{
+    width: 60px;
+  height : 30px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #fff;
+  font-size: 12px;
+  background: #d2bb8f;
+  padding: 8px 10px;
+  text-decoration: none;
+  vertical-align: text-top;
+}
+
+.menu-search-btn:visited{
+    color: #fff;
+}
+
+.menu-search-btn:hover{
+    text-decoration: none;
+    color : #393939;
+}
 
 .basic-btn {
   width: 60px;
@@ -277,7 +305,7 @@ ol, ul {
 
 .basic-btn:hover {
   text-decoration: none;
-  color : #c7b273;
+  color : #d2bb8f;
 }
 
 
@@ -327,8 +355,7 @@ ol, ul {
 
 .category-list a{
     color:black;
-    font-weight: bold;
-    padding : 8px 8px;
+    padding : 10px 8px;
     display: block;
     width : 90px;
     /*
@@ -338,13 +365,13 @@ ol, ul {
 }
 
 .category-list a:hover{
-    color :  #c7b273;
+    color :  #d2bb8f;
 }
 
 .current-category{
     background-color: #ffffff;
-    color:#c7b273;
-    padding : 8px 8px;
+    color:#d2bb8f;
+    padding : 10px 8px;
     display: block;
     width : 90px;
 }

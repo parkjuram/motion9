@@ -15,7 +15,7 @@ def helper_get_user(request):
 
 def helper_get_product(product_id_or_object, user=None):
 
-    if isinstance(product_id_or_object, int):
+    if isinstance(product_id_or_object, unicode) or isinstance(product_id_or_object, int):
         product_id = product_id_or_object
         product_object = None
     elif isinstance(product_id_or_object, Product):
@@ -53,7 +53,9 @@ def helper_get_product(product_id_or_object, user=None):
 
 def helper_get_set(set_id_or_object, user=None):
 
-    if isinstance(set_id_or_object, int):
+    print set_id_or_object
+
+    if isinstance(set_id_or_object, unicode) or isinstance(set_id_or_object, int):
         set_id = set_id_or_object
         set_object = None
     elif isinstance(set_id_or_object, Set):

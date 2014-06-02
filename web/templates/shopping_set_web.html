@@ -1,9 +1,10 @@
 {% extends "web_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_set_web.css') }}"/>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/shopping_set_web.css'%}"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="{{ url_for('static', filename='js/shopping_set_web.js') }}"></script>
+<script src="{% static 'js/shopping_set_web.js'%}"></script>
 {% endblock %}
 
 {% block ad_area %}
@@ -27,17 +28,16 @@
     <div class="main-container float-left">
         <div class="box-css">
             <div class="set-category">
-                Collection >
+                Collection > {{ current_category }}
             </div>
-            <div class="set-item">
+            {% for set in sets.data %}
+            <div class="set-item" style="background: url('{{ set.big_img_url }}') top left no-repeat;">
                 <div class="set-item-info">
                     <div class="set-item-info-title">
                         간략설명
                     </div>
                     <div class="set-item-info-contents">
-                        디자이너가 존나 우유부단해서 디자인이 자주바낌<br/>
-                        짜증나지만 돈벌면 많이 나눠 줄거라 참고 있음<br/>
-                        하아
+                        {{ set.description }}
                     </div>
                     <div class="set-item-info-title">
                         세트구성
@@ -46,31 +46,11 @@
                         BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
                     </div>
                     <div class="set-item-info-bottom">
-                        \120,150 &nbsp;&nbsp;<a href="#" class="basic-btn">자세히 보기</a>
+                        \{{ set.discount_price }} &nbsp;&nbsp;<a href="{% url "set" set_id=set.id %}" class="basic-btn">자세히 보기</a>
                     </div>
                 </div>
             </div>
-            <div class="set-item">
-                <div class="set-item-info">
-                    <div class="set-item-info-title">
-                        간략설명
-                    </div>
-                    <div class="set-item-info-contents">
-                        디자이너가 존나 우유부단해서 디자인이 자주바낌<br/>
-                        짜증나지만 돈벌면 많이 나눠 줄거라 참고 있음<br/>
-                        하아
-                    </div>
-                    <div class="set-item-info-title">
-                        세트구성
-                    </div>
-                    <div class="set-item-info-contents">
-                        BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
-                    </div>
-                    <div class="set-item-info-bottom">
-                        \120,150 &nbsp;&nbsp;<a href="#" class="basic-btn">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div class="nav-container float-left">

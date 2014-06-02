@@ -1,10 +1,11 @@
 {% extends "mypage_web.html" %}
 {% block subHeader %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_interesting_web.css') }}"/>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mypage_interesting_web.css'%}"/>
 
-<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/mypage_interesting_web.js') }}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+<script src="{% static 'js/mypage_interesting_web.js'%}"></script>
 {% endblock %}
 {% block categoryTitle %}
     관심 제품
@@ -13,20 +14,16 @@
 {% if interests.data|length > 0 %}
     {% for product in interests.data %}
 
-    <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
+    <div class="product-item" id="item-{{ product.id}}" data-attr="{{ product.id }}">
         <div class="product-item-img">
             <div class="product-opacity-bg product-hover-area">
-                <a href="#"><img src="{{ url_for('static', filename='img/detail.png') }}" class="icon"/></a>
+                <a href="{% url 'product' product_id=product.id %}"><img src="{%  static 'img/detail.png'%}" class="icon"/></a>
             </div>
             <img src="{{ product.big_img_url}}" alt="" />
         </div>
         <div class="product-item-info">
             <div class="product-item-info-contents product-item-name">
-                {% if (product.name|length) > 12 %}
-                    <a href="{{ url_for('productWeb',product_key=product.key) }}">{{product.name[:12] }}..</a>
-                {% else %}
-                    <a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name  }}</a>
-                {% endif %}
+                <a href="{% url 'product' product_id=product.id%}">{{product.name|truncatechars:18 }}..</a>
             </div>
             <div class="product-item-info-contents">
                 카테고리 > {{ product.category_name }}
@@ -52,8 +49,8 @@
 {% if interests.data|length > 0  %}
     <ul class="pagination">
       <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
-      {% for pageNum in range(interests.page_left_count, interests.page_right_count+1 )%}
-      <li><a href="{{ url_for('myPageWeb', pageNum = pageNum) }}">{{ pageNum  }}</a></li>
+      {% for pageNum in page_range %}
+      <li><a href="{% url 'mypage' page_num=pageNum %}">{{ pageNum  }}</a></li>
       {% endfor %}
       <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
     </ul>

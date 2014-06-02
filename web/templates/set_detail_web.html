@@ -1,28 +1,29 @@
 {% extends "web_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/set_detail_web.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='magnific_popup/magnific-popup.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='spinner/jquery.spinner.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='tab/easy-responsive-tabs.css') }}"/>
-<script src="{{ url_for('static', filename='magnific_popup/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/set_detail_web.js') }}"></script>
-<script src="{{ url_for('static', filename='spinner/jquery.spinner.js') }}"></script>
-<script src="{{ url_for('static', filename='tab/easyResponsiveTabs.js') }}"></script>
+{% load static %}
+<link rel="stylesheet" href="{%  static 'css/set_detail_web.css' %}"/>
+<link rel="stylesheet" href="{%  static 'magnific_popup/magnific-popup.css' %}"/>
+<link rel="stylesheet" href="{%  static 'spinner/jquery.spinner.css' %}"/>
+<link rel="stylesheet" href="{%  static 'tab/easy-responsive-tabs.css' %}"/>
+<script src="{%  static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{%  static 'js/set_detail_web.js' %}"></script>
+<script src="{%  static 'spinner/jquery.spinner.js' %}"></script>
+<script src="{%  static 'tab/easyResponsiveTabs.js' %}"></script>
 {% endblock %}
 {% block content %}
 <div class="row" style="margin-top: 20px;">
     <div class="main-container float-left">
         <div class="box-css">
             <div class="box-header">
-                Collection > 라이프 스타일 컬렉션 > 깜둥이를 위한 세트
+                Collection > {{ set.category_name  }} > {{ set.name }}
             </div>
             <div class="set-category-box">
-                카테고리 > 흑인세트
+                카테고리 > {{ set.category_name }}
             </div>
             <div class="product-contents">
                 <div class="float-left">
                     <div class="set-img">
-                        <img src="http://image.auction.co.kr/itemimage/63/c0/fd/63c0fda73.jpg" alt="" />
+                        <img src="{{ set.big_img_url }}" alt="" />
                     </div>
                 </div>
                 <div class="float-right">
@@ -51,7 +52,7 @@
                 </ul>
 
                 <div class="resp-tabs-container">
-                    <div> 상품 정보가 어쩌구 저쩌구</div>
+                    <div> {{ set.description }}</div>
                     <div> 고시가 어쩌구</div>
                 </div>
             </div>
@@ -64,7 +65,7 @@
             </div>
 
             <div class="price-area">
-                <div class="product-price price-origin">원래 가격 : 113,000원 (<span class="price-discount">할인율 : 20%</span>)<!--<span>{{ set.original_price }}</span>--></div>
+                <div class="product-price price-origin">원래 가격 : {{ set.original_price }}원 (<span class="price-discount">할인율 : {{ set.discount_difference }}%</span>)</div>
                 <div class="product-how-many">
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :
@@ -74,9 +75,9 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="product-price price-saled">판매가 : <!--<span>{{ set.discount_price }}</span>--><span>99,000원</span></div>
+                <div class="product-price price-saled">판매가 : <span>{{ set.discount_price }}원</span></div>
                 <div class="product-price price-total">
-                    총 상품 금액 : 99,300원
+                    총 상품 금액 : {{ set.discount_price }}원
                 </div>
                 <div class="product-btn-area">
                     <a href="#" class="basic-btn">구매하기</a>
@@ -89,29 +90,29 @@
                세트 구성
            </div>
            <div class="col-xs-12" style="padding-top: 4px; padding-bottom: 8px; ">
-           {% for number in range(0,2) %}
+           {% for product in set.products %}
                <div class="belong-to-set-item">
                    <div class="product-opacity-bg product-hover-area">
-                       <a href="#" class="view-product-detail-btn"><img src="{{ url_for('static', filename='img/detail.png') }}" class="icon"/></a>
+                       <a href="#" class="view-product-detail-btn"><img src="{% static 'img/detail.png'%}" class="icon"/></a>
                    </div>
                    <div class="belong-product-img">
-                       <img src="http://file.beautynet.co.kr/updata/shop/pimg_b/11/20/pr_img555111.gif" alt="" />
+                       <img src="{{ product.big_img_url }}" alt="" />
                    </div>
                    <div class="belong-product-info">
                        <div class="belong-product-name">
-                           미샤 포맨 익스트림 리뉴
+                           {{ product.name|truncatechars:18 }}
                        </div>
                        <div class="belong-product-contents">
-                           카테고리 > 로션
+                           카테고리 > {{ product.category_name }}
                        </div>
                        <div class="belong-product-contents">
-                           브랜드 : 미샤
+                           브랜드 : {{ product.brandname }}
                        </div>
                        <div class="belong-product-contents">
-                           가격 : 19,000원
+                           가격 : {{ product.discount_price }}원
                        </div>
                        <div class="belong-product-contents">
-                           용량 : 120ml
+                           용량 : {{ product.capacity }}
                        </div>
                    </div>
                    <div class="clearfix"></div>
@@ -123,6 +124,5 @@
 </div>
 
 <div id="productDetailModal" class="jqmWindow">
-
 </div>
 {% endblock %}

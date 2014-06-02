@@ -9,7 +9,7 @@ $(function(){
         var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
         return ctxPath;
     }
-
+/*
     var closeSubMenu = function(){
         $('ul.header-main-sub-menu').each(function(idx, val){
            $(this).css({display :'none'});
@@ -29,7 +29,7 @@ $(function(){
             closeSubMenu();
     });
 
-
+*/
     var fixDiv = function() {
         var b = $(window).scrollTop();
         var d = $("#header").offset().top + 80;
@@ -53,16 +53,16 @@ $(function(){
         var done = btn.hasClass('btn-motion9-disable');
 
         if(!done)
-            url = "/interest/add";
+            url = "/user/interest/add";
         else
-            url = '/interest/del';
+            url = '/user/interest/del';
 
         $.ajax({
 				  url: url,
 				  dataType: 'json',
 				  async : true,
 				  type:'POST',
-                  data : {product_key : productKey, type : type},
+                  data : {product_or_set_id : productKey, type : type},
 				  success: function(data){
 					  if(!data.success && data.message == 'login required'){
                           if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
@@ -105,7 +105,7 @@ $(function(){
 				  dataType: 'json',
 				  async : true,
 				  type:'POST',
-				  data:{product_key : productKey, type : type, how_many : howMany},
+				  data:{product_or_set_id : productKey, type : type, how_many : howMany},
 				  success: function(data){
 					  if(!data.success && data.message == 'login required'){
                           if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
@@ -121,11 +121,5 @@ $(function(){
 				  }
 		});
 	});
-
-    $('#loginBox').jqm({modal:false});
-    $('.login-btn').click(function(e){
-        e.preventDefault();
-        $('#loginBox').jqmShow();
-    });
 
 });

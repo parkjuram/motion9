@@ -16,6 +16,32 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+def helper_add_product_interest(user, product_id):
+    try:
+        Interest.objects.create(user=user, product_id=product_id, type='p')
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_product_interest(user, product_id):
+    try:
+        interest = Interest.objects.get(user=user, product_id=product_id, type='p')
+        interest.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_set_interest(user, set_id):
+    try:
+        Interest.objects.create(user=user, set_id=set_id, type='s')
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_set_interest(user, set_id):
+    try:
+        interest = Interest.objects.get(user=user, set_id=set_id, type='s')
+        interest.delete()
+    except Exception as e:
+        logger.error(e)
+
 @csrf_exempt
 def registration(request):
     email = request.POST.get('email')
@@ -131,20 +157,11 @@ def mypage_set_view(request, page_num=None):
 def mypage_purchase_view(request, page_num=None):
     pass
 
-
-def add_product_interest(user, product_id):
-    print 'here'
-    try:
-        print 'here1'
-        Interest.objects.create(user=user, product_id=product_id, type='p')
-        print 'here2'
-    except Exception as e:
-        print e
-
-    print 'here3'
-
-def add_set_interest(user, set_id):
-    Interest.objects.create(user=user, set_id=set_id, type='s')
+@login_required
+def mypage_cart_view(request):
+    # user = helper_get_user(request)
+    # products = user.cart_set.filter(type='p').all()
+    pass
 
 @csrf_exempt
 @login_required
@@ -154,9 +171,22 @@ def add_interest(request):
 
     product_or_set_id = request.POST.get('product_or_set_id')
     if type=='p':
-        add_product_interest(user, product_or_set_id)
+        helper_add_product_interest(user, product_or_set_id)
     elif type=='s':
-        add_set_interest(user, product_or_set_id)
+        helper_add_set_interest(user, product_or_set_id)
+
+    return HttpResponse('temporary response')
+
+@login_required
+def delete_interest(request):
+    user = helper_get_user(request)
+    type = request.POST.get('type', 'p')
+
+    product_or_set_id = request.POST.get('product_or_set_id')
+    if type=='p':
+        helper_delete_product_interest(user, product_or_set_id)
+    elif type=='s':
+        helper_delete_set_interest(user, product_or_set_id)
 
     return HttpResponse('temporary response')
 

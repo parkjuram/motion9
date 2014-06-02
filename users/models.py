@@ -31,3 +31,17 @@ class Interest(models.Model):
             ("user", "product"),
             ("user", "set"),
             ("user", "custom_set"))
+
+class Cart(models.Model):
+    user = models.ForeignKey('auth.User')
+    product = models.ForeignKey('web.Product',null=True)
+    set = models.ForeignKey('web.Set',null=True)
+    custom_set = models.ForeignKey('web.CustomSet',null=True)
+    type = models.CharField(max_length=1, null=False, default='p')
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    class Meta:
+        unique_together = (
+            ("user", "product"),
+            ("user", "set"),
+            ("user", "custom_set"))

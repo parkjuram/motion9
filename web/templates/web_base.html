@@ -20,7 +20,6 @@
     <style>
         body {
             min-width: 970px;
-            font-size: 14px;
         }
     </style>
     {% block header %}
@@ -38,18 +37,21 @@
 
         <div id="header-main-menu">
             <ul id="header-main-menu-list">
-                <li><a href="#">Motion9?</a></li>
-                <li><a href="#">BEST</a></li>
-                <li><a href="#" class="selected">Collection</a></li>
-                <li><a href="#">단일제품</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Combination</a></li>
+                <li><a href="#" data-attr="menuBest">BEST</a></li>
+                <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>
+                <li><a href="#" data-attr="menuProduct">단일제품</a></li>
+                <li><a href="#" data-attr="menuHelp">Help</a></li>
                 <li class="clearfix"></li>
             </ul>
             <ul id="header-right-menu-list">
-                <li><a href="#">마이페이지</a></li>
+                <li><a href="{% url 'mypage' %}">마이페이지</a></li>
                 <li><a href="#">장바구니</a></li>
-                <li><a href="#" class="login-btn">로그인</a></li>
+                {% if user %}
+                    <li><a href="#" class="">로그아웃</a></li>
+                {% else %}
+                    <li><a href="#" class="login-btn">로그인</a></li>
+                {% endif %}
+                <li><input type="text" style=" margin-left: 4px; margin-top: 14px; height : 18px; width : 106px; border-radius: 7px;"/></li>
                 <li class="clearfix"></li>
             </ul>
             <div class="clearfix"></div>
@@ -57,12 +59,31 @@
         <div class="clearfix"></div>
     </div>
     <div id="header-sub-menu-wrapper">
-        <div id="collection" class="header-sub-menu">
+        <div id="menuBest" class="header-sub-menu">
             <a href="#">전체</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">세트</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">단일제품</a>
+        </div>
+        <div id="menuCollection" class="header-sub-menu">
+            <a href="{% url 'shop_set' %}">전체</a><span class="header-sub-menu-divider">/</span>
             <a href="#">라이프 스타일 컬렉션</a><span class="header-sub-menu-divider">/</span>
             <a href="#">계절 컬렉션</a><span class="header-sub-menu-divider">/</span>
             <a href="#">피부 상태에 따른 컬렉션</a><span class="header-sub-menu-divider">/</span>
             <a href="#">프리미엄 컬렉션</a>
+        </div>
+        <div id="menuProduct" class="header-sub-menu">
+            <a href="{% url 'shop_product' %}">전체</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">스킨</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">로션</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">선크림, BB크림</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">에센스</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">클린징, 스크럽</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">기타</a>
+        </div>
+        <div id="menuHelp" class="header-sub-menu">
+            <a href="#">고객센터</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">FAQ</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">온라인 문의</a>
         </div>
     </div>
 </div>
@@ -71,12 +92,6 @@
 {% endblock %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-
-        </div>
-    </div>
-
 
     {% block content %}
     {% endblock %}
@@ -96,17 +111,17 @@
     <div class="login-box-header">
         로그인
     </div>
-    <form method="post" action="{{url_for('login', next = url_for_login_next )}}" >
+    <form method="post" data-form="login-popup-form" action="#" >
         <div class="form-box">
             <label for="email">이메일</label>
             <input type="text" name="email" id="email"/>
         </div>
         <div class="form-box">
             <label for="password">비밀번호</label>
-            <input type="text" name="password" id="password"/>
+            <input type="password" name="password" id="password"/>
         </div>
         <div class="form-btns">
-            <a href="#" class="basic-btn" style="padding : 8px 40px;">로그인</a> &nbsp;&nbsp;&nbsp;
+            <a href="#" class="basic-btn login-submit-btn" data-form="login-popup-form" style="padding : 8px 40px;">로그인</a> &nbsp;&nbsp;&nbsp;
             <a href="#" class="facebook-btn">페이스북으로 로그인</a>
         </div>
     </form>

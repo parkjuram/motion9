@@ -22,10 +22,10 @@ $(function(){
     $('.set-item').hover(function(e){
         var infoBox = $(this).find('.set-item-info');
        var left = $(this).innerWidth() - infoBox.outerWidth();
-       infoBox.animate({left : left+'px' }, 'fast', 'swing');
+       infoBox.animate({left : left+'px' }, { duration :'fast', easing: 'swing', queue: false});
     }, function(e){
        var infoBox = $(this).find('.set-item-info');
        var left = $(this).innerWidth();
-       infoBox.animate({left : left+'px' }, 'fast', 'swing');
+       infoBox.animate({left : left+'px' }, { duration :'fast', easing: 'swing', queue: false});
     });
 });

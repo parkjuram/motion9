@@ -1,7 +1,7 @@
 {% extends "web_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_web.css') }}"/>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mypage_web.css'%}"/>
 {% block subHeader %}
 {% endblock %}
 {% endblock %}
@@ -9,17 +9,17 @@
 <div class="row">
     <div class="category-list">
         <ul>
-            {% if tabName == "interesting"%}
+            {% if tab_name == "interesting_product"%}
                 <li class="current-category">관심 제품</li>
-                <li><a href="{{ url_for('myPageSetWeb') }}">관심 세트</a></li>
-                <li><a href="{{ url_for('myPageWebPurchase') }}">구매 목록</a></li>
-            {% elif tabName == "interesting_set" %}
-                <li><a href="{{ url_for('myPageWeb') }}"    >관심 제품</a></li>
+                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>
+                <li><a href="{% url 'mypage_set'%}">구매 목록</a></li>
+            {% elif tab_name == "interesting_set" %}
+                <li><a href="{% url 'mypage'%}"    >관심 제품</a></li>
                 <li class="current-category">관심 세트</li>
-                <li><a href="{{ url_for('myPageWebPurchase') }}">구매 목록</a></li>
-            {% elif tabName == "purchase" %}
-                <li><a href="{{ url_for('myPageWeb') }}">관심 제품</a></li>
-                <li><a href="{{ url_for('myPageSetWeb') }}">관심 세트</a></li>
+                <li><a href="{% url 'mypage_set'%}">구매 목록</a></li>
+            {% elif tab_name == "purchase" %}
+                <li><a href="{% url 'mypage'%}">관심 제품</a></li>
+                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>
                 <li class="current-category">구매 목록</li>
             {% endif%}
         </ul>
@@ -45,14 +45,14 @@
         </div>
         <div class="nav-container float-left">
             <div class="box-css user-profile">
-                <div class="profile-user-name">{{ g.user.name }}</div>
+                <div class="profile-user-name">{{ user.profile.name }}</div>
                 <div>
-                    {{ g.user.email }}
+                    {{ user.profile.email }}
                 </div>
                 <hr/>
                 <p class="user-sex">
-                    성별 :
-                     {%if g.user.sex == 'M' %}
+                    성별 : {{ user.username }}
+                     {%if user.profile.sex == 'M' %}
                     남자
                     {% else %}
                     여자
@@ -60,19 +60,19 @@
                 </p>
                 <p class="user-age">
                     나이 :
-                     {% if g.user.age != none %}
-                        {{ g.user.age }} ~ {{ g.user.age + 4}}세
+                     {% if user.profile.age != none %}
+                        {{ user.profile.age }} ~ {{ user.profile.age|add:4}}세
                     {% else %}
                         나이를 입력해주세요.
                     {% endif %}
                 </p>
                 <p class="user-skin-type">
                     피부타입 :
-                     {% if g.user.skin_type == 'O' %}
+                     {% if user.profile.skin_type == 'O' %}
                             지성 피부
-                        {% elif g.user.skin_type =='D' %}
+                        {% elif user.profile.skin_type == 'D' %}
                             건성 피부
-                        {% elif g.user.skin_type == 'C' %}
+                        {% elif user.profile.skin_type == 'C' %}
                             복합성 피부
                         {% else %}
                             미등록
@@ -81,7 +81,7 @@
                 </p>
                 <hr/>
                 <p style="text-align: center; margin-top: 12px;  ">
-                    <a href="{{ url_for('updateUserProfile') }}" class="basic-btn">&nbsp;&nbsp;edit&nbsp;&nbsp;</a>
+                    <a href="{% url 'mypage_set'%}" class="basic-btn">&nbsp;&nbsp;edit&nbsp;&nbsp;</a>
                 </p>
             </div>
         </div>

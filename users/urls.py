@@ -16,8 +16,10 @@ urlpatterns = patterns('',
     url(r'^mypage/purchase/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
     url(r'^mypage/purchase/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
 
+    url(r'^mypage/cart/$', 'users.views.mypage_cart_view', name='mypage_cart'),
 
     url(r'^interest/add/$', 'users.views.add_interest', name='add_interest'),
+    url(r'^interest/del/$', 'users.views.delete_interest', name='del_interest'),
     # @app.route('/interest/add', methods = ['POST'])
 
 
