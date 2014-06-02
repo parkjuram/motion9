@@ -66,12 +66,12 @@ def _update_database(source_folder):
     run('cd %s && sudo ../virtualenv/bin/python manage.py syncdb --noinput' % (source_folder,))
 
     with settings(warn_only=True):
-        # # run('cd %s && ../virtualenv/bin/python manage.py schemamigration classes --initial' % (source_folder,))
+        # # run('cd %s && ../virtualenv/bin/python manage.py schemamigration users --initial' % (source_folder,))
         run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration users --auto' % (source_folder,))
         run('cd %s && sudo ../virtualenv/bin/python manage.py migrate users' % (source_folder,))
         #
-        # # run('cd %s && ../virtualenv/bin/python manage.py schemamigration user --initial' % (source_folder,))
-        run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration web --auto' % (source_folder,))
+        run('cd %s && ../virtualenv/bin/python manage.py schemamigration web --initial' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration web --auto' % (source_folder,))
         run('cd %s && sudo ../virtualenv/bin/python manage.py migrate web' % (source_folder,))
         #
         # # run('cd %s && ../virtualenv/bin/python manage.py schemamigration foradmin --initial' % (source_folder,))
