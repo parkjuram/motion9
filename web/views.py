@@ -5,7 +5,8 @@ from django.template.context import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
-from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data
+from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data, \
+    http_response_by_json
 from web.models import Product, Category, BlogReview, Set
 
 import math
@@ -245,8 +246,6 @@ def set_view(request, set_id):
 
 @csrf_exempt
 def product_view(request, product_id=None):
-    logger.info( 'def product_view(request, product_id=None): start')
-
     if product_id is not None:
         product = helper_get_product(product_id, helper_get_user(request))
         blog_reivews = _get_blog_reviews(product_id)
@@ -260,7 +259,20 @@ def product_view(request, product_id=None):
         logger.error( 'product_id is wrong in product_view')
         return render(request, "404.html")
 
-    logger.info( 'def product_view(request, product_id=None): end')
+@csrf_exempt
+def product_modal_view(request, product_id=None):
+    if product_id is not None:
+        product = helper_get_product(product_id, helper_get_user(request))
+        blog_reivews = _get_blog_reviews(product_id)
+
+        return render(request, "product_detail_for_modal.html",
+                      {
+                          'product': product,
+                          'blog_reviews': blog_reivews
+                      })
+    else:
+        logger.error( 'product_id is wrong in product_view')
+        return render(request, "404.html")
 
 def product_json_view(request, product_id=None):
     logger.info( 'def product_json_view(request, product_id=None): start')
@@ -281,9 +293,8 @@ def product_json_view(request, product_id=None):
 def customize_set_view(request, set_id):
     set = helper_get_set(set_id)
 
-    print set
 
-    return HttpResponse('test')
+    return http_response_by_json(None, set)
 
 # @login_required
 # def changeProductInSetWeb(set_key):

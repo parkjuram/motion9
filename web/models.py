@@ -50,6 +50,22 @@ class SetProduct(models.Model):
     product = models.ForeignKey('Product')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
+class ChangeableProduct(models.Model):
+    set = models.ForeignKey('Set')
+    product = models.ForeignKey('Product')
+
+    class Meta:
+        unique_together = (
+            ("set", "product"))
+
+class ChangeableProductInfo(models.Model):
+    changeable_product = models.ForeignKey('ChangeableProduct')
+    product = models.ForeignKey('Product')
+
+    class Meta:
+        unique_together = (
+            ("changeable_product", "product"))
+
 class CustomSet(models.Model):
     user = models.ForeignKey('users.UserProfile')
     set = models.ForeignKey('Set')

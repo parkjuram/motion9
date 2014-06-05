@@ -69,8 +69,6 @@ def helper_get_product(product_id_or_object, user=None):
 
 def helper_get_set(set_id_or_object, user=None):
 
-    print set_id_or_object
-
     if isinstance(set_id_or_object, unicode) or isinstance(set_id_or_object, int):
         set_id = set_id_or_object
         set_object = None
@@ -112,6 +110,9 @@ def helper_get_set(set_id_or_object, user=None):
     })
 
     return set_
+
+def helper_get_changeable_product_list(set_id):
+    pass
 
 def helper_make_paging_data( all_object_length, lists, page_num):
     pager_total_length = math.ceil( all_object_length/float(ITEM_COUNT_PER_PAGE))

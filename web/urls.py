@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^product/(?P<product_id>(\d+))/$', 'web.views.product_view', name='product'),
     url(r'^product/(?P<product_id>(\d+))/json/$', 'web.views.product_json_view', name='product_json'),
+    url(r'^product/(?P<product_id>(\d+))/modal/$', 'web.views.product_modal_view', name='product_modal'),
 
     url(r'^shop/set/$', 'web.views.shop_set_view', name='shop_set'),
     url(r'^shop/set/(?P<category_id>(\d+))/$', 'web.views.shop_set_view', name='shop_set'),
