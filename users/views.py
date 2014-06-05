@@ -40,6 +40,10 @@ def registration(request):
     return HttpResponse('temporary response')
 
 @csrf_exempt
+def registration_view(request):
+    return render(request, 'register.html')
+
+@csrf_exempt
 def login(request):
     email = request.POST.get('email')
     password = request.POST.get('password')
