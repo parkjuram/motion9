@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from web.models import Product, Set
+from web.models import Product, Set, ChangeableProduct, ChangeableProductInfo
 from users.models import Interest, Cart, Purchase
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -67,7 +67,7 @@ def helper_get_product(product_id_or_object, user=None):
     except ObjectDoesNotExist as e:
         logger.error(e)
 
-def helper_get_set(set_id_or_object, user=None):
+def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 
     if isinstance(set_id_or_object, unicode) or isinstance(set_id_or_object, int):
         set_id = set_id_or_object
@@ -102,6 +102,27 @@ def helper_get_set(set_id_or_object, user=None):
         discount_price += product.discount_price
 
         product_ = helper_get_product( product.id, user)
+
+        if with_custom_info:
+            try:
+                changeable_product = ChangeableProduct.objects.get(set_id=set_id, product_id=product.id)
+                changeable_product_infos = changeable_product.changeableproductinfo_set.all()
+
+                changeable_products = []
+                for changeable_product_info in changeable_product_infos:
+                    product_ = helper_get_product(changeable_product_info.product, user)
+                    changeable_products.append(product_)
+
+                product_.update({
+                    'is_changeable': True,
+                    'changeable_products': changeable_products
+                })
+
+            except Exception as e:
+                product_.update({
+                    'is_changeable': False
+                })
+
         set_['products'].append(product_)
 
     set_.update({
@@ -111,8 +132,11 @@ def helper_get_set(set_id_or_object, user=None):
 
     return set_
 
-def helper_get_changeable_product_list(set_id):
-    pass
+# def helper_get_changeable_product_list(set_id):
+#     changeable_products = ChangeableProduct.objects.filter(set_id=set_id)
+#     for changeable_product in changeable_products:
+#         changeableproductinfos = changeable_product.changeableproductinfo_set.all()
+#         changeable_product.product_id -> changeableproductinfos items product_id
 
 def helper_make_paging_data( all_object_length, lists, page_num):
     pager_total_length = math.ceil( all_object_length/float(ITEM_COUNT_PER_PAGE))

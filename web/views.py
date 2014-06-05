@@ -291,8 +291,7 @@ def product_json_view(request, product_id=None):
 
 @csrf_exempt
 def customize_set_view(request, set_id):
-    set = helper_get_set(set_id)
-
+    set = helper_get_set(set_id, helper_get_user(request), True)
 
     return http_response_by_json(None, set)
 
