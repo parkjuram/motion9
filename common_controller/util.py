@@ -1,4 +1,5 @@
 from web.models import Product, Set
+from users.models import Interest, Cart, Purchase
 from django.core.exceptions import ObjectDoesNotExist
 
 from motion9.const import *
@@ -113,3 +114,74 @@ def helper_make_paging_data( all_object_length, lists, page_num):
         'page_range': range(lists['page_left_count'], lists['page_right_count']+1)
     })
     return lists
+
+# interest
+
+def helper_add_product_interest(user, product_id):
+    try:
+        Interest.objects.create(user=user, product_id=product_id, type='p')
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_set_interest(user, set_id):
+    try:
+        Interest.objects.create(user=user, set_id=set_id, type='s')
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_product_interest(user, product_id):
+    try:
+        interest = Interest.objects.get(user=user, product_id=product_id, type='p')
+        interest.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_set_interest(user, set_id):
+    try:
+        interest = Interest.objects.get(user=user, set_id=set_id, type='s')
+        interest.delete()
+    except Exception as e:
+        logger.error(e)
+
+# cart
+
+def helper_add_product_cart(user, product_id):
+    try:
+        Cart.objects.create(user=user, product_id=product_id, type='p')
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_set_cart(user, set_id):
+    try:
+        Cart.objects.create(user=user, set_id=set_id, type='s')
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_custom_set_cart(user, custom_set_id):
+    try:
+        Cart.objects.create(user=user, custom_set_id=custom_set_id, type='c')
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_product_cart(user, product_id):
+    try:
+        cart = Cart.objects.get(user=user, product_id=product_id, type='p')
+        cart.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_set_cart(user, set_id):
+    try:
+        cart = Cart.objects.get(user=user, set_id=set_id, type='s')
+        cart.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_custom_set_cart(user, custom_set_id):
+    try:
+        cart = Cart.objects.get(user=user, custom_set_id=custom_set_id, type='c')
+        cart.delete()
+    except Exception as e:
+        logger.error(e)
+
+# purchase

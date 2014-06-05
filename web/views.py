@@ -2,6 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.template.context import RequestContext
+from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data
@@ -230,6 +231,7 @@ def set_view(request, set_id):
 #     categories = getCategoryList(True)
 #     return render_template('shopping_set_web.html', products = sets, current_page='shopping1',current_category=category_key, categories=categories)
 
+@csrf_exempt
 def product_view(request, product_id=None):
     logger.info( 'def product_view(request, product_id=None): start')
 
