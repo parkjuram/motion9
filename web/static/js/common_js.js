@@ -53,9 +53,9 @@ $(function(){
         var done = btn.hasClass('btn-motion9-disable');
 
         if(!done)
-            url = "/user/interest/add";
+            url = "/user/interest/add/";
         else
-            url = '/user/interest/del';
+            url = '/user/interest/del/';
 
         $.ajax({
 				  url: url,
@@ -66,14 +66,17 @@ $(function(){
 				  success: function(data){
 					  if(!data.success && data.message == 'login required'){
                           if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
-                            location.href= url_for_login_next;
+                            if($('#loginBox').length > 0 )
+                                $('#loginBox').jqmShow();
+                            else
+                                location.href='';
                       }else if(!data.success){
                           alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
                       }else{
                           if(!done){
-                            btn.addClass('btn-motion9-disable');
+                              //btn.addClass('btn-motion9-disable');
                           }else{
-                              btn.removeClass('btn-motion9-disable');
+                              //btn.removeClass('btn-motion9-disable');
                           }
                       }
 
@@ -101,7 +104,7 @@ $(function(){
             return;
 
         $.ajax({
-				  url: "/cart/add",
+				  url: "/cart/add/",
 				  dataType: 'json',
 				  async : true,
 				  type:'POST',
