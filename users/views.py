@@ -8,39 +8,17 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
-from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data
+from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data, \
+    helper_add_product_interest, helper_add_set_interest, helper_delete_product_interest, helper_delete_set_interest
 
 from .models import Interest
 
 import logging
 
 logger = logging.getLogger(__name__)
-
-def helper_add_product_interest(user, product_id):
-    try:
-        Interest.objects.create(user=user, product_id=product_id, type='p')
-    except Exception as e:
-        logger.error(e)
-
-def helper_delete_product_interest(user, product_id):
-    try:
-        interest = Interest.objects.get(user=user, product_id=product_id, type='p')
-        interest.delete()
-    except Exception as e:
-        logger.error(e)
-
-def helper_add_set_interest(user, set_id):
-    try:
-        Interest.objects.create(user=user, set_id=set_id, type='s')
-    except Exception as e:
-        logger.error(e)
-
-def helper_delete_set_interest(user, set_id):
-    try:
-        interest = Interest.objects.get(user=user, set_id=set_id, type='s')
-        interest.delete()
-    except Exception as e:
-        logger.error(e)
+# def helper_add_product_cart(user, product_id):
+#     try:
+#         Cart.objects.create(user=user, )
 
 @csrf_exempt
 def registration(request):
@@ -160,7 +138,32 @@ def mypage_purchase_view(request, page_num=None):
 @login_required
 def mypage_cart_view(request):
     # user = helper_get_user(request)
-    # products = user.cart_set.filter(type='p').all()
+    #
+    # product_carts= user.cart_set.filter(type='p').all()
+    # products = []
+    # for product_cart in product_carts:
+    #     product = product_cart.product
+    #     products.append(helper_get_product(product,user))
+    #
+    # set_carts = user.cart_set.filter(type='s').all()
+    # sets = []
+    # for set_cart in set_carts:
+    #     set = set_cart.set
+    #     sets.append(helper_get_set(set,user))
+    #
+    # custom_set_carts = user.cart_set.filter(type='c').all()
+    # custom_sets = []
+    # for custom_set_cart in custom_set_carts:
+    #     custom_set = custom_set_cart.custom_set
+    #     # !!!!need helper_get_custom_set
+    #
+    # return render(request, 'cart_web.html',
+    #     {
+    #         'products': products,
+    #         'sets': sets,
+    #         'custom_sets': custom_sets
+    #     })
+
     pass
 
 @csrf_exempt
@@ -177,6 +180,7 @@ def add_interest(request):
 
     return HttpResponse('temporary response')
 
+@csrf_exempt
 @login_required
 def delete_interest(request):
     user = helper_get_user(request)
@@ -189,6 +193,19 @@ def delete_interest(request):
         helper_delete_set_interest(user, product_or_set_id)
 
     return HttpResponse('temporary response')
+
+
+@csrf_exempt
+@login_required
+def add_cart(request):
+    user = helper_get_user(request)
+    type = request.POST.get('type', 'p')
+    product_or_set_id = request.POST.get('product_or_set_id')
+
+    # if type=='p':
+    #     helper_add_product_interest(user, product_or_set_id)
+    # elif type=='s':
+    #     helper_add_set_interest(user, product_or_set_id)
 
 # return render(request, 'shopping_product_web.html',
 #                   {
