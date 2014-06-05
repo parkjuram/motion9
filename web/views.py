@@ -120,7 +120,7 @@ def index_view(request):
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
 
-    return render(request, 'index_web.htm',
+    return render(request, 'index_web.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
