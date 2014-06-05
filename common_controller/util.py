@@ -110,8 +110,8 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 
                 changeable_products = []
                 for changeable_product_info in changeable_product_infos:
-                    product_ = helper_get_product(changeable_product_info.product, user)
-                    changeable_products.append(product_)
+                    changeable_product_ = helper_get_product(changeable_product_info.product, user)
+                    changeable_products.append(changeable_product_)
 
                 product_.update({
                     'is_changeable': True,

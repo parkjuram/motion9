@@ -71,6 +71,10 @@ class CustomSet(models.Model):
     set = models.ForeignKey('Set')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
+    class Meta:
+        unique_together = (
+            ("user", "set"))
+
 class CustomSetDetail(models.Model):
     custom_set = models.ForeignKey('CustomSet')
     original_product = models.ForeignKey('Product', related_name='get_custom_set_detail_from_original_product')

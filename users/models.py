@@ -6,7 +6,8 @@ from datetime import datetime
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', related_name='profile')
-    name = models.TextField(null=False)
+    phone = models.TextField(null=False)
+    address = models.TextField(null=False)
     sex = models.CharField(max_length=1, null=True)
     age = models.IntegerField(null=True)
     skin_type = models.CharField(max_length=100, null=True)
@@ -38,6 +39,7 @@ class Cart(models.Model):
     set = models.ForeignKey('web.Set',null=True)
     custom_set = models.ForeignKey('web.CustomSet',null=True)
     type = models.CharField(max_length=1, null=False, default='p')
+    item_count = models.IntegerField(null=False, default=1)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     class Meta:
@@ -53,6 +55,7 @@ class Purchase(models.Model):
     set = models.ForeignKey('web.Set',null=True)
     custom_set = models.ForeignKey('web.CustomSet',null=True)
     type = models.CharField(max_length=1, null=False, default='p')
+    item_count = models.IntegerField(null=False, default=1)
     status = models.CharField(max_length=1, null=False, default='r')
     shipping_number = models.TextField(null=False, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)

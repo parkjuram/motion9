@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data, \
     http_response_by_json
-from web.models import Product, Category, BlogReview, Set
+from web.models import Product, Category, BlogReview, Set, CustomSet, CustomSetDetail
 
 import math
 import json
@@ -293,41 +293,55 @@ def product_json_view(request, product_id=None):
 def customize_set_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request), True)
 
-    return http_response_by_json(None, set)
+    return render(request, "change_product_in_set_web.html",
+          {
+              'set': set
+          })
 
+@csrf_exempt
+def customize_set_save_view(request):
+    user = helper_get_user(request)
+    data = request.POST.get('data', None)
+    post_json = json.loads(data)
+    set_id = post_json.get('set_id')
+    custom_list = post_json.get('custom_lists')
+
+    if set_id is None:
+        return HttpResponse('is error')
+
+    if user is not None:
+        custom_set, is_created = CustomSet.objects.get_or_create(user=user, set__id = set_id)
+        for custom_item in custom_list:
+            original_id = custom_item.get('original_id')
+            new_id = custom_item.get('new_id')
+            CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_id, new_product_id=new_id)
+        return http_response_by_json()
+    else:
+        return http_response_by_json(CODE_LOGIN_REQUIRED)
+
+# @app.route('/customize/set/add', methods = ['POST'])
 # @login_required
-# def changeProductInSetWeb(set_key):
-#     availableList = getProductListForChangeableSetProduct(set_key)
-#     set = getSet(set_key)
+# def submitCustomCart():
+#     param = request.form['param']
+#     addToCart = parseBoolString(request.form['addToCart'])
+#     param = json.loads(param)
+#     setKey = param['setKey']
+#     customData = param['customData']
+#     originalKeys = []
+#     newKeys = []
 #
-#     return render_template('change_product_in_set_web.html', availableList = availableList, set = set)
-
-# @app.route('/product/json/<int:product_key>', methods = ['POST'])
-# def productWebJson(product_key):
-#     product = getProduct(product_key)
-#     product_dict = dict( product.__dict__ )
-#     del product_dict['_sa_instance_state']
+#     for data in customData:
+#          originalKeys.append(int(data['originalKey']))
+#          newKeys.append(int(data['newKey']))
 #
-#     product_json = {
-#         'data': product_dict
-#     }
+#     result = addCustomSet(setKey, originalKeys, newKeys)
 #
-#     return json.dumps(product_json, ensure_ascii=False)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#     if result == None :
+#         result = 'success'
+#     if addToCart:
+#         print "go to cart !!!!"
+#
+#     return jsonify(result = result)
 
 
 

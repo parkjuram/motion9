@@ -20,4 +20,5 @@ urlpatterns = patterns('',
     url(r'^set/(?P<set_id>(\d+))/$', 'web.views.set_view', name='set'),
 
     url(r'^customize/set/(?P<set_id>(\d+))/$', 'web.views.customize_set_view', name='customize_set'),
+    url(r'^customize/set/save/$', 'web.views.customize_set_save_view', name='customize_set_save'),
 )

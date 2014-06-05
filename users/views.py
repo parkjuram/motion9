@@ -27,13 +27,14 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def registration(request):
+    name = request.POST.get('name')
     email = request.POST.get('email')
     password = request.POST.get('password')
     password_confirm = request.POST.get('password_confirm')
 
     if password == password_confirm:
         try:
-            user = User.objects.create_user(username=email, email=email, password=password)
+            user = User.objects.create_user(username=name, email=email, password=password)
         except ValueError as e:
             logger.error(e)
         except IntegrityError as e:
@@ -77,7 +78,8 @@ def update(request):
     if helper_get_user(request) is not None:
         user_profile = request.user.profile
 
-        user_profile.name = request.POST.get('name')
+        user_profile.phone = request.POST.get('phone')
+        user_profile.address = request.POST.get('address')
         user_profile.sex = request.POST.get('sex')
         user_profile.age = request.POST.get('age')
         user_profile.skin_type = request.POST.get('skin_type')
