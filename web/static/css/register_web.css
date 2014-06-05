@@ -4,7 +4,6 @@
     margin-top: 30px;
     background-color: #ffffff;
     width : 600px;
-    height : 300px;
     font-size: 14px;
 }
 
@@ -46,20 +45,24 @@
     width : 90px;
     float: left;
     margin-right: 12px;
+    margin-top : 4px;
 }
+
 
 .checkbox-wrapper input{
     float : left ;
-    width : 30px;
+    width : 20px !important;
 }
 
 .checkbox-wrapper label{
     width : 50px;
-    float: left;
+    float: right;
 }
 
 .already-member-area{
-    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
 }
 
 .already-member-area a{
