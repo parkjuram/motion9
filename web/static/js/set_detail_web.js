@@ -71,7 +71,9 @@ $(function(){
         hoverArea.css({display:'none'});
     });
 
-    $('.cnt-spinner').spinner();
+    $('.cnt-spinner').spinner({value:1, min : 1, afterChange: function(val){
+        console.log('hello' + val);
+    }});
 
     $("#setTabs").easyResponsiveTabs({
         type: 'default', //Types: default, vertical, accordion
@@ -96,7 +98,9 @@ $(function(){
             }
         });
 
-         $('#modalCntSpinner').spinner();
+        $('#modalCntSpinner').spinner({value:1, min : 1, afterChange: function(val){
+            console.log('hello' + val);
+        }});
 
         $('body').css({overflow:'hidden'});
     };

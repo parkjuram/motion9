@@ -23,7 +23,7 @@
         </div>
         <div class="product-item-info">
             <div class="product-item-info-contents product-item-name">
-                <a href="{% url 'product' product_id=product.id%}">{{product.name|truncatechars:18 }}..</a>
+                <a href="{% url 'product' product_id=product.id%}" title="{{ product.name }}">{{product.name|truncatechars:15 }}..</a>
             </div>
             <div class="product-item-info-contents">
                 카테고리 > {{ product.category_name }}
@@ -48,11 +48,11 @@
 {% block productPaging %}
 {% if interests.data|length > 0  %}
     <ul class="pagination">
-      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
+      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="page">Prev</a></li>
       {% for pageNum in page_range %}
-      <li><a href="{% url 'mypage' page_num=pageNum %}">{{ pageNum  }}</a></li>
+      <li><a href="{% url 'mypage' page_num=pageNum %}" class="page">{{ pageNum  }}</a></li>
       {% endfor %}
-      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="page">Next</a></li>
     </ul>
 {% else %}
         <div class="clearfix"></div>

@@ -1,0 +1,45 @@
+{% extends "web_base.html" %}
+{% block header %}
+{% load static %}
+<link rel="stylesheet" href="{% url 'css/insert_profile_info.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="register-form">
+        <div class="register-header">
+            로그인
+        </div>
+        <form method="post" action="{% url 'login'%}" >
+            <div class="form-box">
+                <label for="email">이메일</label>
+                <input type="text" name="email" id="email"/>
+            </div>
+            <div class="form-box">
+                <label for="password">비밀번호</label>
+                <input type="password" name="password" id="password"/>
+            </div>
+            <div class="form-box">
+                <label for="password_check">비밀번호 확인</label>
+                <input type="password" name="password_check" id="password_check"/>
+            </div>
+            <div class="form-box">
+                <label for="sex">성별</label>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" name="sex" id="sex_m" value="M"/> <label for="sex_m">남자</label>
+                </div>
+
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" name="sex" id="sex_f" value="F"/> <label for="sex_f">여자</label>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-btns">
+                <a href="#" class="basic-btn login-submit-btn" style="padding : 8px 40px;">회원가입</a> &nbsp;&nbsp;&nbsp;
+                <a href="#" class="facebook-btn">페이스북으로 가입</a>
+            </div>
+            <div class="already-member-area">
+                이미 회원 이세요? <a href="{% url 'login_page' %}">로그인 하기</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

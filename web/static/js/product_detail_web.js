@@ -60,7 +60,9 @@ $(function(){
 	});
 
 
-    $('.cnt-spinner').spinner();
+    $('.cnt-spinner').spinner({value:1, min : 1, afterChange: function(val){
+        console.log('hello' + val);
+    }});
 
     $("#product-xTabs").easyResponsiveTabs({
         type: 'default', //Types: default, vertical, accordion
