@@ -46,7 +46,7 @@ def registration(request):
 
 @csrf_exempt
 def registration_view(request):
-    return render(request, 'register.html')
+    return render(request, 'register_web.html')
 
 @csrf_exempt
 def login(request):
