@@ -27,6 +27,12 @@ urlpatterns = patterns('',
 
     url(r'^interest/add/$', 'users.views.add_interest', name='add_interest'),
     url(r'^interest/del/$', 'users.views.delete_interest', name='del_interest'),
+
+    url(r'^cart/add/$', 'users.views.add_cart', name='add_cart'),
+    url(r'^cart/del/$', 'users.views.delete_cart', name='del_cart'),
+
+    url(r'^purchase/add/$', 'users.views.add_purchase', name='add_purchase'),
+    url(r'^purchase/del/$', 'users.views.delete_purchase', name='del_purchase'),
     # @app.route('/interest/add', methods = ['POST'])
 
 

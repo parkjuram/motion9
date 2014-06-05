@@ -9,7 +9,12 @@ from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data, \
-    helper_add_product_interest, helper_add_set_interest, helper_delete_product_interest, helper_delete_set_interest
+    helper_add_product_interest, helper_add_set_interest, helper_delete_product_interest, helper_delete_set_interest, \
+    helper_add_product_cart, helper_add_set_cart, helper_add_custom_set_cart, \
+    helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
+    helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
+    helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
+    http_response_by_json
 
 from .models import Interest
 
@@ -231,9 +236,11 @@ def mypage_purchase_custom_set_view(request, page_num=None):
             })
 
 @csrf_exempt
-@login_required
 def add_interest(request):
     user = helper_get_user(request)
+    if user is None:
+        return http_response_by_json(CODE_LOGIN_REQUIRED)
+
     type = request.POST.get('type', 'p')
 
     product_or_set_id = request.POST.get('product_or_set_id')
@@ -242,12 +249,14 @@ def add_interest(request):
     elif type=='s':
         helper_add_set_interest(user, product_or_set_id)
 
-    return HttpResponse('temporary response')
+    return http_response_by_json()
 
 @csrf_exempt
-@login_required
 def delete_interest(request):
     user = helper_get_user(request)
+    if user is None:
+        return http_response_by_json(CODE_LOGIN_REQUIRED)
+
     type = request.POST.get('type', 'p')
 
     product_or_set_id = request.POST.get('product_or_set_id')
@@ -256,15 +265,85 @@ def delete_interest(request):
     elif type=='s':
         helper_delete_set_interest(user, product_or_set_id)
 
-    return HttpResponse('temporary response')
+    return http_response_by_json()
 
 
 @csrf_exempt
-@login_required
 def add_cart(request):
     user = helper_get_user(request)
+    if user is None:
+        return http_response_by_json(CODE_LOGIN_REQUIRED)
+
     type = request.POST.get('type', 'p')
+
     product_or_set_id = request.POST.get('product_or_set_id')
+    if type=='p':
+        helper_add_product_cart(user, product_or_set_id)
+    elif type=='s':
+        helper_add_set_cart(user, product_or_set_id)
+    elif type=='c':
+        helper_add_custom_set_cart(user, product_or_set_id)
+
+    return http_response_by_json()
+
+@csrf_exempt
+def delete_cart(request):
+    user = helper_get_user(request)
+    if user is None:
+        return http_response_by_json(CODE_LOGIN_REQUIRED)
+
+    type = request.POST.get('type', 'p')
+
+    product_or_set_id = request.POST.get('product_or_set_id')
+    if type=='p':
+        helper_delete_product_cart(user, product_or_set_id)
+    elif type=='s':
+        helper_delete_set_cart(user, product_or_set_id)
+    elif type=='c':
+        helper_delete_custom_set_cart(user, product_or_set_id)
+
+    return http_response_by_json()
+
+@csrf_exempt
+def add_purchase(request):
+    user = helper_get_user(request)
+    if user is None:
+        return http_response_by_json(CODE_LOGIN_REQUIRED)
+
+    address = request.POST.get('address', '')
+
+    type = request.POST.get('type', 'p')
+
+    product_or_set_id = request.POST.get('product_or_set_id')
+    if type=='p':
+        helper_add_product_purchase(user, address, product_or_set_id)
+    elif type=='s':
+        helper_add_set_purchase(user, address, product_or_set_id)
+    elif type=='c':
+        helper_add_custom_set_purchase(user, address, product_or_set_id)
+
+    return http_response_by_json()
+
+@csrf_exempt
+def delete_purchase(request):
+    user = helper_get_user(request)
+    if user is None:
+        return http_response_by_json(CODE_LOGIN_REQUIRED)
+
+    address = request.POST.get('address', '')
+
+    type = request.POST.get('type', 'p')
+    # delete need address ?
+
+    product_or_set_id = request.POST.get('product_or_set_id')
+    if type=='p':
+        helper_delete_product_purchase(user, address, product_or_set_id)
+    elif type=='s':
+        helper_delete_set_purchase(user, address, product_or_set_id)
+    elif type=='c':
+        helper_delete_custom_set_purchase(user, address, product_or_set_id)
+
+    return http_response_by_json()
 
     # if type=='p':
     #     helper_add_product_interest(user, product_or_set_id)

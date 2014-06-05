@@ -1,12 +1,27 @@
+from django.http.response import HttpResponse
 from web.models import Product, Set
 from users.models import Interest, Cart, Purchase
 from django.core.exceptions import ObjectDoesNotExist
 
-from motion9.const import *
+from motion9.const import ITEM_COUNT_PER_PAGE, PAGER_INDICATOR_LENGTH, ERROR_CODE_AND_MESSAGE_DICT
 import logging
 import math
+import json
 
 logger = logging.getLogger(__name__)
+
+def http_response_by_json(error=None, json_={}):
+    if error is None:
+        json_.update({
+            'success': True
+        })
+    else:
+        json_.update({
+            'success': False,
+            'message': ERROR_CODE_AND_MESSAGE_DICT[error],
+        })
+
+    return HttpResponse(json.dumps(json_, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
 def helper_get_user(request):
     if request.user and request.user.is_authenticated():

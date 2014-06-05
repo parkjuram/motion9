@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
+    url(r'^index/$', 'web.views.index_view', name='index'),
+
     url(r'^shop/product/$', 'web.views.shop_product_view', name='shop_product'),
     url(r'^shop/product/(?P<category_id>(\d+))/$', 'web.views.shop_product_view', name='shop_product'),
     url(r'^shop/product/page/(?P<page_num>(\d+))/$', 'web.views.shop_product_view', name='shop_product'),
