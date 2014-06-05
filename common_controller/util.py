@@ -185,3 +185,43 @@ def helper_delete_custom_set_cart(user, custom_set_id):
         logger.error(e)
 
 # purchase
+
+def helper_add_product_purchase(user, address, product_id):
+    try:
+        Purchase.objects.create(user=user, address=address, product_id=product_id, type='p')
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_set_purchase(user, address, set_id):
+    try:
+        Purchase.objects.create(user=user, address=address, set_id=set_id, type='s')
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_custom_set_purchase(user, address, custom_set_id):
+    try:
+        Purchase.objects.create(user=user, address=address, custom_set_id=custom_set_id, type='c')
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_product_purchase(user, address, product_id):
+    try:
+        purchase = Purchase.objects.get(user=user, product_id=product_id, type='p')
+        purchase.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_set_purchase(user, address, set_id):
+    try:
+        purchase = Purchase.objects.get(user=user, set_id=set_id, type='s')
+        purchase.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_custom_set_purchase(user, address, custom_set_id):
+    try:
+        purchase = Purchase.objects.get(user=user, custom_set_id=custom_set_id, type='c')
+        purchase.delete()
+    except Exception as e:
+        logger.error(e)
+

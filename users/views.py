@@ -132,39 +132,99 @@ def mypage_set_view(request, page_num=None):
         logger.error('have_to_login')
 
 @login_required
-def mypage_purchase_view(request, page_num=None):
-    pass
+def mypage_cart_view(request):
+    user = helper_get_user(request)
+
+    product_carts= user.cart_set.filter(type='p').all()
+    products = []
+    for product_cart in product_carts:
+        product = product_cart.product
+        products.append(helper_get_product(product,user))
+
+    set_carts = user.cart_set.filter(type='s').all()
+    sets = []
+    for set_cart in set_carts:
+        set = set_cart.set
+        sets.append(helper_get_set(set,user))
+
+    custom_set_carts = user.cart_set.filter(type='c').all()
+    custom_sets = []
+    for custom_set_cart in custom_set_carts:
+        custom_set = custom_set_cart.custom_set
+        custom_sets.append(custom_set)
+
+    return render(request, 'cart_web.html',
+        {
+            'products': products,
+            'sets': sets,
+            'custom_sets': custom_sets
+        })
 
 @login_required
-def mypage_cart_view(request):
-    # user = helper_get_user(request)
-    #
-    # product_carts= user.cart_set.filter(type='p').all()
-    # products = []
-    # for product_cart in product_carts:
-    #     product = product_cart.product
-    #     products.append(helper_get_product(product,user))
-    #
-    # set_carts = user.cart_set.filter(type='s').all()
-    # sets = []
-    # for set_cart in set_carts:
-    #     set = set_cart.set
-    #     sets.append(helper_get_set(set,user))
-    #
-    # custom_set_carts = user.cart_set.filter(type='c').all()
-    # custom_sets = []
-    # for custom_set_cart in custom_set_carts:
-    #     custom_set = custom_set_cart.custom_set
-    #     # !!!!need helper_get_custom_set
-    #
-    # return render(request, 'cart_web.html',
-    #     {
-    #         'products': products,
-    #         'sets': sets,
-    #         'custom_sets': custom_sets
-    #     })
+def mypage_purchase_product_view(request, page_num=None):
+    user = helper_get_user(request)
+    if user is not None:
+        purchases = user.purchase_set.filter(type='p').all()
+        products = []
+        for purchase in purchases:
+            product = purchase.product
+            product_ = helper_get_product(product, user)
+            products.append(product_)
 
-    pass
+        if page_num is not None:
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        else:
+            products = {'data':products}
+
+        return render(request, 'mypage_purchase_web.html',
+            {
+                'purchases': products,
+                'tab_name': 'purchase_product'
+            })
+
+@login_required
+def mypage_purchase_set_view(request, page_num=None):
+    user = helper_get_user(request)
+    if user is not None:
+        purchases = user.purchase_set.filter(type='s').all()
+        sets = []
+        for purchase in purchases:
+            set = purchase.set
+            set_ = helper_get_product(set, user)
+            sets.append(set_)
+
+        if page_num is not None:
+            products = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        else:
+            products = {'data':sets}
+
+        return render(request, 'mypage_purchase_web.html',
+            {
+                'purchases': sets,
+                'tab_name': 'purchase_product'
+            })
+
+@login_required
+def mypage_purchase_custom_set_view(request, page_num=None):
+    user = helper_get_user(request)
+    if user is not None:
+        purchases = user.purchase_set.filter(type='c').all()
+        custom_sets = []
+        for purchase in purchases:
+            custom_set = purchase.custom_set
+            custom_set_ = helper_get_product(custom_set, user)
+            custom_sets.append(custom_set_)
+
+        if page_num is not None:
+            products = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        else:
+            products = {'data':custom_sets}
+
+        return render(request, 'mypage_purchase_web.html',
+            {
+                'purchases': custom_sets,
+                'tab_name': 'purchase_product'
+            })
 
 @csrf_exempt
 @login_required

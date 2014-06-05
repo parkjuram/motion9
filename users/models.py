@@ -48,13 +48,13 @@ class Cart(models.Model):
 
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
+    address = models.TextField(null=False, blank=True)
     product = models.ForeignKey('web.Product',null=True)
     set = models.ForeignKey('web.Set',null=True)
     custom_set = models.ForeignKey('web.CustomSet',null=True)
     type = models.CharField(max_length=1, null=False, default='p')
-    address = models.TextField(null=False, blank=True)
     status = models.CharField(max_length=1, null=False, default='r')
-    shipping_number = models.TextField(null=False, blank=True)
+    shipping_number = models.TextField(null=False, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     class Meta:
