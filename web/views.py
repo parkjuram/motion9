@@ -277,6 +277,21 @@ def product_json_view(request, product_id=None):
 
     logger.info( 'def product_json_view(request, product_id=None): end')
 
+@csrf_exempt
+def customize_set_view(request, set_id):
+    set = helper_get_set(set_id)
+
+    print set
+
+    return HttpResponse('test')
+
+# @login_required
+# def changeProductInSetWeb(set_key):
+#     availableList = getProductListForChangeableSetProduct(set_key)
+#     set = getSet(set_key)
+#
+#     return render_template('change_product_in_set_web.html', availableList = availableList, set = set)
+
 # @app.route('/product/json/<int:product_key>', methods = ['POST'])
 # def productWebJson(product_key):
 #     product = getProduct(product_key)
