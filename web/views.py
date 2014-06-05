@@ -115,6 +115,18 @@ def helper_get_set_list(category_id, user):
 
     return sets_
 
+@csrf_exempt
+def index_view(request):
+    product_categories = Category.objects.filter(is_set=False).all()
+    set_categories = Category.objects.filter(is_set=True).all()
+
+    return render(request, 'index_web.htm',
+                  {
+                      'product_categories': product_categories,
+                      'set_categories': set_categories,
+                  })
+
+@csrf_exempt
 def shop_product_view(request, category_id=None, page_num=None):
 
     products = Product.objects

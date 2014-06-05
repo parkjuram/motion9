@@ -1,12 +1,27 @@
+from django.http.response import HttpResponse
 from web.models import Product, Set
 from users.models import Interest, Cart, Purchase
 from django.core.exceptions import ObjectDoesNotExist
 
-from motion9.const import *
+from motion9.const import ITEM_COUNT_PER_PAGE, PAGER_INDICATOR_LENGTH, ERROR_CODE_AND_MESSAGE_DICT
 import logging
 import math
+import json
 
 logger = logging.getLogger(__name__)
+
+def http_response_by_json(error=None, json_={}):
+    if error is None:
+        json_.update({
+            'success': True
+        })
+    else:
+        json_.update({
+            'success': False,
+            'message': ERROR_CODE_AND_MESSAGE_DICT[error],
+        })
+
+    return HttpResponse(json.dumps(json_, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
 def helper_get_user(request):
     if request.user and request.user.is_authenticated():
@@ -185,3 +200,43 @@ def helper_delete_custom_set_cart(user, custom_set_id):
         logger.error(e)
 
 # purchase
+
+def helper_add_product_purchase(user, address, product_id):
+    try:
+        Purchase.objects.create(user=user, address=address, product_id=product_id, type='p')
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_set_purchase(user, address, set_id):
+    try:
+        Purchase.objects.create(user=user, address=address, set_id=set_id, type='s')
+    except Exception as e:
+        logger.error(e)
+
+def helper_add_custom_set_purchase(user, address, custom_set_id):
+    try:
+        Purchase.objects.create(user=user, address=address, custom_set_id=custom_set_id, type='c')
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_product_purchase(user, address, product_id):
+    try:
+        purchase = Purchase.objects.get(user=user, product_id=product_id, type='p')
+        purchase.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_set_purchase(user, address, set_id):
+    try:
+        purchase = Purchase.objects.get(user=user, set_id=set_id, type='s')
+        purchase.delete()
+    except Exception as e:
+        logger.error(e)
+
+def helper_delete_custom_set_purchase(user, address, custom_set_id):
+    try:
+        purchase = Purchase.objects.get(user=user, custom_set_id=custom_set_id, type='c')
+        purchase.delete()
+    except Exception as e:
+        logger.error(e)
+
