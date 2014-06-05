@@ -94,7 +94,7 @@ $(function(){
         if(type != 's' && type !='c')
             type = 'p';
 
-        var howManySelectBox = $('#howManySelectBox');
+        var howManySelectBox = $('#howMany');
         var howMany = 1;
         if(howManySelectBox.length != 0){
             howMany = howManySelectBox.val();
@@ -104,7 +104,7 @@ $(function(){
             return;
 
         $.ajax({
-				  url: "/cart/add/",
+				  url: "/user/cart/add/",
 				  dataType: 'json',
 				  async : true,
 				  type:'POST',

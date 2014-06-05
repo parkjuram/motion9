@@ -111,26 +111,17 @@ $(function(){
         $('body').css({overflow: 'visible'});
     };
 
-    $('#productDetailModal').jqm({modal:false, ajax : '/ajaxtest', onLoad : modalOnloadHandler, onHide:onHideHandler});
+$('#productDetailModal').jqm({modal:false, ajaxText:'불러오는중..', trigger: '.view-product-detail-btn',ajax:'@href', onLoad : modalOnloadHandler, onHide:onHideHandler});
+    //$('#productDetailModal').jqm({ajax : '@href'});
 
 
-
-    $('.view-product-detail-btn').click(function(e){
+/*    $('.view-product-detail-btn').click(function(e){
         e.preventDefault();
+        var id = $(this).attr('data-product');
+
         $('#productDetailModal').jqmShow();
     });
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 });

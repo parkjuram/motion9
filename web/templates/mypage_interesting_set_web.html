@@ -1,49 +1,37 @@
 {% extends "mypage_web.html" %}
 {% block subHeader %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_interesting_set_web.css') }}"/>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mypage_interesting_set_web.css'%}"/>
 
-<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/mypage_interesting_set_web.js') }}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+<script src="{% static 'js/mypage_interesting_set_web.js'%}"></script>
 {% endblock %}
 {% block productGrid %}
-<div id="productHoverArea">
-    <div id="opacityBg"></div>
-    <div id="hoverButtonList">
-        <div class="btn-group-vertical">
-          <div class="btn-group">
-            <button type="button" id="addCartBtn" class="btn btn-default btn-for-cart">장바구니 넣기</button>
-          </div>
-          <div class="btn-group">
-            <button type="button" class="btn btn-default">바로 구매</button>
-          </div>
-          <div class="btn-group">
-            <a href="#" id="cancelInterestBtn"class="btn btn-danger">삭제</a>
-          </div>
-        </div>
-    </div>
-</div>
+
 {% if interests.data|length > 0 %}
 
     {% for set in interests.data %}
-
-    <div class="product-item" id="item-{{ set.key}}" data-attr="{{ set.key }}">
-        <div class="product-img">
-            <img src="{{ set.big_img_url}}" alt="" />
-        </div>
-        <div class="product-info">
-            {% if (set.name|length) > 17 %}
-                <a href="{{ url_for('setDetailWeb',set_key=set.key) }}">{{set.name[:17] }}..</a>
-            {% else %}
-                <a href="{{ url_for('setDetailWeb', set_key=set.key) }}">{{set.name  }}</a>
-            {% endif %}
-
-            <div class="product-price-box">
-                Price : <b>￦{{ set.discount_price }} ({{set.capacity }})</b><br/>
-                Category : <b>{{ set.category_name }}</b>
+    <div class="set-item" style="background: url('{{ set.big_img_url }}') top left no-repeat;">
+        <div class="set-item-info">
+            <div class="set-item-info-title">
+                간략설명
+            </div>
+            <div class="set-item-info-contents">
+                {{ set.description }}
+            </div>
+            <div class="set-item-info-title">
+                세트구성
+            </div>
+            <div class="set-item-info-contents">
+                BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
+            </div>
+            <div class="set-item-info-bottom">
+                \{{ set.discount_price }} &nbsp;&nbsp;<a href="{% url "set" set_id=set.id %}" class="basic-btn">자세히 보기</a>
             </div>
         </div>
     </div>
+
 
     {% endfor %}
 
@@ -52,18 +40,19 @@
 {% endblock %}
 
 {% block productPaging %}
-    {% if interests.data|length > 0  %}
-        <ul class="pagination">
-          <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
-          {% for pageNum in range(interests.page_left_count, interests.page_right_count+1 )%}
-          <li><a href="{{ url_for('myPageSetWeb', pageNum = pageNum) }}">{{ pageNum  }}</a></li>
-          {% endfor %}
-          <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
-        </ul>
-    {% else %}
+{% if interests.data|length > 0  %}
+    <ul class="pagination">
+      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="page">Prev</a></li>
+      {% for pageNum in page_range %}
+      <li><a href="{% url 'mypage' page_num=pageNum %}" class="page">{{ pageNum  }}</a></li>
+      {% endfor %}
+      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="page">Next</a></li>
+    </ul>
+{% else %}
         <div class="clearfix"></div>
         <div style="padding : 20px;">
-            아직 관심하신 세트가 없습니다.
+            아직 관심하신 단품이 없습니다.
         </div>
-    {% endif %}
+{% endif %}
+
 {% endblock %}

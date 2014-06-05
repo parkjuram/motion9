@@ -16,7 +16,7 @@
     <div class="main-container float-left">
         <div class="box-css">
             <div class="box-header">
-                단일제품 > {{ product.category_name }}
+                단일제품 > {{ product.name }}
             </div>
             <div class="product-x-category-box">
                 카테고리 > {{ product.category_name }}
@@ -72,7 +72,7 @@
                         구매수량 :
                     </div>
                     <div style="width : 100px; margin-left:2px; float:left;">
-                        <input type="text" class="cnt-spinner"/>
+                        <input type="text" class="cnt-spinner" id="howMany"/>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="product-btn-area">
                     <a href="#" class="basic-btn">구매하기</a>
-                    <a href="#" class="basic-btn btn-for-cart">장바구니</a>
+                    <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-cart">장바구니</a>
                 </div>
             </div>
         </div>

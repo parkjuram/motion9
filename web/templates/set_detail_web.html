@@ -71,17 +71,17 @@
                         구매수량 :
                     </div>
                     <div style="width : 100px; margin-left:2px; float:left;">
-                        <input type="text" class="cnt-spinner"/>
+                        <input type="text" class="cnt-spinner" id="howMany"/>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="product-price price-saled">판매가 : <span>{{ set.discount_price }}원</span></div>
                 <div class="product-price price-total">
-                    총 상품 금액 : {{ set.discount_price }}원
+                    총 상품 금액 : {{ set.discount_price }}원 <a href="#" class="btn-for-interest basic-btn" data-product="{{ set.id }}" data-type="s">관심하자</a>
                 </div>
                 <div class="product-btn-area">
                     <a href="#" class="basic-btn">구매하기</a>
-                    <a href="#" class="basic-btn btn-for-cart">장바구니</a>
+                    <a href="#" data-product="{{ set.id }}" data-type="s" class="basic-btn btn-for-cart">장바구니</a>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
            {% for product in set.products %}
                <div class="belong-to-set-item">
                    <div class="product-opacity-bg product-hover-area">
-                       <a href="#" class="view-product-detail-btn"><img src="{% static 'img/detail.png'%}" class="icon"/></a>
+                       <a href="/product/{{ product.id }}/modal" class="view-product-detail-btn" data-product="{{ product.id }}"><img src="{% static 'img/detail.png'%}" class="icon"/></a>
                    </div>
                    <div class="belong-product-img">
                        <img src="{{ product.big_img_url }}" alt="" />

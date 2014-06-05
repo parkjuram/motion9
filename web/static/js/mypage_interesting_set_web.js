@@ -3,44 +3,16 @@
  */
 $(function(){
 
-    var setItemWidth = function(){
-        var width = $('#productGrid').width();
-        $('.product-item').css({width : '306px'});
-    };
-
-    var container = document.querySelector('#productGrid');
-    var msnry;
-
-
-    imagesLoaded(container, function(){	//when all images are loaded, it is triggered
-        //var width = $('#productGrid').width()-2;
-        setItemWidth();
-        msnry = new Masonry( container, {	// api for displaying images as a grid
-          // options
-          columnWidth: 306,
-          isResizeBound : false,
-          gutter : 0,
-          itemSelector: '.product-item'
-        });
+    $('.set-item-info').css({opacity:0.9});
+    $('.set-item').hover(function(e){
+        var infoBox = $(this).find('.set-item-info');
+       var left = $(this).innerWidth() - infoBox.outerWidth();
+       infoBox.animate({left : left+'px' }, { duration :'fast', easing: 'swing', queue: false});
+    }, function(e){
+       var infoBox = $(this).find('.set-item-info');
+       var left = $(this).innerWidth();
+       infoBox.animate({left : left+'px' }, { duration :'fast', easing: 'swing', queue: false});
     });
 
-    $('.product-item').hover(function(e){
-        var id = $(this).attr('data-attr');
 
-        $('#addCartBtn').attr('data-product', id);
-        $('#cancelInterestBtn').attr('href', '/interest/del/set/'+id);
-
-        var hoverArea = $('#productHoverArea');
-        hoverArea.appendTo($('#item-'+id));
-
-        hoverArea.css({position : 'absolute', top : 0, left: 0});
-        $('#opacityBg').css({opacity:0.7});
-
-        hoverArea.css({display:'block'});
-
-    }, function(e){
-        var hoverArea = $('#productHoverArea');
-        hoverArea.appendTo($('body'));
-        hoverArea.css({display:'none'});
-    })
 });
