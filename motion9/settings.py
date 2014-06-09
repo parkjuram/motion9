@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
 TEMPLATE_DIRS = (
     PROJECT_PATH + '/templates/'
 )
@@ -155,6 +157,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
 
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../media')
