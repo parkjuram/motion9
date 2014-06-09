@@ -14,6 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = PROJECT_PATH + '/media/'
 
 TEMPLATE_DIRS = (
