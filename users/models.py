@@ -6,8 +6,8 @@ from datetime import datetime
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', related_name='profile')
-    phone = models.TextField(null=False, blank=True)
-    address = models.TextField(null=False)
+    phone = models.TextField(null=False, blank=True, default='')
+    address = models.TextField(null=False, blank=True, default='')
     sex = models.CharField(max_length=1, null=True)
     age = models.IntegerField(null=True)
     skin_type = models.CharField(max_length=100, null=True)
