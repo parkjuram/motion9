@@ -4,6 +4,7 @@ from datetime import datetime
 class Category(models.Model):
     name = models.TextField(null=False)
     is_set = models.BooleanField(null=False, default=False)
+    small_image = models.ImageField(null=True)
 
     def __unicode__(self):
         return '(%r)Category : name(%s) is_set(%r)' \
