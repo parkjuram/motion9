@@ -4,7 +4,7 @@ from datetime import datetime
 class Category(models.Model):
     name = models.TextField(null=False)
     is_set = models.BooleanField(null=False, default=False)
-    small_image = models.ImageField(null=True)
+    small_image = models.ImageField(null=True, upload_to='categoryimage/')
 
     def __unicode__(self):
         return '(%r)Category : name(%s) is_set(%r)' \
