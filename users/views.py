@@ -75,9 +75,10 @@ def login(request):
 def login_view(request):
     return render(request, 'login_web.html')
 
-@login_required
+@csrf_exempt
 def logout(request):
     logout(request)
+    return redirect('index')
 
 @login_required
 def update(request):

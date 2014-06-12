@@ -17,7 +17,8 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.TextField(null=False)
     category = models.ForeignKey(Category)
-    description = models.TextField(null=False, blank=True)
+    # description = models.TextField(null=False, blank=True)
+    description_img = models.ImageField(blan=True)
     big_img_url = models.TextField(null=False, blank=True)
     small_img_url = models.TextField(null=False, blank=True)
     video_url = models.TextField(null=False, blank=True)
