@@ -280,6 +280,7 @@ def product_modal_view(request, product_id=None):
         logger.error( 'product_id is wrong in product_view')
         return render(request, "404.html")
 
+@csrf_exempt
 def product_json_view(request, product_id=None):
     logger.info( 'def product_json_view(request, product_id=None): start')
 
