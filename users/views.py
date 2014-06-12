@@ -56,11 +56,12 @@ def login(request):
 
     error = None
 
-    if not(User.objects.filter(username=email).exists()):
+    if not(User.objects.filter(email=email).exists()):
         error = 'user id is not exsit'
         logger.error(error)
     else:
-        user = authenticate(username=email, password=password)
+        user_ = User.objects.get(email=email)
+        user = authenticate(username=user_.username, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
             return redirect('shop_product')
