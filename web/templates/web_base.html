@@ -32,7 +32,7 @@
 <div id="header">
     <div id="header-wrapper">
         <div id="brand">
-            Motion 9
+            <a href="{% url 'index' %}">Motion 9</a>
         </div>
 
         <div id="header-main-menu">
@@ -45,7 +45,7 @@
             </ul>
             <ul id="header-right-menu-list">
                 <li><a href="{% url 'mypage' %}">마이페이지</a></li>
-                <li><a href="#">장바구니</a></li>
+                <li><a href="{% url 'mypage_cart' %}">장바구니</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}" class="">로그아웃</a></li>
                 {% else %}

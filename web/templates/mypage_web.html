@@ -45,9 +45,9 @@
         </div>
         <div class="nav-container float-left">
             <div class="box-css user-profile">
-                <div class="profile-user-name">{{ user.profile.name }}</div>
+                <div class="profile-user-name">{{ user.username }}</div>
                 <div>
-                    {{ user.profile.email }}
+                    {{ user.email }}
                 </div>
                 <hr/>
                 <p class="user-sex">
@@ -81,7 +81,7 @@
                 </p>
                 <hr/>
                 <p style="text-align: center; margin-top: 12px;  ">
-                    <a href="{% url 'mypage_set'%}" class="basic-btn">&nbsp;&nbsp;edit&nbsp;&nbsp;</a>
+                    <a href="{% url 'registration_page'%}" class="basic-btn">&nbsp;&nbsp;edit&nbsp;&nbsp;</a>
                 </p>
             </div>
         </div>

@@ -26,55 +26,23 @@ $(function(){
        totalPurchasePrice.text(productPrice + deliveryPrice);
    });
 
-   var fixDiv = function() {
-        var b = $(window).scrollTop();
-        var d = $("#cartPageWrapper").offset().top;
-        var c = $("#puchaseInfoBox");
-        if (b > d-50) {
-            c.css({position:"fixed",top:"70px"})
-        } else {
-            c.css({position:"absolute",top:"20px"})
-        }
-    };
-   $(window).scroll(fixDiv);
-   fixDiv();
 
-   $('#setAllCheck').click(function(e){
-      var isChecked = $(this).is(':checked');
-      if(!isChecked)
-        $('.set-checkbox').prop('checked',false);
-      else
-        $('.set-checkbox').prop('checked',true);
-   });
 
-   $('#productAllCheck').click(function(){
-      var isChecked = $(this).is(':checked');
-      if(!isChecked)
-        $('.product-checkbox').prop('checked',false);
-      else
-        $('.product-checkbox').prop('checked',true);
-   });
-
-   $('#delProductBtn').click(function(e){
+   $('.del-item-btn').click(function(e){
       e.preventDefault();
       if(confirm('정말 삭제하시겠습니까?')){
-        var keys = '';
-        $('.product-checkbox').each(function(idx, val){
-             if($(this).is(':checked') == true){
-                 if(keys != '')
-                    keys += ',';
-                 keys+=$(this).attr('data-product-key');
-             }
-        });
+        var id = $(this).attr('data-product-id');
+        var type= $(this).attr('data-type');
+
         $.ajax({
-              url: '/cart/del',
+              url: '/user/cart/del/',
               dataType: 'json',
               async : true,
               type:'POST',
-              data : {product_keys : keys, type: 'p'},
+              data : {product_or_set_id : id, type: type},
               success: function(data){
                   if(data.success){
-                      location.href= '/cart';
+                      location.href= '/user/mypage/cart';
                   }else if(!data.success){
                       alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
                   }
@@ -86,35 +54,4 @@ $(function(){
       }
    });
 
-
-    $('#delSetBtn').click(function(e){
-        e.preventDefault();
-        if(confirm('정말 삭제하시겠습니까?')){
-        var keys = '';
-        $('.set-checkbox').each(function(idx, val){
-             if($(this).is(':checked') == true){
-                 if(keys != '')
-                    keys += ',';
-                 keys+=$(this).attr('data-product-key');
-             }
-        });
-        $.ajax({
-              url: '/cart/del',
-              dataType: 'json',
-              async : true,
-              type:'POST',
-              data : {product_keys : keys, type: 's'},
-              success: function(data){
-                  if(data.success){
-                      location.href= '/cart';
-                  }else if(!data.success){
-                      alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
-                  }
-              },
-              error:function(jqXHR, textStatus, errorThrown){
-                  console.log(textStatus);
-              }
-        });
-      }
-    });
 });

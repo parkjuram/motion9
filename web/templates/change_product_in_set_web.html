@@ -1,8 +1,9 @@
 {% extends "web_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/change_product_in_set_web.css') }}"/>
-<script src="{{ url_for('static', filename='js/change_product_in_set_web.js') }}"></script>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/common_style_web.css'%}"/>
+<link rel="stylesheet" href="{% static 'css/change_product_in_set_web.css'%}"/>
+<script src="{% static 'js/change_product_in_set_web.js'%}"></script>
 {% block subHeader %}
 {% endblock %}
 {% endblock %}
@@ -22,56 +23,54 @@
                     변경가능 제품
                 </div>
                 <div class="available-list">
-                    {% for number in range(0, 5) %}
-                    {#%  for product in set.products %#}
-                          {#%  if availableList[product.key|string] | length !=0 %#}
+                    {% for product in set.products %}
+                        {% if product.is_changeable == True %}
                             <div class="available-product">
                                 <div class="available-product-hover-menu">
-                                     <a href="#" class="basic-btn available-product-btn"  data-target="#availableList-{# { product.key }#}">변경가능 제품 보기</a>
+                                     <a href="#" class="basic-btn available-product-btn"  data-target="#availableList-{{ product.id }}">변경가능 제품 보기</a>
                                </div>
                                 <div class="product-img">
-                                    <img src="{#{ product.big_img_url}#}" alt="" />
+                                    <img src="{{ product.big_img_url }}" alt="" />
                                 </div>
                                 <div class="product-info">
                                     <div class="product-item-name">
-                                        {# { product.name }#}미샤 포맨 익스트림 올가즘
+                                        {{ product.name }}
                                     </div>
                                     <div style="margin-top: 4px;">
-                                        카테고리 > {#{ product.category_name }#}로션<br/>
-                                        브랜드 : {#{ product.brandname }#}미샤<br/>
-                                        용량 : 120ml<br/>
-                                        가격 : {#{ product.discount_price }#}원<br/>
-                                        세트 포함시 가격 : \ 18,000 (할인율 : 23%)
+                                        카테고리 > {{ product.category_name }}<br/>
+                                        브랜드 : {{ product.maker }}<br/>
+                                        용량 : {{ product.capacity }}<br/>
+                                        원래 가격 : {{ product.original_price }}원<br/>
+                                        세트 포함시 가격 : \ {{ product.discount_price }} (할인율 : 23%)
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div id="availableList-{# { product.key }#}" class="available-products-list">
-                                {#% for item in availableList[product.key|string] %#}
+                            <div id="availableList-{{ product.id}}" class="available-products-list">
+                                {% for item in product.changeable_products %}
                                     <div class="available-item">
                                         <div class="available-item-hover-menu">
-                                             <a href="#" class="basic-btn basic-lg-btn available-item-btn" data-original-key="{# { product.key }#}" data-product="{# { item.key }#}">선택</a>
+                                             <a href="#" class="basic-btn basic-lg-btn available-item-btn" data-original-key="{{ product.id}}" data-product="{{ item.id }}">선택</a>
                                        </div>
                                         <div class="available-item-img">
-                                            <img src="{#{item.big_img_url }#}" alt="" />
+                                            <img src="{{item.big_img_url }}" alt="" />
                                         </div>
                                         <div class="available-item-info">
-                                            <div class="available-item-name"><a href="{# { url_for('productWeb', product_key = item.key) }#}">{# {item.name  }#}미샤 포맨 오르가즘 섹</a></div>
-                                            <div style="margin-top : 4px;">
-                                                카테고리 > {#{ item.category_name }#}로션<br/>
-                                                브랜드 : {#{ item.brandname }#}미샤<br/>
-                                                가격 : {#{ item.discount_price }#} 16,000원<br/>
-                                                용량 : 120ml<br/>
+                                            <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}">{{item.name  }}</a></div>
+                                            <div style="margin-top : 4px; line-height: 16px;">
+                                                카테고리 > {{ item.category_name }}<br/>
+                                                브랜드 : {{ item.maker}}<br/>
+                                                가격 : {{ item.discount_price }}<br/>
+                                                용량 : {{ item.capacity }}<br/>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                {#% endfor %#}
+                                {% endfor %}
                             </div>
                             <div class="clearfix"></div>
                             <hr/>
-                        {#%endif%#}
-                    {#% endfor %#}
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
@@ -85,33 +84,33 @@
                     <div class="custom-set-table">
                         <table>
                             <tbody>
-                            {#% for setItem in set.products %#}
-                                <tr class="custom-set-item-tr" id="customSetTableItem-{# { setItem.key }#}" data-original-key = "{#{ setItem.key }#}" data-new-key="{# { setItem.key }#}">
+                            {% for setItem in set.products %}
+                                <tr class="custom-set-item-tr" id="customSetTableItem-{{ setItem.id}}" data-original-key = "{{ setItem.id}}" data-new-key="{{ setItem.id}}">
                                     <td class="set-table-item-img">
-                                        <img src="{# { setItem.big_img_url}#}"/>
+                                        <img src="{{ setItem.big_img_url}}"/>
                                     </td>
                                     <td class="set-table-item-category">
-                                        {#{ setItem.category_name }#}스킨
+                                        {{ setItem.category_name }}
                                     </td>
                                     <td class="set-table-item-info">
-                                        {#{ setItem.name }#}미샤 포맨 익스트림..
-                                        {#% if setItem.is_changeable == false %#}
-                                            (<span style="color:red;">고정상품</span>)
-                                        {#% endif %#}
+                                        {{ setItem.name|truncatechars:16 }}
+                                        {% if setItem.is_changeable == False %}
+                                            <br/>(<span style="color:red;">고정상품</span>)
+                                        {% endif %}
                                     </td>
                                 </tr>
-                            {#% endfor %#}
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
                     <div>
                         <div class="box-header" style="margin: 0;">
-                            수정된 {#{set.name }#} 찌질이를 위한 제품
+                            수정된 {{set.name }}
                         </div>
                         <div class="set-final-info">
                             <div class="set-final-price-box">
-                                    원래가격 : ￦{#{ set.discoun.t_price }#}125,000<br/>
-                                    할인 된 가격 : 109,000원<br/>
+                                    원래가격 : {{ set.original_price }}원<br/>
+                                    할인 된 가격 : {{ set.discount_price }}원<br/>
                                     할인율 : 15%<br/>
                             </div>
                             <br/>

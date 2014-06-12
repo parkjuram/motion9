@@ -1,125 +1,169 @@
-.cart-table{
-    border: 1px solid #e7e7e7;
-    border-collapse: collapse;
-    font-size: 14px;
+.address-box{
+    margin: 20px;
 }
 
-.cart-table td{
-    border: 1px solid #e7e7e7;
-    border-collapse: collapse;
+.form-box{
+    margin : 12px 20px;
     font-size: 12px;
 }
 
-.cart-table th{
-    background-color: #080808;
-    color : white;
-    text-align: center;
+.form-input-container{
+    margin-top : 10px;
 }
 
-.tb-checkbox{
+.form-address-input-container{
+    margin-top: 6px;
+}
+
+.address-expanded-form input{
+    width : 250px;
+}
+
+.form-box input{
+    height : 24px;
+}
+
+.form-box select{
+    height : 24px;
+}
+
+.form-input-horizontal label{
+    max-width: 70px;
+    float: left;
+    padding-top : 6px;
+    margin-right : 8px;
+}
+
+.form-input-horizontal input{
+    vertical-align: baseline;
+    float: left;
+}
+
+.input-phone{
     width : 50px;
-    text-align: center;
-    line-height: 40%;
+    margin-right : 8px;
 }
 
-.tb-contents{
-    width : 450px;
-    padding : 6px 8px;
-}
-
-.tb-cnt{
-    width: 50px;
-    text-align: center;
-}
-
-.tb-price{
-    width : 80px;
-    text-align: center;
-    line-height: 40%;
-    font-weight: bold;
-}
-
-.tb-delivery{
-    width : 70px;
-    text-align: center;
-    line-height: 40%;
-}
-
-div.table-header{
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: auto;
-    margin-right: auto;
+.form-input-horizontal .send-to-input{
     width : 100px;
-    padding: 8px 0px;
-    font-size: 16px;
-    text-align: center;
-    background-color: #1c588f;
 }
 
-
-.product-img{
-    float:left;
-    width : 80px;
+.shipment-request{
+    width : 250px;
+    height : 70px;
+    font-size: 12px;
 }
 
-.product-img img{
-    width : 80px;
-    height : 80px;
-}
-
-.product-info{
-    width : 350px;
-    float: right;
-}
-
-.purchase-btn-area{
-    width : 90%;
-    margin: 10px auto 0 auto;
-}
-
-.price-info-area{
-    width : 90%;
-    padding: 5%;
-    font-size: 14px;
-}
-
-.total-product-price span{
-    font-weight: bold;
-}
-
-.total-delivery-price span{
-    font-weight: bold;
+.purchase-nav-bottom{
+    margin-top: 30px;
 }
 
 .total-purchase-price{
     font-size: 18px;
-    font-weight: bold;
+    margin-left: 20px;
 }
 
 .total-purchase-price span{
-    color :red;
-    font-weight: bold;
+    color : red;
 }
 
-.purchase-method{
-    width : 90%;
-    padding: 0 5% 5% 5%;
+.purchase-methods{
+    margin: 20px;
 }
 
-.set-name{
-    font-weight: bold;
-    margin-bottom: 18px;
+.purchase-methods .checkbox-wrapper{
+    width : 100px;
+    margin-bottom: 8px;
+    margin-right : 10px;
+    float : left;
 }
 
-#cartPageWrapper{
+.purchase-btn-box{
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+.purchase-btn {
+  width: 150px;
+  height : 50px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #fff;
+  font-size: 14px;
+  background: #393939;
+  padding: 15px 50px;
+  text-decoration: none;
+}
+
+.purchase-btn:visited{
+    color : #fff;
+}
+
+.purchase-btn:hover {
+  text-decoration: none;
+  color : #d2bb8f;
+}
+
+.purchased-item{
+    width : 608px;
+    border: 1px solid #e5e5e5;
+    margin : 16px 20px;
+    height : 150px;
     position: relative;
 }
 
-#puchaseInfoBox{
-    width : 360px;
+
+.purchased-item-img{
+    width : 150px;
+    height : 150px;
+    float: left;
 }
 
-.delete-btn-box{
+.purchased-item-img img{
+    width : 100%;
+    height : 100%;
+}
+
+.purchased-item-contents{
+    width : 310px;
+    float: left;
+}
+
+.purchased-item-buy{
+    width : 148px;
+    float:left;
+}
+
+.purchased-item-contents-wrapper{
+    margin-left: 20px;
     margin-top: 20px;
+}
+
+.purchased-item-name{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+}
+
+.purchased-item-price{
+
+}
+
+.purchased-item-price-with-cnt{
+    margin-left: 14px;
+}
+
+.purchased-item-del-btn{
+    width : 40px;
+    position: absolute;
+    bottom: 10px;
+    right : 0;
+    color : #003f95;
+}
+
+.no-item{
+    margin: 20px;
 }

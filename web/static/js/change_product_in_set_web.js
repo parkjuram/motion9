@@ -20,8 +20,8 @@ $(function(){
         var b = $(window).scrollTop();
         var d = $("#changeProductWrapper").offset().top;
         var c = $("#originProductWrapper");
-        if (b > d-50) {
-            c.css({position:"fixed",top:"60px"})
+        if (b > d-20) {
+            c.css({position:"fixed",top:"20px"})
         } else {
             c.css({position:"absolute",top:"0px"})
         }
@@ -43,7 +43,10 @@ $(function(){
          target.attr('data-new-key', newKey);
          target.find('.set-table-item-img img').attr('src', product.big_img_url);
          target.find('.set-table-item-category').text(product.category_name)
-         target.find('.set-table-item-info').text(product.name);
+        var productName = product.name;
+        if(productName.length > 16)
+            productName = productName.substr(0,16)+'..';
+         target.find('.set-table-item-info').text(productName);
     };
 
     $('.available-item-btn').click(function(e){
@@ -52,12 +55,12 @@ $(function(){
         var newKey = $(this).attr('data-product');
 
          $.ajax({
-				  url: '/product/json/'+newKey,
+				  url: '/product/'+newKey+'/json/',
 				  dataType: 'json',
 				  async : true,
 				  type:'POST',
 				  success: function(data){
-                      var product = data.data;
+                      var product = data;
 					  if(product != null){
                           updateCustomView(product, originalKey, newKey);
                       }else{
