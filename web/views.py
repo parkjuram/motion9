@@ -117,6 +117,12 @@ def helper_get_set_list(category_id, user):
     return sets_
 
 @csrf_exempt
+def test_view(request):
+    set = helper_get_set(3, helper_get_user(request), True)
+
+    return http_response_by_json(None, set)
+
+@csrf_exempt
 def index_view(request):
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
@@ -279,10 +285,7 @@ def product_json_view(request, product_id=None):
 
     if product_id is not None:
         product = helper_get_product(product_id, helper_get_user(request))
-        product = {
-            'data': product
-        }
-        return json.dumps(product, ensure_ascii=False)
+        return http_response_by_json(None, product)
     else:
         logger.error( 'product_id is wrong in product_view')
         return render(request, "404.html")
