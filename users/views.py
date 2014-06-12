@@ -54,15 +54,21 @@ def login(request):
     email = request.POST.get('email')
     password = request.POST.get('password')
 
+    error = None
+
     if not(User.objects.filter(username=email).exists()):
-        logger.error('user id is not exsit')
+        error = 'user id is not exsit'
+        logger.error(error)
     else:
         user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
             return redirect('shop_product')
         else:
-            logger.error('login fail')
+            error = 'login fail'
+            logger.error(error)
+
+    return HttpResponse(error)
 
 @csrf_exempt
 def login_view(request):
