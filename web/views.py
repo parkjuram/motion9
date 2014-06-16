@@ -150,8 +150,6 @@ def shop_product_view(request, category_id=None, page_num=None):
     else:
         current_category = Category.objects.get(id=category_id).name
 
-    return http_response_by_json(None, products_)
-
     return render(request, 'shopping_product_web.html',
                   {
 
