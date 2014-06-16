@@ -12,11 +12,11 @@
             {% if tab_name == "interesting_product"%}
                 <li class="current-category">관심 제품</li>
                 <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>
-                <li><a href="{% url 'mypage_set'%}">구매 목록</a></li>
+                <li><a href="{% url 'mypage_purchase_product'%}">구매 목록</a></li>
             {% elif tab_name == "interesting_set" %}
                 <li><a href="{% url 'mypage'%}"    >관심 제품</a></li>
                 <li class="current-category">관심 세트</li>
-                <li><a href="{% url 'mypage_set'%}">구매 목록</a></li>
+                <li><a href="{% url 'mypage_purchase_product'%}">구매 목록</a></li>
             {% elif tab_name == "purchase" %}
                 <li><a href="{% url 'mypage'%}">관심 제품</a></li>
                 <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>

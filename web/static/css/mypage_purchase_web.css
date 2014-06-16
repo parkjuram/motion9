@@ -57,10 +57,17 @@
 
 .table{
     font-size: 12px;
-    width : 646px;
+    width : 600px;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.table th {
+    border-bottom: 1px solid black;
 }
 
 .table th, td{
+    padding : 8px 4px;
     text-align: center;
 }
 

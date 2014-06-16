@@ -39,8 +39,17 @@
         <div id="header-main-menu">
             <ul id="header-main-menu-list">
                 <li><a href="#" data-attr="menuBest">BEST</a></li>
-                <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>
-                <li><a href="#" data-attr="menuProduct">단일제품</a></li>
+
+                {% if current_page and current_page == 'shop_product' %}
+                    <li><a href="#" data-attr="menuCollection">Collection</a></li>
+                    <li><a href="#" class="selected" data-attr="menuProduct">단일제품</a></li>
+                {% elif current_page and current_page == 'shop_set' %}
+                    <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>
+                    <li><a href="#" data-attr="menuProduct">단일제품</a></li>
+                {% else %}
+                    <li><a href="#" data-attr="menuCollection">Collection</a></li>
+                    <li><a href="#" data-attr="menuProduct">단일제품</a></li>
+                {% endif %}
                 <li><a href="#" data-attr="menuHelp">Help</a></li>
                 <li class="clearfix"></li>
             </ul>

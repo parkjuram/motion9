@@ -129,10 +129,20 @@
     margin-top : 14px;
 }
 .price-filter{
+    position: relative;
     margin-top: 18px;
 
 }
 
+.filter-btn{
+   position: absolute;
+    top :-8px;
+    right : 0;
+    width : 26px;
+    padding-right : 18px;
+    padding-left : 18px;
+    height : 16px;
+}
 
 
 

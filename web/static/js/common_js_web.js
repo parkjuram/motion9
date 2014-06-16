@@ -33,7 +33,7 @@ $(function(){
         var selectedMainMenu = $('#header-main-menu-list a').filter(function(){
             return $(this).hasClass('selected');
         }).attr('data-attr');
-        console.log(selectedMainMenu);
+
         $('#'+selectedMainMenu).addClass('header-sub-menu-selected');
     };
 
