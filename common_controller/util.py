@@ -104,6 +104,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
         'big_img_url': set.big_img_url,
         'small_img_url': set.small_img_url,
         'discount_difference': set.discount_difference,
+        'is_interested': True if user is not None and set.interest_set.filter(user=user).count()>0 else False,
         'products': []
     })
 
