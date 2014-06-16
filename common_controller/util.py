@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http.response import HttpResponse
 from web.models import Product, Set, ChangeableProduct, BlogReview
 from users.models import Interest, Cart, Purchase
@@ -80,7 +81,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
         product_images = product.product_image_set.all()
         images = []
         for product_image in product_images:
-            images.append(product_image.image)
+            images.append(settings.MEDIA_ROOT+product_image.image)
 
         product_ = {
             'id': product.id,
