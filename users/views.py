@@ -76,7 +76,7 @@ def login_view(request):
     return render(request, 'login_web.html')
 
 @csrf_exempt
-def logout(request):
+def logout_(request):
     logout(request)
     return redirect('index')
 
