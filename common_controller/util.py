@@ -74,8 +74,6 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'original_price': product.original_price,
             'discount_price': product.discount_price,
             'fit_skin_type': product.fit_skin_type,
-            'color_description': product.color_description,
-            'color_rgb': product.color_rgb,
             'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False
         }
 
