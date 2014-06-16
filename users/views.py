@@ -195,7 +195,7 @@ def mypage_purchase_product_view(request, page_num=None):
         else:
             products = {'data':products}
 
-        return render(request, 'mypage_purchase_web.html',
+        return render(request, 'mypage_purchase_product_web.html',
             {
                 'purchases': products,
                 'tab_name': 'purchase_product'
@@ -217,7 +217,7 @@ def mypage_purchase_set_view(request, page_num=None):
         else:
             products = {'data':sets}
 
-        return render(request, 'mypage_purchase_web.html',
+        return render(request, 'mypage_purchase_set_web.html',
             {
                 'purchases': sets,
                 'tab_name': 'purchase_product'
@@ -239,7 +239,7 @@ def mypage_purchase_custom_set_view(request, page_num=None):
         else:
             products = {'data':custom_sets}
 
-        return render(request, 'mypage_purchase_web.html',
+        return render(request, 'mypage_purchase_custom_web.html',
             {
                 'purchases': custom_sets,
                 'tab_name': 'purchase_product'

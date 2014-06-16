@@ -13,31 +13,61 @@ class Category(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
-
 class Product(models.Model):
-    name = models.TextField(null=False)
+    name = models.TextField(unique=True)
     category = models.ForeignKey(Category)
-    description = models.TextField(null=False, blank=True)
-    # description_img = models.ImageField(blank=True)
-    big_img_url = models.TextField(null=False, blank=True)
-    small_img_url = models.TextField(null=False, blank=True)
-    video_url = models.TextField(null=False, blank=True)
-    brandname = models.TextField(null=False, blank=True)
-    maker = models.TextField(null=False, blank=True)
-    capacity = models.TextField(null=False, blank=True)
+
     original_price = models.IntegerField(null=False, default=0)
     discount_price = models.IntegerField(null=False, default=0)
-    fit_skin_type = models.TextField(null=False, blank=True)
-    color_description = models.TextField(null=False, blank=True)
-    color_rgb = models.CharField(max_length=10, null=False, blank=True)
-    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+    fit_skin_type = models.CharField(max_length=30, blank=True)
 
-    def __unicode__(self):
-        return '(%r)Product : name(%s) category(%s) description(%s)' \
-               % (self.id, self.name, self.category.name, self.description)
+    video_url = models.URLField(blank=True)
+    brandname = models.CharField(max_length=30, blank=True)
+    maker = models.CharField(max_length=30, blank=True)
+    country = models.CharField(max_length=30, blank=True)
+    capacity = models.CharField(max_length=10, blank=True)
+    short_desc = models.CharField(max_length=100, blank=True)
+    use_expired_date = models.CharField(max_length=50, blank=True)
+    production_date = models.CharField(max_length=50, blank=True)
+    usage = models.TextField(blank=True)
+    ingredient = models.TextField(blank=True)
+    judge_result = models.CharField(max_length=100, blank=True)
+    precautions = models.TextField(blank=True)
+    quality_guarantee_standard = models.CharField(max_length=100, blank=True)
 
-    def __str__(self):
-        return unicode(self).encode('utf-8')
+class ProductDescriptionImage(models.Model):
+    product = models.ForeignKey(Product)
+    img_url = models.CharField(max_length=100, blank=True)
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product)
+    img_url = models.CharField(max_length=100, blank=True)
+
+
+# class Product(models.Model):
+#     name = models.TextField(null=False)
+#     category = models.ForeignKey(Category)
+#     description = models.TextField(null=False, blank=True)
+#     # description_img = models.ImageField(blank=True)
+#     big_img_url = models.TextField(null=False, blank=True)
+#     small_img_url = models.TextField(null=False, blank=True)
+#     video_url = models.TextField(null=False, blank=True)
+#     brandname = models.TextField(null=False, blank=True)
+#     maker = models.TextField(null=False, blank=True)
+#     capacity = models.TextField(null=False, blank=True)
+#     original_price = models.IntegerField(null=False, default=0)
+#     discount_price = models.IntegerField(null=False, default=0)
+#     fit_skin_type = models.TextField(null=False, blank=True)
+#     color_description = models.TextField(null=False, blank=True)
+#     color_rgb = models.CharField(max_length=10, null=False, blank=True)
+#     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+#
+#     def __unicode__(self):
+#         return '(%r)Product : name(%s) category(%s) description(%s)' \
+#                % (self.id, self.name, self.category.name, self.description)
+#
+#     def __str__(self):
+#         return unicode(self).encode('utf-8')
 
 class Set(models.Model):
     name = models.TextField(null=False)
