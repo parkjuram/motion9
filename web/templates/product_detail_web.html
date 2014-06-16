@@ -47,12 +47,12 @@
 
         <div class="box-css no-shadow" style="background-color: #F3F3F3;">
             <div id="product-xTabs">
-                <ul class="resp-tabs-list">
+                <ul class="resp-tabs-list tab-box-menu-shadow">
                     <li>상세설명</li>
                     <li style="margin-left: -1px;">상품정보고시</li>
                 </ul>
 
-                <div class="resp-tabs-container">
+                <div class="resp-tabs-container tab-box-shadow">
                     <div> {{ product.description }}</div>
                     <div> 고시가 어쩌구</div>
                 </div>
@@ -80,6 +80,7 @@
                     총 상품 금액 : {{ product.discount_price }}원
                 </div>
                 <div class="product-btn-area">
+                    <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-interest">관심하기</a>
                     <a href="#" class="basic-btn">구매하기</a>
                     <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-cart">장바구니</a>
                 </div>

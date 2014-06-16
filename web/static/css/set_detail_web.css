@@ -206,6 +206,7 @@ a.basic-btn{
     z-index: 999!important;
     height : 500px;
     overflow-y: auto;
+    background-color: #F3F3F3;
 }
 
 #productDetailModal .modal-left-wrapper{
@@ -217,7 +218,7 @@ a.basic-btn{
 }
 
 #productDetailModal .modal-desc-wrapper{
-    margin-left: 20px;
+    margin-right: 20px;
 }
 
 

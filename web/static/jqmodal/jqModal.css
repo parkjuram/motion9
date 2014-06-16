@@ -17,7 +17,9 @@
     background-color: #fff;
     color: #333333;
     font-size: 12px;
-    border: 1px solid black;
+    box-shadow: -1px 3px 3px 0px rgba(0,0,0,0.05);
+    -moz-box-shadow: -1px 3px 3px 0px rgba(0,0,0,0.05);
+    -webkit-box-shadow: -1px 3px 3px 0px rgba(0,0,0,0.05);
     padding: 20px;
 }
 

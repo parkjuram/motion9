@@ -50,7 +50,7 @@ $(function(){
         var productKey = btn.attr('data-product');
         var type = btn.attr('data-type')=='s'?'s':'p';
         var url = '';
-        var done = btn.hasClass('btn-motion9-disable');
+        var done = btn.hasClass('interest-done');
 
         if(!done)
             url = "/user/interest/add/";
@@ -74,9 +74,11 @@ $(function(){
                           alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
                       }else{
                           if(!done){
-                              //btn.addClass('btn-motion9-disable');
+                              btn.addClass('interest-done');
+                              btn.text('관심취소');
                           }else{
-                              //btn.removeClass('btn-motion9-disable');
+                              btn.removeClass('interest-done');
+                              btn.text('관심하기');
                           }
                       }
 

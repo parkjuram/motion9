@@ -46,7 +46,7 @@
 
         <div class="box-css no-shadow" style="background-color: #F3F3F3;">
             <div id="setTabs">
-                <ul class="resp-tabs-list">
+                <ul class="resp-tabs-list tab-box-menu-shadow">
                     <li>상세설명</li>
                     <li style="margin-left: -1px;">상품정보고시</li>
                 </ul>
@@ -64,7 +64,11 @@
                 The Motion9
             </div>
             <div style="padding : 30px 10px 20px 20px;">
-                <a href="#" class="btn-for-interest basic-btn" data-product="{{ set.id }}" data-type="s">관심하기</a>
+                {% if set.is_interested %}
+                    <a href="#" class="btn-for-interest basic-btn interest-done" data-product="{{ set.id }}" data-type="s">관심취소</a>
+                {% else %}
+                    <a href="#" class="btn-for-interest basic-btn" data-product="{{ set.id }}" data-type="s">관심하기</a>
+                {% endif %}
                 <a href="{% url 'customize_set' set_id=set.id %}" class="basic-btn" >커스텀 구성하기</a>
             </div>
         </div>
