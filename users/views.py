@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
-from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data, \
+from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     helper_add_product_interest, helper_add_set_interest, helper_delete_product_interest, helper_delete_set_interest, \
     helper_add_product_cart, helper_add_set_cart, helper_add_custom_set_cart, \
     helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
@@ -108,7 +108,7 @@ def mypage_view(request, page_num=None):
         products = []
         for interest in interests:
             product = interest.product
-            product_ = helper_get_product(product, user)
+            product_ = helper_get_product_detail(product, user)
             products.append(product_)
 
         if page_num is not None:
@@ -158,7 +158,7 @@ def mypage_cart_view(request):
     products = []
     for product_cart in product_carts:
         product = product_cart.product
-        products.append(helper_get_product(product,user))
+        products.append(helper_get_product_detail(product,user))
 
     set_carts = user.cart_set.filter(type='s').all()
     sets = []
@@ -187,7 +187,7 @@ def mypage_purchase_product_view(request, page_num=None):
         products = []
         for purchase in purchases:
             product = purchase.product
-            product_ = helper_get_product(product, user)
+            product_ = helper_get_product_detail(product, user)
             products.append(product_)
 
         if page_num is not None:
@@ -209,7 +209,7 @@ def mypage_purchase_set_view(request, page_num=None):
         sets = []
         for purchase in purchases:
             set = purchase.set
-            set_ = helper_get_product(set, user)
+            set_ = helper_get_product_detail(set, user)
             sets.append(set_)
 
         if page_num is not None:
@@ -231,7 +231,7 @@ def mypage_purchase_custom_set_view(request, page_num=None):
         custom_sets = []
         for purchase in purchases:
             custom_set = purchase.custom_set
-            custom_set_ = helper_get_product(custom_set, user)
+            custom_set_ = helper_get_product_detail(custom_set, user)
             custom_sets.append(custom_set_)
 
         if page_num is not None:

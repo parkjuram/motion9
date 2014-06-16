@@ -1,12 +1,10 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import HttpResponse
-from django.shortcuts import render, render_to_response
-from django.template.context import RequestContext
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
-from common_controller.util import helper_get_user, helper_get_product, helper_get_set, helper_make_paging_data, \
-    http_response_by_json
+from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
+    http_response_by_json, helper_get_products
 from web.models import Product, Category, BlogReview, Set, CustomSet, CustomSetDetail
 
 import math
@@ -136,40 +134,9 @@ def index_view(request):
 @csrf_exempt
 def shop_product_view(request, category_id=None, page_num=None):
 
-    products = Product.objects
-    if category_id is not None:
-        products.filter(category__id=category_id)
+    page_num = int(page_num)
 
-    products = products.all()
-    products_ = []
-
-    for product in products:
-        is_interest = False
-        if helper_get_user(request) is not None:
-            if product.interest_set.filter(user=helper_get_user(request)).count()>0:
-                is_interest = True
-
-        product_ = {}
-        product_.update({
-            'id': product.id,
-            'name': product.name,
-            'is_interest': is_interest,
-            'category_name': product.category.name,
-            'description': product.description,
-            'big_img_url': product.big_img_url,
-            'small_img_url': product.small_img_url,
-            'video_url': product.video_url,
-            'brandname': product.brandname,
-            'maker': product.maker,
-            'capacity': product.capacity,
-            'original_price': product.original_price,
-            'discount_price': product.discount_price,
-            'fit_skin_type': product.fit_skin_type,
-            'color_description': product.color_description,
-            'color_rgb': product.color_rgb
-        })
-
-        products_.append(product_)
+    products_ = helper_get_products(helper_get_user(request), category_id)
 
     if page_num is not None:
         products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
@@ -183,6 +150,8 @@ def shop_product_view(request, category_id=None, page_num=None):
     else:
         current_category = Category.objects.get(id=category_id).name
 
+    return http_response_by_json(None, products_)
+
     return render(request, 'shopping_product_web.html',
                   {
 
@@ -194,6 +163,9 @@ def shop_product_view(request, category_id=None, page_num=None):
 
 
 def shop_set_view(request, category_id=None, page_num=None):
+
+    page_num = int(page_num)
+
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): start')
     sets = helper_get_set_list(category_id, helper_get_user(request))
 
@@ -253,7 +225,7 @@ def set_view(request, set_id):
 @csrf_exempt
 def product_view(request, product_id=None):
     if product_id is not None:
-        product = helper_get_product(product_id, helper_get_user(request))
+        product = helper_get_product_detail(product_id, helper_get_user(request))
         blog_reivews = _get_blog_reviews(product_id)
 
         return render(request, "product_detail_web.html",
@@ -268,7 +240,7 @@ def product_view(request, product_id=None):
 @csrf_exempt
 def product_modal_view(request, product_id=None):
     if product_id is not None:
-        product = helper_get_product(product_id, helper_get_user(request))
+        product = helper_get_product_detail(product_id, helper_get_user(request))
         blog_reivews = _get_blog_reviews(product_id)
 
         return render(request, "product_detail_for_modal.html",
@@ -285,7 +257,7 @@ def product_json_view(request, product_id=None):
     logger.info( 'def product_json_view(request, product_id=None): start')
 
     if product_id is not None:
-        product = helper_get_product(product_id, helper_get_user(request))
+        product = helper_get_product_detail(product_id, helper_get_user(request))
         return http_response_by_json(None, product)
     else:
         logger.error( 'product_id is wrong in product_view')

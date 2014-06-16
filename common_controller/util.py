@@ -29,7 +29,22 @@ def helper_get_user(request):
     else:
         return None
 
-def helper_get_product(product_id_or_object, user=None):
+def helper_get_products(user=None, category_id=None):
+
+    products = Product.objects
+    if category_id is not None:
+        products.filter(category__id=category_id)
+
+    products = products.all()
+    products_ = []
+
+    for product in products:
+        product_ = helper_get_product_detail(product, user)
+        products_.append(product_)
+
+    return products_
+
+def helper_get_product_detail(product_id_or_object, user=None):
 
     if isinstance(product_id_or_object, unicode) or isinstance(product_id_or_object, int):
         product_id = product_id_or_object
@@ -101,7 +116,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
         original_price += product.original_price
         discount_price += product.discount_price
 
-        product_ = helper_get_product( product.id, user)
+        product_ = helper_get_product_detail( product.id, user)
 
         if with_custom_info:
             try:
@@ -110,7 +125,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 
                 changeable_products = []
                 for changeable_product_info in changeable_product_infos:
-                    changeable_product_ = helper_get_product(changeable_product_info.product, user)
+                    changeable_product_ = helper_get_product_detail(changeable_product_info.product, user)
                     changeable_products.append(changeable_product_)
 
                 product_.update({
@@ -143,10 +158,10 @@ def helper_make_paging_data( all_object_length, lists, page_num):
     lists = {
         'data': lists,
         'page_total_count': pager_total_length,
-        'page_left_count': page_num-(page_num%PAGER_INDICATOR_LENGTH)+1,
-        'page_right_count': pager_total_length
+        'page_left_count': int(page_num-(page_num%PAGER_INDICATOR_LENGTH)+1),
+        'page_right_count': int(pager_total_length)
         if pager_total_length < page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH
-        else page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH,
+        else int(page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH),
     }
     lists.update({
         'page_hasPrev': True if lists['page_left_count'] is not 1 else False,
