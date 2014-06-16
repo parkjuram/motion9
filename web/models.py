@@ -36,6 +36,13 @@ class Product(models.Model):
     precautions = models.TextField(blank=True)
     quality_guarantee_standard = models.CharField(max_length=100, blank=True)
 
+    def __unicode__(self):
+        return '(%r)Product : name(%s)' \
+               % (self.id, self.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class ProductDescriptionImage(models.Model):
     product = models.ForeignKey(Product)
     image = models.ImageField(null=True, upload_to='product/desc/')
