@@ -101,7 +101,8 @@ def update(request):
         logger.error('have_to_login')
 
 @login_required
-def mypage_view(request, page_num=None):
+def mypage_view(request, page_num=1):
+    page_num = int(page_num)
     user = helper_get_user(request)
     if user is not None:
         interests = user.interest_set.filter(type='p').all()
@@ -126,7 +127,8 @@ def mypage_view(request, page_num=None):
         logger.error('have_to_login')
 
 @login_required
-def mypage_set_view(request, page_num=None):
+def mypage_set_view(request, page_num=1):
+    page_num = int(page_num)
     user = helper_get_user(request)
     if user is not None:
         interests = user.interest_set.filter(type='s').all()
@@ -180,7 +182,8 @@ def mypage_cart_view(request):
         })
 
 @login_required
-def mypage_purchase_product_view(request, page_num=None):
+def mypage_purchase_product_view(request, page_num=1):
+    page_num = int(page_num)
     user = helper_get_user(request)
     if user is not None:
         purchases = user.purchase_set.filter(type='p').all()
@@ -202,7 +205,8 @@ def mypage_purchase_product_view(request, page_num=None):
             })
 
 @login_required
-def mypage_purchase_set_view(request, page_num=None):
+def mypage_purchase_set_view(request, page_num=1):
+    page_num = int(page_num)
     user = helper_get_user(request)
     if user is not None:
         purchases = user.purchase_set.filter(type='s').all()
@@ -224,7 +228,8 @@ def mypage_purchase_set_view(request, page_num=None):
             })
 
 @login_required
-def mypage_purchase_custom_set_view(request, page_num=None):
+def mypage_purchase_custom_set_view(request, page_num=1):
+    page_num = int(page_num)
     user = helper_get_user(request)
     if user is not None:
         purchases = user.purchase_set.filter(type='c').all()

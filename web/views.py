@@ -182,7 +182,8 @@ def shop_set_view(request, category_id=None, page_num=1):
                   {
                       'sets': sets,
                       'current_category': current_category,
-                      'categories': categories
+                      'categories': categories,
+                      'current_page': 'shop_set'
                   })
 
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): end')
