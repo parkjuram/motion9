@@ -1,8 +1,16 @@
 from django.contrib import admin
-from web.models import Category, Product, Set, CustomSet, CustomSetDetail
+from .models import Category, Product, ProductDescriptionImage, ProductImage, Set, SetProduct, ChangeableProduct, \
+    ChangeableProductInfo, CustomSet, CustomSetDetail, BlogReview
 
 admin.site.register(Category)
 admin.site.register(Product)
+admin.site.register(ProductDescriptionImage)
+admin.site.register(ProductImage)
 admin.site.register(Set)
+admin.site.register(SetProduct)
+admin.site.register(ChangeableProduct)
+admin.site.register(ChangeableProductInfo)
 admin.site.register(CustomSet)
 admin.site.register(CustomSetDetail)
+admin.site.register(BlogReview)
+

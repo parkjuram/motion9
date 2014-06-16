@@ -41,7 +41,7 @@ class ProductDescriptionImage(models.Model):
     img_url = models.CharField(max_length=100, blank=True)
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, related_name='product_image_set')
     img_url = models.CharField(max_length=100, blank=True)
 
 
