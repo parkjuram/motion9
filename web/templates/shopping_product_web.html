@@ -73,6 +73,16 @@
                 </div>
                 {% endfor %}
             </div>
+
+            <div class="paging-area">
+                <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
+                  <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="previous">Prev</a></li>
+                  {% for pageNum in page_range %}
+                  <li><a href="{% url 'shop_product' page_num=pageNum %}" class="">{{ pageNum  }}</a></li>
+                  {% endfor %}
+                  <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="next">Next</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="nav-container float-left">

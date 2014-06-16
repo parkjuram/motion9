@@ -42,7 +42,7 @@
                     총 상품 금액 : {{ product.discount_price }}원
                 </div>
                 <div class="product-btn-area">
-                    <a href="{% url product product_id=product.id %}" class="basic-btn">상세 페이지로 이동</a>
+                    <a href="{% url 'product' product_id=product.id %}" class="basic-btn">상세 페이지로 이동</a>
                     <a href="#" class="basic-btn btn-for-cart">장바구니</a>
                 </div>
             </div>

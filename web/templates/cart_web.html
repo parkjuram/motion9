@@ -108,6 +108,53 @@
 
                 {% endfor %}
             </div>
+
+            <div class="box-header" style="margin-left: 20px; margin-top: 40px;">
+                커스텀 세트
+            </div>
+            <div>
+                {% if custom_sets|length == 0 %}
+                    <div class="no-item">
+                        구매하신 내역이 없습니다.
+                    </div>
+                {% endif %}
+                {% for custom_set in custom_sets%}
+                <div class="purchased-item">
+                    <div class="purchased-item-img">
+                        <a href="#" target="_blank"><img src="{{ custom.big_img_url }}"/></a>
+                    </div>
+                    <div class="purchased-item-contents">
+                        <div class="purchased-item-contents-wrapper">
+                            <div class="purchased-item-name">
+                                <a href="#" target="_blank">{{ custom_set.name }}</a>
+                            </div>
+                            <div class="purchased-item-price">가격 : {{ custom_set.discount_price }}원</div>
+                        </div>
+                    </div>
+                    <div class="purchased-item-buy">
+                        <div class="purchased-item-contents-wrapper">
+                            <select>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            <span class="purchased-item-price-with-cnt">{{ custom_set.discount_price }}원</span>
+                        </div>
+                    </div>
+                    <div class="purchased-item-del-btn">
+                        <a href="#" class="del-item-btn" data-product-id="{{ custom_set.id }}" data-type="p">삭제</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="nav-container float-left">

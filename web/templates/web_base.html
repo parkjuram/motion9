@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
     <link rel="stylesheet" href="{% static 'jqmodal/jqModal.css'%}"/>
     <link rel="stylesheet" href="{% static "css/login_web.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/tsc_pagination.css" %}"/>
     <script type="text/javascript">
 {#        var url_for_login_next = "{% url 'users.login_view' next=request.url %}";#}
     </script>
@@ -50,6 +51,7 @@
                     <li><a href="{% url 'logout' %}" class="">로그아웃</a></li>
                 {% else %}
                     <li><a href="#" class="login-btn">로그인</a></li>
+                    <li><a href="{% url 'registration_page' %}">회원가입</a></li>
                 {% endif %}
                 <li><input type="text" style=" margin-left: 4px; margin-top: 14px; height : 18px; width : 106px; border-radius: 7px;"/></li>
                 <li class="clearfix"></li>

@@ -38,12 +38,12 @@
 
 {% block productPaging %}
 {% if interests.data|length > 0  %}
-    <ul class="pagination">
-      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="page">Prev</a></li>
+    <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
+      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="previous">Prev</a></li>
       {% for pageNum in page_range %}
-      <li><a href="{% url 'mypage' page_num=pageNum %}" class="page">{{ pageNum  }}</a></li>
+      <li><a href="{% url 'mypage' page_num=pageNum %}" class="">{{ pageNum  }}</a></li>
       {% endfor %}
-      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="page">Next</a></li>
+      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="next">Next</a></li>
     </ul>
 {% else %}
         <div class="clearfix"></div>

@@ -8,7 +8,7 @@
         <div class="register-header">
             회원가입
         </div>
-        <form method="post" action="{% url 'login'%}" >
+        <form method="post" action="{% url 'registration'%}" >
             <div class="form-box">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name"/>
@@ -23,7 +23,7 @@
             </div>
             <div class="form-box">
                 <label for="password_check">비밀번호 확인</label>
-                <input type="password" name="password_check" id="password_check"/>
+                <input type="password" name="password_confirm" id="password_check"/>
             </div>
             <div class="form-box">
                 <label for="sex">성별</label>

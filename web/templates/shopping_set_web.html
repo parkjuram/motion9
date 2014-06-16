@@ -52,6 +52,15 @@
             </div>
             {% endfor %}
         </div>
+        <div>
+            <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
+              <li {% if not sets.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="previous">Prev</a></li>
+              {% for pageNum in page_range %}
+              <li><a href="{% url 'shop_set' page_num=pageNum %}" class="">{{ pageNum  }}</a></li>
+              {% endfor %}
+              <li {% if not sets.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="next">Next</a></li>
+            </ul>
+        </div>
     </div>
     <div class="nav-container float-left">
         <div class="box-css">
