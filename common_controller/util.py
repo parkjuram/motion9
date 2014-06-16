@@ -81,7 +81,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
         product_images = product.product_image_set.all()
         images = []
         for product_image in product_images:
-            images.append(product_image.image.name)
+            images.append( settings.MEDIA_URL + product_image.image.name)
 
         product_ = {
             'id': product.id,
