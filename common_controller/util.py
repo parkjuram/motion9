@@ -63,8 +63,10 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'name': product.name,
             'category_name': product.category.name,
             'description': product.description,
-            'big_img_url': product.big_img_url,
-            'small_img_url': product.small_img_url,
+            # 'big_img_url': product.big_img_url,
+            'big_img_url': 'http://pds.joins.com/news/component/htmlphoto_mmdata/201004/htm_20100416151255l000l300-001.JPG',
+            # 'small_img_url': product.small_img_url,
+            'small_img_url': 'http://www.newshankuk.com/nshk3/news/file/2011/05/04/%ED%94%84%EB%9E%91%EC%8A%A4PAB%20LMPC.jpg',
             'video_url': product.description,
             'brandname': product.brandname,
             'maker': product.maker,
@@ -72,8 +74,6 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'original_price': product.original_price,
             'discount_price': product.discount_price,
             'fit_skin_type': product.fit_skin_type,
-            'color_description': product.color_description,
-            'color_rgb': product.color_rgb,
             'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False
         }
 

@@ -178,8 +178,6 @@ def shop_set_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
-    print sets['data']
-
     return render(request, 'shopping_set_web.html',
                   {
                       'sets': sets,
