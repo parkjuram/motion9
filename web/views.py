@@ -132,7 +132,7 @@ def index_view(request):
                   })
 
 @csrf_exempt
-def shop_product_view(request, category_id=None, page_num=None):
+def shop_product_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
 
@@ -160,7 +160,7 @@ def shop_product_view(request, category_id=None, page_num=None):
                   })
 
 
-def shop_set_view(request, category_id=None, page_num=None):
+def shop_set_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
 
