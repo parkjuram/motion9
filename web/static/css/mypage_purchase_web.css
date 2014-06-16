@@ -1,3 +1,36 @@
+.purchase-tab{
+    margin: 0;
+    padding : 0;
+}
+
+.purchase-tab li{
+    display: inline-block;
+    font-size: 14px;
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 15px;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+}
+
+.purchase-tab li.active{
+    border: 1px solid #c1c1c1;
+    margin-bottom: -1px !important;
+    padding: 9px 14px 14px 14px !important;
+    border-bottom: none;
+    background-color: #fff;
+    border-top: 4px solid #797979;
+}
+
+.purchase-tab-container{
+    padding: 0px;
+    margin-right: 12px;
+    background-color: #fff;
+    clear: left;
+    border: 1px solid #c1c1c1;
+}
+
 
 .product-img{
     width : 60px;

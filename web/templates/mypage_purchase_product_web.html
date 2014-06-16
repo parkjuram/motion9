@@ -1,0 +1,59 @@
+{% extends "mypage_purchase_web.html" %}
+    {%block purchaseTab %}
+    <ul class="purchase-tab">
+        <li class="active">단품 구매목록</li>
+        <li><a href="{% url 'mypage_purchase_product' %}">세트 구매목록</a></li>
+        <li><a href="{% url 'mypage_purchase_custom_set' %}">커스텀 세트 구매목록</a></li>
+    </ul>
+    {% endblock %}
+
+    {% block purchaseTable %}
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width : 100px;">구매내역</th>
+                <th  style="width : 77px;"></th>
+                <th style="width : 260px;">상품명</th>
+                <th style="width : 73px;">금액</th>
+                <th colspan="2" >진행 상태</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in purchases.data%}
+            <tr>
+                <td>
+                    2014.05.12<br/>23423a6362cd
+                </td>
+                <td>
+                    <div class="product-img">
+                        <img src="{{product.big_img_url }}" alt="" />
+                    </div>
+                </td>
+                <td style="text-align: left;">
+                    <a href="{% url 'product' product_id=product.id %}">{{product.name  }}</a>
+                </td>
+                <td>
+                    ￦{{product.discount_price}}
+                </td>
+                <td style="width : 50px;">
+                    배송 완료
+                </td>
+                <td style="width : 50px;">
+                    <div class="list-btn-wrapper btn-group-vertical">
+                        <div class="btn-group">
+                            <button type="button" class="">배송 조회</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="">다시 구매</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="">반품 신청</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+

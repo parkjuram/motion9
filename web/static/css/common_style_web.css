@@ -228,10 +228,27 @@ ol, ul {
     /*
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     */
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+
+
     padding : 4px 0;
     border-radius: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
+}
+
+.tab-box-shadow{
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+}
+
+.no-shadow{
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
 }
 
 .box-header{
@@ -341,6 +358,10 @@ ol, ul {
 .category-list{
     margin : 32px 0 20px 0;
     background-color: white;
+
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
 }
 
 .category-list ul{
@@ -405,6 +426,7 @@ ol, ul {
 }
 */
 .paging-area{
+    margin-top: 8px;
     text-align: center;
 }
 
