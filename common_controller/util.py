@@ -1,5 +1,6 @@
+from django.conf import settings
 from django.http.response import HttpResponse
-from web.models import Product, Set, ChangeableProduct, ChangeableProductInfo
+from web.models import Product, Set, ChangeableProduct, BlogReview
 from users.models import Interest, Cart, Purchase
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -28,6 +29,25 @@ def helper_get_user(request):
         return request.user
     else:
         return None
+
+def helper_get_blog_reviews(product_id):
+    blog_reviews = BlogReview.objects.filter(product__id=product_id)
+
+    blog_reviews_ = []
+    for blog_review in blog_reviews:
+        blog_review_ = {}
+        blog_review_.update({
+            'writer': blog_review.writer,
+            'url': blog_review.url,
+            'big_img_url': blog_review.big_img_url,
+            'small_img_url': blog_review.small_img_url,
+            'review_created_time': blog_review.review_created_time,
+            'summary': blog_review.summary,
+        })
+
+        blog_reviews_.append(blog_review_)
+
+    return blog_reviews_
 
 def helper_get_products(user=None, category_id=None):
 
@@ -58,15 +78,21 @@ def helper_get_product_detail(product_id_or_object, user=None):
         else:
             product = product_object
 
+        product_images = product.product_image_set.all()
+        images = []
+        for product_image in product_images:
+            images.append( settings.MEDIA_URL + product_image.image.name)
+
         product_ = {
             'id': product.id,
             'name': product.name,
             'category_name': product.category.name,
             'description': product.description,
+            'images': images,
             # 'big_img_url': product.big_img_url,
-            'big_img_url': 'http://pds.joins.com/news/component/htmlphoto_mmdata/201004/htm_20100416151255l000l300-001.JPG',
+            'big_img_url': images[0] if len(images)>0 else '',
             # 'small_img_url': product.small_img_url,
-            'small_img_url': 'http://www.newshankuk.com/nshk3/news/file/2011/05/04/%ED%94%84%EB%9E%91%EC%8A%A4PAB%20LMPC.jpg',
+            'small_img_url': images[0] if len(images)>0 else '',
             'video_url': product.description,
             'brandname': product.brandname,
             'maker': product.maker,
@@ -94,6 +120,12 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
         set = Set.objects.get(id=set_id)
     else:
         set = set_object
+
+    # set_tags =
+    # product_images = product.product_image_set.all()
+    #     images = []
+    #     for product_image in product_images:
+    #         images.append(product_image.img_url)
 
     set_ = {}
     set_.update({
@@ -148,11 +180,25 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 
     return set_
 
-# def helper_get_changeable_product_list(set_id):
-#     changeable_products = ChangeableProduct.objects.filter(set_id=set_id)
-#     for changeable_product in changeable_products:
-#         changeableproductinfos = changeable_product.changeableproductinfo_set.all()
-#         changeable_product.product_id -> changeableproductinfos items product_id
+def helper_get_set_list(category_id, user):
+    sets = Set.objects
+    if category_id is not None:
+        sets.filter(category__id=category_id)
+
+    set_count = sets.count()
+    sets = sets.all()
+    sets_ = []
+
+    for set in sets:
+        is_interest = False
+        if user is not None:
+            if set.interest_set.filter(user=user).count()>0:
+                is_interest = True
+
+        set_ = helper_get_set(set.id, user)
+        sets_.append(set_)
+
+    return sets_
 
 def helper_make_paging_data( all_object_length, lists, page_num):
     pager_total_length = int(math.ceil( all_object_length/float(ITEM_COUNT_PER_PAGE)))

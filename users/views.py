@@ -359,17 +359,3 @@ def delete_purchase(request):
         helper_delete_custom_set_purchase(user, address, product_or_set_id)
 
     return http_response_by_json()
-
-    # if type=='p':
-    #     helper_add_product_interest(user, product_or_set_id)
-    # elif type=='s':
-    #     helper_add_set_interest(user, product_or_set_id)
-
-# return render(request, 'shopping_product_web.html',
-#                   {
-#
-#                       'products': products_,
-#                       'current_category': current_category,
-#                       'categories': categories,
-#                       'current_page': 'shop_product'
-#                   })
