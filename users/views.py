@@ -117,8 +117,6 @@ def mypage_view(request, page_num=1):
         else:
             products = {'data':products}
 
-        print products
-
         return render(request, 'mypage_interesting_web.html',
             {
                 'interests': products,
