@@ -80,7 +80,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
         product_images = product.product_image_set.all()
         images = []
         for product_image in product_images:
-            images.append(product_image.img_url)
+            images.append(product_image.image)
 
         product_ = {
             'id': product.id,
@@ -119,6 +119,12 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
         set = Set.objects.get(id=set_id)
     else:
         set = set_object
+
+    # set_tags =
+    # product_images = product.product_image_set.all()
+    #     images = []
+    #     for product_image in product_images:
+    #         images.append(product_image.img_url)
 
     set_ = {}
     set_.update({

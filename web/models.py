@@ -38,11 +38,11 @@ class Product(models.Model):
 
 class ProductDescriptionImage(models.Model):
     product = models.ForeignKey(Product)
-    img_url = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(null=True, upload_to='product/desc/')
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='product_image_set')
-    img_url = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(null=True, upload_to='product/image/')
 
 
 # class Product(models.Model):
@@ -77,6 +77,13 @@ class Set(models.Model):
     big_img_url = models.TextField(null=False, blank=True)
     small_img_url = models.TextField(null=False, blank=True)
     discount_difference = models.IntegerField(null=False, default=0)
+
+class Tag(models.Model):
+    name = models.TextField(unique=True)
+
+class SetTag(models.Model):
+    set = models.ForeignKey('Set')
+    tag = models.ForeignKey('Tag')
 
 class SetProduct(models.Model):
     set = models.ForeignKey('Set')
