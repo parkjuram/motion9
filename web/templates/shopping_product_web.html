@@ -65,8 +65,12 @@
                                 {{product.description|truncatechars:60}}
                             </div>
                             <div class="product-item-btn-group">
-                                <div class="product-item-btn"><a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest"><img src="{% static "img/interest.png" %}"/> 관심하기</a>&nbsp;&nbsp;</div>
-                                <div class="product-item-btn">&nbsp;&nbsp;<a href="#" data-type='p' data-product="{{ product.id }}" class="btn-for-cart"><img src="{% static "img/Add_to_basket.png" %}"/> 장바구니</a></div>
+                                {% if product.is_interested %}
+                                    <div class="product-item-btn"><img src="{% static "img/interest.png" %}"/><a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest interest-done"> 관심취소</a>&nbsp;&nbsp;</div>
+                                {% else %}
+                                    <div class="product-item-btn"><img src="{% static "img/interest.png" %}"/><a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest"> 관심하기</a>&nbsp;&nbsp;</div>
+                                {% endif %}
+                                <div class="product-item-btn">&nbsp;&nbsp;<img src="{% static "img/Add_to_basket.png" %}"/><a href="#" data-type='p' data-product="{{ product.id }}" class="btn-for-cart"> 장바구니</a></div>
                             </div>
                         </div>
                     </div>
