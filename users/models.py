@@ -51,9 +51,9 @@ class Cart(models.Model):
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
     address = models.TextField(null=False, blank=True)
-    product = models.ForeignKey('web.Product',null=True)
-    set = models.ForeignKey('web.Set',null=True)
-    custom_set = models.ForeignKey('web.CustomSet',null=True)
+    product = models.ForeignKey('web.Product',null=True, blank=True)
+    set = models.ForeignKey('web.Set',null=True, blank=True)
+    custom_set = models.ForeignKey('web.CustomSet',null=True, blank=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
     status = models.CharField(max_length=1, null=False, default='r')
