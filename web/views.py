@@ -189,7 +189,7 @@ def shop_set_view(request, category_id=None, page_num=1):
     logger.info( 'def shop_set_view(request, category_id=None, page_num=None): end')
 
 def set_view(request, set_id):
-    set = helper_get_set(set_id)
+    set = helper_get_set(set_id, helper_get_user(request))
 
     return render(request, 'set_detail_web.html',
                 {
