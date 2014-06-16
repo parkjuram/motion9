@@ -154,7 +154,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 #         changeable_product.product_id -> changeableproductinfos items product_id
 
 def helper_make_paging_data( all_object_length, lists, page_num):
-    pager_total_length = math.ceil( all_object_length/float(ITEM_COUNT_PER_PAGE))
+    pager_total_length = int(math.ceil( all_object_length/float(ITEM_COUNT_PER_PAGE)))
     lists = {
         'data': lists,
         'page_total_count': pager_total_length,
