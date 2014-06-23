@@ -1,7 +1,6 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/common_style.css'%}"/>
 <link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>
 
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
@@ -19,10 +18,12 @@
 </div>
 <div class="category-box">
     <div class="select-wrapper">
+      <div class="select-box-border">
         <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
             <option value="#">단일제품</option>
             <option value="#">세트상품</option>
         </select>
+      </div>
     </div>
     <div class="select-wrapper">
         <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
@@ -36,66 +37,28 @@
     <div class="clearfix"></div>
 </div>
 <div id="productGrid">
-    <div class="product-item">
-           <div class="item-title">
-               미샤 더모션 나인 ㅋ
+    {% for product in products.data %}
+    <div class="product-item" >
+           <div class="item-title" >
+               <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name|truncatechars:13}}</a>
                <div class="item-price">
                    18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
                </div>
            </div>
            <div class="item-image">
-               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
-               <a href="#" class="interest-btn"> &nbsp;</a>
+               <a href="{% url 'mobile_product' product_id=product.id %}" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
+               <a href="#" class="interest-btn btn-for-interest" data-type="p" data-product="{{ product.id }}"> &nbsp;</a>
            </div>
     </div>
-    <div class="product-item">
-           <div class="item-title">
-               미샤 더모션 나인 ㅋ
-               <div class="item-price">
-                   18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
-               </div>
-           </div>
-           <div class="item-image">
-               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
-               <a href="#" class="interest-btn"> &nbsp;</a>
-           </div>
-    </div>
-    <div class="product-item">
-          <div class="item-title">
-               미샤 더모션 나인 ㅋ
-               <div class="item-price">
-                   18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
-               </div>
-           </div>
-           <div class="item-image">
-               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
-               <a href="#" class="interest-btn"> &nbsp;</a>
-           </div>
-    </div>
-    <div class="product-item">
-           <div class="item-title">
-               미샤 더모션 나인 ㅋ
-               <div class="item-price">
-                   18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
-               </div>
-           </div>
-           <div class="item-image">
-               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
-               <a href="#" class="interest-btn"> &nbsp;</a>
-           </div>
-    </div>
+    {% endfor %}
 </div>
 <div class="paging-area">
     <ul class="pagination">
-      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
-      {% for pageNum in pageList%}
-          {% if current_category != None %}
-            <li><a href="#" data-ajax="false">{{ pageNum  }}</a></li>
-          {% else %}
-             <li><a href="#"  data-ajax="false">{{ pageNum  }}</a></li>
-          {% endif %}
-      {% endfor %}
-      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
+       {% for pageNum in products.page_range %}
+          <li><a href="{% url 'shop_product' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
+       {% endfor %}
+      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
     </ul>
 </div>
 {% endblock %}

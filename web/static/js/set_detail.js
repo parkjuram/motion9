@@ -1,18 +1,12 @@
-/**
- * Created by Park-Kunbae on 14. 3. 27.
- */
 $(function(){
-   $('.product-menu-btn').click(function(e){
-       e.preventDefault();
-       var el = $('#changeProductPopup');
-       el.popup('open',{positionTo : 'window'});
+
+   $('a.tab-btn').click(function(e){
+        e.preventDefault();
+
+        var target = $(this).attr('href');
+        console.log(target);
+        $('.tab-content').removeClass('tab-selected');
+        $(target).addClass('tab-selected');
    });
-
-   $('#newProductBtn').click(function(e){
-       e.preventDefault();
-      location.href='/changeproductinset';
-   });
-
-
 
 });

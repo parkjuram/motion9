@@ -13,13 +13,24 @@ a:visited{
     color : inherit !important;
 }
 
-
+.ui-focus{
+    box-shadow : none !important;
+    -webkit-box-shadow : none !important;
+    color : inherit !important;
+    text-shadow : none!important;
+}
 
 .ui-header{
     background-color : #ffffff !important;
     border: 0;
+    padding-bottom: 4px;
     /*border-bottom: 1px solid #d8d9dd !important;*/
 }
+
+.ui-title{
+    margin-top : 4px !important;
+}
+
 #loginForm{
     background: url("../img/menu_bg6.png") top left !important;
     color : white;
@@ -173,7 +184,7 @@ a:visited{
 
 
 .ui-page{
-    background-color : #F3F3F3;
+    background-color : white;/*#F3F3F3*/;
 }
 
 .ui-panel-wrapper{
