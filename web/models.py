@@ -21,6 +21,7 @@ class Product(models.Model):
     discount_price = models.IntegerField(null=False, default=0)
     fit_skin_type = models.CharField(max_length=30, blank=True)
 
+    thumbnail_image = models.ImageField(null=True, upload_to='product/')
     video_url = models.URLField(blank=True)
     brandname = models.CharField(max_length=30, blank=True)
     maker = models.CharField(max_length=30, blank=True)

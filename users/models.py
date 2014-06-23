@@ -12,6 +12,7 @@ class UserProfile(models.Model):
     age = models.IntegerField(null=True)
     skin_type = models.CharField(max_length=100, null=True)
     skin_color = models.CharField(max_length=10, null=True)
+    mileage = models.IntegerField(null=False, default=0)
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
