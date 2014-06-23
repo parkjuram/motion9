@@ -4,6 +4,19 @@
 
 $(function(){
 
+    var fixDiv = function() {
+        var b = $(window).scrollTop();
+        var d = $("#header").offset().top + 80;
+        var c = $("#nav-top-btn");
+        if (b > d) {
+            c.css({position:"fixed", top:"90%", display:"block"});
+        } else {
+            c.css({position:"absolute",top:"0px", display : 'none'});
+        }
+    };
+
+    $(window).scroll(fixDiv);
+
     $('.login-box, .login-form').keypress(function(e){
         if(e.keyCode == 13){
             $(this).find('form').submit();

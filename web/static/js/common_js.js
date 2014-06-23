@@ -9,39 +9,8 @@ $(function(){
         var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
         return ctxPath;
     }
-/*
-    var closeSubMenu = function(){
-        $('ul.header-main-sub-menu').each(function(idx, val){
-           $(this).css({display :'none'});
-        });
-    };
 
-    $('#header .has-sub-menu').hover(function(e){
-        closeSubMenu();
 
-        var subMenu = $(this).children('ul.header-main-sub-menu');
-        subMenu.css({display : 'block'});
-    });
-
-    $('#header').hover(function(){
-
-    }, function(e){
-            closeSubMenu();
-    });
-
-*/
-    var fixDiv = function() {
-        var b = $(window).scrollTop();
-        var d = $("#header").offset().top + 80;
-        var c = $("#nav-top-btn");
-        if (b > d) {
-            c.css({position:"fixed", top:"90%", display:"block"});
-        } else {
-            c.css({position:"absolute",top:"0px", display : 'none'});
-        }
-    };
-
-    $(window).scroll(fixDiv);
 
     $('.btn-for-interest').click(function(e){
         e.preventDefault();

@@ -1,10 +1,24 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+a {
+    color : inherit !important;
+}
+
+a:hover{
+    color : inherit !important;
+}
+
+a:visited{
+    color : inherit !important;
+}
+
+
 
 .ui-header{
-    background: url("../img/menu_bar4.png") top left !important;
-    border-bottom: 1px solid #999999 !important;
+    background-color : #ffffff !important;
+    border: 0;
+    /*border-bottom: 1px solid #d8d9dd !important;*/
 }
 #loginForm{
     background: url("../img/menu_bg6.png") top left !important;
@@ -12,31 +26,154 @@
 }
 
 #menuPanel{
-    background: url("../img/menu_bg6.png") top left !important;
-    color : white;
+
 }
 
-#menuPanelTitle{
-    color : white;
+.menu-panel-search-box{
+
+    margin-bottom : 32px;
 }
 
-#menuListView{
-    background: inherit;
-    color : white;
+.menu-panel-search-box img{
+    width : 22px;
+    height : 22px;
+}
+
+.menu-panel-search-box input{
+    border : 0;
+
+    width : 170px;
+}
+
+#menuListView .ui-btn{
+    font-size : 14px;
+
+}
+
+.top-menu-btn img{
+    width : 22px;
+    height : 22px;
+    margin : 4px 8px;
 }
 
 
-#menuListView a{
-    font-size:14px;
-    text-shadow: none !important;
-    background: inherit;
-    color : white;
-    font-weight : normal;
-    border-color: black;
+.basic-btn {
+  width: 60px;
+  display: inline-block;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: black !important;
+  font-size: 12px;
+  background: #e5e5e5;
+  padding: 14px 10px;
+  text-decoration: none;
+  text-align : center;
+  text-shadow : none !important;
 }
+
+.basic-btn:visited{
+    color : #e7e7e7 !important;
+}
+
+.basic-btn:hover {
+  text-decoration: none !important;
+  color : black !important;
+}
+
+.gold-btn {
+  text-align : center;
+  width: 60px;
+  display : inline-block;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: white !important;
+  font-size: 12px;
+  background: #d2bb8f;
+  padding: 8px 10px;
+  text-decoration: none !important;
+  text-shadow : none !important;
+
+}
+
+.gold-btn:visited{
+    color : #ffffff !important;
+}
+
+.gold-btn:hover {
+  text-decoration: none !important;
+  color : white !important;
+}
+
+
+.facebook-btn {
+  width: 60px;
+  display : inline-block;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #fff !important;
+  font-size: 12px;
+  background: #3c599b;
+  padding: 8px 10px;
+  text-decoration: none;
+  text-shadow : none !important;
+}
+
+.facebook-btn:visited{
+    color : #fff !important;
+}
+
+.facebook-btn:hover {
+  text-decoration: none;
+  color : #e5e5e5 !important;
+}
+
+
+
+
+.ui-li-static.ui-collapsible {
+    padding: 0;
+}
+.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview,
+.ui-li-static.ui-collapsible > .ui-collapsible-heading {
+    margin: 0;
+}
+.ui-li-static.ui-collapsible > .ui-collapsible-content {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    border-bottom-width: 0;
+}
+/* collapse vertical borders */
+.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
+.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-btn {
+    border-bottom-width: 0;
+}
+.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
+.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-btn,
+.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn {
+    border-top-width: 0;
+}
+/* Remove right borders */
+.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
+.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
+.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn,
+.ui-li-static.ui-collapsible > .ui-collapsible-content {
+    border-right-width: 0;
+}
+/* Remove left borders */
+/* Here, we need class ui-listview-outer to identify the outermost listview */
+.ui-listview-outer > .ui-li-static.ui-collapsible .ui-li-static.ui-collapsible.ui-collapsible,
+.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
+.ui-li-static.ui-collapsible > .ui-collapsible-content {
+    border-left-width: 0;
+}
+
 
 .ui-page{
-    background: url("../img/bg2.png") top left !important;
+    background-color : #F3F3F3;
 }
 
 .ui-panel-wrapper{
@@ -46,12 +183,14 @@
 
 body{
 	font-family: 'Nanum Gothic';
-	font-size : 15px;
+	font-size : 12px;
+	background-color : #F3F3F3;
 }
 
 .ui-btn {
 	font-family: 'Nanum Gothic';
 }
+
 .clearfix{
 	clear:both;
 }
@@ -62,38 +201,7 @@ ol, ul {
 	margin:0;
 }
 
-.boxed {
-    background-color: #fff;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
-	position: relative;
-}
-.boxed-transparent {
-    background-color: #a9728e;
-    background-color: rgba(255,255,255,0.1);
-}
 
-
-/* flash message style */
-.flash          { background: #CEE5F5; padding: 0.5em; }
-
-
-.btn-motion9-disable{
-    color:#adabad !important;
-}
-
-
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
 .pagination {
   display: inline-block;
   padding-left: 0;
@@ -232,4 +340,9 @@ ol, ul {
     padding: 10px 30px;
     line-height: 14px;
     text-align: right;
+}
+
+.paging-area{
+    margin-top: 8px;
+    text-align: center;
 }

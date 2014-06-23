@@ -1,59 +1,119 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_set.css') }}"/>
-
-<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/shopping_set.js') }}"></script>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/common_style.css'%}"/>
+<link rel="stylesheet" href="{% static 'css/shopping_set.css'%}"/>
+<script src="{% static 'js/shopping_set.js'%}"></script>
 {% endblock %}
 
 {% block title %}
-    <h2 class="ui-title">세트 구성 쇼핑</h2>
+    <h2 class="ui-title">세트상품</h2>
 {% endblock %}
 
 {% block content %}
-<div>
-    <div data-role="controlgroup" data-type="horizontal">
-        <select id="categoryList">
-            <option value="#">카테고리 선택</option>
-            <option value="all">모두 보기</option>
-            {% for category in categories %}
-               <option value="{{ category.key }}">{{ category.name }}</option>
-            {% endfor %}
+<div class="main-header-img">
+    <img src="{% static "img/black.jpg" %}"/>
+</div>
+<div class="category-box">
+    <div class="select-wrapper">
+        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">세제품</option>
+            <option value="#">단일상품</option>
         </select>
     </div>
-    {% for product in products %}
-    <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
-        <div class="product-img">
-            <img src="{{ product.big_img_url}}" alt="" />
-        </div>
-        <div class="product-contents">
-            <div class="product-info">
-                [{{ product.brandname }}]<br/>
-                <a href="{{ url_for('setMobile', set_key = product.key) }}">{{product.name }}</a>
-                <div class="product-price-box">
-                    Price : <b>￦{{ product.discount_price }} ({{product.capacity }})</b><br/>
-                    Category : <b>{{ product.category_name}}</b>
-                </div>
+    <div class="select-wrapper">
+        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">피부가 꺼먼새끼</option>
+            <option value="#">운동 많이 하는 새끼</option>
+            <option value="#">그냥 피부 더러운 새끼</option>
+            <option value="#">못생긴 새끼</option>
+        </select>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div id="productGrid">
+    <div class="product-item">
+        <div class="item-image">
+            <img src="{% static "img/surfer.jpg" %}"/>
+            <div class="product-title">
+                <a href="#">자세히 보기</a>
             </div>
         </div>
-        <div class="product-bottom-menu">
-            <ul class="menu-links clearfix">
-               {% if product.isInterested  %}
-                <li class=""><a href="#" data-product="{{ product.key }}" data-type="s" class="btn-for-interest btn-motion9-disable">관심</a></li>
-            {%  else  %}
-                <li class=""><a href="#" data-product="{{ product.key }}" data-type="s" class="btn-for-interest">관심</a></li>
-            {% endif %}
-                <li class=""><a href="#" class="btn-for-cart" data-type="s" data-product="{{ product.key }}">장바구니</a></li>
-            </ul>
+        <div>
+            <div class="item-contents-left">
+                <div style="margin-bottom: 16px;">
+                    <div>
+                        <img src="{% static "img/sim_detail.png" %}"/>
+                    </div>
+                    <div>
+                        어쩌구 저쩌고 설명
+                    </div/>
+                </div>
+                <div>
+                    <div>
+                        <img src="{% static "img/set_comp.png" %}"/>
+                    </div>
+                    <div>
+                        에센스, 비비크림, 로션, 스
+                    </div/>
+                </div>
+            </div>
+            <div class="item-contents-right">
+                <div class="item-price">
+                    90,000원
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
+        <a href="#" class="interest-btn">&nbsp;</a>
     </div>
-
-    {% endfor %}
-
+    <div class="product-item">
+        <div class="item-image">
+            <img src="{% static "img/surfer.jpg" %}"/>
+            <div class="product-title">
+                <a href="#">자세히 보기</a>
+            </div>
+        </div>
+        <div>
+            <div class="item-contents-left">
+                <div style="margin-bottom: 16px;">
+                    <div>
+                        <img src="{% static "img/sim_detail.png" %}"/>
+                    </div>
+                    <div>
+                        어쩌구 저쩌고 설명
+                    </div/>
+                </div>
+                <div>
+                    <div>
+                        <img src="{% static "img/set_comp.png" %}"/>
+                    </div>
+                    <div>
+                        에센스, 비비크림, 로션, 스
+                    </div/>
+                </div>
+            </div>
+            <div class="item-contents-right">
+                <div class="item-price">
+                    90,000원
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <a href="#" class="interest-btn">&nbsp;</a>
+    </div>
 </div>
-
+<div class="paging-area">
+    <ul class="pagination">
+      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
+      {% for pageNum in pageList%}
+          {% if current_category != None %}
+            <li><a href="#" data-ajax="false">{{ pageNum  }}</a></li>
+          {% else %}
+             <li><a href="#"  data-ajax="false">{{ pageNum  }}</a></li>
+          {% endif %}
+      {% endfor %}
+      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+    </ul>
+</div>
 {% endblock %}
