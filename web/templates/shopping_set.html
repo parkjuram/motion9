@@ -34,11 +34,12 @@
     <div class="clearfix"></div>
 </div>
 <div id="productGrid">
+    {% for set in sets.data %}
     <div class="product-item">
         <div class="item-image">
-            <img src="{% static "img/surfer.jpg" %}"/>
+            <img src="{{ set.big_img_url }}"/>
             <div class="product-title">
-                <a href="#">자세히 보기</a>
+                <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">자세히 보기</a>
             </div>
         </div>
         <div>
@@ -48,7 +49,7 @@
                         <img src="{% static "img/sim_detail.png" %}"/>
                     </div>
                     <div>
-                        어쩌구 저쩌고 설명
+                        {{ set.description }}
                     </div/>
                 </div>
                 <div>
@@ -62,60 +63,22 @@
             </div>
             <div class="item-contents-right">
                 <div class="item-price">
-                    90,000원
+                    {{ set.discount_price }}원
                 </div>
             </div>
             <div class="clearfix"></div>
         </div>
         <a href="#" class="interest-btn">&nbsp;</a>
     </div>
-    <div class="product-item">
-        <div class="item-image">
-            <img src="{% static "img/surfer.jpg" %}"/>
-            <div class="product-title">
-                <a href="#">자세히 보기</a>
-            </div>
-        </div>
-        <div>
-            <div class="item-contents-left">
-                <div style="margin-bottom: 16px;">
-                    <div>
-                        <img src="{% static "img/sim_detail.png" %}"/>
-                    </div>
-                    <div>
-                        어쩌구 저쩌고 설명
-                    </div/>
-                </div>
-                <div>
-                    <div>
-                        <img src="{% static "img/set_comp.png" %}"/>
-                    </div>
-                    <div>
-                        에센스, 비비크림, 로션, 스
-                    </div/>
-                </div>
-            </div>
-            <div class="item-contents-right">
-                <div class="item-price">
-                    90,000원
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <a href="#" class="interest-btn">&nbsp;</a>
-    </div>
+    {% endfor %}
 </div>
 <div class="paging-area">
     <ul class="pagination">
-      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
-      {% for pageNum in pageList%}
-          {% if current_category != None %}
-            <li><a href="#" data-ajax="false">{{ pageNum  }}</a></li>
-          {% else %}
-             <li><a href="#"  data-ajax="false">{{ pageNum  }}</a></li>
-          {% endif %}
-      {% endfor %}
-      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
+       {% for pageNum in sets.page_range %}
+          <li><a href="{% url 'mobile_shop_set' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
+       {% endfor %}
+      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
     </ul>
 </div>
 {% endblock %}

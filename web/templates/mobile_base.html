@@ -28,26 +28,30 @@
 	   </div>
 	   <ul data-role="listview" class="ui-listview-outer" id="menuListView">
 		    <li data-icon="false"><a href="/">홈</a></li>
-		    <li data-icon="false"><a href="#" data-ajax="false">프로필</a></li>
+            {% if user.is_authenticated %}
+		       <li data-icon="false"><a href="#" data-ajax="false">프로필</a></li>
+           {% else %}
+               <li data-icon="false"><a href="{% url 'mobile_login_page' %}" data-ajax="false">로그인</a></li>
+           {% endif %}
 		    <li data-icon="false"><a href="#" data-ajax="false">Best</a></li>
 		    <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-corner="false" data-shadow="false">
                 <h5>세트</h5>
                 <ul data-role="listview" data-shadow="false" data-corner="false" data-inset="true">
-                    <li>전체</li>
-                    <li>라이프 스타일</li>
-                    <li>계절</li>
-                    <li>피부 상태에 따른</li>
-                    <li>프리미엄</li>
+                    <li data-icon="false"><a href="{% url "mobile_shop_set" %}" data-ajax="false">전체</a></li>
+                    <li data-icon="false">라이프 스타일</li>
+                    <li data-icon="false">계절</li>
+                    <li data-icon="false">피부 상태에 따른</li>
+                    <li data-icon="false">프리미엄</li>
                 </ul>
             </li>
            <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-corner="false" data-shadow="false">
                <h5>단품</h5>
                 <ul data-role="listview" data-shadow="false" data-corner="false" data-inset="true">
-                    <li>전체</li>
-                    <li>스킨</li>
-                    <li>로션</li>
-                    <li>BB크림</li>
-                    <li>선크림</li>
+                    <li data-icon="false"><a href="{% url "mobile_shop_product" %}" data-ajax="false">전체</a></li>
+                    <li data-icon="false">스킨</li>
+                    <li data-icon="false">로션</li>
+                    <li data-icon="false">BB크림</li>
+                    <li data-icon="false">선크림</li>
                 </ul>
            </li>
            <li data-icon="false"><a href="#" data-ajax="false">Motion9</a></li>

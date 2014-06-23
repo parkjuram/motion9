@@ -46,7 +46,7 @@
                </div>
            </div>
            <div class="item-image">
-               <a href="{% url 'mobile_product' product_id=product.id %}" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
+               <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
                <a href="#" class="interest-btn btn-for-interest" data-type="p" data-product="{{ product.id }}"> &nbsp;</a>
            </div>
     </div>
@@ -56,7 +56,7 @@
     <ul class="pagination">
       <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
        {% for pageNum in products.page_range %}
-          <li><a href="{% url 'shop_product' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
+          <li><a href="{% url 'mobile_shop_product' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
        {% endfor %}
       <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
     </ul>

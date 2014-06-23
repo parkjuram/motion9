@@ -31,9 +31,9 @@
 <div class="product-img">
     <img src="http://themotion9.com/media/product/image/2_1.jpg"/>
     <div class="product-title">
-        헤라 셀 에센스
+        {{ set.name }}
         <div class="product-price">
-            18,000원 <span class="item-original-price">22,000원</span>
+            {{ set.discount_price }}원 <span class="item-original-price">{{ set.original_price }}원</span>
         </div>
         <a href="#" class="interest-btn"> &nbsp;</a>
     </div>
@@ -54,33 +54,17 @@
         <div class="custom-set-btn-box">
             <a href="#"><img src="{% static "img/custom.png" %}"/></a>
         </div>
+        {% for product in set.products %}
         <div class="product-item">
             <div class="product-item-img">
-                <img src="{% static "img/c_n.jpg" %}"/>
+                <img src="{{ product.big_img_url }}"/>
             </div>
             <div class="product-item-contents">
-                test hahah
+                {{ product.name|truncatechars:18 }}
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="product-item">
-            <div class="product-item-img">
-                <img src="{% static "img/c_n.jpg" %}"/>
-            </div>
-            <div class="product-item-contents">
-                test hahah
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="product-item">
-            <div class="product-item-img">
-                <img src="{% static "img/c_n.jpg" %}"/>
-            </div>
-            <div class="product-item-contents">
-                test hahah
-            </div>
-            <div class="clearfix"></div>
-        </div>
+        {% endfor %}
     </div>
     <div class="tab-content" id="productInfo">
         상품 정보 ㅋㅋㅋ
