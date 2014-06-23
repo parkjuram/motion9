@@ -1,96 +1,119 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}"/>
+{% load static %}
+<script src="{% static "js/product_detail.js" %}"></script>
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}"/>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">제품 정보</h2>
 {% endblock %}
 {% block content %}
-<div class="ui-grid-solo">
-    <div class="ui-block-a">
-        <div class="product-detail boxed">
-            <div class="product-detail-img">
-                <img src="{{ product.big_img_url}}"/>
+<div class="category-box">
+    <div class="select-wrapper">
+        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">단일제품</option>
+            <option value="#">세트상품</option>
+        </select>
+    </div>
+    <div class="select-wrapper">
+        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">스킨</option>
+            <option value="#">로션</option>
+            <option value="#">에센스</option>
+            <option value="#">BB크림</option>
+            <option value="#">선크림</option>
+        </select>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="product-img">
+    <img src="http://themotion9.com/media/product/image/2_1.jpg"/>
+    <div class="product-title">
+        헤라 셀 에센스
+        <div class="product-price">
+            18,000원 <span class="item-original-price">22,000원</span>
+        </div>
+        <a href="#" class="interest-btn"> &nbsp;</a>
+    </div>
+</div>
+<div>
+    <ul class="tab-menu">
+        <li>
+            <a href="#productInfo" class="tab-btn product-info-btn">상품 정보</a>
+        </li>
+        <li>
+            <a href="#blogReview" class="tab-btn product-blog-btn selected-product-blog-btn">블로거 리뷰</a>
+        </li>
+        <li>
+            <a href="#productRule" class="tab-btn product-rule-btn">상품 정보 고시</a>
+        </li>
+    </ul>
+    <div class="tab-content tab-selected" id="blogReview">
+        <div class="product-item">
+            <div class="product-item-img">
+                <img src="{% static "img/c_n.jpg" %}"/>
             </div>
-            <div class="product-detail-title">
-                <h2>{{ product.name }} </h2>
-                <h5>{{ product.category_name }}</h5>
+            <div class="product-item-contents">
+                test hahah
             </div>
-            <div class="product-detail-contents">
-                {{ product.description }}
+            <div class="clearfix"></div>
+        </div>
+        <div class="product-item">
+            <div class="product-item-img">
+                <img src="{% static "img/c_n.jpg" %}"/>
             </div>
-            <div class="product-detail-link-box">
-                <ul class="product-detail-link">
-                    <li><a href="#">블로거</a></li>
-                    <li><a href="#">겟잇뷰티</a></li>
-                    <li><a href="#" class="btn-for-interest">관심</a></li>
-                </ul>
+            <div class="product-item-contents">
+                test hahah
             </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="product-item">
+            <div class="product-item-img">
+                <img src="{% static "img/c_n.jpg" %}"/>
+            </div>
+            <div class="product-item-contents">
+                test hahah
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="tab-content" id="productInfo">
+        상품 정보 ㅋㅋㅋ
+    </div>
+    <div class="tab-content" id="productRule">
+        상품 고시 ㅋㅋㅋ
+    </div>
+</div>
+
+<div data-role="popup" id="purchaseDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="width:300px;">
+    <div data-role="header" data-theme="a">
+    <h1 style="font-size: 18px;">수량 선택</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div id="purchaseDialogSelect">
+            <select data-inline="true" data-shadow="false">
+                <option value="#">1</option>
+                <option value="#">2</option>
+                <option value="#">3</option>
+                <option value="#">4</option>
+                <option value="#">5</option>
+                <option value="#">6</option>
+                <option value="#">7</option>
+                <option value="#">8</option>
+            </select>
+        </div>
+        <div style="text-align: center;">
+            <a href="#" class="gold-btn"  style="margin-right:2%;">구매</a><a href="#" class="gold-btn" data-rel="back">닫기</a>
         </div>
     </div>
 </div>
-<div class="ui-grid-solo">
-    <div class="ui-block-a">
-        <div class="before-after-box">
-            <h3>비포 애프터 동영상</h3>
-            <div class="before-after-video">
-                <iframe width="100%" height="285" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
+{% endblock %}
+
+{% block footer %}
+<div data-role="footer" data-position="fixed">
+    <div class="footer-bar">
+        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%;">구매</a><a href="#" class="gold-btn" >장바구니</a>
     </div>
 </div>
-<div class="ui-grid-solo">
-    <div class="ui-block-a">
-        <div class="blog-review-header">
-            <span style="font-weight: bold; font-size: 18px;">블로거 리뷰</span>&nbsp; <a href="/blogdetail" data-ajax="false" class="ui-btn ui-btn-b ui-btn-inline ui-mini">더보기</a>
-        </div>
-        <div class="blogger-reviews">
-            <div class="blogger-review boxed">
-                <div class="blogger-review-img">
-                    <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
-                </div>
-                <div class="blogger-review-contents">
-                    <a href="#" class="blogger-review-title">신기하게 잘맞는 BB</a>
-                    <div class="blogger-review-desc">
-                        강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
-                    </div>
-                    <div class="blogger-review-writer">
-                        kdesigner@naver.com
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="blogger-review boxed">
-                <div class="blogger-review-img">
-                    <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
-                </div>
-                <div class="blogger-review-contents">
-                    <a href="#" class="blogger-review-title">신기하게 잘맞는 BB</a>
-                    <div class="blogger-review-desc">
-                        강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
-                    </div>
-                    <div class="blogger-review-writer">
-                        kdesigner@naver.com
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="blogger-review boxed">
-                <div class="blogger-review-img">
-                    <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
-                </div>
-                <div class="blogger-review-contents">
-                    <a href="#" class="blogger-review-title">신기하게 잘맞는 BB</a>
-                    <div class="blogger-review-desc">
-                        강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
-                    </div>
-                    <div class="blogger-review-writer">
-                        kdesigner@naver.com
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
+
 {% endblock %}

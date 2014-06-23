@@ -1,26 +1,24 @@
 {% extends "mobile_base.html" %}
 {% block content %}
 
-    <div class="login-wrapper">
-        <form method="post" action="{{url_for('login', next = url_for_login_next )}}" data-ajax="false">
-            <h2>로그인</h2>
-            <label for="name">Email:</label>
-            <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
-            <div class="ui-grid-solo">
-                <div class="ui-block-a">
-                    <input type="submit" data-mini="true" value="로그인"/>
+    <div style="margin : 0 20px;">
+        <form method="post" action="#" data-ajax="false">
+
+            <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true" placeholder="이메일">
+            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true" placeholder="비밀번호">
+            <div>
+                <div style="margin : 20px 0px; text-align : center;">
+                    <a href="#" class="gold-btn" style="width : 44%; display:inline-block; margin-right : 4%;padding : 14px 2%;">로그인</a><a href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;" class="facebook-btn">페이스북 로그인</a>
                 </div>
             </div>
         </form>
 
-        <div class="ui-grid-solo">
-            <div class="ui-block-a"><a href="{{ url_for('register')}}" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">회원가입</a></div>
+
+        <div style="text-align:right; margin-bottom : 20px;">
+            <a href="#" data-ajax="false" style="width : 30%; display:inline-block;" class="basic-btn">회원가입</a>
         </div>
-        <div class="ui-grid-solo">
-            <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
-        </div>
+
+
     </div>
 
 {% endblock %}

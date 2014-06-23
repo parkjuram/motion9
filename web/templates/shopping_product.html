@@ -1,73 +1,98 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_product.css') }}"/>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/common_style.css'%}"/>
+<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>
 
-<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/shopping_product.js') }}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+<script src="{% static 'js/shopping_product.js'%}"></script>
 {% endblock %}
 
 {% block title %}
-    <h2 class="ui-title">쇼핑</h2>
+    <h2 class="ui-title">단일제품</h2>
 {% endblock %}
 
 {% block content %}
-<div data-role="controlgroup" data-type="horizontal">
-    <select id="categoryList">
-        <option value="#">카테고리 선택</option>
-        <option value="all">모두 보기</option>
-        {% for category in categories %}
-           <option value="{{ category.key }}">{{ category.name }}</option>
-        {% endfor %}
-    </select>
+<div class="main-header-img">
+    <img src="{% static "img/black.jpg" %}"/>
+</div>
+<div class="category-box">
+    <div class="select-wrapper">
+        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">단일제품</option>
+            <option value="#">세트상품</option>
+        </select>
+    </div>
+    <div class="select-wrapper">
+        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">스킨</option>
+            <option value="#">로션</option>
+            <option value="#">에센스</option>
+            <option value="#">BB크림</option>
+            <option value="#">선크림</option>
+        </select>
+    </div>
+    <div class="clearfix"></div>
 </div>
 <div id="productGrid">
-    {% for product in products.data %}
-    <div class="product-item" id="item-{{ product.key }}" data-attr="{{ product.key }}">
-        <div class="product-img">
-            <a href="/product/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
-        </div>
-        <div class="product-contents">
-            <div class="product-info">
-                [{{ product.brandname }}]<br/>
-                {% if (product.name|length) > 16 %}
-                    <a href="{{ url_for('productMobile',product_key = product.key) }}" data-ajax="false">{{product.name[:16] }}..</a>
-                {% else %}
-                    <a href="{{ url_for('productMobile', product_key=product.key) }}"  data-ajax="false">{{product.name  }}</a>
-                {% endif %}
-
-                <div class="product-price-box">
-                    Price : <b>￦{{ product.discount_price }} ({{product.capacity}})</b><br/>
-                    Category : <b>{{ product.category.name}}</b>
-                </div>
-            </div>
-        </div>
-        <div class="product-bottom-menu">
-            <ul class="menu-links clearfix">
-            {% if product.isInterested  %}
-                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9-disable">관심</a></li>
-            {%  else  %}
-                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest">관심</a></li>
-            {% endif %}
-                <li class=""><a href="#" class="btn-for-cart" data-product="{{ product.key }}">장바구니</a></li>
-            </ul>
-        </div>
+    <div class="product-item">
+           <div class="item-title">
+               미샤 더모션 나인 ㅋ
+               <div class="item-price">
+                   18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
+               </div>
+           </div>
+           <div class="item-image">
+               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
+               <a href="#" class="interest-btn"> &nbsp;</a>
+           </div>
     </div>
-
-    {% endfor %}
-
+    <div class="product-item">
+           <div class="item-title">
+               미샤 더모션 나인 ㅋ
+               <div class="item-price">
+                   18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
+               </div>
+           </div>
+           <div class="item-image">
+               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
+               <a href="#" class="interest-btn"> &nbsp;</a>
+           </div>
+    </div>
+    <div class="product-item">
+          <div class="item-title">
+               미샤 더모션 나인 ㅋ
+               <div class="item-price">
+                   18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
+               </div>
+           </div>
+           <div class="item-image">
+               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
+               <a href="#" class="interest-btn"> &nbsp;</a>
+           </div>
+    </div>
+    <div class="product-item">
+           <div class="item-title">
+               미샤 더모션 나인 ㅋ
+               <div class="item-price">
+                   18,000원 <span class="item-original-price">22,000원</span> <span class="discount-rate">17%</span>
+               </div>
+           </div>
+           <div class="item-image">
+               <a href="#"><img src="http://themotion9.com/media/product/image/2_1.jpg"/></a>
+               <a href="#" class="interest-btn"> &nbsp;</a>
+           </div>
+    </div>
 </div>
 <div class="paging-area">
     <ul class="pagination">
       <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
-      {% for pageNum in range(products.page_left_count, products.page_right_count+1 )%}
+      {% for pageNum in pageList%}
           {% if current_category != None %}
-            <li><a href="{{ url_for('mshoppingProduct', pageNum = pageNum, category_key = current_category) }}" data-ajax="false">{{ pageNum  }}</a></li>
+            <li><a href="#" data-ajax="false">{{ pageNum  }}</a></li>
           {% else %}
-             <li><a href="{{ url_for('mshoppingProduct', pageNum = pageNum) }}"  data-ajax="false">{{ pageNum  }}</a></li>
+             <li><a href="#"  data-ajax="false">{{ pageNum  }}</a></li>
           {% endif %}
       {% endfor %}
       <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
