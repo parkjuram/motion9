@@ -63,7 +63,6 @@ def shop_set_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
 
-    logger.info( 'def shop_set_view(request, category_id=None, page_num=None): start')
     sets = helper_get_set_list(category_id, helper_get_user(request))
 
     if page_num is not None:
@@ -85,8 +84,7 @@ def shop_set_view(request, category_id=None, page_num=1):
                       'current_page': 'shop_set'
                   })
 
-    logger.info( 'def shop_set_view(request, category_id=None, page_num=None): end')
-
+@csrf_exempt
 def set_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request))
 
@@ -107,7 +105,6 @@ def product_view(request, product_id=None):
                           'blog_reviews': blog_reivews
                       })
     else:
-        logger.error( 'product_id is wrong in product_view')
         return render(request, "404.html")
 
 @csrf_exempt
@@ -122,21 +119,15 @@ def product_modal_view(request, product_id=None):
                           'blog_reviews': blog_reivews
                       })
     else:
-        logger.error( 'product_id is wrong in product_view')
         return render(request, "404.html")
 
 @csrf_exempt
 def product_json_view(request, product_id=None):
-    logger.info( 'def product_json_view(request, product_id=None): start')
-
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
         return http_response_by_json(None, product)
     else:
-        logger.error( 'product_id is wrong in product_view')
         return render(request, "404.html")
-
-    logger.info( 'def product_json_view(request, product_id=None): end')
 
 @csrf_exempt
 def customize_set_view(request, set_id):
