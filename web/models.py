@@ -37,6 +37,8 @@ class Product(models.Model):
     precautions = models.TextField(blank=True)
     quality_guarantee_standard = models.CharField(max_length=100, blank=True)
 
+    is_active = models.BooleanField(default=True)
+
     def __unicode__(self):
         return '(%r)Product : name(%s)' \
                % (self.id, self.name)
@@ -59,6 +61,8 @@ class Set(models.Model):
     big_img_url = models.TextField(null=False, blank=True)
     small_img_url = models.TextField(null=False, blank=True)
     discount_difference = models.IntegerField(null=False, default=0)
+
+    is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return '(%r)Set : name(%s)' \
