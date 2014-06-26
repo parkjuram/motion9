@@ -333,7 +333,8 @@ def helper_delete_custom_set_purchase(user, address, custom_set_id):
 def helper_make_custom_set(user, set_id, original_product_id, new_product_id):
     custom_set, created = CustomSet.objects.get_or_create(user=user, set_id=set_id)
     if CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_product_id).exists():
-        custom_set_detail = CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_product_id)\
-            .update(new_product_id=new_product_id)
+        custom_set_detail = CustomSetDetail.objects.get(custom_set=custom_set, original_product_id=original_product_id)
+        custom_set_detail.new_product_id=new_product_id
+        custom_set_detail.save()
     else:
-        CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_product_id,new_product_id=new_product_id)
+        CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_product_id, new_product_id=new_product_id)

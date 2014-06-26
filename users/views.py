@@ -208,6 +208,36 @@ def mypage_cart_json_view(request):
         'custom_sets': custom_sets
     })
 
+def mypage_purchase_view(request, page_num=1):
+    page_num = int(page_num)
+    user = helper_get_user(request)
+    if user is not None:
+        purchases = user.purchase_set.all()
+        purchases_ = []
+        for purchase in purchases:
+            if purchase.type=='p':
+                product = purchase.product
+                product_ = helper_get_product_detail(product, user)
+                purchases_.append(product_)
+            elif purchase.type=='s':
+                set = purchase.set
+                set_ = helper_get_product_detail(set, user)
+                purchases_.append(set_)
+            elif purchase.type=='c':
+                custom_set = purchase.custom_set
+                custom_set_ = helper_get_product_detail(custom_set, user)
+                purchases_.append(custom_set_)
+
+        if page_num is not None:
+            purchases_ = helper_make_paging_data(len(purchases_), purchases_[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        else:
+            purchases_ = {'data':purchases_}
+
+        return render(request, 'my_page_purchase.html',
+            {
+                'purchases': purchases_
+            })
+
 @login_required
 def mypage_purchase_product_view(request, page_num=1):
     page_num = int(page_num)
