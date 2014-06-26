@@ -14,7 +14,7 @@ a:hover{
 .mypage-wrapper{
     height : 180px;
     text-shadow : none;
-    background-color : #ECECEC;
+    background: url('../img/profile_bg.png') top center repeat-y #ECECEC;
     font-size : 14px;
     width : 100%;
     line-height : 18px;

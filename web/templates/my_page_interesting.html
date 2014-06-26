@@ -19,7 +19,9 @@
                </div>
                <div class="item-image">
                    <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
-                   <a href="#" class="interest-btn btn-for-interest" data-type="p" data-product="{{ product.id }}"> &nbsp;</a>
+               </div>
+               <div class="interest-btn">
+                   <a href="#" class="" data-type="p" data-product="{{ product.id }}">삭제</a>
                </div>
             </div>
         {% endfor %}

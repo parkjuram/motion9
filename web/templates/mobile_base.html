@@ -22,8 +22,59 @@
 <body>
 <div data-role="page">
     <div data-role="panel" id="cartPanel" data-position="right" data-display="overlay" data-position-fixed="true">
+        <div class="cart-header">
+            카트
+        </div>
         <div>
-            cart area
+            <ul class="custom-menu-list">
+                <li>
+                    <div class="cart-item-img">
+                        <img src=""/>
+                    </div>
+                    <div class="cart-item-info">
+                       박주람 세트<br/>
+                       <div class="cart-select-box-wrapper">
+                           <label>
+                            수량 :
+                           </label>
+                           <select data-shadow="false" data-corner="false">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                            </select>
+                            <div class="clearfix"></div>
+                        </div>
+                        가격 : 25,000원
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+                <li>
+                    <div class="cart-item-img">
+                        <img src=""/>
+                    </div>
+                    <div class="cart-item-info">
+                        박주람 세트<br/>
+                        수량 2 <br/>
+                        가격 : 25,000원
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+                <li>
+                    <div class="cart-item-img">
+                        <img src=""/>
+                    </div>
+                    <div class="cart-item-info">
+                        박주람 세트<br/>
+                        수량 2 <br/>
+                        가격 : 25,000원
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
         </div>
     </div>
 	<div data-role="panel" id="menuPanel" data-position="left" data-display="overlay" data-position-fixed="true">
@@ -31,41 +82,43 @@
 	   <div class="menu-panel-search-box">
             <input type="search" name="password" id="search" value="" placeholder="검색">
 	   </div>
-	   <ul data-role="listview" class="ui-listview-outer" id="menuListView">
-		    <li data-icon="false"><a href="/">홈</a></li>
-            {% if user.is_authenticated %}
-		       <li data-icon="false"><a href="{% url "mobile_mypage" %}" data-ajax="false">프로필</a></li>
-           {% else %}
-               <li data-icon="false"><a href="{% url 'mobile_login_page' %}" data-ajax="false">로그인</a></li>
-           {% endif %}
-		    <li data-icon="false"><a href="#" data-ajax="false">Best</a></li>
-		    <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-corner="false" data-shadow="false">
-                <h5>세트</h5>
-                <ul data-role="listview" data-shadow="false" data-corner="false" data-inset="true">
-                    <li data-icon="false"><a href="{% url "mobile_shop_set" %}" data-ajax="false">전체</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">라이프 스타일</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">계절</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">피부 상태에 따른</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">프리미엄</a></li>
-                </ul>
-            </li>
-           <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-corner="false" data-shadow="false">
-               <h5>단품</h5>
-                <ul data-role="listview" data-shadow="false" data-corner="false" data-inset="true">
-                    <li data-icon="false"><a href="{% url "mobile_shop_product" %}" data-ajax="false">전체</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">스킨</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">로션</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">BB크림</a></li>
-                    <li data-icon="false"><a href="#" data-ajax="false">선크림</a></li>
-                </ul>
-           </li>
-           <li data-icon="false"><a href="#" data-ajax="false">Motion9</a></li>
-		    <li data-icon="false"><a href="#">About</a></li>
-		    <li data-icon="false"><a href="#">Help</a></li>
-           {% if g.user %}
-		    <li data-icon="false"><a href="{% url 'logout'%}">로그아웃</a></li>
-           {% endif %}
-		</ul>
+
+       <div>
+            <ul class="custom-menu-list">
+                <li><a href="/mobile/" data-ajax="false">홈</a></li>
+                {% if user.is_authenticated %}
+                   <li><a href="{% url "mobile_mypage" %}" data-ajax="false">프로필</a></li>
+                {% else %}
+                   <li><a href="{% url 'mobile_login_page' %}" data-ajax="false">로그인</a></li>
+                {% endif %}
+                <li class="list-collapsible">
+                    <a href="#" class="collapse-btn">세트</a>
+                    <ul class="list-collapsed">
+                        <li ><a href="{% url "mobile_shop_set" %}" data-ajax="false">전체</a></li>
+                        <li ><a href="#" data-ajax="false">라이프 스타일</a></li>
+                        <li ><a href="#" data-ajax="false">계절</a></li>
+                        <li ><a href="#" data-ajax="false">피부 상태에 따른</a></li>
+                        <li ><a href="#" data-ajax="false">프리미엄</a></li>
+                    </ul>
+                </li>
+                <li class="list-collapsible">
+                    <a href="#" class="collapse-btn">단품</a>
+                    <ul class="list-collapsed">
+                        <li data-icon="false"><a href="{% url "mobile_shop_product" %}" data-ajax="false">전체</a></li>
+                        <li data-icon="false"><a href="#" data-ajax="false">스킨</a></li>
+                        <li data-icon="false"><a href="#" data-ajax="false">로션</a></li>
+                        <li data-icon="false"><a href="#" data-ajax="false">BB크림</a></li>
+                        <li data-icon="false"><a href="#" data-ajax="false">선크림</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">세번째</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout'%}">로그아웃</a></li>
+                {% endif %}
+            </ul>
+        </div>
 	</div><!-- /panel -->
 
 	<div data-role="header" data-position="fixed">
