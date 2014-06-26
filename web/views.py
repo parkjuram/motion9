@@ -5,7 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews
-from web.models import Product, Category, BlogReview, Set, CustomSet, CustomSetDetail
+from web.models import Product, Category, BlogReview, Set
+from users.models import CustomSet, CustomSetDetail
 
 import math
 import json
