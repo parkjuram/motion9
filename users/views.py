@@ -14,7 +14,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
-    http_response_by_json
+    http_response_by_json, helper_make_custom_set
 
 from .models import Interest
 
@@ -160,13 +160,17 @@ def mypage_cart_view(request):
     products = []
     for product_cart in product_carts:
         product = product_cart.product
-        products.append(helper_get_product_detail(product,user))
+        products.append(helper_get_product_detail(product,user).update({
+            'item_count': product_cart.item_count
+        }))
 
     set_carts = user.cart_set.filter(type='s').all()
     sets = []
     for set_cart in set_carts:
         set = set_cart.set
-        sets.append(helper_get_set(set,user))
+        sets.append(helper_get_set(set,user).update({
+            'item_count': set_cart.item_count
+        }))
 
     custom_set_carts = user.cart_set.filter(type='c').all()
     custom_sets = []
@@ -188,13 +192,17 @@ def mypage_cart_json_view(request):
     products = []
     for product_cart in product_carts:
         product = product_cart.product
-        products.append(helper_get_product_detail(product,user))
+        product_detail = helper_get_product_detail(product,user)
+        product_detail['item_count'] = product_cart.item_count
+        products.append(product_detail)
 
     set_carts = user.cart_set.filter(type='s').all()
     sets = []
     for set_cart in set_carts:
         set = set_cart.set
-        sets.append(helper_get_set(set,user))
+        set_detail = helper_get_set(set,user)
+        set_detail['item_count'] = set_cart.item_count
+        sets.append(set_detail)
 
     custom_set_carts = user.cart_set.filter(type='c').all()
     custom_sets = []
@@ -207,6 +215,36 @@ def mypage_cart_json_view(request):
         'sets': sets,
         'custom_sets': custom_sets
     })
+
+def mypage_purchase_view(request, page_num=1):
+    page_num = int(page_num)
+    user = helper_get_user(request)
+    if user is not None:
+        purchases = user.purchase_set.all()
+        purchases_ = []
+        for purchase in purchases:
+            if purchase.type=='p':
+                product = purchase.product
+                product_ = helper_get_product_detail(product, user)
+                purchases_.append(product_)
+            elif purchase.type=='s':
+                set = purchase.set
+                set_ = helper_get_product_detail(set, user)
+                purchases_.append(set_)
+            elif purchase.type=='c':
+                custom_set = purchase.custom_set
+                custom_set_ = helper_get_product_detail(custom_set, user)
+                purchases_.append(custom_set_)
+
+        if page_num is not None:
+            purchases_ = helper_make_paging_data(len(purchases_), purchases_[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        else:
+            purchases_ = {'data':purchases_}
+
+        return render(request, 'my_page_purchase.html',
+            {
+                'purchases': purchases_
+            })
 
 @login_required
 def mypage_purchase_product_view(request, page_num=1):
@@ -386,6 +424,20 @@ def delete_purchase(request):
         helper_delete_custom_set_purchase(user, address, product_or_set_id)
 
     return http_response_by_json()
+
+# make custom
+
+@csrf_exempt
+def make_custom_set(request):
+    set_id = request.POST.get('set_id', -1)
+    original_product_id = request.POST.get('original_product_id', -1)
+    new_product_id = request.POST.get('new_product_id', -1)
+
+    if set_id==-1 or original_product_id==-1 or new_product_id==-1:
+        return http_response_by_json(CODE_PARAMS_WRONG)
+
+    helper_make_custom_set( helper_get_user(request), set_id, original_product_id, new_product_id)
+    return http_response_by_json(None)
 
 # mobile part
 

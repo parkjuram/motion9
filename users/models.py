@@ -24,7 +24,7 @@ class Interest(models.Model):
     user = models.ForeignKey('auth.User')
     product = models.ForeignKey('web.Product',null=True)
     set = models.ForeignKey('web.Set',null=True)
-    custom_set = models.ForeignKey('web.CustomSet',null=True)
+    custom_set = models.ForeignKey('users.CustomSet',null=True)
     type = models.CharField(max_length=1, null=False, default='p')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
@@ -38,7 +38,7 @@ class Cart(models.Model):
     user = models.ForeignKey('auth.User')
     product = models.ForeignKey('web.Product',null=True)
     set = models.ForeignKey('web.Set',null=True)
-    custom_set = models.ForeignKey('web.CustomSet',null=True)
+    custom_set = models.ForeignKey('users.CustomSet',null=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
@@ -54,7 +54,7 @@ class Purchase(models.Model):
     address = models.TextField(null=False, blank=True)
     product = models.ForeignKey('web.Product',null=True, blank=True)
     set = models.ForeignKey('web.Set',null=True, blank=True)
-    custom_set = models.ForeignKey('web.CustomSet',null=True, blank=True)
+    custom_set = models.ForeignKey('users.CustomSet',null=True, blank=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
     status = models.CharField(max_length=1, null=False, default='r')
@@ -66,3 +66,22 @@ class Purchase(models.Model):
             ("user", "product"),
             ("user", "set"),
             ("user", "custom_set"))
+
+class CustomSet(models.Model):
+    user = models.ForeignKey('auth.User')
+    set = models.ForeignKey('web.Set')
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    class Meta:
+        unique_together = (
+            ("user", "set"))
+
+class CustomSetDetail(models.Model):
+    custom_set = models.ForeignKey('users.CustomSet')
+    original_product = models.ForeignKey('web.Product', related_name='get_custom_set_detail_from_original_product')
+    new_product = models.ForeignKey('web.Product', related_name='get_custom_set_detail_from_new_product')
+
+    class Meta:
+        unique_together = (
+            ("custom_set", "original_product")
+        )

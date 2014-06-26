@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.http.response import HttpResponse
 from web.models import Product, Set, ChangeableProduct, BlogReview
-from users.models import Interest, Cart, Purchase
+from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail
 from django.core.exceptions import ObjectDoesNotExist
 
 from motion9.const import ITEM_COUNT_PER_PAGE, PAGER_INDICATOR_LENGTH, ERROR_CODE_AND_MESSAGE_DICT
@@ -327,3 +327,14 @@ def helper_delete_custom_set_purchase(user, address, custom_set_id):
     except Exception as e:
         logger.error(e)
 
+
+# custom set
+
+def helper_make_custom_set(user, set_id, original_product_id, new_product_id):
+    custom_set, created = CustomSet.objects.get_or_create(user=user, set_id=set_id)
+    if CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_product_id).exists():
+        custom_set_detail = CustomSetDetail.objects.get(custom_set=custom_set, original_product_id=original_product_id)
+        custom_set_detail.new_product_id=new_product_id
+        custom_set_detail.save()
+    else:
+        CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_product_id, new_product_id=new_product_id)

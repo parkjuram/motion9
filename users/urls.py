@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     url(r'^mypage/set/$', 'users.views.mypage_set_view', name='mypage_set'),
     url(r'^mypage/set/(?P<page_num>(\d+))/$', 'users.views.mypage_set_view', name='mypage_set'),
 
+    url(r'^mypage/purchase/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
+    url(r'^mypage/purchase/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
+
     url(r'^mypage/purchase/product/$', 'users.views.mypage_purchase_product_view', name='mypage_purchase_product'),
     url(r'^mypage/purchase/product/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_product_view', name='mypage_purchase_product'),
 
@@ -34,6 +37,8 @@ urlpatterns = patterns('',
 
     url(r'^purchase/add/$', 'users.views.add_purchase', name='add_purchase'),
     url(r'^purchase/del/$', 'users.views.delete_purchase', name='del_purchase'),
+
+    url(r'^custom/$', 'users.views.make_custom_set', name='make_custom_set'),
 
 #     mobile part
 
