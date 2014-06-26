@@ -70,6 +70,13 @@ class Set(models.Model):
 class Tag(models.Model):
     name = models.TextField(unique=True)
 
+    def __unicode__(self):
+        return '(%r)Tags : name(%s)' \
+               % (self.id, self.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class SetTag(models.Model):
     set = models.ForeignKey('Set')
     tag = models.ForeignKey('Tag')
