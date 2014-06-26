@@ -1,39 +1,42 @@
 {% extends "my_page.html" %}
-{% block productGrid %}
-    <div id="interestGrid">
-        {% for product in interests.data%}
-        <div class="service-list team">
-            <div class="service-item boxed bg-image-star2">
-                <div class="service-content">
-                    <div class="service-image ">
-                        <a href="/productdetail/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url }}" alt="" /></a>
-                    </div>
-                    <div class="service-title profile-interesting-title">
-                        {{ product.name }}
-                        <div class="product-price-box">
-                            Price : <b>{{ product.discount_price }}원</b><br/>
-                            Category : <b>{{ product.category_name}}</b>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-meta-bot">
-                    <ul class="service-links clearfix">
-                         <li class="service-social"><a href="#" class="">구매</a></li>
-                        <li class="service-social"><a href="/cancelproductinterest/{{ product.key }}" >삭제</a></li>
-                    </ul>
-                </div>
+{% block header_append %}
+{% load static %}
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/my_page_interesting.css'%}"/>
+<script src="{% static 'js/my_page_interesting.js'%}"></script>
+{% endblock %}
+{% block detail %}
+    {% if interests.data|length > 0 %}
+        <div id="productGrid">
+        {% for product in interests.data %}
+            <div class="product-item" >
+               <div class="item-title" >
+                   <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name|truncatechars:13}}</a>
+                   <div class="item-price">
+                       {{product.discount_price}}원 <span class="item-original-price">{{product.original_price}}원</span> <span class="discount-rate">17%</span>
+                   </div>
+               </div>
+               <div class="item-image">
+                   <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
+                   <a href="#" class="interest-btn btn-for-interest" data-type="p" data-product="{{ product.id }}"> &nbsp;</a>
+               </div>
             </div>
-        </div>
         {% endfor %}
-  </div>
+        </div>
+        <div class="paging-area">
+            <ul class="pagination">
+              <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
+               {% for pageNum in interests.page_range %}
+                  <li><a href="{% url 'mobile_mypage' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
+               {% endfor %}
+              <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
+            </ul>
+        </div>
+    {% else %}
+        <div>
+            아직 데이터가 없습니다.
+        </div>
+    {% endif %}
 {% endblock %}
 
-{% block productPaging %}
-    <ul class="pagination pagination-lg">
-      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
-      {% for pageNum in range(interests.page_left_count, interests.page_right_count+1 )%}
-      <li><a href="{{ url_for('myPageMobile', pageNum = pageNum) }}" data-ajax="false">{{ pageNum  }}</a></li>
-      {% endfor %}
-      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
-    </ul>
-{% endblock %}

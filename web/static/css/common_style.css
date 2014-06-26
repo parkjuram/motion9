@@ -31,6 +31,11 @@ a:visited{
     margin-top : 4px !important;
 }
 
+.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn{
+    border : 0;
+    font-size: 12px !important;
+}
+
 #loginForm{
     background: url("../img/menu_bg6.png") top left !important;
     color : white;

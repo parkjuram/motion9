@@ -1,15 +1,69 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/my_page.css'%}"/>
-
-<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
-<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+<script src="{% static "swiper/idangerous.swiper.js" %}"></script>
 <script src="{% static 'js/my_page.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/my_page.css'%}"/>
+<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
+{% block header_append %}
 {% endblock %}
+
+{% endblock %}
+
 {% block title %}
     <h2 class="ui-title">My Page</h2>
 {% endblock %}
 {% block content %}
+<div class="mypage-wrapper">
+    <div class="mypage-user-name">
+        빈라덴
+    </div>
+    <div class="mypage-user-email">
+        test@test.com
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!--First Slide-->
+          <div class="swiper-slide">
+             <div class="mypage-user-info">
+                성별 : 남<br/>
+                나이 : 25세 <br/>
+                피부타입 : 건성 <br/>
+                피부색 : 밝은피부<br/>
+                <a href="#" id="mypage-next-btn"><img src="{% static "img/profile_right.png" %}"/></a>
+             </div>
+          </div>
 
+          <!--Second Slide-->
+          <div class="swiper-slide">
+             <div class="mypage-user-info">
+                적립 : 2500원<br/>
+                주소 : 서울시 강남구 서초동<br/> 강남역 2번출구<br/>
+                <a href="#" id="mypage-prev-btn"><img src="{% static "img/profile_left.png" %}"/></a>
+             </div>
+          </div>
+          <!--Etc..-->
+        </div>
+    </div>
+
+
+    <div class="my-page-edit-box">
+        <a href="#" class="mypage-edit-btn">EDIT</a>
+    </div>
+</div>
+<div>
+    <ul class="tab-menu">
+        <li>
+            <a href="{% url "mobile_mypage_set" %}" data-ajax="false" class="tab-btn tab-selected">관심 세트</a>
+        </li>
+        <li>
+            <a href="{% url "mobile_mypage" %}" data-ajax="false" class="tab-btn ">관심 제품</a>
+        </li>
+        <li>
+            <a href="#" class="tab-btn ">구매 내역</a>
+        </li>
+    </ul>
+</div>
+{% block detail %}
+{% endblock %}
 {% endblock %}
