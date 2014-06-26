@@ -95,24 +95,6 @@ class ChangeableProductInfo(models.Model):
         unique_together = (
             ("changeable_product", "product"))
 
-class CustomSet(models.Model):
-    user = models.ForeignKey('users.UserProfile')
-    set = models.ForeignKey('Set')
-    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
-
-    class Meta:
-        unique_together = (
-            ("user", "set"))
-
-class CustomSetDetail(models.Model):
-    custom_set = models.ForeignKey('CustomSet')
-    original_product = models.ForeignKey('Product', related_name='get_custom_set_detail_from_original_product')
-    new_product = models.ForeignKey('Product', related_name='get_custom_set_detail_from_new_product')
-
-    class Meta:
-        unique_together = (
-            ("custom_set", "original_product")
-        )
 
 class BlogReview(models.Model):
     product = models.ForeignKey('Product')

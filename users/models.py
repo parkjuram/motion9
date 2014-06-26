@@ -66,3 +66,22 @@ class Purchase(models.Model):
             ("user", "product"),
             ("user", "set"),
             ("user", "custom_set"))
+
+class CustomSet(models.Model):
+    user = models.ForeignKey('auth.User')
+    set = models.ForeignKey('web.Set')
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    class Meta:
+        unique_together = (
+            ("user", "set"))
+
+class CustomSetDetail(models.Model):
+    custom_set = models.ForeignKey('user.CustomSet')
+    original_product = models.ForeignKey('web.Product', related_name='get_custom_set_detail_from_original_product')
+    new_product = models.ForeignKey('web.Product', related_name='get_custom_set_detail_from_new_product')
+
+    class Meta:
+        unique_together = (
+            ("custom_set", "original_product")
+        )
