@@ -160,13 +160,17 @@ def mypage_cart_view(request):
     products = []
     for product_cart in product_carts:
         product = product_cart.product
-        products.append(helper_get_product_detail(product,user))
+        products.append(helper_get_product_detail(product,user).update({
+            'item_count': product_cart.item_count
+        }))
 
     set_carts = user.cart_set.filter(type='s').all()
     sets = []
     for set_cart in set_carts:
         set = set_cart.set
-        sets.append(helper_get_set(set,user))
+        sets.append(helper_get_set(set,user).update({
+            'item_count': set_cart.item_count
+        }))
 
     custom_set_carts = user.cart_set.filter(type='c').all()
     custom_sets = []
@@ -188,13 +192,17 @@ def mypage_cart_json_view(request):
     products = []
     for product_cart in product_carts:
         product = product_cart.product
-        products.append(helper_get_product_detail(product,user))
+        product_detail = helper_get_product_detail(product,user)
+        product_detail['item_count'] = product_cart.item_count
+        products.append(product_detail)
 
     set_carts = user.cart_set.filter(type='s').all()
     sets = []
     for set_cart in set_carts:
         set = set_cart.set
-        sets.append(helper_get_set(set,user))
+        set_detail = helper_get_set(set,user)
+        set_detail['item_count'] = set_cart.item_count
+        sets.append(set_detail)
 
     custom_set_carts = user.cart_set.filter(type='c').all()
     custom_sets = []
