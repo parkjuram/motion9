@@ -181,6 +181,33 @@ def mypage_cart_view(request):
             'custom_sets': custom_sets
         })
 
+def mypage_cart_json_view(request):
+    user = helper_get_user(request)
+
+    product_carts= user.cart_set.filter(type='p').all()
+    products = []
+    for product_cart in product_carts:
+        product = product_cart.product
+        products.append(helper_get_product_detail(product,user))
+
+    set_carts = user.cart_set.filter(type='s').all()
+    sets = []
+    for set_cart in set_carts:
+        set = set_cart.set
+        sets.append(helper_get_set(set,user))
+
+    custom_set_carts = user.cart_set.filter(type='c').all()
+    custom_sets = []
+    for custom_set_cart in custom_set_carts:
+        custom_set = custom_set_cart.custom_set
+        custom_sets.append(custom_set)
+
+    return http_response_by_json(None, {
+        'products': products,
+        'sets': sets,
+        'custom_sets': custom_sets
+    })
+
 @login_required
 def mypage_purchase_product_view(request, page_num=1):
     page_num = int(page_num)
