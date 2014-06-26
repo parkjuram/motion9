@@ -1,76 +1,58 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/change_product_in_set.css') }}"/>
-<script src="{{ url_for('static', filename='js/change_product_in_set.js') }}"></script>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/change_product_in_set.css'%}"/>
+<script src="{% static 'js/change_product_in_set.js' %}"></script>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">세트 커스터 마이징</h2>
 {% endblock %}
 {% block content %}
-<div class="ui-grid-solo">
-    <div class="ui-block-a">
-        <div id="changeProductArea">
-            <div>카테고리 : BB 크림</div>
-            <div style="text-align: right;">
-                <select data-mini="true" data-inline="true" data-theme="b" class="sort-selection">
-                    <option>정렬 방식</option>
-                    <option>높은 가격 순으로</option>
-                    <option>낮은 가격 순으로</option>
-                    <option>제품명 순으로</option>
-                </select>
+<div>
+    <ul>
+    {% for product in set.products %}
+        {% if product.is_changeable == True %}
+        <li class="list-collapsed">
+
+            <div>
+                <div>
+                    <img src="{{ product.big_img_url }}"/>
+                </div>
+                <div>
+                    {{ product.name }}
+                </div>
+                <div>
+                    <a href="#" class="list-collapsed-btn">변경가능 제품</a>
+                </div>
+                <div class="clearfix"></div>
             </div>
             <div>
-                <div class="change-product boxed">
-                    <div class="change-product-img">
-                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+            <ul class="list-collapsed-child">
+            {% for item in product.changeable_products %}
+
+                <li class="available-item">
+                    <div class="">
+
+                   </div>
+                    <div class="available-item-img">
+                        <img src="{{item.big_img_url }}" alt="" />
                     </div>
-                    <div class="change-product-contents">
-                        <span class="change-product-title">신기하게 잘맞는 BB</span>
-                        <div class="change-product-price">
-                            2만 9000원
-                        </div>
-                        <div class="change-product-desc">
-                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!<br/>
-                            졸라좋아용 ㅋㅋ
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="change-product boxed">
-                    <div class="change-product-img">
-                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
-                    </div>
-                    <div class="change-product-contents">
-                        <span class="change-product-title">신기하게 잘맞는 BB</span>
-                        <div class="change-product-price">
-                            2만 9000원
-                        </div>
-                        <div class="change-product-desc">
-                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!<br/>
-                            졸라좋아용 ㅋㅋ
+                    <div class="available-item-info">
+                        <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}">{{item.name  }}</a></div>
+                        <div>
+
                         </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="change-product boxed">
-                    <div class="change-product-img">
-                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
-                    </div>
-                    <div class="change-product-contents">
-                        <span class="change-product-title">신기하게 잘맞는 BB</span>
-                        <div class="change-product-price">
-                            2만 9000원
-                        </div>
-                        <div class="change-product-desc">
-                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!<br/>
-                            졸라좋아용 ㅋㅋ
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                </li>
+            {% endfor %}
+            </ul>
             </div>
-        </div>
-    </div>
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
 </div>
 {% endblock %}
 

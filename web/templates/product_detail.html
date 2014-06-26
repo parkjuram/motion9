@@ -2,7 +2,9 @@
 {% block header %}
 {% load static %}
 <script src="{% static "js/product_detail.js" %}"></script>
+<script src="{% static "swiper/idangerous.swiper.js" %}"></script>
 <link rel="stylesheet" href="{% static 'css/product_detail.css' %}"/>
+<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">제품 정보</h2>
@@ -29,7 +31,27 @@
     <div class="clearfix"></div>
 </div>
 <div class="product-img">
-    <img src="{{ product.big_img_url }}"/>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!--First Slide-->
+          <div class="swiper-slide">
+            <img src="http://themotion9.com/media/product/image/2_1.jpg"/>
+          </div>
+
+          <!--Second Slide-->
+          <div class="swiper-slide">
+            test
+          </div>
+
+          <!--Third Slide-->
+          <div class="swiper-slide">
+            <img src="{{ product.big_img_url }}"/>
+          </div>
+          <!--Etc..-->
+        </div>
+        <div class="pagination">
+        </div>
+    </div>
     <div class="product-title">
         {{ product.name }}
         <div class="product-price">
@@ -53,6 +75,7 @@
     <div class="tab-content tab-selected" id="blogReview">
         {% for blog in blog_reviews %}
         <div class="product-item">
+
             <div class="product-item-img">
                 <img src="{% static "{{ blog.big_img_url }}" %}"/>
             </div>

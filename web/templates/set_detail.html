@@ -2,7 +2,9 @@
 {% block header %}
 {% load static %}
 <script src="{% static "js/set_detail.js" %}"></script>
+<script src="{% static "swiper/idangerous.swiper.js" %}"></script>
 <link rel="stylesheet" href="{% static 'css/set_detail.css' %}"/>
+<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">세트 정보</h2>
@@ -29,7 +31,27 @@
     <div class="clearfix"></div>
 </div>
 <div class="product-img">
-    <img src="http://themotion9.com/media/product/image/2_1.jpg"/>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!--First Slide-->
+          <div class="swiper-slide">
+            <img src="http://themotion9.com/media/product/image/2_1.jpg"/>
+          </div>
+
+          <!--Second Slide-->
+          <div class="swiper-slide">
+            test
+          </div>
+
+          <!--Third Slide-->
+          <div class="swiper-slide">
+            <img src="{{ set.big_img_url }}"/>
+          </div>
+          <!--Etc..-->
+        </div>
+        <div class="pagination">
+        </div>
+    </div>
     <div class="product-title">
         {{ set.name }}
         <div class="product-price">

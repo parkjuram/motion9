@@ -9,4 +9,15 @@ $(function(){
         $(target).addClass('tab-selected');
    });
 
+
+  var mySwiper = $('.swiper-container').swiper({
+    //Your options here:
+    mode:'horizontal',
+    loop: true,
+    calculateHeight : true,
+    pagination: '.pagination',
+    paginationClickable: true
+    //etc..
+  });
+
 });
