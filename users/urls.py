@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^mypage/purchase/custom_set/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_custom_set_view', name='mypage_purchase_custom_set'),
 
     url(r'^mypage/cart/$', 'users.views.mypage_cart_view', name='mypage_cart'),
+    url(r'^mypage/cart/json/$', 'users.views.mypage_cart_json_view', name='mypage_cart_json'),
 
     url(r'^interest/add/$', 'users.views.add_interest', name='add_interest'),
     url(r'^interest/del/$', 'users.views.delete_interest', name='del_interest'),
