@@ -14,7 +14,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
-    http_response_by_json
+    http_response_by_json, helper_make_custom_set
 
 from .models import Interest
 
@@ -386,6 +386,20 @@ def delete_purchase(request):
         helper_delete_custom_set_purchase(user, address, product_or_set_id)
 
     return http_response_by_json()
+
+# make custom
+
+@csrf_exempt
+def make_custom_set(request):
+    set_id = request.POST.get('set_id', -1)
+    original_product_id = request.POST.get('original_product_id', -1)
+    new_product_id = request.POST.get('new_product_id', -1)
+
+    if set_id==-1 or original_product_id==-1 or new_product_id==-1:
+        return http_response_by_json(CODE_PARAMS_WRONG)
+
+    helper_make_custom_set( helper_get_user(request), set_id, original_product_id, new_product_id)
+    return http_response_by_json(None)
 
 # mobile part
 

@@ -35,6 +35,8 @@ urlpatterns = patterns('',
     url(r'^purchase/add/$', 'users.views.add_purchase', name='add_purchase'),
     url(r'^purchase/del/$', 'users.views.delete_purchase', name='del_purchase'),
 
+    url(r'^custom/$', 'users.views.make_custom_set', name='make_custom_set'),
+
 #     mobile part
 
     url(r'^mobile/login_page/$', 'users.views.mobile_login_view', name='mobile_login_page'),

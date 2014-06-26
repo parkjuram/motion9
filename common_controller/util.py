@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.http.response import HttpResponse
-from web.models import Product, Set, ChangeableProduct, BlogReview
+from web.models import Product, Set, ChangeableProduct, BlogReview, CustomSet, CustomSetDetail
 from users.models import Interest, Cart, Purchase
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -327,3 +327,11 @@ def helper_delete_custom_set_purchase(user, address, custom_set_id):
     except Exception as e:
         logger.error(e)
 
+
+# custom set
+
+def helper_make_custom_set(user, set_id, original_product_id, new_product_id):
+    custom_set, created = CustomSet.objects.get_or_create(user=user, set_id=set_id)
+    custom_set_detail, created = CustomSetDetail.objects.get_or_create(custom_set=custom_set, original_product_id=original_product_id)
+    custom_set_detail.new_product_id = new_product_id
+    custom_set_detail.save()
