@@ -181,6 +181,7 @@ def mypage_cart_view(request):
             'custom_sets': custom_sets
         })
 
+@csrf_exempt
 def mypage_cart_json_view(request):
     user = helper_get_user(request)
 
