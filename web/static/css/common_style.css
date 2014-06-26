@@ -13,6 +13,25 @@ a:visited{
     color : inherit !important;
 }
 
+
+.ui-select {
+    margin-top : 0;
+}
+
+.ui-btn, label.ui-btn{
+    border :0;
+    border-style : none;
+    background-color : transparent !important;
+}
+
+.ui-icon-carat-d:after{
+    background-image : url('../img/down_arrow_category.png');
+    background-size : 10px 6px;
+    background-color : transparent !important;
+    margin-left : 22px;
+    right : 0.002em !important;
+}
+
 .ui-focus{
     box-shadow : none !important;
     -webkit-box-shadow : none !important;
@@ -31,10 +50,6 @@ a:visited{
     margin-top : 4px !important;
 }
 
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn{
-    border : 0;
-    font-size: 12px !important;
-}
 
 #loginForm{
     background: url("../img/menu_bg6.png") top left !important;
@@ -63,12 +78,66 @@ a:visited{
 
 #menuListView .ui-btn{
     font-size : 14px;
+}
 
+
+#menuPanel .ui-panel-inner, #cartPanel .ui-panel-inner{
+    padding : 0;
+}
+
+ul.custom-menu-list{
+    margin : 0;
+    padding : 0;
+}
+
+ul.custom-menu-list li:nth-child(1){
+    border-top : 1px solid #e5e5e5;
+}
+
+ul.custom-menu-list li{
+    width : 100%;
+    padding : 10px 0;
+    font-size : 14px;
+    border-bottom : 1px solid #e5e5e5;
+    position : relative;
+}
+
+ul.custom-menu-list li a{
+    width : 95%;
+    display:inline-block;
+    padding-left : 5%;
+}
+
+ul.custom-menu-list li.list-collapsible{
+    padding : 0;
+}
+
+ul.custom-menu-list a.collapse-btn{
+    width : 95%;
+    padding : 10px 0 10px 5%;
+    display : inline-block;
+    background : url('../img/down_arrow.png') 90% 50% no-repeat;
+    background-size : 16px 12px;
+}
+
+ul.custom-menu-list ul.list-collapsed{
+    background-color : #f3f3f3;
+    width : 100%;
+}
+
+ul.custom-menu-list ul.list-collapsed li{
+    width : 90%;
+    padding : 8px 0 8px 10%;
+    font-size: 12px;
+    border-bottom : 1px solid #e5e5e5;
+}
+
+ul.custom-menu-list ul.list-collapsed li:last-child{
+    border : 0;
 }
 
 .top-menu-btn img{
     width : 22px;
-    height : 22px;
     margin : 4px 8px;
 }
 
@@ -147,45 +216,6 @@ a:visited{
 }
 
 
-
-
-.ui-li-static.ui-collapsible {
-    padding: 0;
-}
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview,
-.ui-li-static.ui-collapsible > .ui-collapsible-heading {
-    margin: 0;
-}
-.ui-li-static.ui-collapsible > .ui-collapsible-content {
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-right: 0;
-    border-bottom-width: 0;
-}
-/* collapse vertical borders */
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
-.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-btn {
-    border-bottom-width: 0;
-}
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn {
-    border-top-width: 0;
-}
-/* Remove right borders */
-.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-content {
-    border-right-width: 0;
-}
-/* Remove left borders */
-/* Here, we need class ui-listview-outer to identify the outermost listview */
-.ui-listview-outer > .ui-li-static.ui-collapsible .ui-li-static.ui-collapsible.ui-collapsible,
-.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-content {
-    border-left-width: 0;
-}
 
 
 .ui-page{
@@ -361,4 +391,54 @@ ol, ul {
 .paging-area{
     margin-top: 8px;
     text-align: center;
+}
+
+
+
+#cartPanel{
+    width : 70%;
+}
+
+#cartPanel .ui-btn{
+    padding : 0;
+    font-size : 12px;
+    width :60px;
+    float: left;
+}
+
+.cart-header{
+    padding : 10px 0;
+    text-align : center;
+    font-weight : bold;
+}
+
+.cart-item-img{
+
+    width : 50px;
+    height : 50px;
+    margin-left : 10px;
+    margin-right : 10px;
+    float: left;
+}
+
+.cart-item-img img{
+    width : 50px;
+    height : 50px;
+}
+
+.cart-select-box-wrapper{
+
+}
+
+.cart-select-box-wrapper label{
+    width : 30px;
+    font-size : 12px;
+    font-weight : none;
+    float: left;
+}
+
+.cart-item-info {
+    float: left;
+    width : 150px;
+    font-size : 12px;
 }

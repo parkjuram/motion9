@@ -24,15 +24,17 @@
             <div class="product-contents">
                 <div class="float-left">
                     <div class="product-x-img">
-                        <img src="{{ product.big_img_url }}" alt="" />
+                        <img src="{{ product.images.0 }}" alt="" />
                     </div>
                 </div>
                 <div class="float-right">
                     <div class="product-x-img-gallery">
-                        <a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_s.jpg" ></a>
-                        <a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_s.jpg" ></a>
-                        <a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_s.jpg" ></a>
-                        <a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_s.jpg" ></a>
+                        {% for image in product.images %}
+                            {% if forloop.first %}
+                            {% else %}
+                                <a href="{{image}}"><img src="{{image}}" ></a>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="clearfix"></div>

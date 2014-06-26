@@ -37,11 +37,15 @@
 
 
 .interest-btn{
-    width : 36px;
-    height : 36px;
-    background : url('../img/interest_down.png') top left no-repeat;
-    position : absolute;
-    right : 4px;
-    bottom : 4px;
-    background-size : 35px 35px;
+    width : 100%;
+    height : 18px;
+    padding : 7px 0 4px 0;
+    background-color : #f9f9f9;
+    text-align : center;
+    font-size: 12px;
+}
+
+.interest-btn a{
+    width : 100%;
+    display: inline-block;
 }
