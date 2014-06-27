@@ -91,8 +91,8 @@ class SetProduct(models.Model):
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     def __unicode__(self):
-        return '(%r)SetProduct : set(%s) product(%s)' \
-               % (self.id, self.set.name, self.product.name)
+        return '(%r)SetProduct : (%r)set(%s) (%r)product(%s)' \
+               % (self.id, self.set_id, self.set.name, self.product_id, self.product.name)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
@@ -106,8 +106,8 @@ class ChangeableProduct(models.Model):
             ("set", "product"))
 
     def __unicode__(self):
-        return '(%r)ChangeableProduct : set(%s) product(%s)' \
-               % (self.id, self.set.name, self.product.name)
+        return '(%r)ChangeableProduct : (%r)set(%s) (%r)product(%s)' \
+               % (self.id, self.set_id, self.set.name, self.product_id, self.product.name)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
@@ -121,8 +121,8 @@ class ChangeableProductInfo(models.Model):
             ("changeable_product", "product"))
 
     def __unicode__(self):
-        return '(%r)ChangeableProductInfo : changeable_product(%r) product(%s)' \
-               % (self.id, self.changeable_product, self.product.name)
+        return '(%r)ChangeableProductInfo : (%r)changeable_product(%r) (%r)product(%s)' \
+               % (self.id, self.changeable_product_id, self.changeable_product, self.product_id, self.product.name)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
