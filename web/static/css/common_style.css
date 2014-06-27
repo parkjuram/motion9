@@ -3,14 +3,17 @@
 
 a {
     color : inherit !important;
+    text-decoration : none;
 }
 
 a:hover{
     color : inherit !important;
+    text-decoration : none;
 }
 
 a:visited{
     color : inherit !important;
+    text-decoration : none;
 }
 
 
@@ -42,6 +45,7 @@ a:visited{
 .ui-header{
     background-color : #ffffff !important;
     border: 0;
+    
     padding-bottom: 4px;
     /*border-bottom: 1px solid #d8d9dd !important;*/
 }
@@ -219,7 +223,7 @@ ul.custom-menu-list ul.list-collapsed li:last-child{
 
 
 .ui-page{
-    background-color : white;/*#F3F3F3*/;
+    background-color : white;/*#F3F3F3*/
 }
 
 .ui-panel-wrapper{
@@ -397,7 +401,9 @@ ol, ul {
 
 #cartPanel{
     width : 70%;
+
 }
+
 
 #cartPanel .ui-btn{
     padding : 0;
@@ -435,10 +441,21 @@ ol, ul {
     font-size : 12px;
     font-weight : none;
     float: left;
+
 }
 
 .cart-item-info {
     float: left;
     width : 150px;
     font-size : 12px;
+}
+
+.cart-footer-bar{
+    font-size : 14px;
+    border-top : 1px solid #e5e5e5;
+    width : 92%;
+    padding : 10px 4%;
+    background-color : white;
+    height : 70px;
+    text-align : center;
 }

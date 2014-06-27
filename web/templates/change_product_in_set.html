@@ -9,47 +9,79 @@
 {% endblock %}
 {% block content %}
 <div>
-    <ul>
+    <ul class="custom-menu-list">
     {% for product in set.products %}
         {% if product.is_changeable == True %}
-        <li class="list-collapsed">
+        <li class="list-collapsible">
 
             <div>
-                <div>
-                    <img src="{{ product.big_img_url }}"/>
-                </div>
-                <div>
-                    {{ product.name }}
-                </div>
-                <div>
-                    <a href="#" class="list-collapsed-btn">변경가능 제품</a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div>
-            <ul class="list-collapsed-child">
-            {% for item in product.changeable_products %}
-
-                <li class="available-item">
-                    <div class="">
-
-                   </div>
-                    <div class="available-item-img">
-                        <img src="{{item.big_img_url }}" alt="" />
+                <div class="changeable-collapse-btn">
+                    <div class="changeable-item-img">
+                        <img src="{{ product.big_img_url }}"/>
                     </div>
-                    <div class="available-item-info">
-                        <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}">{{item.name  }}</a></div>
-                        <div>
-
+                    <div class="changeable-item-name">
+                        {{ product.name }}
+                        <div class="changeable-btn">
+                            변경 가능 제품 보기
                         </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                </li>
-            {% endfor %}
-            </ul>
+            </div>
+            <div>
+                <ul class="list-collapsed">
+                    <li class="available-item">
+                        <div class="available-item-type">
+                            기본
+                        </div>
+                        <div class="available-item-img">
+                            <img src="{{item.big_img_url }}" alt="" />
+                        </div>
+                        <div class="available-item-info">
+                            <div class="available-item-name">{{product.name}}</div>
+                            <div class="available-item-btns">
+                                <a href="#" class="gold-btn">상세보기</a>
+                                <a href="#" class="gold-btn">선택</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                {% for item in product.changeable_products %}
+                    <li class="available-item">
+                        <div class="available-item-type">
+                            <img src="{% static 'img/change.png' %}"/>
+                        </div>
+                        <div class="available-item-img">
+                            <img src="{{item.big_img_url }}" alt="" />
+                        </div>
+                        <div class="available-item-info">
+                            <div class="available-item-name">{{item.name}}</div>
+                            <div class="available-item-btns">
+                                <a href="#" class="gold-btn">상세보기</a>
+                                <a href="#" class="gold-btn">선택</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                {% endfor %}
+                </ul>
             </div>
         </li>
+        {% else %}
+            <li>
+                <div>
+                    <div class="changeable-item-img">
+                        <img src="{{ product.big_img_url }}"/>
+                    </div>
+                    <div class="changeable-item-name">
+                        {{ product.name }}
+                        <div class="changeable-btn">
+                            기본 고정 제품
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </li>
         {% endif %}
     {% endfor %}
     </ul>
@@ -58,16 +90,8 @@
 
 {% block footer %}
     <div data-role="footer" data-position="fixed" data-tap-toggle="false" id="change-product-footer">
-        <div class="footer-left">
-            <div class="current-set-price footer-contents">
-                현재 가격 : <span id="currentSetPrice">12만 8000원</span>
-            </div>
-            <div class="current-set-name footer-contents">
-                세트 : 감성적인 남자를 위한 세트
-            </div>
-        </div>
-        <div class="footer-right">
-            <input type="button" value="선택 완료" data-theme="b" id="completeChangeBtn"/>
+        <div class="footer-bar">
+            <a href="#" class="gold-btn" style="margin-right:2%;">돌아가기</a><a href="#" class="gold-btn" >저장하기</a>
         </div>
 	</div>
 {% endblock %}

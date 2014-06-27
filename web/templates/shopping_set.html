@@ -1,7 +1,6 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/common_style.css'%}"/>
 <link rel="stylesheet" href="{% static 'css/shopping_set.css'%}"/>
 <script src="{% static 'js/shopping_set.js'%}"></script>
 {% endblock %}
@@ -68,7 +67,13 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <a href="#" class="interest-btn">&nbsp;</a>
+        <div class="interest-btn">
+           {% if set.is_interested %}
+               <a href="#" class="btn-for-interest"  data-type="s" data-product="{{ set.id }}">관심하기</a>
+           {% else %}
+               <a href="#" class="btn-for-interest interest-done"  data-type="s" data-product="{{ set.id }}">관심취소</a>
+           {% endif %}
+        </div>
     </div>
     {% endfor %}
 </div>

@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     {% load static %}
+
     <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
     <link rel="stylesheet" href="{% static "jqmodal/jqModal.css"%}"/>
     <link rel="stylesheet" href="{% static "css/login_web.css" %}"/>
     <link rel="stylesheet" href="{% static "css/tsc_pagination.css" %}"/>
-
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="{% static "js/common_js.js" %}"></script>
-    <script src="{% static "js/common_js_web.js" %}"></script>
-    <script src="{% static "jqmodal/jqModal.js"%}"></script>
-    <script src="{% static "js/login_web.js" %}"></script>
     <style>
         body {
             min-width: 970px;
         }
     </style>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'js/common_js.js' %}"></script>
+    <script src="{% static 'js/common_js_web.js' %}"></script>
+    <script src="{% static 'jqmodal/jqModal.js' %}"></script>
+    <script src="{% static 'js/login_web.js' %}"></script>
     {% block header %}
     {% endblock %}
 </head>

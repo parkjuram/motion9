@@ -57,7 +57,11 @@
         <div class="product-price">
             {{ set.discount_price }}원 <span class="item-original-price">{{ set.original_price }}원</span>
         </div>
-        <a href="#" class="interest-btn"> &nbsp;</a>
+        {% if set.is_interested %}
+            <a href="#" class="interest-btn btn-for-interest"  data-type="s" data-product="{{ set.id }}">관심하기</a>
+        {% else %}
+            <a href="#" class="interest-btn btn-for-interest interest-done"  data-type="s" data-product="{{ set.id }}">관심취소</a>
+        {% endif %}
     </div>
 </div>
 <div>
@@ -74,7 +78,7 @@
     </ul>
     <div class="tab-content tab-selected" id="productItems">
         <div class="custom-set-btn-box">
-            <a href="#"><img src="{% static "img/custom.png" %}"/></a>
+            <a href="{% url 'mobile_customize_set' set_id=set.id %}" data-ajax="false"><img src="{% static "img/custom.png" %}"/></a>
         </div>
         {% for product in set.products %}
         <div class="product-item">
@@ -82,7 +86,7 @@
                 <img src="{{ product.big_img_url }}"/>
             </div>
             <div class="product-item-contents">
-                {{ product.name|truncatechars:18 }}
+                <a href="#" class="view-product-btn" data-product="{{product.id}}">{{ product.name|truncatechars:18 }}</a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -115,6 +119,24 @@
         </div>
         <div style="text-align: center;">
             <a href="#" class="gold-btn"  style="margin-right:2%;">구매</a><a href="#" class="gold-btn" data-rel="back">닫기</a>
+        </div>
+    </div>
+</div>
+
+
+<div data-role="popup" id="productDetailDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="width:300px;">
+    <div data-role="header" data-theme="a">
+    <h5 style="font-size: 14px;" id="popupDetailName"></h5>
+    </div>
+    <div role="main" class="ui-content">
+        <div id="popupDetailImg">
+            <img src=""/>
+        </div>
+        <div id="popupDetailDesc">
+
+        </div>
+        <div style="text-align: center;">
+            <a href="#" class="gold-btn" id="popupDetailBtn" style="margin-right:2%;">자세히</a><a href="#" class="gold-btn" data-rel="back">닫기</a>
         </div>
     </div>
 </div>

@@ -26,55 +26,31 @@
             카트
         </div>
         <div>
-            <ul class="custom-menu-list">
-                <li>
-                    <div class="cart-item-img">
-                        <img src=""/>
-                    </div>
-                    <div class="cart-item-info">
-                       박주람 세트<br/>
-                       <div class="cart-select-box-wrapper">
-                           <label>
-                            수량 :
-                           </label>
-                           <select data-shadow="false" data-corner="false">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                            </select>
-                            <div class="clearfix"></div>
+             {% if user.is_authenticated %}
+                <div class="cart-item-list-wrapper">
+                    <ul class="custom-menu-list"></ul>
+
+                    <div >
+                        <div class="cart-footer-bar">
+                            <div style="margin : 16px 0;">
+                                총 결제 금액 : <span id="cartTotalPrice">45,000</span>원
+                            </div>
+                            <div style="text-align : center; margin-bottom : 16px;">
+                                <a href="#" style=" width : 80%;" data-ajax="false" class="gold-btn">구매 하기</a>
+                            </div>
                         </div>
-                        가격 : 25,000원
                     </div>
-                    <div class="clearfix"></div>
-                </li>
-                <li>
-                    <div class="cart-item-img">
-                        <img src=""/>
-                    </div>
-                    <div class="cart-item-info">
-                        박주람 세트<br/>
-                        수량 2 <br/>
-                        가격 : 25,000원
-                    </div>
-                    <div class="clearfix"></div>
-                </li>
-                <li>
-                    <div class="cart-item-img">
-                        <img src=""/>
-                    </div>
-                    <div class="cart-item-info">
-                        박주람 세트<br/>
-                        수량 2 <br/>
-                        가격 : 25,000원
-                    </div>
-                    <div class="clearfix"></div>
-                </li>
-            </ul>
+                </div>
+             {% else %}
+                <div style="font-size : 12px; text-align : center; margin : 20px 0;">
+                   ! 로그인이 필요합니다.
+                </div>
+                <div style="text-align : center;">
+                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">로그인 하러가기</a>
+                </div>
+
+             {% endif %}
+
         </div>
     </div>
 	<div data-role="panel" id="menuPanel" data-position="left" data-display="overlay" data-position-fixed="true">
@@ -115,7 +91,7 @@
                     <a href="#">세번째</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout'%}">로그아웃</a></li>
+                    <li><a href="{% url 'logout'%}" data-ajax="false">로그아웃</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -130,7 +106,7 @@
     	<h2 class="ui-title">Motion9</h2>
         {% endblock %}
     	<div  class="ui-btn-right">
-	    	<a href="#cartPanel"  class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>
+	    	<a href="#" id="testBtn" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>
     	</div>
         {% block special_header %}
         {% endblock %}

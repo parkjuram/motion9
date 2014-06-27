@@ -49,7 +49,11 @@
                <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
            </div>
            <div class="interest-btn">
-               <a href="#" class=" btn-for-interest" data-type="p" data-product="{{ product.id }}">관심하기</a>
+               {% if product.is_interested %}
+                   <a href="#" class=" btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
+               {% else %}
+                   <a href="#" class=" btn-for-interest interest-done"  data-type="p" data-product="{{ product.id }}">관심취소</a>
+               {% endif %}
            </div>
     </div>
     {% endfor %}

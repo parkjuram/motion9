@@ -57,7 +57,11 @@
         <div class="product-price">
             {{ product.discount_price }}원 <span class="item-original-price">{{ product.original_price }}원</span>
         </div>
-        <a href="#" class="interest-btn"> &nbsp;</a>
+        {% if product.is_interested %}
+            <a href="#" class="interest-btn btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
+        {% else %}
+            <a href="#" class="interest-btn btn-for-interest interest-done"  data-type="p" data-product="{{ product.id }}">관심취소</a>
+        {% endif %}
     </div>
 </div>
 <div>
@@ -121,6 +125,8 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
 
 {% block footer %}

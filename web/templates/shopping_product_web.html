@@ -2,18 +2,13 @@
 {% block header %}
 {% load static %}
 
-{#<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_product_web.css') }}"/>#}
-<link rel="stylesheet" href="{% static "css/shopping_product_web.css" %}" type="text/css" media="screen" />
-
-{#<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>#}
 <script src="{% static "js/imagesloaded.pkgd.min.js" %}"></script>
-{#<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>#}
 <script src="{% static "js/masonry.pkgd.min.js" %}"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="{% static "js/shopping_product_web.js" %}"></script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-{#<script src="{{ url_for('static', filename='js/shopping_product_web.js') }}"></script>#}
-<script src="{% static "js/shopping_product_web.js" %}"></script>
+<link rel="stylesheet" href="{% static "css/shopping_product_web.css" %}" type="text/css" />
 {% endblock %}
 
 {% block ad_area %}

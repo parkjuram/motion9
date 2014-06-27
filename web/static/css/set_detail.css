@@ -82,13 +82,12 @@ a:visited{
 }
 
 .interest-btn{
-    width : 50px;
+    width : 70px;
     height : 50px;
-    background : url('../img/interest_mobile.png') top left no-repeat;
+    color : white;
     position : absolute;
     right : 24px;
-    bottom : 4px;
-    background-size : 45px 45px;
+    top : 12px;
 }
 
 .tab-menu{
@@ -250,4 +249,27 @@ a:visited{
 
 .swiper-active-switch{
     background:#e5e5e5;
+}
+
+
+#popupDetailName{
+    width : 90%;
+    padding : 6px 5%;
+    margin : 0;
+}
+
+#popupDetailImg{
+    width : 100px;
+    margin : 0px auto;
+}
+
+#popupDetailImg img{
+    width : 100%;
+}
+
+#popupDetailDesc{
+    margin : 12px 0;
+    width : 90%;
+    padding : 8px 5%;
+    border: 1px solid #e5e5e5;
 }
