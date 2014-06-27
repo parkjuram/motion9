@@ -116,6 +116,10 @@ class ChangeableProductInfo(models.Model):
     changeable_product = models.ForeignKey('ChangeableProduct')
     product = models.ForeignKey('Product')
 
+    class Meta:
+        unique_together = (
+            ("changeable_product", "product"))
+
     def __unicode__(self):
         return '(%r)ChangeableProductInfo : (%r)changeable_product (%r)product(%s)' \
                % (self.id, self.changeable_product_id, self.product_id, self.product.name)
