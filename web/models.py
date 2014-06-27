@@ -121,8 +121,8 @@ class ChangeableProductInfo(models.Model):
             ("changeable_product", "product"))
 
     def __unicode__(self):
-        return '(%r)ChangeableProductInfo : (%r)changeable_product(%r) (%r)product(%s)' \
-               % (self.id, self.changeable_product_id, self.changeable_product, self.product_id, self.product.name)
+        return '(%r)ChangeableProductInfo : (%r)changeable_product (%r)product(%s)' \
+               % (self.id, self.changeable_product_id, self.product_id, self.product.name)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
