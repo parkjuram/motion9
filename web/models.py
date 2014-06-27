@@ -37,6 +37,8 @@ class Product(models.Model):
     precautions = models.TextField(blank=True)
     quality_guarantee_standard = models.CharField(max_length=100, blank=True)
 
+    is_active = models.BooleanField(default=True)
+
     def __unicode__(self):
         return '(%r)Product : name(%s)' \
                % (self.id, self.name)
@@ -59,6 +61,8 @@ class Set(models.Model):
     big_img_url = models.TextField(null=False, blank=True)
     small_img_url = models.TextField(null=False, blank=True)
     discount_difference = models.IntegerField(null=False, default=0)
+
+    is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return '(%r)Set : name(%s)' \
@@ -86,6 +90,13 @@ class SetProduct(models.Model):
     product = models.ForeignKey('Product')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
+    def __unicode__(self):
+        return '(%r)SetProduct : (%r)set(%s) (%r)product(%s)' \
+               % (self.id, self.set_id, self.set.name, self.product_id, self.product.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class ChangeableProduct(models.Model):
     set = models.ForeignKey('Set')
     product = models.ForeignKey('Product')
@@ -94,6 +105,13 @@ class ChangeableProduct(models.Model):
         unique_together = (
             ("set", "product"))
 
+    def __unicode__(self):
+        return '(%r)ChangeableProduct : (%r)set(%s) (%r)product(%s)' \
+               % (self.id, self.set_id, self.set.name, self.product_id, self.product.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class ChangeableProductInfo(models.Model):
     changeable_product = models.ForeignKey('ChangeableProduct')
     product = models.ForeignKey('Product')
@@ -101,6 +119,13 @@ class ChangeableProductInfo(models.Model):
     class Meta:
         unique_together = (
             ("changeable_product", "product"))
+
+    def __unicode__(self):
+        return '(%r)ChangeableProductInfo : (%r)changeable_product (%r)product(%s)' \
+               % (self.id, self.changeable_product_id, self.product_id, self.product.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
 
 
 class BlogReview(models.Model):
