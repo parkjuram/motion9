@@ -16,9 +16,7 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def test_view(request):
-    set = helper_get_set(3, helper_get_user(request), True)
-
-    return http_response_by_json(None, set)
+    return render(request, 'uservoice_test.html')
 
 @csrf_exempt
 def index_view(request):

@@ -90,6 +90,13 @@ class SetProduct(models.Model):
     product = models.ForeignKey('Product')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
+    def __unicode__(self):
+        return '(%r)SetProduct : set(%s) product(%s)' \
+               % (self.id, self.set.name, self.product.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class ChangeableProduct(models.Model):
     set = models.ForeignKey('Set')
     product = models.ForeignKey('Product')
@@ -98,6 +105,13 @@ class ChangeableProduct(models.Model):
         unique_together = (
             ("set", "product"))
 
+    def __unicode__(self):
+        return '(%r)ChangeableProduct : set(%s) product(%s)' \
+               % (self.id, self.set.name, self.product.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class ChangeableProductInfo(models.Model):
     changeable_product = models.ForeignKey('ChangeableProduct')
     product = models.ForeignKey('Product')
@@ -105,6 +119,13 @@ class ChangeableProductInfo(models.Model):
     class Meta:
         unique_together = (
             ("changeable_product", "product"))
+
+    def __unicode__(self):
+        return '(%r)ChangeableProductInfo : changeable_product(%r) product(%s)' \
+               % (self.id, self.changeable_product, self.product.name)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
 
 
 class BlogReview(models.Model):
