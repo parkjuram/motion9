@@ -1,0 +1,42 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}"/>
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">구매</h2>
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <div class="section-header">
+        주문리스트 확인
+    </div>
+    <div>
+        <div class="purchase-product-img">
+            <img src=""/>
+        </div>
+        <div>
+            박주람세트<br/>
+            가격 : 14,000원<br/>
+        </div>
+        <div class='cart-select-box-wrapper'>
+            <lable>수량 : </lable>
+            <select data-shadow='false' data-corner='false'>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
