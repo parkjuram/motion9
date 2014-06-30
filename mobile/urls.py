@@ -4,6 +4,7 @@ urlpatterns = patterns('',
 
     url(r'^$', 'mobile.views.index_view', name='mobile_index'),
     url(r'^index/$', 'mobile.views.index_view', name='mobile_index'),
+    url(r'^purchase/$', 'mobile.views.purchase_view', name='mobile_purchase'),
 
     url(r'^shop/product/$', 'mobile.views.shop_product_view', name='mobile_shop_product'),
     url(r'^shop/product/(?P<category_id>(\d+))/$', 'mobile.views.shop_product_view', name='mobile_shop_product'),
