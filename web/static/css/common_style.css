@@ -141,7 +141,8 @@ ul.custom-menu-list ul.list-collapsed li:last-child{
 }
 
 .top-menu-btn img{
-    width : 22px;
+    width : 26px;
+    height : 26px;
     margin : 4px 8px;
 }
 
@@ -223,7 +224,7 @@ ul.custom-menu-list ul.list-collapsed li:last-child{
 
 
 .ui-page{
-    background-color : white;/*#F3F3F3*/
+    background-color : #F3F3F3;
 }
 
 .ui-panel-wrapper{
