@@ -14,7 +14,7 @@
         {% if product.is_changeable == True %}
         <li class="list-collapsible">
 
-            <div>
+            <div class="change-list-wrapper">
                 <div class="changeable-collapse-btn">
                     <div class="changeable-item-img">
                         <img src="{{ product.big_img_url }}"/>
@@ -28,48 +28,46 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <div>
-                <ul class="list-collapsed">
-                    <li class="available-item">
-                        <div class="available-item-type">
-                            기본
+            <ul class="list-collapsed">
+                <li class="available-item">
+                    <div class="available-item-type">
+                        기본
+                    </div>
+                    <div class="available-item-img">
+                        <img src="{{item.big_img_url }}" alt="" />
+                    </div>
+                    <div class="available-item-info">
+                        <div class="available-item-name">{{product.name}}</div>
+                        <div class="available-item-btns">
+                            <a href="#" class="gold-btn">요약보기</a>
+                            <a href="#" class="gold-btn">선택</a>
                         </div>
-                        <div class="available-item-img">
-                            <img src="{{item.big_img_url }}" alt="" />
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            {% for item in product.changeable_products %}
+                <li class="available-item">
+                    <div class="available-item-type">
+                        <img src="{% static 'img/change.png' %}"/>
+                    </div>
+                    <div class="available-item-img">
+                        <img src="{{item.big_img_url }}" alt="" />
+                    </div>
+                    <div class="available-item-info">
+                        <div class="available-item-name">{{item.name}}</div>
+                        <div class="available-item-btns">
+                            <a href="#" class="gold-btn">요약약기</a>
+                            <a href="#" class="gold-btn">선택</a>
                         </div>
-                        <div class="available-item-info">
-                            <div class="available-item-name">{{product.name}}</div>
-                            <div class="available-item-btns">
-                                <a href="#" class="gold-btn">상세보기</a>
-                                <a href="#" class="gold-btn">선택</a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
-                {% for item in product.changeable_products %}
-                    <li class="available-item">
-                        <div class="available-item-type">
-                            <img src="{% static 'img/change.png' %}"/>
-                        </div>
-                        <div class="available-item-img">
-                            <img src="{{item.big_img_url }}" alt="" />
-                        </div>
-                        <div class="available-item-info">
-                            <div class="available-item-name">{{item.name}}</div>
-                            <div class="available-item-btns">
-                                <a href="#" class="gold-btn">상세보기</a>
-                                <a href="#" class="gold-btn">선택</a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            {% endfor %}
+            </ul>
         </li>
         {% else %}
             <li>
-                <div>
+                <div class="change-list-wrapper">
                     <div class="changeable-item-img">
                         <img src="{{ product.big_img_url }}"/>
                     </div>

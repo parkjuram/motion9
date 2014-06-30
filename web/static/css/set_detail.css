@@ -18,6 +18,7 @@ a:visited{
     height : 40px;
     border-bottom : 1px solid #e5e5e5;
     overflow : hidden;
+    background-color: white;
 }
 .ui-select {
     margin-top : 0;
@@ -91,8 +92,9 @@ a:visited{
 }
 
 .tab-menu{
+    background-color: white;
     margin : 0;
-    margin-top : 14px;
+    padding-top : 14px;
     height : 66px;
     overflow: hidden;
     border-bottom : 1px solid #e5e5e5;

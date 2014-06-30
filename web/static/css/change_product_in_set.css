@@ -28,9 +28,13 @@
 
 }
 
-.changeable-collapse-btn{
+.change-list-wrapper{
     width : 95%;
     padding : 10px 0 10px 5%;
+}
+
+.changeable-collapse-btn{
+    width : 100%;
     display : inline-block;
     background : url('../img/down_arrow.png') 90% 50% no-repeat;
     background-size : 16px 12px;

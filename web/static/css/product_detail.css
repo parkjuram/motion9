@@ -18,6 +18,7 @@ a:visited{
     height : 40px;
     border-bottom : 1px solid #e5e5e5;
     overflow : hidden;
+    background-color: white;
 }
 .ui-select {
     margin-top : 0;
@@ -93,7 +94,8 @@ a:visited{
 
 .tab-menu{
     margin : 0;
-    margin-top : 14px;
+    background-color: white;
+    padding-top : 14px;
     height : 66px;
     overflow: hidden;
     border-bottom : 1px solid #e5e5e5;
@@ -183,7 +185,7 @@ a:visited{
 
 .footer-bar{
     text-align :center;
-    width : 100%;
+    width : 98%;
     height : 38px;
     padding : 9px 1%;
     background-color : #d2bb8f;

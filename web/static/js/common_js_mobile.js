@@ -58,34 +58,22 @@ $(function(){
     };
 
 
+    $('a.collapse-btn').click(function(e){
+        e.preventDefault();
+        var collapsedMenu = $(this).next('.list-collapsed');
 
-    $('#cartPanel').on('panelopen', function(){
-        var target = $('#cartPanel .custom-menu-list');
-
-        if(false && target.length != 0){
-            target.html('');
-            $.ajax({
-                  url: '/user/mypage/cart/json/',
-                  dataType: 'json',
-                  async : true,
-                  type:'get',
-
-                  success: function(data){
-
-                      renderCart('#cartPanel .custom-menu-list', data);
-                      $.mobile.loading('hide');
-                      $(window).scroll();
-
-                  },
-                  error:function(jqXHR, textStatus, errorThrown){
-                      console.log(textStatus);
-                  }
-            });
+        if(collapsedMenu.hasClass('list-collapsed-opened')){
+            collapsedMenu.removeClass('list-collapsed-opened');
+        }else{
+            collapsedMenu.addClass('list-collapsed-opened');
         }
     });
 
 
-    $('#testBtn').click(function(e){
+
+
+
+    $('#openCartBtn').click(function(e){
         e.preventDefault();
         $.mobile.loading('show');
         var target = $('#cartPanel .custom-menu-list');

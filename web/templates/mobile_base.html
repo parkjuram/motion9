@@ -56,7 +56,7 @@
 	<div data-role="panel" id="menuPanel" data-position="left" data-display="overlay" data-position-fixed="true">
 	    <!-- panel content goes here -->
 	   <div class="menu-panel-search-box">
-            <input type="search" name="password" id="search" value="" placeholder="검색">
+            <input type="search" name="password" id="menuSearch" value="" placeholder="검색">
 	   </div>
 
        <div>
@@ -106,7 +106,7 @@
     	<h2 class="ui-title">Motion9</h2>
         {% endblock %}
     	<div  class="ui-btn-right">
-	    	<a href="#" id="testBtn" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>
+	    	<a href="#" id="openCartBtn" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>
     	</div>
         {% block special_header %}
         {% endblock %}

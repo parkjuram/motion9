@@ -1,8 +1,8 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/cart.css' %}"/>
-<script src="{% static 'js/cart.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/purchase.css' %}"/>
+<script src="{% static 'js/purchase.js' %}"></script>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">구매</h2>
@@ -10,20 +10,20 @@
 
 {% block content %}
 
-<div>
+<div class="page-wrapper">
     <div class="section-header">
         주문리스트 확인
     </div>
-    <div>
+    <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
             <img src=""/>
         </div>
-        <div>
+        <div class="purchase-product-info">
             박주람세트<br/>
             가격 : 14,000원<br/>
         </div>
         <div class='cart-select-box-wrapper'>
-            <lable>수량 : </lable>
+            <label>수량 : </label>
             <select data-shadow='false' data-corner='false'>
                 <option>1</option>
                 <option>2</option>
@@ -35,7 +35,181 @@
                 <option>8</option>
                 <option>9</option>
             </select>
+            <div class="clearfix"></div>
+            총 가격 : <span id="purchase-item-">149000</span>원
         </div>
+    </div>
+    <div class="purchase-wrapper purchased-item">
+        <div class="purchase-product-img">
+            <img src=""/>
+        </div>
+        <div class="purchase-product-info">
+            박주람세트<br/>
+            가격 : 14,000원<br/>
+        </div>
+        <div class='cart-select-box-wrapper'>
+            <label>수량 : </label>
+            <select data-shadow='false' data-corner='false'>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+            </select>
+            <div class="clearfix"></div>
+            총 가격 : <span id="purchase-item-">149000</span>원
+        </div>
+    </div>
+    <div class="purchase-wrapper purchased-item">
+        <div class="purchase-product-img">
+            <img src=""/>
+        </div>
+        <div class="purchase-product-info">
+            박주람세트<br/>
+            가격 : 14,000원<br/>
+        </div>
+        <div class='cart-select-box-wrapper'>
+            <label>수량 : </label>
+            <select data-shadow='false' data-corner='false'>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+            </select>
+            <div class="clearfix"></div>
+            총 가격 : <span id="purchase-item-">149000</span>원
+        </div>
+    </div>
+    <div class="section-header">
+        주문자 정보
+    </div>
+    <div class="purchase-wrapper">
+        <div class="purchase-inline-input">
+            <label>
+                주문자 이름
+            </label>
+            <div class="inline-input-wrapper">
+                <input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="purchase-inline-input">
+            <label>
+                이메일
+            </label>
+            <div class="inline-input-wrapper">
+                <input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="purchase-inline-input">
+            <label>
+                연락처
+            </label>
+            <div class="inline-input-wrapper phone-form-wrapper">
+                <input type="text" /><input type="text"/><input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="section-header">
+        배송지 정보
+    </div>
+    <div class="purchase-wrapper">
+        <form>
+        <label>
+            <input type="checkbox" name="chckbox-0" data-mini="true" style="display:none;">기본배송지
+        </label>
+        </form>
+        <div class="purchase-inline-input">
+            <label>
+                수취인 이름
+            </label>
+            <div class="inline-input-wrapper">
+                <input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="purchase-inline-input">
+            <label>
+                연락처
+            </label>
+            <div class="inline-input-wrapper phone-form-wrapper">
+                <input type="text" /><input type="text"/><input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="purchase-inline-input">
+            <label>
+                주소
+            </label>
+            <div class="inline-input-wrapper address-form-wrapper">
+                <input type="text"/> <a href="#" class="gold-btn" >주소 검색</a>
+                <input type="text"/>
+                <input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="purchase-inline-input">
+            <label>
+                배송유의사항
+           </label>
+            <div class="inline-input-wrapper">
+                <input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="section-header">
+        결제 금액
+    </div>
+    <div class="purchase-wrapper">
+        <div style="padding-bottom : 8px;">
+           구매총액 : <span id="totalPurchasePrice">240000</span> 원
+        </div>
+    </div>
+    <div class="purchase-wrapper">
+        <div>
+            마일리지 (보유 : 12000point)
+        </div>
+        <div class="purchase-inline-input">
+            <label>
+                마일리지 사용
+           </label>
+            <div class="inline-input-wrapper">
+                <input type="text"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div style="color : red; padding-bottom: 8px;">
+            * 마일리지는 1000points 이상부터 사용 하실 수 있습니다.
+        </div>
+    </div>
+    <div class="purchase-wrapper">
+        <div style="padding-bottom : 8px;">
+           총 결제액 : <span id="finalPurchasePrice">240000</span> 원
+        </div>
+    </div>
+    <div class="section-header">
+        결제 금액
+    </div>
+    <div class="purchase-wrapper">
+        <ul>
+            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"/>신용카드</label></li>
+            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"/>무통장입금</label></li>
+        </ul>
+    </div>
+    <div class="footer-bar">
+        <a href="#" class="gold-btn" >결제하기</a>
     </div>
 </div>
 

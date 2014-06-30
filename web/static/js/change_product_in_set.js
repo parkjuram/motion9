@@ -4,20 +4,15 @@
 $(function(){
 
 
-   $('.change-product').click(function(e){
-       e.preventDefault();
-       removeSelectedBox();
-       $('#currentSetPrice').text('10만 2000원');
-       $(this).addClass('change-product-selected');
-   });
+   $('.changeable-collapse-btn').click(function(e){
+        e.preventDefault();
+       console.log('hi');
+        var collapsedMenu = $(this).parent().next('.list-collapsed');
 
-   $('#completeChangeBtn').click(function(e){
-       e.preventDefault();
-       location.href="/setdetail";
-   });
-
-   var removeSelectedBox = function(){
-       $('.change-product').removeClass('change-product-selected');
-   };
-
+        if(collapsedMenu.hasClass('list-collapsed-opened')){
+            collapsedMenu.removeClass('list-collapsed-opened');
+        }else{
+            collapsedMenu.addClass('list-collapsed-opened');
+        }
+    });
 });

@@ -60,25 +60,22 @@ a:visited{
     color : white;
 }
 
+
+
 #menuPanel{
 
 }
 
 .menu-panel-search-box{
 
-    margin-bottom : 32px;
+    margin-bottom : 12px;
 }
 
-.menu-panel-search-box img{
-    width : 22px;
-    height : 22px;
+.menu-panel-search-box .ui-input-search{
+    width : 80%;
+    margin : 8px auto;
 }
 
-.menu-panel-search-box input{
-    border : 0;
-
-    width : 170px;
-}
 
 #menuListView .ui-btn{
     font-size : 14px;
@@ -87,6 +84,7 @@ a:visited{
 
 #menuPanel .ui-panel-inner, #cartPanel .ui-panel-inner{
     padding : 0;
+    min-height: 600px !important;
 }
 
 ul.custom-menu-list{
@@ -127,6 +125,7 @@ ul.custom-menu-list a.collapse-btn{
 ul.custom-menu-list ul.list-collapsed{
     background-color : #f3f3f3;
     width : 100%;
+    display : none;
 }
 
 ul.custom-menu-list ul.list-collapsed li{
@@ -140,8 +139,13 @@ ul.custom-menu-list ul.list-collapsed li:last-child{
     border : 0;
 }
 
+.list-collapsed-opened{
+    display: block !important;
+}
+
+
 .top-menu-btn img{
-    width : 26px;
+
     height : 26px;
     margin : 4px 8px;
 }
@@ -180,6 +184,7 @@ ul.custom-menu-list ul.list-collapsed li:last-child{
   border-radius: 0px;
   color: white !important;
   font-size: 12px;
+  font-weight: normal;
   background: #d2bb8f;
   padding: 8px 10px;
   text-decoration: none !important;

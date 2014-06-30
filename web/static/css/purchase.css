@@ -1,0 +1,141 @@
+.page-wrapper{
+    width : 96%;
+    padding : 4px 2%;
+}
+
+
+.section-header{
+    padding : 6px 8px;
+    border : 1px solid #e5e5e5;
+    border-top : none;
+    font-size :14px;
+    font-weight : bold;
+}
+
+.section-header:first-child{
+    border-top : 1px solid #e5e5e5;
+}
+
+.purchase-wrapper{
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: white;
+    width : 100%;
+    padding : 8px 2% 0 2%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+
+
+
+
+
+.purchase-product-wrapper div.ui-select{
+    margin-bottom: 0;
+}
+
+.purchase-product-img{
+    width : 80px;
+    height : 80px;
+
+    float: left;
+}
+
+
+.purchase-product-img img{
+    width : 80px;
+    height : 80px;
+}
+
+.purchase-product-info{
+    padding : 8px 10px;
+    float : left;
+    width : 260px;
+    line-height: 22px;
+}
+
+.cart-select-box-wrapper{
+    clear : both;
+    line-height: 20px;
+    padding : 10px 0;
+}
+
+.cart-select-box-wrapper label{
+    width : 30px;
+    font-size : 12px;
+    font-weight : none;
+    float: left;
+
+}
+
+.cart-select-box-wrapper .ui-btn{
+    padding : 0;
+    margin-top : 2px;
+    font-size : 12px;
+    width :60px;
+    float: left;
+}
+
+.purchase-inline-input{
+    width : 100%;
+
+}
+
+.purchase-inline-input label{
+    width : 80px;
+    padding-top : 12px;
+    float : left;
+    font-size : 12px;
+}
+
+.purchase-inline-input .inline-input-wrapper{
+    width : 200px;
+    float: left;
+}
+
+.phone-form-wrapper .ui-input-text{
+    float : left;
+    margin-right : 8px;
+    width : 44px !important;
+}
+
+.address-form-wrapper .ui-input-text:first-child{
+    width : 90px;
+    margin-right : 10px;
+    float : left;
+}
+
+.address-form-wrapper .gold-btn{
+    margin-top : 6px;
+    font-weight: normal !important;
+}
+
+#finalPurchasePrice{
+    font-weight: bold;
+    font-size: 14px;
+    color : red;
+}
+
+ .purchase-method{
+     display : none;
+     font-size : 12px;
+     font-weight: normal;
+ }
+
+ .footer-bar{
+    text-align :center;
+    width : 98%;
+    height : 38px;
+    padding : 9px 1%;
+    background-color : #d2bb8f;
+}
+
+.footer-bar .gold-btn{
+    font-size: 14px;
+    border : 1px solid white;
+    width : 38%;
+}
