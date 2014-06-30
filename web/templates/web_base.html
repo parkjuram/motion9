@@ -53,6 +53,7 @@
                 <li class="clearfix"></li>
             </ul>
             <ul id="header-right-menu-list">
+                <li><span><input type="text" class="header-search rounded" placeholder="Search.."></span></li>
                 <li><a href="{% url 'mypage' %}">마이페이지</a></li>
                 <li><a href="{% url 'mypage_cart' %}">장바구니</a></li>
                 {% if user.is_authenticated %}
@@ -61,7 +62,7 @@
                     <li><a href="#" class="login-btn">로그인</a></li>
                     <li><a href="{% url 'registration_page' %}">회원가입</a></li>
                 {% endif %}
-                <li><input type="text" style=" margin-left: 4px; margin-top: 14px; height : 22px; width : 106px; border-radius: 7px; border-style: solid; border-width: 1px; "/></li>
+
                 <li class="clearfix"></li>
             </ul>
             <div class="clearfix"></div>

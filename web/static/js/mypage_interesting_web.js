@@ -23,13 +23,13 @@ $(function(){
         var id = $(this).attr('data-attr');
         $(this).addClass('product-item-hover');
         $(this).find('.product-hover-area').css({display:'block'});
-        $('.product-opacity-bg').css({opacity:0.7});
+        $(this).find('.product-opacity-bg').animate({opacity:0.7},'slow');
         //hoverArea.css({display:'block'});
 
     }, function(e){
         $(this).removeClass('product-item-hover');
         var hoverArea = $(this).find('.product-hover-area');
-        //hoverArea.appendTo($('body'));
+        $(this).find('.product-opacity-bg').css({opacity : 1});
         hoverArea.css({display:'none'});
     });
 

@@ -76,12 +76,12 @@ cursor: pointer;
 text-indent: -10000px
 }
 .spinner .value {
-background-position: 0 -100px;
+background-position: 0 -25px;
 width: 24px;
 height: 27px;
 border: none;
 font-family: Arial;
-color: #ffffff;
+color: black;
 padding: 0px
 }
 .spinner .value.passive {

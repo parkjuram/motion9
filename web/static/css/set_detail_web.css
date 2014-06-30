@@ -24,7 +24,7 @@
 }
 
 .set-img-gallery img:hover{
-    outline: 3px solid #c7b273;
+    outline: 3px solid #d2bb8f;
 }
 
 .tag-header{
@@ -170,7 +170,7 @@ a.basic-btn{
 }
 
 .belong-to-set-item:hover{
-    outline : 3px solid #c7b273;
+    outline : 3px solid #d2bb8f;
 }
 
 .product-hover-area{
@@ -261,5 +261,5 @@ a.basic-btn{
 }
 
 #modalProductImgGallery img:hover{
-    outline: 2px solid #c7b273;
+    outline: 2px solid #d2bb8f;
 }
