@@ -23,8 +23,9 @@ $(function(){
         var id = $(this).attr('data-attr');
         $(this).addClass('product-item-hover');
         $(this).find('.product-hover-area').css({display:'block'});
-        $(this).find('.product-opacity-bg').animate({opacity:0.7},'slow');
-        //hoverArea.css({display:'block'});
+        $(this).find('.product-opacity-bg').animate({backgroundColor:'#393939', opacity:0.7},'slow',function(){
+            console.log('done');
+        });
 
     }, function(e){
         $(this).removeClass('product-item-hover');

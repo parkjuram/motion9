@@ -39,7 +39,7 @@ $(function(){
     $('.product-item').hover(function(e){
         var id = $(this).attr('data-attr');
         $(this).find('.product-hover-area').css({display:'block'});
-        $(this).find('.product-opacity-bg').animate({opacity:0.7},'fast');
+        $(this).find('.product-opacity-bg').animate({backgroundColor: 'black', opacity:0.7},'slow');
         $(this).find('.product-item-info').addClass('product-expand-info-mode');
         $(this).find('.product-item-info-contents').hide();
         $(this).addClass('product-expand-mode');
@@ -47,7 +47,7 @@ $(function(){
     }, function(e){
         var hoverArea = $('.product-hover-area');
         hoverArea.css({display:'none'});
-        $(this).find('.product-opacity-bg').css({opacity : 1});
+        $(this).find('.product-opacity-bg').css({backgroundColor: 'grey', opacity : 1});
         $(this).find('.product-item-info').removeClass('product-expand-info-mode');
         $(this).find('.product-item-info-contents').show();
         $(this).removeClass('product-expand-mode');

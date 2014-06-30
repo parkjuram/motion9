@@ -125,7 +125,7 @@
 
 
 .product-opacity-bg{
-    background-color: black;
+    background-color: grey;
     position: absolute;
     top :0;
     left : 0;
@@ -227,11 +227,11 @@
 .product-expand-info-mode{
     height : 174px;
     background-color: #d2bb8f;
-    -webkit-transition-property : background-color, height;
-    -moz-transition-property : background-color, height;
-    -ms-transition-property : background-color, height;
-    -o-transition-property : background-color, height;
-    transition-property : background-color, height;
+    -webkit-transition-property : background-color;
+    -moz-transition-property : background-color;
+    -ms-transition-property : background-color;
+    -o-transition-property : background-color;
+    transition-property : background-color;
     -webkit-transition-duration : 1s;
     -moz-transition-duration : 1s;
     -ms-transition-duration : 1s;
@@ -245,11 +245,7 @@
     border : 1px solid #444444;
     outline : 3px solid #444444;
     z-index: 90;
-    -webkit-transition: height 1s;
-    -moz-transition: height 1s;
-    -ms-transition: height 1s;
-    -o-transition: height 1s;
-    transition: height 1s;
+
 }
 
 .product-item-img {
