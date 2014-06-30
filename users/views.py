@@ -156,34 +156,38 @@ def mypage_set_view(request, page_num=1):
 def mypage_cart_view(request):
     user = helper_get_user(request)
 
-    product_carts= user.cart_set.filter(type='p').all()
-    products = []
-    for product_cart in product_carts:
-        product = product_cart.product
-        products.append(helper_get_product_detail(product,user).update({
-            'item_count': product_cart.item_count
-        }))
+    if user is not None:
+        product_carts= user.cart_set.filter(type='p').all()
+        products = []
+        for product_cart in product_carts:
+            product = product_cart.product
+            products.append(helper_get_product_detail(product,user).update({
+                'item_count': product_cart.item_count
+            }))
 
-    set_carts = user.cart_set.filter(type='s').all()
-    sets = []
-    for set_cart in set_carts:
-        set = set_cart.set
-        sets.append(helper_get_set(set,user).update({
-            'item_count': set_cart.item_count
-        }))
+        set_carts = user.cart_set.filter(type='s').all()
+        sets = []
+        for set_cart in set_carts:
+            set = set_cart.set
+            sets.append(helper_get_set(set,user).update({
+                'item_count': set_cart.item_count
+            }))
 
-    custom_set_carts = user.cart_set.filter(type='c').all()
-    custom_sets = []
-    for custom_set_cart in custom_set_carts:
-        custom_set = custom_set_cart.custom_set
-        custom_sets.append(custom_set)
+        custom_set_carts = user.cart_set.filter(type='c').all()
+        custom_sets = []
+        for custom_set_cart in custom_set_carts:
+            custom_set = custom_set_cart.custom_set
+            custom_sets.append(custom_set)
 
-    return render(request, 'cart_web.html',
-        {
-            'products': products,
-            'sets': sets,
-            'custom_sets': custom_sets
-        })
+        return render(request, 'cart_web.html',
+            {
+                'products': products,
+                'sets': sets,
+                'custom_sets': custom_sets
+            })
+    else:
+        return redirect('login_page')
+
 
 @csrf_exempt
 def mypage_cart_json_view(request):
