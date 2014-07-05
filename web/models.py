@@ -21,8 +21,8 @@ class Brand(models.Model):
     is_domestic = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return '(%r)Brand : name(%s) is_domestic(%r)' \
-               % (self.id, self.name, self.is_domestic)
+        return '(%r)Brand : name_eng(%s) name_kor(%s) is_domestic(%r)' \
+               % (self.id, self.name_eng, self.name_kor, self.is_domestic)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
