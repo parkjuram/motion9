@@ -117,7 +117,7 @@ def mypage_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':products}
 
@@ -143,7 +143,7 @@ def mypage_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], page_num)
         else:
             sets = {'data':sets}
 
@@ -250,7 +250,7 @@ def mypage_purchase_view(request, page_num=1):
                 purchases_.append(custom_set_)
 
         if page_num is not None:
-            purchases_ = helper_make_paging_data(len(purchases_), purchases_[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            purchases_ = helper_make_paging_data(len(purchases_), purchases_[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             purchases_ = {'data':purchases_}
 
@@ -272,7 +272,7 @@ def mypage_purchase_product_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':products}
 
@@ -295,7 +295,7 @@ def mypage_purchase_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':sets}
 
@@ -318,7 +318,7 @@ def mypage_purchase_custom_set_view(request, page_num=1):
             custom_sets.append(custom_set_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], page_num)
         else:
             products = {'data':custom_sets}
 
@@ -471,7 +471,7 @@ def mobile_mypage_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':products}
 
@@ -496,7 +496,7 @@ def mobile_mypage_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], page_num)
         else:
             sets = {'data':sets}
 

@@ -4,7 +4,7 @@ from web.models import Product, Set, ChangeableProduct, BlogReview
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail
 from django.core.exceptions import ObjectDoesNotExist
 
-from motion9.const import ITEM_COUNT_PER_PAGE, PAGER_INDICATOR_LENGTH, ERROR_CODE_AND_MESSAGE_DICT
+from motion9.const import *
 import logging
 import math
 import json
