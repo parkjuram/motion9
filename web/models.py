@@ -52,8 +52,8 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return '(%r)Product : name(%s)' \
-               % (self.id, self.name)
+        return '(%r)Product : name(%s) (%r)brand(%s)' \
+               % (self.id, self.name, self.brand_id, self.brand.name)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
