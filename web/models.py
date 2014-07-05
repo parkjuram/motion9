@@ -34,7 +34,7 @@ class Product(models.Model):
 
     thumbnail_image = models.ImageField(null=True, upload_to='product/')
     video_url = models.URLField(blank=True)
-    brand = models.ForeignKey(Brand)
+    # brand = models.ForeignKey(Brand)
     brandname = models.CharField(max_length=30, blank=True)
     maker = models.CharField(max_length=30, blank=True)
     country = models.CharField(max_length=30, blank=True)
