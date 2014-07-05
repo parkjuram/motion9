@@ -187,12 +187,6 @@ def mypage_cart_view(request):
             custom_set = custom_set_cart.custom_set
             custom_sets.append(custom_set)
 
-        return http_response_by_json(None, {
-                'products': products,
-                'sets': sets,
-                'custom_sets': custom_sets
-            })
-
         return render(request, 'cart_web.html',
             {
                 'products': products,
