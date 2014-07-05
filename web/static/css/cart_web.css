@@ -167,3 +167,19 @@
 .no-item{
     margin: 20px;
 }
+
+
+#addressLayer{
+    display:none;
+    border:1px solid;
+    position:fixed;
+    width:360px;
+    height:460px;
+    left:50%;
+    margin-left:-155px;
+    top:50%;
+    margin-top:-235px;
+    overflow:hidden;
+    -webkit-overflow-scrolling:touch;
+    z-index: 999;
+}
