@@ -58,6 +58,9 @@ def helper_get_products(user=None, category_id=None, price_max_filter=None, pric
     if price_max_filter is not None and price_min_filter is not None:
         products = products.filter(discount_price__lte=price_max_filter, discount_price__gte=price_min_filter)
 
+    if brandname_filter is not None:
+        products = products.filter(brandname__contains=brandname_filter)
+
     products = products.all()
     products_ = []
 
@@ -103,8 +106,15 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'original_price': product.original_price,
             'discount_price': product.discount_price,
             'fit_skin_type': product.fit_skin_type,
-            'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False
+            'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False,
+            'contains_set': []
         }
+
+        set_products = product.setproduct_set.all()
+        for set_product in set_products:
+            set = set_product.set
+            set_ = helper_get_set(set, user)
+            product_['contains_set'].append(set_)
 
         return product_
 
@@ -178,7 +188,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 
     set_.update({
         'original_price': original_price,
-        'discount_price': discount_price
+        'discount_price': discount_price-set.discount_difference
     })
 
     return set_

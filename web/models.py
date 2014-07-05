@@ -13,6 +13,20 @@ class Category(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+class Brand(models.Model):
+    name_eng = models.CharField(max_length=30, unique=True)
+    name_kor = models.CharField(max_length=30, null=False, blank=True)
+    is_repr_to_eng = models.BooleanField(default=True)
+
+    is_domestic = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return '(%r)Brand : name_eng(%s) name_kor(%s) is_domestic(%r)' \
+               % (self.id, self.name_eng, self.name_kor, self.is_domestic)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class Product(models.Model):
     name = models.TextField(unique=True)
     category = models.ForeignKey(Category)
@@ -23,6 +37,7 @@ class Product(models.Model):
 
     thumbnail_image = models.ImageField(null=True, upload_to='product/')
     video_url = models.URLField(blank=True)
+    brand = models.ForeignKey(Brand)
     brandname = models.CharField(max_length=30, blank=True)
     maker = models.CharField(max_length=30, blank=True)
     country = models.CharField(max_length=30, blank=True)
@@ -40,8 +55,8 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return '(%r)Product : name(%s)' \
-               % (self.id, self.name)
+        return '(%r)Product : name(%s) (%r)brand(%s)' \
+               % (self.id, self.name, self.brand_id, self.brand.name_eng)
 
     def __str__(self):
         return unicode(self).encode('utf-8')

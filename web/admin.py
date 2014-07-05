@@ -1,6 +1,15 @@
 from django.contrib import admin
 from .models import Category, Product, ProductDescriptionImage, ProductImage, Set, SetProduct, ChangeableProduct, \
-    ChangeableProductInfo, BlogReview
+    ChangeableProductInfo, BlogReview, Brand
+
+
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('name_eng', 'name_kor', 'is_repr_to_eng', 'is_domestic')
+    list_editable = ('name_kor', 'is_repr_to_eng', 'is_domestic',)
+    # list_display_links = ('name_kor', 'is_repr_to_eng')
+    list_filter = ('name_eng', 'name_kor', 'is_repr_to_eng', 'is_domestic')
+
+admin.site.register(Brand, BrandAdmin)
 
 admin.site.register(Category)
 admin.site.register(Product)
@@ -11,4 +20,3 @@ admin.site.register(SetProduct)
 admin.site.register(ChangeableProduct)
 admin.site.register(ChangeableProductInfo)
 admin.site.register(BlogReview)
-
