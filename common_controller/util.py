@@ -106,8 +106,15 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'original_price': product.original_price,
             'discount_price': product.discount_price,
             'fit_skin_type': product.fit_skin_type,
-            'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False
+            'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False,
+            'contains_set': []
         }
+
+        set_products = product.setproduct_set.all()
+        for set_product in set_products:
+            set = set_product.set
+            set_ = helper_get_set(set, user)
+            product_['contains_set'].append(set_)
 
         return product_
 
