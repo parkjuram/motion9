@@ -58,6 +58,9 @@ def helper_get_products(user=None, category_id=None, price_max_filter=None, pric
     if price_max_filter is not None and price_min_filter is not None:
         products = products.filter(discount_price__lte=price_max_filter, discount_price__gte=price_min_filter)
 
+    if brandname_filter is not None:
+        products = products.filter(brandname__contains=brandname_filter)
+
     products = products.all()
     products_ = []
 

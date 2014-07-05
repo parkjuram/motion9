@@ -13,6 +13,17 @@ class Category(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+class Brand(models.Model):
+    name = models.TextField(unique=True)
+    is_domestic = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return '(%r)Brand : name(%s) is_domestic(%r)' \
+               % (self.id, self.name, self.is_domestic)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
 class Product(models.Model):
     name = models.TextField(unique=True)
     category = models.ForeignKey(Category)
@@ -23,6 +34,7 @@ class Product(models.Model):
 
     thumbnail_image = models.ImageField(null=True, upload_to='product/')
     video_url = models.URLField(blank=True)
+    brand = models.ForeignKey(Brand)
     brandname = models.CharField(max_length=30, blank=True)
     maker = models.CharField(max_length=30, blank=True)
     country = models.CharField(max_length=30, blank=True)
