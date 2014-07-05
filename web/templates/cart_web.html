@@ -6,6 +6,9 @@
 <script src="{% static 'js/cart_web.js'%}"></script>
 {% endblock %}
 {% block content %}
+<div id="addressLayer">
+    <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px" onclick="closeDaumPostcode()">
+</div>
 <div class="row">
     <div class="category-list">
         <div style="font-size: 14px; padding: 10px 20px; font-weight: bold;">
@@ -191,13 +194,13 @@
                 <label>주소</label>
                 <div>
                     <div class="form-address-input-container">
-                        <input type="text"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
+                        <input type="text" name="postal_code" id="postalcode" disabled="disabled"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text"/>
+                        <input type="text" name="basic_address" id="basicAddress" disabled="disabled"/>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text"/>
+                        <input type="text" name="detail_address"/>
                     </div>
                 </div>
             </div>
