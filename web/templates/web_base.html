@@ -37,7 +37,6 @@
 
         <div id="header-main-menu">
             <ul id="header-main-menu-list">
-                <li><a href="#" data-attr="menuBest">BEST</a></li>
 
                 {% if current_page and current_page == 'shop_product' %}
                     <li><a href="#" data-attr="menuCollection">Collection</a></li>
@@ -49,11 +48,15 @@
                     <li><a href="#" data-attr="menuCollection">Collection</a></li>
                     <li><a href="#" data-attr="menuProduct">단일제품</a></li>
                 {% endif %}
+                <li><a href="#">커스텀컬렉션</a></li>
+                <li><a href="#" data-attr="menuSearch">검색</a></li>
                 <li><a href="#" data-attr="menuHelp">Help</a></li>
                 <li class="clearfix"></li>
             </ul>
             <ul id="header-right-menu-list">
+                <!--
                 <li><span><input type="text" class="header-search rounded" placeholder="Search.."></span></li>
+                -->
                 <li><a href="{% url 'mypage' %}">마이페이지</a></li>
                 <li><a href="{% url 'mypage_cart' %}">장바구니</a></li>
                 {% if user.is_authenticated %}
@@ -96,6 +99,13 @@
             <a href="#">FAQ</a><span class="header-sub-menu-divider">/</span>
             <a href="#">온라인 문의</a>
         </div>
+        <div id="menuSearch" class="header-sub-menu">
+            <span><b>인기 검색어 : &nbsp;</b></span>
+            <a href="#">고객센터</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">FAQ</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">온라인 문의</a>
+            <span><input type="text" class="header-search" placeholder="Search.."><a href="#" class="gold-btn menu-search-btn">검색</a></span>
+        </div>
     </div>
 </div>
 
@@ -122,7 +132,7 @@
     <div class="login-box-header">
         로그인
     </div>
-    <form method="post" data-form="login-popup-form" action="{% url 'login' %}" >
+    <form method="post" data-form="login-popup-form" action="{% url 'login' next="{{ next }}" %}" >
         <div class="form-box">
             <label for="email">이메일</label>
             <input type="text" name="email" id="email"/>

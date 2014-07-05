@@ -2,6 +2,7 @@
 $(function(){
 
 
+
   var mySwiper = $('.swiper-container').swiper({
     //Your options here:
     mode:'horizontal',
@@ -24,5 +25,26 @@ $(function(){
      mySwiper.swipePrev();
   });
 
+
+  $('.mypage-interesting-del-btn').click(function(e){
+        e.preventDefault();
+        var type = $(this).attr('data-type');
+        var id = $(this).attr('data-product');
+
+        $.ajax({
+              url: '/user/interest/del/',
+              dataType: 'json',
+              data : {product_or_set_id : id , type : type},
+              async : true,
+              type:'post',
+              success: function(data){
+
+                  location.reload();
+              },
+              error:function(jqXHR, textStatus, errorThrown){
+                  console.log(textStatus);
+              }
+        });
+    });
 
 });

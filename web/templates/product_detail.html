@@ -1,10 +1,12 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
-<script src="{% static "js/product_detail.js" %}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
 <script src="{% static "swiper/idangerous.swiper.js" %}"></script>
-<link rel="stylesheet" href="{% static 'css/product_detail.css' %}"/>
+<script src="{% static "js/product_detail.js" %}"></script>
+
 <link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}"/>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">제품 정보</h2>

@@ -61,12 +61,13 @@
 
        <div>
             <ul class="custom-menu-list">
-                <li><a href="/mobile/" data-ajax="false">홈</a></li>
+
                 {% if user.is_authenticated %}
-                   <li><a href="{% url "mobile_mypage" %}" data-ajax="false">프로필</a></li>
+                   <li><a href="{% url "mobile_mypage" %}" data-ajax="false">한도건님</a><img class="profile-img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c85.18.229.229/s100x100/180837_10150110963568938_908650_n.jpg"/></li>
                 {% else %}
                    <li><a href="{% url 'mobile_login_page' %}" data-ajax="false">로그인</a></li>
                 {% endif %}
+                <li><a href="/mobile/" data-ajax="false">홈</a></li>
                 <li class="list-collapsible">
                     <a href="#" class="collapse-btn">세트</a>
                     <ul class="list-collapsed">
@@ -88,7 +89,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">세번째</a>
+                    <a href="#">커스텀 컬렉션</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout'%}" data-ajax="false">로그아웃</a></li>

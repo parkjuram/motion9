@@ -70,12 +70,21 @@
 }
 
 
+a{
+    text-decoration : none;
+}
+
 .interest-btn{
-    width : 46px;
-    height : 46px;
-    background : url('../img/interest_down.png') top left no-repeat;
-    position : absolute;
-    right : 4px;
-    bottom : 4px;
-    background-size : 45px 45px;
+    border-top : 1px solid #e9e9e9;
+    width : 100%;
+    height : 18px;
+    padding : 7px 0 4px 0;
+    background-color : white;
+    text-align : center;
+    font-size: 12px;
+}
+
+.interest-btn a{
+    width : 100%;
+    display: inline-block;
 }

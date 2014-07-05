@@ -1,6 +1,7 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
 <script src="{% static "swiper/idangerous.swiper.js" %}"></script>
 <script src="{% static 'js/my_page.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/my_page.css'%}"/>
@@ -60,7 +61,7 @@
             <a href="{% url "mobile_mypage" %}" data-ajax="false" class="tab-btn ">관심 제품</a>
         </li>
         <li>
-            <a href="#" class="tab-btn ">구매 내역</a>
+            <a href="{% url "mobile_mypage_cart" %}" data-ajax="false" class="tab-btn ">구매 내역</a>
         </li>
     </ul>
 </div>

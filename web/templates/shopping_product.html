@@ -50,9 +50,9 @@
            </div>
            <div class="interest-btn">
                {% if product.is_interested %}
-                   <a href="#" class=" btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
-               {% else %}
                    <a href="#" class=" btn-for-interest interest-done"  data-type="p" data-product="{{ product.id }}">관심취소</a>
+               {% else %}
+                   <a href="#" class=" btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
                {% endif %}
            </div>
     </div>

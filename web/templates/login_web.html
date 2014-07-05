@@ -54,7 +54,7 @@
         <div class="login-box-header">
             로그인
         </div>
-        <form method="post" data-form="login-page-form" action="{% url 'login'%}" >
+        <form method="post" data-form="login-page-form" action="{% url 'login' next="{{ next }}"%}" >
             <div class="form-box">
                 <label for="email">이메일</label>
                 <input type="text" name="email" id="email"/>

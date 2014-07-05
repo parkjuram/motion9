@@ -1,39 +1,50 @@
 {% extends "my_page.html" %}
-{% block productGrid %}
-  <div id="purchaseList">
-    <div class="ui-grid-solo">
-        {% for product in carts.data %}
-        <div class="ui-block-a purchase-row">
-            <div class="comment-body boxed">
-                <div class="comment-avatar">
-                  <div class="avatar"><img src="{{ product.big_img_url }}" alt="" /></div>
-                </div>
-                <div class="comment-text ">
-                    <div class="comment-author clearfix">
-                        <a href="/productdetail/{{ product.key }}" data-ajax="false" class="link-author">{{ product.name }}</a>
-                        <span class="comment-meta"><span class="comment-date">{{ product.created_time }}</span></span>
-                    </div>
-                    <div class="comment-entry">
-                        <div data-role="controlgroup" data-mini="true" data-type="horizontal">
-                            <a href="#" class="ui-btn ui-corner-all purchased-list-btn">반품 신청</a>
-                            <a href="#" class="ui-btn ui-corner-all purchased-list-btn">배송 조회</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        </div>
-    </div>
-  </div>
-{% endblock %}
+{% block header_append %}
+{% load static %}
 
-{% block productPaging %}
-    <ul class="pagination pagination-lg">
-      <li {% if not carts.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
-      {% for pageNum in range(carts.page_left_count, carts.page_right_count+1 )%}
-      <li><a href="{{ url_for('myPagePurchaseMobile', pageNum = pageNum) }}"  data-ajax="false">{{ pageNum  }}</a></li>
-      {% endfor %}
-      <li {% if not carts.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+<link rel="stylesheet" href="{% static 'css/my_page_purchase.css'%}"/>
+<script src="{% static 'js/my_page_purchase.js'%}"></script>
+{% endblock %}
+{% block detail %}
+<div>
+{% if products|length > 0 %}
+  {% for product in products %}
+    <ul class="custom-menu-list">
+        <li>
+            <div class="purchase-item-wrapper">
+
+                <div class="purchase-item-img">
+                    <img src="{{ product.big_img_url }}"/>
+                </div>
+                <div class="purchase-item-info">
+                    2014.05.05 <span class="shipment-status-ok">배송 완료</span><br/>
+                    {{ product.name }}<br/>
+                    <b>{{ product.discount_price }}원</b>
+                </div>
+                <div class="purchase-item-btn">
+                    <a href="#" class="gold-btn">배송조회</a>
+                    <a href="#" class="gold-btn">반품신청</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </li>
     </ul>
+  {% endfor %}
+
+    <div class="paging-area">
+        <ul class="pagination">
+          <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
+           {% for pageNum in interests.page_range %}
+              <li><a href="{% url 'mobile_mypage' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
+           {% endfor %}
+          <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
+        </ul>
+    </div>
+
+{% else %}
+    <div>
+        아직 데이터가 없습니다.
+    </div>
+{% endif %}
+</div>
 {% endblock %}

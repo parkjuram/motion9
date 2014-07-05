@@ -1,0 +1,50 @@
+
+.purchase-item-wrapper{
+    width : 100%;
+}
+
+.purchase-item-img{
+    width : 80px;
+    height : 80px;
+    margin-left: 6px;
+    margin-right: 10px;
+    float : left;
+}
+
+.purchase-item-img img{
+    width : 80px;
+    height : 80px;
+    border : 0;
+}
+
+.purchase-item-info{
+    font-size: 12px;
+    padding : 2px 8px;
+    line-height: 20px;
+    margin-bottom: 6px;
+}
+
+.purchase-item-btn .gold-btn{
+    width : 60px;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.purchase-item-btn .gold-btn:first-child{
+    margin-right : 8px;
+}
+
+.shipment-status-ok{
+    font-weight: bold;
+    color : blue;
+}
+
+.shipment-status-ready{
+    font-weight: bold;
+    color : red;
+}
+
+.shipment-status-delivery{
+    font-weight: bold;
+    color : green;
+}

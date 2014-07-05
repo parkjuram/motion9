@@ -9,15 +9,16 @@ $(function(){
         $(target).addClass('tab-selected');
    });
 
-
-  var mySwiper = $('.swiper-container').swiper({
-    //Your options here:
-    mode:'horizontal',
-    loop: true,
-    calculateHeight : true,
-    pagination: '.pagination',
-    paginationClickable: true
-    //etc..
+  var container = document.querySelector('.swiper-container');
+  imagesLoaded(container, function() {	//when all images are loaded, it is triggered
+      var mySwiper = $('.swiper-container').swiper({
+          //Your options here:
+          mode: 'horizontal',
+          loop: true,
+          calculateHeight: true,
+          pagination: '.pagination',
+          paginationClickable: true
+          //etc..
+      });
   });
-
 });

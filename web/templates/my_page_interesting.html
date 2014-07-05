@@ -1,7 +1,7 @@
 {% extends "my_page.html" %}
 {% block header_append %}
 {% load static %}
-<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+
 <script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/my_page_interesting.css'%}"/>
 <script src="{% static 'js/my_page_interesting.js'%}"></script>
@@ -21,7 +21,7 @@
                    <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
                </div>
                <div class="interest-btn">
-                   <a href="#" class="" data-type="p" data-product="{{ product.id }}">삭제</a>
+                   <a href="#" class="mypage-interesting-del-btn" data-type="p" data-product="{{ product.id }}">삭제</a>
                </div>
             </div>
         {% endfor %}
