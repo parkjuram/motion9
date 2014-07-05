@@ -1,6 +1,7 @@
 {% extends "my_page.html" %}
 {% block header_append %}
 {% load static %}
+{% load humanize %}
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
 <script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>
@@ -38,7 +39,7 @@
                     </div>
                     <div class="item-contents-right">
                         <div class="item-price">
-                            {{ set.discount_price }}원
+                            {{ set.discount_price|intcomma }}원
                         </div>
                     </div>
                     <div class="clearfix"></div>

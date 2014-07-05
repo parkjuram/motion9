@@ -1,6 +1,7 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
+{% load humanize %}
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
 <script src="{% static "swiper/idangerous.swiper.js" %}"></script>
 <script src="{% static "js/product_detail.js" %}"></script>
@@ -57,7 +58,7 @@
     <div class="product-title">
         {{ product.name }}
         <div class="product-price">
-            {{ product.discount_price }}원 <span class="item-original-price">{{ product.original_price }}원</span>
+            {{ product.discount_price|intcomma }}원 <span class="item-original-price">{{ product.original_price }}원</span>
         </div>
         {% if product.is_interested %}
             <a href="#" class="interest-btn btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>

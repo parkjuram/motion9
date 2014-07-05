@@ -1,3 +1,4 @@
+{% load humanize %}
     <div class="modal-left-wrapper float-left">
         <div class="modal-desc-wrapper box-css">
             <div class="box-header">{{ product.name }}</div>
@@ -28,7 +29,7 @@
                 정보
             </div>
             <div class="price-area">
-                <div class="product-price price-saled">판매가 : <span>{{ product.discount_price }}원</span></div>
+                <div class="product-price price-saled">판매가 : <span>{{ product.discount_price|intcomma }}원</span></div>
                 <div class="product-how-many">
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :
@@ -39,7 +40,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="product-price price-total">
-                    총 상품 금액 : {{ product.discount_price }}원
+                    총 상품 금액 : {{ product.discount_price|intcomma }}원
                 </div>
                 <div class="product-btn-area">
                     <a href="{% url 'product' product_id=product.id %}" class="basic-btn">상세 페이지로 이동</a>

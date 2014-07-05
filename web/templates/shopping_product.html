@@ -1,6 +1,7 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>
 
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
@@ -46,7 +47,7 @@
            <div class="item-title" >
                <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name}}</a>
                <div class="item-price">
-                   {{product.discount_price}}원 <span class="item-original-price">{{product.original_price}}원</span> <span class="discount-rate">17%</span>
+                   {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ product.discount_rate }}</span>
                </div>
            </div>
            <div class="interest-btn">

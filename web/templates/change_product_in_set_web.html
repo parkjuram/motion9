@@ -1,6 +1,7 @@
 {% extends "web_base.html" %}
 {% block header %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'css/common_style_web.css'%}"/>
 <link rel="stylesheet" href="{% static 'css/change_product_in_set_web.css'%}"/>
 <script src="{% static 'js/change_product_in_set_web.js'%}"></script>
@@ -40,8 +41,8 @@
                                         카테고리 > {{ product.category_name }}<br/>
                                         브랜드 : {{ product.maker }}<br/>
                                         용량 : {{ product.capacity }}<br/>
-                                        원래 가격 : {{ product.original_price }}원<br/>
-                                        세트 포함시 가격 : \ {{ product.discount_price }} (할인율 : 23%)
+                                        원래 가격 : {{ product.original_price|intcomma }}원<br/>
+                                        세트 포함시 가격 : {{ product.discount_price|intcomma }}원 (할인율 : {{ product.discount_rate }}%)
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -56,11 +57,11 @@
                                             <img src="{{item.big_img_url }}" alt="" />
                                         </div>
                                         <div class="available-item-info">
-                                            <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}">{{item.name  }}</a></div>
+                                            <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}" target="_blank">{{item.name  }}</a></div>
                                             <div style="margin-top : 4px; line-height: 16px;">
                                                 카테고리 > {{ item.category_name }}<br/>
                                                 브랜드 : {{ item.maker}}<br/>
-                                                가격 : {{ item.discount_price }}<br/>
+                                                가격 : {{ item.discount_price|intcomma }}원<br/>
                                                 용량 : {{ item.capacity }}<br/>
                                             </div>
                                         </div>
@@ -77,7 +78,7 @@
         </div>
         <div class="nav-container float-left">
             <div class="box-css" id="originProductWrapper">
-                <div class="box-header">
+                <div class="box-header" style="margin-bottom: 8px;">
                     고객님의 커스텀 제품
                 </div>
                 <div class="origin-product-area">
@@ -103,20 +104,20 @@
                             </tbody>
                         </table>
                     </div>
-                    <div>
+                    <div style="padding-top : 12px;">
                         <div class="box-header" style="margin: 0;">
                             수정된 {{set.name }}
                         </div>
                         <div class="set-final-info">
                             <div class="set-final-price-box">
-                                    원래가격 : {{ set.original_price }}원<br/>
-                                    할인 된 가격 : {{ set.discount_price }}원<br/>
+                                    원래가격 : {{ set.original_price|intcomma }}원<br/>
+                                    할인 된 가격 : {{ set.discount_price|intcomma }}원<br/>
                                     할인율 : 15%<br/>
                             </div>
                             <br/>
                            <div class="purchase-btn-area">
-                                <a href="#" type="button" id="addCustomBtn" class="basic-btn" data-set = "{#{ set.key  }#}" >&nbsp;&nbsp;저장 하기&nbsp;&nbsp;</a>
-                                &nbsp;&nbsp;<a href="#" type="button" id="submitCustomBtn" data-set = "{#{ set.key  }#}" class="basic-btn">&nbsp;&nbsp;장바구니&nbsp;&nbsp;</a>
+                                <a href="#" type="button" id="addCustomBtn" class="basic-btn" data-set = "{{ set.id  }}" >&nbsp;&nbsp;저장 하기&nbsp;&nbsp;</a>
+                                &nbsp;&nbsp;<a href="#" type="button" id="submitCustomBtn" data-set = "{{ set.id  }}" class="basic-btn">&nbsp;&nbsp;장바구니&nbsp;&nbsp;</a>
                             </div>
                         </div>
                     </div>
@@ -127,74 +128,5 @@
    <div class="clearfix"></div>
 </div>
 
-<!--
-
-<div class="modal fade" id="product-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" style="padding : 12px;">
-      <div class="row">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-7">
-                    <div class="box-css">
-                        <div class="box-header">
-                            <h4 class="contents-header">제품 상세 설명</h4>
-                        </div>
-                        <div class="product-contents">
-                            <div class="product-img">
-                                <img src="{#{ set.big_img_url}#}" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-5">
-                    <div class="box-css">
-                        <div class="box-header">
-                            <h4 class="contents-header">구매</h4>
-                        </div>
-                        <div class="price-area">
-                            <div class="product-name"><a href="#">{#{set.name  }#}</a></div>
-                            <div class="product-price"><span>{#{ set.discount_price }#}</span>원</div>
-                            <div class="product-btn-area">
-                                <a href="#" class="btn btn-danger">선택하기</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-css" style="margin-top: 14px;">
-                        <div class="box-header">
-                            <h4 class="contents-header">상품 정보</h4>
-                        </div>
-                        <div>
-                            <ul class="nav nav-tabs nav-justified set-info-tab" style="margin-left:-1px;">
-                               <li class="active"><a href="#modalProductInfo" data-toggle="tab">상품 정보</a></li>
-                               <li><a href="#modalProductReview" data-toggle="tab">제품 리뷰</a></li>
-                               <li><a href="#modalProductEtc" data-toggle="tab">기타</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="modalProductInfo">
-                                   <div class="product-description">
-                                        <h4  class="contents-header" style="padding-left:0px;">상세 설명</h4>
-                                        {#{ set.description }#}
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="modalProductReview">
-                                     <div class="video-review">
-                                        <iframe width="96%" height="225" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="modalProductEtc">
-                                     상품 정보가 어쩌구 저쩌구 <button class="btn btn-primary" data-toggle="modal" data-target=".product-detail-modal">Large modal</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-       </div>
-    </div>
-  </div>
-</div>
--->
 
 {% endblock %}

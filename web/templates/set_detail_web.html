@@ -1,6 +1,7 @@
 {% extends "web_base.html" %}
 {% block header %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{%  static 'css/set_detail_web.css' %}"/>
 <link rel="stylesheet" href="{%  static 'magnific_popup/magnific-popup.css' %}"/>
 <link rel="stylesheet" href="{%  static 'spinner/jquery.spinner.css' %}"/>
@@ -80,7 +81,7 @@
             </div>
 
             <div class="price-area">
-                <div class="product-price price-origin">원래 가격 : {{ set.original_price }}원 (<span class="price-discount">할인율 : {{ set.discount_difference }}%</span>)</div>
+                <div class="product-price price-origin">원래 가격 : {{ set.original_price|intcomma }}원 (<span class="price-discount">할인율 : {{ set.discount_difference|intcomma }}%</span>)</div>
                 <div class="product-how-many">
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :
@@ -90,9 +91,9 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="product-price price-saled">판매가 : <span>{{ set.discount_price }}원</span></div>
+                <div class="product-price price-saled">판매가 : <span>{{ set.discount_price|intcomma }}원</span></div>
                 <div class="product-price price-total">
-                    총 상품 금액 : {{ set.discount_price }}원
+                    총 상품 금액 : {{ set.discount_price|intcomma }}원
                 </div>
                 <div class="product-btn-area">
                     <a href="#" class="basic-btn">구매하기</a>
@@ -124,7 +125,7 @@
                            브랜드 : {{ product.brandname }}
                        </div>
                        <div class="belong-product-contents">
-                           가격 : {{ product.discount_price }}원
+                           가격 : {{ product.discount_price|intcomma }}원
                        </div>
                        <div class="belong-product-contents">
                            용량 : {{ product.capacity }}

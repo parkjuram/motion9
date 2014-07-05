@@ -51,7 +51,7 @@ $(function(){
                     + '     </div>'
                     + '     <div class="clearfix"></div>'
                     + '가격 : '
-                    + productPrice + '원'
+                    + numberFormatter(productPrice) + '원'
                     + '</div>'
                     + '<div class="clearfix"></div>'
                     + '</li>';

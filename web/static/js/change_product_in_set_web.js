@@ -75,14 +75,14 @@ $(function(){
 
     var preForSubmit = function(setKey){
 
-        var params = {setKey : setKey, customData : [], changedCnt : 0};
+        var params = {set_id : setKey, custom_lists : [], changedCnt : 0};
         var changedCnt = 0;
         $('.custom-set-item-tr').each(function(idx, val){
             var originalKey = $(this).attr('data-original-key');
             var newKey = $(this).attr('data-new-key');
             if(newKey != originalKey)
                 changedCnt++;
-            params.customData.push({originalKey : originalKey, newKey : newKey});
+            params.custom_lists.push({original_id : originalKey, new_id : newKey});
         });
         params.changedCnt = changedCnt;
 
@@ -96,13 +96,13 @@ $(function(){
             return ;
         }
         $.ajax({
-				  url: '/customize/set/add',
+				  url: '/customize/set/save/',
 				  dataType: 'json',
-                  data: {'param' : JSON.stringify(param), 'addToCart': addToCart},
+                  data: {'data' : JSON.stringify(param), 'addToCart': addToCart},
 				  async : true,
 				  type:'POST',
 				  success: function(data){
-                      var result = data.result;
+                      var result = data;
 					  if(result == 'success'){
                           if(addToCart)
                             alert('장바구니에 추가 되었습니다.');

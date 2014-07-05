@@ -1,6 +1,7 @@
 {% extends "my_page.html" %}
 {% block header_append %}
 {% load static %}
+{% load humanize %}
 
 <script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/my_page_interesting.css'%}"/>
@@ -14,7 +15,7 @@
                <div class="item-title" >
                    <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name|truncatechars:13}}</a>
                    <div class="item-price">
-                       {{product.discount_price}}원 <span class="item-original-price">{{product.original_price}}원</span> <span class="discount-rate">17%</span>
+                       {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ discount_rate }}%</span>
                    </div>
                </div>
                <div class="item-image">

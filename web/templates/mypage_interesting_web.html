@@ -1,6 +1,7 @@
 {% extends "mypage_web.html" %}
 {% block subHeader %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'css/mypage_interesting_web.css'%}"/>
 
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
@@ -32,7 +33,7 @@
                 브랜드 : {{ product.brandname }}
             </div>
             <div class="product-item-info-contents">
-                가격 : ￦{{ product.original_price }}
+                가격 : {{ product.original_price|intcomma }}원
             </div>
             <div class="product-item-info-contents">
                 용량 : {{ product.capacity}}

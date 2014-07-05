@@ -1,6 +1,7 @@
 {% extends "web_base.html" %}
 {% block header %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'css/product_detail_web.css' %}"/>
 <link rel="stylesheet" href="{% static 'magnific_popup/magnific-popup.css' %}"/>
 <link rel="stylesheet" href="{% static 'spinner/jquery.spinner.css' %}"/>
@@ -69,7 +70,7 @@
 
             <div class="price-area">
                 <div class="product-how-many">
-                    <div class="product-price price-saled">판매가 : <span>{{ product.discount_price }}원</span></div>
+                    <div class="product-price price-saled">판매가 : <span>{{ product.discount_price|intcomma }}원</span></div>
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :
                     </div>
@@ -79,7 +80,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="product-price price-total">
-                    총 상품 금액 : {{ product.discount_price }}원
+                    총 상품 금액 : {{ product.discount_price|intcomma }}원
                 </div>
                 <div class="product-btn-area">
                     <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-interest">관심하기</a>

@@ -1,6 +1,7 @@
 {% extends "mypage_web.html" %}
 {% block subHeader %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'css/mypage_interesting_set_web.css'%}"/>
 <script src="{% static 'js/mypage_interesting_set_web.js'%}"></script>
 {% endblock %}
@@ -24,7 +25,7 @@
                 BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
             </div>
             <div class="set-item-info-bottom">
-                \{{ set.discount_price }} &nbsp;&nbsp;<a href="{% url "set" set_id=set.id %}" class="basic-btn">자세히 보기</a>
+                {{ set.discount_price|intcomma }}원 &nbsp;&nbsp;<a href="{% url "set" set_id=set.id %}" class="basic-btn">자세히 보기</a>
             </div>
         </div>
     </div>
