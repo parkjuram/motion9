@@ -56,7 +56,7 @@ class Product(models.Model):
 
     def __unicode__(self):
         return '(%r)Product : name(%s) (%r)brand(%s)' \
-               % (self.id, self.name, self.brand_id, self.brand.name)
+               % (self.id, self.name, self.brand_id, self.brand.name_eng)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
