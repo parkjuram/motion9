@@ -1,7 +1,31 @@
 /**
  * Created by Park-Kunbae on 14. 4. 10.
  */
+
+function openDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            // 우편번호와 주소 정보를 해당 필드에 넣고, 커서를 상세주소 필드로 이동한다.
+            console.log(data);
+            /*
+            document.getElementById('post1').value = data.postcode1;
+            document.getElementById('post2').value = data.postcode2;
+            document.getElementById('addr').value = data.address;
+            document.getElementById('addr2').focus();
+            */
+        }
+    }).open();
+}
+
+
 $(function(){
+
+   $('#searchAddressBtn').click(function(e){
+        openDaumPostcode();
+   });
+
+
    $('select.product-num').change(function(e){
        var productPrice = 0;
        var deliveryPrice = 0;

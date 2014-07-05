@@ -107,7 +107,7 @@
 .product-item{
     width : 190px;
     /*height : 369px;*/
-    height : 320px;
+    min-height : 320px;
     border : 1px solid #e5e5e5;
     margin-top : 20px;
 }
@@ -115,7 +115,7 @@
 .product-item-info{
     padding : 8px 15px 8px 15px;
     width: 160px;
-    height : 100px;
+    min-height : 100px;
     font-size: 14px;
     overflow-y: hidden;
     /*background-color: #e5e5e5;*/
@@ -225,7 +225,7 @@
 }
 
 .product-expand-info-mode{
-    height : 174px;
+    min-height : 174px;
     background-color: #d2bb8f;
     -webkit-transition-property : background-color;
     -moz-transition-property : background-color;
@@ -241,7 +241,7 @@
 }
 
 .product-expand-mode{
-    height : 390px;
+    min-height : 390px;
     border : 1px solid #444444;
     outline : 3px solid #444444;
     z-index: 90;

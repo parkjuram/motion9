@@ -2,6 +2,7 @@
 {% block header %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/cart_web.css' %}"/>
+<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script src="{% static 'js/cart_web.js'%}"></script>
 {% endblock %}
 {% block content %}
@@ -190,7 +191,7 @@
                 <label>주소</label>
                 <div>
                     <div class="form-address-input-container">
-                        <input type="text"/> <a href="#" class="basic-btn">우편번호 검색</a>
+                        <input type="text"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
                         <input type="text"/>

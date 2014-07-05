@@ -48,11 +48,11 @@
                             카테고리 > {{ product.category_name }}
                         </div>
                         <div class="product-item-name">
-                            <a href="{% url 'product' product_id=product.id %}" title="{{ product.name }}">{{product.name|truncatechars:13}}</a>
+                            <a href="{% url 'product' product_id=product.id %}" title="{{ product.name }}">{{product.name}}</a>
                         </div>
                        <div class="product-item-info-contents">
                            브랜드 : {{ product.brandname }}<br/>
-                           가격 : {{ product.discount_price }}원<br/>
+                           가격 : {{ product.discount_price|intcomma }}원 <br/>
                            용량 : {{ product.capacity }}
                         </div>
                         <div class="product-hover-area">
