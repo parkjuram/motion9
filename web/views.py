@@ -33,8 +33,10 @@ def index_view(request):
 def shop_product_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
-    price_filter = request.GET.get('price', 0)
-    products_ = helper_get_products(helper_get_user(request), category_id)
+    price_max_filter = request.GET.get('price_max', None)
+    price_min_filter = request.GET.get('price_min', None)
+    brandname_filter = request.GET.get('brandname', None)
+    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter, brandname_filter)
 
     if page_num is not None:
         products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], page_num)
@@ -61,8 +63,9 @@ def shop_product_view(request, category_id=None, page_num=1):
 def shop_set_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
-
-    sets = helper_get_set_list(category_id, helper_get_user(request))
+    price_max_filter = request.GET.get('price_max', None)
+    price_min_filter = request.GET.get('price_min', None)
+    sets = helper_get_set_list(category_id, helper_get_user(request), price_max_filter, price_min_filter)
 
     if page_num is not None:
         sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_SET:page_num*ITEM_COUNT_PER_PAGE_FOR_SET], page_num)

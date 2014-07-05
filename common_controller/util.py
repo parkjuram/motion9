@@ -49,11 +49,14 @@ def helper_get_blog_reviews(product_id):
 
     return blog_reviews_
 
-def helper_get_products(user=None, category_id=None):
+def helper_get_products(user=None, category_id=None, price_max_filter=None, price_min_filter=None, brandname_filter=None):
 
     products = Product.objects
     if category_id is not None:
-        products.filter(category__id=category_id)
+        products = products.filter(category__id=category_id)
+
+    if price_max_filter is not None and price_min_filter is not None:
+        products = products.filter(discount_price__lte=price_max_filter, discount_price__gte=price_min_filter)
 
     products = products.all()
     products_ = []
@@ -180,10 +183,13 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 
     return set_
 
-def helper_get_set_list(category_id, user):
+def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filter=None):
     sets = Set.objects
     if category_id is not None:
-        sets.filter(category__id=category_id)
+        sets = sets.filter(category__id=category_id)
+
+    # if price_max_filter is not None and price_min_filter is not None:
+        # sets = sets.filter(discount_price__lte=price_max_filter, discount_price__gte=price_min_filter)
 
     set_count = sets.count()
     sets = sets.all()
@@ -196,7 +202,11 @@ def helper_get_set_list(category_id, user):
                 is_interest = True
 
         set_ = helper_get_set(set.id, user)
-        sets_.append(set_)
+        if price_max_filter is not None and price_min_filter is not None:
+            if set_.discount_price <= price_max_filter and set_.discount_price >= price_min_filter:
+                sets_.append(set_)
+        else:
+            sets_.append(set_)
 
     return sets_
 
