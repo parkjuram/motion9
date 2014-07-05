@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Category, Product, ProductDescriptionImage, ProductImage, Set, SetProduct, ChangeableProduct, \
-    ChangeableProductInfo, BlogReview
+    ChangeableProductInfo, BlogReview, Brand
 
 admin.site.register(Category)
 admin.site.register(Product)
@@ -11,4 +11,5 @@ admin.site.register(SetProduct)
 admin.site.register(ChangeableProduct)
 admin.site.register(ChangeableProductInfo)
 admin.site.register(BlogReview)
+admin.site.register(Brand)
 
