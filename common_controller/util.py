@@ -210,8 +210,8 @@ def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filt
 
     return sets_
 
-def helper_make_paging_data( all_object_length, lists, page_num):
-    pager_total_length = int(math.ceil( all_object_length/float(ITEM_COUNT_PER_PAGE)))
+def helper_make_paging_data( all_object_length, lists, item_count_per_page, page_num):
+    pager_total_length = int(math.ceil( all_object_length/float(item_count_per_page)))
     lists = {
         'data': lists,
         'page_total_count': pager_total_length,
