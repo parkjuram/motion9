@@ -33,11 +33,11 @@ def index_view(request):
 def shop_product_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
-
+    price_filter = request.GET.get('price', 0)
     products_ = helper_get_products(helper_get_user(request), category_id)
 
     if page_num is not None:
-        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], page_num)
     else:
         products_ = {'data': products_}
 
@@ -65,7 +65,7 @@ def shop_set_view(request, category_id=None, page_num=1):
     sets = helper_get_set_list(category_id, helper_get_user(request))
 
     if page_num is not None:
-        sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+        sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_SET:page_num*ITEM_COUNT_PER_PAGE_FOR_SET], page_num)
     else:
         sets = {'data': sets}
 

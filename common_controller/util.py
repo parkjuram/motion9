@@ -4,7 +4,7 @@ from web.models import Product, Set, ChangeableProduct, BlogReview
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail
 from django.core.exceptions import ObjectDoesNotExist
 
-from motion9.const import ITEM_COUNT_PER_PAGE, PAGER_INDICATOR_LENGTH, ERROR_CODE_AND_MESSAGE_DICT
+from motion9.const import *
 import logging
 import math
 import json
@@ -213,7 +213,8 @@ def helper_make_paging_data( all_object_length, lists, page_num):
     lists.update({
         'page_hasPrev': True if lists['page_left_count'] is not 1 else False,
         'page_hasNext': True if lists['page_right_count'] is not pager_total_length else False,
-        'page_range': range(lists['page_left_count'], lists['page_right_count']+1)
+        'page_range': range(lists['page_left_count'], lists['page_right_count']+1),
+        'page_num': page_num
     })
     return lists
 

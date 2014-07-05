@@ -53,6 +53,7 @@ def registration_view(request):
 def login(request):
     email = request.POST.get('email')
     password = request.POST.get('password')
+    next = request.GET.get('next', 'index')
 
     error = None
 
@@ -64,7 +65,7 @@ def login(request):
         user = authenticate(username=user_.username, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
-            return redirect('shop_product')
+            return redirect(next)
         else:
             error = 'login fail'
             logger.error(error)
@@ -73,7 +74,10 @@ def login(request):
 
 @csrf_exempt
 def login_view(request):
-    return render(request, 'login_web.html')
+    return render(request, 'login_web.html',
+        {
+            'next': 'shop_product'
+        })
 
 @csrf_exempt
 def logout_(request):
@@ -113,7 +117,7 @@ def mypage_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':products}
 
@@ -139,7 +143,7 @@ def mypage_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], page_num)
         else:
             sets = {'data':sets}
 
@@ -161,17 +165,21 @@ def mypage_cart_view(request):
         products = []
         for product_cart in product_carts:
             product = product_cart.product
-            products.append(helper_get_product_detail(product,user).update({
+            product_ = helper_get_product_detail(product,user)
+            product_.update({
                 'item_count': product_cart.item_count
-            }))
+            })
+            products.append(product_)
 
         set_carts = user.cart_set.filter(type='s').all()
         sets = []
         for set_cart in set_carts:
             set = set_cart.set
-            sets.append(helper_get_set(set,user).update({
+            set_ = helper_get_set(set,user)
+            set_.update({
                 'item_count': set_cart.item_count
-            }))
+            })
+            sets.append(set_)
 
         custom_set_carts = user.cart_set.filter(type='c').all()
         custom_sets = []
@@ -242,7 +250,7 @@ def mypage_purchase_view(request, page_num=1):
                 purchases_.append(custom_set_)
 
         if page_num is not None:
-            purchases_ = helper_make_paging_data(len(purchases_), purchases_[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            purchases_ = helper_make_paging_data(len(purchases_), purchases_[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             purchases_ = {'data':purchases_}
 
@@ -264,7 +272,7 @@ def mypage_purchase_product_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':products}
 
@@ -287,7 +295,7 @@ def mypage_purchase_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':sets}
 
@@ -310,7 +318,7 @@ def mypage_purchase_custom_set_view(request, page_num=1):
             custom_sets.append(custom_set_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], page_num)
         else:
             products = {'data':custom_sets}
 
@@ -447,7 +455,9 @@ def make_custom_set(request):
 # mobile part
 
 def mobile_login_view(request):
-    return render(request, 'login.html' )
+    return render(request, 'login.html', {
+        'next': 'mobile_index'
+    })
 
 def mobile_mypage_view(request, page_num=1):
     page_num = int(page_num)
@@ -461,7 +471,7 @@ def mobile_mypage_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], page_num)
         else:
             products = {'data':products}
 
@@ -486,7 +496,7 @@ def mobile_mypage_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE:page_num*ITEM_COUNT_PER_PAGE], page_num)
+            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], page_num)
         else:
             sets = {'data':sets}
 
