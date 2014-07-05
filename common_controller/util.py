@@ -181,7 +181,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
 
     set_.update({
         'original_price': original_price,
-        'discount_price': discount_price
+        'discount_price': discount_price-set.discount_difference
     })
 
     return set_
