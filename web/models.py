@@ -14,8 +14,8 @@ class Category(models.Model):
         return unicode(self).encode('utf-8')
 
 class Brand(models.Model):
-    name_eng = models.TextField(unique=True)
-    name_kor = models.TextField(null=False, blank=True)
+    name_eng = models.CharField(max_length=30, unique=True)
+    name_kor = models.CharField(max_length=30, null=False, blank=True)
     is_repr_to_eng = models.BooleanField(default=True)
 
     is_domestic = models.BooleanField(default=True)
