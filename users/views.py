@@ -50,10 +50,9 @@ def registration_view(request):
     return render(request, 'register_web.html')
 
 @csrf_exempt
-def login(request):
+def login(request, next='index'):
     email = request.POST.get('email')
     password = request.POST.get('password')
-    next = request.GET.get('next', 'index')
 
     error = None
 
