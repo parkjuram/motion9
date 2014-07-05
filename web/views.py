@@ -33,7 +33,7 @@ def index_view(request):
 def shop_product_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
-
+    price_filter = request.GET.get('price', 0)
     products_ = helper_get_products(helper_get_user(request), category_id)
 
     if page_num is not None:
