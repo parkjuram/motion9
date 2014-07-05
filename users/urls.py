@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('',
     url(r'^registration/$', 'users.views.registration', name='registration'),
     url(r'^registration_page/$', 'users.views.registration_view', name='registration_page'),
+    url(r'^login/$', 'users.views.login', name='login'),
     url(r'^login/(?P<next>(\w+))/$', 'users.views.login', name='login'),
     url(r'^login_page/$', 'users.views.login_view', name='login_page'),
     url(r'^logout/$', 'users.views.logout_', name='logout'),
