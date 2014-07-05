@@ -35,7 +35,8 @@ def shop_product_view(request, category_id=None, page_num=1):
     page_num = int(page_num)
     price_max_filter = request.GET.get('price_max', None)
     price_min_filter = request.GET.get('price_min', None)
-    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter)
+    brandname_filter = request.GET.get('brandname', None)
+    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter, brandname_filter)
 
     if page_num is not None:
         products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], page_num)

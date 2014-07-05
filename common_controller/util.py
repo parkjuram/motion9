@@ -49,7 +49,7 @@ def helper_get_blog_reviews(product_id):
 
     return blog_reviews_
 
-def helper_get_products(user=None, category_id=None, price_max_filter=None, price_min_filter=None):
+def helper_get_products(user=None, category_id=None, price_max_filter=None, price_min_filter=None, brandname_filter=None):
 
     products = Product.objects
     if category_id is not None:
