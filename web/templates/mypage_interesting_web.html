@@ -23,7 +23,7 @@
         </div>
         <div class="product-item-info">
             <div class="product-item-info-contents product-item-name">
-                <a href="{% url 'product' product_id=product.id%}" title="{{ product.name }}">{{product.name|truncatechars:15 }}..</a>
+                <a href="{% url 'product' product_id=product.id%}" title="{{ product.name }}">{{product.name }}</a>
             </div>
             <div class="product-item-info-contents">
                 카테고리 > {{ product.category_name }}

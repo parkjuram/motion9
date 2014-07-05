@@ -39,14 +39,15 @@
 <div id="productGrid">
     {% for product in products.data %}
     <div class="product-item" >
+
+           <div class="item-image">
+               <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
+           </div>
            <div class="item-title" >
-               <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name|truncatechars:13}}</a>
+               <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name}}</a>
                <div class="item-price">
                    {{product.discount_price}}원 <span class="item-original-price">{{product.original_price}}원</span> <span class="discount-rate">17%</span>
                </div>
-           </div>
-           <div class="item-image">
-               <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
            </div>
            <div class="interest-btn">
                {% if product.is_interested %}
