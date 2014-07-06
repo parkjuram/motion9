@@ -113,7 +113,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
         set_products = product.setproduct_set.all()
         for set_product in set_products:
             set = set_product.set
-            set_ = helper_get_set(set, user)
+            set_ = helper_get_set(set, user, False, True)
             product_['contains_set'].append(set_)
 
         return product_
@@ -121,7 +121,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
     except ObjectDoesNotExist as e:
         logger.error(e)
 
-def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
+def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_detail_info=True):
 
     if isinstance(set_id_or_object, unicode) or isinstance(set_id_or_object, int):
         set_id = set_id_or_object
@@ -162,29 +162,30 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False):
         original_price += product.original_price
         discount_price += product.discount_price
 
-        product_ = helper_get_product_detail( product.id, user)
+        if with_detail_info:
+            product_ = helper_get_product_detail( product.id, user)
 
-        if with_custom_info:
-            try:
-                changeable_product = ChangeableProduct.objects.get(set_id=set_id, product_id=product.id)
-                changeable_product_infos = changeable_product.changeableproductinfo_set.all()
+            if with_custom_info:
+                try:
+                    changeable_product = ChangeableProduct.objects.get(set_id=set_id, product_id=product.id)
+                    changeable_product_infos = changeable_product.changeableproductinfo_set.all()
 
-                changeable_products = []
-                for changeable_product_info in changeable_product_infos:
-                    changeable_product_ = helper_get_product_detail(changeable_product_info.product, user)
-                    changeable_products.append(changeable_product_)
+                    changeable_products = []
+                    for changeable_product_info in changeable_product_infos:
+                        changeable_product_ = helper_get_product_detail(changeable_product_info.product, user)
+                        changeable_products.append(changeable_product_)
 
-                product_.update({
-                    'is_changeable': True,
-                    'changeable_products': changeable_products
-                })
+                    product_.update({
+                        'is_changeable': True,
+                        'changeable_products': changeable_products
+                    })
 
-            except Exception as e:
-                product_.update({
-                    'is_changeable': False
-                })
+                except Exception as e:
+                    product_.update({
+                        'is_changeable': False
+                    })
 
-        set_['products'].append(product_)
+            set_['products'].append(product_)
 
     set_.update({
         'original_price': original_price,
