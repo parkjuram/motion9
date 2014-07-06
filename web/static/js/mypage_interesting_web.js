@@ -24,7 +24,7 @@ $(function(){
         $(this).addClass('product-item-hover');
         $(this).find('.product-hover-area').css({display:'block'});
         $(this).find('.product-opacity-bg').animate({backgroundColor:'#393939', opacity:0.7},'slow',function(){
-            console.log('done');
+
         });
 
     }, function(e){

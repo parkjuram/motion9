@@ -1,6 +1,7 @@
 {% extends "my_page.html" %}
 {% block header_append %}
 {% load static %}
+{% load humanize %}
 
 <link rel="stylesheet" href="{% static 'css/my_page_purchase.css'%}"/>
 <script src="{% static 'js/my_page_purchase.js'%}"></script>
@@ -19,7 +20,7 @@
                 <div class="purchase-item-info">
                     2014.05.05 <span class="shipment-status-ok">배송 완료</span><br/>
                     {{ product.name }}<br/>
-                    <b>{{ product.discount_price }}원</b>
+                    <b>{{ product.discount_price|intcomma }}원</b>
                 </div>
                 <div class="purchase-item-btn">
                     <a href="#" class="gold-btn">배송조회</a>

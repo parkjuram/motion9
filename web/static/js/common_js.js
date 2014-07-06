@@ -2,15 +2,32 @@
  * Created by Park-Kunbae on 14. 3. 31.
  */
 
-$(function(){
 
-    function getContextPath(){
-        var offset=location.href.indexOf(location.host)+location.host.length;
-        var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
-        return ctxPath;
+function numberFormatter(number){
+    var digits = parseInt(number);
+    var numberStr = ''+ digits;
+    var length = numberStr.length;
+
+    var result = '';
+    for(var i = length-1 ; i >= 0; i--){
+        result = numberStr.charAt(i) + result;
+
+        if(i != 0 && (i == length-9 || i == length-6 || i == length-3))
+           result = ',' + result;
     }
 
+    return result;
+}
 
+
+function getContextPath(){
+    var offset=location.href.indexOf(location.host)+location.host.length;
+    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+    return ctxPath;
+}
+
+
+$(function(){
 
     $('.btn-for-interest').click(function(e){
         e.preventDefault();
