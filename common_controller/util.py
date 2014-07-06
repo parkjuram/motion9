@@ -113,7 +113,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
         set_products = product.setproduct_set.all()
         for set_product in set_products:
             set = set_product.set
-            set_ = helper_get_set(set, user, False, True)
+            set_ = helper_get_set(set, user, False, False)
             product_['contains_set'].append(set_)
 
         return product_
