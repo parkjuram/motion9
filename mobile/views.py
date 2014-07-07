@@ -137,8 +137,8 @@ def customize_set_view(request, user):
     # set =
 
 @csrf_exempt
-def customize_set_detail_view(request, custom_set_id):
-    custom_set = helper_get_custom_set(custom_set_id, helper_get_user(request))
+def customize_set_detail_view(request, set_id):
+    custom_set = helper_get_custom_set(set_id, helper_get_user(request))
 
     return render(request, "custom_detail.html",
           {
