@@ -51,6 +51,7 @@ class Cart(models.Model):
 
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
+    price = models.IntegerField(null=False, default=0)
     address = models.TextField(null=False, blank=True)
     product = models.ForeignKey('web.Product',null=True, blank=True)
     set = models.ForeignKey('web.Set',null=True, blank=True)
@@ -70,6 +71,7 @@ class Purchase(models.Model):
 class CustomSet(models.Model):
     user = models.ForeignKey('auth.User')
     set = models.ForeignKey('web.Set')
+    is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     class Meta:

@@ -121,6 +121,9 @@ def helper_get_product_detail(product_id_or_object, user=None):
     except ObjectDoesNotExist as e:
         logger.error(e)
 
+# def helper_get_products(user=None, category_id=None, price_max_filter=None, price_min_filter=None, brandname_filter=None):
+# def helper_get_custom_sets(user=None)
+
 def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_detail_info=True):
 
     if isinstance(set_id_or_object, unicode) or isinstance(set_id_or_object, int):

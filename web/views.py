@@ -132,7 +132,12 @@ def product_json_view(request, product_id=None):
         return render(request, "404.html")
 
 @csrf_exempt
-def customize_set_view(request, set_id):
+def customize_set_view(request):
+    pass
+    # set =
+
+@csrf_exempt
+def customize_set_detail_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request), True)
 
     return render(request, "change_product_in_set_web.html",
