@@ -76,7 +76,6 @@
             </div>
         </div>
         <div class="paging-area">
-        {{products.page_hasPrev}} {{products.page_hasNext}}
             <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
               {% if not products.page_hasPrev %}
                   <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
@@ -92,7 +91,6 @@
               {% else %}
                 <li><a href="{% url 'shop_product' page_num=products.page_right_count|add:1 %}" class="next">Next</a></li>
               {% endif %}
-
             </ul>
         </div>
     </div>

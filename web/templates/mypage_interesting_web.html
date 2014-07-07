@@ -2,6 +2,7 @@
 {% block subHeader %}
 {% load static %}
 {% load humanize %}
+{% load mathfilters %}
 <link rel="stylesheet" href="{% static 'css/mypage_interesting_web.css'%}"/>
 
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
@@ -48,13 +49,24 @@
 
 {% block productPaging %}
 {% if interests.data|length > 0  %}
+
     <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
-      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="previous">Prev</a></li>
+      {% if not interests.page_hasPrev %}
+          <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
+      {% else %}
+          <li><a href="{% url 'mypage' page_num=interests.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+      {% endif %}
+
       {% for pageNum in interests.page_range %}
-      <li><a href="{% url 'mypage' page_num=pageNum %}" class="">{{ pageNum  }}</a></li>
+        <li><a href="{% url 'mypage' page_num=pageNum %}" {% if pageNum == interests.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
       {% endfor %}
-      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="next">Next</a></li>
+      {% if not interests.page_hasNext  %}
+        <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
+      {% else %}
+        <li><a href="{% url 'mypage' page_num=interests.page_right_count|add:1 %}" class="next">Next</a></li>
+      {% endif %}
     </ul>
+
 {% else %}
         <div class="clearfix"></div>
         <div style="padding : 20px;">

@@ -31,7 +31,7 @@
             <div class="set-category">
                 Collection > {{ current_category }}
             </div>
-            {% for set in sets.data %}
+            {% for set in custom_sets.data %}
             <div class="set-item" style="background: url('{{ set.big_img_url }}') top left no-repeat;">
                 <div class="set-item-info">
                     <div class="set-item-info-title">
@@ -47,7 +47,7 @@
                         BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
                     </div>
                     <div class="set-item-info-bottom">
-                        {{ set.discount_price|intcomma }}원 &nbsp;&nbsp;<a href="{% url "set" set_id=set.id %}" class="basic-btn">자세히 보기</a>
+                        {{ set.discount_price|intcomma }}원 &nbsp;&nbsp;<a href="{% url "customize/set" set_id=set.id %}" class="basic-btn">자세히 보기</a>
                     </div>
                 </div>
             </div>

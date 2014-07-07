@@ -2,6 +2,7 @@
 {% block header %}
 {% load static %}
 {% load humanize %}
+{% load mathfilters %}
 <link rel="stylesheet" href="{% static 'css/shopping_set_web.css'%}"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -55,12 +56,22 @@
         </div>
         <div class="paging-area">
             <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
-              <li {% if not sets.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="previous">Prev</a></li>
+              {% if not sets.page_hasPrev %}
+                  <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
+              {% else %}
+                  <li><a href="{% url 'shop_set' page_num=sets.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+              {% endif %}
+
               {% for pageNum in sets.page_range %}
-              <li><a href="{% url 'shop_set' page_num=pageNum %}" class="">{{ pageNum  }}</a></li>
+                <li><a href="{% url 'shop_set' page_num=pageNum %}" {% if pageNum == sets.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
               {% endfor %}
-              <li {% if not sets.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="next">Next</a></li>
+              {% if not sets.page_hasNext  %}
+                <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
+              {% else %}
+                <li><a href="{% url 'shop_set' page_num=sets.page_right_count|add:1 %}" class="next">Next</a></li>
+              {% endif %}
             </ul>
+
         </div>
     </div>
     <div class="nav-container float-left">
