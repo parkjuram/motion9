@@ -4,7 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
-    http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews
+    http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
+    helper_get_custom_set, helper_get_custom_set_list
 from web.models import Product, Category, BlogReview, Set
 from users.models import CustomSet, CustomSetDetail
 
@@ -133,17 +134,22 @@ def product_json_view(request, product_id=None):
 
 @csrf_exempt
 def customize_set_view(request, user):
-    custom_sets = user.get_custom_sets.filter(is_active=True).all()
-    pass
+    custom_sets = helper_get_custom_set_list(helper_get_user(request))
+
+    return render(request, "shopping_custom_web.html",
+          {
+              'custom_sets': custom_sets
+          })
+
     # set =
 
 @csrf_exempt
-def customize_set_detail_view(request, set_id):
-    set = helper_get_set(set_id, helper_get_user(request), True)
+def customize_set_detail_view(request, custom_set_id):
+    custom_set = helper_get_custom_set(custom_set_id, helper_get_user(request))
 
-    return render(request, "change_product_in_set_web.html",
+    return render(request, "custom_detail_web.html",
           {
-              'set': set
+              'custom_set': custom_set
           })
 
 @csrf_exempt

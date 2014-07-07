@@ -74,7 +74,9 @@ class Set(models.Model):
     category = models.ForeignKey('Category')
     description = models.TextField(null=False, blank=True)
     big_img_url = models.TextField(null=False, blank=True)
+    custom_big_img_url = models.TextField(null=False, blank=True)
     small_img_url = models.TextField(null=False, blank=True)
+    custom_small_img_url = models.TextField(null=False, blank=True)
     discount_difference = models.IntegerField(null=False, default=0)
 
     is_active = models.BooleanField(default=True)
