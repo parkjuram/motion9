@@ -122,7 +122,52 @@ def helper_get_product_detail(product_id_or_object, user=None):
         logger.error(e)
 
 # def helper_get_products(user=None, category_id=None, price_max_filter=None, price_min_filter=None, brandname_filter=None):
-# def helper_get_custom_sets(user=None)
+def helper_get_custom_set(custom_set_id_or_object, user=None):
+
+    if isinstance(custom_set_id_or_object, unicode) or isinstance(custom_set_id_or_object, int):
+        custom_set_id = custom_set_id_or_object
+        custom_set_object = None
+    elif isinstance(custom_set_id_or_object, CustomSet):
+        custom_set_object = custom_set_id_or_object
+
+    if custom_set_object is None:
+        custom_set = CustomSet.objects.get(id=custom_set_id)
+    else:
+        custom_set = custom_set_object
+
+    set = custom_set.set
+
+    custom_set_ = {}
+    custom_set_.update({
+        'id': custom_set.id,
+        'name': user.email + str(custom_set.id),
+        'category_name': set.category.name,
+        'description': set.description,
+        'big_img_url': set.custom_big_img_url,
+        'small_img_url': set.custom_small_img_url,
+        'discount_difference': set.discount_difference,
+        'products': []
+    })
+
+    set_products = set.setproduct_set.all()
+    original_price = 0
+    discount_price = 0
+    for set_product in set_products:
+        product = set_product.product
+        if product.get_custom_set_detail_from_original_product.filter(custom_set=custom_set).count() > 0:
+            custom_set_detail = product.get_custom_set_detail_from_original_product.filter(custom_set=custom_set).first()
+            product = custom_set_detail.new_product
+
+            original_price += product.original_price
+            discount_price += product.discount_price
+
+    custom_set_.update({
+        'original_price': original_price,
+        'discount_price': discount_price-set.discount_difference
+    })
+
+    return custom_set_
+
 
 def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_detail_info=True):
 
@@ -136,12 +181,6 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
         set = Set.objects.get(id=set_id)
     else:
         set = set_object
-
-    # set_tags =
-    # product_images = product.product_image_set.all()
-    #     images = []
-    #     for product_image in product_images:
-    #         images.append(product_image.img_url)
 
     set_ = {}
     set_.update({
@@ -197,25 +236,27 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
 
     return set_
 
+def helper_get_custom_set_list(user=None):
+    custom_sets = user.get_custom_sets.all()
+
+    custom_sets_ = []
+
+    for custom_set in custom_sets:
+        custom_set_ = helper_get_custom_set(custom_set, user)
+        custom_sets_.append(custom_set_)
+
+    return custom_sets_
+
 def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filter=None):
     sets = Set.objects
     if category_id is not None:
         sets = sets.filter(category__id=category_id)
 
-    # if price_max_filter is not None and price_min_filter is not None:
-        # sets = sets.filter(discount_price__lte=price_max_filter, discount_price__gte=price_min_filter)
-
-    set_count = sets.count()
     sets = sets.all()
     sets_ = []
 
     for set in sets:
-        is_interest = False
-        if user is not None:
-            if set.interest_set.filter(user=user).count()>0:
-                is_interest = True
-
-        set_ = helper_get_set(set.id, user)
+        set_ = helper_get_set(set, user)
         if price_max_filter is not None and price_min_filter is not None:
             if set_.discount_price <= price_max_filter and set_.discount_price >= price_min_filter:
                 sets_.append(set_)
@@ -224,21 +265,26 @@ def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filt
 
     return sets_
 
-def helper_make_paging_data( all_object_length, lists, item_count_per_page, page_num):
+
+
+def helper_make_paging_data( all_object_length, lists, item_count_per_page, current_page_num):
     pager_total_length = int(math.ceil( all_object_length/float(item_count_per_page)))
     lists = {
         'data': lists,
         'page_total_count': pager_total_length,
-        'page_left_count': int(page_num-(page_num%PAGER_INDICATOR_LENGTH)+1),
-        'page_right_count': int(pager_total_length)
-        if pager_total_length < page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH
-        else int(page_num-(page_num%PAGER_INDICATOR_LENGTH)+PAGER_INDICATOR_LENGTH),
+        'page_left_count': int(current_page_num-(current_page_num%(PAGER_INDICATOR_LENGTH+1))+1)
     }
+    lists.update({
+        'page_right_count': lists['page_left_count']+PAGER_INDICATOR_LENGTH-1
+        if pager_total_length > lists['page_left_count']+PAGER_INDICATOR_LENGTH-1
+        else int(pager_total_length)
+    })
+
     lists.update({
         'page_hasPrev': True if lists['page_left_count'] is not 1 else False,
         'page_hasNext': True if lists['page_right_count'] is not pager_total_length else False,
         'page_range': range(lists['page_left_count'], lists['page_right_count']+1),
-        'page_num': page_num
+        'page_num': current_page_num
     })
     return lists
 

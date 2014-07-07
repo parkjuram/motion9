@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
-    helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set
+    helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
+    helper_get_custom_set_list, helper_get_custom_set
 
 from web.models import Category
 
@@ -125,11 +126,21 @@ def set_view(request, set_id):
                 })
 
 
-@csrf_exempt
-def customize_set_view(request, set_id):
-    set = helper_get_set(set_id, helper_get_user(request), True)
+def customize_set_view(request, user):
+    custom_sets = helper_get_custom_set_list(helper_get_user(request))
 
-    return render(request, "change_product_in_set.html",
+    return render(request, "shopping_custom.html",
           {
-              'set': set
+              'custom_sets': custom_sets
+          })
+
+    # set =
+
+@csrf_exempt
+def customize_set_detail_view(request, custom_set_id):
+    custom_set = helper_get_custom_set(custom_set_id, helper_get_user(request))
+
+    return render(request, "custom_detail.html",
+          {
+              'custom_set': custom_set
           })
