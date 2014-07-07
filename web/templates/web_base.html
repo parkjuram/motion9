@@ -81,19 +81,22 @@
         </div>
         <div id="menuCollection" class="header-sub-menu">
             <a href="{% url 'shop_set' %}">전체</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">라이프 스타일 컬렉션</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">계절 컬렉션</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">피부 상태에 따른 컬렉션</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">프리미엄 컬렉션</a>
+            <a href="{% url 'shop_set' category_id=18 %}">라이프 스타일</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_set' category_id=19 %}">계절</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_set' category_id=20 %}">피부상태</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_set' category_id=21 %}">프리미엄</a>
         </div>
         <div id="menuProduct" class="header-sub-menu">
             <a href="{% url 'shop_product' %}">전체</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">스킨</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">로션</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">선크림, BB크림</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">에센스</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">클린징, 스크럽</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">기타</a>
+            <a href="{% url 'shop_product' category_id=1 %}">스킨</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=2 %}">로션</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=4 %}">선크림, BB크림</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=5 %}">에센스</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=12 %}">모이스춰라이저</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=14 %}">수분크림, 아이크림</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=16 %}">스페셜케어</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=3 %}">클렌징, 스크럽</a><span class="header-sub-menu-divider">/</span>
+            <a href="{% url 'shop_product' category_id=17 %}">메이크업</a>
         </div>
         <div id="menuHelp" class="header-sub-menu">
             <a href="#">고객센터</a><span class="header-sub-menu-divider">/</span>

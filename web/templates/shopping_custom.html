@@ -1,0 +1,89 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+{% load static %}
+{% load humanize %}
+<link rel="stylesheet" href="{% static 'css/shopping_set.css'%}"/>
+{% endblock %}
+
+{% block title %}
+    <h2 class="ui-title">세트상품</h2>
+{% endblock %}
+
+{% block content %}
+<div class="main-header-img">
+    <img src="{% static "img/black.jpg" %}"/>
+</div>
+<div class="category-box">
+    <div class="select-wrapper">
+      <div class="select-box-border">
+        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">세제품</option>
+            <option value="#">단일상품</option>
+        </select>
+      </div>
+    </div>
+    <div class="select-wrapper">
+        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">피부가 꺼먼새끼</option>
+            <option value="#">운동 많이 하는 새끼</option>
+            <option value="#">그냥 피부 더러운 새끼</option>
+            <option value="#">못생긴 새끼</option>
+        </select>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div id="productGrid">
+    {% for set in sets.data %}
+    <div class="product-item">
+        <div class="item-image">
+            <img src="{{ set.big_img_url }}"/>
+            <div class="product-title">
+                <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">자세히 보기</a>
+            </div>
+        </div>
+        <div>
+            <div class="item-contents-left">
+                <div style="margin-bottom: 16px;">
+                    <div>
+                        <img src="{% static "img/sim_detail.png" %}"/>
+                    </div>
+                    <div>
+                        {{ set.description }}
+                    </div/>
+                </div>
+                <div>
+                    <div>
+                        <img src="{% static "img/set_comp.png" %}"/>
+                    </div>
+                    <div>
+                        에센스, 비비크림, 로션, 스
+                    </div/>
+                </div>
+            </div>
+            <div class="item-contents-right">
+                <div class="item-price">
+                    {{ set.discount_price|intcomma }}원
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="interest-btn">
+           {% if set.is_interested %}
+               <a href="#" class="btn-for-interest"  data-type="s" data-product="{{ set.id }}">관심하기</a>
+           {% else %}
+               <a href="#" class="btn-for-interest interest-done"  data-type="s" data-product="{{ set.id }}">관심취소</a>
+           {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="paging-area">
+    <ul class="pagination">
+      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
+       {% for pageNum in sets.page_range %}
+          <li><a href="{% url 'mobile_shop_set' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
+       {% endfor %}
+      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
+    </ul>
+</div>
+{% endblock %}

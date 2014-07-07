@@ -1,0 +1,156 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+{% load static %}
+{% load humanize %}
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+<script src="{% static "swiper/idangerous.swiper.js" %}"></script>
+<script src="{% static "js/set_detail.js" %}"></script>
+
+<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/set_detail.css' %}"/>
+
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">세트 정보</h2>
+{% endblock %}
+{% block content %}
+<div class="category-box">
+    <div class="select-wrapper">
+        <div class="select-box-border">
+            <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+                <option value="#">세트상품</option>
+                <option value="#">단일제품</option>
+            </select>
+        </div>
+    </div>
+    <div class="select-wrapper">
+        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#">스킨</option>
+            <option value="#">로션</option>
+            <option value="#">에센스</option>
+            <option value="#">BB크림</option>
+            <option value="#">선크림</option>
+        </select>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="product-img">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!--First Slide-->
+          <div class="swiper-slide">
+            <img src="http://themotion9.com/media/product/image/2_1.jpg"/>
+          </div>
+
+          <!--Second Slide-->
+          <div class="swiper-slide">
+            test
+          </div>
+
+          <!--Third Slide-->
+          <div class="swiper-slide">
+            <img src="{{ set.big_img_url }}"/>
+          </div>
+          <!--Etc..-->
+        </div>
+        <div class="pagination">
+        </div>
+    </div>
+    <div class="product-title">
+        {{ set.name }}
+        <div class="product-price">
+            {{ set.discount_price|intcomma }}원 <span class="item-original-price">{{ set.original_price|intcomma }}원</span>
+        </div>
+        {% if set.is_interested %}
+            <a href="#" class="interest-btn btn-for-interest"  data-type="s" data-product="{{ set.id }}">관심하기</a>
+        {% else %}
+            <a href="#" class="interest-btn btn-for-interest interest-done"  data-type="s" data-product="{{ set.id }}">관심취소</a>
+        {% endif %}
+    </div>
+</div>
+<div>
+    <ul class="tab-menu">
+        <li>
+            <a href="#productInfo" class="tab-btn product-info-btn">상품 정보</a>
+        </li>
+        <li>
+            <a href="#productItems" class="tab-btn product-items-btn selected-product-items-btn">세트 구성</a>
+        </li>
+        <li>
+            <a href="#productRule" class="tab-btn product-rule-btn">상품 정보 고시</a>
+        </li>
+    </ul>
+    <div class="tab-content tab-selected" id="productItems">
+        <div class="custom-set-btn-box">
+            <a href="{% url 'mobile_customize_set' set_id=set.id %}" data-ajax="false"><img src="{% static "img/custom.png" %}"/></a>
+        </div>
+        {% for product in set.products %}
+        <div class="product-item">
+            <div class="product-item-img">
+                <img src="{{ product.big_img_url }}"/>
+            </div>
+            <div class="product-item-contents">
+                <a href="#" class="view-product-btn" data-product="{{product.id}}">{{ product.name|truncatechars:18 }}</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="tab-content" id="productInfo">
+        상품 정보 ㅋㅋㅋ
+    </div>
+    <div class="tab-content" id="productRule">
+        상품 고시 ㅋㅋㅋ
+    </div>
+</div>
+
+<div data-role="popup" id="purchaseDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="width:300px;">
+    <div data-role="header" data-theme="a">
+    <h1 style="font-size: 18px;">수량 선택</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div id="purchaseDialogSelect">
+            <select data-inline="true" data-shadow="false">
+                <option value="#">1</option>
+                <option value="#">2</option>
+                <option value="#">3</option>
+                <option value="#">4</option>
+                <option value="#">5</option>
+                <option value="#">6</option>
+                <option value="#">7</option>
+                <option value="#">8</option>
+            </select>
+        </div>
+        <div style="text-align: center;">
+            <a href="#" class="gold-btn"  style="margin-right:2%;">구매</a><a href="#" class="gold-btn" data-rel="back">닫기</a>
+        </div>
+    </div>
+</div>
+
+
+<div data-role="popup" id="productDetailDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="width:300px;">
+    <div data-role="header" data-theme="a">
+    <h5 style="font-size: 14px;" id="popupDetailName"></h5>
+    </div>
+    <div role="main" class="ui-content">
+        <div id="popupDetailImg">
+            <img src=""/>
+        </div>
+        <div id="popupDetailDesc">
+
+        </div>
+        <div style="text-align: center;">
+            <a href="#" class="gold-btn" id="popupDetailBtn" style="margin-right:2%;">자세히</a><a href="#" class="gold-btn" data-rel="back">닫기</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div data-role="footer" data-position="fixed">
+    <div class="footer-bar">
+        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%;">구매</a><a href="#" class="gold-btn" >장바구니</a>
+    </div>
+</div>
+
+{% endblock %}
