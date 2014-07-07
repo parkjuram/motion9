@@ -44,23 +44,23 @@ def shop_product_view(request, category_id=None, page_num=1):
     else:
         products_ = {'data': products_}
 
-    return http_response_by_json(None, products_ )
+    # return http_response_by_json(None, products_ )
 
-    # categories = Category.objects.filter(is_set=False).all()
-    #
-    # if category_id is None:
-    #     current_category = 'all'
-    # else:
-    #     current_category = Category.objects.get(id=category_id).name
-    #
-    # return render(request, 'shopping_product_web.html',
-    #               {
-    #
-    #                   'products': products_,
-    #                   'current_category': current_category,
-    #                   'categories': categories,
-    #                   'current_page': 'shop_product'
-    #               })
+    categories = Category.objects.filter(is_set=False).all()
+
+    if category_id is None:
+        current_category = 'all'
+    else:
+        current_category = Category.objects.get(id=category_id).name
+
+    return render(request, 'shopping_product_web.html',
+                  {
+
+                      'products': products_,
+                      'current_category': current_category,
+                      'categories': categories,
+                      'current_page': 'shop_product'
+                  })
 
 
 def shop_set_view(request, category_id=None, page_num=1):
