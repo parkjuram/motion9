@@ -1,0 +1,144 @@
+{% extends "web_base.html" %}
+{% block header %}
+{% load static %}
+{% load humanize %}
+<link rel="stylesheet" href="{%  static 'css/set_detail_web.css' %}"/>
+<link rel="stylesheet" href="{%  static 'magnific_popup/magnific-popup.css' %}"/>
+<link rel="stylesheet" href="{%  static 'spinner/jquery.spinner.css' %}"/>
+<link rel="stylesheet" href="{%  static 'tab/easy-responsive-tabs.css' %}"/>
+<script src="{%  static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{%  static 'js/set_detail_web.js' %}"></script>
+<script src="{%  static 'spinner/jquery.spinner.js' %}"></script>
+<script src="{%  static 'tab/easyResponsiveTabs.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="row" style="margin-top: 20px;">
+    <div class="main-container float-left">
+        <div class="box-css">
+            <div class="box-header">
+                Collection > {{ set.category_name  }} > {{ set.name }}
+            </div>
+            <div class="set-category-box">
+                카테고리 > {{ set.category_name }}
+            </div>
+            <div class="product-contents">
+                <div class="float-left">
+                    <div class="set-img">
+                        <img src="{{ set.images.0 }}" alt="" />
+                    </div>
+                </div>
+                <div class="float-right">
+                    <div class="set-img-gallery">
+                    {% for image in product.images %}
+                        {% if forloop.first %}
+                        {% else %}
+                            <a href="{{image}}"><img src="{{image}}" ></a>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div>
+                    <div class="tag-header">태그</div>
+                    <div class="tag-list">
+                        <a href="#">여드름</a>, <a href="#">하얀피부</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-css no-shadow" style="background-color: #F3F3F3;">
+            <div id="setTabs">
+                <ul class="resp-tabs-list tab-box-menu-shadow">
+                    <li>상세설명</li>
+                    <li style="margin-left: -1px;">상품정보고시</li>
+                </ul>
+
+                <div class="resp-tabs-container tab-box-shadow">
+                    <div> {{ set.description }}</div>
+                    <div> 고시가 어쩌구</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-container float-left">
+        <div class="box-css">
+            <div class="box-header">
+                The Motion9
+            </div>
+            <div style="padding : 30px 10px 20px 20px;">
+                {% if set.is_interested %}
+                    <a href="#" class="btn-for-interest basic-btn interest-done" data-product="{{ set.id }}" data-type="s">관심취소</a>
+                {% else %}
+                    <a href="#" class="btn-for-interest basic-btn" data-product="{{ set.id }}" data-type="s">관심하기</a>
+                {% endif %}
+                <a href="{% url 'customize_set' set_id=set.id %}" class="basic-btn" >커스텀 구성하기</a>
+            </div>
+        </div>
+        <div class="box-css">
+            <div class="box-header">
+                구매
+            </div>
+
+            <div class="price-area">
+                <div class="product-price price-origin">원래 가격 : {{ set.original_price|intcomma }}원 (<span class="price-discount">할인율 : {{ set.discount_difference|intcomma }}%</span>)</div>
+                <div class="product-how-many">
+                    <div style="width :80px; margin-top : 6px; float: left;">
+                        구매수량 :
+                    </div>
+                    <div style="width : 100px; margin-left:2px; float:left;">
+                        <input type="text" class="cnt-spinner" id="howMany"/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="product-price price-saled">판매가 : <span>{{ set.discount_price|intcomma }}원</span></div>
+                <div class="product-price price-total">
+                    총 상품 금액 : {{ set.discount_price|intcomma }}원
+                </div>
+                <div class="product-btn-area">
+                    <a href="#" class="basic-btn">구매하기</a>
+                    <a href="#" data-product="{{ set.id }}" data-type="s" class="basic-btn btn-for-cart">장바구니</a>
+                </div>
+            </div>
+        </div>
+        <div class="box-css">
+           <div class="box-header">
+               세트 구성
+           </div>
+           <div class="col-xs-12" style="padding-top: 4px; padding-bottom: 8px; ">
+           {% for product in set.products %}
+               <div class="belong-to-set-item">
+                   <div class="product-opacity-bg product-hover-area">
+                       <a href="/product/{{ product.id }}/modal" class="view-product-detail-btn" data-product="{{ product.id }}"><img src="{% static 'img/detail.png'%}" class="icon"/></a>
+                   </div>
+                   <div class="belong-product-img">
+                       <img src="{{ product.big_img_url }}" alt="" />
+                   </div>
+                   <div class="belong-product-info">
+                       <div class="belong-product-name">
+                           {{ product.name|truncatechars:18 }}
+                       </div>
+                       <div class="belong-product-contents">
+                           카테고리 > {{ product.category_name }}
+                       </div>
+                       <div class="belong-product-contents">
+                           브랜드 : {{ product.brandname }}
+                       </div>
+                       <div class="belong-product-contents">
+                           가격 : {{ product.discount_price|intcomma }}원
+                       </div>
+                       <div class="belong-product-contents">
+                           용량 : {{ product.capacity }}
+                       </div>
+                   </div>
+                   <div class="clearfix"></div>
+               </div>
+           {% endfor %}
+           </div>
+        </div>
+    </div>
+</div>
+
+<div id="productDetailModal" class="jqmWindow">
+</div>
+{% endblock %}
