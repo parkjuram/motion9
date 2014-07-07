@@ -58,6 +58,13 @@ $(function(){
             $(this).addClass('selected');
             subMenuInitialize();
         });
+
+        $('#headerSearchBtn').click(function(e){
+            e.preventDefault();
+            menuLinks.removeClass('selected');
+            subMenuInitialize();
+            $('#headerSearch').addClass('header-sub-menu-selected');
+        });
     };
 
     subMenuInitialize();

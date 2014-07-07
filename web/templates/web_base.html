@@ -49,7 +49,7 @@
                     <li><a href="#" data-attr="menuProduct">단일제품</a></li>
                 {% endif %}
                 <li><a href="#">커스텀컬렉션</a></li>
-                <li><a href="#" data-attr="menuSearch">검색</a></li>
+
                 <li><a href="#" data-attr="menuHelp">Help</a></li>
                 <li class="clearfix"></li>
             </ul>
@@ -57,6 +57,7 @@
                 <!--
                 <li><span><input type="text" class="header-search rounded" placeholder="Search.."></span></li>
                 -->
+                <li><a href="#" id="headerSearchBtn" data-attr="menuSearch">검색</a></li>
                 <li><a href="{% url 'mypage' %}">마이페이지</a></li>
                 <li><a href="{% url 'mypage_cart' %}">장바구니</a></li>
                 {% if user.is_authenticated %}
@@ -99,11 +100,11 @@
             <a href="#">FAQ</a><span class="header-sub-menu-divider">/</span>
             <a href="#">온라인 문의</a>
         </div>
-        <div id="menuSearch" class="header-sub-menu">
+        <div id="headerSearch" class="header-sub-menu">
             <span><b>인기 검색어 : &nbsp;</b></span>
-            <a href="#">고객센터</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">FAQ</a><span class="header-sub-menu-divider">/</span>
-            <a href="#">온라인 문의</a>
+            <a href="#">미샤</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">꽃을든 남자</a><span class="header-sub-menu-divider">/</span>
+            <a href="#">헤라옴므</a>
             <span><input type="text" class="header-search" placeholder="Search.."><a href="#" class="gold-btn menu-search-btn">검색</a></span>
         </div>
     </div>

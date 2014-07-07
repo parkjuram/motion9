@@ -2,6 +2,7 @@
 {% block header %}
 {% load static %}
 {% load humanize %}
+{% load mathfilters %}
 
 <script src="{% static "js/imagesloaded.pkgd.min.js" %}"></script>
 <script src="{% static "js/masonry.pkgd.min.js" %}"></script>
@@ -75,12 +76,13 @@
             </div>
         </div>
         <div class="paging-area">
+        products.page_hasPrev
             <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
-              <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#" class="previous">Prev</a></li>
+              <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="{% url 'shop_product' page_num=products.page_left_count|sub:1 %}" class="previous">Prev</a></li>
               {% for pageNum in products.page_range %}
-              <li><a href="{% url 'shop_product' page_num=pageNum %}" class="">{{ pageNum  }}</a></li>
+                <li><a href="{% url 'shop_product' page_num=pageNum %}" {% if pageNum == products.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
               {% endfor %}
-              <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#" class="next">Next</a></li>
+              <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="{% url 'shop_product' page_num=products.page_right_count|add:1 %}" class="next">Next</a></li>
             </ul>
         </div>
     </div>
