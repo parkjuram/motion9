@@ -125,7 +125,16 @@ def set_view(request, set_id):
                     'set': set
                 })
 
+@csrf_exempt
+def customize_set_make_view(request, set_id):
+    set = helper_get_set(set_id, helper_get_user(request), True)
 
+    return render(request, "change_product_in_set.html",
+          {
+              'set': set
+          })
+
+@csrf_exempt
 def customize_set_view(request, user):
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
 
