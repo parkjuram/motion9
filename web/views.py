@@ -132,7 +132,8 @@ def product_json_view(request, product_id=None):
         return render(request, "404.html")
 
 @csrf_exempt
-def customize_set_view(request):
+def customize_set_view(request, user):
+    custom_sets = user.get_custom_sets.filter(is_active=True).all()
     pass
     # set =
 

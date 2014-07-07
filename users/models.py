@@ -69,7 +69,7 @@ class Purchase(models.Model):
             ("user", "custom_set"))
 
 class CustomSet(models.Model):
-    user = models.ForeignKey('auth.User')
+    user = models.ForeignKey('auth.User', related_name='get_custom_sets')
     set = models.ForeignKey('web.Set')
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
