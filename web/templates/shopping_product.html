@@ -64,18 +64,18 @@
 <div class="paging-area">
     <ul class="pagination">
       {% if not products.page_hasPrev %}
-          <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
+          <li><a href="#" data-ajax="false" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
       {% else %}
-          <li><a href="{% url 'mobile_shop_product' page_num=products.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+          <li><a  data-ajax="false" href="{% url 'mobile_shop_product' page_num=products.page_left_count|sub:1 %}" class="previous">Prev</a></li>
       {% endif %}
 
       {% for pageNum in products.page_range %}
-        <li><a href="{% url 'mobile_shop_product' page_num=pageNum %}" {% if pageNum == products.page_num %} class="active" {% endif %}>{{ pageNum  }}</a></li>
+        <li><a  data-ajax="false"  href="{% url 'mobile_shop_product' page_num=pageNum %}" {% if pageNum == products.page_num %} class="active" {% endif %}>{{ pageNum  }}</a></li>
       {% endfor %}
       {% if not products.page_hasNext  %}
-        <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
+        <li><a data-ajax="false"  href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
       {% else %}
-        <li><a href="{% url 'mobile_shop_product' page_num=products.page_right_count|add:1 %}" class="next">Next</a></li>
+        <li><a data-ajax="false"  href="{% url 'mobile_shop_product' page_num=products.page_right_count|add:1 %}" class="next">Next</a></li>
       {% endif %}
 
     </ul>
