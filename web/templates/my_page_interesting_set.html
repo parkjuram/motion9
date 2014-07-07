@@ -52,6 +52,8 @@
             {% endfor %}
         </div>
         <div class="paging-area">
+
+
             <ul class="pagination">
               <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
                {% for pageNum in interests.page_range %}

@@ -82,7 +82,7 @@
     </ul>
     <div class="tab-content tab-selected" id="productItems">
         <div class="custom-set-btn-box">
-            <a href="{% url 'mobile_customize_set' set_id=set.id %}" data-ajax="false"><img src="{% static "img/custom.png" %}"/></a>
+            <a href="{% url 'mobile_customize_set_make' set_id=set.id %}" data-ajax="false"><img src="{% static "img/custom.png" %}"/></a>
         </div>
         {% for product in set.products %}
         <div class="product-item">
