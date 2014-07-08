@@ -255,7 +255,8 @@ def mypage_purchase_view(request, page_num=1):
 
         return render(request, 'my_page_purchase.html',
             {
-                'purchases': purchases_
+                'purchases': purchases_,
+                'tab_name':'purchase'
             })
 
 @login_required
