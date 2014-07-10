@@ -18,18 +18,17 @@
     <div class="select-wrapper">
         <div class="select-box-border">
             <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-                <option value="#">세트상품</option>
-                <option value="#">단일제품</option>
+                <option value="#subSetCategory">세트상품</option>
+                <option value="#subProductCategory">단일제품</option>
             </select>
         </div>
     </div>
     <div class="select-wrapper">
         <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#">스킨</option>
-            <option value="#">로션</option>
-            <option value="#">에센스</option>
-            <option value="#">BB크림</option>
-            <option value="#">선크림</option>
+            <option {% if current_category == 18 %} selected="selected" {% endif %} value="18">라이프 스타일</option>
+            <option {% if current_category == 19 %} selected="selected" {% endif %}  value="19">계절</option>
+            <option {% if current_category == 20 %} selected="selected" {% endif %}  value="20">피부상태</option>
+            <option {% if current_category == 21 %} selected="selected" {% endif %}  value="21">프리미엄</option>
         </select>
     </div>
     <div class="clearfix"></div>
@@ -149,7 +148,7 @@
 {% block footer %}
 <div data-role="footer" data-position="fixed">
     <div class="footer-bar">
-        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%;">구매</a><a href="#" class="gold-btn" >장바구니</a>
+        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%;">구매</a><a href="#" class="gold-btn btn-for-cart" data-type="s" data-product="{{ set.id }}">장바구니</a>
     </div>
 </div>
 

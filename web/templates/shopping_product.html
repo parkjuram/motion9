@@ -22,19 +22,25 @@
     <div class="select-wrapper">
       <div class="select-box-border">
         <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#">단일제품</option>
-            <option value="#">세트상품</option>
+            <option value="#subProductCategory">단일제품</option>
+            <option value="#subSetCategory">세트상품</option>
         </select>
       </div>
     </div>
     <div class="select-wrapper">
-        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#">스킨</option>
-            <option value="#">로션</option>
-            <option value="#">에센스</option>
-            <option value="#">BB크림</option>
-            <option value="#">선크림</option>
+
+        <select id="subCategoryList" class="sub-category-list show-sub-category" data-mini="true" data-inline="true" data-shadow="false">
+            <option  {% if current_category == 1 %} selected="selected" {% endif %}  value="1">스킨</option>
+            <option  {% if current_category == 2 %} selected="selected" {% endif %} value="2">로션</option>
+            <option  {% if current_category == 4 %} selected="selected" {% endif %} value="4">선크림, BB크림</option>
+            <option  {% if current_category == 5 %} selected="selected" {% endif %} value="5">에센스</option>
+            <option  {% if current_category == 12 %} selected="selected" {% endif %} value="12">모이스춰라이저</option>
+            <option  {% if current_category == 14 %} selected="selected" {% endif %} value="14">수분크림, 아이크림</option>
+            <option  {% if current_category == 16 %} selected="selected" {% endif %} value="16">스페셜케어</option>
+            <option  {% if current_category == 3 %} selected="selected" {% endif %} value="3">클렌징, 스크럽</option>
+            <option  {% if current_category == 17 %} selected="selected" {% endif %} value="17">메이크업</option>
         </select>
+
     </div>
     <div class="clearfix"></div>
 </div>
@@ -64,16 +70,16 @@
 <div class="paging-area">
     <ul class="pagination">
       {% if not products.page_hasPrev %}
-          <li><a href="#" data-ajax="false" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
+          <li class="disabled"><a href="#" data-ajax="false" class="previous" onClick="javascript:return false;">Prev</a></li>
       {% else %}
           <li><a  data-ajax="false" href="{% url 'mobile_shop_product' page_num=products.page_left_count|sub:1 %}" class="previous">Prev</a></li>
       {% endif %}
 
       {% for pageNum in products.page_range %}
-        <li><a  data-ajax="false"  href="{% url 'mobile_shop_product' page_num=pageNum %}" {% if pageNum == products.page_num %} class="active" {% endif %}>{{ pageNum  }}</a></li>
+        <li {% if pageNum == products.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_product' page_num=pageNum %}" >{{ pageNum  }}</a></li>
       {% endfor %}
       {% if not products.page_hasNext  %}
-        <li><a data-ajax="false"  href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
+        <li class="disabled"><a data-ajax="false"  href="#" class="next" onClick="javascript:return false;">Next</a></li>
       {% else %}
         <li><a data-ajax="false"  href="{% url 'mobile_shop_product' page_num=products.page_right_count|add:1 %}" class="next">Next</a></li>
       {% endif %}

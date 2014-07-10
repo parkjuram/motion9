@@ -8,8 +8,8 @@
 {% endblock %}
 {% block detail %}
 <div>
-{% if products|length > 0 %}
-  {% for product in products %}
+{% if purchases|length > 0 %}
+  {% for product in purchases %}
     <ul class="custom-menu-list">
         <li>
             <div class="purchase-item-wrapper">
@@ -34,11 +34,20 @@
 
     <div class="paging-area">
         <ul class="pagination">
-          <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
-           {% for pageNum in interests.page_range %}
-              <li><a href="{% url 'mobile_mypage' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
-           {% endfor %}
-          <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
+          {% if not purchases.page_hasPrev %}
+              <li class="disabled"><a href="#" data-ajax="false" class="previous" onClick="javascript:return false;">Prev</a></li>
+          {% else %}
+              <li><a  data-ajax="false" href="{% url 'mypage_purchase' page_num=purchases.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+          {% endif %}
+
+          {% for pageNum in purchases.page_range %}
+            <li {% if pageNum == purchases.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mypage_purchase' page_num=pageNum %}" >{{ pageNum  }}</a></li>
+          {% endfor %}
+          {% if not purchases.page_hasNext  %}
+            <li class="disabled"><a data-ajax="false"  href="#" class="next" onClick="javascript:return false;">Next</a></li>
+          {% else %}
+            <li><a data-ajax="false"  href="{% url 'mypage_purchase' page_num=interests.page_right_count|add:1 %}" class="next">Next</a></li>
+          {% endif %}
         </ul>
     </div>
 
