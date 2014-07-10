@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.http.response import HttpResponse
-from web.models import Product, Set, ChangeableProduct, BlogReview
+from web.models import Product, Set, ChangeableProduct, BlogReview, Brand
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -397,6 +397,25 @@ def helper_delete_custom_set_purchase(user, address, custom_set_id):
         purchase.delete()
     except Exception as e:
         logger.error(e)
+
+def helper_get_brands():
+    brands = Brand.objects.all()
+    brands = []
+    for brand in brands:
+        if brand.is_repr_to_eng:
+            name = brand.name_eng
+        else:
+            name = brand.name_kor
+
+        brand_ = {
+            'id': brand.id,
+            'name': name
+        }
+
+        brands.append(brand_)
+
+
+    return brands
 
 
 # custom set

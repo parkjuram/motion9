@@ -5,8 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
-    helper_get_custom_set, helper_get_custom_set_list
-from web.models import Product, Category, BlogReview, Set
+    helper_get_custom_set, helper_get_custom_set_list, helper_get_brands
+from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail
 
 import math
@@ -53,13 +53,16 @@ def shop_product_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
+    brands = helper_get_brands()
+
     return render(request, 'shopping_product_web.html',
                   {
 
                       'products': products_,
                       'current_category': current_category,
                       'categories': categories,
-                      'current_page': 'shop_product'
+                      'current_page': 'shop_product',
+                      'brands': brands
                   })
 
 
@@ -81,12 +84,15 @@ def shop_set_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
+    brands = helper_get_brands()
+
     return render(request, 'shopping_set_web.html',
                   {
                       'sets': sets,
                       'current_category': current_category,
                       'categories': categories,
-                      'current_page': 'shop_set'
+                      'current_page': 'shop_set',
+                      'brands': brands
                   })
 
 @csrf_exempt
@@ -144,7 +150,7 @@ def customize_set_make_view(request, set_id):
           })
 
 @csrf_exempt
-def customize_set_view(request, user):
+def customize_set_view(request):
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
 
     return render(request, "shopping_custom_web.html",
