@@ -59,7 +59,7 @@ def helper_get_products(user=None, category_id=None, price_max_filter=None, pric
         products = products.filter(discount_price__lte=price_max_filter, discount_price__gte=price_min_filter)
 
     if brandname_filter is not None:
-        products = products.filter(brandname__contains=brandname_filter)
+        products = products.filter(brandname__id=brandname_filter)
 
     products = products.all()
     products_ = []
@@ -258,7 +258,7 @@ def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filt
     for set in sets:
         set_ = helper_get_set(set, user)
         if price_max_filter is not None and price_min_filter is not None:
-            if set_.discount_price <= price_max_filter and set_.discount_price >= price_min_filter:
+            if int(set_['discount_price']) <= int(price_max_filter) and int(set_['discount_price']) >= int(price_min_filter):
                 sets_.append(set_)
         else:
             sets_.append(set_)
