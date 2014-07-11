@@ -95,7 +95,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="mobile_customize_set" data-ajax="false">커스텀 컬렉션</a>
+                    <a href="{% url "mobile_customize_set" %}" data-ajax="false">커스텀 컬렉션</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout'%}" data-ajax="false">로그아웃</a></li>
