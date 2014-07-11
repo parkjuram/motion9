@@ -400,7 +400,7 @@ def helper_delete_custom_set_purchase(user, address, custom_set_id):
 
 def helper_get_brands():
     brands = Brand.objects.all()
-    brands = []
+    brands_ = []
     for brand in brands:
         if brand.is_repr_to_eng:
             name = brand.name_eng
@@ -412,10 +412,10 @@ def helper_get_brands():
             'name': name
         }
 
-        brands.append(brand_)
+        brands_.append(brand_)
 
 
-    return brands
+    return brands_
 
 
 # custom set
