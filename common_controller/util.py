@@ -244,7 +244,7 @@ def helper_get_custom_set_list(user=None):
     for custom_set in custom_sets:
         custom_set_ = helper_get_custom_set(custom_set, user)
         custom_sets_.append(custom_set_)
-
+        
     return custom_sets_
 
 def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filter=None):

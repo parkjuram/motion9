@@ -135,7 +135,7 @@ def customize_set_make_view(request, set_id):
           })
 
 @csrf_exempt
-def customize_set_view(request, user):
+def customize_set_view(request):
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
 
     return render(request, "shopping_custom.html",
