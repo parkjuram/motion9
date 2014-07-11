@@ -117,7 +117,7 @@
                 <div class="filter-area-contents">
                     <ul>
                         {% for brand in brands %}
-                            <li><a href="{% url 'shop_product' brandname=brand.id %}" {% if brand.id == current_brand %} class="filter-selected" {% endif %}>{{ brand.name  }}</a></li>
+                            <li><a href="{% url 'shop_product' %}?brandname=brand.id" {% if brand.id == current_brand %} class="filter-selected" {% endif %}>{{ brand.name  }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
