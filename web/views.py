@@ -62,6 +62,7 @@ def shop_product_view(request, category_id=None, page_num=1):
                       'current_category': current_category,
                       'categories': categories,
                       'current_page': 'shop_product',
+                      'current_brand': brandname_filter,
                       'brands': brands
                   })
 
