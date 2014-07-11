@@ -109,10 +109,10 @@
                 </div>
                 <div class="filter-area-contents">
                     <ul>
-                        <li><a href="#" class="filter-selected">라이프 스타일 컬렉션</a></li>
-                        <li><a href="#">계절 컬렉션</a></li>
-                        <li><a href="#">피부상태에 따른 컬렉션</a></li>
-                        <li><a href="#">프리미엄 컬렉션</a></li>
+                        <li><a href="{% url 'shop_set' category_id=18 %}" {% if current_category == 18 %}class="filter-selected" {% endif %}>라이프 스타일</a></li>
+                        <li><a href="{% url 'shop_set' category_id=19 %}" {% if current_category == 19 %}class="filter-selected" {% endif %}>계절</a></li>
+                        <li><a href="{% url 'shop_set' category_id=20 %}" {% if current_category == 20 %}class="filter-selected" {% endif %}>피부상태</a></li>
+                        <li><a href="{% url 'shop_set' category_id=21 %}" {% if current_category == 21 %}class="filter-selected" {% endif %}>프리미엄</a></li>
                     </ul>
                 </div>
             </div>

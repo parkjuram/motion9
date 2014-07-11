@@ -116,10 +116,9 @@
                 </div>
                 <div class="filter-area-contents">
                     <ul>
-                        <li><a href="#" class="filter-selected">Hera</a></li>
-                        <li><a href="#">이니스프리</a></li>
-                        <li><a href="#">미샤</a></li>
-                        <li><a href="#">설화수</a></li>
+                        {% for brand in brands %}
+                            <li><a href="{% url 'shop_product' brandname=brand.id %}" {% if brand.id == current_brand %} class="filter-selected" {% endif %}>{{ brand.name  }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
