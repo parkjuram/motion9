@@ -54,6 +54,10 @@ $(function(){
         var menuLinks = $('#header-main-menu-list a');
         menuLinks.click(function(e){
             e.preventDefault();
+
+            if($(this).attr('data-directly') == 'true')
+                location.href=$(this).attr('href');
+
             menuLinks.removeClass('selected');
             $(this).addClass('selected');
             subMenuInitialize();

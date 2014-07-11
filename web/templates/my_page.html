@@ -84,13 +84,13 @@
 <div>
     <ul class="tab-menu">
         <li>
-            <a href="{% url "mobile_mypage_set" %}" data-ajax="false" class="tab-btn tab-selected">관심 세트</a>
+            <a href="{% url "mobile_mypage_set" %}" data-ajax="false" class="tab-btn {% if tab_name == 'interesting_set' %} tab-selected {% endif %}">관심 세트</a>
         </li>
         <li>
-            <a href="{% url "mobile_mypage" %}" data-ajax="false" class="tab-btn ">관심 제품</a>
+            <a href="{% url "mobile_mypage" %}" data-ajax="false" class="tab-btn {% if tab_name == 'interesting_product' %} tab-selected {% endif %}">관심 제품</a>
         </li>
         <li>
-            <a href="{% url "mobile_mypage_cart" %}" data-ajax="false" class="tab-btn ">구매 내역</a>
+            <a href="{% url "mypage_purchase" %}" data-ajax="false" class="tab-btn {% if tab_name == 'purchase' %} tab-selected {% endif %}">구매 내역</a>
         </li>
     </ul>
 </div>

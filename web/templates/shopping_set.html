@@ -2,7 +2,9 @@
 {% block header %}
 {% load static %}
 {% load humanize %}
+{% load mathfilters %}
 <link rel="stylesheet" href="{% static 'css/shopping_set.css'%}"/>
+<script src="{% static 'js/shopping_set.js'%}"></script>
 {% endblock %}
 
 {% block title %}
@@ -17,17 +19,17 @@
     <div class="select-wrapper">
       <div class="select-box-border">
         <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#">세제품</option>
-            <option value="#">단일상품</option>
+            <option value="#subSetCategory">세트상품</option>
+            <option value="#subProductCategory">단일제품</option>
         </select>
       </div>
     </div>
     <div class="select-wrapper">
         <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#">피부가 꺼먼새끼</option>
-            <option value="#">운동 많이 하는 새끼</option>
-            <option value="#">그냥 피부 더러운 새끼</option>
-            <option value="#">못생긴 새끼</option>
+            <option {% if current_category == 18 %} selected="selected" {% endif %} value="18">라이프 스타일</option>
+            <option {% if current_category == 19 %} selected="selected" {% endif %}  value="19">계절</option>
+            <option {% if current_category == 20 %} selected="selected" {% endif %}  value="20">피부상태</option>
+            <option {% if current_category == 21 %} selected="selected" {% endif %}  value="21">프리미엄</option>
         </select>
     </div>
     <div class="clearfix"></div>
@@ -69,9 +71,9 @@
         </div>
         <div class="interest-btn">
            {% if set.is_interested %}
-               <a href="#" class="btn-for-interest"  data-type="s" data-product="{{ set.id }}">관심하기</a>
-           {% else %}
                <a href="#" class="btn-for-interest interest-done"  data-type="s" data-product="{{ set.id }}">관심취소</a>
+           {% else %}
+               <a href="#" class="btn-for-interest"  data-type="s" data-product="{{ set.id }}">관심하기</a>
            {% endif %}
         </div>
     </div>
@@ -79,11 +81,20 @@
 </div>
 <div class="paging-area">
     <ul class="pagination">
-      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Prev</a></li>
-       {% for pageNum in sets.page_range %}
-          <li><a href="{% url 'mobile_shop_set' page_num=pageNum %}" class="" data-ajax="false">{{ pageNum  }}</a></li>
-       {% endfor %}
-      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#" data-ajax="false">Next</a></li>
+      {% if not sets.page_hasPrev %}
+          <li class="disabled"><a href="#" data-ajax="false" class="previous" onClick="javascript:return false;">Prev</a></li>
+      {% else %}
+          <li><a  data-ajax="false" href="{% url 'mobile_shop_set' page_num=sets.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+      {% endif %}
+
+      {% for pageNum in sets.page_range %}
+        <li {% if pageNum == sets.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_set' page_num=pageNum %}" >{{ pageNum  }}</a></li>
+      {% endfor %}
+      {% if not sets.page_hasNext  %}
+        <li class="disabled"><a data-ajax="false"  href="#" class="next" onClick="javascript:return false;">Next</a></li>
+      {% else %}
+        <li><a data-ajax="false"  href="{% url 'mobile_shop_set' page_num=sets.page_right_count|add:1 %}" class="next">Next</a></li>
+      {% endif %}
     </ul>
 </div>
 {% endblock %}
