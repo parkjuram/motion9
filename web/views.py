@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from motion9.const import *
@@ -153,6 +153,9 @@ def customize_set_make_view(request, set_id):
 
 @csrf_exempt
 def customize_set_view(request):
+    if helper_get_user(request) is None:
+        return redirect('login_page')
+    
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
 
     return render(request, "shopping_custom_web.html",
