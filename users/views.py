@@ -26,11 +26,24 @@ logger = logging.getLogger(__name__)
 #         Cart.objects.create(user=user, )
 
 @csrf_exempt
+def check_email_view(request):
+    email = request.POST.get('email')
+
+    if User.objects.filter(email=email).exists():
+        return http_response_by_json(None, {'exist':True})
+
+    return http_response_by_json(None, {'exist':False})
+
+
+@csrf_exempt
 def registration(request):
     name = request.POST.get('name')
     email = request.POST.get('email')
     password = request.POST.get('password')
     password_confirm = request.POST.get('password_confirm')
+
+    if User.objects.exists(email=email):
+        return HttpResponse('already exist email')
 
     if password == password_confirm:
         try:
@@ -41,7 +54,7 @@ def registration(request):
             logger.error(e)
 
     else:
-        logger.error('password and confirm is not identical')
+        return HttpResponse('password and confirm is not identical')
 
     return HttpResponse('temporary response')
 
