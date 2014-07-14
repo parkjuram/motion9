@@ -80,17 +80,18 @@ def shop_set_view(request, category_id=None, page_num=1):
         sets = {'data': sets}
 
     categories = Category.objects.filter(is_set=True).all()
-    # if category_id is None:
-    #     current_category = 'all'
-    # else:
-    #     current_category = Category.objects.get(id=category_id).name
+    if category_id is None:
+        current_category = 'all'
+    else:
+        current_category = Category.objects.get(id=category_id).name
 
     brands = helper_get_brands()
 
     return render(request, 'shopping_set_web.html',
                   {
                       'sets': sets,
-                      'current_category': category_id,
+                      'current_category': current_category,
+                      'current_category_id': category_id,
                       'categories': categories,
                       'current_page': 'shop_set',
                       'brands': brands
