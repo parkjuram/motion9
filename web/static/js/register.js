@@ -1,5 +1,8 @@
-$(function(){
+/**
+ * Created by kunbae_park on 2014. 7. 14..
+ */
 
+$(function(){
     var registerPageInit = function(response) {
         console.log(response);
         if (response.status === 'connected') {
@@ -22,10 +25,11 @@ $(function(){
           name.val(response.last_name + response.first_name);
 
           if(response.gender == 'male'){
-              $('#sex_m').attr('checked', 'checked');
+              $('#sex_m').attr('selected', 'selected');
           }else{
-              $('#sex_f').attr('checked', 'checked');
+              $('#sex_f').attr('selected', 'selected');
           }
+
         });
     }
 
@@ -46,8 +50,8 @@ $(function(){
 
     $('.fb-join-btn').click(function(e){
         e.preventDefault();
-        window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page'+"&response_type=token&scope=public_profile,email,user_friends");
+        window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/mobile/registration_page'+"&response_type=token&scope=public_profile,email,user_friends");
     });
 
-
 });
+

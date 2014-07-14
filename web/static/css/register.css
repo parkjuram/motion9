@@ -1,0 +1,22 @@
+
+.form-contents{
+    width : 85%;
+    margin : 4px auto;
+}
+
+.sex-wrapper .ui-select{
+    background-color: white !important;
+}
+
+a.facebook-btn{
+    width : 140px;
+    text-align: center;
+}
+
+a.gold-btn {
+
+    box-sizing: border-box;
+    padding-top : 10px;
+    padding-bottom: 10px;
+    width : 100%;
+}
