@@ -108,7 +108,7 @@
 }
 
 .filter-selected{
-    color : #d2bb8f;
+    color : #d2bb8f !important;
 }
 
 .filter-area-contents{
