@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
+
+    url(r'^check/email/$', 'users.views.check_email_view', name='check_email'),
+
     url(r'^registration/$', 'users.views.registration', name='registration'),
     url(r'^registration_page/$', 'users.views.registration_view', name='registration_page'),
 

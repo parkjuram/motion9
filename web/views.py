@@ -155,7 +155,7 @@ def customize_set_make_view(request, set_id):
 def customize_set_view(request):
     if helper_get_user(request) is None:
         return redirect('login_page')
-    
+
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
 
     return render(request, "shopping_custom_web.html",
