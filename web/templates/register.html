@@ -1,49 +1,48 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/insert_profile_info.css') }}"/>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}"/>
+<script src="{% static 'js/register.js' %}"></script>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">회원가입</h2>
 {% endblock %}
 {% block content %}
-       <form method="post" action="{{url_for('register')}}">
+       <form method="post" action="{% url 'registration' %}">
 			<div class="ui-grid-solo">
-				<div class="ui-block-a">
-					<a href="#" class="ui-btn ui-shadow ui-btn-inline" style="margin:12px 0;">Facebook을 통해 가입</a>
-				</div>
+
 				<div class="ui-block-a form-box">
 					<div class="boxed">
-						<div class="form-header">
-							회원가입
-						</div>
 						<div class="form-contents">
+                            <div class="facebook-register-wrapper">
+                                <a href="#" class="facebook-btn fb-join-btn" style="margin:12px 0;">Facebook을 통해 가입</a>
+                            </div>
 							<div>
 								<label for="email">Email</label>
-								<input type="text" name="email" id="email"/>
+								<input type="text" name="email" id="email" data-clear-btn="true" data-mini="true"/>
 							</div>
 							<div>
-								<label for="name_i">이름</label>
-								<input type="text" name="name" id="name_i"/>
+								<label for="name">이름</label>
+								<input type="text" name="name" id="name" data-clear-btn="true" data-mini="true"/>
 							</div>
 							<div>
 								<label for="password_i">비밀번호</label>
-								<input type="password" name="password" id="password_i"/>
+								<input type="password" name="password" id="password_i" data-clear-btn="true" data-mini="true"/>
 							</div>
-							<div>
+							<div class="sex-wrapper">
 								<label for="sex">성별</label>
-								<select name="sex" id="sex">
-						        	<option value="M">남자</option>
-						        	<option value="F">여자</option>
+								<select name="sex" id="sex"  data-mini="true">
+						        	<option value="M" id="sex_m">남자</option>
+						        	<option value="F" id="sex_f">여자</option>
 						        </select>
 						    </div>
+                            <div style="margin-top : 24px;">
+                                 <a href="#" onclick="javascript:form[0].submit(); return false;" class="gold-btn">회원가입</a>
+                            </div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="ui-grid-solo">
-				<div class="ui-block-a">
-					<input type="submit" value="회원가입" class="ui-btn ui-shadow">
-				</div>
-			</div>
+
 		</form>
 {% endblock %}

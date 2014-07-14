@@ -138,6 +138,9 @@ $(function(){
                       console.log(textStatus);
                   }
             });
+        }else{
+            $.mobile.loading('hide');
+            $('#cartPanel').panel('open');
         }
     });
 
