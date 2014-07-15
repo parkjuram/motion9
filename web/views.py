@@ -55,8 +55,6 @@ def shop_product_view(request, category_id=None, page_num=1):
 
     brands = helper_get_brands()
 
-    print products_
-
     return render(request, 'shopping_product_web.html',
                   {
 
