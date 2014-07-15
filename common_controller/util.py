@@ -318,21 +318,36 @@ def helper_delete_set_interest(user, set_id):
 
 # cart
 
-def helper_add_product_cart(user, product_id):
+def helper_add_product_cart(user, product_id, item_count):
     try:
-        Cart.objects.create(user=user, product_id=product_id, type='p')
+        if Cart.objects.filter(user=user, product_id=product_id, type='p').exists():
+            cart = Cart.objects.filter(user=user, product_id=product_id, type='p').first()
+            cart.item_count = int(cart.item_count) + item_count
+            cart.save()
+        else:
+            Cart.objects.create(user=user, product_id=product_id, type='p', item_count = item_count)
     except Exception as e:
         logger.error(e)
 
-def helper_add_set_cart(user, set_id):
+def helper_add_set_cart(user, set_id, item_count):
     try:
-        Cart.objects.create(user=user, set_id=set_id, type='s')
+        if Cart.objects.filter(user=user, set_id=set_id, type='s').exists():
+            cart = Cart.objects.filter(user=user, set_id=set_id, type='s').first()
+            cart.item_count = int(cart.item_count) + item_count
+            cart.save()
+        else:
+            Cart.objects.create(user=user, set_id=set_id, type='s', item_count = item_count)
     except Exception as e:
         logger.error(e)
 
-def helper_add_custom_set_cart(user, custom_set_id):
+def helper_add_custom_set_cart(user, custom_set_id, item_count):
     try:
-        Cart.objects.create(user=user, custom_set_id=custom_set_id, type='c')
+        if Cart.objects.filter(user=user, custom_set_id=custom_set_id, type='c').exists():
+            cart = Cart.objects.filter(user=user, custom_set_id=custom_set_id, type='c').first()
+            cart.item_count = int(cart.item_count) + item_count
+            cart.save()
+        else:
+            Cart.objects.create(user=user, custom_set_id=custom_set_id, type='c', item_count = item_count)
     except Exception as e:
         logger.error(e)
 

@@ -184,4 +184,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 # Login
-LOGIN_URL = '/users/login_page/'
+LOGIN_URL = '/user/login_page/'
