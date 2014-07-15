@@ -55,6 +55,8 @@ def shop_product_view(request, category_id=None, page_num=1):
 
     brands = helper_get_brands()
 
+    print products_
+
     return render(request, 'shopping_product_web.html',
                   {
 
@@ -157,6 +159,8 @@ def customize_set_view(request):
         return redirect('login_page')
 
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
+
+    print custom_sets
 
     return render(request, "shopping_custom_web.html",
           {
