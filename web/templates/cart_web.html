@@ -93,8 +93,9 @@
                         </div>
                     </div>
                     <div class="purchased-item-buy">
+                        {{ product.item_count }}
                         <div class="purchased-item-contents-wrapper">
-                            <select>
+                            <select class="product-num">
                                 <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
                                 <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
                                 <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
