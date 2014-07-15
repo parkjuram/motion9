@@ -272,7 +272,7 @@ def helper_make_paging_data( all_object_length, lists, item_count_per_page, curr
     lists = {
         'data': lists,
         'page_total_count': pager_total_length,
-        'page_left_count': int(current_page_num-(current_page_num%(PAGER_INDICATOR_LENGTH+1))+1)
+        'page_left_count': current_page_num-( (current_page_num-1)%PAGER_INDICATOR_LENGTH +1 ) +1
     }
     lists.update({
         'page_right_count': lists['page_left_count']+PAGER_INDICATOR_LENGTH-1

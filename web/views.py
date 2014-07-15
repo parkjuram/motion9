@@ -60,6 +60,7 @@ def shop_product_view(request, category_id=None, page_num=1):
 
                       'products': products_,
                       'current_category': current_category,
+                      'current_category_id': category_id,
                       'categories': categories,
                       'current_page': 'shop_product',
                       'current_brand': brandname_filter,
@@ -157,6 +158,8 @@ def customize_set_view(request):
         return redirect('login_page')
 
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
+
+    print custom_sets
 
     return render(request, "shopping_custom_web.html",
           {
