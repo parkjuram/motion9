@@ -74,6 +74,7 @@
                 </div>
                 {% endfor %}
             </div>
+
         </div>
         <div class="paging-area">
             <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
@@ -82,9 +83,20 @@
               {% else %}
                   <li><a href="{% url 'shop_product' page_num=products.page_left_count|sub:1 %}" class="previous">Prev</a></li>
               {% endif %}
-
               {% for pageNum in products.page_range %}
-                <li><a href="{% url 'shop_product' page_num=pageNum %}" {% if pageNum == products.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                 {% if request.GET.brandname != null %}
+                     {% if current_category_id != null %}
+                        <li><a href="{% url 'shop_product' page_num=pageNum category_id=current_category_id%}?brandname={{ request.GET.brandname }}" {% if pageNum == products.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                     {% else %}
+                        <li><a href="{% url 'shop_product' page_num=pageNum%}?brandname={{ request.GET.brandname }}" {% if pageNum == products.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                     {% endif %}
+                 {% else %}
+                     {% if current_category_id != null %}
+                        <li><a href="{% url 'shop_product' page_num=pageNum category_id=current_category_id%}" {% if pageNum == products.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                     {% else %}
+                        <li><a href="{% url 'shop_product' page_num=pageNum%}" {% if pageNum == products.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                     {% endif %}
+                 {% endif %}
               {% endfor %}
               {% if not products.page_hasNext  %}
                 <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
