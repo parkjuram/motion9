@@ -14,7 +14,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
-    http_response_by_json, helper_make_custom_set
+    http_response_by_json, helper_make_custom_set, helper_get_custom_set
 
 from .models import Interest
 
@@ -177,6 +177,9 @@ def mypage_cart_view(request):
     user = helper_get_user(request)
 
     if user is not None:
+
+        total_price = 0
+
         product_carts= user.cart_set.filter(type='p').all()
         products = []
         for product_cart in product_carts:
@@ -185,6 +188,8 @@ def mypage_cart_view(request):
             product_.update({
                 'item_count': product_cart.item_count
             })
+            total_price += int(product_['discount_price'])
+            # product_['discount_price']
             products.append(product_)
 
         set_carts = user.cart_set.filter(type='s').all()
@@ -195,13 +200,19 @@ def mypage_cart_view(request):
             set_.update({
                 'item_count': set_cart.item_count
             })
+            # set_['discount_price']
             sets.append(set_)
 
         custom_set_carts = user.cart_set.filter(type='c').all()
         custom_sets = []
         for custom_set_cart in custom_set_carts:
             custom_set = custom_set_cart.custom_set
-            custom_sets.append(custom_set)
+            custom_set_ = helper_get_custom_set(custom_set, user)
+            # custom_set_['discount_price']
+            custom_sets.append(custom_set_)
+
+        print products
+        print sets
 
         return render(request, 'cart_web.html',
             {
@@ -385,14 +396,15 @@ def add_cart(request):
         return http_response_by_json(CODE_LOGIN_REQUIRED)
 
     type = request.POST.get('type', 'p')
+    item_count = int(request.POST.get('how_many', 1))
 
     product_or_set_id = request.POST.get('product_or_set_id')
     if type=='p':
-        helper_add_product_cart(user, product_or_set_id)
+        helper_add_product_cart(user, product_or_set_id, item_count)
     elif type=='s':
-        helper_add_set_cart(user, product_or_set_id)
+        helper_add_set_cart(user, product_or_set_id, item_count)
     elif type=='c':
-        helper_add_custom_set_cart(user, product_or_set_id)
+        helper_add_custom_set_cart(user, product_or_set_id, item_count)
 
     return http_response_by_json()
 
