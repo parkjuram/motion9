@@ -120,6 +120,8 @@ $(function(){
             howMany = howManySelectBox.val();
         }
 
+        console.log('===='+howMany);
+
         if(!confirm('장바구니에 추가 하시겠습니까?'))
             return;
 

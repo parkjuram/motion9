@@ -63,7 +63,11 @@
               {% endif %}
 
               {% for pageNum in sets.page_range %}
-                <li><a href="{% url 'shop_set' page_num=pageNum %}" {% if pageNum == sets.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                 {% if current_category_id != null %}
+                    <li><a href="{% url 'shop_set' page_num=pageNum category_id=current_category_id%}" {% if pageNum == sets.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                 {% else %}
+                    <li><a href="{% url 'shop_set' page_num=pageNum%}" {% if pageNum == sets.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+                 {% endif %}
               {% endfor %}
               {% if not sets.page_hasNext  %}
                 <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>

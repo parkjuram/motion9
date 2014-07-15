@@ -1,6 +1,7 @@
 {% extends "web_base.html" %}
 {% block header %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'css/cart_web.css' %}"/>
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script src="{% static 'js/cart_web.js'%}"></script>
@@ -39,24 +40,27 @@
                             <div class="purchased-item-name">
                                 <a href="{% url 'set' set_id=set.id %}" target="_blank">{{ set.name }}</a>
                             </div>
-                            <div class="purchased-item-price">가격 : {{ set.discount_price }}원</div>
+                            <div class="purchased-item-price">가격 : {{ set.discount_price|intcomma }}원</div>
                         </div>
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
                             <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
+                                <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                                <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                                <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                                <option {% if set.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                                <option {% if set.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                                <option {% if set.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                                <option {% if set.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                                <option {% if set.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                                <option {% if set.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                                <option {% if set.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                                {% if set.item_count > 10 %}
+                                    <option>{{ set.item_count }}</option>
+                                {% endif %}
                             </select>
-                            <span class="purchased-item-price-with-cnt">{{ set.discount_price }}원</span>
+                            <span class="purchased-item-price-with-cnt">{{ set.discount_price|intcomma }}원</span>
                         </div>
                     </div>
                     <div class="purchased-item-del-btn">
@@ -85,24 +89,27 @@
                             <div class="purchased-item-name">
                                 <a href="{% url 'product' product_id=product.id %}" target="_blank">{{ product.name }}</a>
                             </div>
-                            <div class="purchased-item-price">가격 : {{ product.discount_price }}원</div>
+                            <div class="purchased-item-price">가격 : {{ product.discount_price|intcomma }}원</div>
                         </div>
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
                             <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
+                                <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                                <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                                <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                                <option {% if product.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                                <option {% if product.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                                <option {% if product.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                                <option {% if product.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                                <option {% if product.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                                <option {% if product.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                                <option {% if product.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                                {% if product.item_count > 10 %}
+                                    <option>{{ product.item_count }}</option>
+                                {% endif %}
                             </select>
-                            <span class="purchased-item-price-with-cnt">{{ product.discount_price }}원</span>
+                            <span class="purchased-item-price-with-cnt">{{ product.discount_price|intcomma }}원</span>
                         </div>
                     </div>
                     <div class="purchased-item-del-btn">
@@ -132,24 +139,27 @@
                             <div class="purchased-item-name">
                                 <a href="#" target="_blank">{{ custom_set.name }}</a>
                             </div>
-                            <div class="purchased-item-price">가격 : {{ custom_set.discount_price }}원</div>
+                            <div class="purchased-item-price">가격 : {{ custom_set.discount_price|intcomma }}원</div>
                         </div>
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
                             <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
+                                <option {% if custom_sets.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                                <option {% if custom_sets.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                                <option {% if custom_sets.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                                <option {% if custom_sets.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                                <option {% if custom_sets.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                                <option {% if custom_sets.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                                <option {% if custom_sets.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                                <option {% if custom_sets.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                                <option {% if custom_sets.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                                <option {% if custom_sets.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                                {% if custom_sets.item_count > 10 %}
+                                    <option>{{ custom_sets.item_count }}</option>
+                                {% endif %}
                             </select>
-                            <span class="purchased-item-price-with-cnt">{{ custom_set.discount_price }}원</span>
+                            <span class="purchased-item-price-with-cnt">{{ custom_set.discount_price|intcomma }}원</span>
                         </div>
                     </div>
                     <div class="purchased-item-del-btn">
