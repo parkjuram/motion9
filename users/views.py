@@ -211,8 +211,6 @@ def mypage_cart_view(request):
             # custom_set_['discount_price']
             custom_sets.append(custom_set_)
 
-        print products
-        print sets
 
         return render(request, 'cart_web.html',
             {
