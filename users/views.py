@@ -184,7 +184,7 @@ def mypage_cart_view(request):
         products = []
         for product_cart in product_carts:
             product = product_cart.product
-            product_ = helper_get_product_detail(product,user)
+            product_ = helper_get_product_detail(product, user)
             product_.update({
                 'item_count': product_cart.item_count
             })
