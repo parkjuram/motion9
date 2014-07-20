@@ -40,12 +40,12 @@
                             <div class="purchased-item-name">
                                 <a href="{% url 'set' set_id=set.id %}" target="_blank">{{ set.name }}</a>
                             </div>
-                            <div class="purchased-item-price">가격 : {{ set.discount_price|intcomma }}원</div>
+                            <div class="purchased-item-price">가격 : <span id="cart-set-price-{{ set.id }}">{{ set.discount_price|intcomma }}</span>원</div>
                         </div>
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
-                            <select>
+                            <select class="cart-item-count" data-type="s" data-id="{{ set.id }}">
                                 <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
                                 <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>
                                 <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>
@@ -60,7 +60,7 @@
                                     <option  selected="selected">{{ set.item_count }}</option>
                                 {% endif %}
                             </select>
-                            <span class="purchased-item-price-with-cnt">{{ set.discount_price|intcomma }}원</span>
+                            <span class="purchased-item-price-with-cnt" id="cart-set-total-price-{{ set.id }}">{% widthratio set.discount_price 1 set.item_count %}원</span>
                         </div>
                     </div>
                     <div class="purchased-item-del-btn">
@@ -89,12 +89,12 @@
                             <div class="purchased-item-name">
                                 <a href="{% url 'product' product_id=product.id %}" target="_blank">{{ product.name }}</a>
                             </div>
-                            <div class="purchased-item-price">가격 : {{ product.discount_price|intcomma }}원</div>
+                            <div class="purchased-item-price">가격 : <span id="cart-product-price-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원</div>
                         </div>
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
-                            <select class="product-num">
+                            <select class="cart-item-count" data-type="p" data-id="{{ product.id }}">
                                 <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
                                 <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
                                 <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
@@ -109,7 +109,7 @@
                                     <option selected="selected">{{ product.item_count }}</option>
                                 {% endif %}
                             </select>
-                            <span class="purchased-item-price-with-cnt">{{ product.discount_price|intcomma }}원</span>
+                            <span class="purchased-item-price-with-cnt" id="cart-product-total-price-{{ product.id }}">{% widthratio product.discount_price 1 product.item_count %}원</span>
                         </div>
                     </div>
                     <div class="purchased-item-del-btn">
@@ -139,12 +139,12 @@
                             <div class="purchased-item-name">
                                 <a href="#" target="_blank">{{ custom_set.name }}</a>
                             </div>
-                            <div class="purchased-item-price">가격 : {{ custom_set.discount_price|intcomma }}원</div>
+                            <div class="purchased-item-price">가격 : <span id="cart-custom-price-{{ custom_set.id }}">{{ custom_set.discount_price|intcomma }}</span>원</div>
                         </div>
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
-                            <select>
+                            <select class="cart-item-count" data-type="c" data-id="{{ custom_set.id }}">
                                 <option {% if custom_sets.item_count == 1 %} selected="selected" {% endif %}>1</option>
                                 <option {% if custom_sets.item_count == 2 %} selected="selected" {% endif %}>2</option>
                                 <option {% if custom_sets.item_count == 3 %} selected="selected" {% endif %}>3</option>
@@ -156,10 +156,10 @@
                                 <option {% if custom_sets.item_count == 9 %} selected="selected" {% endif %}>9</option>
                                 <option {% if custom_sets.item_count == 10 %} selected="selected" {% endif %}>10</option>
                                 {% if custom_sets.item_count > 10 %}
-                                    <option  selected="selected">{{ custom_sets.item_count }}</option>
+                                    <option  selected="selected">{{ custom_set.item_count }}</option>
                                 {% endif %}
                             </select>
-                            <span class="purchased-item-price-with-cnt">{{ custom_set.discount_price|intcomma }}원</span>
+                            <span class="purchased-item-price-with-cnt" id="cart-custom-total-price-{{ custom_set.id }}">{% widthratio custom_set.discount_price 1 custom_sets.item_count %}원</span>
                         </div>
                     </div>
                     <div class="purchased-item-del-btn">
@@ -223,7 +223,7 @@
 
             <div class="purchase-nav-bottom">
                 <div class="total-purchase-price">
-                    총 결제 금액 &nbsp;<span>306,000원</span>
+                    총 결제 금액 &nbsp;<span id="cart-sum-price">306,000원</span>
                 </div>
                 <div class="purchase-methods">
                     <div class="checkbox-wrapper">

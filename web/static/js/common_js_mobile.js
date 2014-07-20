@@ -45,13 +45,13 @@ $(function(){
                     +       productName
                     + "     <div class='cart-select-box-wrapper'>"
                     + "         <lable>수량 : </lable>"
-                    + "         <select data-shadow='false' data-corner='false'>";
+                    + "         <select class='cart-item-count' data-id='"+productId+"' data-shadow='false' data-corner='false'>";
 
                 var htmlPost = '</select>'
                     + '     </div>'
                     + '     <div class="clearfix"></div>'
-                    + '가격 : '
-                    + numberFormatter(productPrice) + '원'
+                    + '가격 : <span id="cart-item-' + productId + '">'
+                    + numberFormatter(productPrice) + '</span>원'
                     + '</div>'
                     + '<div class="clearfix"></div>'
                     + '</li>';
@@ -66,7 +66,29 @@ $(function(){
                 html += htmlPost;
                 target.append($(html));
             }
+
+            $('select.cart-item-count').change(function(e){
+                console.log('event works');
+                var sumPrice = $('#cartTotalPrice');
+                var sum=0;
+
+               $('select.cart-item-count').each(function(i, v){
+                   var id = $(this).attr('data-id');
+                   var cnt = parseInt($(this).val());
+                   var price;
+                   var total;
+
+                   price = parsePrice($('#cart-item-'+id).text());
+                   total = price * cnt;
+                   sum+=total;
+               });
+
+               sumPrice.text(numberFormatter(sum));
+           });
+
         }
+
+
 
 
         $('.cart-delete-btn').click(function(e){
@@ -96,6 +118,15 @@ $(function(){
         });
     };
 
+    function parsePrice(price){
+        var parsedPrice = '';
+        var numbers = price.split(',');
+        for(var i = 0 ; i < numbers.length; i++){
+            parsedPrice += numbers[i];
+        }
+
+        return parseInt(parsedPrice);
+    }
 
     $('a.collapse-btn').click(function(e){
         e.preventDefault();
