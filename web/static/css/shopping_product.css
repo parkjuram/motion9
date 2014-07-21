@@ -54,10 +54,14 @@ a:hover{
     min-height : 36px;
     font-size : 13px;
     padding : 5px 10px;
+    line-height: 22px;
     background-color : white;
 
 }
 
+.item-brand{
+    line-height: 22px;
+}
 
 .item-original-price{
     text-decoration : line-through;

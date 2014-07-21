@@ -43,7 +43,7 @@ $(function(){
 
     });
 
-
+/*
     $('.set-img-gallery').magnificPopup({
 		delegate: 'a',
 		type: 'image',
@@ -58,7 +58,7 @@ $(function(){
 			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
 		}
 	});
-
+*/
     $('.belong-to-set-item').hover(function(e){
         var id = $(this).attr('data-attr');
         $(this).find('.product-hover-area').css({display:'block'});
@@ -72,7 +72,9 @@ $(function(){
     });
 
     $('.cnt-spinner').spinner({value:1, min : 1, afterChange: function(val){
-        console.log('hello' + val);
+        var price = parsePrice($('#productPrice').text());
+        var final = price * parseInt(val);
+        $('#productFinalPrice').text(numberFormatter(final));
     }});
 
     $("#setTabs").easyResponsiveTabs({

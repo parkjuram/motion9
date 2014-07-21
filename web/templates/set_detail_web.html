@@ -27,6 +27,7 @@
                         <img src="{{ set.images.0 }}" alt="" />
                     </div>
                 </div>
+                <!--
                 <div class="float-right">
                     <div class="set-img-gallery">
                     {% for image in product.images %}
@@ -37,6 +38,7 @@
                     {% endfor %}
                     </div>
                 </div>
+                -->
                 <div class="clearfix"></div>
                 <div>
                     <div class="tag-header">태그</div>
@@ -91,9 +93,9 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="product-price price-saled">판매가 : <span>{{ set.discount_price|intcomma }}원</span></div>
+                <div class="product-price price-saled">판매가 : <span id="productPrice">{{ set.discount_price|intcomma }}</span>원</div>
                 <div class="product-price price-total">
-                    총 상품 금액 : {{ set.discount_price|intcomma }}원
+                    총 상품 금액 : <span id="productFinalPrice">{{ set.discount_price|intcomma }}</span>원
                 </div>
                 <div class="product-btn-area">
                     <a href="#" class="basic-btn">구매하기</a>

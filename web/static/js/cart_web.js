@@ -103,13 +103,5 @@ $(function(){
    });
 
 
-    function parsePrice(price){
-        var parsedPrice = '';
-        var numbers = price.split(',');
-        for(var i = 0 ; i < numbers.length; i++){
-            parsedPrice += numbers[i];
-        }
 
-        return parseInt(parsedPrice);
-    }
 });

@@ -17,7 +17,7 @@
     <div class="main-container float-left">
         <div class="box-css">
             <div class="box-header">
-                단일제품 > {{ product.name }}
+                모든제품 > {{ product.name }}
             </div>
             <div class="product-x-category-box">
                 카테고리 > {{ product.category_name }}
@@ -28,6 +28,7 @@
                         <img src="{{ product.images.0 }}" alt="" />
                     </div>
                 </div>
+                <!--
                 <div class="float-right">
                     <div class="product-x-img-gallery">
                         {% for image in product.images %}
@@ -38,13 +39,8 @@
                         {% endfor %}
                     </div>
                 </div>
+                -->
                 <div class="clearfix"></div>
-                <div>
-                    <div class="tag-header">태그</div>
-                    <div class="tag-list">
-                        <a href="#">여드름</a>, <a href="#">하얀피부</a>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -70,7 +66,7 @@
 
             <div class="price-area">
                 <div class="product-how-many">
-                    <div class="product-price price-saled">판매가 : <span>{{ product.discount_price|intcomma }}원</span></div>
+                    <div class="product-price price-saled">판매가 : <span id="productPrice">{{ product.discount_price|intcomma }}</span>원</div>
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :
                     </div>
@@ -80,7 +76,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="product-price price-total">
-                    총 상품 금액 : {{ product.discount_price|intcomma }}원
+                    총 상품 금액 : <span id="productFinalPrice">{{ product.discount_price|intcomma }}</span>원
                 </div>
                 <div class="product-btn-area">
                     <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-interest">관심하기</a>
@@ -97,14 +93,14 @@
            {% for blog in blog_reviews %}
                <div class="belong-to-product-x-item">
                    <div class="belong-product-img">
-                       <img src="{{ blog.big_img_url }}" alt="" />
+                       <a href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}"><img src="{{ blog.small_img_url }}" alt="" /></a>
                    </div>
                    <div class="belong-product-info">
                        <div class="belong-product-name">
-                           <a href="#" title="{{ blog.writer }}">{{ blog.writer|truncatechars:10 }}</a>
+                           <a href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}">{{ blog.writer|truncatechars:10 }}</a>
                        </div>
                        <div class="belong-product-contents">
-                           {{ blog.summary |truncatechars:70}}
+                           {{ blog.summary}}
                        </div>
                    </div>
                    <div class="clearfix"></div>
