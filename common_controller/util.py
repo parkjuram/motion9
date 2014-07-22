@@ -11,6 +11,15 @@ import json
 
 logger = logging.getLogger(__name__)
 
+def validateEmail( email ):
+    from django.core.validators import validate_email
+    from django.core.exceptions import ValidationError
+    try:
+        validate_email( email )
+        return True
+    except ValidationError:
+        return False
+
 def http_response_by_json(error=None, json_={}):
     if error is None:
         json_.update({

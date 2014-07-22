@@ -14,7 +14,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
-    http_response_by_json, helper_make_custom_set, helper_get_custom_set
+    http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail
 
 from .models import Interest
 
@@ -32,7 +32,7 @@ def check_email_view(request):
     if User.objects.filter(email=email).exists():
         return http_response_by_json(None, {'exist':True})
 
-    return http_response_by_json(None, {'exist':False})
+    return http_response_by_json(None, {'isvalid': validateEmail(email), 'exist':False})
 
 
 @csrf_exempt
