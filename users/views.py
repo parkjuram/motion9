@@ -205,11 +205,11 @@ def mypage_purchase_view(request, page_num=1):
                 purchases_.append(product_)
             elif purchase.type=='s':
                 set = purchase.set
-                set_ = helper_get_product_detail(set, user)
+                set_ = helper_get_set(set, user)
                 purchases_.append(set_)
             elif purchase.type=='c':
                 custom_set = purchase.custom_set
-                custom_set_ = helper_get_product_detail(custom_set, user)
+                custom_set_ = helper_get_custom_set(custom_set, user)
                 purchases_.append(custom_set_)
 
         if page_num is not None:
@@ -475,29 +475,16 @@ def mobile_mypage_set_view(request, page_num=1):
         logger.error('have_to_login')
 
 def mobile_mypage_cart_view(request):
-    user = helper_get_user(request)
 
-    product_carts= user.cart_set.filter(type='p').all()
-    products = []
-    for product_cart in product_carts:
-        product = product_cart.product
-        products.append(helper_get_product_detail(product,user))
+    cart_items = helper_get_cart_items( helper_get_user(request) )
+    return render(request, 'cart.html', cart_items)
 
-    set_carts = user.cart_set.filter(type='s').all()
-    sets = []
-    for set_cart in set_carts:
-        set = set_cart.set
-        sets.append(helper_get_set(set,user))
 
-    custom_set_carts = user.cart_set.filter(type='c').all()
-    custom_sets = []
-    for custom_set_cart in custom_set_carts:
-        custom_set = custom_set_cart.custom_set
-        custom_sets.append(custom_set)
+def mobile_mypage_before_purchase_view(request):
+    product_id_list = request.POST.get('product_id', None)
+    product_count_list = request.POST.get('product_cnt', None)
 
-    return render(request, 'cart.html',
-        {
-            'products': products,
-            'sets': sets,
-            'custom_sets': custom_sets
-        })
+
+    cart_items = helper_get_cart_items( helper_get_user(request) )
+
+    return render(request, 'my_page_purchase.html', cart_items )
