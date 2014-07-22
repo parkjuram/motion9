@@ -40,13 +40,13 @@
 
                 {% if current_page and current_page == 'shop_product' %}
                     <li><a href="#" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" class="selected" data-attr="menuProduct">단일제품</a></li>
+                    <li><a href="#" class="selected" data-attr="menuProduct">모든제품</a></li>
                 {% elif current_page and current_page == 'shop_set' %}
                     <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" data-attr="menuProduct">단일제품</a></li>
+                    <li><a href="#" data-attr="menuProduct">모든제품</a></li>
                 {% else %}
                     <li><a href="#" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" data-attr="menuProduct">단일제품</a></li>
+                    <li><a href="#" data-attr="menuProduct">모든제품</a></li>
                 {% endif %}
                 <li><a href="{%  url 'customize_set' %}" data-directly="true">커스텀컬렉션</a></li>
 

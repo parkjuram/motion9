@@ -22,7 +22,7 @@
     <div class="select-wrapper">
       <div class="select-box-border">
         <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#subProductCategory">단일제품</option>
+            <option value="#subProductCategory">모든제품</option>
             <option value="#subSetCategory">세트상품</option>
         </select>
       </div>
@@ -52,7 +52,7 @@
                <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
            </div>
            <div class="item-title" >
-               <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name}}</a>
+               <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
                <div class="item-price">
                    {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ product.discount_rate }}</span>
                </div>

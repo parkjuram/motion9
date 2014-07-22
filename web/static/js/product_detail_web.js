@@ -43,7 +43,7 @@ $(function(){
 
     });
 
-
+/*
     $('.product-x-img-gallery').magnificPopup({
 		delegate: 'a',
 		type: 'image',
@@ -58,10 +58,12 @@ $(function(){
 			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
 		}
 	});
-
+*/
 
     $('.cnt-spinner').spinner({value:1, min : 1, afterChange: function(val){
-        console.log('hello' + val);
+        var price = parsePrice($('#productPrice').text());
+        var final = price * parseInt(val);
+        $('#productFinalPrice').text(numberFormatter(final));
     }});
 
     $("#product-xTabs").easyResponsiveTabs({

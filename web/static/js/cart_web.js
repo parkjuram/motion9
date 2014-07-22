@@ -42,28 +42,36 @@ $(function(){
    });
 
 
-   $('select.product-num').change(function(e){
-       var productPrice = 0;
-       var deliveryPrice = 0;
-       var totalProductPrice =  $('#totalProductPrice');
-       var totalPurchasePrice = $('#totalPurchasePrice');
+   $('select.cart-item-count').change(function(e){
 
-       $('select.product-num').each(function(i, v){
-           var num = parseInt($(this).val());
-           var isSet = $(this).attr('data-isSet');
-           var key = $(this).attr('data-attr');
-           var price = 0;
-           if(isSet=='true'){
-               price = parseInt($('#setPrice-'+key).text());
-               productPrice += (price * num);
+        var sumPrice = $('#cart-sum-price');
+        var sum=0;
+
+       $('select.cart-item-count').each(function(i, v){
+           var type = $(this).attr('data-type');
+           var id = $(this).attr('data-id');
+           var cnt = parseInt($(this).val());
+           var price;
+           var total;
+
+           if(type == 's'){
+              $('#cart-set-price-'+id).text();
+              price = parsePrice($('#cart-set-price-'+id).text());
+              total = price * cnt;
+              $('#cart-set-total-price-'+id).text(numberFormatter(total));
+           }else if(type == 'p'){
+              price = parsePrice($('#cart-product-price-'+id).text());
+              total = price * cnt;
+              $('#cart-product-total-price-'+id).text(numberFormatter(total));
            }else{
-               price = parseInt($('#productPrice-'+key).text());
-               productPrice += (price * num);
+              price = parsePrice($('#cart-custom-price-'+id).text());
+              total = price * cnt;
+              $('#cart-custom-total-price-'+id).text(numberFormatter(total));
            }
+           sum+=total;
        });
 
-       totalProductPrice.text(productPrice);
-       totalPurchasePrice.text(productPrice + deliveryPrice);
+       sumPrice.text(numberFormatter(sum));
    });
 
 
@@ -93,5 +101,7 @@ $(function(){
         });
       }
    });
+
+
 
 });
