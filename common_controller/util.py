@@ -114,6 +114,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'capacity': product.capacity,
             'original_price': product.original_price,
             'discount_price': product.discount_price,
+            'discount_rate' : float(product.original_price-product.discount_price)/product.original_price*100,
             'fit_skin_type': product.fit_skin_type,
             'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False,
             'contains_set': []
@@ -174,6 +175,12 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
         'original_price': original_price,
         'discount_price': discount_price-set.discount_difference
     })
+
+    custom_set_.update({
+        'discount_rate' : float(custom_set_['original_price']-custom_set_['discount_price'])/custom_set_['original_price']*100
+    })
+
+
 
     return custom_set_
 
@@ -241,6 +248,10 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     set_.update({
         'original_price': original_price,
         'discount_price': discount_price-set.discount_difference
+    })
+
+    set_.update({
+        'discount_rate': float(set_['original_price']-set_['discount_price'])/set_['original_price']*100
     })
 
     return set_

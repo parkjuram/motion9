@@ -97,8 +97,9 @@ def login_view(request):
 
 @csrf_exempt
 def logout_(request):
+    next = request.GET.get('next', 'index' )
     logout(request)
-    return redirect('index')
+    return redirect( next )
 
 @login_required
 def update(request):
