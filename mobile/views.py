@@ -50,6 +50,7 @@ def shop_product_view(request, category_id=None, page_num=1):
 
                       'products': products_,
                       'current_category': current_category,
+                      'current_category_id': category_id,
                       'categories': categories,
                       'current_page': 'shop_product'
                   })
