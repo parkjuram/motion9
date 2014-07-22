@@ -109,12 +109,21 @@ def helper_get_product_detail(product_id_or_object, user=None):
             # 'small_img_url': product.small_img_url,
             'small_img_url': settings.MEDIA_URL + product.thumbnail_image.name,
             'video_url': product.description,
-            'brandname': product.brandname,
+            'brandname': product.brand.name_eng if product.brand.is_repr_to_eng is True else product.brand.name_kor,
             'maker': product.maker,
+            'country': product.country,
             'capacity': product.capacity,
+            'short_desc': product.short_desc,
+            'use_expired_date': product.use_expired_date,
+            'production_date': product.production_date,
+            'usage': product.usage,
+            'ingredient': product.ingredient,
+            'judge_result': product.judge_result,
+            'precautions': product.precautions,
+            'quality_guarantee_standard': product.quality_guarantee_standard,
             'original_price': product.original_price,
             'discount_price': product.discount_price,
-            'discount_rate' : float(product.original_price-product.discount_price)/product.original_price*100,
+            'discount_rate' : float(product.original_price-product.discount_price)/product.original_price*100 if product.original_price is not 0 else 0,
             'fit_skin_type': product.fit_skin_type,
             'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False,
             'contains_set': []
@@ -177,7 +186,7 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
     })
 
     custom_set_.update({
-        'discount_rate' : float(custom_set_['original_price']-custom_set_['discount_price'])/custom_set_['original_price']*100
+        'discount_rate' : float(custom_set_['original_price']-custom_set_['discount_price'])/custom_set_['original_price']*100  if custom_set_['original_price'] is not 0 else 0
     })
 
 
@@ -251,7 +260,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     })
 
     set_.update({
-        'discount_rate': float(set_['original_price']-set_['discount_price'])/set_['original_price']*100
+        'discount_rate': float(set_['original_price']-set_['discount_price'])/set_['original_price']*100 if set_['original_price'] is not 0 else 0
     })
 
     return set_
@@ -307,6 +316,42 @@ def helper_make_paging_data( all_object_length, lists, item_count_per_page, curr
         'page_num': current_page_num
     })
     return lists
+
+def helper_get_cart_items( user ):
+    if user is not None:
+        total_price = 0
+        product_carts= user.cart_set.filter(type='p').all()
+        products = []
+        for product_cart in product_carts:
+            product = product_cart.product
+            product_ = helper_get_product_detail(product, user)
+            product_['item_count'] = product_cart.item_count
+            total_price += int(product_['discount_price'])*product_cart.item_count
+            products.append(product_)
+
+        set_carts = user.cart_set.filter(type='s').all()
+        sets = []
+        for set_cart in set_carts:
+            set = set_cart.set
+            set_ = helper_get_set(set,user)
+            set_['item_count'] = set_cart.item_count
+            total_price += int(set_['discount_price'])*set_cart.item_count
+            sets.append(set_)
+
+        custom_set_carts = user.cart_set.filter(type='c').all()
+        custom_sets = []
+        for custom_set_cart in custom_set_carts:
+            custom_set = custom_set_cart.custom_set
+            custom_set_ = helper_get_custom_set(custom_set, user)
+            total_price += int(custom_set_['discount_price'])
+            custom_sets.append(custom_set_)
+
+        return { 'products': products,
+                'sets': sets,
+                'custom_sets': custom_sets,
+                'total_price': total_price }
+
+    return None
 
 # interest
 

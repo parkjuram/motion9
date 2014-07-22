@@ -14,7 +14,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
-    http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail
+    http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items
 
 from .models import Interest
 
@@ -175,87 +175,22 @@ def mypage_set_view(request, page_num=1):
 
 @login_required
 def mypage_cart_view(request):
-    user = helper_get_user(request)
+    cart_items = helper_get_cart_items( helper_get_user(request) )
 
-    if user is not None:
-
-        total_price = 0
-
-        product_carts= user.cart_set.filter(type='p').all()
-        products = []
-        for product_cart in product_carts:
-            product = product_cart.product
-            product_ = helper_get_product_detail(product, user)
-            product_.update({
-                'item_count': product_cart.item_count
-            })
-            total_price += int(product_['discount_price'])*product_cart.item_count
-            products.append(product_)
-
-        set_carts = user.cart_set.filter(type='s').all()
-        sets = []
-        for set_cart in set_carts:
-            set = set_cart.set
-            set_ = helper_get_set(set,user)
-            set_.update({
-                'item_count': set_cart.item_count
-            })
-            total_price += int(set_['discount_price'])*set_cart.item_count
-            sets.append(set_)
-
-        custom_set_carts = user.cart_set.filter(type='c').all()
-        custom_sets = []
-        for custom_set_cart in custom_set_carts:
-            custom_set = custom_set_cart.custom_set
-            custom_set_ = helper_get_custom_set(custom_set, user)
-            total_price += int(custom_set_['discount_price'])
-            custom_sets.append(custom_set_)
-
-        print total_price
-
-
-        return render(request, 'cart_web.html',
-            {
-                'products': products,
-                'sets': sets,
-                'custom_sets': custom_sets,
-                'total_price': total_price
-            })
+    if cart_items is not None:
+        return render(request, 'cart_web.html', cart_items )
     else:
         return redirect('login_page')
 
 
 @csrf_exempt
 def mypage_cart_json_view(request):
-    user = helper_get_user(request)
+    cart_items = helper_get_cart_items( helper_get_user(request) )
 
-    product_carts= user.cart_set.filter(type='p').all()
-    products = []
-    for product_cart in product_carts:
-        product = product_cart.product
-        product_detail = helper_get_product_detail(product,user)
-        product_detail['item_count'] = product_cart.item_count
-        products.append(product_detail)
-
-    set_carts = user.cart_set.filter(type='s').all()
-    sets = []
-    for set_cart in set_carts:
-        set = set_cart.set
-        set_detail = helper_get_set(set,user)
-        set_detail['item_count'] = set_cart.item_count
-        sets.append(set_detail)
-
-    custom_set_carts = user.cart_set.filter(type='c').all()
-    custom_sets = []
-    for custom_set_cart in custom_set_carts:
-        custom_set = custom_set_cart.custom_set
-        custom_sets.append(custom_set)
-
-    return http_response_by_json(None, {
-        'products': products,
-        'sets': sets,
-        'custom_sets': custom_sets
-    })
+    if cart_items is not None:
+        return http_response_by_json(None, cart_items)
+    else:
+        return http_response_by_json(None, {})
 
 def mypage_purchase_view(request, page_num=1):
     page_num = int(page_num)
