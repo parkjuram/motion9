@@ -53,5 +53,42 @@ $(function(){
         window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/mobile/registration_page'+"&response_type=token&scope=public_profile,email,user_friends");
     });
 
+    $('#joinBtn').click(function(e){
+        e.preventDefault();
+
+        if($(this).attr('data-enable')==true){
+            $('#register').submit();
+        }else{
+            alert('Email을 확인해주세요.');
+        }
+
+
+    });
+
+    $('#email').focusout(function(e){
+       var email = $(this).val();
+       if(email.length > 5 && email != ''){
+            $.ajax({
+                  url: '/user/check/email/',
+                  dataType: 'json',
+                  async : true,
+                  type:'POST',
+                  data : {email : email},
+                  success: function(data){
+                      if(data.exist == false && data.isValid == true && data.success == true){
+                          $('#joinBtn').attr('data-enable', true);
+                          $('span.warning-message').hide();
+                      }else{
+                          $('#joinBtn').attr('data-enable', false);
+                          $('span.warning-message').show();
+                      }
+                  },
+                  error:function(jqXHR, textStatus, errorThrown){
+                      console.log(textStatus);
+                  }
+        });
+       }
+    });
+
 });
 

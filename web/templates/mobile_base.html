@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {% load static %}
+    {% load humanize %}
+    {% load mathfilters %}
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
     <link rel="stylesheet" href="{% static 'css/common_style.css' %}"/>
     <script type="text/javascript">
@@ -33,7 +35,7 @@
                     <div >
                         <div class="cart-footer-bar">
                             <div style="margin : 16px 0;">
-                                총 결제 금액 : <span id="cartTotalPrice">45,000</span>원
+                                총 결제 금액 : <span id="cartTotalPrice">{{ total_price|intcomma }}</span>원
                             </div>
                             <div style="text-align : center; margin-bottom : 16px;">
                                 <a href="#" style=" width : 80%;" data-ajax="false" class="gold-btn">구매 하기</a>

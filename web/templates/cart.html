@@ -9,7 +9,7 @@
 {% block special_header%}
     <div class="total-cost-box">
        <div id="total-cost">
-         총 결제 금액 : <span class="total-cost">148000</span>원
+         총 결제 금액 : <span class="total-cost">{{ total_price|intcomma }}</span>원
        </div>
        <div class="purchase-btn">
           <input type="button" data-mini="true" data-shadow="false" value="결제하기" data-inline="true">

@@ -8,7 +8,7 @@
     <h2 class="ui-title">회원가입</h2>
 {% endblock %}
 {% block content %}
-       <form method="post" action="{% url 'registration' %}">
+       <form method="post" id="register" action="{% url 'registration' %}">
 			<div class="ui-grid-solo">
 
 				<div class="ui-block-a form-box">
@@ -18,7 +18,7 @@
                                 <a href="#" class="facebook-btn fb-join-btn" style="margin:12px 0;">Facebook을 통해 가입</a>
                             </div>
 							<div>
-								<label for="email">Email</label>
+								<label for="email">Email <span class="warning-message">* 이미 존재하는 이메일이거나 형식이 올바르지 않습니다.</span></label>
 								<input type="text" name="email" id="email" data-clear-btn="true" data-mini="true"/>
 							</div>
 							<div>
@@ -37,7 +37,7 @@
 						        </select>
 						    </div>
                             <div style="margin-top : 24px;">
-                                 <a href="#" onclick="javascript:form[0].submit(); return false;" class="gold-btn">회원가입</a>
+                                 <a href="#"  data-enable="false" id="joinBtn" class="gold-btn">회원가입</a>
                             </div>
 						</div>
 					</div>

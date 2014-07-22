@@ -34,6 +34,11 @@ a:visited{
     color : inherit;
 }
 
+.warning-message{
+    color : red;
+    display: none;
+}
+
 .container{
     width : 970px;
     min-height : 400px;

@@ -9,13 +9,13 @@
         <div class="register-header">
             회원가입
         </div>
-        <form method="post" action="{% url 'registration'%}" >
+        <form method="post" data-form="register" action="{% url 'registration'%}" >
             <div class="form-box">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name"/>
             </div>
             <div class="form-box">
-                <label for="email">이메일</label>
+                <label for="email">이메일 <span class="warning-message">* 이미 존재하는 이메일이거나 형식이 올바르지 않습니다.</span></label>
                 <input type="text" name="email" id="email"/>
             </div>
             <div class="form-box">
@@ -38,7 +38,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="form-btns">
-                <a href="#" class="basic-btn login-submit-btn" style="padding : 8px 40px;">회원가입</a> &nbsp;&nbsp;&nbsp;
+                <a href="#" class="basic-btn login-submit-btn" id="joinBtn" data-form="register" data-enable="false" style="padding : 8px 40px;">회원가입</a> &nbsp;&nbsp;&nbsp;
                 <a href="#" class="fb-join-btn facebook-btn">페이스북으로 가입</a>
             </div>
             <div class="already-member-area">
