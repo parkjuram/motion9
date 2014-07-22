@@ -188,8 +188,7 @@ def mypage_cart_view(request):
             product_.update({
                 'item_count': product_cart.item_count
             })
-            total_price += int(product_['discount_price'])
-            # product_['discount_price']
+            total_price += int(product_['discount_price'])*product_cart.item_count
             products.append(product_)
 
         set_carts = user.cart_set.filter(type='s').all()
@@ -200,7 +199,7 @@ def mypage_cart_view(request):
             set_.update({
                 'item_count': set_cart.item_count
             })
-            # set_['discount_price']
+            total_price += int(set_['discount_price'])*set_cart.item_count
             sets.append(set_)
 
         custom_set_carts = user.cart_set.filter(type='c').all()
@@ -208,15 +207,18 @@ def mypage_cart_view(request):
         for custom_set_cart in custom_set_carts:
             custom_set = custom_set_cart.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
-            # custom_set_['discount_price']
+            total_price += int(custom_set_['discount_price'])
             custom_sets.append(custom_set_)
+
+        print total_price
 
 
         return render(request, 'cart_web.html',
             {
                 'products': products,
                 'sets': sets,
-                'custom_sets': custom_sets
+                'custom_sets': custom_sets,
+                'total_price': total_price
             })
     else:
         return redirect('login_page')
