@@ -76,7 +76,7 @@ class ProductMagazine(models.Model):
     magazine = models.ForeignKey(Magazine)
     year = models.IntegerField(null=False, default=0)
     month = models.IntegerField(null=False, default=0)
-    link = models.URLField(null=Flase, blank=True)
+    link = models.URLField(null=False, blank=True)
 
 class ProductDescriptionImage(models.Model):
     product = models.ForeignKey(Product)
