@@ -36,21 +36,18 @@
 <div class="product-img">
     <div class="swiper-container">
         <div class="swiper-wrapper">
-          <!--First Slide-->
           <div class="swiper-slide">
-            <img src="http://themotion9.com/media/product/image/2_1.jpg"/>
-          </div>
+             <img src="{{ product.small_img_url }}"/>
+           </div>
 
-          <!--Second Slide-->
-          <div class="swiper-slide">
-            test
-          </div>
-
-          <!--Third Slide-->
-          <div class="swiper-slide">
-            <img src="{{ set.big_img_url }}"/>
-          </div>
-          <!--Etc..-->
+        {% for image in product.images %}
+            {% if forloop.first %}
+            {% else %}
+                <div class="swiper-slide">
+                    <img src="{{image}}" />
+                </div>
+            {% endif %}
+        {% endfor %}
         </div>
         <div class="pagination">
         </div>
