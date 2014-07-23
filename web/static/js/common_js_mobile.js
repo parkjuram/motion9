@@ -19,13 +19,25 @@ $(function(){
 
         for(var j = 0; j < keys.length ; j++){
             var list =  data[keys[j]];
-
-            if(keys[j] == 'sets')
+            var preHiddenEl = "";
+            var postHiddenEl = "";
+            var name="";
+            if(keys[j] == 'sets') {
                 type = 's';
-            else if(keys[j] =='products')
-                type= 'p';
-            else if(keys[j] == 'custom_sets')
-                type= 'c';
+                preHiddenEl = "<input type='hidden' name='set_id[";
+                postHiddenEl = "]' value='";
+                name="name='set_cnt[";
+            }else if(keys[j] =='products') {
+                type = 'p';
+                preHiddenEl = "<input type='hidden' name='product_id[";
+                postHiddenEl = "]' value='";
+                name="name='product_cnt[";
+            }else if(keys[j] == 'custom_sets') {
+                type = 'c';
+                preHiddenEl = "<input type='hidden' name='custom_set_id[";
+                postHiddenEl = "]' value='";
+                name="name='custom_set_cnt[";
+            }
 
             for(var i = 0 ; i < list.length ; i++){
                 html = '';
@@ -35,17 +47,17 @@ $(function(){
                 imgUrl = list[i].big_img_url;
                 howMany = list[i].item_count;
 
-
                 var htmlPrepend = "<li>"
                     + "<a class='cart-delete-btn' data-type='"+type+"' data-id='"+productId+"' href='#' >X</a>"
                     + "<div class='cart-item-img'>"
                     +   "<img src='"+imgUrl+"'/>"
                     + "</div>"
+                    + preHiddenEl + i + postHiddenEl+ productId+"'/>"
                     + "<div class='cart-item-info'>"
                     +       productName
                     + "     <div class='cart-select-box-wrapper'>"
                     + "         <lable>수량 : </lable>"
-                    + "         <select class='cart-item-count' data-id='"+productId+"' data-shadow='false' data-corner='false'>";
+                    + "         <select class='cart-item-count' "+name+i+"]' data-id='"+productId+"' data-shadow='false' data-corner='false'>";
 
                 var htmlPost = '</select>'
                     + '     </div>'
@@ -68,7 +80,6 @@ $(function(){
             }
 
             $('select.cart-item-count').change(function(e){
-                console.log('event works');
                 var sumPrice = $('#cartTotalPrice');
                 var sum=0;
 
@@ -167,6 +178,10 @@ $(function(){
         }
     });
 
-
+    $('#cartBuyBtn').click(function(e){
+        e.preventDefault();
+        console.log('here');
+        $('#cartBuyForm').submit();
+    });
 
 });

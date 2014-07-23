@@ -117,6 +117,7 @@ a.basic-btn{
     width : 84px;
     float: left;
     margin-left: 12px;
+    margin-right : 8px;
 }
 
 .belong-product-img img{
@@ -126,8 +127,10 @@ a.basic-btn{
 }
 
 .belong-product-info{
-    float:left;
-    width : 186px;
+    /*float:left;*/
+    line-height: 20px;
+    margin-left : 8px;
+    width : 266px;
     padding: 4px 8px;
 }
 
@@ -225,3 +228,22 @@ a.basic-btn{
 }
 
 
+.product-info-table{
+    border-collapse: collapse;
+    width : 600px;
+    margin-left: auto;
+    margin-right:auto;
+    font-size: 12px;
+    border: 1px solid #e5e5e5;
+}
+
+.product-info-table td{
+    line-height: 20px;
+    padding : 12px 16px;
+    border : 1px solid #e5e5e5;
+}
+
+.product-info-table td.item-spec-head{
+    width : 180px;
+    background-color: #f3f3f3;
+}

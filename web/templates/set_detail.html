@@ -96,7 +96,51 @@
         상품 정보 ㅋㅋㅋ
     </div>
     <div class="tab-content" id="productRule">
-        상품 고시 ㅋㅋㅋ
+        <table class="product-info-table">
+            <tr>
+                <td class="item-spec-head">사이즈 및 용량</td>
+                <td>{{ set.capacity }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">제품 주요 사양</td>
+                <td>{{ set.fit_skin_type }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">사용기한</td>
+                <td>{{ set.production_date }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">사용 방법</td>
+                <td>{{ set.usage }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">제조자 및 제조판매업자</td>
+                <td>{{ set.maker }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">제조국</td>
+                <td>{{ set.country }}</td>
+            </tr><tr>
+                <td class="item-spec-head">주요성분 및 전성분</td>
+                <td>{{ set.ingredient }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">식풍의약품안전청 심사필 유무</td>
+                <td>{{ set.judge_result }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">사용시 주의사항</td>
+                <td>{{ set.precautions }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">품질 보증기준</td>
+                <td>{{ set.quality_guarantee_standard }}</td>
+            </tr>
+            <tr>
+                <td class="item-spec-head">소비자 상담관련 전화번호</td>
+                <td>02-871-4510</td>
+            </tr>
+        </table>
     </div>
 </div>
 

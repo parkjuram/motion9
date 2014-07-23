@@ -252,3 +252,22 @@ a:visited{
     background:#e5e5e5;
 }
 
+.product-info-table{
+    margin : 20px auto;
+    border-collapse: collapse;
+    width : 320px;
+    font-size: 12px;
+    border: 1px solid #e5e5e5;
+}
+
+.product-info-table td{
+    background-color: white;
+    padding : 12px 16px;
+    line-height: 20px;
+    border : 1px solid #e5e5e5;
+}
+
+.product-info-table td.item-spec-head{
+    width : 80px;
+    background-color: #f3f3f3;
+}

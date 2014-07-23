@@ -28,6 +28,7 @@
         <div>
              {% if user.is_authenticated %}
                 <div class="cart-item-list-wrapper">
+                <form id="cartBuyForm" method="post" action="/user/mobile/mypage/before_purchase/">
                     <ul class="custom-menu-list"></ul>
 
                     <div >
@@ -36,10 +37,11 @@
                                 총 결제 금액 : <span id="cartTotalPrice">{{ total_price|intcomma }}</span>원
                             </div>
                             <div style="text-align : center; margin-bottom : 16px;">
-                                <a href="#" style=" width : 80%;" data-ajax="false" class="gold-btn">구매 하기</a>
+                                <a href="#" id="cartBuyBtn" style=" width : 80%;" data-ajax="false" class="gold-btn">구매 하기</a>
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
              {% else %}
                 <div style="font-size : 12px; text-align : center; margin : 20px 0;">
