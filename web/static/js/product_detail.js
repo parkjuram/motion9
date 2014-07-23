@@ -43,7 +43,7 @@ $(function(){
       var mySwiper = $('.swiper-container').swiper({
           //Your options here:
           mode: 'horizontal',
-          loop: true,
+          loop: false,
           calculateHeight: true,
           pagination: '.pagination',
           paginationClickable: true

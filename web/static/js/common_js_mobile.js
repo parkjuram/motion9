@@ -181,6 +181,7 @@ $(function(){
     $('#cartBuyBtn').click(function(e){
         e.preventDefault();
         console.log('here');
+
         $('#cartBuyForm').submit();
     });
 

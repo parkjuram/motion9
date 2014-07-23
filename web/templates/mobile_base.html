@@ -65,7 +65,7 @@
             <ul class="custom-menu-list">
 
                 {% if user.is_authenticated %}
-                   <li><a href="{% url "mobile_mypage" %}" data-ajax="false">{{ user.username }}님</a><img class="profile-img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c85.18.229.229/s100x100/180837_10150110963568938_908650_n.jpg"/></li>
+                   <li><a href="{% url "mobile_mypage" %}" data-ajax="false">{{ user.username }}님</a><!--<img class="profile-img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c85.18.229.229/s100x100/180837_10150110963568938_908650_n.jpg"/>--></li>
                 {% else %}
                    <li><a href="{% url 'mobile_login_page' %}" data-ajax="false">로그인</a></li>
                 {% endif %}
