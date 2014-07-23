@@ -51,6 +51,7 @@ a:visited{
 .product-img{
     width : 100%;
     position : relative;
+    text-align: center;
 }
 
 .product-img img {
