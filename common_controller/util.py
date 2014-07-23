@@ -315,7 +315,7 @@ def helper_make_paging_data( all_object_length, lists, item_count_per_page, curr
     })
     return lists
 
-def helper_get_cart_items( user ):
+def helper_get_cart_items(user):
     if user is not None:
         total_price = 0
         product_carts= user.cart_set.filter(type='p').all()
@@ -350,6 +350,15 @@ def helper_get_cart_items( user ):
                 'total_price': total_price }
 
     return None
+
+def helper_update_cart_items_count(user, id_list, count_list, type ):
+    for i in range(len(id_list)):
+        if type == 'p':
+            user.cart_set.filter(product__id=id_list[i], type='p').update(item_count=count_list[i])
+        elif type == 's':
+            user.cart_set.filter(set__id=id_list[i], type='s').update(item_count=count_list[i])
+        elif type == 'c':
+            user.cart_set.filter(custom_set__id=id_list[i], type='c').update(item_count=count_list[i])
 
 # interest
 

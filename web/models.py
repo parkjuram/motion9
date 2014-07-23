@@ -61,6 +61,23 @@ class Product(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+class Magazine(models.Model):
+    title = models.CharField(max_length=30, unique=True)
+
+    def __unicode__(self):
+        return '(%r)Magazine : title(%s)' \
+               % (self.id, self.title)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+class ProductMagazine(models.Model):
+    product = models.ForeignKey(Product)
+    magazine = models.ForeignKey(Magazine)
+    year = models.IntegerField(null=False, default=0)
+    month = models.IntegerField(null=False, default=0)
+    link = models.URLField(null=False, blank=True)
+
 class ProductDescriptionImage(models.Model):
     product = models.ForeignKey(Product)
     image = models.ImageField(null=True, upload_to='product/desc/')
