@@ -14,7 +14,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_cart, helper_delete_set_cart, helper_delete_custom_set_cart, \
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
-    http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items
+    http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
+    helper_update_cart_items_count
 
 from .models import Interest
 
@@ -484,6 +485,32 @@ def mobile_mypage_before_purchase_view(request):
     product_id_list = request.POST.get('product_id', None)
     product_count_list = request.POST.get('product_cnt', None)
 
+    if product_id_list is not None and product_count_list is not None\
+            and len(product_id_list) == len(product_count_list):
+        helper_update_cart_items_count( helper_get_user(request),
+                                        product_id_list,
+                                        product_count_list,
+                                        'p')
+
+    set_id_list = request.POST.get('set_id', None)
+    set_count_list = request.POST.get('set_cnt', None)
+
+    if set_id_list is not None and set_count_list is not None\
+            and len(set_id_list) == len(set_count_list):
+        helper_update_cart_items_count( helper_get_user(request),
+                                        set_id_list,
+                                        set_count_list,
+                                        's')
+
+    custom_set_id_list = request.POST.get('custom_set_id', None)
+    custom_set_count_list = request.POST.get('custom_set_cnt', None)
+
+    if custom_set_id_list is not None and custom_set_count_list is not None\
+            and len(custom_set_id_list) == len(custom_set_count_list):
+        helper_update_cart_items_count( helper_get_user(request),
+                                        custom_set_id_list,
+                                        custom_set_count_list,
+                                        'c')
 
     cart_items = helper_get_cart_items( helper_get_user(request) )
 
