@@ -514,4 +514,4 @@ def mobile_mypage_before_purchase_view(request):
 
     cart_items = helper_get_cart_items( helper_get_user(request) )
 
-    return render(request, 'my_page_purchase.html', cart_items )
+    return render(request, 'purchase.html', cart_items )
