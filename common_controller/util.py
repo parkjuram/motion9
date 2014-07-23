@@ -104,9 +104,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'category_name': product.category.name,
             'description': product.description,
             'images': images,
-            # 'big_img_url': product.big_img_url,
             'big_img_url': settings.MEDIA_URL + product.thumbnail_image.name,
-            # 'small_img_url': product.small_img_url,
             'small_img_url': settings.MEDIA_URL + product.thumbnail_image.name,
             'video_url': product.description,
             'brandname': product.brand.name_eng if product.brand.is_repr_to_eng is True else product.brand.name_kor,
@@ -123,7 +121,7 @@ def helper_get_product_detail(product_id_or_object, user=None):
             'quality_guarantee_standard': product.quality_guarantee_standard,
             'original_price': product.original_price,
             'discount_price': product.discount_price,
-            'discount_rate' : float(product.original_price-product.discount_price)/product.original_price*100 if product.original_price is not 0 else 0,
+            'discount_rate' : round(float(product.original_price-product.discount_price)/product.original_price*100,1) if product.original_price is not 0 else 0,
             'fit_skin_type': product.fit_skin_type,
             'is_interested': True if user is not None and product.interest_set.filter(user=user).count()>0 else False,
             'contains_set': []
@@ -186,7 +184,7 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
     })
 
     custom_set_.update({
-        'discount_rate' : float(custom_set_['original_price']-custom_set_['discount_price'])/custom_set_['original_price']*100  if custom_set_['original_price'] is not 0 else 0
+        'discount_rate' : round(float(custom_set_['original_price']-custom_set_['discount_price'])/custom_set_['original_price']*100,1)  if custom_set_['original_price'] is not 0 else 0
     })
 
 
@@ -260,7 +258,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     })
 
     set_.update({
-        'discount_rate': float(set_['original_price']-set_['discount_price'])/set_['original_price']*100 if set_['original_price'] is not 0 else 0
+        'discount_rate': round(float(set_['original_price']-set_['discount_price'])/set_['original_price']*100,1) if set_['original_price'] is not 0 else 0
     })
 
     return set_

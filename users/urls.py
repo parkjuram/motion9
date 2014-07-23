@@ -57,6 +57,8 @@ urlpatterns = patterns('',
     url(r'^mobile/mypage/set/$', 'users.views.mobile_mypage_set_view', name='mobile_mypage_set'),
     url(r'^mobile/mypage/set/(?P<page_num>(\d+))/$', 'users.views.mobile_mypage_set_view', name='mobile_mypage_set'),
 
+    url(r'^mobile/mypage/before_purchase/$', 'users.views.mobile_mypage_before_purchase_view', name='mobile_mypage_before_purchase'),
+
     # url(r'^mobile/mypage/purchase/product/$', 'users.views.mobile_mypage_purchase_product_view', name='mobile_mypage_purchase_product'),
     # url(r'^mobile/mypage/purchase/product/(?P<page_num>(\d+))/$', 'users.views.mobile_mypage_purchase_product_view', name='mobile_mypage_purchase_product'),
     #
