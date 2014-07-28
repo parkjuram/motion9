@@ -3,6 +3,8 @@
 {% load static %}
 {% load humanize %}
 <link rel="stylesheet" href="{% static 'css/purchase.css' %}"/>
+<script src="{% static 'jqmodal/jqModal.js' %}"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script src="{% static 'js/purchase.js' %}"></script>
 {% endblock %}
 {% block title %}
@@ -10,11 +12,19 @@
 {% endblock %}
 
 {% block content %}
-
+<div id="addressLayer">
+    <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px" onclick="closeDaumPostcode()">
+</div>
 <div class="page-wrapper">
     <div class="section-header">
         주문리스트 확인
     </div>
+    {% if sets|length == 0 %}
+        <div class="no-item">
+            구매하신 내역이 없습니다.
+        </div>
+    {% endif %}
+    {% for product in products %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
             <img src=""/>
@@ -40,6 +50,7 @@
             총 가격 : <span id="purchase-item-">149000</span>원
         </div>
     </div>
+    {% endfor %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
             <img src=""/>
@@ -154,9 +165,9 @@
                 주소
             </label>
             <div class="inline-input-wrapper address-form-wrapper">
-                <input type="text"/> <a href="#" class="gold-btn" >주소 검색</a>
-                <input type="text"/>
-                <input type="text"/>
+                <input type="text" name="postal_code" id="postalcode" disabled="disabled"/> <a href="#" class="gold-btn" id="searchAddressBtn" >주소 검색</a>
+                <input type="text" name="basic_address" id="basicAddress" disabled="disabled"/>
+                <input type="text" name="detail_address"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -197,7 +208,7 @@
     </div>
     <div class="purchase-wrapper">
         <div style="padding-bottom : 8px;">
-           총 결제액 : <span id="finalPurchasePrice">240000</span> 원
+           총 결제액 : <span id="finalPurchasePrice">{{ total_price }}</span> 원
         </div>
     </div>
     <div class="section-header">
