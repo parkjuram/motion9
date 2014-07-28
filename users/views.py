@@ -33,7 +33,7 @@ def check_email_view(request):
     if User.objects.filter(email=email).exists():
         return http_response_by_json(None, {'exist':True})
 
-    return http_response_by_json(None, {'isvalid': validateEmail(email), 'exist':False})
+    return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
 
 @csrf_exempt
