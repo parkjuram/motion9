@@ -19,7 +19,7 @@
     <div class="section-header">
         주문리스트 확인
     </div>
-    {% if sets|length == 0 %}
+    {% if products|length == 0 and sets|length == 0 and custom_sets|length == 0 %}
         <div class="no-item">
             구매하신 내역이 없습니다.
         </div>
@@ -27,15 +27,15 @@
     {% for product in products %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
-            <img src=""/>
+            <img src="{{ product.small_img_url }}"/>
         </div>
         <div class="purchase-product-info">
-            박주람세트<br/>
-            가격 : 14,000원<br/>
+            {{ product.name }}<br/>
+            가격 : <span id="productPrice-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원<br/>
         </div>
         <div class='cart-select-box-wrapper'>
             <label>수량 : </label>
-            <select data-shadow='false' data-corner='false'>
+            <select data-shadow='false' class="productBuyCnt" data-id="{{ product.id }}" data-corner='false'>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -47,21 +47,22 @@
                 <option>9</option>
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="purchase-item-">149000</span>원
+            총 가격 : <span id="totalProductPrice-{{ product.id }}">149000</span>원
         </div>
     </div>
     {% endfor %}
+    {% for set in sets %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
-            <img src=""/>
+            <img src="{{ set.small_img_url }}"/>
         </div>
         <div class="purchase-product-info">
-            박주람세트<br/>
-            가격 : 14,000원<br/>
+            {{ set.name }}<br/>
+            가격 : <span id="setPrice-{{ set.id }}">{{ set.discount_price|intcomma }}</span>원<br/>
         </div>
         <div class='cart-select-box-wrapper'>
             <label>수량 : </label>
-            <select data-shadow='false' data-corner='false'>
+            <select data-shadow='false' class="setBuyCnt" data-id="{{ set.id }}" data-corner='false'>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -73,20 +74,22 @@
                 <option>9</option>
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="purchase-item-">149000</span>원
+            총 가격 : <span id="totalSetPrice-{{ set.id }}">149000</span>원
         </div>
     </div>
+    {% endfor %}
+    {% for custom in custom_sets %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
-            <img src=""/>
+            <img src="{{ custom.small_img_url }}"/>
         </div>
         <div class="purchase-product-info">
-            박주람세트<br/>
-            가격 : 14,000원<br/>
+            {{ custom.name }}<br/>
+            가격 : <span id="customPrice-{{ custom.id }}">{{ custom.discount_price|intcomma }}</span>원<br/>
         </div>
         <div class='cart-select-box-wrapper'>
             <label>수량 : </label>
-            <select data-shadow='false' data-corner='false'>
+            <select data-shadow='false' class="customBuyCnt" data-id="{{ custom.id }}" data-corner='false'>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -98,9 +101,11 @@
                 <option>9</option>
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="purchase-item-">149000</span>원
+            총 가격 : <span id="totalCustomPrice-{{ custom.id }}">{{ custom.discount_price }}</span>원
         </div>
     </div>
+    {% endfor %}
+
     <div class="section-header">
         주문자 정보
     </div>
