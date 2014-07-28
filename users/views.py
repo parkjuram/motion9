@@ -38,6 +38,10 @@ def check_email_view(request):
 @csrf_exempt
 def check_facebook_token_view(request):
     token = request.POST.get('token', None)
+
+    token_check_url = 'http://graph.facebook.com/debug_token?input_token='+token+'&access_token='+'1450591788523941';
+
+
     if token is None:
         pass
     else:
