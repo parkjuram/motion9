@@ -81,8 +81,9 @@ $(function(){
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
             //testAPI();
-            loginCheck();
-            console.log('already logged in');
+            $('#fbToken').val(response.access_token);
+            $('#facebookLoginForm').submit();
+
         } else if (response.status === 'not_authorized') {
 
             window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page'+"&response_type=token&scope=public_profile,email,user_friends");
@@ -105,7 +106,6 @@ $(function(){
         } else {
           // The person is not logged into Facebook, so we're not sure if
           // they are logged into this app or not.
-          console.log('both required.');
         }
     }
 

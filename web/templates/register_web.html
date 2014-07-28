@@ -9,7 +9,7 @@
         <div class="register-header">
             회원가입
         </div>
-        <form method="post" data-form="register" action="{% url 'registration'%}" >
+        <form method="post" data-form="register" action="{% url 'registration' next=next%}" >
             <div class="form-box">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name"/>

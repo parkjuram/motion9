@@ -133,6 +133,9 @@
 </div>
 
 <div id="loginBox" class="login-box">
+    <form id="facebookLoginForm" method="post" action="{% url check_facebook_token %}">
+        <input type="hidden" id="fbToken" name="token"/>
+    </form>
     <div class="login-box-header">
         로그인
     </div>
