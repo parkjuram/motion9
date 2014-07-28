@@ -88,19 +88,20 @@
                         <li ><a href="{% url "mobile_shop_product" category_id=2%}" data-ajax="false">로션</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=4 %}" data-ajax="false">선크림, BB크림</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=5 %}" data-ajax="false">에센스</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=12 %}" data-ajax="false">모이스춰라이저</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=14 %}" data-ajax="false">수분크림, 아이크림</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=16 %}" data-ajax="false">스페셜케어</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=3 %}" data-ajax="false">클렌징, 스크럽</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=17 %}" data-ajax="false">메이크업</a></li>
-
+                        <li ><a href="{% url "mobile_shop_product" category_id=24 %}" data-ajax="false">바디</a></li>
+                        <li ><a href="{% url "mobile_shop_product" category_id=22 %}" data-ajax="false">헤어</a></li>
+                        <li ><a href="{% url "mobile_shop_product" category_id=25 %}" data-ajax="false">향수</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="{% url "mobile_customize_set" %}" data-ajax="false">커스텀 컬렉션</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' next=next %}" data-ajax="false">로그아웃</a></li>
+                    <li><a href="{% url 'logout' %}" data-ajax="false">로그아웃</a></li>
                 {% endif %}
             </ul>
         </div>

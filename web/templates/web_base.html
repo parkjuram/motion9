@@ -4,7 +4,7 @@
     <title>The Motion9</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>Z
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     {% load static %}
 
     <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
@@ -61,7 +61,7 @@
                 <li><a href="{% url 'mypage' %}">마이페이지</a></li>
                 <li><a href="{% url 'mypage_cart' %}">장바구니</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' next=next %}" class="">로그아웃</a></li>
+                    <li><a href="{% url 'logout'%}" class="">로그아웃</a></li>
                 {% else %}
                     <li><a href="#" class="login-btn">로그인</a></li>
                     <li><a href="{% url 'registration_page' %}">회원가입</a></li>
@@ -92,11 +92,14 @@
             <a href="{% url 'shop_product' category_id=2 %}">로션</a><span class="header-sub-menu-divider">/</span>
             <a href="{% url 'shop_product' category_id=4 %}">선크림, BB크림</a><span class="header-sub-menu-divider">/</span>
             <a href="{% url 'shop_product' category_id=5 %}">에센스</a><span class="header-sub-menu-divider">/</span>
-            <a href="{% url 'shop_product' category_id=12 %}">모이스춰라이저</a><span class="header-sub-menu-divider">/</span>
             <a href="{% url 'shop_product' category_id=14 %}">수분크림, 아이크림</a><span class="header-sub-menu-divider">/</span>
             <a href="{% url 'shop_product' category_id=16 %}">스페셜케어</a><span class="header-sub-menu-divider">/</span>
             <a href="{% url 'shop_product' category_id=3 %}">클렌징, 스크럽</a><span class="header-sub-menu-divider">/</span>
             <a href="{% url 'shop_product' category_id=17 %}">메이크업</a>
+            <a href="{% url 'shop_product' category_id=24 %}">바디</a>
+            <a href="{% url 'shop_product' category_id=22 %}">헤어</a>
+            <a href="{% url 'shop_product' category_id=25 %}">향수</a>
+
         </div>
         <div id="menuHelp" class="header-sub-menu">
             <a href="#">고객센터</a><span class="header-sub-menu-divider">/</span>
