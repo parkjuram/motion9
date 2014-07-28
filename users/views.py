@@ -59,7 +59,7 @@ def registration(request):
     else:
         return HttpResponse('password and confirm is not identical')
 
-    return http_response_by_json(None)
+    return redirect('index')
 
 @csrf_exempt
 def registration_view(request):
