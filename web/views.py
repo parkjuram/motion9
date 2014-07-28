@@ -66,7 +66,8 @@ def payment_pay_explore_view(request):
         'amount': amount,
         'user_ip': user_ip,
         'installment_period': '0:3',
-        'return_url': return_url
+        'return_url': return_url,
+        'check_sum': checksum
     })
 
 @csrf_exempt
