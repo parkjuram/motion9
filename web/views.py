@@ -72,8 +72,14 @@ def payment_pay_explore_view(request):
 
 @csrf_exempt
 def payment_return_explore_view(request):
+    service_id = request.POST.get('SERVICE_ID')
+    order_id = request.POST.get('ORDER_ID')
+    order_date = request.POST.get('ORDER_DATE')
     response_code = request.POST.get('RESPONSE_CODE')
     check_sum = request.POST.get('CHECK_SUM')
+
+    # if response_code == "0000":
+        # temp = $
 
     return render(request, 'return_explorer.html', {
         'response_code': response_code,
