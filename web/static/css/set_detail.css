@@ -297,3 +297,7 @@ a:visited{
     width : 80px;
     background-color: #f3f3f3;
 }
+
+.swiper-wrapper{
+    text-align: center;
+}
