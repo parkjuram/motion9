@@ -72,19 +72,65 @@ def payment_pay_explore_view(request):
 
 @csrf_exempt
 def payment_return_explore_view(request):
-    service_id = request.POST.get('SERVICE_ID')
-    order_id = request.POST.get('ORDER_ID')
-    order_date = request.POST.get('ORDER_DATE')
-    response_code = request.POST.get('RESPONSE_CODE')
-    check_sum = request.POST.get('CHECK_SUM')
-
+    pass
+    # service_id = request.POST.get('SERVICE_ID')
+    # order_id = request.POST.get('ORDER_ID')
+    # order_date = request.POST.get('ORDER_DATE')
+    # response_code = request.POST.get('RESPONSE_CODE')
+    # check_sum = request.POST.get('CHECK_SUM')
+    # message = request.POST.get('MESSAGE')
+    #
+    # is_success = False
+    #
     # if response_code == "0000":
-        # temp = $
+    #     temp = service_id+order_id+order_date
+    #     checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
+    #     'DIFF ' + check_sum + " " + temp
+    #     checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
+    #     checksum = checksum.strip()
+    #     if checksum == 'SUC':
+    #         # function ServiceBroker('java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker',
+    #         #  './libs/config/config.ini')
+    #         bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker'
+    #         config_file = './libs/config/config.ini'
+    #         service_code = '0900'
+    #         broker_message_command = bin+' '+config_file+' '+service_code+' '+message
+    #         response_message = Popen(broker_message_command.split(' '), stdout=PIPE).communicate()[0]
+    #         response_message = response_message.strip()
+    #         response_code = response_message[0:5]
+    #
+    #         # $resMsg = $broker->getResMsg(); //Get response request
+    #
+    #         if response_code=='ERROR':
+    #             pass
+    #         else:
+    #
+    #             # $RESPONSE_CODE = $resMsg->get('1002');
+    #             # $RESPONSE_MESSAGE = $resMsg->get('1003');
+    #             # $DETAIL_RESPONSE_CODE = $resMsg->get('1009');
+    #             # $DETAIL_RESPONSE_MESSAGE = $resMsg->get('1010');
+    #
+    #             message_response_code = response_message[6:10]
+    #             if message_response_code=='0000':
+    #          #        $AUTH_AMOUNT = $resMsg->get('1007');
+		# 	# $TRANSACTION_ID = $resMsg->get('1001');
+		# 	# $AUTH_DATE = $resMsg->get('1005');
+    #                 is_success = True
 
-    return render(request, 'return_explorer.html', {
-        'response_code': response_code,
-        'check_sum': check_sum
-    })
+
+
+
+
+
+    # return render(request, 'return_explorer.html', {
+    #     'response_code': response_code,
+    #     'check_sum': check_sum,
+    #     'is_success': is_success,
+    #     'service_id': service_id,
+    #     'order_id': order_id,
+    #     'order_date': order_date,
+    #
+    # })
 
 @csrf_exempt
 def index_view(request):

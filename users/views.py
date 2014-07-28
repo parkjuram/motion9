@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from motion9 import const
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
@@ -20,6 +21,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
 from .models import Interest
 
 import logging
+import urllib2
+import json
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -38,14 +41,21 @@ def check_email_view(request):
 @csrf_exempt
 def check_facebook_token_view(request):
     token = request.POST.get('token', None)
-
-    token_check_url = 'http://graph.facebook.com/debug_token?input_token='+token+'&access_token='+'1450591788523941';
-
-
     if token is None:
-        pass
+        http_response_by_json( const.CODE_PARAMS_WRONG )
     else:
-        pass
+
+        token_check_url = 'http://graph.facebook.com/debug_token?input_token='+token+'&access_token='+'1450591788523941';
+
+        contents = urllib2.urlopen(token_check_url).read()
+        print contents
+        contents_dict = json.loads(contents)
+        print contents_dict
+        print contents_dict['is_valid']
+        print contents_dict['is_valid']==True
+        print contents_dict['is_valid']=='true'
+
+        http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
 
 
 @csrf_exempt
