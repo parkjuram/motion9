@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>결제페이지</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+        <script language='javascript'>
+            function payment_submit() {
+                var payment_form = document.payment;
+                payment_form.target = "payment";
+
+{#                test payemnt url : http://tpay.billgate.net/credit/certify.jsp #}
+{#                real payemnt url : https://pay.billgate.net/credit/certify.jsp #}
+                payment_form.action = "http://tpay.billgate.net/credit/certify.jsp";
+
+                var popup_option ="width=500,height=477,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,left=150,top=150";
+                var popup_object = window.open("", "payment", popup_option);
+
+                if ( popup_object == null ) {
+                    alert("팝업이 차단되어 있습니다.\n팝업차단을 해제하신 뒤 다시 시도하여 주십시오.");
+                }
+
+                payment_form.submit();
+
+            }
+        </script>
+    </head>
+
+    <body>
+
+    <form name="payment" method="post">
+        SERVICE_ID <input type="text" name="SERVICE_ID" value="{{ service_id }}"><br>
+        ORDER_ID <input type="text" name="ORDER_ID" value="{{ order_id }}"><br>
+        ORDER_DATE <input type="text" name="ORDER_DATE" value="{{ order_date }}"><br>
+        USER_ID <input type="text" name="USER_ID" value="{{ user_id }}"><br>
+        ITEM_CODE <input type="text" name="ITEM_CODE" value="{{ item_code }}"><br>
+        USING_TYPE <input type="text" name="USING_TYPE" value="{{ using_type }}"><br>
+        CURRENCY <input type="text" name="CURRENCY" value="{{ currency }}"><br>
+        ITEM_NAME <input type="text" name="ITEM_NAME" value="{{ item_name }}"><br>
+        CARD_TYPE <input type="text" name="CARD_TYPE" value=""><br>
+        USER_ID <input type="text" name="USER_ID" value="{{ user_id }}"><br>
+        AMOUNT <input type="text" name="AMOUNT" value="{{ amount }}"><br>
+        INSTALLMENT_PERIOD <input type="text" name="INSTALLMENT_PERIOD" value="{{ installment_period }}"><br>
+        RETURN_URL <input type="text" name="RETURN_URL" value="{{ return_url }}"><br>
+
+        <button type="button" onclick="javascript:payment_submit()">결제하기</button>
+
+    </form>
+
+    </body>
+
+</html>

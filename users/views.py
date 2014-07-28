@@ -35,6 +35,13 @@ def check_email_view(request):
 
     return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
+def check_facebook_token_view(request):
+    token = request.POST.get('token', None)
+    if token is None:
+        pass
+    else:
+        pass
+
 
 @csrf_exempt
 def registration(request):
