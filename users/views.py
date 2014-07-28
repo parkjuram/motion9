@@ -35,6 +35,7 @@ def check_email_view(request):
 
     return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
+@csrf_exempt
 def check_facebook_token_view(request):
     token = request.POST.get('token', None)
     if token is None:
@@ -490,6 +491,7 @@ def mobile_mypage_cart_view(request):
     return render(request, 'cart.html', cart_items)
 
 
+@csrf_exempt
 def mobile_mypage_before_purchase_view(request):
     product_id_list = request.POST.get('product_id', None)
     product_count_list = request.POST.get('product_cnt', None)
