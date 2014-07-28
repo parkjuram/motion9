@@ -43,7 +43,7 @@ def registration(request):
     password = request.POST.get('password')
     password_confirm = request.POST.get('password_confirm')
 
-    if User.objects.exists(email=email):
+    if User.objects.filter(email=email).exists():
         return HttpResponse('already exist email')
 
     if password == password_confirm:
