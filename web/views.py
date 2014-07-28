@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -9,7 +10,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
 from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail
 
-import math
+from subprocess import call, Popen, PIPE
+import time
 import json
 import logging
 
@@ -18,6 +20,60 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def test_view(request):
     return render(request, 'uservoice_test.html')
+
+def payment_pay_explore_view(request):
+    current_datetime = time.strftime("%Y%m%d%H%M%S")
+
+    # testing option
+    service_id = 'glx_api'
+    order_date = current_datetime
+    order_id = 'arsdale_' + order_date
+    user_id = 'arsdale@naver.com'
+    user_name = 'arsdale'
+    item_name = 'beyond_sun_2014'
+    item_code = '01_01_2014'
+    amount = '1000'
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        user_ip = x_forwarded_for.split(',')[0]
+    else:
+        user_ip = request.META.get('REMOTE_ADDR')
+    return_url = request.build_absolute_uri(reverse('payment_return_explore'))
+
+
+    # checksum
+    temp = service_id+order_id+amount
+    checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
+        'GEN ' + temp
+
+    checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
+    checksum = checksum.strip()
+
+    if checksum=='8001' or checksum=='8003' or checksum=='8009':
+        return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
+
+
+    return render(request, 'pay_explorer.html', {
+        'service_id': service_id,
+        'order_id': order_id,
+        'order_date': order_date,
+        'user_id': user_id,
+        'item_code': 'TEST_CD1',
+        'using_type': '0000',
+        'currency': '0000',
+        'item_name': item_name,
+        'amount': amount,
+        'user_ip': user_ip,
+        'installment_period': '0:3',
+        'return_url': return_url
+    })
+
+def payment_return_explore_view(request):
+    response_code = request.POST.get('RESPONSE_CODE')
+
+    return render(request, 'return_explorer.html', {
+        'response_code': response_code
+    })
 
 @csrf_exempt
 def index_view(request):
