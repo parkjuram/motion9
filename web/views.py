@@ -71,7 +71,9 @@ def payment_pay_explore_view(request):
 def payment_return_explore_view(request):
     response_code = request.POST.get('RESPONSE_CODE')
 
-    return render(request, 'return_explorer.html')
+    return render(request, 'return_explorer.html', {
+        'response_code': response_code
+    })
 
 @csrf_exempt
 def index_view(request):
