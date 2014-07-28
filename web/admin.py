@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Category, Product, ProductDescriptionImage, ProductImage, Set, SetProduct, ChangeableProduct, \
-    ChangeableProductInfo, BlogReview, Brand
+    ChangeableProductInfo, BlogReview, Brand, Magazine, ProductMagazine
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'category', 'original_price', 'discount_price', 'fit_skin_type', 'thumbnail_image', 'video_url', 'brand', 'brandname', 'maker', 'country', 'capacity', 'description', 'short_desc', 'use_expired_date', 'production_date', 'usage', 'ingredient', 'judge_result', 'precautions', 'quality_guarantee_standard')
@@ -51,7 +51,19 @@ class BlogReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(BlogReview, BlogReviewAdmin)
 
+class MagazineAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    # list_editable = ('title',)
+    list_display_links = ('title',)
 
+admin.site.register(Magazine, MagazineAdmin)
+
+class ProductMagazineAdmin(admin.ModelAdmin):
+    list_display = ('product', 'magazine', 'year', 'month', 'link')
+    list_editable = ('year', 'month', 'link',)
+    list_display_links = ('product', 'magazine')
+
+admin.site.register(ProductMagazine, ProductMagazineAdmin)
 
 admin.site.register(Category)
 

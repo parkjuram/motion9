@@ -33,7 +33,7 @@ def check_email_view(request):
     if User.objects.filter(email=email).exists():
         return http_response_by_json(None, {'exist':True})
 
-    return http_response_by_json(None, {'isvalid': validateEmail(email), 'exist':False})
+    return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
 
 @csrf_exempt
@@ -43,7 +43,7 @@ def registration(request):
     password = request.POST.get('password')
     password_confirm = request.POST.get('password_confirm')
 
-    if User.objects.exists(email=email):
+    if User.objects.filter(email=email).exists():
         return HttpResponse('already exist email')
 
     if password == password_confirm:
@@ -51,13 +51,15 @@ def registration(request):
             user = User.objects.create_user(username=name, email=email, password=password)
         except ValueError as e:
             logger.error(e)
+            return HttpResponse('error')
         except IntegrityError as e:
             logger.error(e)
+            return HttpResponse('error')
 
     else:
         return HttpResponse('password and confirm is not identical')
 
-    return HttpResponse('temporary response')
+    return redirect('index')
 
 @csrf_exempt
 def registration_view(request):
