@@ -51,13 +51,15 @@ def registration(request):
             user = User.objects.create_user(username=name, email=email, password=password)
         except ValueError as e:
             logger.error(e)
+            return HttpResponse('error')
         except IntegrityError as e:
             logger.error(e)
+            return HttpResponse('error')
 
     else:
         return HttpResponse('password and confirm is not identical')
 
-    return HttpResponse('temporary response')
+    return http_response_by_json(None)
 
 @csrf_exempt
 def registration_view(request):
