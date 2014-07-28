@@ -28,7 +28,7 @@
         <div>
              {% if user.is_authenticated %}
                 <div class="cart-item-list-wrapper">
-                <form id="cartBuyForm" method="post" action="/user/mobile/mypage/before_purchase/">
+                <form id="cartBuyForm" method="post" data-ajax="false" action="/user/mobile/mypage/before_purchase/">
                     <ul class="custom-menu-list"></ul>
 
                     <div >
@@ -100,7 +100,7 @@
                     <a href="{% url "mobile_customize_set" %}" data-ajax="false">커스텀 컬렉션</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout'%}" data-ajax="false">로그아웃</a></li>
+                    <li><a href="{% url 'logout' next=next %}" data-ajax="false">로그아웃</a></li>
                 {% endif %}
             </ul>
         </div>
