@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 def test_view(request):
     return render(request, 'uservoice_test.html')
 
+@csrf_exempt
 def payment_pay_explore_view(request):
     current_datetime = time.strftime("%Y%m%d%H%M%S")
 
@@ -65,14 +66,18 @@ def payment_pay_explore_view(request):
         'amount': amount,
         'user_ip': user_ip,
         'installment_period': '0:3',
-        'return_url': return_url
+        'return_url': return_url,
+        'check_sum': checksum
     })
 
+@csrf_exempt
 def payment_return_explore_view(request):
     response_code = request.POST.get('RESPONSE_CODE')
+    check_sum = request.POST.get('CHECK_SUM')
 
     return render(request, 'return_explorer.html', {
-        'response_code': response_code
+        'response_code': response_code,
+        'check_sum': check_sum
     })
 
 @csrf_exempt
