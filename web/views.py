@@ -73,9 +73,11 @@ def payment_pay_explore_view(request):
 @csrf_exempt
 def payment_return_explore_view(request):
     response_code = request.POST.get('RESPONSE_CODE')
+    check_sum = request.POST.get('CHECK_SUM')
 
     return render(request, 'return_explorer.html', {
-        'response_code': response_code
+        'response_code': response_code,
+        'check_sum': check_sum
     })
 
 @csrf_exempt
