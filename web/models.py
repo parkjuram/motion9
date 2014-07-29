@@ -43,6 +43,7 @@ class Product(models.Model):
     country = models.CharField(max_length=30, blank=True)
     capacity = models.CharField(max_length=10, blank=True)
     description = models.TextField(blank=True)
+    description2 = models.TextField(blank=True)
     short_desc = models.CharField(max_length=100, blank=True)
     use_expired_date = models.CharField(max_length=50, blank=True)
     production_date = models.CharField(max_length=50, blank=True)
