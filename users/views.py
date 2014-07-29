@@ -72,7 +72,7 @@ def registration(request, next='index'):
         try:
             user = User.objects.create_user(username=email, email=email, password=password)
             user.profile.name=name
-            # user.profile.name.save()
+            user.profile.save()
         except ValueError as e:
             logger.error(e)
             return HttpResponse('Registraion ValueError!')
