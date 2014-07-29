@@ -387,13 +387,14 @@ def customize_set_save_view(request):
     data = request.POST.get('data', None)
     post_json = json.loads(data)
     set_id = post_json.get('set_id')
+    print set_id
     custom_list = post_json.get('custom_lists')
 
     if set_id is None:
         return HttpResponse('is error')
 
     if user is not None:
-        custom_set, is_created = CustomSet.objects.get_or_create(user=user, set__id = set_id)
+        custom_set, is_created = CustomSet.objects.get_or_create(user=user, set_id = set_id)
         for custom_item in custom_list:
             original_id = custom_item.get('original_id')
             new_id = custom_item.get('new_id')
