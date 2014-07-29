@@ -72,53 +72,130 @@ def payment_pay_explore_view(request):
 
 @csrf_exempt
 def payment_return_explore_view(request):
-    pass
-    # service_id = request.POST.get('SERVICE_ID')
-    # order_id = request.POST.get('ORDER_ID')
-    # order_date = request.POST.get('ORDER_DATE')
-    # response_code = request.POST.get('RESPONSE_CODE')
-    # check_sum = request.POST.get('CHECK_SUM')
-    # message = request.POST.get('MESSAGE')
-    #
-    # is_success = False
-    #
-    # if response_code == "0000":
-    #     temp = service_id+order_id+order_date
-    #     checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
-    #     'DIFF ' + check_sum + " " + temp
-    #     checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
-    #     checksum = checksum.strip()
-    #     if checksum == 'SUC':
+    # pass
+    service_id = request.POST.get('SERVICE_ID')
+    order_id = request.POST.get('ORDER_ID')
+    order_date = request.POST.get('ORDER_DATE')
+    post_response_code = request.POST.get('RESPONSE_CODE')
+    check_sum = request.POST.get('CHECK_SUM')
+    message = request.POST.get('MESSAGE')
+
+    is_success = False
+
+    if post_response_code == "0000":
+        temp = service_id+order_id+order_date
+        checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
+        'DIFF ' + check_sum + " " + temp
+        checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
+        checksum = checksum.strip()
+        if checksum == 'SUC':
     #         # function ServiceBroker('java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker',
     #         #  './libs/config/config.ini')
-    #         bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker'
-    #         config_file = './libs/config/config.ini'
-    #         service_code = '0900'
-    #         broker_message_command = bin+' '+config_file+' '+service_code+' '+message
-    #         response_message = Popen(broker_message_command.split(' '), stdout=PIPE).communicate()[0]
-    #         response_message = response_message.strip()
-    #         response_code = response_message[0:5]
-    #
-    #         # $resMsg = $broker->getResMsg(); //Get response request
-    #
-    #         if response_code=='ERROR':
-    #             pass
-    #         else:
-    #
-    #             # $RESPONSE_CODE = $resMsg->get('1002');
-    #             # $RESPONSE_MESSAGE = $resMsg->get('1003');
-    #             # $DETAIL_RESPONSE_CODE = $resMsg->get('1009');
-    #             # $DETAIL_RESPONSE_MESSAGE = $resMsg->get('1010');
-    #
-    #             message_response_code = response_message[6:10]
-    #             if message_response_code=='0000':
-    #          #        $AUTH_AMOUNT = $resMsg->get('1007');
-		# 	# $TRANSACTION_ID = $resMsg->get('1001');
-		# 	# $AUTH_DATE = $resMsg->get('1005');
-    #                 is_success = True
+            bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker'
+            config_file = './libs/config/config.ini'
+            service_code = '0900'
+            broker_message_command = bin+' '+config_file+' '+service_code+' '+message
+            return_message = Popen(broker_message_command.split(' '), stdout=PIPE).communicate()[0]
+            return_message = return_message.strip()
+            return_code = return_message[0:5]
 
+            if return_code=='ERROR':
+                pass
+                # $this->resMsg->setVersion($this->reqMsg->getVersion());
+                # $this->resMsg->setMerchantId($this->reqMsg->getMerchantId());
+                # $this->resMsg->setServiceCode($this->reqMsg->getServiceCode());
+                # $this->resMsg->setCommand((string)((int)$this->reqMsg->getCommand() + 1));
+                # $this->resMsg->setOrderId($this->reqMsg->getOrderId());
+                # $this->resMsg->setOrderDate($this->reqMsg->getOrderDate());
+                #
+                # $this->resMsg->put($this->tag->RESPONSE_CODE, substr($retMsg,6,4));
+                # $this->resMsg->put($this->tag->RESPONSE_MESSAGE, "API 에러!!");
+                # $this->resMsg->put($this->tag->DETAIL_RESPONSE_CODE, substr($retMsg,10,2));
+                # $this->resMsg->put($this->tag->DETAIL_RESPONSE_MESSAGE, $this->getErrorMessage(substr($retMsg,6,6)));
+            else:
+                pass
+                # $this->resMsg->setData(return_message);
+                # //----------------------------
+                # // Define Header Length
+                # //----------------------------
+                # {{ Message.php
+                this_data = {}
 
+                set_data_param = return_message
+                VERSION_LENGTH = 10
+                MERCHANT_ID_LENGTH = 20
+                SERVICE_CODE_LENGTH = 4
+                COMMAND_LENGTH = 4
+                ORDER_ID_LENGTH = 64
+                DATE_LENGTH = 14
+                TAG_LENGTH = 4
+                COUNT_LENGTH = 4
+                VALUE_LENGTH = 4
 
+                VERSION_INDEX = 0
+                MERCHANT_ID_INDEX = 10
+                SERVICE_CODE_INDEX = 30
+
+                COMMAND_INDEX = 0
+                ORDER_ID_INDEX = 4
+                ORDER_DATE_INDEX = 68
+                DATA_INDEX = 82
+
+                this_version = set_data_param[VERSION_INDEX:VERSION_INDEX+VERSION_LENGTH].strip()
+                this_merchantId = set_data_param[MERCHANT_ID_INDEX:MERCHANT_ID_INDEX+MERCHANT_ID_LENGTH].strip()
+                this_serviceCode = set_data_param[SERVICE_CODE_INDEX:SERVICE_CODE_INDEX+SERVICE_CODE_LENGTH].strip()
+
+                decrypted = set_data_param[VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH:VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH+len(set_data_param)]
+
+                this_command = decrypted[COMMAND_INDEX:COMMAND_INDEX+COMMAND_LENGTH].strip()
+                this_orderId = decrypted[ORDER_ID_INDEX:ORDER_ID_INDEX+ORDER_ID_LENGTH].strip()
+                this_orderDate = decrypted[ORDER_DATE_INDEX:ORDER_DATE_INDEX+DATE_LENGTH].strip()
+
+                bodyStr = decrypted[DATA_INDEX:DATA_INDEX+len(decrypted)].strip()
+                #this->parseData($bodyStr);
+                parse_data_param = bodyStr
+                arrData = parse_data_param.split("|")
+                for i in range(len(arrData)):
+                    if len(arrData[i]) != 0:
+                        arrValueData = arrData[i].split("=")
+                        tag = arrValueData[0]
+                        value = arrValueData[1]
+
+                        if this_data.has_key(tag):
+                            vt = this_data.get(tag)
+                        else:
+                            vt = []
+
+                        vt.append(value)
+                        this_data[tag] = vt
+
+                response_code = this_data.get('1002')
+                response_message = this_data.get('1003')
+                detail_response_code = this_data.get('1009')
+                detail_response_message = this_data.get('1010')
+
+                if response_code=='0000':
+                    auth_amount = this_data.get('1007')
+                    transaction_id = this_data.get('1001')
+                    auth_date = this_data.get('1005')
+
+                    is_success = True
+
+                # Message.php }}
+
+    return render(request, 'return_explorer.html', {
+        'is_success': is_success,
+        'service_id': service_id,
+        'order_id': order_id,
+        'order_date': order_date,
+        'transaction_id': transaction_id,
+        'auth_amount': auth_amount,
+        'auth_date': auth_date,
+        'response_code': response_code,
+        'response_message': response_message,
+        'detail_response_code': detail_response_code,
+        'detail_response_message': detail_response_message
+    })
 
 
 
