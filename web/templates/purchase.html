@@ -31,23 +31,27 @@
         </div>
         <div class="purchase-product-info">
             {{ product.name }}<br/>
-            가격 : <span id="productPrice-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원<br/>
+            가격 : <span id="cart-product-price-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원<br/>
         </div>
         <div class='cart-select-box-wrapper'>
             <label>수량 : </label>
-            <select data-shadow='false' class="productBuyCnt" data-id="{{ product.id }}" data-corner='false'>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
+            <select data-shadow='false' class="cart-item-count" data-type="p" data-id="{{ product.id }}" data-corner='false'>
+                <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                <option {% if product.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                <option {% if product.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                <option {% if product.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                <option {% if product.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                <option {% if product.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                <option {% if product.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                <option {% if product.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                {% if product.item_count > 10 %}
+                    <option selected="selected">{{ product.item_count }}</option>
+                {% endif %}
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="totalProductPrice-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
+            총 가격 : <span id="cart-product-total-price-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
         </div>
     </div>
     {% endfor %}
@@ -58,23 +62,27 @@
         </div>
         <div class="purchase-product-info">
             {{ set.name }}<br/>
-            가격 : <span id="setPrice-{{ set.id }}">{{ set.discount_price|intcomma }}</span>원<br/>
+            가격 : <span id="cart-set-price-{{ set.id }}">{{ set.discount_price|intcomma }}</span>원<br/>
         </div>
         <div class='cart-select-box-wrapper'>
             <label>수량 : </label>
-            <select data-shadow='false' class="setBuyCnt" data-id="{{ set.id }}" data-corner='false'>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
+            <select data-shadow='false' class="cart-item-count" data-type="s" data-id="{{ set.id }}" data-corner='false'>
+                <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                <option {% if set.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                <option {% if set.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                <option {% if set.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                <option {% if set.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                <option {% if set.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                <option {% if set.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                <option {% if set.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                {% if set.item_count > 10 %}
+                    <option selected="selected">{{ set.item_count }}</option>
+                {% endif %}
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="totalSetPrice-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
+            총 가격 : <span id="cart-set-total-price-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
         </div>
     </div>
     {% endfor %}
@@ -85,23 +93,27 @@
         </div>
         <div class="purchase-product-info">
             {{ custom.name }}<br/>
-            가격 : <span id="customPrice-{{ custom.id }}">{{ custom.discount_price|intcomma }}</span>원<br/>
+            가격 : <span id="cart-custom-price-{{ custom.id }}">{{ custom.discount_price|intcomma }}</span>원<br/>
         </div>
         <div class='cart-select-box-wrapper'>
             <label>수량 : </label>
-            <select data-shadow='false' class="customBuyCnt" data-id="{{ custom.id }}" data-corner='false'>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
+            <select data-shadow='false' class="cart-item-count"  data-type="c" data-id="{{ custom.id }}" data-corner='false'>
+                <option {% if custom.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                <option {% if custom.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                <option {% if custom.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                <option {% if custom.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                <option {% if custom.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                <option {% if custom.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                <option {% if custom.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                <option {% if custom.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                <option {% if custom.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                <option {% if custom.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                {% if custom.item_count > 10 %}
+                    <option selected="selected">{{ custom.item_count }}</option>
+                {% endif %}
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="totalCustomPrice-{{ custom.id }}">{{ custom.total_price|intcomma }}</span>원
+            총 가격 : <span id="cart-custom-total-price-{{ custom.id }}">{{ custom.total_price|intcomma }}</span>원
         </div>
     </div>
     {% endfor %}
@@ -213,7 +225,7 @@
     </div>
     <div class="purchase-wrapper">
         <div style="padding-bottom : 8px;">
-           총 결제액 : <span id="finalPurchasePrice">{{ total_price|intcomma }}</span> 원
+           총 결제액 : <span id="cart-sum-price">{{ total_price|intcomma }}</span> 원
         </div>
     </div>
     <div class="section-header">

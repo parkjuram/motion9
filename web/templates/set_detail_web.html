@@ -144,7 +144,7 @@
                     총 상품 금액 : <span id="productFinalPrice">{{ set.discount_price|intcomma }}</span>원
                 </div>
                 <div class="product-btn-area">
-                    <a href="#" class="basic-btn">구매하기</a>
+                    <a href="#" data-product="{{ set.id }}" data-type="s" data-mobile="false" class="basic-btn btn-for-purchase">구매하기</a>
                     <a href="#" data-product="{{ set.id }}" data-type="s" class="basic-btn btn-for-cart">장바구니</a>
                 </div>
             </div>

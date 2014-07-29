@@ -114,7 +114,7 @@
     font-weight: normal !important;
 }
 
-#finalPurchasePrice{
+#cart-sum-price{
     font-weight: bold;
     font-size: 14px;
     color : red;

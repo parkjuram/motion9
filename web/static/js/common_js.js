@@ -156,4 +156,47 @@ $(function(){
 		});
 	});
 
+
+    $('.btn-for-purchase').click(function(e){
+        e.preventDefault();
+        var isMobile = $(this).attr('data-mobile');
+        var productKey = $(this).attr('data-product');
+        var type = $(this).attr('data-type');
+        if(type != 's' && type !='c')
+            type = 'p';
+
+        var howManySelectBox = $('#howMany');
+        var howMany = 1;
+        if(howManySelectBox.length != 0){
+            howMany = howManySelectBox.val();
+        }
+
+        if(!confirm('바로 구매 하시겠습니까?'))
+            return;
+
+        $.ajax({
+				  url: "/user/cart/add/",
+				  dataType: 'json',
+				  async : true,
+				  type:'POST',
+				  data:{product_or_set_id : productKey, type : type, how_many : howMany},
+				  success: function(data){
+					  if(!data.success && data.message == 'login required'){
+                          if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
+                            location.href= url_for_login_next;
+                      }else if(!data.success){
+                          alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+                      }else{
+                          if(isMobile=='true')
+                            location.href="/user/mobile/mypage/before_purchase/";
+                          else
+                            location.href="/user/mypage/cart/";
+                      }
+				  },
+				  error:function(jqXHR, textStatus, errorThrown){
+					  console.log(textStatus);
+				  }
+		});
+	});
+
 });

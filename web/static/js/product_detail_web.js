@@ -60,6 +60,8 @@ $(function(){
 	});
 */
 
+
+
     $('.cnt-spinner').spinner({value:1, min : 1, afterChange: function(val){
         var price = parsePrice($('#productPrice').text());
         var final = price * parseInt(val);
