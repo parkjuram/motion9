@@ -83,7 +83,7 @@ def payment_return_explore_view(request):
     response_code = None
     response_message = None
     detail_response_code = None
-    detail_response_messag = None
+    detail_response_message = None
 
     service_id = request.POST.get('SERVICE_ID')
     order_id = request.POST.get('ORDER_ID')
