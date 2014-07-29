@@ -70,13 +70,15 @@ def registration(request, next='index'):
 
     if password == password_confirm:
         try:
-            user = User.objects.create_user(username=name, email=email, password=password)
+            user = User.objects.create_user(username=email, email=email, password=password)
+            user.profile.name=name
+            # user.profile.name.save()
         except ValueError as e:
             logger.error(e)
-            return HttpResponse('error')
+            return HttpResponse('Registraion ValueError!')
         except IntegrityError as e:
             logger.error(e)
-            return HttpResponse('error')
+            return HttpResponse('Registraion IntegrityError!')
 
     else:
         return HttpResponse('password and confirm is not identical')

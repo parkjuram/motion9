@@ -6,6 +6,7 @@ from datetime import datetime
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', related_name='profile')
+    name = models.TextField(null=False, blank=True, default='')
     phone = models.TextField(null=False, blank=True, default='')
     address = models.TextField(null=False, blank=True, default='')
     sex = models.CharField(max_length=1, null=True)
