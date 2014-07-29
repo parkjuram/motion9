@@ -109,7 +109,7 @@ def payment_return_explore_view(request):
                 # $this->resMsg->setOrderDate($this->reqMsg->getOrderDate());
                 #
                 # $this->resMsg->put($this->tag->RESPONSE_CODE, substr($retMsg,6,4));
-                # $this->resMsg->put($this->tag->RESPONSE_MESSAGE, "API 에러!!");
+                # $this->resMsg->put($this->tag->RESPONSE_MESSAGE, "API error!!");
                 # $this->resMsg->put($this->tag->DETAIL_RESPONSE_CODE, substr($retMsg,10,2));
                 # $this->resMsg->put($this->tag->DETAIL_RESPONSE_MESSAGE, $this->getErrorMessage(substr($retMsg,6,6)));
             else:
