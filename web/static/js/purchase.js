@@ -34,4 +34,36 @@ $(function(){
         showDaumPostcode();
    });
 
+
+    $('select.cart-item-count').change(function(e){
+
+        var sumPrice = $('#cart-sum-price');
+        var sum=0;
+
+       $('select.cart-item-count').each(function(i, v){
+           var type = $(this).attr('data-type');
+           var id = $(this).attr('data-id');
+           var cnt = parseInt($(this).val());
+           var price;
+           var total;
+
+           if(type == 's'){
+              $('#cart-set-price-'+id).text();
+              price = parsePrice($('#cart-set-price-'+id).text());
+              total = price * cnt;
+              $('#cart-set-total-price-'+id).text(numberFormatter(total));
+           }else if(type == 'p'){
+              price = parsePrice($('#cart-product-price-'+id).text());
+              total = price * cnt;
+              $('#cart-product-total-price-'+id).text(numberFormatter(total));
+           }else{
+              price = parsePrice($('#cart-custom-price-'+id).text());
+              total = price * cnt;
+              $('#cart-custom-total-price-'+id).text(numberFormatter(total));
+           }
+           sum+=total;
+       });
+
+       sumPrice.text(numberFormatter(sum));
+   });
 });
