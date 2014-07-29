@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from django.conf import settings
 from django.http.response import HttpResponse
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand
@@ -19,6 +21,38 @@ def validateEmail( email ):
         return True
     except ValidationError:
         return False
+
+def billgate_put_data(this_data, put_key, put_value):
+    vt = None
+    if this_data is not None:
+        if this_data.has_key(put_key):
+            vt = this_data.get(put_key)
+    else:
+        this_data = {}
+
+    if vt is None:
+        vt = []
+
+    vt.append(put_value)
+    this_data[put_key] = vt
+
+def billgate_getErrorMessage(error_code):
+    if error_code=="080000":
+        return "api command error"
+    elif error_code=="080001":
+        return "메시지 파싱 에러!!"
+    elif error_code=="082001":
+        return "소켓 연결 에러!!"
+    elif error_code=="082002":
+        return "소켓 타임아웃 에러!!"
+    elif error_code=="083001":
+        return "메시지 암호화 에러!!"
+    elif error_code=="083002":
+        return "메시지 복호화 에러!!"
+    elif error_code=="899900":
+        return "알수 없는 에러!!"
+    elif error_code=="899901":
+        return "API 에러 발생!!"
 
 def http_response_by_json(error=None, json_={}):
     if error is None:
@@ -70,7 +104,7 @@ def helper_get_products(user=None, category_id=None, price_max_filter=None, pric
     if brandname_filter is not None:
         products = products.filter(brand__id=brandname_filter)
 
-    products = products.all()
+    products = products.filter(is_active=True).all()
     products_ = []
 
     for product in products:
@@ -264,7 +298,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     return set_
 
 def helper_get_custom_set_list(user=None):
-    custom_sets = user.get_custom_sets.all()
+    custom_sets = user.get_custom_sets.filter(is_active=True).all()
 
     custom_sets_ = []
 
@@ -279,7 +313,7 @@ def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filt
     if category_id is not None:
         sets = sets.filter(category__id=category_id)
 
-    sets = sets.all()
+    sets = sets.filter(is_active=True).all()
     sets_ = []
 
     for set in sets:
@@ -324,7 +358,8 @@ def helper_get_cart_items(user):
             product = product_cart.product
             product_ = helper_get_product_detail(product, user)
             product_['item_count'] = product_cart.item_count
-            total_price += int(product_['discount_price'])*product_cart.item_count
+            product_['total_price'] = int(product_['discount_price'])*product_cart.item_count
+            total_price += product_['total_price']
             products.append(product_)
 
         set_carts = user.cart_set.filter(type='s').all()
@@ -333,7 +368,8 @@ def helper_get_cart_items(user):
             set = set_cart.set
             set_ = helper_get_set(set,user)
             set_['item_count'] = set_cart.item_count
-            total_price += int(set_['discount_price'])*set_cart.item_count
+            set_['total_price'] = int(set_['discount_price'])*set_cart.item_count
+            total_price += set_['total_price']
             sets.append(set_)
 
         custom_set_carts = user.cart_set.filter(type='c').all()
@@ -341,7 +377,9 @@ def helper_get_cart_items(user):
         for custom_set_cart in custom_set_carts:
             custom_set = custom_set_cart.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
-            total_price += int(custom_set_['discount_price'])
+            custom_set_['item_count'] = custom_set_cart.item_count
+            custom_set_['total_price'] = int(custom_set_['discount_price'])*custom_set_cart.count
+            total_price += custom_set_['total_price']
             custom_sets.append(custom_set_)
 
         return { 'products': products,
