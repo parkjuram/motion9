@@ -27,6 +27,8 @@ def billgate_put_data(this_data, put_key, put_value):
     if this_data is not None:
         if this_data.has_key(put_key):
             vt = this_data.get(put_key)
+    else:
+        this_data = {}
 
     if vt is None:
         vt = []

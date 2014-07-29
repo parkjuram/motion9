@@ -112,26 +112,25 @@ def payment_return_explore_view(request):
             return_message = return_message.strip()
             return_code = return_message[0:5]
 
-            this_data = None
+            this_data = {}
 
             if return_code=='ERROR':
-                pass
-                # this_version = "0100"
-                # this_merchantId = service_id
-                # this_serviceCode = service_code
-                # this_command = "3011"
-                # this_orderId = order_id
-                # this_orderDate = order_date
-                #
-                # util.billgate_put_data(this_data, "1002", return_message[6:10])
-                # util.billgate_put_data(this_data, "1003", "API error!!")
-                # util.billgate_put_data(this_data, "1009", return_message[10:12])
-                # util.billgate_put_data(this_data, "1010", util.billgate_getErrorMessage(return_message[6:12]))
+
+                this_version = "0100"
+                this_merchantId = service_id
+                this_serviceCode = service_code
+                this_command = "3011"
+                this_orderId = order_id
+                this_orderDate = order_date
+
+                util.billgate_put_data(this_data, "1002", return_message[6:10])
+                util.billgate_put_data(this_data, "1003", "API error!!")
+                util.billgate_put_data(this_data, "1009", return_message[10:12])
+                util.billgate_put_data(this_data, "1010", util.billgate_getErrorMessage(return_message[6:12]))
 
 
             else:
                 # {{ Message.php
-                this_data = {}
 
                 set_data_param = return_message
                 VERSION_LENGTH = 10
