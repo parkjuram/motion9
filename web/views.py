@@ -72,7 +72,19 @@ def payment_pay_explore_view(request):
 
 @csrf_exempt
 def payment_return_explore_view(request):
-    # pass
+
+    is_success = None
+    service_id = None
+    order_id = None
+    order_date = None
+    transaction_id = None
+    auth_amount = None
+    auth_date = None
+    response_code = None
+    response_message = None
+    detail_response_code = None
+    detail_response_messag = None
+
     service_id = request.POST.get('SERVICE_ID')
     order_id = request.POST.get('ORDER_ID')
     order_date = request.POST.get('ORDER_DATE')
