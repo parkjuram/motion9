@@ -104,7 +104,7 @@ def payment_return_explore_view(request):
         if checksum == 'SUC':
     #         # function ServiceBroker('java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker',
     #         #  './libs/config/config.ini')
-            bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker'
+            bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker '
             config_file = './libs/config/config.ini'
             service_code = '0900'
             broker_message_command = bin+' '+config_file+' '+service_code+' '+message
