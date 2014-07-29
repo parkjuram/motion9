@@ -59,7 +59,7 @@ def check_facebook_token_view(request):
 
 
 @csrf_exempt
-def registration(request):
+def registration(request, next):
     name = request.POST.get('name')
     email = request.POST.get('email')
     password = request.POST.get('password')
@@ -81,7 +81,7 @@ def registration(request):
     else:
         return HttpResponse('password and confirm is not identical')
 
-    return redirect('index')
+    return redirect(next)
 
 @csrf_exempt
 def registration_view(request):
