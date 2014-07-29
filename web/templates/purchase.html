@@ -47,7 +47,7 @@
                 <option>9</option>
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="totalProductPrice-{{ product.id }}">149000</span>원
+            총 가격 : <span id="totalProductPrice-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
         </div>
     </div>
     {% endfor %}
@@ -74,7 +74,7 @@
                 <option>9</option>
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="totalSetPrice-{{ set.id }}">149000</span>원
+            총 가격 : <span id="totalSetPrice-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
         </div>
     </div>
     {% endfor %}
@@ -101,7 +101,7 @@
                 <option>9</option>
             </select>
             <div class="clearfix"></div>
-            총 가격 : <span id="totalCustomPrice-{{ custom.id }}">{{ custom.discount_price }}</span>원
+            총 가격 : <span id="totalCustomPrice-{{ custom.id }}">{{ custom.total_price|intcomma }}</span>원
         </div>
     </div>
     {% endfor %}
@@ -213,7 +213,7 @@
     </div>
     <div class="purchase-wrapper">
         <div style="padding-bottom : 8px;">
-           총 결제액 : <span id="finalPurchasePrice">{{ total_price }}</span> 원
+           총 결제액 : <span id="finalPurchasePrice">{{ total_price|intcomma }}</span> 원
         </div>
     </div>
     <div class="section-header">
