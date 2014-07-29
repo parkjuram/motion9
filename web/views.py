@@ -107,8 +107,8 @@ def payment_return_explore_view(request):
             bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker'
             config_file = './libs/config/config.ini'
             service_code = '0900'
-            broker_message_command = bin+' '+config_file+' '+service_code+' '+message
-            return_message = Popen(broker_message_command.split(' '), stdout=PIPE).communicate()[0]
+            broker_message_command = bin+' '+config_file+' '+service_code
+            return_message = Popen(broker_message_command.split(' ').append(message), stdout=PIPE).communicate()[0]
             return_message = return_message.strip()
             return_code = return_message[0:5]
 
