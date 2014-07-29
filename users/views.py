@@ -59,7 +59,7 @@ def check_facebook_token_view(request):
 
 
 @csrf_exempt
-def registration(request, next):
+def registration(request, next='index'):
     name = request.POST.get('name')
     email = request.POST.get('email')
     password = request.POST.get('password')
@@ -85,7 +85,9 @@ def registration(request, next):
 
 @csrf_exempt
 def registration_view(request):
-    return render(request, 'register_web.html')
+    return render(request, 'register_web.html', {
+        'next':'index'
+    })
 
 @csrf_exempt
 def mobile_registration_view(request):
