@@ -196,6 +196,7 @@ def payment_return_explore_view(request):
 
 
     return render(request, 'return_explorer.html', {
+        'message': message,
         'return_message': return_message,
         'is_success': is_success,
         'service_id': service_id,
