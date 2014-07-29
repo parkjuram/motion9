@@ -106,6 +106,10 @@ class Set(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+class SetDescriptionImage(models.Model):
+    set = models.ForeignKey(Set)
+    image = models.ImageField(null=True, upload_to='set/desc/')
+
 class Tag(models.Model):
     name = models.TextField(unique=True)
 
