@@ -174,7 +174,14 @@
     border-top-left-radius: 8px;
 }
 
+#priceRange .ui-slider-handle {
+    width : 12px;
+    height : 12px;
+}
 
+#priceRange  {
+    height: 4px;
+}
 
 
 

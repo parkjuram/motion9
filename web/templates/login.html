@@ -6,7 +6,7 @@
 {% block content %}
 
     <div style="margin : 0 20px;">
-        <form id="facebookLoginForm" method="post" action="{% url 'check_facebook_token' %}">
+        <form id="facebookLoginForm" data-ajax="false" method="post" action="{% url 'check_facebook_token' %}">
             <input type="hidden" id="fbToken" name="token"/>
         </form>
         <form method="post" action="{% url "login" next=next %}" data-ajax="false">
