@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from common_controller import util
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
@@ -111,25 +112,24 @@ def payment_return_explore_view(request):
             return_message = return_message.strip()
             return_code = return_message[0:5]
 
+            this_data = None
+
             if return_code=='ERROR':
                 pass
-                # $this->resMsg->setVersion($this->reqMsg->getVersion());
-                # $this->resMsg->setMerchantId($this->reqMsg->getMerchantId());
-                # $this->resMsg->setServiceCode($this->reqMsg->getServiceCode());
-                # $this->resMsg->setCommand((string)((int)$this->reqMsg->getCommand() + 1));
-                # $this->resMsg->setOrderId($this->reqMsg->getOrderId());
-                # $this->resMsg->setOrderDate($this->reqMsg->getOrderDate());
+                # this_version = "0100"
+                # this_merchantId = service_id
+                # this_serviceCode = service_code
+                # this_command = "3011"
+                # this_orderId = order_id
+                # this_orderDate = order_date
                 #
-                # $this->resMsg->put($this->tag->RESPONSE_CODE, substr($retMsg,6,4));
-                # $this->resMsg->put($this->tag->RESPONSE_MESSAGE, "API error!!");
-                # $this->resMsg->put($this->tag->DETAIL_RESPONSE_CODE, substr($retMsg,10,2));
-                # $this->resMsg->put($this->tag->DETAIL_RESPONSE_MESSAGE, $this->getErrorMessage(substr($retMsg,6,6)));
+                # util.billgate_put_data(this_data, "1002", return_message[6:10])
+                # util.billgate_put_data(this_data, "1003", "API error!!")
+                # util.billgate_put_data(this_data, "1009", return_message[10:12])
+                # util.billgate_put_data(this_data, "1010", util.billgate_getErrorMessage(return_message[6:12]))
+
+
             else:
-                pass
-                # $this->resMsg->setData(return_message);
-                # //----------------------------
-                # // Define Header Length
-                # //----------------------------
                 # {{ Message.php
                 this_data = {}
 
@@ -180,20 +180,21 @@ def payment_return_explore_view(request):
 
                         vt.append(value)
                         this_data[tag] = vt
-
-                response_code = this_data.get('1002')
-                response_message = this_data.get('1003')
-                detail_response_code = this_data.get('1009')
-                detail_response_message = this_data.get('1010')
-
-                if response_code=='0000':
-                    auth_amount = this_data.get('1007')
-                    transaction_id = this_data.get('1001')
-                    auth_date = this_data.get('1005')
-
-                    is_success = True
-
                 # Message.php }}
+
+            response_code = this_data.get('1002')
+            response_message = this_data.get('1003')
+            detail_response_code = this_data.get('1009')
+            detail_response_message = this_data.get('1010')
+
+            if response_code=='0000':
+                auth_amount = this_data.get('1007')
+                transaction_id = this_data.get('1001')
+                auth_date = this_data.get('1005')
+
+                is_success = True
+
+
 
     return render(request, 'return_explorer.html', {
         'is_success': is_success,

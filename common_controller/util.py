@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from django.conf import settings
 from django.http.response import HttpResponse
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand
@@ -19,6 +21,36 @@ def validateEmail( email ):
         return True
     except ValidationError:
         return False
+
+def billgate_put_data(this_data, put_key, put_value):
+    vt = None
+    if this_data is not None:
+        if this_data.has_key(put_key):
+            vt = this_data.get(put_key)
+
+    if vt is None:
+        vt = []
+
+    vt.append(put_value)
+    this_data[put_key] = vt
+
+def billgate_getErrorMessage(error_code):
+    if error_code=="080000":
+        return "api command error"
+    elif error_code=="080001":
+        return "메시지 파싱 에러!!"
+    elif error_code=="082001":
+        return "소켓 연결 에러!!"
+    elif error_code=="082002":
+        return "소켓 타임아웃 에러!!"
+    elif error_code=="083001":
+        return "메시지 암호화 에러!!"
+    elif error_code=="083002":
+        return "메시지 복호화 에러!!"
+    elif error_code=="899900":
+        return "알수 없는 에러!!"
+    elif error_code=="899901":
+        return "API 에러 발생!!"
 
 def http_response_by_json(error=None, json_={}):
     if error is None:
