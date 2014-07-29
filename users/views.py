@@ -83,7 +83,7 @@ def registration(request, next='index'):
     else:
         return HttpResponse('password and confirm is not identical')
 
-    user = authenticate(username=name, password=password)
+    user = authenticate(username=email, password=password)
     if user is not None and user.is_active:
         auth_login(request, user)
 
