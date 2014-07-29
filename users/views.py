@@ -110,8 +110,7 @@ def login(request, next='index'):
         error = 'user id is not exsit'
         logger.error(error)
     else:
-        user_ = User.objects.get(email=email)
-        user = authenticate(username=user_.username, password=password)
+        user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
             return redirect(next)
