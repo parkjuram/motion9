@@ -46,7 +46,8 @@ $(function(){
           loop: false,
           calculateHeight: true,
           pagination: '.pagination',
-          paginationClickable: true
+          paginationClickable: false,
+          noSwiping: true
           //etc..
       });
   });
