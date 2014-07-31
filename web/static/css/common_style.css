@@ -423,8 +423,7 @@ ol, ul {
 
 
 #cartPanel{
-    width : 70%;
-
+    width: 25em;
 }
 
 a.cart-delete-btn{
