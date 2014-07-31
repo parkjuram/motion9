@@ -46,9 +46,8 @@ a:visited{
 .ui-header{
     background-color : #ffffff !important;
     border: 0;
-    
+    height: 50px;
     padding-bottom: 4px;
-    /*border-bottom: 1px solid #d8d9dd !important;*/
 }
 
 .ui-title{
@@ -162,7 +161,6 @@ img.profile-img{
 
 
 .top-menu-btn img{
-
     height : 26px;
     margin : 4px 8px;
 }
