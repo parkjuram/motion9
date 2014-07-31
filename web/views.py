@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
@@ -21,6 +22,10 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def test_view(request):
     return render(request, 'uservoice_test.html')
+
+@csrf_exempt
+def payment_pay_chrome_view(request):
+    return render(request, 'pay.html')
 
 @csrf_exempt
 def payment_pay_explore_view(request):

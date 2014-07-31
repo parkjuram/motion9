@@ -247,3 +247,8 @@ a.basic-btn{
     width : 180px;
     background-color: #f3f3f3;
 }
+
+
+.resp-tab-content-active {
+    border: 0px !important;
+}

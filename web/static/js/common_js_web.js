@@ -136,9 +136,23 @@ $(function(){
             if($(this).attr('data-directly') == 'true')
                 location.href=$(this).attr('href');
 
-            menuLinks.removeClass('selected');
-            $(this).addClass('selected');
-            subMenuInitialize();
+            // before 2014-07-30 front
+//            menuLinks.removeClass('selected');
+//            $(this).addClass('selected');
+//            subMenuInitialize();
+            // before 2014-07-30 end
+
+            // after 2014-07-30 front
+
+            if ( $('#header-main-menu-list a.selected').attr('data-attr') == $(this).attr('data-attr') ) {
+                menuLinks.removeClass('selected');
+                subMenuInitialize();
+            } else {
+                menuLinks.removeClass('selected');
+                $(this).addClass('selected');
+                subMenuInitialize();
+            }
+            // after 2014-07-30 end
         });
 
         $('#headerSearchBtn').click(function(e){

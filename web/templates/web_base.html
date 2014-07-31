@@ -40,15 +40,15 @@
 
                 {% if current_page and current_page == 'shop_product' %}
                     <li><a href="#" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" class="selected" data-attr="menuProduct">모든제품</a></li>
+                    <li><a href="#" class="selected" data-attr="menuProduct">Products</a></li>
                 {% elif current_page and current_page == 'shop_set' %}
                     <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" data-attr="menuProduct">모든제품</a></li>
+                    <li><a href="#" data-attr="menuProduct">Products</a></li>
                 {% else %}
                     <li><a href="#" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" data-attr="menuProduct">모든제품</a></li>
+                    <li><a href="#" data-attr="menuProduct">Products</a></li>
                 {% endif %}
-                <li><a href="{%  url 'customize_set' %}" data-directly="true">커스텀컬렉션</a></li>
+                <li><a href="{%  url 'customize_set' %}" data-directly="true">My Collection</a></li>
 
                 <li><a href="#" data-attr="menuHelp">Help</a></li>
                 <li class="clearfix"></li>
@@ -57,15 +57,15 @@
                 <!--
                 <li><span><input type="text" class="header-search rounded" placeholder="Search.."></span></li>
                 -->
-                <li><a href="#" id="headerSearchBtn" data-attr="menuSearch">검색</a></li>
-                <li><a href="{% url 'mypage' %}">마이페이지</a></li>
-                <li><a href="{% url 'mypage_cart' %}">장바구니</a></li>
+                <li><a href="{% url 'mypage' %}">My Page</a></li>
+                <li><a href="{% url 'mypage_cart' %}">Cart</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout'%}" class="">로그아웃</a></li>
+                    <li><a href="{% url 'logout'%}" class="">Logout</a></li>
                 {% else %}
-                    <li><a href="#" class="login-btn">로그인</a></li>
+                    <li><a href="#" class="login-btn">Login</a></li>
                     <li><a href="{% url 'registration_page' %}">회원가입</a></li>
                 {% endif %}
+                <li><a href="#" id="headerSearchBtn" data-attr="menuSearch">검색</a></li>
 
                 <li class="clearfix"></li>
             </ul>
@@ -116,6 +116,8 @@
     </div>
 </div>
 
+<div style="height:55px"></div>
+
 {% block ad_area %}
 {% endblock %}
 
@@ -140,7 +142,7 @@
         <input type="hidden" id="fbToken" name="token"/>
     </form>
     <div class="login-box-header">
-        로그인
+        Login
     </div>
     <form method="post" data-form="login-popup-form" action="{% url 'login' %}" >
         <div class="form-box">
@@ -152,8 +154,8 @@
             <input type="password" name="password" id="password"/>
         </div>
         <div class="form-btns">
-            <a href="#" class="basic-btn login-submit-btn" data-form="login-popup-form" style="padding : 8px 40px;">로그인</a> &nbsp;&nbsp;&nbsp;
-            <a href="#" class="fb-login-btn facebook-btn">페이스북으로 로그인</a>
+            <a href="#" class="basic-btn login-submit-btn" data-form="login-popup-form" style="padding : 8px 40px;">Login</a> &nbsp;&nbsp;&nbsp;
+            <a href="#" class="fb-login-btn facebook-btn">페이스북으로 Login</a>
         </div>
     </form>
 </div>
