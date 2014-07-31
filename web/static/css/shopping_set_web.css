@@ -62,18 +62,18 @@
     position: relative;
     border : 1px solid #e5e5e5;
     background: url('../img/surfer.jpg') top left no-repeat;
-    width : 610px;
-    height : 250px;
+    width : 630px;
+    height : 270px;
     margin : 20px;
 }
 
 .set-item-info{
     background-color: #ffffff;
     position: absolute;
-    width : 326px;
-    height : 226px;
+    width : 346px;
+    height : 246px;
     top : 0;
-    left : 610px;
+    left : 630px;
     padding : 12px;
 }
 

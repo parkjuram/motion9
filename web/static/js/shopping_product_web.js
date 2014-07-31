@@ -45,7 +45,7 @@ $(function(){
           // options
           columnWidth: 200,//parseInt(width/ 3),
           isResizeBound : false,
-          gutter : 10,
+          gutter : 20,
           itemSelector: '.product-item'
         });
     });

@@ -48,7 +48,7 @@
                    ! 로그인이 필요합니다.
                 </div>
                 <div style="text-align : center;">
-                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">로그인 하러가기</a>
+                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login 하러가기</a>
                 </div>
 
              {% endif %}
@@ -67,11 +67,11 @@
                 {% if user.is_authenticated %}
                    <li><a href="{% url "mobile_mypage" %}" data-ajax="false">{{ user.username }}님</a><!--<img class="profile-img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c85.18.229.229/s100x100/180837_10150110963568938_908650_n.jpg"/>--></li>
                 {% else %}
-                   <li><a href="{% url 'mobile_login_page' %}" data-ajax="false">로그인</a></li>
+                   <li><a href="{% url 'mobile_login_page' %}" data-ajax="false">Login</a></li>
                 {% endif %}
-                <li><a href="/mobile/" data-ajax="false">홈</a></li>
+                <li><a href="/mobile/" data-ajax="false">Home</a></li>
                 <li class="list-collapsible">
-                    <a href="#" class="collapse-btn">세트</a>
+                    <a href="#" class="collapse-btn">Collection</a>
                     <ul class="list-collapsed">
                         <li ><a href="{% url "mobile_shop_set" %}" data-ajax="false">전체</a></li>
                         <li ><a href="{% url "mobile_shop_set" category_id=18 %}" data-ajax="false">라이프 스타일</a></li>
@@ -81,7 +81,7 @@
                     </ul>
                 </li>
                 <li class="list-collapsible">
-                    <a href="#" class="collapse-btn">모든제품</a>
+                    <a href="#" class="collapse-btn">Products</a>
                     <ul class="list-collapsed">
                         <li ><a href="{% url "mobile_shop_product" %}" data-ajax="false">전체</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=1 %}" data-ajax="false">스킨</a></li>
@@ -98,10 +98,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{% url "mobile_customize_set" %}" data-ajax="false">커스텀 컬렉션</a>
+                    <a href="{% url "mobile_customize_set" %}" data-ajax="false">My Collection</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}" data-ajax="false">로그아웃</a></li>
+                    <li><a href="{% url 'logout' %}" data-ajax="false">Logout</a></li>
                 {% endif %}
             </ul>
         </div>
