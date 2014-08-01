@@ -222,8 +222,8 @@ def mypage_cart_view(request):
     user_id = user_.username
     item_name = user_.username+"_"+current_datetime
     item_code = user_.username+"_"+current_datetime
-    # amount = str(cart_items['total_price'])
-    amount = '1000'
+    amount = str(cart_items['total_price'])
+    # amount = '1000'
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         user_ip = x_forwarded_for.split(',')[0]
