@@ -1,3 +1,7 @@
+<head>
+<meta charset="utf-8">
+
+</head>
 <body>
 is explorer's return page</br>
 
@@ -11,7 +15,11 @@ is explorer's return page</br>
 <span>auth_amount</span> : {{ auth_amount }}<br/>
 <span>auth_date</span> : {{ auth_date }}<br/>
 <span>response_code</span> : {{ response_code }}<br/>
-<span>response_message</span> : {{ response_message }}<br/>
+{% for message in response_message %}
+    <span>response_message</span> : {{ message }}<br/>
+{% endfor %}
 <span>detail_response_code</span> : {{ detail_response_code }}<br/>
-<span>detail_response_message</span> : {{ detail_response_message }}<br/>
+{% for message in detail_response_message %}
+    <span>detail_response_message</span> : {{ message }}<br/>
+{% endfor %}
 </body>
