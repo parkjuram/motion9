@@ -23,14 +23,9 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def test_view(request):
 
-    # bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker '
-    #         config_file = '"/Users/ramju/Documents/workspace/django/project_motion9/motion9/libs/config/config.ini"'
-    #         service_code = '"0900"'
-    return_message = Popen(["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini","0900","07180100      glx_api             0900y4w2jWCkhK6+7CTywaME87rUuYBO/yNgXErm0CgTv1GKQmU3eQvB+cGoFgo/w5R0hAiXS80Pcifm03Cen8rcbjR+46fB1uVPCFkB//Ois0jyJsSR9SN2Hr9C20EylIYSGc3uue86jc7G2L91ocZec7Y0JaiQZ6Qc6AdC/WxvPPueE0EzT4gx+mIAcCpMEBKdPtsCk+/Gcj2tXziqEM0HuumMgWtZI6ffhxQJNc/LuRpb6lM+JSPcO3eilE3XcQgtLWbkPeYduceVnRoaMG0fmec6Bhyy7HcjXiYTEG432G08KoaFPDXCUJp0anqlRjwzGo1w2h7+SFvTync32Bw1x195YR1I3biKGhvhS9iglgZ2Gb1TP8cZBdhZvCXqTMiUqEIRo2cKsqjHenfn4bAHvNrmOBeixCkcVHtnKtTEN26A4Cr5Y65Ts+v1sSBExyZErUDZvLDvkmCLxQxdw04S6xwyb3sYTsf7fKBgTGcYoq1Lc/xOBSnoxuSMKBXXkDvfUvzAd8T12jj2txEDJifWDsQOK1fkqZdYJE1KpVaASstwhmif4kCPb3wFNsFt94K07/RxusSkM0a1NvXbDFyoXbtVzUwS+qzZ/aTDYjSvqGBzl7Unby5pBgvSdrsF3oUffSnRY8yXscjAOSH4FzSIrgAiOeRreprJlLKhOiRJyeQ="], stdout=PIPE).communicate()[0]
-    return_message = return_message.strip()
-    print return_message
+    return render(request, 'payment_complete_web.html')
 
-    return render(request, 'uservoice_test.html')
+    # return render(request, 'uservoice_test.html')
 
 @csrf_exempt
 def payment_pay_chrome_view(request):
@@ -282,6 +277,10 @@ def payment_return_explore_view(request):
     #     'order_date': order_date,
     #
     # })
+
+@csrf_exempt
+def payment_complete_view(request):
+    return render(request, 'payment_complete_web.html')
 
 @csrf_exempt
 def index_view(request):

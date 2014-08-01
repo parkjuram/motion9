@@ -1,0 +1,37 @@
+{% extends "web_base.html" %}
+{% block header %}
+{% load static %}
+{% load humanize %}
+<link rel="stylesheet" href="{% static 'css/payment_complete_web.css' %}"/>
+{#<script src="{% static 'js/cart_web.js'%}"></script>#}
+{% endblock %}
+{% block content %}
+    <div id="content-wrapper">
+        <div id="content-title-wrapper" class="text-align-center">
+            <div id="content-title">구매가 정상적으로 완료되었습니다.</h1>
+        </div>
+
+        <div id="content-table-wrapper" class="text-align-center">
+            <table id="content-table" align="center">
+                <tr>
+                    <td class="td-title" style="width: 200px"><span class="text-bold">주문번호</span></td>
+                    <td>2195387137948</td>
+                </tr>
+                <tr>
+                    <td class="td-title"><span class="text-bold">총 결제금액</span></td>
+                    <td><span id='total-price'>55,000원</span></td>
+                </tr>
+                <tr>
+                    <td class="td-title">이메일</td><td>이메일</td>
+                </tr>
+                <tr>
+                    <td class="td-title">수량</td><td>수량 : 1</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="content-footer-wrapper" class="text-align-center">
+            <a class="button-confirm" href="{% url 'mypage_purchase_product' %}">확인</a>
+        </div>
+    </div>
+{% endblock %}

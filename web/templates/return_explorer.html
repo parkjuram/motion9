@@ -1,26 +1,34 @@
 <head>
 <meta charset="utf-8">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 
     $(function() {
         function returnOnPaymentSuccess() {
-            window.opener.onPaymenySuccess();
+            try {
+                window.opener.onPaymentSuccess();
+            } catch (err) {
+                alert(err.description || err) //or console.log or however you debug
+            }
         }
 
         function returnOnPaymentFail() {
-            window.opener.onPaymentFail();
+            try {
+                window.opener.onPaymentFail();
+            } catch (err) {
+                alert(err.description || err) //or console.log or however you debug
+            }
         }
-        var is_success = {{ is_success }};
+        var is_success = "{{ is_success }}";
 
-        if ( is_success ) {
+        if ( is_success == "True" ) {
             returnOnPaymentSuccess();
         } else {
             returnOnPaymentFail();
         }
         window.close();
 
-    })
-    opener.setSearchResult(targetField, choice);
+    });
 
 </script>
 </head>

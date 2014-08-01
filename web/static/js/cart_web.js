@@ -3,6 +3,13 @@
  */
 
 
+function onPaymentSuccess() {
+    window.location.replace( url_payment_complete );
+}
+
+function onPaymentFail() {
+    alert("payment fail!!!");
+}
 
 $(function(){
 
@@ -119,13 +126,5 @@ $(function(){
 
         payment_form.submit();
    });
-
-    function returnOnPaymentSuccess() {
-        alert("payment success!!!")
-    }
-
-    function returnOnPaymentFail() {
-        alert("payment fail!!!");
-    }
 
 });
