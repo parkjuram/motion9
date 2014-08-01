@@ -34,7 +34,39 @@ def test_view(request):
 
 @csrf_exempt
 def payment_pay_chrome_view(request):
-    return render(request, 'pay.html')
+    pass
+    # current_datetime = time.strftime("%Y%m%d%H%M%S")
+    # service_id = 'glx_api'
+    # order_date = current_datetime
+    # order_id = 'arsdale_' + order_date
+    # amount = '1000'
+    #
+    # # checksum
+    # temp = service_id+order_id+amount
+    # checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
+    #     'GEN ' + temp
+    #
+    # checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
+    # checksum = checksum.strip()
+    #
+    # if checksum=='8001' or checksum=='8003' or checksum=='8009':
+    #     return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
+    #
+    # return render(request, 'pay_explorer.html', {
+    #     'service_id': service_id,
+    #     'order_id': order_id,
+    #     'order_date': order_date,
+    #     'user_id': user_id,
+    #     'item_code': 'TEST_CD1',
+    #     'using_type': '0000',
+    #     'currency': '0000',
+    #     'item_name': item_name,
+    #     'amount': amount,
+    #     'user_ip': user_ip,
+    #     'installment_period': '0:3',
+    #     'return_url': return_url,
+    #     'check_sum': checksum
+    # })
 
 @csrf_exempt
 def payment_pay_explore_view(request):

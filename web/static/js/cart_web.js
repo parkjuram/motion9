@@ -120,4 +120,12 @@ $(function(){
         payment_form.submit();
    });
 
+    function returnOnPaymentSuccess() {
+        alert("payment success!!!")
+    }
+
+    function returnOnPaymentFail() {
+        alert("payment fail!!!");
+    }
+
 });

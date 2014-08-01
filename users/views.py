@@ -221,7 +221,7 @@ def mypage_cart_view(request):
     order_id = 'motion9_' + current_datetime
     user_id = user_.username
     item_name = user_.username+"_"+current_datetime
-    item_code = user_.username+"_"+current_datetime
+    item_code = user_.id+"_"+current_datetime
     amount = str(cart_items['total_price'])
     # amount = '1000'
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
