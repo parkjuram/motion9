@@ -44,9 +44,9 @@ $(function(){
           //Your options here:
           mode: 'horizontal',
           loop: false,
-          calculateHeight: true,
-          pagination: '.pagination',
-          paginationClickable: true
+          calculateHeight: true
+          //pagination: '.pagination',
+          //paginationClickable: true
           //etc..
       });
   });

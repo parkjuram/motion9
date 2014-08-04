@@ -88,6 +88,13 @@
       {% endif %}
 
       {% for pageNum in sets.page_range %}
+          
+          {% if current_category_id != null %}
+              <li {% if pageNum == setspage_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_set' page_num=pageNum category_id=current_category%}" >{{ pageNum  }}</a></li>
+          {% else %}
+              <li {% if pageNum == setspage_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_set' page_num=pageNum %}" >{{ pageNum  }}</a></li>
+          {% endif %}
+          
         <li {% if pageNum == sets.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_set' page_num=pageNum %}" >{{ pageNum  }}</a></li>
       {% endfor %}
       {% if not sets.page_hasNext  %}

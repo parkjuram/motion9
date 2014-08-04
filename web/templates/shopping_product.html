@@ -78,7 +78,11 @@
       {% endif %}
 
       {% for pageNum in products.page_range %}
-        <li {% if pageNum == products.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_product' page_num=pageNum %}" >{{ pageNum  }}</a></li>
+          {% if current_category_id != null %}
+              <li {% if pageNum == products.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_product' page_num=pageNum category_id=current_category %}" >{{ pageNum  }}</a></li>
+          {% else %}
+              <li {% if pageNum == products.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_product' page_num=pageNum %}" >{{ pageNum  }}</a></li>
+          {% endif %}
       {% endfor %}
       {% if not products.page_hasNext  %}
         <li class="disabled"><a data-ajax="false"  href="#" class="next" onClick="javascript:return false;">Next</a></li>
