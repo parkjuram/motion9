@@ -45,25 +45,24 @@ def check_email_view(request):
 def check_facebook_token_view(request):
     token = request.POST.get('token', None)
 
-    print token
-
     if token is None:
         http_response_by_json( const.CODE_PARAMS_WRONG )
     else:
 
-        token_check_url = 'https://graph.facebook.com/debug_token?input_token='+token+'&access_token='+'1450591788523941'
+        app_token_url = 'https://graph.facebook.com/v2.0/oauth/access_token?client_id=1450591788523941&client_secret=f99304b17095fd8c2a7d737a9be8c39b&grant_type=client_credentials'
+        contents = urllib2.urlopen(app_token_url).read()
+        app_token = contents[13:]
 
-        print token_check_url
+
+        token_check_url = 'https://graph.facebook.com/debug_token?input_token='+token+'&access_token='+app_token
 
         contents = urllib2.urlopen(token_check_url).read()
-        print contents
         contents_dict = json.loads(contents)
-        print contents_dict
-        print contents_dict['is_valid']
-        print contents_dict['is_valid']==True
-        print contents_dict['is_valid']=='true'
 
-        http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
+        if contents_dict['data']['is_valid']==True:
+            
+        else:
+            http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
 
 
 @csrf_exempt
