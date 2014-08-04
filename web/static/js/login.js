@@ -24,7 +24,7 @@ $(function(){
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
             //testAPI();
-            $('#fbToken').val(response.access_token);
+            $('#fbToken').val(response.authResponse.accessToken);
             $('#facebookLoginForm').submit();
         } else if (response.status === 'not_authorized') {
 

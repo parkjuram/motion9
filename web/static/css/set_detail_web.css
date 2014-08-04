@@ -283,3 +283,18 @@ a.basic-btn{
     width : 180px;
     background-color: #f3f3f3;
 }
+
+
+.product-detail-info-wrapper{
+    padding : 12px 14px;
+}
+
+.product-detail-info-header{
+    font-size: 14px;
+    margin-bottom : 12px;
+}
+
+.product-detail-info{
+    color : #6e6e6e;
+    line-height: 22px;
+}

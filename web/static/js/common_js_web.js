@@ -81,7 +81,7 @@ $(function(){
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
             //testAPI();
-            $('#fbToken').val(response.access_token);
+            $('#fbToken').val(response.authResponse.accessToken);
             $('#facebookLoginForm').submit();
 
         } else if (response.status === 'not_authorized') {
@@ -104,6 +104,7 @@ $(function(){
             }, {scope: 'public_profile,email,user_friends'});
             */
         } else {
+            alert('페이스북에 로그인을 먼저 해주세요.');
           // The person is not logged into Facebook, so we're not sure if
           // they are logged into this app or not.
         }

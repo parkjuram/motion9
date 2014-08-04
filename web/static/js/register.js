@@ -22,6 +22,7 @@ $(function(){
         FB.api('/me', function(response) {
 
           email.val(response.email);
+          emailCheck(email);
           name.val(response.last_name + response.first_name);
 
           if(response.gender == 'male'){
@@ -65,8 +66,8 @@ $(function(){
 
     });
 
-    $('#email').focusout(function(e){
-       var email = $(this).val();
+    function emailCheck(el){
+       var email = el.val();
        if(email.length > 5 && email != ''){
             $.ajax({
                   url: '/user/check/email/',
@@ -86,8 +87,12 @@ $(function(){
                   error:function(jqXHR, textStatus, errorThrown){
                       console.log(textStatus);
                   }
-        });
+            });
        }
+    }
+
+    $('#email').focusout(function(e){
+        emailCheck($(this));
     });
 
 });

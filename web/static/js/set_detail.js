@@ -45,7 +45,8 @@ $(function(){
           //Your options here:
           mode: 'horizontal',
           loop: false,
-          calculateHeight: true
+          calculateHeight: true,
+          noSwiping : true
           //pagination: '.pagination',
           //paginationClickable: true
           //etc..
