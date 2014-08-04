@@ -254,14 +254,15 @@ def payment_return_explore_view(request):
     payment_id=0
 
     if is_success:
+
         payment = Payment.objects.create(
             user=helper_get_user(request),
             service_id=service_id,
             order_id=order_id,
             order_date=order_date,
-            transaction_id=transaction_id,
+            transaction_id=transaction_id[0],
             auth_amount=auth_amount,
-            auth_date=auth_date,
+            auth_date=auth_date[0],
             response_code=response_code,
             response_message=response_message[0],
             detail_response_code=detail_response_code,

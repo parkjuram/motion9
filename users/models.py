@@ -96,7 +96,7 @@ class Payment(models.Model):
     order_date = models.CharField(max_length=14, null=True)
     transaction_id = models.CharField(max_length=20, null=True)
     auth_amount = models.CharField(max_length=9, null=True)
-    auth_date = models.CharField(max_length=4, null=True)
+    auth_date = models.CharField(max_length=14, null=True)
     response_code = models.CharField(max_length=4, null=True)
     response_message = models.TextField(null=False, blank=True, default='')
     detail_response_code = models.CharField(max_length=4, null=True)
