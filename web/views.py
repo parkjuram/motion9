@@ -255,8 +255,10 @@ def payment_return_explore_view(request):
 
     if is_success:
 
+        user_ = helper_get_user(request)
+
         payment = Payment.objects.create(
-            user=helper_get_user(request),
+            user=user_,
             service_id=service_id,
             order_id=order_id,
             order_date=order_date,
