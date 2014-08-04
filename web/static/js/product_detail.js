@@ -38,6 +38,28 @@ $(function(){
         location.href='/mobile/shop/product/'+categoryId;
     });
 
+
+    $('a.tab-btn').click(function(e){
+        e.preventDefault();
+
+        var target = $(this).attr('href');
+        $('.tab-content').removeClass('tab-selected');
+        $(target).addClass('tab-selected');
+
+        if(target == '#productInfo'){
+            $('.tab-btn').removeClass('selected-product-items-btn selected-product-rule-btn selected-product-info-btn');
+            $(this).addClass('selected-product-info-btn');
+        }else if(target == '#productItems'){
+            $('.tab-btn').removeClass('selected-product-items-btn selected-product-rule-btn selected-product-info-btn');
+            $(this).addClass('selected-product-items-btn');
+        }else if(target == '#productRule'){
+            $('.tab-btn').removeClass('selected-product-items-btn selected-product-rule-btn selected-product-info-btn');
+            $(this).addClass('selected-product-rule-btn');
+        }
+
+   });
+
+
   var container = document.querySelector('.swiper-container');
   imagesLoaded(container, function() {	//when all images are loaded, it is triggered
       var mySwiper = $('.swiper-container').swiper({

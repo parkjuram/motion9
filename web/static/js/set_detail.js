@@ -34,9 +34,20 @@ $(function(){
         e.preventDefault();
 
         var target = $(this).attr('href');
-        console.log(target);
         $('.tab-content').removeClass('tab-selected');
         $(target).addClass('tab-selected');
+
+        if(target == '#productInfo'){
+            $('.tab-btn').removeClass('selected-product-items-btn selected-product-rule-btn selected-product-info-btn');
+            $(this).addClass('selected-product-info-btn');
+        }else if(target == '#productItems'){
+            $('.tab-btn').removeClass('selected-product-items-btn selected-product-rule-btn selected-product-info-btn');
+            $(this).addClass('selected-product-items-btn');
+        }else if(target == '#productRule'){
+            $('.tab-btn').removeClass('selected-product-items-btn selected-product-rule-btn selected-product-info-btn');
+            $(this).addClass('selected-product-rule-btn');
+        }
+
    });
 
    var container = document.querySelector('.swiper-container');

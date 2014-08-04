@@ -131,6 +131,11 @@ a:visited{
     border-right : 1px solid #e5e5e5;
 }
 
+.selected-product-info-btn{
+    background : url('../img/product_detail_down.png') top center no-repeat;
+    color : #d2bb8f !important;
+}
+
 .product-items-btn{
     background : url('../img/set_goosung.png') top center no-repeat;
     background-size : 30px 30px;
@@ -146,6 +151,11 @@ a:visited{
 .product-rule-btn{
     background : url('../img/product_info.png') top center no-repeat;
     background-size : 30px 30px;
+}
+
+.selected-product-rule-btn{
+    background : url('../img/product_info_down.png') top center no-repeat;
+    color : #d2bb8f !important;
 }
 
 .custom-set-btn-box{
@@ -300,4 +310,18 @@ a:visited{
 
 .swiper-wrapper{
     text-align: center;
+}
+
+.product-detail-info-wrapper{
+    padding : 12px 14px;
+}
+
+.product-detail-info-header{
+    font-size: 14px;
+    margin-bottom : 12px;
+}
+
+.product-detail-info{
+    color : #6e6e6e;
+    line-height: 22px;
 }

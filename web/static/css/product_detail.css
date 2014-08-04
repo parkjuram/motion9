@@ -134,15 +134,20 @@ a:visited{
     border-right : 1px solid #e5e5e5;
 }
 
-.product-blog-btn{
-    background : url('../img/review.png') top center no-repeat;
+.selected-product-info-btn{
+    background : url('../img/product_detail_down.png') top center no-repeat;
+    color : #d2bb8f !important;
+}
+
+.product-items-btn{
+    background : url('../img/set_goosung.png') top center no-repeat;
     background-size : 30px 30px;
     border-right : 1px solid #e5e5e5;
 
 }
 
-.selected-product-blog-btn{
-    background : url('../img/review_down.png') top center no-repeat;
+.selected-product-items-btn{
+    background : url('../img/set_goosung_down.png') top center no-repeat;
     color : #d2bb8f !important;
 }
 
@@ -150,6 +155,12 @@ a:visited{
     background : url('../img/product_info.png') top center no-repeat;
     background-size : 30px 30px;
 }
+
+.selected-product-rule-btn{
+    background : url('../img/product_info_down.png') top center no-repeat;
+    color : #d2bb8f !important;
+}
+
 
 .product-item{
     width : 100%;
