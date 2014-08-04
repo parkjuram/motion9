@@ -23,7 +23,14 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def test_view(request):
 
-    return render(request, 'payment_complete_web.html')
+    # products = Product.objects.all()
+    # for product in products:
+    #     product.short_desc = product.description
+    #     product.save()
+
+    return HttpResponse('success!')
+
+    # return render(request, 'payment_complete_web.html')
 
     # return render(request, 'uservoice_test.html')
 
@@ -402,6 +409,7 @@ def product_view(request, product_id=None):
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
         blog_reivews = helper_get_blog_reviews(product_id)
+        magazines
 
         return render(request, "product_detail_web.html",
                       {

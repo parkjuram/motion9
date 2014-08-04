@@ -44,11 +44,16 @@ def check_email_view(request):
 @csrf_exempt
 def check_facebook_token_view(request):
     token = request.POST.get('token', None)
+
+    print token
+
     if token is None:
         http_response_by_json( const.CODE_PARAMS_WRONG )
     else:
 
-        token_check_url = 'http://graph.facebook.com/debug_token?input_token='+token+'&access_token='+'1450591788523941';
+        token_check_url = 'https://graph.facebook.com/debug_token?input_token='+token+'&access_token='+'1450591788523941'
+
+        print token_check_url
 
         contents = urllib2.urlopen(token_check_url).read()
         print contents
