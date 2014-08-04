@@ -62,7 +62,7 @@ $(function(){
     $('.belong-to-set-item').hover(function(e){
         var id = $(this).attr('data-attr');
         $(this).find('.product-hover-area').css({display:'block'});
-        $('.product-opacity-bg').css({opacity:0.7});
+        $('.product-opacity-bg').css({opacity:0.9});
         //hoverArea.css({display:'block'});
 
     }, function(e){

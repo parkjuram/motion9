@@ -4,6 +4,12 @@ urlpatterns = patterns('',
     url(r'^test/$', 'web.views.test_view', name='test'),
     url(r'^payment/pay_explorer/$', 'web.views.payment_pay_explore_view', name='payment_pay_explore'),
     url(r'^payment/return_explorer/$', 'web.views.payment_return_explore_view', name='payment_return_explore'),
+
+    url(r'^payment/complete/$', 'web.views.payment_complete_view', name='payment_complete'),
+    url(r'^payment/complete/(?P<payment_id>(\d+))/$', 'web.views.payment_complete_view', name='payment_complete'),
+
+    # url(r'^payment/pay_chrome/$', 'web.views.payment_pay_chrome_view', name='payment_pay_chrome'),
+    # url(r'^payment/return_chrome/$', 'web.views.payment_return_chrome_view', name='payment_return_chrome'),
     url(r'^$', 'web.views.index_view', name='index'),
     url(r'^index/$', 'web.views.index_view', name='index'),
 

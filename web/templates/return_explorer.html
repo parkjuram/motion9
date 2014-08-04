@@ -1,3 +1,38 @@
+<head>
+<meta charset="utf-8">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+        function returnOnPaymentSuccess() {
+            try {
+                window.opener.onPaymentSuccess(payment_id);
+            } catch (err) {
+                alert(err.description || err) //or console.log or however you debug
+            }
+        }
+
+        function returnOnPaymentFail() {
+            try {
+                window.opener.onPaymentFail();
+            } catch (err) {
+                alert(err.description || err) //or console.log or however you debug
+            }
+        }
+        var is_success = "{{ is_success }}";
+        var payment_id = "{{ payment_id }}";
+
+        if ( is_success == "True" ) {
+            returnOnPaymentSuccess(payment_id);
+        } else {
+            returnOnPaymentFail();
+        }
+        window.close();
+
+    });
+
+</script>
+</head>
 <body>
 is explorer's return page</br>
 
@@ -11,7 +46,11 @@ is explorer's return page</br>
 <span>auth_amount</span> : {{ auth_amount }}<br/>
 <span>auth_date</span> : {{ auth_date }}<br/>
 <span>response_code</span> : {{ response_code }}<br/>
-<span>response_message</span> : {{ response_message }}<br/>
+{% for message in response_message %}
+    <span>response_message</span> : {{ message }}<br/>
+{% endfor %}
 <span>detail_response_code</span> : {{ detail_response_code }}<br/>
-<span>detail_response_message</span> : {{ detail_response_message }}<br/>
+{% for message in detail_response_message %}
+    <span>detail_response_message</span> : {{ message }}<br/>
+{% endfor %}
 </body>

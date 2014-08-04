@@ -2,8 +2,6 @@
  * Created by Park-Kunbae on 14. 4. 10.
  */
 
-
-
 $(function(){
 
     var element = document.getElementById('addressLayer');
@@ -102,6 +100,22 @@ $(function(){
       }
    });
 
+    $('.purchase-btn').click(function(e){
+        var payment_form = document.payment;
+        payment_form.target = "payment";
 
+//                test payemnt url : http://tpay.billgate.net/credit/certify.jsp
+//                real payemnt url : https://pay.billgate.net/credit/certify.jsp
+        payment_form.action = "http://tpay.billgate.net/credit/certify.jsp";
+
+        var popup_option ="width=500,height=477,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,left=150,top=150";
+        var popup_object = window.open("about:blank", "payment", popup_option);
+
+        if ( popup_object == null ) {
+            alert("팝업이 차단되어 있습니다.\n팝업차단을 해제하신 뒤 다시 시도하여 주십시오.");
+        }
+
+        payment_form.submit();
+   });
 
 });

@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.db.utils import DataError
 from django.contrib.auth import authenticate, login as auth_login, logout
@@ -20,9 +21,11 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
 
 from .models import Interest
 
+from subprocess import call, Popen, PIPE
 import logging
 import urllib2
 import json
+import time
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -209,7 +212,56 @@ def mypage_set_view(request, page_num=1):
 def mypage_cart_view(request):
     cart_items = helper_get_cart_items( helper_get_user(request) )
 
+    current_datetime = time.strftime("%Y%m%d%H%M%S")
+    user_ = helper_get_user(request)
+
+    # testing option
+    service_id = 'glx_api'
+    order_date = current_datetime
+    order_id = 'motion9_' + current_datetime
+    user_id = user_.username
+    item_name = user_.username+"_"+current_datetime
+    item_code = str(user_.id)+"_"+current_datetime[8:]
+    amount = str(cart_items['total_price'])
+    # amount = '1000'
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        user_ip = x_forwarded_for.split(',')[0]
+    else:
+        user_ip = request.META.get('REMOTE_ADDR')
+    return_url = request.build_absolute_uri(reverse('payment_return_explore'))
+    using_type='0000'
+    currency='0000'
+    installment_period='0:3'
+
+    # checksum
+    temp = service_id+order_id+amount
+    checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
+        'GEN ' + temp
+    checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
+    checksum = checksum.strip()
+
+    if checksum=='8001' or checksum=='8003' or checksum=='8009':
+        return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
+
+    payment_items = {
+        'service_id': service_id,
+        'order_id': order_id,
+        'order_date': order_date,
+        'user_id': user_id,
+        'item_code': item_code,
+        'using_type': using_type,
+        'currency': currency,
+        'item_name': item_name,
+        'amount': amount,
+        'user_ip': user_ip,
+        'installment_period': installment_period,
+        'return_url': return_url,
+        'check_sum': checksum
+    }
+
     if cart_items is not None:
+        cart_items.update( {'payment_items':payment_items} )
         return render(request, 'cart_web.html', cart_items )
     else:
         return redirect('login_page')

@@ -131,7 +131,7 @@ a.basic-btn{
     line-height: 20px;
     margin-left : 8px;
     width : 266px;
-    padding: 4px 8px;
+    padding: 0px 8px 4px 8px;
 }
 
 .belong-product-name{
@@ -246,4 +246,9 @@ a.basic-btn{
 .product-info-table td.item-spec-head{
     width : 180px;
     background-color: #f3f3f3;
+}
+
+
+.resp-tab-content-active {
+    border: 0px !important;
 }

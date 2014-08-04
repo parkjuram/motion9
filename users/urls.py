@@ -3,6 +3,8 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('',
 
     url(r'^check/email/$', 'users.views.check_email_view', name='check_email'),
+
+    url(r'^check/email/$', 'users.views.check_email_view', name='check_email'),
     url(r'^check/token/facebook/$', 'users.views.check_facebook_token_view', name='check_facebook_token'),
 
     url(r'^registration/(?P<next>(\w+))/$', 'users.views.registration', name='registration'),

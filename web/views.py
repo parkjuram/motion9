@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
@@ -9,7 +11,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands
 from .models import Product, Category, BlogReview, Set, Brand
-from users.models import CustomSet, CustomSetDetail
+from users.models import CustomSet, CustomSetDetail, Payment
 
 from subprocess import call, Popen, PIPE
 import time
@@ -20,7 +22,46 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def test_view(request):
-    return render(request, 'uservoice_test.html')
+
+    return render(request, 'payment_complete_web.html')
+
+    # return render(request, 'uservoice_test.html')
+
+@csrf_exempt
+def payment_pay_chrome_view(request):
+    pass
+    # current_datetime = time.strftime("%Y%m%d%H%M%S")
+    # service_id = 'glx_api'
+    # order_date = current_datetime
+    # order_id = 'arsdale_' + order_date
+    # amount = '1000'
+    #
+    # # checksum
+    # temp = service_id+order_id+amount
+    # checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
+    #     'GEN ' + temp
+    #
+    # checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
+    # checksum = checksum.strip()
+    #
+    # if checksum=='8001' or checksum=='8003' or checksum=='8009':
+    #     return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
+    #
+    # return render(request, 'pay_explorer.html', {
+    #     'service_id': service_id,
+    #     'order_id': order_id,
+    #     'order_date': order_date,
+    #     'user_id': user_id,
+    #     'item_code': 'TEST_CD1',
+    #     'using_type': '0000',
+    #     'currency': '0000',
+    #     'item_name': item_name,
+    #     'amount': amount,
+    #     'user_ip': user_ip,
+    #     'installment_period': '0:3',
+    #     'return_url': return_url,
+    #     'check_sum': checksum
+    # })
 
 @csrf_exempt
 def payment_pay_explore_view(request):
@@ -50,6 +91,8 @@ def payment_pay_explore_view(request):
 
     checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
     checksum = checksum.strip()
+
+    print checksum
 
     if checksum=='8001' or checksum=='8003' or checksum=='8009':
         return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
@@ -102,14 +145,24 @@ def payment_return_explore_view(request):
         checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
         checksum = checksum.strip()
         if checksum == 'SUC':
-    #         # function ServiceBroker('java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker',
-    #         #  './libs/config/config.ini')
-            bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker '
-            config_file = './libs/config/config.ini'
+
+
+    # #         # function ServiceBroker('java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker',
+    # #         #  './libs/config/config.ini')
+    #         bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker '
+    #         config_file = '"/Users/ramju/Documents/workspace/django/project_motion9/motion9/libs/config/config.ini"'
+    #         service_code = '"0900"'
+    #         broker_message_command = bin+' '+config_file+' '+service_code+' "'+message + '"';
+    #         print broker_message_command
+    #         return_message = Popen(["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini","0900","07180100      glx_api             0900y4w2jWCkhK6+7CTywaME87rUuYBO/yNgXErm0CgTv1GKQmU3eQvB+cGoFgo/w5R0hAiXS80Pcifm03Cen8rcbjR+46fB1uVPCFkB//Ois0jyJsSR9SN2Hr9C20EylIYSGc3uue86jc7G2L91ocZec7Y0JaiQZ6Qc6AdC/WxvPPueE0EzT4gx+mIAcCpMEBKdPtsCk+/Gcj2tXziqEM0HuumMgWtZI6ffhxQJNc/LuRpb6lM+JSPcO3eilE3XcQgtLWbkPeYduceVnRoaMG0fmec6Bhyy7HcjXiYTEG432G08KoaFPDXCUJp0anqlRjwzGo1w2h7+SFvTync32Bw1x195YR1I3biKGhvhS9iglgZ2Gb1TP8cZBdhZvCXqTMiUqEIRo2cKsqjHenfn4bAHvNrmOBeixCkcVHtnKtTEN26A4Cr5Y65Ts+v1sSBExyZErUDZvLDvkmCLxQxdw04S6xwyb3sYTsf7fKBgTGcYoq1Lc/xOBSnoxuSMKBXXkDvfUvzAd8T12jj2txEDJifWDsQOK1fkqZdYJE1KpVaASstwhmif4kCPb3wFNsFt94K07/RxusSkM0a1NvXbDFyoXbtVzUwS+qzZ/aTDYjSvqGBzl7Unby5pBgvSdrsF3oUffSnRY8yXscjAOSH4FzSIrgAiOeRreprJlLKhOiRJyeQ="], stdout=PIPE).communicate()[0]
+
             service_code = '0900'
-            broker_message_command = bin+' '+config_file+' '+service_code+' '+message
-            return_message = Popen(broker_message_command.split(' '), stdout=PIPE).communicate()[0]
+            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",service_code]
+            broker_message_command.append(message)
+
+            return_message = Popen(broker_message_command, stdout=PIPE).communicate()[0]
             return_message = return_message.strip()
+
             return_code = return_message[0:5]
 
             this_data = {}
@@ -181,12 +234,13 @@ def payment_return_explore_view(request):
                         this_data[tag] = vt
                 # Message.php }}
 
-            response_code = this_data.get('1002')
+            response_code = this_data.get('1002')[0]
             response_message = this_data.get('1003')
+
             detail_response_code = this_data.get('1009')
             detail_response_message = this_data.get('1010')
 
-            if response_code=='0000':
+            if response_code == '0000':
                 auth_amount = this_data.get('1007')
                 transaction_id = this_data.get('1001')
                 auth_date = this_data.get('1005')
@@ -194,8 +248,33 @@ def payment_return_explore_view(request):
                 is_success = True
 
 
+    response_message = map( lambda x: x.decode('euc-kr'), response_message)
+    detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
+
+    payment_id=0
+
+    if is_success:
+
+        user_ = helper_get_user(request)
+
+        payment = Payment.objects.create(
+            user=user_,
+            service_id=service_id,
+            order_id=order_id,
+            order_date=order_date,
+            transaction_id=transaction_id[0],
+            auth_amount=auth_amount[0],
+            auth_date=auth_date[0],
+            response_code=response_code,
+            response_message=response_message[0],
+            detail_response_code=detail_response_code[0],
+            detail_response_message=detail_response_message[0]
+        )
+        if payment is not None:
+            payment_id = payment.id
 
     return render(request, 'return_explorer.html', {
+        'payment_id': payment_id,
         'message': message,
         'return_message': return_message,
         'is_success': is_success,
@@ -222,6 +301,13 @@ def payment_return_explore_view(request):
     #     'order_date': order_date,
     #
     # })
+
+@csrf_exempt
+def payment_complete_view(request, payment_id=0):
+    payment = Payment.objects.get(id=payment_id)
+    return render(request, 'payment_complete_web.html', {
+        'payment_amount': payment.auth_amount
+    })
 
 @csrf_exempt
 def index_view(request):

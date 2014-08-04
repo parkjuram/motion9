@@ -45,7 +45,7 @@ $(function(){
           // options
           columnWidth: 200,//parseInt(width/ 3),
           isResizeBound : false,
-          gutter : 10,
+          gutter : 20,
           itemSelector: '.product-item'
         });
     });
@@ -54,7 +54,7 @@ $(function(){
     $('.product-item').hover(function(e){
         var id = $(this).attr('data-attr');
         $(this).find('.product-hover-area').css({display:'block'});
-        $(this).find('.product-opacity-bg').animate({backgroundColor: 'black', opacity:0.7},'slow');
+        $(this).find('.product-opacity-bg').animate({backgroundColor: 'white', opacity:0.7},'slow');
         $(this).find('.product-item-info').addClass('product-expand-info-mode');
         $(this).find('.product-item-info-contents').hide();
         $(this).addClass('product-expand-mode');
@@ -62,7 +62,7 @@ $(function(){
     }, function(e){
         var hoverArea = $('.product-hover-area');
         hoverArea.css({display:'none'});
-        $(this).find('.product-opacity-bg').css({backgroundColor: 'grey', opacity : 1});
+        $(this).find('.product-opacity-bg').css({backgroundColor: 'white', opacity : 1});
         $(this).find('.product-item-info').removeClass('product-expand-info-mode');
         $(this).find('.product-item-info-contents').show();
         $(this).removeClass('product-expand-mode');

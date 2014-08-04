@@ -17,7 +17,7 @@
     <div class="main-container float-left">
         <div class="box-css">
             <div class="box-header" style="font-size: 16px;">
-                모든제품 > {{ product.brandname }} {{ product.name }}
+                {{ product.brandname }} {{ product.name }}
             </div>
             <div class="product-x-category-box">
                 카테고리 > {{ product.category_name }}
@@ -44,7 +44,8 @@
             </div>
         </div>
 
-        <div class="box-css no-shadow" style="background-color: #F3F3F3;">
+{#        <div class="box-css no-shadow" style="background-color: #F3F3F3;">#}
+        <div class="box-css no-shadow">
             <div id="product-xTabs">
                 <ul class="resp-tabs-list tab-box-menu-shadow">
                     <li>상세설명</li>
