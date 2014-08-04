@@ -11,7 +11,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands
 from .models import Product, Category, BlogReview, Set, Brand
-from users.models import CustomSet, CustomSetDetail
+from users.models import CustomSet, CustomSetDetail, Payment
 
 from subprocess import call, Popen, PIPE
 import time
@@ -234,12 +234,13 @@ def payment_return_explore_view(request):
                         this_data[tag] = vt
                 # Message.php }}
 
-            response_code = this_data.get('1002')
+            response_code = this_data.get('1002')[0]
             response_message = this_data.get('1003')
+
             detail_response_code = this_data.get('1009')
             detail_response_message = this_data.get('1010')
 
-            if response_code=='0000':
+            if response_code == '0000':
                 auth_amount = this_data.get('1007')
                 transaction_id = this_data.get('1001')
                 auth_date = this_data.get('1005')
@@ -250,7 +251,27 @@ def payment_return_explore_view(request):
     response_message = map( lambda x: x.decode('euc-kr'), response_message)
     detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
 
+    payment_id=0
+
+    if is_success:
+        payment = Payment.objects.create(
+            user=helper_get_user(request),
+            service_id=service_id,
+            order_id=order_id,
+            order_date=order_date,
+            transaction_id=transaction_id,
+            auth_amount=auth_amount,
+            auth_date=auth_date,
+            response_code=response_code,
+            response_message=response_message[0],
+            detail_response_code=detail_response_code,
+            detail_response_message=detail_response_message[0]
+        )
+        if payment is not None:
+            payment_id = payment.id
+
     return render(request, 'return_explorer.html', {
+        'payment_id': payment_id,
         'message': message,
         'return_message': return_message,
         'is_success': is_success,
@@ -279,8 +300,11 @@ def payment_return_explore_view(request):
     # })
 
 @csrf_exempt
-def payment_complete_view(request):
-    return render(request, 'payment_complete_web.html')
+def payment_complete_view(request, payment_id=0):
+    payment = Payment.objects.get(id=payment_id)
+    return render(request, 'payment_complete_web.html', {
+        'payment_amount': payment.auth_amount
+    })
 
 @csrf_exempt
 def index_view(request):

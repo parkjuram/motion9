@@ -6,7 +6,7 @@
     $(function() {
         function returnOnPaymentSuccess() {
             try {
-                window.opener.onPaymentSuccess();
+                window.opener.onPaymentSuccess(payment_id);
             } catch (err) {
                 alert(err.description || err) //or console.log or however you debug
             }
@@ -20,13 +20,14 @@
             }
         }
         var is_success = "{{ is_success }}";
+        var payment_id = "{{ payment_id }}";
 
-{#        if ( is_success == "True" ) {#}
-{#            returnOnPaymentSuccess();#}
-{#        } else {#}
-{#            returnOnPaymentFail();#}
-{#        }#}
-{#        window.close();#}
+        if ( is_success == "True" ) {
+            returnOnPaymentSuccess(payment_id);
+        } else {
+            returnOnPaymentFail();
+        }
+        window.close();
 
     });
 

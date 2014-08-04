@@ -88,3 +88,16 @@ class CustomSetDetail(models.Model):
         unique_together = (
             ("custom_set", "original_product")
         )
+
+class Payment(models.Model):
+    user = models.ForeignKey('auth.User')
+    service_id = models.CharField(max_length=20, null=True)
+    order_id = models.CharField(max_length=64, null=False, unique=True)
+    order_date = models.CharField(max_length=14, null=True)
+    transaction_id = models.CharField(max_length=20, null=True)
+    auth_amount = models.CharField(max_length=9, null=True)
+    auth_date = models.CharField(max_length=4, null=True)
+    response_code = models.CharField(max_length=4, null=True)
+    response_message = models.CharField(max_length=64, null=True)
+    detail_response_code = models.CharField(max_length=4, null=True)
+    detail_response_message = models.CharField(max_length=64, null=True)
