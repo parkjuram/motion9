@@ -42,7 +42,7 @@ def check_email_view(request):
     return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
 @csrf_exempt
-def check_facebook_token_view(request):
+def check_facebook_token_view(request, next='index'):
     token = request.POST.get('token', None)
 
     if token is None:
@@ -60,7 +60,7 @@ def check_facebook_token_view(request):
         contents_dict = json.loads(contents)
 
         if contents_dict['data']['is_valid']==True:
-            
+            return redirect(next)
         else:
             http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
 
