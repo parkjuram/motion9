@@ -41,19 +41,19 @@
                 <div class="product-item">
                     <div class="product-item-img"  id="item-{{product.id}}" data-attr="{{product.id}}">
                         <div class="product-opacity-bg product-hover-area">
-                            <a href="{% url 'product' product_id=product.id %}"><img src="{% static "img/detail.png" %}" class="icon"/></a>
+                            <a href="{% url 'product' product_id=product.id %}"><img src="{% static "img/detail_black.png" %}" class="icon"/></a>
                         </div>
                         <img src="{{product.big_img_url}}"/>
                     </div>
                     <div class="product-item-info">
-                        <div class="product-item-category">
-                            카테고리 > {{ product.category_name }}
+                        <div class="product-item-brand">
+                            {{ product.brandname }}
                         </div>
                         <div class="product-item-name">
                             <a href="{% url 'product' product_id=product.id %}" title="{{ product.name }}">{{product.name}}</a>
                         </div>
-                       <div class="product-item-info-contents">
-                           브랜드 : {{ product.brandname }}<br/>
+                        <div class="product-item-info-contents">
+                           카테고리 > {{ product.category_name }}<br/>
                            가격 : {{ product.discount_price|intcomma }}원 <br/>
                            용량 : {{ product.capacity }}
                         </div>
@@ -63,11 +63,11 @@
                             </div>
                             <div class="product-item-btn-group">
                                 {% if product.is_interested %}
-                                    <div class="product-item-btn"><img src="{% static "img/interest.png" %}"/><a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest interest-done"> 관심취소</a>&nbsp;&nbsp;</div>
+                                    <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest interest-done">관심취소</a>&nbsp;&nbsp;</div>
                                 {% else %}
-                                    <div class="product-item-btn"><img src="{% static "img/interest.png" %}"/><a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest"> 관심하기</a>&nbsp;&nbsp;</div>
+                                    <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest">관심하기</a>&nbsp;&nbsp;</div>
                                 {% endif %}
-                                <div class="product-item-btn">&nbsp;&nbsp;<img src="{% static "img/Add_to_basket.png" %}"/><a href="#" data-type='p' data-product="{{ product.id }}" class="btn-for-cart"> 장바구니</a></div>
+                                <div class="product-item-btn">&nbsp;&nbsp;<img src="{% static "img/Add_to_basket_black.png" %}"/><a href="#" data-type='p' data-product="{{ product.id }}" class="btn-for-cart"> 장바구니</a></div>
                             </div>
                         </div>
                     </div>

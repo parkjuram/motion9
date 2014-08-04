@@ -23,7 +23,7 @@ $(function(){
         var id = $(this).attr('data-attr');
         $(this).addClass('product-item-hover');
         $(this).find('.product-hover-area').css({display:'block'});
-        $(this).find('.product-opacity-bg').animate({backgroundColor:'#393939', opacity:0.7},'slow',function(){
+        $(this).find('.product-opacity-bg').animate({backgroundColor:'#212121', opacity:0.7},'slow',function(){
 
         });
 

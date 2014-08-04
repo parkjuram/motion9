@@ -1,5 +1,6 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/css?family=Muli);
 
 *{
     margin : 0;
@@ -7,7 +8,7 @@
 }
 
 body{
-	font-family: 'Nanum Gothic';
+	font-family: Muli, 'Nanum Gothic', Geneva, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
@@ -77,7 +78,7 @@ a:visited{
     z-index : 1;
     width : 100%;
     position: fixed;
-    background-color: #393939;
+    background-color: #212121;
     /*-webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);*/
     /*-moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);*/
     /*box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);*/
@@ -359,7 +360,7 @@ ol, ul {
 
 .menu-search-btn:hover{
     text-decoration: none;
-    color : #393939;
+    color : #212121;
 }
 
 .basic-btn {
@@ -370,7 +371,7 @@ ol, ul {
   border-radius: 0px;
   color: #fff;
   font-size: 12px;
-  background: #393939;
+  background: #212121;
   padding: 8px 10px;
   text-decoration: none;
 }

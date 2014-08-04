@@ -1,5 +1,6 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/css?family=Muli);
 
 a {
     color : inherit !important;
@@ -123,7 +124,7 @@ ul.custom-menu-list a.collapse-btn{
     width : 95%;
     padding : 10px 0 10px 5%;
     display : inline-block;
-    background : url('../img/down_arrow.png') 90% 50% no-repeat;
+    /*background : url('../img/down_arrow.png') 90% 50% no-repeat;*/
     background-size : 16px 12px;
 }
 
@@ -244,7 +245,7 @@ img.profile-img{
 
 
 .ui-page{
-    background-color : #F3F3F3;
+    background-color : #FCFCFC;
 }
 
 .ui-panel-wrapper{
@@ -253,7 +254,8 @@ img.profile-img{
 }
 
 body{
-	font-family: 'Nanum Gothic';
+    font-family: Muli, 'Nanum Gothic', Geneva, sans-serif;
+    _font-family: 'Nanum Gothic', Muli, Geneva, sans-serif;
 	font-size : 12px;
 	background-color : #F3F3F3;
 }
