@@ -46,8 +46,9 @@ $(function(){
           mode: 'horizontal',
           loop: false,
           calculateHeight: true,
-          pagination: '.pagination',
-          paginationClickable: true
+          noSwiping : true
+          //pagination: '.pagination',
+          //paginationClickable: true
           //etc..
       });
   });

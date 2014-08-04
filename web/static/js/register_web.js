@@ -1,7 +1,6 @@
 $(function(){
 
     var registerPageInit = function(response) {
-        console.log(response);
         if (response.status === 'connected') {
             wireDataWithForm();
         } else if (response.status === 'not_authorized') {
@@ -19,6 +18,7 @@ $(function(){
         FB.api('/me', function(response) {
 
           email.val(response.email);
+          emailCheck(email);
           name.val(response.last_name + response.first_name);
 
           if(response.gender == 'male'){
@@ -49,29 +49,33 @@ $(function(){
         window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page'+"&response_type=token&scope=public_profile,email,user_friends");
     });
 
-    $('#email').focusout(function(e){
-       var email = $(this).val();
-       if(email.length > 5 && email != ''){
-            $.ajax({
-				  url: '/user/check/email/',
-				  dataType: 'json',
-				  async : true,
-				  type:'POST',
-                  data : {email : email},
-				  success: function(data){
-					  if(data.exist == false && data.isValid == true && data.success == true){
-                          $('#joinBtn').attr('data-enable', true);
-                          $('span.warning-message').hide();
-                      }else{
-                          $('#joinBtn').attr('data-enable', false);
-                          $('span.warning-message').show();
-                      }
-				  },
-				  error:function(jqXHR, textStatus, errorThrown){
-					  console.log(textStatus);
-				  }
-		});
+    function emailCheck(el){
+       var email = el.val();
+       if(email.length > 5 && email != '') {
+           $.ajax({
+               url: '/user/check/email/',
+               dataType: 'json',
+               async: true,
+               type: 'POST',
+               data: {email: email},
+               success: function (data) {
+                   if (data.exist == false && data.isValid == true && data.success == true) {
+                       $('#joinBtn').attr('data-enable', true);
+                       $('span.warning-message').hide();
+                   } else {
+                       $('#joinBtn').attr('data-enable', false);
+                       $('span.warning-message').show();
+                   }
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   console.log(textStatus);
+               }
+           });
        }
+    }
+
+    $('#email').focusout(function(e){
+       emailCheck($(this));
     });
 
 

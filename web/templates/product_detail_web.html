@@ -50,10 +50,23 @@
                 <ul class="resp-tabs-list tab-box-menu-shadow">
                     <li>상세설명</li>
                     <li style="margin-left: -1px;">상품정보고시</li>
+                    <li style="margin-left: -1px;">배송문의</li>
                 </ul>
 
                 <div class="resp-tabs-container tab-box-shadow">
-                    <div> {{ product.description }}</div>
+                    <div>
+                        <div class="product-detail-info-wrapper">
+                            <div class="product-detail-info-header">상품특징</div>
+                            <div class="product-detail-info">
+                                {{ product.description }}
+                            </div>
+                        </div>
+                        <div class="product-detail-info-wrapper">
+                            <div class="product-detail-info-header">사용방법</div>
+                            <div class="product-detail-info">{{ product.description2 }}</div>
+                        </div>
+
+                    </div>
                     <div>
                         <table class="product-info-table">
                             <tr>
@@ -100,6 +113,9 @@
                                 <td>02-871-4510</td>
                             </tr>
                         </table>
+                    </div>
+                    <div>
+                        배송문의
                     </div>
                 </div>
             </div>

@@ -46,8 +46,8 @@ $(function(){
           loop: false,
           calculateHeight: true,
           pagination: '.pagination',
-          createPagination: false,
-          paginationClickable: false,
+          //createPagination: false,
+          //paginationClickable: false,
           noSwiping: true
           //etc..
       });

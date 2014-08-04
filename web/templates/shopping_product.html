@@ -30,17 +30,17 @@
     </div>
     <div class="select-wrapper">
         <select id="subCategoryList" class="sub-category-list show-sub-category" data-mini="true" data-inline="true" data-shadow="false">
-            <option  {% if current_category_id == 1 %} selected="selected" {% endif %}  value="1">스킨</option>
-            <option  {% if current_category_id == 2 %} selected="selected" {% endif %} value="2">로션</option>
-            <option  {% if current_category_id == 4 %} selected="selected" {% endif %} value="4">선크림, BB크림</option>
-            <option  {% if current_category_id == 5 %} selected="selected" {% endif %} value="5">에센스</option>
-            <option  {% if current_category_id == 14 %} selected="selected" {% endif %} value="14">수분크림, 아이크림</option>
-            <option  {% if current_category_id == 16 %} selected="selected" {% endif %} value="16">스페셜케어</option>
-            <option  {% if current_category_id == 3 %} selected="selected" {% endif %} value="3">클렌징, 스크럽</option>
-            <option  {% if current_category_id == 17 %} selected="selected" {% endif %} value="17">메이크업</option>
-            <option  {% if current_category_id == 24 %} selected="selected" {% endif %} value="24">바디</option>
-            <option  {% if current_category_id == 22 %} selected="selected" {% endif %} value="22">헤어</option>
-            <option  {% if current_category_id == 25 %} selected="selected" {% endif %} value="25">향수</option>
+            <option  {% if current_category_id == '1' %} selected="selected" {% endif %}  value="1">스킨</option>
+            <option  {% if current_category_id == '2' %} selected="selected" {% endif %} value="2">로션</option>
+            <option  {% if current_category_id == '4' %} selected="selected" {% endif %} value="4">선크림, BB크림</option>
+            <option  {% if current_category_id == '5' %} selected="selected" {% endif %} value="5">에센스</option>
+            <option  {% if current_category_id == '14' %} selected="selected" {% endif %} value="14">수분크림, 아이크림</option>
+            <option  {% if current_category_id == '16' %} selected="selected" {% endif %} value="16">스페셜케어</option>
+            <option  {% if current_category_id == '3' %} selected="selected" {% endif %} value="3">클렌징, 스크럽</option>
+            <option  {% if current_category_id == '17' %} selected="selected" {% endif %} value="17">메이크업</option>
+            <option  {% if current_category_id == '24' %} selected="selected" {% endif %} value="24">바디</option>
+            <option  {% if current_category_id == '22' %} selected="selected" {% endif %} value="22">헤어</option>
+            <option  {% if current_category_id == '25' %} selected="selected" {% endif %} value="25">향수</option>
         </select>
 
     </div>
@@ -74,16 +74,29 @@
       {% if not products.page_hasPrev %}
           <li class="disabled"><a href="#" data-ajax="false" class="previous" onClick="javascript:return false;">Prev</a></li>
       {% else %}
-          <li><a  data-ajax="false" href="{% url 'mobile_shop_product' page_num=products.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+          {% if current_category_id != null %}
+            <li><a  data-ajax="false" href="{% url 'mobile_shop_product' page_num=products.page_left_count|sub:1 category_id=current_category_id%}" class="previous">Prev</a></li>
+          {% else %}
+            <li><a  data-ajax="false" href="{% url 'mobile_shop_product' page_num=products.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+          {% endif %}
       {% endif %}
 
       {% for pageNum in products.page_range %}
-        <li {% if pageNum == products.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_shop_product' page_num=pageNum %}" >{{ pageNum  }}</a></li>
+
+         {% if current_category_id != null %}
+            <li {% if pageNum == products.page_num %} class="active" {% endif %}><a href="{% url 'mobile_shop_product' page_num=pageNum category_id=current_category_id%}" data-ajax="false">{{ pageNum  }}</a></li>
+         {% else %}
+            <li {% if pageNum == products.page_num %} class="active" {% endif %}><a href="{% url 'mobile_shop_product' page_num=pageNum%}" data-ajax="false">{{ pageNum  }}</a></li>
+         {% endif %}
       {% endfor %}
       {% if not products.page_hasNext  %}
         <li class="disabled"><a data-ajax="false"  href="#" class="next" onClick="javascript:return false;">Next</a></li>
       {% else %}
-        <li><a data-ajax="false"  href="{% url 'mobile_shop_product' page_num=products.page_right_count|add:1 %}" class="next">Next</a></li>
+          {% if current_category_id != null %}
+            <li><a data-ajax="false"  href="{% url 'mobile_shop_product' page_num=products.page_right_count|add:1 category_id=current_category_id %}" class="next">Next</a></li>
+          {% else %}
+            <li><a data-ajax="false"  href="{% url 'mobile_shop_product' page_num=products.page_right_count|add:1%}" class="next">Next</a></li>
+          {% endif %}
       {% endif %}
 
     </ul>
