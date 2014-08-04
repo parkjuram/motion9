@@ -98,6 +98,6 @@ class Payment(models.Model):
     auth_amount = models.CharField(max_length=9, null=True)
     auth_date = models.CharField(max_length=4, null=True)
     response_code = models.CharField(max_length=4, null=True)
-    response_message = models.CharField(max_length=64, null=True)
+    response_message = models.TextField(null=False, blank=True, default='')
     detail_response_code = models.CharField(max_length=4, null=True)
-    detail_response_message = models.CharField(max_length=64, null=True)
+    detail_response_message = models.TextField(null=False, blank=True, default='')
