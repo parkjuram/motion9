@@ -139,7 +139,7 @@
 </div>
 
 <div id="loginBox" class="login-box">
-    <form id="facebookLoginForm" method="post" action="{% url 'check_facebook_token' next=next %}">
+    <form id="facebookLoginForm" method="post" action="{% url 'check_facebook_token' next=request.get_full_path %}">
         <input type="hidden" id="fbToken" name="token"/>
     </form>
     <div class="login-box-header">
