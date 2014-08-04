@@ -2,15 +2,6 @@
  * Created by Park-Kunbae on 14. 4. 10.
  */
 
-
-function onPaymentSuccess(payment_id) {
-    window.location.replace( url_payment_complete + "?payment_id=" + payment_id );
-}
-
-function onPaymentFail() {
-    alert("payment fail!!!");
-}
-
 $(function(){
 
     var element = document.getElementById('addressLayer');

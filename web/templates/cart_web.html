@@ -6,7 +6,17 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script src="{% static 'js/cart_web.js'%}"></script>
 <script type="text/javascript">
-    var url_payment_complete = "{% url 'payment_complete' %}";
+
+
+    function onPaymentSuccess(payment_id) {
+        var url_payment_complete = "{% url 'payment_complete' payment_id=payment_id %}";
+        window.location.replace( url_payment_complete );
+    }
+
+    function onPaymentFail() {
+        alert("payment fail!!!");
+    }
+
 </script>
 {% endblock %}
 {% block content %}
