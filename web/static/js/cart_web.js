@@ -4,7 +4,7 @@
 
 
 function onPaymentSuccess(payment_id) {
-    window.location.replace( url_payment_complete + "?payment_id" + payment_id );
+    window.location.replace( url_payment_complete + "?payment_id=" + payment_id );
 }
 
 function onPaymentFail() {

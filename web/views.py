@@ -265,7 +265,7 @@ def payment_return_explore_view(request):
             auth_date=auth_date[0],
             response_code=response_code,
             response_message=response_message[0],
-            detail_response_code=detail_response_code,
+            detail_response_code=detail_response_code[0],
             detail_response_message=detail_response_message[0]
         )
         if payment is not None:
