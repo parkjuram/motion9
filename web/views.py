@@ -409,7 +409,7 @@ def product_view(request, product_id=None):
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
         blog_reivews = helper_get_blog_reviews(product_id)
-        magazines
+        # magazines
 
         return render(request, "product_detail_web.html",
                       {
