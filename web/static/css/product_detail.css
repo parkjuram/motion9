@@ -276,3 +276,18 @@ a:visited{
     background-color: #ffffff;
     text-align: center;
 }
+
+
+.product-detail-info-wrapper{
+    padding : 12px 14px;
+}
+
+.product-detail-info-header{
+    font-size: 14px;
+    margin-bottom : 12px;
+}
+
+.product-detail-info{
+    color : #6e6e6e;
+    line-height: 22px;
+}

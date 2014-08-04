@@ -77,7 +77,6 @@ $(function(){
 
 
     function fbLoginCallback(response) {
-        console.log(response);
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
             //testAPI();

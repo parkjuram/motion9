@@ -104,7 +104,16 @@
         {% endfor %}
     </div>
     <div class="tab-content" id="productInfo">
-        상품 정보 ㅋㅋㅋ
+        <div class="product-detail-info-wrapper">
+            <div class="product-detail-info-header">상품특징</div>
+            <div class="product-detail-info">
+                {{ product.description }}
+            </div>
+        </div>
+        <div class="product-detail-info-wrapper">
+            <div class="product-detail-info-header">사용방법</div>
+            <div class="product-detail-info">{{ product.description2 }}</div>
+        </div>
     </div>
     <div class="tab-content" id="productRule">
         <table class="product-info-table">
