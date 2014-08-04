@@ -253,7 +253,7 @@ def mypage_cart_view(request):
         'using_type': using_type,
         'currency': currency,
         'item_name': item_name,
-        'amount': amount[0],
+        'amount': amount,
         'user_ip': user_ip,
         'installment_period': installment_period,
         'return_url': return_url,

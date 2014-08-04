@@ -261,7 +261,7 @@ def payment_return_explore_view(request):
             order_id=order_id,
             order_date=order_date,
             transaction_id=transaction_id[0],
-            auth_amount=auth_amount,
+            auth_amount=auth_amount[0],
             auth_date=auth_date[0],
             response_code=response_code,
             response_message=response_message[0],
