@@ -325,6 +325,7 @@ def index_view(request):
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
+                      'next': 'index'
                   })
 
 @csrf_exempt
