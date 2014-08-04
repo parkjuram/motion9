@@ -114,7 +114,6 @@ a.basic-btn{
 .belong-product-img{
     width : 84px;
     float: left;
-    margin-left: 12px;
 }
 
 .belong-product-img img{
@@ -170,7 +169,7 @@ a.basic-btn{
 }
 
 .belong-to-set-item:hover{
-    outline : 3px solid #d2bb8f;
+    outline : 2px solid #212121;
 }
 
 .product-hover-area{
@@ -178,7 +177,7 @@ a.basic-btn{
 }
 
 .product-opacity-bg{
-    background-color: black;
+    background-color: white;
     position: absolute;
     top :0;
     left : 0;
@@ -189,8 +188,8 @@ a.basic-btn{
 
 .product-opacity-bg .icon{
     position: absolute;
-    width : 90px;
-    height : 68px;
+    width : 80px;
+    height : 80px;
     left: 100px;
     top : 12px;
 }

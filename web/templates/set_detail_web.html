@@ -112,7 +112,7 @@
     <div class="nav-container float-left">
         <div class="box-css">
             <div class="box-header">
-                The Motion9
+                Motion9
             </div>
             <div style="padding : 30px 10px 20px 20px;">
                 {% if set.is_interested %}
@@ -153,11 +153,11 @@
            <div class="box-header">
                세트 구성
            </div>
-           <div class="col-xs-12" style="padding-top: 4px; padding-bottom: 8px; ">
+           <div class="col-xs-12" style="padding-top: 4px; padding-bottom: 8px; padding-left: 12px">
            {% for product in set.products %}
                <div class="belong-to-set-item">
                    <div class="product-opacity-bg product-hover-area">
-                       <a href="/product/{{ product.id }}/modal" class="view-product-detail-btn" data-product="{{ product.id }}"><img src="{% static 'img/detail.png'%}" class="icon"/></a>
+                       <a href="/product/{{ product.id }}/modal" class="view-product-detail-btn" data-product="{{ product.id }}"><img src="{% static 'img/detail_black.png'%}" class="icon"/></a>
                    </div>
                    <div class="belong-product-img">
                        <img src="{{ product.big_img_url }}" alt="" />
