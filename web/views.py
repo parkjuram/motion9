@@ -11,7 +11,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands
 from .models import Product, Category, BlogReview, Set, Brand
-from users.models import CustomSet, CustomSetDetail, Payment
+from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase
 
 from subprocess import call, Popen, PIPE
 import urllib
@@ -283,6 +283,10 @@ def payment_return_openbrowser_view(request):
             detail_response_code=detail_response_code[0],
             detail_response_message=detail_response_message[0]
         )
+        # carts = Cart.objects.filter(order_id=order_id).all()
+        # for cart in carts:
+        #     Purchase
+
         if payment is not None:
             payment_id = payment.id
 
