@@ -104,7 +104,7 @@ class Set(models.Model):
                % (self.id, self.name)
 
     def __str__(self):
-        return unicode(self).encode('utf-8')
+        return unicode(self)
 
 class SetDescriptionImage(models.Model):
     set = models.ForeignKey(Set)

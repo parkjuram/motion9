@@ -79,6 +79,11 @@ class CustomSet(models.Model):
         unique_together = (
             ("user", "set"))
 
+    def __unicode__(self):
+        return '(%r)CustomSet : user(%s) set(%s) is_active(%s)' % (self.id, self.user, self.set, self.is_active)
+        # return '(%r)Brand : name_eng(%s) name_kor(%s) is_domestic(%r)' \
+        #        % (self.id, self.name_eng, self.name_kor, self.is_domestic)
+
 class CustomSetDetail(models.Model):
     custom_set = models.ForeignKey('users.CustomSet')
     original_product = models.ForeignKey('web.Product', related_name='get_custom_set_detail_from_original_product')

@@ -480,20 +480,25 @@ def customize_set_detail_view(request, set_id):
 def customize_set_save_view(request):
     user = helper_get_user(request)
     data = request.POST.get('data', None)
+
+    print data
+
     post_json = json.loads(data)
     set_id = post_json.get('set_id')
-    print set_id
     custom_list = post_json.get('custom_lists')
 
     if set_id is None:
         return HttpResponse('is error')
 
     if user is not None:
-        custom_set, is_created = CustomSet.objects.get_or_create(user=user, set_id = set_id)
+        custom_set, is_created = CustomSet.objects.get_or_create(user=user, set_id=set_id)
         for custom_item in custom_list:
             original_id = custom_item.get('original_id')
             new_id = custom_item.get('new_id')
-            CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_id, new_product_id=new_id)
+            if CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_id).exists():
+                CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_id).update(new_product=new_id)
+            else:
+                CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_id, new_product_id=new_id)
         return http_response_by_json()
     else:
         return http_response_by_json(CODE_LOGIN_REQUIRED)
