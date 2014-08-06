@@ -1,5 +1,6 @@
 {% extends "mypage_purchase_web.html" %}
 {% load humanize %}
+{% load mathfilters %}
     {% block purchaseTab %}
     <ul class="purchase-tab">
         <li><a href="{% url 'mypage_purchase_product' %}">단품 구매목록</a></li>
@@ -12,9 +13,8 @@
         <thead>
             <tr>
                 <th style="width : 100px;">구매내역</th>
-                <th  style="width : 77px;"></th>
-                <th style="width : 260px;">상품명</th>
-                <th style="width : 73px;">금액</th>
+                <th style="width : 200px;">상품명</th>
+                <th style="width : 53px;">금액</th>
                 <th colspan="2" >진행 상태</th>
             </tr>
         </thead>
@@ -33,7 +33,7 @@
 
                 </td>
                 <td style="width : 50px;">
-                    {{ shipping_status }}
+                    {{ item.shipping_status }}
                 </td>
                 <td style=" width : 80px;">
                     <div style="padding : 8px;">

@@ -78,12 +78,12 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="product-price price-saled">판매가 : <span>{{ custom_set.discount_price|intcomma }}원</span></div>
+                <div class="product-price price-saled">판매가 : <span  id="productPrice">{{ custom_set.discount_price|intcomma }}</span>원</div>
                 <div class="product-price price-total">
-                    총 상품 금액 : {{ custom_set.discount_price|intcomma }}원
+                    총 상품 금액 : <span id="productFinalPrice">{{ custom_set.discount_price|intcomma }}</span>원
                 </div>
                 <div class="product-btn-area">
-                    <a href="#" class="basic-btn">구매하기</a>
+                    <a href="#"  data-product="{{ custom_set.id }}" data-type="c" data-mobile="false" class="basic-btn btn-for-purchase">구매하기</a>
                     <a href="#" data-product="{{ custom_set.id }}" data-type="c" class="basic-btn btn-for-cart">장바구니</a>
                 </div>
             </div>
