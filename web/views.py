@@ -124,7 +124,7 @@ def payment_pay_explore_view(request):
 
 
 @csrf_exempt
-def payment_return_openbrowser(request):
+def payment_return_openbrowser_view(request):
 
     is_success = None
     service_id = None
