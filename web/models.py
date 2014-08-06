@@ -36,6 +36,7 @@ class Product(models.Model):
     fit_skin_type = models.CharField(max_length=30, blank=True)
 
     thumbnail_image = models.ImageField(null=True, upload_to='product/')
+    thumbnail_text = models.CharField(max_length=30, blank=True)
     video_url = models.URLField(blank=True)
     brand = models.ForeignKey(Brand)
     brandname = models.CharField(max_length=30, blank=True)
