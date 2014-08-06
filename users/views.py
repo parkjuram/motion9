@@ -365,7 +365,7 @@ def mypage_purchase_set_view(request, page_num=1):
         sets = []
         for purchase in purchases:
             set = purchase.set
-            set_ = helper_get_product_detail(set, user)
+            set_ = helper_get_set(set, user)
             set_.update({
                 'item_count':purchase.item_count,
                 'status':helpger_get_purchase_status(purchase.status),
