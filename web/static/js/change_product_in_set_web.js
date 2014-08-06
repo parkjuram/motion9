@@ -103,7 +103,7 @@ $(function(){
 				  type:'POST',
 				  success: function(data){
                       var result = data;
-					  if(result == 'success'){
+					  if(result['success'] == true){
                           if(addToCart)
                             alert('장바구니에 추가 되었습니다.');
                           else
@@ -131,6 +131,6 @@ $(function(){
     });
 
 
-   $(window).scroll(fixDiv);
-   fixDiv();
+   //$(window).scroll(fixDiv);
+   //fixDiv();
 });

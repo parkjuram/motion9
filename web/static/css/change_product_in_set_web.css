@@ -194,7 +194,7 @@
 #originProductWrapper{
     width : 300px;
     font-size: 12px;
-    z-index: 99;
+    /*z-index: 99;*/
 }
 
 .set-final-price-box{
