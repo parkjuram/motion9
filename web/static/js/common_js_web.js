@@ -80,8 +80,13 @@ $(function(){
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
             //testAPI();
-            $('#fbToken').val(response.authResponse.accessToken);
-            $('#facebookLoginForm').submit();
+            FB.api('/me', function(user_info) {
+                $('#fbEmail').val(user_info.email);
+                $('#fbToken').val(response.authResponse.accessToken);
+                $('#facebookLoginForm').submit();
+            });
+
+
 
         } else if (response.status === 'not_authorized') {
 
