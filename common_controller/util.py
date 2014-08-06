@@ -392,7 +392,7 @@ def helper_get_cart_items(user, order_id=None):
         for custom_set_cart in custom_set_carts:
             custom_set = custom_set_cart.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
-            custom_set_['item_count'] = custom_set_cart.item_count
+            custom_set_['item_count'] = custom_set_cart.item_counts
             custom_set_['total_price'] = int(custom_set_['discount_price'])*custom_set_cart.item_count
             total_price += custom_set_['total_price']
             custom_sets.append(custom_set_)
