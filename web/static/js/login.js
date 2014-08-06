@@ -62,7 +62,11 @@ $(function(){
         FB.getLoginStatus(fbLoginCallback);
     });
 
-
+    $('.login-box, .login-form').keypress(function(e){
+        if(e.keyCode == 13){
+            $(this).find('form').submit();
+        }
+    });
 
     $('#loginBtn').click(function(e){
         e.preventDefault();

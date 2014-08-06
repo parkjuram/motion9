@@ -12,8 +12,8 @@
         </form>
         <form method="post" action="{% url "login" next=next %}" data-ajax="false">
 
-            <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true" placeholder="이메일">
-            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true" placeholder="비밀번호">
+            <input type="text" class="login-form" name="email" id="name" value="" data-clear-btn="true" data-mini="true" placeholder="이메일">
+            <input type="password" class="login-form" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true" placeholder="비밀번호">
             <div>
                 <div style="margin : 20px 0px; text-align : center;">
                     <a href="#" class="gold-btn" id="loginBtn" style="width : 44%; display:inline-block; margin-right : 4%;padding : 14px 2%;">로그인</a><a href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;" class="fb-login-btn facebook-btn">페이스북 로그인</a>
