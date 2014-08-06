@@ -9,18 +9,18 @@
 {% block detail %}
 <div>
 {% if purchases|length > 0 %}
-  {% for product in purchases %}
+  {% for item in purchases.data %}
     <ul class="custom-menu-list">
         <li>
             <div class="purchase-item-wrapper">
 
                 <div class="purchase-item-img">
-                    <img src="{{ product.big_img_url }}"/>
+                    <img src="{{ item.small_img_url }}"/>
                 </div>
                 <div class="purchase-item-info">
-                    2014.05.05 <span class="shipment-status-ok">배송 완료</span><br/>
-                    {{ product.name }}<br/>
-                    <b>{{ product.discount_price|intcomma }}원</b>
+                    {{ item.created }} <span class="shipment-status-ok">{{ item.status }}</span><br/>
+                    {{ item.brandname }} {{ item.name }}<br/>
+                    <b>{{ item.price|intcomma }}원</b>
                 </div>
                 <div class="purchase-item-btn">
                     <a href="#" class="gold-btn">배송조회</a>

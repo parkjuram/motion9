@@ -1,5 +1,6 @@
 {% extends "mypage_purchase_web.html" %}
 {% load humanize %}
+{% load mathfilters %}
     {%block purchaseTab %}
     <ul class="purchase-tab">
         <li class="active">단품 구매목록</li>
@@ -19,16 +20,18 @@
             </tr>
         </thead>
         <tbody>
-        {% for item in data%}
+        {% for item in purchases.data%}
             <tr>
                 <td>
-                    2014.05.12<br/>{{ item.shipping_number }}
+                    {{ item.created }}<br/>{{ item.shipping_number }}
                 </td>
                 <td style="text-align: left;">
                     <a href="{% url 'product' product_id=item.id %}">{{ item.brandname }} {{item.name  }}</a>
                 </td>
                 <td>
-                    {{item.discount_price|intcomma}}원 x {{ item.item_count }}
+                    {{item.discount_price|intcomma}}원 x {{ item.item_count }}<br/>
+                    {{ item.price|intcomma }}원
+
                 </td>
                 <td style="width : 50px;">
                     {{ shipping_status }}
@@ -47,5 +50,22 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="paging-area">
+        <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
+          {% if not item.page_hasPrev %}
+              <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
+          {% else %}
+              <li><a href="{% url 'mypage_purchase_product' page_num=item.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+          {% endif %}
+          {% for pageNum in item.page_range %}
+              <li><a href="{% url 'mypage_purchase_product' page_num=pageNum%}" {% if pageNum == item.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+          {% endfor %}
+          {% if not item.page_hasNext  %}
+            <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
+          {% else %}
+            <li><a href="{% url 'mypage_purchase_product' page_num=item.page_right_count|add:1 %}" class="next">Next</a></li>
+          {% endif %}
+        </ul>
+    </div>
     {% endblock %}
 
