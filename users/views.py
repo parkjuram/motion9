@@ -72,6 +72,7 @@ def registration(request, next='index'):
     email = request.POST.get('email')
     password = request.POST.get('password')
     password_confirm = request.POST.get('password_confirm')
+    sex = request.POST.get('sex')
 
     if User.objects.filter(email=email).exists():
         return HttpResponse('already exist email')
@@ -80,6 +81,7 @@ def registration(request, next='index'):
         try:
             user = User.objects.create_user(username=email, email=email, password=password)
             user.profile.name=name
+            user.profile.sex=sex
             user.profile.save()
         except ValueError as e:
             logger.error(e)
@@ -108,7 +110,7 @@ def mobile_registration_view(request):
     return render(request, 'register.html')
 
 @csrf_exempt
-def login(request, next='index'):
+def login_(request, next='index'):
     email = request.POST.get('email')
     password = request.POST.get('password')
 
@@ -136,8 +138,8 @@ def login_view(request):
         })
 
 @csrf_exempt
-def logout_(request):
-    next = request.GET.get('next', 'index' )
+def logout_(request, next='index'):
+    # next = request.GET.get('next', 'index' )
     logout(request)
     return redirect( next )
 

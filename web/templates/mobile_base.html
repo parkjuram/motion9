@@ -101,7 +101,7 @@
                     <a href="{% url "mobile_customize_set" %}" data-ajax="false">My Collection</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}" data-ajax="false">Logout</a></li>
+                    <li><a href="{% url 'logout' next='mobile_index' %}" data-ajax="false">Logout</a></li>
                 {% endif %}
             </ul>
         </div>

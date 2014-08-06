@@ -13,10 +13,11 @@ urlpatterns = patterns('',
 
     url(r'^mobile/registration_page/$', 'users.views.mobile_registration_view', name='mobile_registration_page'),
 
-    url(r'^login/$', 'users.views.login', name='login'),
-    url(r'^login/(?P<next>(\w+))/$', 'users.views.login', name='login'),
+    url(r'^login/$', 'users.views.login_', name='login'),
+    url(r'^login/(?P<next>(\w+))/$', 'users.views.login_', name='login'),
     url(r'^login_page/$', 'users.views.login_view', name='login_page'),
     url(r'^logout/$', 'users.views.logout_', name='logout'),
+    url(r'^logout/(?P<next>(\w+))/$', 'users.views.logout_', name='logout'),
     url(r'^update/$', 'users.views.update', name='update'),
 
     url(r'^mypage/$', 'users.views.mypage_view', name='mypage'),

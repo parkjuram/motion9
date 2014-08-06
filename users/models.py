@@ -9,10 +9,10 @@ class UserProfile(models.Model):
     name = models.TextField(null=False, blank=True, default='')
     phone = models.TextField(null=False, blank=True, default='')
     address = models.TextField(null=False, blank=True, default='')
-    sex = models.CharField(max_length=1, null=True)
-    age = models.IntegerField(null=True)
-    skin_type = models.CharField(max_length=100, null=True)
-    skin_color = models.CharField(max_length=10, null=True)
+    sex = models.CharField(max_length=1, null=True, blank=True)
+    age = models.IntegerField(null=True, blank=True)
+    skin_type = models.CharField(max_length=100, null=True, blank=True)
+    skin_color = models.CharField(max_length=10, null=True, blank=True)
     mileage = models.IntegerField(null=False, default=0)
 
 def create_user_profile(sender, instance, created, **kwargs):
