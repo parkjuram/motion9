@@ -341,7 +341,7 @@ def mypage_purchase_product_view(request, page_num=1):
         else:
             products = {'data':products}
 
-        return HttpResponse(json.dumps(products, ensure_ascii=False), content_type="application/json; charset=utf-8")
+        # return HttpResponse(json.dumps(products, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
         return render(request, 'mypage_purchase_product_web.html',
             {
