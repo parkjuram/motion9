@@ -44,6 +44,7 @@ def check_email_view(request):
 @csrf_exempt
 def check_facebook_token_view(request, next='index'):
     token = request.POST.get('token', None)
+    email = request.POST.get('email', None)
 
     if token is None:
         http_response_by_json( const.CODE_PARAMS_WRONG )
@@ -60,7 +61,9 @@ def check_facebook_token_view(request, next='index'):
         contents_dict = json.loads(contents)
 
         if contents_dict['data']['is_valid']==True:
-            # auth_login(request, user)
+            print email
+            user_ = User.objects.get(username=email)
+            auth_login(request, user_)
             return redirect(next)
         else:
             http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
@@ -320,6 +323,7 @@ def mypage_purchase_view(request, page_num=1):
                 'tab_name':'purchase'
             })
 
+@csrf_exempt
 @login_required
 def mypage_purchase_product_view(request, page_num=1):
     page_num = int(page_num)
@@ -336,6 +340,8 @@ def mypage_purchase_product_view(request, page_num=1):
             products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
         else:
             products = {'data':products}
+
+        return HttpResponse(json.dumps(products, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
         return render(request, 'mypage_purchase_product_web.html',
             {

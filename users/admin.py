@@ -23,6 +23,12 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin)
 
+class PurchaseAdmin(admin.ModelAdmin):
+    list_display = ('user', 'payment', 'price', 'address', 'product', 'set', 'custom_set', 'type', 'item_count', 'status', 'shipping_number', 'created')
+    list_editable = ('price', 'address', 'type', 'item_count', 'status', 'shipping_number',)
+    list_display_links = ('user', 'payment', 'product', 'set', 'custom_set',)
+
+admin.site.register(Purchase, PurchaseAdmin)
+
 admin.site.register(Interest)
 admin.site.register(Cart)
-admin.site.register(Purchase)
