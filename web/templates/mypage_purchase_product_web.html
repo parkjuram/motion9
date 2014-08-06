@@ -19,19 +19,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for product in purchases.data%}
+        {% for item in data%}
             <tr>
                 <td>
-                    2014.05.12<br/>23423a6362cd
+                    2014.05.12<br/>{{ item.shipping_number }}
                 </td>
                 <td style="text-align: left;">
-                    <a href="{% url 'product' product_id=product.id %}">{{product.name  }}</a>
+                    <a href="{% url 'product' product_id=item.id %}">{{ item.brandname }} {{item.name  }}</a>
                 </td>
                 <td>
-                    {{product.discount_price|intcomma}}원
+                    {{item.discount_price|intcomma}}원 x {{ item.item_count }}
                 </td>
                 <td style="width : 50px;">
-                    배송 완료
+                    {{ shipping_status }}
                 </td>
                 <td style=" width : 80px;">
                     <div style="padding : 8px;">
