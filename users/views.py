@@ -221,7 +221,8 @@ def mypage_cart_view(request):
     user_ = helper_get_user(request)
 
     # testing option
-    service_id = 'glx_api'
+    # service_id = 'glx_api'
+    service_id = 'M1406684'
     order_date = current_datetime
     order_id = 'motion9_' + current_datetime
     user_id = user_.username

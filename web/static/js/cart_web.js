@@ -120,7 +120,7 @@ $(function(){
 
     //                test payemnt url : http://tpay.billgate.net/credit/certify.jsp
     //                real payemnt url : https://pay.billgate.net/credit/certify.jsp
-            payment_form.action = "http://tpay.billgate.net/credit/certify.jsp";
+            payment_form.action = "https://pay.billgate.net/credit/certify.jsp";
 
             var popup_option ="width=500,height=477,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,left=150,top=150";
             var popup_object = window.open("about:blank", "payment", popup_option);
@@ -157,8 +157,8 @@ $(function(){
             plugin.CHECK_SUM            = payment_form.CHECK_SUM.value;                                   
 
             //결제페이지 URL
-            plugin.CERTIFY_URL          = "http://tpay.billgate.net/credit/certify.jsp";    //TEST
-            //plugin.CERTIFY_URL          = "https://pay.billgate.net/credit/certify.jsp";    //REAL
+//            plugin.CERTIFY_URL          = "http://tpay.billgate.net/credit/certify.jsp";    //TEST
+            plugin.CERTIFY_URL          = "https://pay.billgate.net/credit/certify.jsp";    //REAL
 
             ////// 수정 불가(필수 파라메터) //////////////////////
 
