@@ -35,8 +35,8 @@ class MagazineAdmin(admin.ModelAdmin):
 admin.site.register(Magazine, MagazineAdmin)
 
 class ProductMagazineAdmin(admin.ModelAdmin):
-    list_display = ('product', 'magazine', 'year', 'month', 'link')
-    list_editable = ('year', 'month', 'link',)
+    list_display = ('product', 'magazine', 'year', 'month', 'title', 'author', 'link')
+    list_editable = ('year', 'month', 'title', 'author', 'link',)
     list_display_links = ('product', 'magazine')
 
 admin.site.register(ProductMagazine, ProductMagazineAdmin)
