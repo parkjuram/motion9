@@ -235,6 +235,7 @@ def mypage_cart_view(request):
     else:
         user_ip = request.META.get('REMOTE_ADDR')
     return_url = request.build_absolute_uri(reverse('payment_return_explore'))
+    return_openbrowser_url = request.build_absolute_uri(reverse('payment_return_openbrowser'))
     using_type='0000'
     currency='0000'
     installment_period='0:3'
@@ -262,6 +263,7 @@ def mypage_cart_view(request):
         'user_ip': user_ip,
         'installment_period': installment_period,
         'return_url': return_url,
+        'return_openbrowser_url': return_openbrowser_url,
         'check_sum': checksum
     }
 

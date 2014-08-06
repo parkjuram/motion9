@@ -153,7 +153,7 @@ $(function(){
             plugin.DIRECT_USE           = '0000';
             plugin.AMOUNT               = payment_form.AMOUNT.value;
             plugin.INSTALLMENT_PERIOD   = payment_form.INSTALLMENT_PERIOD.value;
-            plugin.RETURN_URL           = payment_form.RETURN_URL.value;
+            plugin.RETURN_URL           = payment_form.RETURN_OPENBROWSER_URL.value;
             plugin.CHECK_SUM            = payment_form.CHECK_SUM.value;                                   
 
             //결제페이지 URL
