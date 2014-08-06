@@ -53,6 +53,7 @@ class Cart(models.Model):
 
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
+    payment = models.ForeignKey('users.Payment')
     price = models.IntegerField(null=False, default=0)
     address = models.TextField(null=False, blank=True)
     product = models.ForeignKey('web.Product',null=True, blank=True)
@@ -60,7 +61,7 @@ class Purchase(models.Model):
     custom_set = models.ForeignKey('users.CustomSet',null=True, blank=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
-    status = models.CharField(max_length=1, null=False, default='r')
+    status = models.CharField(max_length=1, null=False, default='b') # before, ready, ship, finish
     shipping_number = models.TextField(null=False, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
@@ -107,13 +108,4 @@ class Payment(models.Model):
     response_message = models.TextField(null=False, blank=True, default='')
     detail_response_code = models.CharField(max_length=4, null=True)
     detail_response_message = models.TextField(null=False, blank=True, default='')
-    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
-
-class PurchaseHistory(models.Model):
-    user = models.ForeignKey('auth.User')
-    payment = models.ForeignKey('users.Payment')
-    type = models.CharField(max_length=1, null=False, default='p')
-    title = models.CharField(max_length=100)
-    auth_amount = models.CharField(max_length=9, null=True)
-    status = models.CharField(max_length=1, null=False, default='r')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
