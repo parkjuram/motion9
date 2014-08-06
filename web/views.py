@@ -286,22 +286,24 @@ def payment_return_openbrowser_view(request):
         if payment is not None:
             payment_id = payment.id
 
-    return render(request, 'return_explorer.html', {
-        'payment_id': payment_id,
-        'message': message,
-        'return_message': return_message,
-        'is_success': is_success,
-        'service_id': service_id,
-        'order_id': order_id,
-        'order_date': order_date,
-        'transaction_id': transaction_id,
-        'auth_amount': auth_amount,
-        'auth_date': auth_date,
-        'response_code': response_code,
-        'response_message': response_message,
-        'detail_response_code': detail_response_code,
-        'detail_response_message': detail_response_message
-    })
+    return redirect('payment_complete', payment_id=payment_id )
+
+    # return render(request, 'return_explorer.html', {
+    #     'payment_id': payment_id,
+    #     'message': message,
+    #     'return_message': return_message,
+    #     'is_success': is_success,
+    #     'service_id': service_id,
+    #     'order_id': order_id,
+    #     'order_date': order_date,
+    #     'transaction_id': transaction_id,
+    #     'auth_amount': auth_amount,
+    #     'auth_date': auth_date,
+    #     'response_code': response_code,
+    #     'response_message': response_message,
+    #     'detail_response_code': detail_response_code,
+    #     'detail_response_message': detail_response_message
+    # })
 
 
 
