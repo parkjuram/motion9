@@ -17,7 +17,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
-    helper_update_cart_items_count
+    helper_update_cart_items_count, helpger_get_purchase_status
 
 from .models import Interest
 
@@ -334,6 +334,11 @@ def mypage_purchase_product_view(request, page_num=1):
         for purchase in purchases:
             product = purchase.product
             product_ = helper_get_product_detail(product, user)
+            product_.update({
+                'item_count':purchase.item_count,
+                'status':purchase.status,
+                'shipping_number':purchase.shipping_number
+            })
             products.append(product_)
 
         if page_num is not None:
@@ -359,6 +364,11 @@ def mypage_purchase_set_view(request, page_num=1):
         for purchase in purchases:
             set = purchase.set
             set_ = helper_get_product_detail(set, user)
+            set_.update({
+                'item_count':purchase.item_count,
+                'status':helpger_get_purchase_status(purchase.status),
+                'shipping_number':purchase.shipping_number
+            })
             sets.append(set_)
 
         if page_num is not None:
@@ -382,6 +392,11 @@ def mypage_purchase_custom_set_view(request, page_num=1):
         for purchase in purchases:
             custom_set = purchase.custom_set
             custom_set_ = helper_get_product_detail(custom_set, user)
+            custom_set_.update({
+                'item_count':purchase.item_count,
+                'status':purchase.status,
+                'shipping_number':purchase.shipping_number
+            })
             custom_sets.append(custom_set_)
 
         if page_num is not None:

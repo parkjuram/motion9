@@ -67,6 +67,17 @@ def http_response_by_json(error=None, json_={}):
 
     return HttpResponse(json.dumps(json_, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
+def helpger_get_purchase_status(status):
+    if status == 'b':
+        return '상품 준비중'
+    elif status == 'r':
+        return '배송대기'
+    elif status == 's':
+        return '배송중'
+    elif status == 'f':
+        return '배송완료'
+    return ''
+
 def helper_get_user(request):
     if request.user and request.user.is_authenticated():
         return request.user
