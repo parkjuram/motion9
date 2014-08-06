@@ -60,6 +60,7 @@ def check_facebook_token_view(request, next='index'):
         contents_dict = json.loads(contents)
 
         if contents_dict['data']['is_valid']==True:
+            # auth_login(request, user)
             return redirect(next)
         else:
             http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
