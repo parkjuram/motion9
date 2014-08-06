@@ -217,16 +217,19 @@ def mypage_set_view(request, page_num=1):
 
 @login_required
 def mypage_cart_view(request):
-    cart_items = helper_get_cart_items( helper_get_user(request) )
 
     current_datetime = time.strftime("%Y%m%d%H%M%S")
+    order_id = 'motion9_' + current_datetime
     user_ = helper_get_user(request)
+
+    cart_items = helper_get_cart_items( user_, order_id )
+
+
 
     # testing option
     # service_id = 'glx_api'
     service_id = 'M1406684'
     order_date = current_datetime
-    order_id = 'motion9_' + current_datetime
     user_id = user_.username
     item_name = user_.username+"_"+current_datetime
     item_code = str(user_.id)+"_"+current_datetime[8:]

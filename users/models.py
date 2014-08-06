@@ -42,6 +42,7 @@ class Cart(models.Model):
     custom_set = models.ForeignKey('users.CustomSet',null=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
+    order_id = models.CharField(max_length=64, null=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     class Meta:
@@ -106,3 +107,13 @@ class Payment(models.Model):
     response_message = models.TextField(null=False, blank=True, default='')
     detail_response_code = models.CharField(max_length=4, null=True)
     detail_response_message = models.TextField(null=False, blank=True, default='')
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+class PurchaseHistory(models.Model):
+    user = models.ForeignKey('auth.User')
+    payment = models.ForeignKey('users.Payment')
+    type = models.CharField(max_length=1, null=False, default='p')
+    title = models.CharField(max_length=100)
+    auth_amount = models.CharField(max_length=9, null=True)
+    status = models.CharField(max_length=1, null=False, default='r')
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)

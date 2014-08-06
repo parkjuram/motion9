@@ -349,7 +349,11 @@ def helper_make_paging_data( all_object_length, lists, item_count_per_page, curr
     })
     return lists
 
-def helper_get_cart_items(user):
+def helper_get_cart_items(user, order_id=None):
+
+    if order_id is not None:
+        user.cart_set.update(order_id=order_id)
+
     if user is not None:
         total_price = 0
         product_carts= user.cart_set.filter(type='p').all()
