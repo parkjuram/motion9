@@ -53,7 +53,7 @@ class Cart(models.Model):
 
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
-    payment = models.ForeignKey('users.Payment', null=False, blank=True)
+    payment = models.ForeignKey('users.Payment', null=True)
     price = models.IntegerField(null=False, default=0)
     address = models.TextField(null=False, blank=True)
     product = models.ForeignKey('web.Product',null=True, blank=True)
