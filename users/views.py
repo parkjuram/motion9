@@ -336,8 +336,9 @@ def mypage_purchase_product_view(request, page_num=1):
             product_ = helper_get_product_detail(product, user)
             product_.update({
                 'item_count':purchase.item_count,
-                'status':purchase.status,
-                'shipping_number':purchase.shipping_number
+                'status':helpger_get_purchase_status(purchase.status),
+                'shipping_number':purchase.shipping_number,
+                'created':purchase.created
             })
             products.append(product_)
 
@@ -367,7 +368,8 @@ def mypage_purchase_set_view(request, page_num=1):
             set_.update({
                 'item_count':purchase.item_count,
                 'status':helpger_get_purchase_status(purchase.status),
-                'shipping_number':purchase.shipping_number
+                'shipping_number':purchase.shipping_number,
+                'created':purchase.created
             })
             sets.append(set_)
 
@@ -394,8 +396,9 @@ def mypage_purchase_custom_set_view(request, page_num=1):
             custom_set_ = helper_get_product_detail(custom_set, user)
             custom_set_.update({
                 'item_count':purchase.item_count,
-                'status':purchase.status,
-                'shipping_number':purchase.shipping_number
+                'status':helpger_get_purchase_status(purchase.status),
+                'shipping_number':purchase.shipping_number,
+                'created':purchase.created
             })
             custom_sets.append(custom_set_)
 
