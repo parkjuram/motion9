@@ -61,8 +61,8 @@ def check_facebook_token_view(request, next='index'):
         contents_dict = json.loads(contents)
 
         if contents_dict['data']['is_valid']==True:
-            print email
             user_ = User.objects.get(username=email)
+            user_.backend = 'django.contrib.auth.backends.ModelBackend'
             auth_login(request, user_)
             return redirect(next)
         else:
