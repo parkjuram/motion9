@@ -17,7 +17,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
-    helper_update_cart_items_count
+    helper_update_cart_items_count, helpger_get_purchase_status
 
 from .models import Interest
 
@@ -61,8 +61,8 @@ def check_facebook_token_view(request, next='index'):
         contents_dict = json.loads(contents)
 
         if contents_dict['data']['is_valid']==True:
-            print email
             user_ = User.objects.get(username=email)
+            user_.backend = 'django.contrib.auth.backends.ModelBackend'
             auth_login(request, user_)
             return redirect(next)
         else:
@@ -334,6 +334,13 @@ def mypage_purchase_product_view(request, page_num=1):
         for purchase in purchases:
             product = purchase.product
             product_ = helper_get_product_detail(product, user)
+            product_.update({
+                'item_count':purchase.item_count,
+                'status':helpger_get_purchase_status(purchase.status),
+                'shipping_number':purchase.shipping_number,
+                'price':purchase.price,
+                'created':purchase.created
+            })
             products.append(product_)
 
         if page_num is not None:
@@ -341,7 +348,7 @@ def mypage_purchase_product_view(request, page_num=1):
         else:
             products = {'data':products}
 
-        return HttpResponse(json.dumps(products, ensure_ascii=False), content_type="application/json; charset=utf-8")
+        # return HttpResponse(json.dumps(products, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
         return render(request, 'mypage_purchase_product_web.html',
             {
@@ -358,7 +365,14 @@ def mypage_purchase_set_view(request, page_num=1):
         sets = []
         for purchase in purchases:
             set = purchase.set
-            set_ = helper_get_product_detail(set, user)
+            set_ = helper_get_set(set, user)
+            set_.update({
+                'item_count':purchase.item_count,
+                'status':helpger_get_purchase_status(purchase.status),
+                'shipping_number':purchase.shipping_number,
+                'price':purchase.price,
+                'created':purchase.created
+            })
             sets.append(set_)
 
         if page_num is not None:
@@ -382,6 +396,13 @@ def mypage_purchase_custom_set_view(request, page_num=1):
         for purchase in purchases:
             custom_set = purchase.custom_set
             custom_set_ = helper_get_product_detail(custom_set, user)
+            custom_set_.update({
+                'item_count':purchase.item_count,
+                'status':helpger_get_purchase_status(purchase.status),
+                'shipping_number':purchase.shipping_number,
+                'price':purchase.price,
+                'created':purchase.created
+            })
             custom_sets.append(custom_set_)
 
         if page_num is not None:

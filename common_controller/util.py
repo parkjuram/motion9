@@ -67,6 +67,17 @@ def http_response_by_json(error=None, json_={}):
 
     return HttpResponse(json.dumps(json_, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
+def helpger_get_purchase_status(status):
+    if status == 'b':
+        return '상품 준비중'
+    elif status == 'r':
+        return '배송대기'
+    elif status == 's':
+        return '배송중'
+    elif status == 'f':
+        return '배송완료'
+    return ''
+
 def helper_get_user(request):
     if request.user and request.user.is_authenticated():
         return request.user
@@ -116,8 +127,8 @@ def helper_get_products(user=None, category_id=None, price_max_filter=None, pric
 def helper_get_product_detail(product_id_or_object, user=None):
 
     if isinstance(product_id_or_object, unicode) or isinstance(product_id_or_object, int):
-        product_id = product_id_or_object
         product_object = None
+        product_id = product_id_or_object
     elif isinstance(product_id_or_object, Product):
         product_object = product_id_or_object
 
@@ -382,7 +393,7 @@ def helper_get_cart_items(user, order_id=None):
             custom_set = custom_set_cart.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
             custom_set_['item_count'] = custom_set_cart.item_count
-            custom_set_['total_price'] = int(custom_set_['discount_price'])*custom_set_cart.count
+            custom_set_['total_price'] = int(custom_set_['discount_price'])*custom_set_cart.item_count
             total_price += custom_set_['total_price']
             custom_sets.append(custom_set_)
 
