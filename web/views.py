@@ -14,6 +14,7 @@ from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail, Payment
 
 from subprocess import call, Popen, PIPE
+import urllib
 import time
 import json
 import logging
@@ -142,6 +143,7 @@ def payment_return_explore_view(request):
     post_response_code = request.POST.get('RESPONSE_CODE')
     check_sum = request.POST.get('CHECK_SUM')
     message = request.POST.get('MESSAGE')
+    message = urllib.unquote_plus(message)
 
     is_success = False
 
@@ -255,8 +257,11 @@ def payment_return_explore_view(request):
                 is_success = True
 
 
-    response_message = map( lambda x: x.decode('euc-kr'), response_message)
-    detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
+    try:
+        response_message = map( lambda x: x.decode('euc-kr'), response_message)
+        detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
+    except:
+        pass
 
     payment_id=0
 
