@@ -233,13 +233,28 @@
     </div>
     <div class="purchase-wrapper">
         <ul>
-            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"/>신용카드</label></li>
-            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"/>무통장입금</label></li>
+            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method" checked="checked"/>신용카드</label></li>
+{#            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"/>무통장입금</label></li>#}
         </ul>
     </div>
     <div class="footer-bar">
-        <a href="#" class="gold-btn" >결제하기</a>
+        <a href="#" class="purchase-btn gold-btn" >결제하기</a>
     </div>
+    <form name="payment" method="post" >
+        <input type="text" name="SERVICE_ID" value="{{ payment_items.service_id }}"><br>
+        <input type="text" name="ORDER_ID" value="{{ payment_items.order_id }}"><br>
+        <input type="text" name="ORDER_DATE" value="{{ payment_items.order_date }}"><br>
+        <input type="text" name="USER_ID" value="{{ payment_items.user_id }}"><br>
+        <input type="text" name="USER_NAME" value="{{ payment_items.user_name }}"><br>
+        <input type="text" name="USER_EMAIL" value="{{ payment_items.user_email }}"><br>
+        <input type="text" name="ITEM_CODE" value="{{ payment_items.item_code }}"><br>
+        <input type="text" name="ITEM_NAME" value="{{ payment_items.item_name }}"><br>
+        <input type="text" name="CARD_TYPE" value="{{ payment_items.card_type }}"><br>
+        <input type="text" name="AMOUNT" value="{{ payment_items.amount }}"><br>
+        <input type="text" name="INSTALLMENT_PERIOD" value="{{ payment_items.installment_period }}"><br>
+        <input type="text" name="RETURN_URL" value="{{ payment_items.return_url }}"><br>
+        <input type="text" name="APPNAME" value="{{ payment_items.appname }}"><br>
+    </form>
 </div>
 
 {% endblock %}

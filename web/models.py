@@ -56,6 +56,9 @@ class Product(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ['id']
+
     def __unicode__(self):
         return '(%r)Product : name(%s) (%r)brand(%s)' \
                % (self.id, self.name, self.brand_id, self.brand.name_eng)

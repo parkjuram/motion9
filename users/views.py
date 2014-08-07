@@ -227,13 +227,10 @@ def mypage_cart_view(request):
 
     cart_items = helper_get_cart_items( user_, order_id )
 
-
-
     # testing option
     # service_id = 'glx_api'
     service_id = 'M1406684'
     order_date = current_datetime
-    user_id = user_.username
     item_name = user_.username+"_"+current_datetime
     item_code = str(user_.id)+"_"+current_datetime[8:]
     amount = str(cart_items['total_price'])
@@ -263,7 +260,7 @@ def mypage_cart_view(request):
         'service_id': service_id,
         'order_id': order_id,
         'order_date': order_date,
-        'user_id': user_id,
+        'user_id': user_.username,
         'item_code': item_code,
         'using_type': using_type,
         'currency': currency,
@@ -638,4 +635,41 @@ def mobile_mypage_before_purchase_view(request):
 
     cart_items = helper_get_cart_items( helper_get_user(request) )
 
-    return render(request, 'purchase.html', cart_items )
+    current_datetime = time.strftime("%Y%m%d%H%M%S")
+    order_id = 'motion9_' + current_datetime
+    user_ = helper_get_user(request)
+
+    cart_items = helper_get_cart_items( user_, order_id )
+
+    # testing option
+    # service_id = 'glx_api'
+    service_id = 'M1406684'
+    order_date = current_datetime
+    item_name = user_.username+"_"+current_datetime
+    item_code = str(user_.id)+"_"+current_datetime[8:]
+    amount = str(cart_items['total_price'])
+    installment_period='0:3'
+    return_url = request.build_absolute_uri(reverse('payment_return_explore'))
+
+    payment_items = {
+        'service_id': service_id,
+        'order_id': order_id,
+        'order_date': order_date,
+        'user_id': user_.username,
+        'user_name': user_.profile.name,
+        'user_email': user_.email,
+        'item_code': item_code,
+        'item_name': item_name,
+        'card_type': '',
+        'amount': amount,
+        'installment_period': installment_period,
+        'return_url': return_url,
+        'appname': 'WEB'
+    }
+
+    if cart_items is not None:
+        cart_items.update( {'payment_items':payment_items} )
+        return render(request, 'purchase.html', cart_items )
+    else:
+        return redirect('mobile_login_page')
+

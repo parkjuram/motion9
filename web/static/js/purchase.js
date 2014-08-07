@@ -66,4 +66,11 @@ $(function(){
 
        sumPrice.text(numberFormatter(sum));
    });
+    $('.purchase-btn').click(function(e){
+        var payment_form = document.payment;
+
+//        payment_form.action = 'http://tpay.billgate.net/credit/smartphone/certify.jsp';  //test
+    	payment_form.action = 'https://pay.billgate.net/credit/smartphone/certify.jsp';  //real
+        payment_form.submit();
+    });
 });
