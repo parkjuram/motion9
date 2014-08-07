@@ -16,7 +16,7 @@
         <div class="register-header">
             내 정보 수정
         </div>
-        <form name="update" method="post" action="{% url 'update'%}" >
+        <form name="update" method="post" action="{% url 'update' %}" >
             <div class="form-box">
                 <label for="sex">성별</label>
 
@@ -101,13 +101,13 @@
                 <label>주소</label>
                 <div>
                     <div class="form-address-input-container">
-                        <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user_profile.postcode }}"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
+                        <input type="text" name="postcode" id="postalcode" readonly value="{{ user_profile.postcode }}"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text" name="basic_address" id="basicAddress" disabled="disabled" value="{{ user_profile.address }}"/>
+                        <input type="text" name="basic_address" id="basicAddress" readonly value="{{ user_profile.basic_address }}"/>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text" name="detail_address" value="{{ user_profile.address_detail }}"/>
+                        <input type="text" name="detail_address" value="{{ user_profile.detail_address }}"/>
                     </div>
                 </div>
             </div>

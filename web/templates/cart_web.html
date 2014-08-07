@@ -9,6 +9,7 @@
 <script type="text/javascript">
 
     var url_payment_complete = "{% url 'payment_complete' %}";
+    var url_profile_update = "{% url 'update' %}";
 
     function onPaymentSuccess(payment_id) {
         window.location.replace( url_payment_complete+payment_id );
@@ -219,13 +220,13 @@
                 <label>주소</label>
                 <div>
                     <div class="form-address-input-container">
-                        <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user_profile.postcode }}"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
+                        <input type="text" name="postal_code" id="postalcode" readonly value="{{ user_profile.postcode }}"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text" name="basic_address" id="basicAddress" disabled="disabled" value="{{ user_profile.address }}"/>
+                        <input type="text" name="basic_address" id="basicAddress" readonly value="{{ user_profile.basic_address }}"/>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text" name="detail_address" id="detailAddress" value="{{ user_profile.address_detail }}"/>
+                        <input type="text" name="detail_address" id="detailAddress" value="{{ user_profile.detail_address }}"/>
                     </div>
                 </div>
             </div>

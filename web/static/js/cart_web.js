@@ -179,6 +179,7 @@ $(function(){
             type:'POST',
             data: {
                 'postcode': $('#postalcode').val(),
+                'recent_phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),
                 'basic_address': $('#basicAddress').val(),
                 'detail_address': $('#detailAddress').val()
             },

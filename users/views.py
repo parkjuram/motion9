@@ -175,6 +175,7 @@ def update(request):
         user_profile = request.user.profile
 
         name = request.POST.get('name', '')
+        print name
         if len(name)>0:
             user_profile.name=name
 
@@ -183,6 +184,10 @@ def update(request):
         phone3=request.POST.get('phone3','')
         if len(phone1+phone2+phone3)>0:
             user_profile.phone = phone1+"-"+phone2+"-"+phone3
+            
+        recent_phone = request.POST.get('recent_phone', '')
+        if len(recent_phone)>0:
+            user_profile.recent_phone = recent_phone
 
         postcode = request.POST.get('postcode', '')
         if len(postcode)>0:
