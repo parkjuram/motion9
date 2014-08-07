@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail
+from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment
 
 class CustomSetAdmin(admin.ModelAdmin):
     list_display = ('user', 'set', 'is_active', 'created')
@@ -29,6 +29,13 @@ class PurchaseAdmin(admin.ModelAdmin):
     list_display_links = ('user', 'payment', 'product', 'set', 'custom_set',)
 
 admin.site.register(Purchase, PurchaseAdmin)
+
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message', 'created')
+    list_editable = ('service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message',)
+    list_display_links = ('user',)
+
+admin.site.register(Payment, PaymentAdmin)
 
 admin.site.register(Interest)
 admin.site.register(Cart)

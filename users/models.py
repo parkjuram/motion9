@@ -109,3 +109,6 @@ class Payment(models.Model):
     detail_response_code = models.CharField(max_length=4, null=True)
     detail_response_message = models.TextField(null=False, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    def __unicode__(self):
+        return '(%r)Payment' % (self.id)

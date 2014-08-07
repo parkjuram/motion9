@@ -649,7 +649,7 @@ def mobile_mypage_before_purchase_view(request):
     item_code = str(user_.id)+"_"+current_datetime[8:]
     amount = str(cart_items['total_price'])
     installment_period='0:3'
-    return_url = request.build_absolute_uri(reverse('payment_return_explore'))
+    return_url = request.build_absolute_uri(reverse('payment_return_mobile_web'))
 
     payment_items = {
         'service_id': service_id,

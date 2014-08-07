@@ -5,6 +5,7 @@ urlpatterns = patterns('',
     url(r'^payment/pay_explorer/$', 'web.views.payment_pay_explore_view', name='payment_pay_explore'),
     url(r'^payment/return_explorer/$', 'web.views.payment_return_explore_view', name='payment_return_explore'),
     url(r'^payment/return_openbrowser/$', 'web.views.payment_return_openbrowser_view', name='payment_return_openbrowser'),
+    url(r'^payment/return_mobile_web/$', 'web.views.payment_return_mobile_web_view', name='payment_return_mobile_web'),
 
     url(r'^payment/complete/$', 'web.views.payment_complete_view', name='payment_complete'),
     url(r'^payment/complete/(?P<payment_id>(\d+))/$', 'web.views.payment_complete_view', name='payment_complete'),
