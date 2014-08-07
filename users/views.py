@@ -135,25 +135,36 @@ def login_(request, next='index'):
 
 @csrf_exempt
 def login_view(request):
+    next = request.GET.get('next', 'index')
     return render(request, 'login_web.html',
         {
-            'next': 'shop_product'
+            'next': next
         })
 
 @csrf_exempt
-def logout_(request, next='index'):
-    # next = request.GET.get('next', 'index' )
+def logout_(request):
+    next = request.GET.get('next', 'index')
     logout(request)
     return redirect( next )
 
+@csrf_exempt
+@login_required
+def account_modify_view(request):
+    user_ = helper_get_user(request)
+    return render(request, 'update_user_profile_web.html', {
+        'user_profile': user_.profile
+    } )
+
+@csrf_exempt
 @login_required
 def update(request):
 
     if helper_get_user(request) is not None:
         user_profile = request.user.profile
 
-        user_profile.phone = request.POST.get('phone')
-        user_profile.address = request.POST.get('address')
+        user_profile.name = request.POST.get('name', '')
+        user_profile.phone = request.POST.get('phone', '')
+        user_profile.address = request.POST.get('address', '')
         user_profile.sex = request.POST.get('sex')
         user_profile.age = request.POST.get('age')
         user_profile.skin_type = request.POST.get('skin_type')
@@ -161,6 +172,7 @@ def update(request):
 
         try:
             user_profile.save()
+            return redirect('mypage')
         except DataError:
             logger.error('date input format not correct')
     else:

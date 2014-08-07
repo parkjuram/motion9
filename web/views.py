@@ -126,53 +126,28 @@ def payment_pay_explore_view(request):
 @csrf_exempt
 def payment_return_openbrowser_view(request):
 
-    is_success = None
-    service_id = None
-    order_id = None
-    order_date = None
-    transaction_id = None
-    auth_amount = None
-    auth_date = None
-    response_code = None
-    response_message = None
-    detail_response_code = None
-    detail_response_message = None
+    is_success = service_id = order_id = order_date = transaction_id = \
+        auth_amount = auth_date = response_code = response_message = \
+        detail_response_code = detail_response_message = None
+    is_success = False
 
     service_id = request.POST.get('SERVICE_ID')
     order_id = request.POST.get('ORDER_ID')
     order_date = request.POST.get('ORDER_DATE')
     post_response_code = request.POST.get('RESPONSE_CODE')
     check_sum = request.POST.get('CHECK_SUM')
-    message = request.POST.get('MESSAGE')
-    message = urllib.unquote_plus(message)
-
-    is_success = False
+    message = urllib.unquote_plus(request.POST.get('MESSAGE'))
 
     if post_response_code == "0000":
         temp = service_id+order_id+order_date
-        checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
-        'DIFF ' + check_sum + " " + temp
-        checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
-        checksum = checksum.strip()
+        checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + 'DIFF ' + check_sum + " " + temp
+        checksum = (Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]).strip()
         if checksum == 'SUC':
-
-
-    # #         # function ServiceBroker('java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker',
-    # #         #  './libs/config/config.ini')
-    #         bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker '
-    #         config_file = '"/Users/ramju/Documents/workspace/django/project_motion9/motion9/libs/config/config.ini"'
-    #         service_code = '"0900"'
-    #         broker_message_command = bin+' '+config_file+' '+service_code+' "'+message + '"';
-    #         print broker_message_command
-    #         return_message = Popen(["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini","0900","07180100      glx_api             0900y4w2jWCkhK6+7CTywaME87rUuYBO/yNgXErm0CgTv1GKQmU3eQvB+cGoFgo/w5R0hAiXS80Pcifm03Cen8rcbjR+46fB1uVPCFkB//Ois0jyJsSR9SN2Hr9C20EylIYSGc3uue86jc7G2L91ocZec7Y0JaiQZ6Qc6AdC/WxvPPueE0EzT4gx+mIAcCpMEBKdPtsCk+/Gcj2tXziqEM0HuumMgWtZI6ffhxQJNc/LuRpb6lM+JSPcO3eilE3XcQgtLWbkPeYduceVnRoaMG0fmec6Bhyy7HcjXiYTEG432G08KoaFPDXCUJp0anqlRjwzGo1w2h7+SFvTync32Bw1x195YR1I3biKGhvhS9iglgZ2Gb1TP8cZBdhZvCXqTMiUqEIRo2cKsqjHenfn4bAHvNrmOBeixCkcVHtnKtTEN26A4Cr5Y65Ts+v1sSBExyZErUDZvLDvkmCLxQxdw04S6xwyb3sYTsf7fKBgTGcYoq1Lc/xOBSnoxuSMKBXXkDvfUvzAd8T12jj2txEDJifWDsQOK1fkqZdYJE1KpVaASstwhmif4kCPb3wFNsFt94K07/RxusSkM0a1NvXbDFyoXbtVzUwS+qzZ/aTDYjSvqGBzl7Unby5pBgvSdrsF3oUffSnRY8yXscjAOSH4FzSIrgAiOeRreprJlLKhOiRJyeQ="], stdout=PIPE).communicate()[0]
-
-            service_code = '0900'
-            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",service_code]
+            credit_card_service_code = '0900'
+            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",credit_card_service_code]
             broker_message_command.append(message)
 
-            return_message = Popen(broker_message_command, stdout=PIPE).communicate()[0]
-            return_message = return_message.strip()
-
+            return_message = (Popen(broker_message_command, stdout=PIPE).communicate()[0]).strip()
             return_code = return_message[0:5]
 
             this_data = {}
@@ -181,7 +156,7 @@ def payment_return_openbrowser_view(request):
 
                 this_version = "0100"
                 this_merchantId = service_id
-                this_serviceCode = service_code
+                this_serviceCode = credit_card_service_code
                 this_command = "3011"
                 this_orderId = order_id
                 this_orderDate = order_date
@@ -269,6 +244,7 @@ def payment_return_openbrowser_view(request):
     if is_success:
 
         user_ = helper_get_user(request)
+        user_profile = user_.profile
 
         payment = Payment.objects.create(
             user=user_,
@@ -283,9 +259,28 @@ def payment_return_openbrowser_view(request):
             detail_response_code=detail_response_code[0],
             detail_response_message=detail_response_message[0]
         )
-        # carts = Cart.objects.filter(order_id=order_id).all()
-        # for cart in carts:
-        #     Purchase
+
+        carts = Cart.objects.filter(order_id=order_id).all()
+        for cart in carts:
+
+            if cart.type=='p':
+                price = cart.product.discount_price
+            elif cart.type=='s':
+                price = helper_get_set(cart.set).get('discount_price', 0)
+            elif cart.type=='c':
+                price = helper_get_custom_set(cart.custom_set).get('discount_price', 0)
+
+            Purchase.objects.create(
+                user=user_,
+                payment=payment,
+                price=price,
+                address=user_profile.address,
+                product=cart.product,
+                set=cart.set,
+                custom_set=cart.custom_set,
+                type=cart.type,
+                item_count=cart.item_count
+            )
 
         if payment is not None:
             payment_id = payment.id

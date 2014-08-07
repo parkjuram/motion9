@@ -68,3 +68,31 @@
 .already-member-area a{
     color: #d2bb8f;
 }
+
+/*.form-input-horizontal{*/
+    /*float: left;*/
+/*}*/
+
+.form-input-horizontal label{
+    max-width: 70px;
+    float: left;
+    padding-top : 6px;
+    margin-right : 8px;
+}
+
+.form-input-horizontal input{
+    vertical-align: baseline;
+    float: left;
+}
+
+#phone1, #phone2{
+    margin-right : 8px;
+}
+
+#phone1 {
+    width: 17%;
+}
+
+#phone2, #phone3 {
+    width: 38%;
+}

@@ -2,103 +2,130 @@
 {% block header %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/register_web.css' %}"/>
+<script>
+    var url_mypage = "{% url 'mypage' %}";
+</script>
+<script src="{% static 'js/update_user_profile_web.js'%}"></script>
 {% endblock %}
 {% block content %}
     <div class="register-form">
         <div class="register-header">
             내 정보 수정
         </div>
-        <form method="post" action="{% url 'update'%}" >
+        <form name="update" method="post" action="{% url 'update'%}" >
             <div class="form-box">
                 <label for="sex">성별</label>
+
                 <div class="checkbox-wrapper">
-                    <input type="radio" name="sex" id="sex_m" value="M"/> <label for="sex_m">남자</label>
+                    {% if user_profile.sex == 'M' %}
+                        <input type="radio" name="sex" id="sex_m" value="M" checked="checked"/> <label for="sex_m">남자</label>
+                    {% else %}
+                        <input type="radio" name="sex" id="sex_m" value="M" /> <label for="sex_m">남자</label>
+                    {% endif %}
+
                 </div>
 
                 <div class="checkbox-wrapper">
-                    <input type="radio" name="sex" id="sex_f" value="F"/> <label for="sex_f">여자</label>
+                    {% if user_profile.sex == 'F' %}
+                        <input type="radio" name="sex" id="sex_f" value="F" checked="checked" /> <label for="sex_f">여자</label>
+                    {% else %}
+                        <input type="radio" name="sex" id="sex_f" value="F"/> <label for="sex_f">여자</label>
+                    {% endif %}
                 </div>
+
                 <div class="clearfix"></div>
             </div>
-            <div class="form-box">
-                <label for="age">나이</label>
-                <select>
-                    <option>10대</option>
-                    <option>20대 초반</option>
-                    <option>20대 후반</option>
-                    <option>30대 초반</option>
-                    <option>30대 후반</option>
-                    <option>40대 초반</option>
-                    <option>40대 후반</option>
-                    <option>50대 이상</option>
-                </select>
-            </div>
-            <div class="form-box">
-                <label for="age">피부 타입</label>
-                <div class="checkbox-wrapper">
-                    <input type="radio" name="skin_type" id="drySkin" value="d"/> <label for="drySkin">건성</label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="radio" name="skin_type" id="midSkin" value="c"/> <label for="midSkin">복합성</label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="radio" name="skin_type" id="oilSkin" value="o"/> <label for="oilSkin">지성</label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="radio" name="skin_type" id="sensiSkin" value="s"/> <label for="sensiSkin">민감성</label>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="form-box">
-                <label>피부색</label>
-                <select>
-                    <option value="w">백인</option>
-                    <option value="b">밝은</option>
-                    <option value="m">중간</option>
-                    <option value="d">어두운</option>
-                    <option value="n">흑인</option>
-                </select>
-            </div>
+{#            <div class="form-box">#}
+{#                <label for="age">나이</label>#}
+{#                <select>#}
+{#                    <option>10대</option>#}
+{#                    <option>20대 초반</option>#}
+{#                    <option>20대 후반</option>#}
+{#                    <option>30대 초반</option>#}
+{#                    <option>30대 후반</option>#}
+{#                    <option>40대 초반</option>#}
+{#                    <option>40대 후반</option>#}
+{#                    <option>50대 이상</option>#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="form-box">#}
+{#                <label for="age">피부 타입</label>#}
+{#                <div class="checkbox-wrapper">#}
+{#                    <input type="radio" name="skin_type" id="drySkin" value="d"/> <label for="drySkin">건성</label>#}
+{#                </div>#}
+{#                <div class="checkbox-wrapper">#}
+{#                    <input type="radio" name="skin_type" id="midSkin" value="c"/> <label for="midSkin">복합성</label>#}
+{#                </div>#}
+{#                <div class="checkbox-wrapper">#}
+{#                    <input type="radio" name="skin_type" id="oilSkin" value="o"/> <label for="oilSkin">지성</label>#}
+{#                </div>#}
+{#                <div class="checkbox-wrapper">#}
+{#                    <input type="radio" name="skin_type" id="sensiSkin" value="s"/> <label for="sensiSkin">민감성</label>#}
+{#                </div>#}
+{#                <div class="clearfix"></div>#}
+{#            </div>#}
+{#            <div class="form-box">#}
+{#                <label>피부색</label>#}
+{#                <select>#}
+{#                    <option value="w">백인</option>#}
+{#                    <option value="b">밝은</option>#}
+{#                    <option value="m">중간</option>#}
+{#                    <option value="d">어두운</option>#}
+{#                    <option value="n">흑인</option>#}
+{#                </select>#}
+{#            </div>#}
             <div class="form-box">
                 <label for="name">이름</label>
-                <input type="text" name="name" id="name"/>
+                <input type="text" name="name" id="name" value="{{ user_profile.name }}"/>
+                <div class="clearfix"></div>
             </div>
             <div class="form-box">
-                <input type="hidden" name="phone" id="phone"/>
-                <label for="phone">연락처</label>
-                <select id="headPhone">
-                    <option>010</option>
-                    <option>02</option>
-                    <option>031</option>
-                    <option>032</option>
-                    <option>033</option>
-                    <option>034</option>
-                    <option>035</option>
-                </select>
-                <input type="text" id="midPhone" />
-                <input type="text" id="tailPhone"/>
+                <input type="hidden" id="phone" name="phone"/>
+                <div class="form-input-horizontal">
+                    <label for="phone1">연락처</label>
+                    <div class="clearfix"></div>
+                    <div class="form-input-container">
+                        <input type="text" class="input-phone" id="phone1"/> <input type="text"  class="input-phone" id="phone2"/> <input type="text"  class="input-phone" id="phone3"/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-            <div class="form-box">
-                <input type="hidden" name="address" id="address">
-                <label for="address-key">주소</label>
-                <input type="text" id="address-key"/> <a href="#" class="basic-btn">검색</a>
-                <input type="text" id="addr1"/><br/>
-                <input type="text" id="addr2"/>
-            </div>
-
-
-            <div class="form-box">
-                <label for="password">비밀번호</label>
-                <input type="password" name="password" id="password"/>
-            </div>
-            <div class="form-box">
-                <label for="new_password">새로운 비밀번호</label>
-                <input type="password" name="new_password" id="new_password"/>
-            </div>
+{#            <div class="form-box">#}
+{#                <input type="hidden" name="phone" id="phone"/>#}
+{#                <label for="phone">연락처</label>#}
+{#                <select id="headPhone">#}
+{#                    <option>010</option>#}
+{#                    <option>02</option>#}
+{#                    <option>031</option>#}
+{#                    <option>032</option>#}
+{#                    <option>033</option>#}
+{#                    <option>034</option>#}
+{#                    <option>035</option>#}
+{#                </select>#}
+{#                <input type="text" id="midPhone" />#}
+{#                <input type="text" id="tailPhone"/>#}
+{#            </div>#}
+{#            <div class="form-box">#}
+{#                <input type="hidden" name="address" id="address">#}
+{#                <label for="address-key">주소</label>#}
+{#                <input type="text" id="address-key"/> <a href="#" class="basic-btn">검색</a>#}
+{#                <input type="text" id="addr1"/><br/>#}
+{#                <input type="text" id="addr2"/>#}
+{#            </div>#}
+{##}
+{##}
+{#            <div class="form-box">#}
+{#                <label for="password">비밀번호</label>#}
+{#                <input type="password" name="password" id="password"/>#}
+{#            </div>#}
+{#            <div class="form-box">#}
+{#                <label for="new_password">새로운 비밀번호</label>#}
+{#                <input type="password" name="new_password" id="new_password"/>#}
+{#            </div>#}
 
             <div class="form-btns">
-                <a href="#" class="basic-btn login-submit-btn" style="padding : 8px 40px;">수정</a> &nbsp;&nbsp;&nbsp;
-                <a href="#" class="basic-btn login-submit-btn" style="padding : 8px 40px;">취소</a> &nbsp;&nbsp;&nbsp;
+                <a href="#" id='btn-update' class="basic-btn" style="padding : 8px 40px;">수정</a> &nbsp;&nbsp;&nbsp;
+                <a href="#" id='btn-cancel' class="basic-btn" style="padding : 8px 40px;">취소</a> &nbsp;&nbsp;&nbsp;
             </div>
             <div class="already-member-area">
                 &nbsp;
