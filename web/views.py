@@ -633,6 +633,7 @@ def payment_return_explore_view(request):
     if is_success:
 
         user_ = helper_get_user(request)
+        user_profile = user_.profile
 
         payment = Payment.objects.create(
             user=user_,
@@ -647,8 +648,35 @@ def payment_return_explore_view(request):
             detail_response_code=detail_response_code[0],
             detail_response_message=detail_response_message[0]
         )
+
+        carts = Cart.objects.filter(order_id=order_id).all()
+        for cart in carts:
+
+            if cart.type=='p':
+                price = cart.product.discount_price
+            elif cart.type=='s':
+                price = helper_get_set(cart.set).get('discount_price', 0)
+            elif cart.type=='c':
+                price = helper_get_custom_set(cart.custom_set).get('discount_price', 0)
+
+            Purchase.objects.create(
+                user=user_,
+                payment=payment,
+                price=price,
+                postcode = user_profile.postcode,
+                phone= user_profile.recent_phone,
+                address=user_profile.basic_address + " " + user_profile.detail_address,
+                product=cart.product,
+                set=cart.set,
+                custom_set=cart.custom_set,
+                type=cart.type,
+                item_count=cart.item_count
+            )
+
         if payment is not None:
             payment_id = payment.id
+
+        Cart.objects.filter(order_id=order_id).delete()
 
     return render(request, 'return_explorer.html', {
         'payment_id': payment_id,
