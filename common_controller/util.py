@@ -202,7 +202,7 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
     custom_set_ = {}
     custom_set_.update({
         'id': custom_set.id,
-        'name': user.email + str(custom_set.id),
+        'name': set.name+"(My Collection)",
         'category_name': set.category.name,
         'description': set.description,
         'big_img_url': set.custom_big_img_url,
