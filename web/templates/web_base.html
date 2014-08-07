@@ -80,7 +80,7 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout'%}" class="">Logout</a></li>
                 {% else %}
-                    <li><a href="#" class="login-btn">Login</a></li>
+                    <li><a href="{% url 'login_page' %}">Login</a></li>
                     <li><a href="{% url 'registration_page' %}">회원가입</a></li>
                 {% endif %}
                 <li><a href="#" id="headerSearchBtn" data-attr="menuSearch">검색</a></li>

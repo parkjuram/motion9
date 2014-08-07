@@ -2,7 +2,7 @@
 
 from django.conf import settings
 from django.http.response import HttpResponse
-from web.models import Product, Set, ChangeableProduct, BlogReview, Brand
+from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -102,6 +102,25 @@ def helper_get_blog_reviews(product_id):
         blog_reviews_.append(blog_review_)
 
     return blog_reviews_
+
+def helper_get_product_magazines(product_id):
+    product_magazines = ProductMagazine.objects.filter(product_id=product_id)
+
+    product_magazines_ = []
+    for product_magazine in product_magazines:
+        product_magazine_ = {}
+        magazine = product_magazine.magazine
+        product_magazine_.update({
+            'title': product_magazine.title,
+            'magazine_title': magazine.title,
+            'author': product_magazine.author,
+            'year': product_magazine.year,
+            'month': product_magazine.month,
+            'link': product_magazine.link
+        })
+        product_magazines_.append(product_magazine_)
+
+    return product_magazines_
 
 def helper_get_products(user=None, category_id=None, price_max_filter=None, price_min_filter=None, brandname_filter=None):
 

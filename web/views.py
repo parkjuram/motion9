@@ -9,7 +9,7 @@ from common_controller import util
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
-    helper_get_custom_set, helper_get_custom_set_list, helper_get_brands
+    helper_get_custom_set, helper_get_custom_set_list, helper_get_brands, helper_get_product_magazines
 from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase
 
@@ -807,12 +807,14 @@ def set_view(request, set_id):
 def product_view(request, product_id=None):
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
+
         blog_reivews = helper_get_blog_reviews(product_id)
-        # magazines
+        magazines = helper_get_product_magazines(product_id)
 
         return render(request, "product_detail_web.html",
                       {
                           'product': product,
+                          'magazines': magazines,
                           'blog_reviews': blog_reivews
                       })
     else:

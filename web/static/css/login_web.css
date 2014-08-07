@@ -8,16 +8,25 @@
     margin-left: -295px;
 
     background-color: #ffffff;
-    width : 600px;
+    width : 400px;
+    height : 300px;
+    font-size: 14px;
+}
+
+.login-form{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background-color: #ffffff;
+    width : 400px;
     height : 300px;
     font-size: 14px;
 }
 
 .login-box-header{
-    border-bottom: 1px solid #e5e5e5;
-    background-color: #212121;
+    background-color: #ffffff;
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 10px 0px;
 }
 
 .login-box .form-box{

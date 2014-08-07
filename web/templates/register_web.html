@@ -7,16 +7,17 @@
 {% block content %}
     <div class="register-form">
         <div class="register-header">
-            회원가입
+            <h4 class="lined-heading"><span>회원가입</span></h4>
+            <span style="color: #000000; font-size:11px; line-height: 24px; text-rendering: optimizelegibility;">MOTION9(모션나인)은 간단한 정보입력만으로도 회원가입이 가능합니다. 결제 혹은 페이지 이동에 오류가 있으신 분들은 고객센터로 연락해주세요</span>
         </div>
         <form method="post" data-form="register" action="{% url 'registration' next=next%}" >
             <div class="form-box">
-                <label for="name">이름</label>
+                <label for="name">이름 <span class="warning-message">* 한글로 입력해 주세요.</span></label>
                 <input type="text" name="name" id="name"/>
             </div>
             <div class="form-box">
                 <label for="email">이메일 <span class="warning-message">* 이미 존재하는 이메일이거나 형식이 올바르지 않습니다.</span></label>
-                <input type="text" name="email" id="email"/>
+                <input type="text" class="input-text" name="email" id="email">
             </div>
             <div class="form-box">
                 <label for="password">비밀번호</label>

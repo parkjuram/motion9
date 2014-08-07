@@ -3,29 +3,32 @@
     margin-right: auto;
     margin-top: 30px;
     background-color: #ffffff;
-    width : 600px;
+    width : 400px;
     font-size: 14px;
 }
 
 .register-header{
-    border-bottom: 1px solid #e5e5e5;
-    background-color: #212121;
+    /*border-bottom: 1px solid #e5e5e5;*/
+    background-color: #ffffff;
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 10px 0px;
 }
 
 .register-form .form-box{
-    width :400px;
+    width :100%;
     margin: 20px auto;
 }
 
 .register-form .form-box label{
+    color: #212121;
     display: block;
-    margin : 6px 0;
+    margin : 10px 0;
 }
 
 .register-form .form-box input{
-    width : 100%;
+    border: 1px solid #e4e4e4;
+    padding: 8px 10px;
+    width : 96%;
     height : 30px;
 }
 
@@ -37,8 +40,9 @@
 }
 
 .register-form .form-btns a{
-    min-width : 120px !important;
-    font-size: 14px !important;
+    width: 93px !important;
+    height: 33px !important;
+    padding: 10px 20px !important;
 }
 
 .checkbox-wrapper{
@@ -118,4 +122,11 @@
     overflow:hidden;
     -webkit-overflow-scrolling:touch;
     z-index: 999;
+}
+
+.warning-message{
+    color : red;
+    float: right;
+    display: none;
+    font-size: 12px;
 }

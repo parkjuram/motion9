@@ -25,21 +25,35 @@
             <div class="product-contents">
                 <div class="float-left">
                     <div class="product-x-img">
-                        <img src="{{ product.images.0 }}" alt="" />
+                        <img src="{{ product.big_img_url }}" alt="" />
                     </div>
                 </div>
-                <!--
                 <div class="float-right">
-                    <div class="product-x-img-gallery">
-                        {% for image in product.images %}
-                            {% if forloop.first %}
-                            {% else %}
-                                <a href="{{image}}"><img src="{{image}}" ></a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+                    {% for magazine in magazines %}
+                        <a href="{{ magazine.link }}" target="_blank">
+                            <div class="magazine-item-container">
+                                <div class="title">{{ magazine.title }}</div>
+                                <div class="description">
+                                    <span class="magazine-title">{{ magazine.magazine_title }}</span>
+                                    <span class="year">{{ magazine.year }}</span>
+                                    <span class="month">{{ magazine.month }}</span>
+                                    <span class="author">{{ magazine.author }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
                 </div>
-                -->
+
+{#                <div class="float-right">#}
+{#                    <div class="product-x-img-gallery">#}
+{#                        {% for image in product.images %}#}
+{#                            {% if forloop.first %}#}
+{#                            {% else %}#}
+{#                                <a href="{{image}}"><img src="{{image}}" ></a>#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
                 <div class="clearfix"></div>
             </div>
         </div>
