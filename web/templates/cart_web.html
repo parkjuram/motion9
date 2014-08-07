@@ -210,7 +210,7 @@
                 <div class="form-input-horizontal">
                     <label for="phone1">연락처</label>
                     <div class="form-input-container">
-                        <input type="text" class="input-phone" id="phone1"/> <input type="text"  class="input-phone" id="phone2"/> <input type="text"  class="input-phone" id="phone3"/>
+                        <input type="text" class="input-phone" id="phone1" value="{{ profile_items.phone1 }}"/> <input type="text"  class="input-phone" id="phone2" value="{{ profile_items.phone2 }}"/> <input type="text"  class="input-phone" id="phone3" value="{{ profile_items.phone3 }}"/>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -219,13 +219,13 @@
                 <label>주소</label>
                 <div>
                     <div class="form-address-input-container">
-                        <input type="text" name="postal_code" id="postalcode" disabled="disabled"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
+                        <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user_profile.postcode }}"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text" name="basic_address" id="basicAddress" disabled="disabled"/>
+                        <input type="text" name="basic_address" id="basicAddress" disabled="disabled" value="{{ user_profile.address }}"/>
                     </div>
                     <div class="form-address-input-container address-expanded-form">
-                        <input type="text" name="detail_address"/>
+                        <input type="text" name="detail_address" value="{{ user_profile.address_detail }}"/>
                     </div>
                 </div>
             </div>

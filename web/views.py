@@ -274,7 +274,7 @@ def payment_return_openbrowser_view(request):
                 user=user_,
                 payment=payment,
                 price=price,
-                address=user_profile.address,
+                address=user_profile.basic_address + " " + user_profile.detail_address,
                 product=cart.product,
                 set=cart.set,
                 custom_set=cart.custom_set,

@@ -5,9 +5,13 @@
 <script>
     var url_mypage = "{% url 'mypage' %}";
 </script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script src="{% static 'js/update_user_profile_web.js'%}"></script>
 {% endblock %}
 {% block content %}
+<div id="addressLayer">
+    <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px" onclick="closeDaumPostcode()">
+</div>
     <div class="register-form">
         <div class="register-header">
             내 정보 수정
@@ -85,9 +89,26 @@
                     <label for="phone1">연락처</label>
                     <div class="clearfix"></div>
                     <div class="form-input-container">
-                        <input type="text" class="input-phone" id="phone1"/> <input type="text"  class="input-phone" id="phone2"/> <input type="text"  class="input-phone" id="phone3"/>
+                        <input type="text" class="input-phone" name="phone1" id="phone1" value="{{ phone1 }}"/>
+                        <input type="text"  class="input-phone" name="phone2" id="phone2" value="{{ phone2 }}"/>
+                        <input type="text"  class="input-phone" name="phone3" id="phone3" value="{{ phone3 }}"/>
                     </div>
                     <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="form-box">
+                <label>주소</label>
+                <div>
+                    <div class="form-address-input-container">
+                        <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user_profile.postcode }}"/> <a href="#" id="searchAddressBtn" class="basic-btn">우편번호 검색</a>
+                    </div>
+                    <div class="form-address-input-container address-expanded-form">
+                        <input type="text" name="basic_address" id="basicAddress" disabled="disabled" value="{{ user_profile.address }}"/>
+                    </div>
+                    <div class="form-address-input-container address-expanded-form">
+                        <input type="text" name="detail_address" value="{{ user_profile.address_detail }}"/>
+                    </div>
                 </div>
             </div>
 {#            <div class="form-box">#}

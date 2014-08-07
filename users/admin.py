@@ -17,8 +17,8 @@ class CustomSetDetailAdmin(admin.ModelAdmin):
 admin.site.register(CustomSetDetail, CustomSetDetailAdmin)
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'name', 'phone', 'address', 'sex', 'age', 'skin_type', 'skin_color', 'mileage')
-    list_editable = ('name', 'phone', 'address', 'sex', 'age', 'skin_type', 'skin_color', 'mileage',)
+    list_display = ('user', 'name', 'phone', 'postcode', 'basic_address', 'detail_address', 'sex', 'age', 'skin_type', 'skin_color', 'mileage')
+    list_editable = ('name', 'phone', 'postcode', 'basic_address', 'detail_address', 'sex', 'age', 'skin_type', 'skin_color', 'mileage',)
     list_display_links = ('user',)
 
 admin.site.register(UserProfile, UserProfileAdmin)

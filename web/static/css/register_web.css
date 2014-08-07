@@ -96,3 +96,26 @@
 #phone2, #phone3 {
     width: 38%;
 }
+
+.form-address-input-container{
+    margin-top: 6px;
+}
+
+#postalcode{
+    width: 50%;
+}
+
+#addressLayer{
+    display:none;
+    border:1px solid;
+    position:fixed;
+    width:360px;
+    height:460px;
+    left:50%;
+    margin-left:-155px;
+    top:50%;
+    margin-top:-235px;
+    overflow:hidden;
+    -webkit-overflow-scrolling:touch;
+    z-index: 999;
+}

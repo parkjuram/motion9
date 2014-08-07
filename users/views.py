@@ -151,8 +151,20 @@ def logout_(request):
 @login_required
 def account_modify_view(request):
     user_ = helper_get_user(request)
+    user_profile = user_.profile
+    phone = user_profile.phone
+    phones = phone.split("-")
+    phone1 = phone2 = phone3 = ''
+    if len(phones) == 3:
+        phone1 = phones[0]
+        phone2 = phones[1]
+        phone3 = phones[2]
+
     return render(request, 'update_user_profile_web.html', {
-        'user_profile': user_.profile
+        'user_profile': user_profile,
+        'phone1': phone1,
+        'phone2': phone2,
+        'phone3': phone3,
     } )
 
 @csrf_exempt
@@ -163,8 +175,18 @@ def update(request):
         user_profile = request.user.profile
 
         user_profile.name = request.POST.get('name', '')
-        user_profile.phone = request.POST.get('phone', '')
-        user_profile.address = request.POST.get('address', '')
+
+        phone1=request.POST.get('phone1','')
+        phone2=request.POST.get('phone2','')
+        phone3=request.POST.get('phone3','')
+        if len(phone1+phone2+phone3)>0:
+            phone = phone1+"-"+phone2+"-"+phone3
+        else:
+            phone = ''
+        user_profile.phone = phone
+
+        user_profile.basic_address = request.POST.get('basic_address', '')
+        user_profile.detail_address = request.POST.get('detail_address', '')
         user_profile.sex = request.POST.get('sex')
         user_profile.age = request.POST.get('age')
         user_profile.skin_type = request.POST.get('skin_type')
@@ -285,8 +307,27 @@ def mypage_cart_view(request):
         'check_sum': checksum
     }
 
+    user_profile = user_.profile
+    phone = user_profile.phone
+    phones = phone.split("-")
+    phone1 = phone2 = phone3 = ''
+    if len(phones)==3:
+        phone1=phones[0]
+        phone2=phones[1]
+        phone3=phones[2]
+
+    profile_items = {
+        'phone1': phone1,
+        'phone2': phone2,
+        'phone3': phone3,
+    }
+
     if cart_items is not None:
-        cart_items.update( {'payment_items':payment_items} )
+        cart_items.update( {
+            'payment_items': payment_items,
+            'profile_items': profile_items,
+            'user_profile': user_profile
+        } )
         return render(request, 'cart_web.html', cart_items )
     else:
         return redirect('login_page')
