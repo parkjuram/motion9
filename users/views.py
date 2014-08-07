@@ -470,7 +470,7 @@ def mypage_purchase_custom_set_view(request, page_num=1):
         custom_sets = []
         for purchase in purchases:
             custom_set = purchase.custom_set
-            custom_set_ = helper_get_product_detail(custom_set, user)
+            custom_set_ = helper_get_custom_set(custom_set, user)
             custom_set_.update({
                 'item_count':purchase.item_count,
                 'status':helpger_get_purchase_status(purchase.status),
