@@ -174,23 +174,43 @@ def update(request):
     if helper_get_user(request) is not None:
         user_profile = request.user.profile
 
-        user_profile.name = request.POST.get('name', '')
+        name = request.POST.get('name', '')
+        if len(name)>0:
+            user_profile.name=name
 
         phone1=request.POST.get('phone1','')
         phone2=request.POST.get('phone2','')
         phone3=request.POST.get('phone3','')
         if len(phone1+phone2+phone3)>0:
-            phone = phone1+"-"+phone2+"-"+phone3
-        else:
-            phone = ''
-        user_profile.phone = phone
+            user_profile.phone = phone1+"-"+phone2+"-"+phone3
 
-        user_profile.basic_address = request.POST.get('basic_address', '')
-        user_profile.detail_address = request.POST.get('detail_address', '')
-        user_profile.sex = request.POST.get('sex')
-        user_profile.age = request.POST.get('age')
-        user_profile.skin_type = request.POST.get('skin_type')
-        user_profile.skin_color = request.POST.get('skin_color')
+        postcode = request.POST.get('postcode', '')
+        if len(postcode)>0:
+            user_profile.postcode = postcode
+            
+        basic_address = request.POST.get('basic_address', '')
+        if len(basic_address)>0:
+            user_profile.basic_address = basic_address
+            
+        detail_address = request.POST.get('detail_address', '')
+        if len(detail_address)>0:
+            user_profile.detail_address = detail_address
+            
+        sex = request.POST.get('sex', '')
+        if len(sex)>0:
+            user_profile.sex = sex
+            
+        age = request.POST.get('age', 0)
+        if age>0:
+            user_profile.age = age
+            
+        skin_type = request.POST.get('skin_type', '')
+        if len(skin_type)>0:
+            user_profile.skin_type = skin_type
+            
+        skin_color = request.POST.get('skin_color', '')
+        if len(skin_color)>0:
+            user_profile.skin_color = skin_color
 
         try:
             user_profile.save()

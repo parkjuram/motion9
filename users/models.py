@@ -57,6 +57,7 @@ class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
     payment = models.ForeignKey('users.Payment', null=True)
     price = models.IntegerField(null=False, default=0)
+    postcode = models.CharField(max_length=10, null=True, default='')
     address = models.TextField(null=False, blank=True)
     product = models.ForeignKey('web.Product',null=True, blank=True)
     set = models.ForeignKey('web.Set',null=True, blank=True)

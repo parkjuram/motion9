@@ -110,7 +110,7 @@ $(function(){
         else return navigator.userAgent;
     }
 
-    $('.purchase-btn').click(function(e){
+    function startPayment() {
         var browserName = getBrowserName();
 
         if(browserName != "Chrome" &&  browserName != "Safari" && browserName != "Firefox" && browserName != "Opera")
@@ -154,7 +154,7 @@ $(function(){
             plugin.AMOUNT               = payment_form.AMOUNT.value;
             plugin.INSTALLMENT_PERIOD   = payment_form.INSTALLMENT_PERIOD.value;
             plugin.RETURN_URL           = payment_form.RETURN_OPENBROWSER_URL.value;
-            plugin.CHECK_SUM            = payment_form.CHECK_SUM.value;                                   
+            plugin.CHECK_SUM            = payment_form.CHECK_SUM.value;
 
             //결제페이지 URL
 //            plugin.CERTIFY_URL          = "http://tpay.billgate.net/credit/certify.jsp";    //TEST
@@ -169,6 +169,23 @@ $(function(){
             }
 
         }
+    }
+
+    $('.purchase-btn').click(function(e){
+
+        $.ajax({
+            url: url_profile_update,
+            dataType: 'json',
+            type:'POST',
+            data: {
+                'postcode': $('#postalcode').val(),
+                'basic_address': $('#basicAddress').val(),
+                'detail_address': $('#detailAddress').val()
+            },
+            complete: function(jqXHR, textStatus) {
+                startPayment();
+            }
+        });
 
    });
 
