@@ -62,7 +62,7 @@ $(function(){
     }, function(e){
         var hoverArea = $('.product-hover-area');
         hoverArea.css({display:'none'});
-        $(this).find('.product-opacity-bg').css({backgroundColor: 'white', opacity : 1});
+        $(this).find('.product-opacity-bg').css({backgroundColor: 'white', opacity : 0});
         $(this).find('.product-item-info').removeClass('product-expand-info-mode');
         $(this).find('.product-item-info-contents').show();
         $(this).removeClass('product-expand-mode');

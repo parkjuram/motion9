@@ -1,69 +1,169 @@
+.product-category{
+    margin-top : 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-left : 10px;
+    color : #6e6e6e;
+    font-size: 14px;
+    border-left : 3px solid #6e6e6e;
+}
+
+
+.product-item{
+    width : 190px;
+    /*height : 369px;*/
+    min-height : 320px;
+    border : 1px solid #e5e5e5;
+    margin-top : 20px;
+}
+
+.product-item-info{
+    padding : 8px 15px 8px 15px;
+    width: 160px;
+    min-height : 100px;
+    font-size: 14px;
+    overflow-y: hidden;
+    /*background-color: #e5e5e5;*/
+    color : black;
+    line-height: 22px;
+}
+
+
+.product-opacity-bg{
+    background-color: white;
+    position: absolute;
+    top :0;
+    left : 0;
+    width : 100%;
+    height: 100%;
+    display: none;
+
+}
+
+.product-opacity-bg .icon{
+    position: absolute;
+    width : 80px;
+    height : 80px;
+    left: 55px;
+    top : 70px;
+}
+
+.product-item-btn-group{
+    margin-top : 14px;
+}
+
+.product-item-btn{
+    text-align: center;
+    width : 50%;
+    color : white;
+    float:left;
+    font-size: 12px;
+}
+
+.product-item-btn a{
+    vertical-align: top;
+    color : #212121;
+    text-decoration: none;
+}
+
+.product-item-btn a:hover{
+    color : #212121;
+    text-decoration: none;
+}
+
+.product-item-btn img{
+    width : 20px;
+    height : 20px;
+    vertical-align: middle;
+}
+
+
+.product-item-name{
+    font-size : 14px;
+    font-weight: bold;
+}
+
+.product-expand-info-mode .product-item-name{
+    color: black;
+    font-weight: 800;
+}
+
+.product-item-brand{
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.product-expand-info-mode .product-item-category{
+    color:white;
+}
+
+.product-item-price{
+    font-size: 12px;;
+    color : black;
+    margin-top : 2px;
+}
+
+.product-item-info-contents{
+    font-size: 12px;
+    line-height: 16px;
+    margin-top : 6px;
+}
+
+.product-expand-info-mode .product-item-price{
+    color : white;
+ }
+
+.product-item-desc{
+    white-space: pre-line;
+    color : black;
+    height : 84px;
+    overflow-y: hidden;
+    margin-top : 8px;
+    font-size: 12px;
+    line-height: 20px;
+}
 
 
 
+.product-hover-area{
+    display: none;
+    width : 100%;
+}
 
+.product-expand-info-mode{
+    min-height : 174px;
+    background-color: #ffffff;
+    /*background-color: #d2bb8f;
+    -webkit-transition-property : background-color;
+    -moz-transition-property : background-color;
+    -ms-transition-property : background-color;
+    -o-transition-property : background-color;
+    transition-property : background-color;
+    -webkit-transition-duration : 1s;
+    -moz-transition-duration : 1s;
+    -ms-transition-duration : 1s;
+    -o-transition-duration : 1s;
+    transition-duration : 1s;*/
 
-        .product-item{
-            position: relative;
-            width : 200px;
-            /*height : 369px;*/
-            height : 330px;
-            border : 1px solid #e5e5e5;
-            margin-bottom: 25px;
-        }
+}
 
-        .product-item-hover{
-            outline : 3px solid #c7b273;
-            border : 1px solid #c7b273;
-        }
-        .product-item-info{
-            padding : 4px 14px 15px 14px;
-            width: 172px;
-            height : 90px;
-            font-size: 12px;
-            background-color: white;
-            color : black;
-            line-height: 20px;
-        }
+.product-expand-mode{
+    min-height : 390px;
+    border : 1px solid #444444;
+    outline : 3px solid #444444;
+    z-index: 90;
 
+}
 
-        .product-opacity-bg{
-            background-color: #212121;
-            position: absolute;
-            top :0;
-            left : 0;
-            width : 100%;
-            height: 100%;
-            display: none;
-        }
+.product-item-img {
+    position: relative;
+    width : 190px;
+    height : 200px;
+}
 
-        .product-opacity-bg .icon{
-            position: absolute;
-            width : 90px;
-            height : 68px;
-            left: 50px;
-            top : 40px;
-        }
-
-
-        .product-item-name{
-            font-size : 14px;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        .product-hover-area{
-            display: none;
-        }
-
-        .product-item-img {
-            width : 100%;
-            position: relative;
-            text-align: center;
-        }
-
-        .product-item-img img{
-            width : 190px;
-            height : 200px;
-            border: 0;
-        }
+.product-item-img img{
+    width : 190px;
+    height : 200px;
+    border: 0;
+}

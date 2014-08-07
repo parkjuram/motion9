@@ -21,17 +21,19 @@ $(function(){
 
     $('.product-item').hover(function(e){
         var id = $(this).attr('data-attr');
-        $(this).addClass('product-item-hover');
         $(this).find('.product-hover-area').css({display:'block'});
-        $(this).find('.product-opacity-bg').animate({backgroundColor:'#212121', opacity:0.7},'slow',function(){
-
-        });
+        $(this).find('.product-opacity-bg').animate({backgroundColor: 'white', opacity:0.7},'slow');
+        $(this).find('.product-item-info').addClass('product-expand-info-mode');
+        $(this).find('.product-item-info-contents').hide();
+        $(this).addClass('product-expand-mode');
 
     }, function(e){
-        $(this).removeClass('product-item-hover');
-        var hoverArea = $(this).find('.product-hover-area');
-        $(this).find('.product-opacity-bg').css({opacity : 1});
+        var hoverArea = $('.product-hover-area');
         hoverArea.css({display:'none'});
+        $(this).find('.product-opacity-bg').css({backgroundColor: 'white', opacity : 0});
+        $(this).find('.product-item-info').removeClass('product-expand-info-mode');
+        $(this).find('.product-item-info-contents').show();
+        $(this).removeClass('product-expand-mode');
     });
 
 });

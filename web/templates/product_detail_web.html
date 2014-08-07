@@ -155,7 +155,11 @@
                     총 상품 금액 : <span id="productFinalPrice">{{ product.discount_price|intcomma }}</span>원
                 </div>
                 <div class="product-btn-area">
-                    <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-interest">관심하기</a>
+                    {% if product.is_interested %}
+                        <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-interest interest-done">관심취소</a>
+                    {% else %}
+                        <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-interest">관심하기</a>
+                    {% endif %}
                     <a href="#" data-product="{{ product.id }}" data-type="p" data-mobile="false" class="basic-btn btn-for-purchase">구매하기</a>
                     <a href="#" data-product="{{ product.id }}" data-type="p" class="basic-btn btn-for-cart">장바구니</a>
                 </div>
