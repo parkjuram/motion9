@@ -287,6 +287,8 @@ def payment_return_openbrowser_view(request):
         if payment is not None:
             payment_id = payment.id
 
+        Cart.objects.filter(order_id=order_id).delete()
+
     return redirect('payment_complete', payment_id=payment_id )
 
     # return render(request, 'return_explorer.html', {
