@@ -481,9 +481,9 @@ def mypage_purchase_custom_set_view(request, page_num=1):
             custom_sets.append(custom_set_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
+            custom_sets = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
         else:
-            products = {'data':custom_sets}
+            custom_sets = {'data':custom_sets}
 
         return render(request, 'mypage_purchase_custom_web.html',
             {
