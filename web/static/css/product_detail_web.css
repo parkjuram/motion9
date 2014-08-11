@@ -6,9 +6,17 @@
     margin-top : 12px;
 }
 
-.product-x-img img{
+.product-x-img {
     width : 190px;
     height: 200px;
+    display:table-cell;
+    vertical-align:middle;
+    text-align: center;
+}
+
+.product-x-img img{
+    /*width : 190px;*/
+    /*height: 200px;*/
 }
 
 /*
