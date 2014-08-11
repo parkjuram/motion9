@@ -74,11 +74,11 @@ class Purchase(models.Model):
     shipping_number = models.TextField(null=False, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
-    class Meta:
-        unique_together = (
-            ("user", "product"),
-            ("user", "set"),
-            ("user", "custom_set"))
+    # class Meta:
+    #     unique_together = (
+    #         ("user", "product"),
+    #         ("user", "set"),
+    #         ("user", "custom_set"))
 
 class CustomSet(models.Model):
     user = models.ForeignKey('auth.User', related_name='get_custom_sets')
