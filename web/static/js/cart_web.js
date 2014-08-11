@@ -43,7 +43,6 @@ $(function(){
 
    $('select.cart-item-count').change(function(e){
 
-        var sumPrice = $('#cart-sum-price');
         var sum=0;
 
        $('select.cart-item-count').each(function(i, v){
@@ -70,7 +69,9 @@ $(function(){
            sum+=total;
        });
 
-       sumPrice.text(numberFormatter(sum));
+       total_price=sum;
+       $('#mileage').val(0);
+       updateAmount(sum);
    });
 
 
@@ -208,69 +209,53 @@ $(function(){
     });
 
     $('#mileage').focusout(function(e){
-        $(this).val( parseInt($(this).val()) );
         if ( $(this).val().length == 0 ) {
             $(this).val(0);
-        } else if ( parseInt($(this).val())%1000 != 0 ) {
-            alert('천원단위로 사용 가능합니다.');
-            $(this).val(0);
-        } else if ( parseInt($(this).val()) > parseInt(user_mileage) ) {
-            alert('보유한 적립금보다 많습니다.');
-            $(this).val(0);
-        } else if ( total_price-parseInt($(this).val()) < 0 ) {
-            alert('상품금액보다 많은 적립금을 사용할 수 없습니다.');
-            $(this).val(0);
+        } else {
+            $(this).val( parseInt($(this).val()) );
+            if ( parseInt($(this).val())%1000 != 0 ) {
+                alert('천원단위로 사용 가능합니다.');
+                $(this).val(0);
+            } else if ( parseInt($(this).val()) > parseInt(user_mileage) ) {
+                alert('보유한 적립금보다 많습니다.');
+                $(this).val(0);
+            } else if ( total_price-parseInt($(this).val()) < 0 ) {
+                alert('상품금액보다 많은 적립금을 사용할 수 없습니다.');
+                $(this).val(0);
+            }
         }
 
+
         var result_total_price = total_price-parseInt($(this).val());
-        console.log('result_total_price = '+result_total_price);
-        console.log('result_total_price2 = '+parseInt($('input[name="AMOUNT"]').val()));
 
         if ( result_total_price != parseInt($('input[name="AMOUNT"]').val())) {
-
-            console.log('before ajax');
-
-            $.ajax({
-                url: url_get_billgate_payment_checksum,
-                dataType: 'json',
-                type: 'POST',
-                data: {
-                    service_id: service_id,
-                    order_id: order_id,
-                    amount: result_total_price
-                },
-                success: function(data) {
-                    if ( data.success ) {
-                        $('#cart-sum-price').text( numberWithCommas(result_total_price) );
-                        $('input[name="AMOUNT"]').val( result_total_price );
-                        $('input[name="CHECK_SUM"]').val( data.checksum );
-                    }
-                }
-
-            });
-
-//                    $.ajax({
-//              url: '/cart/del',
-//              dataType: 'json',
-//              async : true,
-//              type:'POST',
-//              data : {product_keys : keys, type: 'p'},
-//              success: function(data){
-//                  if(data.success){
-//                      location.href= '/cart';
-//                  }else if(!data.success){
-//                      alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
-//                  }
-//              },
-//              error:function(jqXHR, textStatus, errorThrown){
-//                  console.log(textStatus);
-//              }
-//        });
-            console.log('price changed!');
+            updateAmount(result_total_price);
         }
 
     });
 
+    function updateAmount(amount) {
+        $.ajax({
+            url: url_get_billgate_payment_checksum,
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                service_id: service_id,
+                order_id: order_id,
+                amount: amount
+            },
+            success: function(data) {
+                if ( data.success ) {
+                    $('#cart-sum-price').text( numberWithCommas(amount) );
+                    $('input[name="AMOUNT"]').val( amount );
+                    $('input[name="CHECK_SUM"]').val( data.checksum );
+                }
+            }
+
+        });
+
+
+    }
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }

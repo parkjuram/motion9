@@ -701,18 +701,6 @@ def payment_return_explore_view(request):
         'detail_response_message': detail_response_message
     })
 
-
-
-    # return render(request, 'return_explorer.html', {
-    #     'response_code': response_code,
-    #     'check_sum': check_sum,
-    #     'is_success': is_success,
-    #     'service_id': service_id,
-    #     'order_id': order_id,
-    #     'order_date': order_date,
-    #
-    # })
-
 @csrf_exempt
 def payment_complete_view(request, payment_id=0):
     payment = Payment.objects.get(id=payment_id)

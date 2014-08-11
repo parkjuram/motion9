@@ -67,21 +67,22 @@
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
-                            <select class="cart-item-count" data-type="s" data-id="{{ set.id }}">
-                                <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
-                                <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>
-                                <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>
-                                <option {% if set.item_count == 4 %} selected="selected" {% endif %}>4</option>
-                                <option {% if set.item_count == 5 %} selected="selected" {% endif %}>5</option>
-                                <option {% if set.item_count == 6 %} selected="selected" {% endif %}>6</option>
-                                <option {% if set.item_count == 7 %} selected="selected" {% endif %}>7</option>
-                                <option {% if set.item_count == 8 %} selected="selected" {% endif %}>8</option>
-                                <option {% if set.item_count == 9 %} selected="selected" {% endif %}>9</option>
-                                <option {% if set.item_count == 10 %} selected="selected" {% endif %}>10</option>
-                                {% if set.item_count > 10 %}
-                                    <option  selected="selected">{{ set.item_count }}</option>
-                                {% endif %}
-                            </select>
+                            <span>{{ set.item_count }}개</span>
+{#                            <select class="cart-item-count" data-type="s" data-id="{{ set.id }}">#}
+{#                                <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>#}
+{#                                <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>#}
+{#                                <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>#}
+{#                                <option {% if set.item_count == 4 %} selected="selected" {% endif %}>4</option>#}
+{#                                <option {% if set.item_count == 5 %} selected="selected" {% endif %}>5</option>#}
+{#                                <option {% if set.item_count == 6 %} selected="selected" {% endif %}>6</option>#}
+{#                                <option {% if set.item_count == 7 %} selected="selected" {% endif %}>7</option>#}
+{#                                <option {% if set.item_count == 8 %} selected="selected" {% endif %}>8</option>#}
+{#                                <option {% if set.item_count == 9 %} selected="selected" {% endif %}>9</option>#}
+{#                                <option {% if set.item_count == 10 %} selected="selected" {% endif %}>10</option>#}
+{#                                {% if set.item_count > 10 %}#}
+{#                                    <option  selected="selected">{{ set.item_count }}</option>#}
+{#                                {% endif %}#}
+{#                            </select>#}
                             <span class="purchased-item-price-with-cnt" id="cart-set-total-price-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
                         </div>
                     </div>
@@ -116,21 +117,22 @@
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
-                            <select class="cart-item-count" data-type="p" data-id="{{ product.id }}">
-                                <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
-                                <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
-                                <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
-                                <option {% if product.item_count == 4 %} selected="selected" {% endif %}>4</option>
-                                <option {% if product.item_count == 5 %} selected="selected" {% endif %}>5</option>
-                                <option {% if product.item_count == 6 %} selected="selected" {% endif %}>6</option>
-                                <option {% if product.item_count == 7 %} selected="selected" {% endif %}>7</option>
-                                <option {% if product.item_count == 8 %} selected="selected" {% endif %}>8</option>
-                                <option {% if product.item_count == 9 %} selected="selected" {% endif %}>9</option>
-                                <option {% if product.item_count == 10 %} selected="selected" {% endif %}>10</option>
-                                {% if product.item_count > 10 %}
-                                    <option selected="selected">{{ product.item_count }}</option>
-                                {% endif %}
-                            </select>
+                            <span>{{ product.item_count }}개</span>
+{#                            <select class="cart-item-count" data-type="p" data-id="{{ product.id }}">#}
+{#                                <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>#}
+{#                                <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>#}
+{#                                <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>#}
+{#                                <option {% if product.item_count == 4 %} selected="selected" {% endif %}>4</option>#}
+{#                                <option {% if product.item_count == 5 %} selected="selected" {% endif %}>5</option>#}
+{#                                <option {% if product.item_count == 6 %} selected="selected" {% endif %}>6</option>#}
+{#                                <option {% if product.item_count == 7 %} selected="selected" {% endif %}>7</option>#}
+{#                                <option {% if product.item_count == 8 %} selected="selected" {% endif %}>8</option>#}
+{#                                <option {% if product.item_count == 9 %} selected="selected" {% endif %}>9</option>#}
+{#                                <option {% if product.item_count == 10 %} selected="selected" {% endif %}>10</option>#}
+{#                                {% if product.item_count > 10 %}#}
+{#                                    <option selected="selected">{{ product.item_count }}</option>#}
+{#                                {% endif %}#}
+{#                            </select>#}
                             <span class="purchased-item-price-with-cnt" id="cart-product-total-price-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
                         </div>
                     </div>
@@ -166,21 +168,22 @@
                     </div>
                     <div class="purchased-item-buy">
                         <div class="purchased-item-contents-wrapper">
-                            <select class="cart-item-count" data-type="c" data-id="{{ custom_set.id }}">
-                                <option {% if custom_sets.item_count == 1 %} selected="selected" {% endif %}>1</option>
-                                <option {% if custom_sets.item_count == 2 %} selected="selected" {% endif %}>2</option>
-                                <option {% if custom_sets.item_count == 3 %} selected="selected" {% endif %}>3</option>
-                                <option {% if custom_sets.item_count == 4 %} selected="selected" {% endif %}>4</option>
-                                <option {% if custom_sets.item_count == 5 %} selected="selected" {% endif %}>5</option>
-                                <option {% if custom_sets.item_count == 6 %} selected="selected" {% endif %}>6</option>
-                                <option {% if custom_sets.item_count == 7 %} selected="selected" {% endif %}>7</option>
-                                <option {% if custom_sets.item_count == 8 %} selected="selected" {% endif %}>8</option>
-                                <option {% if custom_sets.item_count == 9 %} selected="selected" {% endif %}>9</option>
-                                <option {% if custom_sets.item_count == 10 %} selected="selected" {% endif %}>10</option>
-                                {% if custom_sets.item_count > 10 %}
-                                    <option  selected="selected">{{ custom_set.item_count }}</option>
-                                {% endif %}
-                            </select>
+                            <span>{{ custom_set.item_count }}개</span>
+{#                            <select class="cart-item-count" data-type="c" data-id="{{ custom_set.id }}">#}
+{#                                <option {% if custom_sets.item_count == 1 %} selected="selected" {% endif %}>1</option>#}
+{#                                <option {% if custom_sets.item_count == 2 %} selected="selected" {% endif %}>2</option>#}
+{#                                <option {% if custom_sets.item_count == 3 %} selected="selected" {% endif %}>3</option>#}
+{#                                <option {% if custom_sets.item_count == 4 %} selected="selected" {% endif %}>4</option>#}
+{#                                <option {% if custom_sets.item_count == 5 %} selected="selected" {% endif %}>5</option>#}
+{#                                <option {% if custom_sets.item_count == 6 %} selected="selected" {% endif %}>6</option>#}
+{#                                <option {% if custom_sets.item_count == 7 %} selected="selected" {% endif %}>7</option>#}
+{#                                <option {% if custom_sets.item_count == 8 %} selected="selected" {% endif %}>8</option>#}
+{#                                <option {% if custom_sets.item_count == 9 %} selected="selected" {% endif %}>9</option>#}
+{#                                <option {% if custom_sets.item_count == 10 %} selected="selected" {% endif %}>10</option>#}
+{#                                {% if custom_sets.item_count > 10 %}#}
+{#                                    <option  selected="selected">{{ custom_set.item_count }}</option>#}
+{#                                {% endif %}#}
+{#                            </select>#}
                             <span class="purchased-item-price-with-cnt" id="cart-custom-total-price-{{ custom_set.id }}">{{ custom_set.total_price|intcomma }}</span>원
                         </div>
                     </div>
