@@ -54,6 +54,10 @@ class Cart(models.Model):
             ("user", "set"),
             ("user", "custom_set"))
 
+class OrderTempInfo(models.Model):
+    order_id = models.CharField(max_length=64, null=False, unique=True)
+    original_amount = models.CharField(max_length=9, null=True)
+
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
     payment = models.ForeignKey('users.Payment', null=True)

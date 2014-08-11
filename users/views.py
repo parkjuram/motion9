@@ -27,6 +27,7 @@ import logging
 import urllib2
 import json
 import time
+from users.models import OrderTempInfo
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -296,6 +297,7 @@ def mypage_cart_view(request):
     user_ = helper_get_user(request)
     order_id = current_datetime+'_'+str(user_.id)
     cart_items = helper_get_cart_items( user_, order_id )
+    OrderTempInfo.objects.create(order_id=order_id, original_amount=str(cart_items['total_price']))
 
     service_id = 'M1406684' # TEST:'glx_api', REAL:'M1406684'
     order_date = current_datetime
