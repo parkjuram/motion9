@@ -649,7 +649,8 @@ def payment_return_explore_view(request):
             detail_response_message=detail_response_message[0]
         )
 
-        user_profile.mileage = int(user_profile.mileage) - ( int(OrderTempInfo.objects.get(order_id=order_id).original_amount) - int(auth_amount[0]) )
+        user_profile.mileage = int(user_profile.mileage) - ( int(OrderTempInfo.objects.get(order_id=order_id).original_amount) - int(auth_amount[0]))
+        user_profile.save()
 
         carts = Cart.objects.filter(order_id=order_id).all()
         for cart in carts:
