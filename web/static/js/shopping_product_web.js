@@ -5,10 +5,10 @@ $(function(){
 
     $( "#priceRange" ).slider({
       range: true,
-      step : 30000,
-      min: 5000,
+      step : 5000,
+      min: 0,
       max: 500000,
-      values: [ 70000, 140000 ],
+      values: [ 0, 140000 ],
       slide: function( event, ui ) {
           $( "#sPrice" ).text( numberFormatter(ui.values[ 0 ]));
           $( "#fPrice" ).text( numberFormatter(ui.values[ 1 ]));
