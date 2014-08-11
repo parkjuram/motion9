@@ -218,9 +218,51 @@ $(function(){
             alert('상품금액보다 많은 적립금을 사용할 수 없습니다.');
             $(this).val(0);
         }
-        console.log(total_price-parseInt($(this).val()));
-        $('#cart-sum-price').text( numberWithCommas(total_price-parseInt($(this).val())) );
-        $('input[name="AMOUNT"]').attr('value', total_price-parseInt($(this).val()) );
+
+        var result_total_price = total_price-parseInt($(this).val());
+        if ( result_total_price != parseInt($('input[name="AMOUNT"]').val())) {
+
+
+            $.ajax({
+                url: url_get_billgate_payment_checksum,
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    service_id: service_id,
+                    order_id: order_id,
+                    amount: result_total_price
+                },
+                success: function(data) {
+                    if ( data.success ) {
+                        data = data.data;
+
+                        $('#cart-sum-price').text( numberWithCommas(result_total_price) );
+                        $('input[name="AMOUNT"]').val( total_price-parseInt($(this).val()) );
+                        $('input[name="CHECK_SUM"]').val( data.checksum );
+                    }
+                }
+
+            });
+
+//                    $.ajax({
+//              url: '/cart/del',
+//              dataType: 'json',
+//              async : true,
+//              type:'POST',
+//              data : {product_keys : keys, type: 'p'},
+//              success: function(data){
+//                  if(data.success){
+//                      location.href= '/cart';
+//                  }else if(!data.success){
+//                      alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+//                  }
+//              },
+//              error:function(jqXHR, textStatus, errorThrown){
+//                  console.log(textStatus);
+//              }
+//        });
+            console.log('price changed!');
+        }
 
     });
 

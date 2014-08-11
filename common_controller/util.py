@@ -1,4 +1,5 @@
 # coding=utf-8
+from subprocess import call, Popen, PIPE
 
 from django.conf import settings
 from django.http.response import HttpResponse
@@ -587,3 +588,18 @@ def helper_make_custom_set(user, set_id, original_product_id, new_product_id):
         custom_set_detail.save()
     else:
         CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_product_id, new_product_id=new_product_id)
+
+def helper_get_user_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        user_ip = x_forwarded_for.split(',')[0]
+    else:
+        user_ip = request.META.get('REMOTE_ADDR')
+
+    return user_ip
+
+def helper_get_billgate_payment_checksum(temp):
+    checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + 'GEN ' + temp
+    checksum = (Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]).strip()
+
+    return checksum

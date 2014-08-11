@@ -10,6 +10,10 @@
 
     var url_payment_complete = "{% url 'payment_complete' %}";
     var url_profile_update = "{% url 'update' %}";
+    var url_get_billgate_payment_checksum = "{% url 'billgate_payment_checksum' %}";
+
+    var service_id = "{{ payment_items.service_id }}";
+    var order_id = "{{ payment_items.order_id }}";
     var user_mileage = "{{ user.profile.mileage }}";
     var total_price = "{{ total_price }}";
 

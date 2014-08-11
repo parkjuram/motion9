@@ -17,7 +17,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
-    helper_update_cart_items_count, helpger_get_purchase_status
+    helper_update_cart_items_count, helpger_get_purchase_status, helper_get_user_ip, \
+    helper_get_billgate_payment_checksum
 
 from .models import Interest
 
@@ -277,40 +278,38 @@ def mypage_set_view(request, page_num=1):
     else:
         logger.error('have_to_login')
 
+@csrf_exempt
+def billgate_payment_checksum(request):
+    service_id=request.POST.get('service_id')
+    order_id=request.POST.get('order_id')
+    amount=request.POST.get('amount')
+
+    checksum = helper_get_billgate_payment_checksum(service_id+order_id+amount)
+
+    return http_response_by_json(None, {'checksum':checksum})
+
+
 @login_required
 def mypage_cart_view(request):
 
     current_datetime = time.strftime("%Y%m%d%H%M%S")
-    order_id = 'motion9_' + current_datetime
     user_ = helper_get_user(request)
-
+    order_id = current_datetime+'_'+str(user_.id)
     cart_items = helper_get_cart_items( user_, order_id )
 
-    # testing option
-    # service_id = 'glx_api'
-    service_id = 'M1406684'
+    service_id = 'M1406684' # TEST:'glx_api', REAL:'M1406684'
     order_date = current_datetime
-    item_name = user_.username+"_"+current_datetime
     item_code = str(user_.id)+"_"+current_datetime[8:]
     amount = str(cart_items['total_price'])
-    # amount = '1000'
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        user_ip = x_forwarded_for.split(',')[0]
-    else:
-        user_ip = request.META.get('REMOTE_ADDR')
+    user_ip = helper_get_user_ip(request)
     return_url = request.build_absolute_uri(reverse('payment_return_explore'))
     return_openbrowser_url = request.build_absolute_uri(reverse('payment_return_openbrowser'))
-    using_type='0000'
-    currency='0000'
-    installment_period='0:3'
+    using_type = '0000'
+    currency = '0000'
+    installment_period = '0'
 
     # checksum
-    temp = service_id+order_id+amount
-    checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
-        'GEN ' + temp
-    checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
-    checksum = checksum.strip()
+    checksum = helper_get_billgate_payment_checksum(service_id+order_id+amount)
 
     if checksum=='8001' or checksum=='8003' or checksum=='8009':
         return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
@@ -323,7 +322,7 @@ def mypage_cart_view(request):
         'item_code': item_code,
         'using_type': using_type,
         'currency': currency,
-        'item_name': item_name,
+        'item_name': '',
         'amount': amount,
         'user_ip': user_ip,
         'installment_period': installment_period,
