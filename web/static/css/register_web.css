@@ -130,3 +130,9 @@
     display: none;
     font-size: 12px;
 }
+
+.name-warning-message{
+    color : red;
+    float: right;
+    font-size: 12px;
+}

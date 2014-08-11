@@ -2,6 +2,7 @@
 {% block header %}
 {% load static %}
 {% load humanize %}
+{% load mathfilters %}
 <link rel="stylesheet" href="{% static 'css/product_detail_web.css' %}"/>
 <link rel="stylesheet" href="{% static 'magnific_popup/magnific-popup.css' %}"/>
 <link rel="stylesheet" href="{% static 'spinner/jquery.spinner.css' %}"/>
@@ -141,8 +142,11 @@
             </div>
 
             <div class="price-area">
+                <div class="price-origin float-left"><span id="productOriginPrice">{{ product.original_price|intcomma }}</span>원</div>
+                <div class="discount-rate float-right"><span id="productDiscountRate">{{ product.discount_rate }}%⬇</span></div>
+                <div class="clearfix" />
+                <div class="product-price price-saled">판매가 : <span id="productPrice"> {{ product.discount_price|intcomma }}</span>원({{ product.discount_price|div:100|add:"0" }}원 적립) </div>
                 <div class="product-how-many">
-                    <div class="product-price price-saled">판매가 : <span id="productPrice">{{ product.discount_price|intcomma }}</span>원</div>
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :
                     </div>
@@ -151,6 +155,8 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
+                <div class="ship-price">배송비 : <span id="shipPrice">무료</span></div>
+                <div class="ship-period">배송기간 : <span id="shipPrice">2 ~ 5일</span></div>
                 <div class="product-price price-total">
                     총 상품 금액 : <span id="productFinalPrice">{{ product.discount_price|intcomma }}</span>원
                 </div>

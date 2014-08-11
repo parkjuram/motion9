@@ -10,6 +10,8 @@
 
     var url_payment_complete = "{% url 'payment_complete' %}";
     var url_profile_update = "{% url 'update' %}";
+    var user_mileage = "{{ user.profile.mileage }}";
+    var total_price = "{{ total_price }}";
 
     function onPaymentSuccess(payment_id) {
         window.location.replace( url_payment_complete+payment_id );
@@ -234,6 +236,15 @@
                 <label for="">배송시 요청사항</label>
                 <div class="form-input-container">
                     <textarea class="shipment-request">부재시 경비실에 맡겨주세요.</textarea>
+                </div>
+            </div>
+
+            <div class="form-box">
+                <div class="form-input-horizontal">
+                    <label for="mileage">적립금 사용</label>
+                    <input type="text" id="mileage" class="send-to-input-small" name="mileage" value="0"/>
+                    <label>&nbsp{{ user.profile.mileage }}원 보유</label>
+                    <div class="clearfix"></div>
                 </div>
             </div>
 

@@ -190,4 +190,42 @@ $(function(){
 
    });
 
+    $('#mileage').keydown(function(e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    $('#mileage').focusout(function(e){
+        $(this).val( parseInt($(this).val()) );
+        if ( parseInt($(this).val())%1000 != 0 ) {
+            alert('천원단위로 사용 가능합니다.');
+            $(this).val(0);
+        } else if ( parseInt($(this).val()) > parseInt(user_mileage) ) {
+            alert('보유한 적립금보다 많습니다.');
+            $(this).val(0);
+        } else if ( total_price-parseInt($(this).val()) < 0 ) {
+            alert('상품금액보다 많은 적립금을 사용할 수 없습니다.');
+            $(this).val(0);
+        }
+        console.log(total_price-parseInt($(this).val()));
+        $('#cart-sum-price').text( numberWithCommas(total_price-parseInt($(this).val())) );
+        $('input[name="AMOUNT"]').attr('value', total_price-parseInt($(this).val()) );
+
+    });
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
 });

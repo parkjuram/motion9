@@ -28,7 +28,7 @@
 }
 
 .form-input-horizontal label{
-    max-width: 70px;
+    max-width: 100px;
     float: left;
     padding-top : 6px;
     margin-right : 8px;
@@ -46,6 +46,10 @@
 
 .form-input-horizontal .send-to-input{
     width : 100px;
+}
+
+.form-input-horizontal .send-to-input-small{
+    width : 70px;
 }
 
 .shipment-request{
@@ -182,4 +186,8 @@
     overflow:hidden;
     -webkit-overflow-scrolling:touch;
     z-index: 999;
+}
+
+input#mileage {
+    text-align: right;
 }
