@@ -2,6 +2,7 @@
  * Created by Park-Kunbae on 14. 4. 10.
  */
 
+
 $(function(){
 
     var element = document.getElementById('addressLayer');
@@ -208,7 +209,9 @@ $(function(){
 
     $('#mileage').focusout(function(e){
         $(this).val( parseInt($(this).val()) );
-        if ( parseInt($(this).val())%1000 != 0 ) {
+        if ( $(this).val().length == 0 ) {
+            $(this).val(0);
+        } else if ( parseInt($(this).val())%1000 != 0 ) {
             alert('천원단위로 사용 가능합니다.');
             $(this).val(0);
         } else if ( parseInt($(this).val()) > parseInt(user_mileage) ) {
@@ -220,8 +223,12 @@ $(function(){
         }
 
         var result_total_price = total_price-parseInt($(this).val());
+        console.log('result_total_price = '+result_total_price);
+        console.log('result_total_price2 = '+parseInt($('input[name="AMOUNT"]').val()));
+
         if ( result_total_price != parseInt($('input[name="AMOUNT"]').val())) {
 
+            console.log('before ajax');
 
             $.ajax({
                 url: url_get_billgate_payment_checksum,
@@ -234,10 +241,8 @@ $(function(){
                 },
                 success: function(data) {
                     if ( data.success ) {
-                        data = data.data;
-
                         $('#cart-sum-price').text( numberWithCommas(result_total_price) );
-                        $('input[name="AMOUNT"]').val( total_price-parseInt($(this).val()) );
+                        $('input[name="AMOUNT"]').val( result_total_price );
                         $('input[name="CHECK_SUM"]').val( data.checksum );
                     }
                 }
