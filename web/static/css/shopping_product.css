@@ -73,6 +73,7 @@ a:hover{
 }
 
 .item-image{
+    float: left;
     width : 100%;
     display: table-cell;
     vertical-align: middle;
