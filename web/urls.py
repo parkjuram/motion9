@@ -35,4 +35,6 @@ urlpatterns = patterns('',
     url(r'^customize/set/$', 'web.views.customize_set_view', name='customize_set'),
     url(r'^customize/set/(?P<set_id>(\d+))/$', 'web.views.customize_set_detail_view', name='customize_set_detail'),
     url(r'^customize/set/save/$', 'web.views.customize_set_save_view', name='customize_set_save'),
+
+    url(r'^help/faq/$', 'web.views.help_faq_view', name='help_faq'),
 )

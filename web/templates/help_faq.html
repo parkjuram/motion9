@@ -1,0 +1,65 @@
+{% extends "web_base.html" %}
+{% block header %}
+{% load static %}
+    <link rel="stylesheet" href="{% static "css/faq_web.css" %}"/>
+    <script src="{% static 'js/jquery.collapsible.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        //collapsible management
+        $('.collapsible').collapsible({
+          defaultOpen: 'nav-section1,nav-section3'
+        });
+      });
+    </script>
+{% endblock %}
+{% block content %}
+
+    <div class="faq-form">
+        <div class="faq-box-header">
+            <h4 class="lined-heading"><span>FAQ</span></h4>
+        </div>
+        {% for faq in faqs %}
+            <div class="collapsible" id="nav-section{{ forloop.counter }}">{{ faq.title }}<span></span></div>
+            <div>
+                {{ faq.content }}
+            </div>
+        {% endfor %}
+
+        <div>
+            <ul>
+                <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+          </ul>
+        </div>
+        <div class="collapsible" id="nav-section2">Navigation Section<span></span></div>
+        <div>
+            <ul>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+          </ul>
+        </div>
+        <div class="collapsible" id="nav-section3">Navigation Section<span></span></div>
+        <div>
+            <ul>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+            <li><a href="#">Navigation Item</a></li>
+          </ul>
+        </div>
+    </div>
+
+
+
+{% endblock %}

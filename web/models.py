@@ -182,3 +182,9 @@ class BlogReview(models.Model):
     review_created_time = models.DateTimeField(default=datetime.now)
     summary = models.TextField(null=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+class Faq(models.Model):
+    title = models.CharField(max_length=30, unique=True)
+    content = models.TextField(null=False, blank=True, default='')
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)

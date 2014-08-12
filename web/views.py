@@ -18,6 +18,7 @@ import urllib
 import time
 import json
 import logging
+from web.models import Faq
 
 logger = logging.getLogger(__name__)
 
@@ -897,6 +898,13 @@ def customize_set_save_view(request):
     else:
         return http_response_by_json(CODE_LOGIN_REQUIRED)
 
+
+@csrf_exempt
+def help_faq_view(request):
+    faqs = Faq.objects.filter(is_active=True).values('title','content')
+    return render(request, 'help_faq.html', {
+        'faqs':faqs
+    })
 
 # render example
 # return render_to_response('shopping_product_web.html',

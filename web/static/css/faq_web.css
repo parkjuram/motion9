@@ -1,0 +1,37 @@
+.faq-box{
+
+    display: none;
+
+    position: fixed;
+    top: 13%;
+    left: 50%;
+    margin-left: -295px;
+
+    background-color: #ffffff;
+    width : 400px;
+    height : 300px;
+    font-size: 14px;
+}
+
+.faq-form{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background-color: #ffffff;
+    width : 400px;
+    height : 300px;
+    font-size: 14px;
+}
+
+.faq-box-header{
+    background-color: #ffffff;
+    color: #ffffff;
+    padding: 10px 0px;
+}
+
+
+.collapsible div.collapse-open {}
+.collapsible div.collapse-close {}
+
+.collapsible div.collapse-open span {}
+.collapsible div.collapse-close span {}
