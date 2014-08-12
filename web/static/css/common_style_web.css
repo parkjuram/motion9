@@ -42,6 +42,7 @@ a:visited{
 
 .container{
     width : 1080px;
+    height: auto;
     min-height : 400px;
     position: relative;
     margin-left : auto;
@@ -474,6 +475,12 @@ ol, ul {
     z-index: 1;
     position: relative;
     height: 300px;
+    bottom: 0;
+    /*margin-top: -300px;*/
+}
+
+.text-deco-through{
+    text-decoration: line-through;
 }
 
 

@@ -1,24 +1,9 @@
-.faq-box{
-
-    display: none;
-
-    position: fixed;
-    top: 13%;
-    left: 50%;
-    margin-left: -295px;
-
-    background-color: #ffffff;
-    width : 400px;
-    height : 300px;
-    font-size: 14px;
-}
-
 .faq-form{
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
     background-color: #ffffff;
-    width : 400px;
+    width : 600px;
     height : 300px;
     font-size: 14px;
 }
@@ -27,31 +12,41 @@
     background-color: #ffffff;
     color: #ffffff;
     padding: 10px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
-.collapsible-header {
-    color: rgb(56, 61, 72);
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    height: 18px;
-    line-height: 18px;
-    margin-top: 10px;
+.faq-list-container {
+    width: 100%;
+
 }
 
-.collapsible-content {
-    white-space: pre-line;
-    color: rgb(116, 120, 126);
-    cursor: default;
+.faq-list {
+    -webkit-font-smoothing: antialiased;
     display: block;
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 22px;
+    font-size: 13px;
+    height: 551px;
+    line-height: 24px;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    text-rendering: optimizelegibility;
 }
 
-
-.collapsible div.collapse-open {}
-.collapsible div.collapse-close {}
-
-.collapsible div.collapse-open span {}
-.collapsible div.collapse-close span {}
+.faq-item-title {
+    margin-bottom: 15px;
+    color: #212121;
+    font-weight: bold;
+}
+.faq-item-content {
+    -webkit-font-smoothing: antialiased;
+    color: #212121;
+    display: block;
+    font-size: 13px;
+    height: 80px;
+    line-height: 20px;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    text-align: left;
+    text-rendering: optimizelegibility;
+}

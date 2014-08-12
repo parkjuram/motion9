@@ -20,6 +20,7 @@ $(function(){
                 // 우편번호와 주소 및 영문주소 정보를 해당 필드에 넣는다.
                 $('#postalcode').val(data.postcode);
                 $('#basicAddress').val(data.address);
+                $('#detailAddress').val('');
                 // iframe을 넣은 element를 안보이게 한다.
                 $(element).jqmHide();
             },
@@ -31,6 +32,10 @@ $(function(){
 
         $(element).jqmShow();
     }
+
+    $('#btnCloseLayer').click(function(e) {
+       $(element).jqmHide();
+    });
 
     function closeDaumPostcode(){
         $(element).jqmHide();

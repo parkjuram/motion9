@@ -58,9 +58,7 @@
                            용량 : {{ product.capacity }}
                         </div>
                         <div class="product-hover-area">
-                            <div class="product-item-desc">
-                                {{product.description|truncatechars:60}}
-                            </div>
+                            <div class="product-item-desc"><span class="text-deco-through">{{ product.original_price|intcomma }}원</span> -> <span>{{ product.discount_price|intcomma }}원</span></div>
                             <div class="product-item-btn-group">
                                 {% if product.is_interested %}
                                     <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest interest-done">관심취소</a>&nbsp;&nbsp;</div>
