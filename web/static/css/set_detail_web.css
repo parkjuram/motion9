@@ -222,24 +222,25 @@ a.basic-btn{
     background-color: #ffffff;
 }
 
-#productDetailModal .modal-left-wrapper{
+#productDetailModal .modal-left-wrapper {
     width : 400px;
 }
 
-#productDetailModal .modal-right-wrapper{
+#productDetailModal .modal-right-wrapper {
     width : 280px;
 }
 
-#productDetailModal .modal-desc-wrapper{
+#productDetailModal .modal-desc-wrapper {
     margin-right: 20px;
 }
 
 
-#productDetailModal .box-header{
+#productDetailModal .box-header {
     font-size: 14px;
+    margin-bottom: 10px;
 }
 
-#productDetailModal .modal-product-category-box{
+#productDetailModal .modal-product-category-box {
     margin-top: 12px;
     margin-bottom : 10px;
     font-size: 12px;

@@ -1,14 +1,15 @@
 {% extends "web_base.html" %}
-{% block header %}
 {% load static %}
 {% load humanize %}
+{% block header %}
+
 <link rel="stylesheet" href="{% static 'css/payment_complete_web.css' %}"/>
 {#<script src="{% static 'js/cart_web.js'%}"></script>#}
 {% endblock %}
 {% block content %}
     <div id="content-wrapper">
         <div id="content-title-wrapper" class="text-align-center">
-            <div id="content-title">구매가 정상적으로 완료되었습니다.</h1>
+            <div id="content-title">구매가 정상적으로 완료되었습니다.</div>
         </div>
 
         <div id="content-table-wrapper" class="text-align-center">
