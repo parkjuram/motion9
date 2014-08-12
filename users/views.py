@@ -551,8 +551,8 @@ def delete_cart(request):
         return http_response_by_json(CODE_LOGIN_REQUIRED)
 
     type = request.POST.get('type', 'p')
-
     product_or_set_id = request.POST.get('product_or_set_id')
+
     if type=='p':
         helper_delete_product_cart(user, product_or_set_id)
     elif type=='s':

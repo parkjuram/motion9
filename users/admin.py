@@ -37,5 +37,12 @@ class PaymentAdmin(admin.ModelAdmin):
 
 admin.site.register(Payment, PaymentAdmin)
 
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'set', 'custom_set', 'type', 'item_count', 'order_id', 'created')
+    list_editable = ('custom_set', 'type', 'item_count', 'order_id',)
+    list_display_links = ('user', 'product', 'set',)
+
+admin.site.register(Cart, CartAdmin)
+
 admin.site.register(Interest)
-admin.site.register(Cart)
+
