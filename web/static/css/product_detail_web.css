@@ -302,6 +302,7 @@ a.basic-btn{
 }
 
 .product-detail-info{
+    white-space: pre-line;
     font-size: 16px;
     color : #000000;
     line-height: 22px;

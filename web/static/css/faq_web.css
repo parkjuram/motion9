@@ -29,6 +29,26 @@
     padding: 10px 0px;
 }
 
+.collapsible-header {
+    color: rgb(56, 61, 72);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    height: 18px;
+    line-height: 18px;
+    margin-top: 10px;
+}
+
+.collapsible-content {
+    white-space: pre-line;
+    color: rgb(116, 120, 126);
+    cursor: default;
+    display: block;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 22px;
+}
+
 
 .collapsible div.collapse-open {}
 .collapsible div.collapse-close {}

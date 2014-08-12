@@ -2,16 +2,33 @@
 {% block header %}
 {% load static %}
     <link rel="stylesheet" href="{% static "css/faq_web.css" %}"/>
-    <script src="{% static 'js/jquery.collapsible.js' %}"></script>
     <script src="{% static 'js/jquery.cookie.js' %}"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         //collapsible management
         $('.collapsible').collapsible({
-          defaultOpen: 'nav-section1,nav-section3'
+            cssClose: 'collapse-close',
+            cssOpen: 'collapse-open',
+            cookieName: 'collapsible',
+            cookieOptions: {
+                path: '/',
+                expires: 0,
+                domain: '',
+                secure: ''
+            },
+            defaultOpen: '',
+            speed: 0,
+            bind: 'click',
+            animateOpen: function (elem, opts) {
+                elem.next().slideUp(opts.speed);
+            },
+            animateClose: function (elem, opts) {
+                elem.next().slideDown(opts.speed);
+            }
         });
       });
     </script>
+    <script src="{% static 'js/jquery.collapsible.js' %}"></script>
 {% endblock %}
 {% block content %}
 
@@ -20,9 +37,11 @@
             <h4 class="lined-heading"><span>FAQ</span></h4>
         </div>
         {% for faq in faqs %}
-            <div class="collapsible" id="nav-section{{ forloop.counter }}">{{ faq.title }}<span></span></div>
-            <div>
-                {{ faq.content }}
+            <div class="collapsible collapsible-header" id="nav-section{{ forloop.counter }}"><span>{{ faq.title }}</span></div>
+            <div class="collapsible-container">
+                <div class="collapsible-content">
+                    {{ faq.content }}
+                </div>
             </div>
         {% endfor %}
     </div>
