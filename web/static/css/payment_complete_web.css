@@ -96,3 +96,217 @@
 	position:relative;
 	top:1px;
 }
+
+.address-box{
+    margin: 20px;
+}
+
+.form-box{
+    margin : 12px 20px;
+    font-size: 12px;
+}
+
+.form-input-container{
+    margin-top : 10px;
+}
+
+.form-address-input-container{
+    margin-top: 6px;
+}
+
+.address-expanded-form input{
+    width : 250px;
+}
+
+.form-box input{
+    border: 1px solid #e4e4e4;
+    padding: 8px 10px;
+    height : 30px;
+}
+
+.form-box select{
+    height : 24px;
+}
+
+.form-input-horizontal label{
+    max-width: 100px;
+    float: left;
+    margin-right : 8px;
+    line-height: 48px;
+}
+
+.form-input-horizontal input{
+    vertical-align: baseline;
+    float: left;
+}
+
+.input-phone{
+    width : 40px;
+    margin-right : 4px;
+}
+
+.form-input-horizontal .send-to-input{
+    width : 100px;
+}
+
+.form-input-horizontal .send-to-input-small{
+    width : 70px;
+}
+
+.shipment-request{
+    width : 250px;
+    height : 70px;
+    font-size: 12px;
+    border: 1px solid #e4e4e4;
+}
+
+#searchAddressBtn {
+   padding: 16px 12px 16px 12px;
+}
+
+.purchase-nav-bottom{
+    margin-top: 30px;
+}
+
+.total-purchase-price{
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.total-purchase-price span{
+    color : red;
+}
+
+.purchase-methods{
+    margin: 20px;
+}
+
+.purchase-methods .checkbox-wrapper{
+    width : 100px;
+    margin-bottom: 8px;
+    margin-right : 10px;
+    float : left;
+}
+
+.purchase-btn-box{
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+.purchase-btn {
+  width: 150px;
+  height : 50px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #fff;
+  font-size: 14px;
+  background: #212121;
+  padding: 15px 50px;
+  text-decoration: none;
+}
+
+.purchase-btn:visited{
+    color : #fff;
+}
+
+.purchase-btn:hover {
+  text-decoration: none;
+  color : #d2bb8f;
+}
+
+.purchased-item{
+    width : 608px;
+    border: 1px solid #e5e5e5;
+    margin : 16px 20px;
+    height : 150px;
+    position: relative;
+}
+
+
+.purchased-item-img{
+    width: 150px;
+    height: 150px;
+    float: left;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+}
+
+.purchased-item-img img{
+    /*width : 100%;*/
+    /*height : 100%;*/
+    height: 90%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.purchased-item-contents{
+    width : 310px;
+    float: left;
+}
+
+.purchased-item-buy{
+    width : 148px;
+    float:left;
+}
+
+.purchased-item-contents-wrapper{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.purchased-item-name{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+}
+
+.purchased-item-price{
+
+}
+
+.purchased-item-price-with-cnt{
+    margin-left: 14px;
+}
+
+.purchased-item-del-btn{
+    width : 40px;
+    position: absolute;
+    bottom: 10px;
+    right : 0;
+    color : #003f95;
+}
+
+.no-item{
+    margin: 20px;
+}
+
+
+#addressLayer{
+    display:none;
+    border:1px solid;
+    position:fixed;
+    width:500px;
+    height:700px;
+    /*width:360px;*/
+    /*height:460px;*/
+    left:50%;
+    margin-left:-250px;
+    top:50%;
+    margin-top:-350px;
+    overflow:hidden;
+    -webkit-overflow-scrolling:touch;
+    z-index: 999;
+}
+
+input#mileage {
+    text-align: right;
+}

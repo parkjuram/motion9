@@ -62,16 +62,11 @@ class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
     payment = models.ForeignKey('users.Payment', null=True)
     price = models.IntegerField(null=False, default=0)
-    phone = models.TextField(null=False, blank=True, default='')
-    postcode = models.CharField(max_length=10, null=True, default='')
-    address = models.TextField(null=False, blank=True)
     product = models.ForeignKey('web.Product',null=True, blank=True)
     set = models.ForeignKey('web.Set',null=True, blank=True)
     custom_set = models.ForeignKey('users.CustomSet',null=True, blank=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
-    status = models.CharField(max_length=1, null=False, default='b') # before, ready, ship, finish
-    shipping_number = models.TextField(null=False, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     # class Meta:
@@ -117,6 +112,13 @@ class Payment(models.Model):
     response_message = models.TextField(null=False, blank=True, default='')
     detail_response_code = models.CharField(max_length=4, null=True)
     detail_response_message = models.TextField(null=False, blank=True, default='')
+
+    status = models.CharField(max_length=1, null=False, default='b') # before, ready, ship, finish
+    shipping_number = models.TextField(null=False, blank=True, default='')
+    phone = models.TextField(null=False, blank=True, default='')
+    postcode = models.CharField(max_length=10, null=True, default='')
+    address = models.TextField(null=False, blank=True)
+
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     def __unicode__(self):

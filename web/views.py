@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
@@ -702,11 +703,44 @@ def payment_return_explore_view(request):
         'detail_response_message': detail_response_message
     })
 
+@login_required
 @csrf_exempt
 def payment_complete_view(request, payment_id=0):
     payment = Payment.objects.get(id=payment_id)
+
+    purchase_products = Purchase.objects.filter(payment_id=payment_id, type='p').all()
+    products = []
+    for purchase_set in purchase_products:
+        product = purchase_set.product
+        product_ = helper_get_product_detail(product, request.user)
+        product_['item_count'] = purchase_set.item_count
+        product_['total_price'] = purchase_set.price
+        products.append(product_)
+
+    purchase_sets = Purchase.objects.filter(payment_id=payment_id, type='s').all()
+    sets = []
+    for purchase_set in purchase_sets:
+        set = purchase_set.set
+        set_ = helper_get_set(set, request.user)
+        set_['item_count'] = purchase_set.item_count
+        set_['total_price'] = purchase_set.price
+        sets.append(set_)
+
+    purchase_custom_sets = Purchase.objects.filter(payment_id=payment_id, type='c').all()
+    custom_sets = []
+    for purchase_custom_set in purchase_custom_sets:
+        custom_set = purchase_custom_set.custom_set
+        custom_set_ = helper_get_custom_set(custom_set, request.user)
+        custom_set_['item_count'] = purchase_custom_set.item_count
+        custom_set_['total_price'] = purchase_custom_set.price
+        custom_sets.append(custom_set_)
+
+
     return render(request, 'payment_complete_web.html', {
-        'payment_amount': payment.auth_amount
+        'products': products,
+        'sets': sets,
+        'custom_sets': custom_sets,
+        'payment': payment
     })
 
 @csrf_exempt

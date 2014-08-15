@@ -1,38 +1,158 @@
 {% extends "web_base.html" %}
 {% load static %}
 {% load humanize %}
+
 {% block header %}
 
 <link rel="stylesheet" href="{% static 'css/payment_complete_web.css' %}"/>
 {#<script src="{% static 'js/cart_web.js'%}"></script>#}
-{% endblock %}
+
+{% endblock header %}
 {% block content %}
-    <div id="content-wrapper">
-        <div id="content-title-wrapper" class="text-align-center">
-            <div id="content-title">구매가 정상적으로 완료되었습니다.</div>
-        </div>
 
-        <div id="content-table-wrapper" class="text-align-center">
-            <table id="content-table" align="center">
-                <tr>
-                    <td class="td-title" style="width: 200px"><span class="text-bold">주문번호</span></td>
-                    <td>2195387137948</td>
-                </tr>
-                <tr>
-                    <td class="td-title"><span class="text-bold">총 결제금액</span></td>
-                    <td><span id='total-price'>{{ payment_amount }}원</span></td>
-                </tr>
-                <tr>
-                    <td class="td-title">이메일</td><td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <td class="td-title">수량</td><td>1</td>
-                </tr>
-            </table>
-        </div>
-
-        <div id="content-footer-wrapper" class="text-align-center">
-            <a class="button-confirm" href="{% url 'mypage_purchase_product' %}">확인</a>
+<div class="row">
+    <div class="category-list">
+        <div style="font-size: 14px; padding: 10px 20px; font-weight: bold;">
+            구매완료
         </div>
     </div>
+</div>
+
+<div class="row">
+    <div class="main-container float-left">
+        <div class="box-css">
+            <div class="box-header" style="margin-left: 20px;">
+                세트
+            </div>
+            {% if sets|length == 0 %}
+                    <div class="no-item">
+                        구매하신 내역이 없습니다.
+                    </div>
+                {% endif %}
+                {% for set in sets %}
+                <div class="purchased-item">
+                    <div class="purchased-item-img">
+                        <a href="{% url 'set' set_id=set.id %}" target="_blank"><img src="{{ set.big_img_url }}"/></a>
+                    </div>
+                    <div class="purchased-item-contents">
+                        <div class="purchased-item-contents-wrapper">
+                            <div class="purchased-item-name">
+                                <a href="{% url 'set' set_id=set.id %}" target="_blank">{{ set.name }}</a>
+                            </div>
+                            <div class="purchased-item-price">가격 : <span id="cart-set-price-{{ set.id }}">{{ set.discount_price|intcomma }}</span>원</div>
+                        </div>
+                    </div>
+                    <div class="purchased-item-buy">
+                        <div class="purchased-item-contents-wrapper">
+                            <span>{{ set.item_count }}개</span>
+                        <span class="purchased-item-price-with-cnt" id="cart-set-total-price-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+            <div class="box-header" style="margin-left: 20px; margin-top: 40px;">
+                단품
+            </div>
+            <div>
+                {% if products|length == 0 %}
+                    <div class="no-item">
+                        구매하신 내역이 없습니다.
+                    </div>
+                {% endif %}
+                {% for product in products %}
+                <div class="purchased-item">
+                    <div class="purchased-item-img">
+                        <a href="{% url 'product' product_id=product.id %}" target="_blank"><img src="{{ product.big_img_url }}"/></a>
+                    </div>
+                    <div class="purchased-item-contents">
+                        <div class="purchased-item-contents-wrapper">
+                            <div class="purchased-item-name">
+                                <a href="{% url 'product' product_id=product.id %}" target="_blank">{{ product.name }}</a>
+                            </div>
+                            <div class="purchased-item-price">가격 : <span id="cart-product-price-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원</div>
+                        </div>
+                    </div>
+                    <div class="purchased-item-buy">
+                        <div class="purchased-item-contents-wrapper">
+                            <span>{{ product.item_count }}개</span>
+                            <span class="purchased-item-price-with-cnt" id="cart-product-total-price-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="box-header" style="margin-left: 20px; margin-top: 40px;">
+                커스텀 세트
+            </div>
+            <div>
+                {% if custom_sets|length == 0 %}
+                    <div class="no-item">
+                        구매하신 내역이 없습니다.
+                    </div>
+                {% endif %}
+                {% for custom_set in custom_sets %}
+                <div class="purchased-item">
+                    <div class="purchased-item-img">
+                        <a href="#" target="_blank"><img src="{{ custom.big_img_url }}"/></a>
+                    </div>
+                    <div class="purchased-item-contents">
+                        <div class="purchased-item-contents-wrapper">
+                            <div class="purchased-item-name">
+                                <a href="#" target="_blank">{{ custom_set.name }}</a>
+                            </div>
+                            <div class="purchased-item-price">가격 : <span id="cart-custom-price-{{ custom_set.id }}">{{ custom_set.discount_price|intcomma }}</span>원</div>
+                        </div>
+                    </div>
+                    <div class="purchased-item-buy">
+                        <div class="purchased-item-contents-wrapper">
+                            <span>{{ custom_set.item_count }}개</span>
+                            <span class="purchased-item-price-with-cnt" id="cart-custom-total-price-{{ custom_set.id }}">{{ custom_set.total_price|intcomma }}</span>원
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    <div class="nav-container float-left">
+        <div class="box-css">
+            <div class="box-header">
+                배송지 정보
+            </div>
+        </div>
+    </div>
+</div>
+{#    <div id="content-wrapper">#}
+{#        <div id="content-title-wrapper" class="text-align-center">#}
+{#            <div id="content-title">구매가 정상적으로 완료되었습니다.</div>#}
+{#        </div>#}
+{##}
+{#        <div id="content-table-wrapper" class="text-align-center">#}
+{#            <table id="content-table" align="center">#}
+{#                <tr>#}
+{#                    <td class="td-title" style="width: 200px"><span class="text-bold">주문번호</span></td>#}
+{#                    <td>2195387137948</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td class="td-title"><span class="text-bold">총 결제금액</span></td>#}
+{#                    <td><span id='total-price'>{{ payment_amount }}원</span></td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td class="td-title">이메일</td><td>{{ user.email }}</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td class="td-title">수량</td><td>1</td>#}
+{#                </tr>#}
+{#            </table>#}
+{#        </div>#}
+{##}
+{#        <div id="content-footer-wrapper" class="text-align-center">#}
+{#            <a class="button-confirm" href="{% url 'mypage_purchase_product' %}">확인</a>#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}
