@@ -188,30 +188,31 @@
     float : left;
 }
 
-.purchase-btn-box{
+.btn-box{
     text-align: center;
     margin-bottom: 40px;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
-.purchase-btn {
-  width: 150px;
-  height : 50px;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0px;
-  color: #fff;
-  font-size: 14px;
-  background: #212121;
-  padding: 15px 50px;
-  text-decoration: none;
+.ok-btn {
+    width: 150px;
+    height : 50px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0px;
+    color: #fff;
+    font-size: 14px;
+    background: #212121;
+    padding: 15px 50px;
+    margin-top: 20px;
+    text-decoration: none;
 }
 
-.purchase-btn:visited{
+.ok-btn:visited{
     color : #fff;
 }
 
-.purchase-btn:hover {
+.ok-btn:hover {
   text-decoration: none;
   color : #d2bb8f;
 }
@@ -238,6 +239,7 @@
 .purchased-item-img img{
     /*width : 100%;*/
     /*height : 100%;*/
+    max-width: 90%;
     height: 90%;
     position: absolute;
     margin: auto;
@@ -309,4 +311,12 @@
 
 input#mileage {
     text-align: right;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.label-content {
+    margin-top: 5px;
 }

@@ -312,3 +312,62 @@ a.basic-btn{
     padding: 5px;
     margin-bottom: 10px;
 }
+
+.magazine-item-container .title {
+    color: #0a4d6d;
+    font-size: 16px;
+    text-align: right;
+}
+.magazine-item-container .description {
+    margin-top: 3px;
+    text-align: right;
+    font-style: italic;
+}
+.magazine-item-container .description .magazine-title {
+
+}
+
+
+.magazine-item-container .description span {
+    font-size: 13px;
+}
+
+.magazine-wrapper {
+    float: left;
+    margin-left: 30px;
+}
+
+.magazine-wrapper-title {
+    text-align: center;
+    padding-bottom: 10px;
+    color: #212121;
+}
+
+.quality-guarantee {
+    padding-bottom: 50px;
+}
+
+.quality-guarantee .icon {
+    width: 17px;
+    height: 16px;
+    margin: 0px 8px 0px 2px;
+    vertical-align: -3px;
+}
+
+.quality-guarantee .text {
+    color: #929292;
+    font-size: 13px;
+}
+
+.tooltip-link {
+    position: relative;
+    margin-left: 6px;
+    cursor: pointer;
+    background: url(https://harrys.exceda.com/assets/borders/red-dot-horizontal-f075454f6b8deab0a8c6ac680a0d21a7.png);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    background-size: 6px 2px;
+    font-weight: 300;
+    color: #8C3946;
+    font-size: 11px;
+}

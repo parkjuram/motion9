@@ -29,16 +29,22 @@
                         <img src="{{ product.big_img_url }}" alt="" />
                     </div>
                 </div>
-                <div class="float-right">
+                <div class="magazine-wrapper">
+                    <div class="magazine-wrapper-title">
+                        <h4 class="lined-heading"><span>EDITOR'S NOTES</span></h4>
+                    </div>
                     {% for magazine in magazines %}
                         <a href="{{ magazine.link }}" target="_blank">
                             <div class="magazine-item-container">
                                 <div class="title">{{ magazine.title }}</div>
                                 <div class="description">
-                                    <span class="magazine-title">{{ magazine.magazine_title }}</span>
-                                    <span class="year">{{ magazine.year }}</span>
-                                    <span class="month">{{ magazine.month }}</span>
-                                    <span class="author">{{ magazine.author }}</span>
+                                    <span class="magazine-title"> < {{ magazine.magazine_title }} > </span>
+                                    <span class="year">{{ magazine.year }}년</span>
+                                    <span class="month">{{ magazine.month }}월호, </span>
+                                    {% if magazine.author|length > 0 %}
+                                        <span class="author">에디터 {{ magazine.author }}</span>
+                                    {% endif %}
+
                                 </div>
                             </div>
                         </a>
@@ -61,6 +67,16 @@
 
 {#        <div class="box-css no-shadow" style="background-color: #F3F3F3;">#}
         <div class="box-css no-shadow">
+            <div class="quality-guarantee">
+                <img class="icon" src="{% static "img/qg_ico.png" %}" />
+                <span class="text">Quality Guarantee</span>
+{#                <span class="tooltip-link" data-tooltip="true" data-tooltip-image="https://harrys.exceda.com/assets/products/guarantee-tooltip-1ee0f3483460f26dd2370b7e07099dd8.png" data-tooltip-content="If you don't love your first shave, it's on us. Return your products within 30 days of receipt for a full refund. Call us at 888-212-6855 and we'll take care of you.">#}
+{#                    Learn More#}
+{#                    <div class="tooltip" style="bottom: 45px; right: -68.5px; visibility: visible; opacity: 1;">#}
+{#                        <img class="icon" src="{% static "img/qg_tooltip.png" %}"/>#}
+{#                    </div>#}
+{#                </span>#}
+            </div>
             <div id="product-xTabs">
                 <ul class="resp-tabs-list tab-box-menu-shadow">
                     <li>상세설명</li>
@@ -144,8 +160,10 @@
             <div class="price-area">
                 <div class="price-origin float-left"><span id="productOriginPrice">{{ product.original_price|intcomma }}</span>원</div>
                 <div class="discount-rate float-right"><span id="productDiscountRate">{{ product.discount_rate }}%⬇</span></div>
-                <div class="clearfix" />
-                <div class="product-price price-saled">판매가 : <span id="productPrice"> {{ product.discount_price|intcomma }}</span>원({{ product.discount_price|div:100|add:"0" }}원 적립) </div>
+                <div class="product-price price-saled">판매가 : <span id="productPrice">{{ product.discount_price|intcomma }}</span>원({{ product.discount_price|div:100|add:"0" }} 원 적립) </div>
+
+                <div class="clearfix"></div>
+
                 <div class="product-how-many">
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :

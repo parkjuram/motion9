@@ -610,7 +610,8 @@ def payment_complete_view(request, payment_id=0):
         'products': products,
         'sets': sets,
         'custom_sets': custom_sets,
-        'payment': payment
+        'payment': payment,
+        'user_': request.user
     })
 
 @csrf_exempt
