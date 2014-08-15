@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http.response import HttpResponse
+from django.http.request import RAISE_ERROR
+from django.http.response import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from common_controller import util
@@ -12,7 +14,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands, helper_get_product_magazines
 from .models import Product, Category, BlogReview, Set, Brand
-from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo
+from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment
 
 from subprocess import call, Popen, PIPE
 import urllib
@@ -25,104 +27,34 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def test_view(request):
-
-    # products = Product.objects.all()
-    # for product in products:
-    #     product.short_desc = product.description
-    #     product.save()
-
     return HttpResponse('success!')
-
     # return render(request, 'payment_complete_web.html')
-
     # return render(request, 'uservoice_test.html')
 
 @csrf_exempt
-def payment_pay_chrome_view(request):
-    pass
-    # current_datetime = time.strftime("%Y%m%d%H%M%S")
-    # service_id = 'glx_api'
-    # order_date = current_datetime
-    # order_id = 'arsdale_' + order_date
-    # amount = '1000'
-    #
-    # # checksum
-    # temp = service_id+order_id+amount
-    # checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
-    #     'GEN ' + temp
-    #
-    # checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
-    # checksum = checksum.strip()
-    #
-    # if checksum=='8001' or checksum=='8003' or checksum=='8009':
-    #     return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
-    #
-    # return render(request, 'pay_explorer.html', {
-    #     'service_id': service_id,
-    #     'order_id': order_id,
-    #     'order_date': order_date,
-    #     'user_id': user_id,
-    #     'item_code': 'TEST_CD1',
-    #     'using_type': '0000',
-    #     'currency': '0000',
-    #     'item_name': item_name,
-    #     'amount': amount,
-    #     'user_ip': user_ip,
-    #     'installment_period': '0:3',
-    #     'return_url': return_url,
-    #     'check_sum': checksum
-    # })
+@login_required
+def before_payment(request):
 
-@csrf_exempt
-def payment_pay_explore_view(request):
-    current_datetime = time.strftime("%Y%m%d%H%M%S")
+    order_id = request.POST.get('order_id', '')
 
-    # testing option
-    service_id = 'glx_api'
-    order_date = current_datetime
-    order_id = 'arsdale_' + order_date
-    user_id = 'arsdale@naver.com'
-    user_name = 'arsdale'
-    item_name = 'beyond_sun_2014'
-    item_code = '01_01_2014'
-    amount = '1000'
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        user_ip = x_forwarded_for.split(',')[0]
-    else:
-        user_ip = request.META.get('REMOTE_ADDR')
-    return_url = request.build_absolute_uri(reverse('payment_return_explore'))
+    name = request.POST.get('name', '')
+    phone = request.POST.get('phone', '')
+    postcode = request.POST.get('postcode', '')
+    basic_address = request.POST.get('basic_address', '')
+    detail_address = request.POST.get('detail_address', '')
+    shipping_requirement = request.POST.get('shipping_requirement', '')
+    mileage = request.POST.get('mileage', 0)
 
-
-    # checksum
-    temp = service_id+order_id+amount
-    checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
-        'GEN ' + temp
-
-    checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
-    checksum = checksum.strip()
-
-    print checksum
-
-    if checksum=='8001' or checksum=='8003' or checksum=='8009':
-        return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
-
-
-    return render(request, 'pay_explorer.html', {
-        'service_id': service_id,
-        'order_id': order_id,
-        'order_date': order_date,
-        'user_id': user_id,
-        'item_code': 'TEST_CD1',
-        'using_type': '0000',
-        'currency': '0000',
-        'item_name': item_name,
-        'amount': amount,
-        'user_ip': user_ip,
-        'installment_period': '0:3',
-        'return_url': return_url,
-        'check_sum': checksum
-    })
+    BeforePayment.objects.create(
+        user=request.user,
+        order_id=order_id,
+        name=name,
+        phone=phone,
+        postcode=postcode,
+        address=basic_address+' '+detail_address,
+        shipping_requirement=shipping_requirement,
+        mileage=mileage
+    )
 
 
 @csrf_exempt
@@ -146,16 +78,12 @@ def payment_return_openbrowser_view(request):
         checksum = (Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]).strip()
         if checksum == 'SUC':
             credit_card_service_code = '0900'
-            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",credit_card_service_code]
-            broker_message_command.append(message)
-
+            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",credit_card_service_code, message]
             return_message = (Popen(broker_message_command, stdout=PIPE).communicate()[0]).strip()
             return_code = return_message[0:5]
 
             this_data = {}
-
             if return_code=='ERROR':
-
                 this_version = "0100"
                 this_merchantId = service_id
                 this_serviceCode = credit_card_service_code
@@ -167,8 +95,6 @@ def payment_return_openbrowser_view(request):
                 util.billgate_put_data(this_data, "1003", "API error!!")
                 util.billgate_put_data(this_data, "1009", return_message[10:12])
                 util.billgate_put_data(this_data, "1010", util.billgate_getErrorMessage(return_message[6:12]))
-
-
             else:
                 # {{ Message.php
 
@@ -241,17 +167,18 @@ def payment_return_openbrowser_view(request):
     except:
         pass
 
-    payment_id=0
-
     if is_success:
+        beforePayment = BeforePayment.objects.get(order_id=order_id)
+        if beforePayment is None:
+            raise Http404
 
-        user_ = helper_get_user(request)
+        user_ = beforePayment.user
         user_profile = user_.profile
 
         payment = Payment.objects.create(
             user=user_,
             service_id=service_id,
-            order_id=order_id,
+            order_id=beforePayment.order_id,
             order_date=order_date,
             transaction_id=transaction_id[0],
             auth_amount=auth_amount[0],
@@ -260,12 +187,13 @@ def payment_return_openbrowser_view(request):
             response_message=response_message[0],
             detail_response_code=detail_response_code[0],
             detail_response_message=detail_response_message[0],
-            postcode = user_profile.postcode,
-            phone= user_profile.recent_phone,
-            address=user_profile.basic_address + " " + user_profile.detail_address
+            name= beforePayment.name,
+            postcode = beforePayment.postcode,
+            phone= beforePayment.phone,
+            address= beforePayment.address
         )
 
-        user_profile.mileage = int(user_profile.mileage) - ( int(OrderTempInfo.objects.get(order_id=order_id).original_amount) - int(auth_amount[0])) + int(auth_amount[0])/100
+        user_profile.mileage = int(user_profile.mileage)-int(beforePayment.mileage)+int(auth_amount[0])/100
         user_profile.save()
 
         carts = Cart.objects.filter(order_id=order_id).all()
@@ -295,35 +223,6 @@ def payment_return_openbrowser_view(request):
         Cart.objects.filter(order_id=order_id).delete()
 
     return redirect('payment_complete', payment_id=payment_id )
-
-    # return render(request, 'return_explorer.html', {
-    #     'payment_id': payment_id,
-    #     'message': message,
-    #     'return_message': return_message,
-    #     'is_success': is_success,
-    #     'service_id': service_id,
-    #     'order_id': order_id,
-    #     'order_date': order_date,
-    #     'transaction_id': transaction_id,
-    #     'auth_amount': auth_amount,
-    #     'auth_date': auth_date,
-    #     'response_code': response_code,
-    #     'response_message': response_message,
-    #     'detail_response_code': detail_response_code,
-    #     'detail_response_message': detail_response_message
-    # })
-
-
-
-    # return render(request, 'return_explorer.html', {
-    #     'response_code': response_code,
-    #     'check_sum': check_sum,
-    #     'is_success': is_success,
-    #     'service_id': service_id,
-    #     'order_id': order_id,
-    #     'order_date': order_date,
-    #
-    # })
 
 @csrf_exempt
 def payment_return_mobile_web_view(request):
@@ -496,17 +395,8 @@ def payment_return_mobile_web_view(request):
 @csrf_exempt
 def payment_return_explore_view(request):
 
-    is_success = None
-    service_id = None
-    order_id = None
-    order_date = None
-    transaction_id = None
-    auth_amount = None
-    auth_date = None
-    response_code = None
-    response_message = None
-    detail_response_code = None
-    detail_response_message = None
+    is_success = service_id = order_id = order_date = transaction_id = auth_amount = auth_date = response_code = \
+        response_message = detail_response_code = detail_response_message = None
 
     service_id = request.POST.get('SERVICE_ID')
     order_id = request.POST.get('ORDER_ID')
@@ -514,43 +404,23 @@ def payment_return_explore_view(request):
     post_response_code = request.POST.get('RESPONSE_CODE')
     check_sum = request.POST.get('CHECK_SUM')
     message = request.POST.get('MESSAGE')
-
     is_success = False
 
     if post_response_code == "0000":
         temp = service_id+order_id+order_date
-        checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
-        'DIFF ' + check_sum + " " + temp
-        checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
-        checksum = checksum.strip()
+        checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + 'DIFF ' + check_sum + " " + temp
+        checksum = (Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]).strip()
         if checksum == 'SUC':
-
-
-    # #         # function ServiceBroker('java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker',
-    # #         #  './libs/config/config.ini')
-    #         bin = 'java -Dfile.encoding=euc-kr -cp ./libs/jars/billgateAPI.jar com.galaxia.api.EncryptServiceBroker '
-    #         config_file = '"/Users/ramju/Documents/workspace/django/project_motion9/motion9/libs/config/config.ini"'
-    #         service_code = '"0900"'
-    #         broker_message_command = bin+' '+config_file+' '+service_code+' "'+message + '"';
-    #         print broker_message_command
-    #         return_message = Popen(["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini","0900","07180100      glx_api             0900y4w2jWCkhK6+7CTywaME87rUuYBO/yNgXErm0CgTv1GKQmU3eQvB+cGoFgo/w5R0hAiXS80Pcifm03Cen8rcbjR+46fB1uVPCFkB//Ois0jyJsSR9SN2Hr9C20EylIYSGc3uue86jc7G2L91ocZec7Y0JaiQZ6Qc6AdC/WxvPPueE0EzT4gx+mIAcCpMEBKdPtsCk+/Gcj2tXziqEM0HuumMgWtZI6ffhxQJNc/LuRpb6lM+JSPcO3eilE3XcQgtLWbkPeYduceVnRoaMG0fmec6Bhyy7HcjXiYTEG432G08KoaFPDXCUJp0anqlRjwzGo1w2h7+SFvTync32Bw1x195YR1I3biKGhvhS9iglgZ2Gb1TP8cZBdhZvCXqTMiUqEIRo2cKsqjHenfn4bAHvNrmOBeixCkcVHtnKtTEN26A4Cr5Y65Ts+v1sSBExyZErUDZvLDvkmCLxQxdw04S6xwyb3sYTsf7fKBgTGcYoq1Lc/xOBSnoxuSMKBXXkDvfUvzAd8T12jj2txEDJifWDsQOK1fkqZdYJE1KpVaASstwhmif4kCPb3wFNsFt94K07/RxusSkM0a1NvXbDFyoXbtVzUwS+qzZ/aTDYjSvqGBzl7Unby5pBgvSdrsF3oUffSnRY8yXscjAOSH4FzSIrgAiOeRreprJlLKhOiRJyeQ="], stdout=PIPE).communicate()[0]
-
-            service_code = '0900'
-            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",service_code]
-            broker_message_command.append(message)
-
-            return_message = Popen(broker_message_command, stdout=PIPE).communicate()[0]
-            return_message = return_message.strip()
-
+            credit_card_service_code = '0900'
+            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini", credit_card_service_code, message ]
+            return_message = (Popen(broker_message_command, stdout=PIPE).communicate()[0]).strip()
             return_code = return_message[0:5]
 
             this_data = {}
-
             if return_code=='ERROR':
-
                 this_version = "0100"
                 this_merchantId = service_id
-                this_serviceCode = service_code
+                this_serviceCode = credit_card_service_code
                 this_command = "3011"
                 this_orderId = order_id
                 this_orderDate = order_date
@@ -559,8 +429,6 @@ def payment_return_explore_view(request):
                 util.billgate_put_data(this_data, "1003", "API error!!")
                 util.billgate_put_data(this_data, "1009", return_message[10:12])
                 util.billgate_put_data(this_data, "1010", util.billgate_getErrorMessage(return_message[6:12]))
-
-
             else:
                 # {{ Message.php
 
@@ -633,17 +501,18 @@ def payment_return_explore_view(request):
     except:
         pass
 
-    payment_id=0
-
     if is_success:
+        beforePayment = BeforePayment.objects.get(order_id=order_id)
+        if beforePayment is None:
+            raise Http404
 
-        user_ = helper_get_user(request)
+        user_ = beforePayment.user
         user_profile = user_.profile
 
         payment = Payment.objects.create(
             user=user_,
             service_id=service_id,
-            order_id=order_id,
+            order_id=beforePayment.order_id,
             order_date=order_date,
             transaction_id=transaction_id[0],
             auth_amount=auth_amount[0],
@@ -651,10 +520,14 @@ def payment_return_explore_view(request):
             response_code=response_code,
             response_message=response_message[0],
             detail_response_code=detail_response_code[0],
-            detail_response_message=detail_response_message[0]
+            detail_response_message=detail_response_message[0],
+            name= beforePayment.name,
+            postcode = beforePayment.postcode,
+            phone= beforePayment.phone,
+            address= beforePayment.address
         )
 
-        user_profile.mileage = int(user_profile.mileage) - ( int(OrderTempInfo.objects.get(order_id=order_id).original_amount) - int(auth_amount[0])) + int(auth_amount[0])/100
+        user_profile.mileage = int(user_profile.mileage)-int(beforePayment.mileage)+int(auth_amount[0])/100
         user_profile.save()
 
         carts = Cart.objects.filter(order_id=order_id).all()
@@ -671,9 +544,6 @@ def payment_return_explore_view(request):
                 user=user_,
                 payment=payment,
                 price=price,
-                postcode = user_profile.postcode,
-                phone= user_profile.recent_phone,
-                address=user_profile.basic_address + " " + user_profile.detail_address,
                 product=cart.product,
                 set=cart.set,
                 custom_set=cart.custom_set,
@@ -948,3 +818,76 @@ def help_faq_view(request):
 #                   'categories': categories,
 #                   'current_page': 'shop_product'
 #               }, RequestContext(request))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# @csrf_exempt
+# def payment_pay_explore_view(request):
+#     current_datetime = time.strftime("%Y%m%d%H%M%S")
+#
+#     # testing option
+#     service_id = 'glx_api'
+#     order_date = current_datetime
+#     order_id = 'arsdale_' + order_date
+#     user_id = 'arsdale@naver.com'
+#     user_name = 'arsdale'
+#     item_name = 'beyond_sun_2014'
+#     item_code = '01_01_2014'
+#     amount = '1000'
+#     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+#     if x_forwarded_for:
+#         user_ip = x_forwarded_for.split(',')[0]
+#     else:
+#         user_ip = request.META.get('REMOTE_ADDR')
+#     return_url = request.build_absolute_uri(reverse('payment_return_explore'))
+#
+#
+#     # checksum
+#     temp = service_id+order_id+amount
+#     checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
+#         'GEN ' + temp
+#
+#     checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
+#     checksum = checksum.strip()
+#
+#     print checksum
+#
+#     if checksum=='8001' or checksum=='8003' or checksum=='8009':
+#         return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
+#
+#
+#     return render(request, 'pay_explorer.html', {
+#         'service_id': service_id,
+#         'order_id': order_id,
+#         'order_date': order_date,
+#         'user_id': user_id,
+#         'item_code': 'TEST_CD1',
+#         'using_type': '0000',
+#         'currency': '0000',
+#         'item_name': item_name,
+#         'amount': amount,
+#         'user_ip': user_ip,
+#         'installment_period': '0:3',
+#         'return_url': return_url,
+#         'check_sum': checksum
+#     })

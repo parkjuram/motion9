@@ -181,14 +181,17 @@ $(function(){
     $('.purchase-btn').click(function(e){
 
         $.ajax({
-            url: url_profile_update,
+            url: url_before_payment,
             dataType: 'json',
             type:'POST',
             data: {
+                'name': $('#sendTo').val(),
+                'phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),
                 'postcode': $('#postalcode').val(),
-                'recent_phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),
                 'basic_address': $('#basicAddress').val(),
-                'detail_address': $('#detailAddress').val()
+                'detail_address': $('#detailAddress').val(),
+                'shipping_requirement': $('#shippingRequirement').val(),
+                'mileage': $('#mileage').val()
             },
             complete: function(jqXHR, textStatus) {
                 startPayment();

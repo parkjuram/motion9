@@ -113,6 +113,7 @@ class Payment(models.Model):
     detail_response_code = models.CharField(max_length=4, null=True)
     detail_response_message = models.TextField(null=False, blank=True, default='')
 
+    name = models.TextField(null=False, blank=True, default='')
     status = models.CharField(max_length=1, null=True, default='b') # before, ready, ship, finish
     shipping_number = models.TextField(null=True, blank=True, default='')
     phone = models.TextField(null=False, blank=True, default='')
@@ -123,3 +124,19 @@ class Payment(models.Model):
 
     def __unicode__(self):
         return '(%r)Payment' % (self.id)
+
+
+class BeforePayment(models.Model):
+    user = models.ForeignKey('auth.User')
+    order_id = models.CharField(max_length=64, null=False, unique=True)
+    name = models.TextField(null=False, blank=True, default='')
+    phone = models.TextField(null=False, blank=True, default='')
+    postcode = models.CharField(max_length=10, null=True, default='')
+    address = models.TextField(null=False, blank=True)
+    shipping_requirement = models.TextField(null=False, blank=True)
+    mileage = models.IntegerField(null=False, default=0)
+
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    def __unicode__(self):
+        return '(%r)BeforePayment' % (self.id)

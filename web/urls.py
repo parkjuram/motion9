@@ -2,7 +2,10 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
     url(r'^test/$', 'web.views.test_view', name='test'),
-    url(r'^payment/pay_explorer/$', 'web.views.payment_pay_explore_view', name='payment_pay_explore'),
+
+    url(r'^payment/before/$', 'web.views.before_payment', name='before_payment'),
+
+    # url(r'^payment/pay_explorer/$', 'web.views.payment_pay_explore_view', name='payment_pay_explore'),
     url(r'^payment/return_explorer/$', 'web.views.payment_return_explore_view', name='payment_return_explore'),
     url(r'^payment/return_openbrowser/$', 'web.views.payment_return_openbrowser_view', name='payment_return_openbrowser'),
     url(r'^payment/return_mobile_web/$', 'web.views.payment_return_mobile_web_view', name='payment_return_mobile_web'),
