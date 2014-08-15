@@ -185,6 +185,7 @@ $(function(){
             dataType: 'json',
             type:'POST',
             data: {
+                'order_id': $('input[name="ORDER_ID"]').val(),
                 'name': $('#sendTo').val(),
                 'phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),
                 'postcode': $('#postalcode').val(),
