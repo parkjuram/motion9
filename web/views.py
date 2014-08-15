@@ -259,7 +259,10 @@ def payment_return_openbrowser_view(request):
             response_code=response_code,
             response_message=response_message[0],
             detail_response_code=detail_response_code[0],
-            detail_response_message=detail_response_message[0]
+            detail_response_message=detail_response_message[0],
+            postcode = user_profile.postcode,
+            phone= user_profile.recent_phone,
+            address=user_profile.basic_address + " " + user_profile.detail_address
         )
 
         user_profile.mileage = int(user_profile.mileage) - ( int(OrderTempInfo.objects.get(order_id=order_id).original_amount) - int(auth_amount[0])) + int(auth_amount[0])/100
@@ -279,9 +282,6 @@ def payment_return_openbrowser_view(request):
                 user=user_,
                 payment=payment,
                 price=price,
-                postcode = user_profile.postcode,
-                phone= user_profile.recent_phone,
-                address=user_profile.basic_address + " " + user_profile.detail_address,
                 product=cart.product,
                 set=cart.set,
                 custom_set=cart.custom_set,

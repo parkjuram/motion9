@@ -24,15 +24,15 @@ class UserProfileAdmin(admin.ModelAdmin):
 admin.site.register(UserProfile, UserProfileAdmin)
 
 class PurchaseAdmin(admin.ModelAdmin):
-    list_display = ('user', 'payment', 'price', 'address', 'product', 'set', 'custom_set', 'type', 'item_count', 'status', 'shipping_number', 'created')
-    list_editable = ('price', 'address', 'type', 'item_count', 'status', 'shipping_number',)
+    list_display = ('user', 'payment', 'price', 'product', 'set', 'custom_set', 'type', 'item_count', 'created')
+    list_editable = ('price', 'type', 'item_count',)
     list_display_links = ('user', 'payment', 'product', 'set', 'custom_set',)
 
 admin.site.register(Purchase, PurchaseAdmin)
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message', 'created')
-    list_editable = ('service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message',)
+    list_display = ('user', 'service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message', 'status', 'shipping_number', 'phone', 'postcode', 'address', 'created')
+    list_editable = ('service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message',  'status', 'shipping_number', 'phone', 'postcode', 'address', )
     list_display_links = ('user',)
 
 admin.site.register(Payment, PaymentAdmin)

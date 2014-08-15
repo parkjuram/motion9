@@ -113,8 +113,8 @@ class Payment(models.Model):
     detail_response_code = models.CharField(max_length=4, null=True)
     detail_response_message = models.TextField(null=False, blank=True, default='')
 
-    status = models.CharField(max_length=1, null=False, default='b') # before, ready, ship, finish
-    shipping_number = models.TextField(null=False, blank=True, default='')
+    status = models.CharField(max_length=1, null=True, default='b') # before, ready, ship, finish
+    shipping_number = models.TextField(null=True, blank=True, default='')
     phone = models.TextField(null=False, blank=True, default='')
     postcode = models.CharField(max_length=10, null=True, default='')
     address = models.TextField(null=False, blank=True)

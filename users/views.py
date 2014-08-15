@@ -408,12 +408,13 @@ def mypage_purchase_product_view(request, page_num=1):
         purchases = user.purchase_set.filter(type='p').all()
         products = []
         for purchase in purchases:
+            payment = purchase.payment
             product = purchase.product
             product_ = helper_get_product_detail(product, user)
             product_.update({
                 'item_count':purchase.item_count,
-                'status':helpger_get_purchase_status(purchase.status),
-                'shipping_number':purchase.shipping_number,
+                'status':helpger_get_purchase_status(payment.status),
+                'shipping_number':payment.shipping_number,
                 'price':purchase.price,
                 'created':purchase.created
             })
