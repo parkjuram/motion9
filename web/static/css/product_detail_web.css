@@ -95,6 +95,7 @@
 .price-saled{
     margin-bottom: 6px;
     width: 100%;
+    float: left;
 }
 
 .price-saled span{
@@ -311,17 +312,15 @@ a.basic-btn{
 .magazine-item-container{
     padding: 5px;
     margin-bottom: 10px;
+    text-align: right;
 }
 
 .magazine-item-container .title {
     color: #0a4d6d;
     font-size: 16px;
-    text-align: right;
 }
 .magazine-item-container .description {
     margin-top: 3px;
-    text-align: right;
-    font-style: italic;
 }
 .magazine-item-container .description .magazine-title {
 
@@ -329,12 +328,12 @@ a.basic-btn{
 
 
 .magazine-item-container .description span {
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .magazine-wrapper {
-    float: left;
-    margin-left: 30px;
+    float: right;
+    width: 330px;
 }
 
 .magazine-wrapper-title {
