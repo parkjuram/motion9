@@ -188,6 +188,38 @@ a.basic-btn{
     display: none;
 }
 
+.set-img-container {
+    position: relative;
+}
+
+.set-img-opacity-bg {
+    background-color: white;
+    opacity: 0.9;
+    position: absolute;
+    top :0;
+    left : 0;
+    width : 100%;
+    height: 100%;
+    z-index:1;
+    display: none;
+}
+.set-img-opacity-contents {
+    position: absolute;
+    top :0;
+    left : 0;
+    width : 100%;
+    height: 100%;
+    z-index: 2;
+    display: none;
+}
+
+.set-img-opacity-contents div {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+}
+
 .product-opacity-bg{
     background-color: white;
     position: absolute;

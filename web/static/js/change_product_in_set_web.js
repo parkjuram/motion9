@@ -4,17 +4,17 @@ $(function(){
         $('#product-detail-modal').modal('show');
     });
 
-     $('.available-product').hover(function(e){
-       $(this).children('.available-product-hover-menu').show();
-    },function(e){
-       $(this).children('.available-product-hover-menu').hide();
-    });
+//     $('.available-product').hover(function(e){
+//       $(this).children('.available-product-hover-menu').show();
+//    },function(e){
+//       $(this).children('.available-product-hover-menu').hide();
+//    });
 
-     $('.available-item').hover(function(e){
-       $(this).children('.available-item-hover-menu').show();
-    },function(e){
-       $(this).children('.available-item-hover-menu').hide();
-    });
+//     $('.available-item').hover(function(e){
+//       $(this).children('.available-item-hover-menu').show();
+//    },function(e){
+//       $(this).children('.available-item-hover-menu').hide();
+//    });
 
     var fixDiv = function() {
         var b = $(window).scrollTop();

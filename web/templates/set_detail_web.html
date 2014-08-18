@@ -22,10 +22,18 @@
                 카테고리 > {{ set.category_name }}
             </div>
             <div class="product-contents">
-                <div class="float-left">
+                <div class="float-left set-img-container">
                     <div class="set-img">
                         <img src="{{ set.images.0 }}" alt="" />
                     </div>
+                    <div class="set-img-opacity-bg">
+                    </div>
+                    <div class="set-img-opacity-contents">
+                        <div style="padding : 30px 10px 20px 20px; display:inline-block">
+                            <a href="{% url 'customize_set_make' set_id=set.id %}" class="big-btn" >커스텀 구성하기</a>
+                        </div>
+                    </div>
+
                 </div>
                 <!--
                 <div class="float-right">
@@ -134,16 +142,8 @@
     </div>
     <div class="nav-container float-left">
         <div class="box-css">
-            <div class="box-header">
-                Motion9
-            </div>
             <div style="padding : 30px 10px 20px 20px;">
-                {% if set.is_interested %}
-                    <a href="#" class="btn-for-interest basic-btn interest-done" data-product="{{ set.id }}" data-type="s">관심취소</a>
-                {% else %}
-                    <a href="#" class="btn-for-interest basic-btn" data-product="{{ set.id }}" data-type="s">관심하기</a>
-                {% endif %}
-                <a href="{% url 'customize_set_make' set_id=set.id %}" class="basic-btn" >커스텀 구성하기</a>
+                <a href="{% url 'customize_set_make' set_id=set.id %}" class="big-btn" >커스텀 구성하기</a>
             </div>
         </div>
         <div class="box-css">
@@ -167,6 +167,11 @@
                     총 상품 금액 : <span id="productFinalPrice">{{ set.discount_price|intcomma }}</span>원
                 </div>
                 <div class="product-btn-area">
+                    {% if set.is_interested %}
+                        <a href="#" class="btn-for-interest basic-btn interest-done" data-product="{{ set.id }}" data-type="s">관심취소</a>
+                    {% else %}
+                        <a href="#" class="btn-for-interest basic-btn" data-product="{{ set.id }}" data-type="s">관심하기</a>
+                    {% endif %}
                     <a href="#" data-product="{{ set.id }}" data-type="s" data-mobile="false" class="basic-btn btn-for-purchase">구매하기</a>
                     <a href="#" data-product="{{ set.id }}" data-type="s" class="basic-btn btn-for-cart">장바구니</a>
                 </div>
@@ -187,14 +192,15 @@
                    </div>
                    <div class="belong-product-info">
                        <div class="belong-product-name">
+                           {{ product.brandname }}<br/>
                            {{ product.name|truncatechars:18 }}
                        </div>
                        <div class="belong-product-contents">
                            카테고리 > {{ product.category_name }}
                        </div>
-                       <div class="belong-product-contents">
-                           브랜드 : {{ product.brandname }}
-                       </div>
+{#                       <div class="belong-product-contents">#}
+{#                           브랜드 : {{ product.brandname }}#}
+{#                       </div>#}
                        <div class="belong-product-contents">
                            가격 : {{ product.discount_price|intcomma }}원
                        </div>

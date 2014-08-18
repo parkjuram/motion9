@@ -27,9 +27,9 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def test_view(request):
-    return HttpResponse('success!')
+    # return HttpResponse('success!')
     # return render(request, 'payment_complete_web.html')
-    # return render(request, 'uservoice_test.html')
+    return render(request, 'uservoice_test.html')
 
 @csrf_exempt
 @login_required

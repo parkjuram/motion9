@@ -59,6 +59,17 @@ $(function(){
 		}
 	});
 */
+
+    var hoverBg = $(this).find('.set-img-opacity-bg');
+    var hoverContents = $(this).find('.set-img-opacity-contents');
+    $('.set-img-container').hover(function(e) {
+        hoverBg.css({display:'block'});
+        hoverContents.css({display:'block'});
+    }, function(e) {
+        hoverBg.css({display:'none'});
+        hoverContents.css({display:'none'});
+    });
+
     $('.belong-to-set-item').hover(function(e){
         var id = $(this).attr('data-attr');
         $(this).find('.product-hover-area').css({display:'block'});

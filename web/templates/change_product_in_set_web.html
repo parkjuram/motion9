@@ -39,7 +39,7 @@
                                     </div>
                                     <div style="margin-top: 4px;">
                                         카테고리 > {{ product.category_name }}<br/>
-                                        브랜드 : {{ product.maker }}<br/>
+                                        브랜드 : {{ product.brandname }}<br/>
                                         용량 : {{ product.capacity }}<br/>
                                         원래 가격 : {{ product.original_price|intcomma }}원<br/>
                                         세트 포함시 가격 : {{ product.discount_price|intcomma }}원 (할인율 : {{ product.discount_rate }}%)
@@ -94,7 +94,9 @@
                                         {{ setItem.category_name }}
                                     </td>
                                     <td class="set-table-item-info">
-                                        {{ setItem.name|truncatechars:16 }}
+{#                                        {{ setItem.name|truncatechars:16 }}#}
+                                        {{ setItem.brandname }}<br/>
+                                        {{ setItem.name }}
                                         {% if setItem.is_changeable == False %}
                                             <br/>(<span style="color:red;">고정상품</span>)
                                         {% endif %}
