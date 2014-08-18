@@ -45,11 +45,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'mathfilters',
+    'foradmin',
     'south',
     'web',
     'mobile',
     'users',
-    'foradmin',
 )
 
 MIDDLEWARE_CLASSES = (
