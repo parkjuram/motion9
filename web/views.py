@@ -624,7 +624,10 @@ def index_view(request):
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
 
-    main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').name
+    try:
+        main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
+    except:
+        main_image=''
 
     return render(request, 'index_web.html',
                   {
