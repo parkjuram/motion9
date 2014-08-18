@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'web',
     'mobile',
     'users',
+    'foradmin',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -9,6 +9,8 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from common_controller import util
+from foradmin.models import MainImage
+from motion9 import settings
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
@@ -622,10 +624,13 @@ def index_view(request):
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
 
+    main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').name
+
     return render(request, 'index_web.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
+                      'main_image': main_image,
                       'next': 'index'
                   })
 
