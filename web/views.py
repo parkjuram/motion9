@@ -7,6 +7,7 @@ from django.http.request import RAISE_ERROR
 from django.http.response import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
 from common_controller import util
 
 from motion9.const import *
@@ -27,9 +28,11 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def test_view(request):
-    # return HttpResponse('success!')
+    send_mail('이게 제목입니다.', '이게내용입니다.', 'from@example.com', ['parkjuram@naver.com'], fail_silently=False)
+
+    return HttpResponse('success!')
     # return render(request, 'payment_complete_web.html')
-    return render(request, 'uservoice_test.html')
+    # return render(request, 'uservoice_test.html')
 
 @csrf_exempt
 @login_required

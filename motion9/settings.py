@@ -185,3 +185,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 # Login
 LOGIN_URL = '/user/login_page/'
+
+
+
+
+# Email
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'motion9corp@gmail.com'
+EMAIL_HOST_PASSWORD = '5sb-8lPeNKVbPFapRFkXBg'
+EMAIL_USE_TLS = True

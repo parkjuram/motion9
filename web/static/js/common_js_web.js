@@ -108,7 +108,22 @@ $(function(){
             }, {scope: 'public_profile,email,user_friends'});
             */
         } else {
-            alert('페이스북에 로그인을 먼저 해주세요.');
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    FB.api('/me', function(user_info) {
+                        $('#fbEmail').val(user_info.email);
+                        $('#fbToken').val(response.authResponse.accessToken);
+                        $('#facebookLoginForm').submit();
+                    });
+//                    console.log('Welcome!  Fetching your information.... ');
+//                    FB.api('/me', function(response) {
+//                        console.log('Good to see you, ' + response.name + '.');
+//                    });
+                } else {
+//                    console.log('User cancelled login or did not fully authorize.');
+                }
+            }, {scope: 'public_profile,email,user_friends' });
+//            alert('페이스북에 로그인을 먼저 해주세요.');
           // The person is not logged into Facebook, so we're not sure if
           // they are logged into this app or not.
         }

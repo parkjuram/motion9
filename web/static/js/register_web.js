@@ -1,6 +1,7 @@
 $(function(){
 
     var registerPageInit = function(response) {
+        console.log(response.status);
         if (response.status === 'connected') {
             wireDataWithForm();
         } else if (response.status === 'not_authorized') {
@@ -10,6 +11,9 @@ $(function(){
         }
     }
 
+    var rr;
+
+    console.log('ttt');
 
     function wireDataWithForm(){
         var name  = $('#name');
@@ -17,15 +21,20 @@ $(function(){
 
         FB.api('/me', function(response) {
 
-          email.val(response.email);
-          emailCheck(email);
-          name.val(response.last_name + response.first_name);
+            rr = response;
 
-          if(response.gender == 'male'){
-              $('#sex_m').attr('checked', 'checked');
-          }else{
-              $('#sex_f').attr('checked', 'checked');
-          }
+            console.log(response);
+            console.log(response.email);
+
+            email.val(response.email);
+            emailCheck(email);
+            name.val(response.last_name + response.first_name);
+
+            if(response.gender == 'male'){
+                $('#sex_m').attr('checked', 'checked');
+            }else{
+                $('#sex_f').attr('checked', 'checked');
+            }
         });
     }
 

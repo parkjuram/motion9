@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.db.utils import DataError
@@ -63,10 +64,16 @@ def check_facebook_token_view(request, next='index'):
         contents_dict = json.loads(contents)
 
         if contents_dict['data']['is_valid']==True:
-            user_ = User.objects.get(username=email)
-            user_.backend = 'django.contrib.auth.backends.ModelBackend'
-            auth_login(request, user_)
-            return redirect(next)
+            try:
+                user_ = User.objects.get(username=email)
+                user_.backend = 'django.contrib.auth.backends.ModelBackend'
+                auth_login(request, user_)
+
+                return redirect(next)
+
+            except ObjectDoesNotExist as e:
+                return redirect('registration_page')
+
         else:
             http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
 
