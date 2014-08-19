@@ -86,34 +86,30 @@ $(function(){
             url = '/user/interest/del/';
 
         $.ajax({
-				  url: url,
-				  dataType: 'json',
-				  async : true,
-				  type:'POST',
-                  data : {product_or_set_id : productKey, type : type},
-				  success: function(data){
-					  if(!data.success && data.message == 'login required'){
-                          if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
-                            if($('#loginBox').length > 0 )
-                                $('#loginBox').jqmShow();
-                            else
-                                location.href='';
-                      }else if(!data.success){
-                          alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
-                      }else{
-                          if(!done){
-                              btn.addClass('interest-done');
-                              btn.text('관심취소');
-                          }else{
-                              btn.removeClass('interest-done');
-                              btn.text('관심하기');
-                          }
-                      }
-
-				  },
-				  error:function(jqXHR, textStatus, errorThrown){
-					  console.log(textStatus);
-				  }
+            url: url,
+            dataType: 'json',
+            async : true,
+            type:'POST',
+            data : {product_or_set_id : productKey, type : type},
+            success: function(data){
+                if(!data.success && data.message == 'login required'){
+                    if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
+                        location.href= url_for_login_next;
+                }else if(!data.success){
+                    alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+                }else{
+                    if(!done){
+                        btn.addClass('interest-done');
+                        btn.text('관심취소');
+                    }else{
+                        btn.removeClass('interest-done');
+                        btn.text('관심하기');
+                    }
+                }
+            },
+            error:function(jqXHR, textStatus, errorThrown){
+                console.log(textStatus);
+            }
 		});
 	});
 

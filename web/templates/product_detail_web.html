@@ -94,7 +94,10 @@
                         </div>
                         <div class="product-detail-info-wrapper">
                             <div class="product-detail-info-header">사용방법</div>
-                            <div class="product-detail-info">{{ product.description2 }}</div>
+                            <div class="product-detail-info">
+                                <img src="{{ product.category_guide_image }}" alt="" />
+                                {{ product.description2 }}
+                            </div>
                         </div>
                     </div>
                     <div>

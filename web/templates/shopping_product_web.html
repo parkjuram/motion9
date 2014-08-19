@@ -108,7 +108,7 @@
         <div class="box-css">
             <div class="filter-area">
                 <div class="product-category">
-                    Filter by 가격
+                    가격
                 </div>
                 <div class="filter-area-contents">
                     <div class="price-ranger">
@@ -122,14 +122,12 @@
             </div>
             <div class="filter-area">
                 <div class="product-category">
-                    Filter by 브랜드
+                    브랜드
                 </div>
                 <div class="filter-area-contents">
-                    <ul>
-                        {% for brand in brands %}
-                            <li><a href="{% url 'shop_product' %}?brandname={{brand.id}}" {% if brand.id == request.GET.brandname|add:0 %} class="filter-selected" {% endif %}>{{ brand.name  }}</a></li>
-                        {% endfor %}
-                    </ul>
+                    {% for brand in brands %}
+                        <span class="brand-title"><a href="{% url 'shop_product' %}?brandname={{brand.id}}" {% if brand.id == request.GET.brandname|add:0 %} class="filter-selected" {% endif %}>{{ brand.name  }}</a></span>
+                    {% endfor %}
                 </div>
             </div>
         </div>
