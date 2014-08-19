@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'mathfilters',
     'registration',
+    'bootstrap3',
     'foradmin',
     'south',
     'web',
@@ -54,6 +55,9 @@ INSTALLED_APPS = (
     'users',
 
 )
+
+SITE_ID = 1
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

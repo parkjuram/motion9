@@ -1,9 +1,176 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "foradmin_base.html" %}
+{% load bootstrap3 %}
+{% load humanize %}
 
-</body>
-</html>
+{% block stylesheets %}
+    {{ block.super }}
+    <style type="text/css">
+        .col-sm-custom-20 {
+            width: 3000px;
+        }
+        .clickable:hover {
+            cursor: pointer;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        $(function(){
+            $(".clickable").click(function() {
+                window.document.location = $(this).attr("href");
+            });
+
+            $(".btn-payment-save").click(function() {
+                var tr = $(this).parent().parent();
+                var pk = tr.attr('payment-id')
+                var status = tr.find('.select-status').val();
+                var shipping_number = tr.find('.shipping-number').val();
+
+                console.log( pk );
+                console.log( status );
+                console.log( shipping_number );
+
+                $.ajax({
+                    url: "{% url 'foradmin:payment_update' %}"+pk+"/",
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        'status':status,
+                        'shipping_number': shipping_number
+                    },
+                    success: function (data) {
+                        if (data.success == true ) {
+                            window.document.location = "{% url 'foradmin:manage_shipping' %}";
+                        } else {
+                            alert('에러가 발생했습니다! 관리자에게 문의해주세요.');
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        alert('에러가 발생했습니다! 관리자에게 문의해주세요.');
+                    }
+                });
+
+{#                console.log($(this).parent().getParameter('payment-id'));#}
+{#                $.ajax({#}
+{#                    url: {% url 'payment_update' %}+,#}
+{#                    dataType: 'json',#}
+{#                    type:'POST',#}
+{#                    data: {#}
+{#                        'order_id': $('input[name="ORDER_ID"]').val(),#}
+{#                        'name': $('#sendTo').val(),#}
+{#                        'phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),#}
+{#                        'postcode': $('#postalcode').val(),#}
+{#                        'basic_address': $('#basicAddress').val(),#}
+{#                        'detail_address': $('#detailAddress').val(),#}
+{#                        'shipping_requirement': $('#shippingRequirement').val(),#}
+{#                        'mileage': $('#mileage').val()#}
+{#                    },#}
+{#                    complete: function(jqXHR, textStatus) {#}
+{#                        startPayment();#}
+{#                    }#}
+{#                });#}
+            });
+
+        });
+
+{#        function post(path, params, method) {#}
+{#            method = method || "post"; // Set method to post by default if not specified.#}
+{##}
+{#            // The rest of this code assumes you are not using a library.#}
+{#            // It can be made less wordy if you use one.#}
+{#            var form = document.createElement("form");#}
+{#            form.setAttribute("method", method);#}
+{#            form.setAttribute("action", path);#}
+{##}
+{#            for(var key in params) {#}
+{#                if(params.hasOwnProperty(key)) {#}
+{#                    var hiddenField = document.createElement("input");#}
+{#                    hiddenField.setAttribute("type", "hidden");#}
+{#                    hiddenField.setAttribute("name", key);#}
+{#                    hiddenField.setAttribute("value", params[key]);#}
+{##}
+{#                    form.appendChild(hiddenField);#}
+{#                 }#}
+{#            }#}
+{##}
+{#            document.body.appendChild(form);#}
+{#            form.submit();#}
+{#        }#}
+{##}
+{#        function payment_save( pk ) {#}
+{#            var path = '{% url 'foradmin:payment_update' %}'+pk+"/";#}
+{#            post(path, {status:"f",shipping_number:"111"}, "POST");#}
+{#        }#}
+    </script>
+{% endblock javascripts %}
+
+{% block content %}
+    <div class='row'>
+        <div class='col-sm-custom-20'>
+{#            <p><a class="btn btn-default" href="{% url 'forcompany:company_classes_create' %}">수업추가하기</a></p>#}
+            <table class="table table-hover">
+                <tr>
+                    <th>#</th>
+                    <th></th>
+                    <th>주문번호</th>
+                    <th>주문일자</th>
+                    <th>배송상태</th>
+                    <th>송장번호</th>
+                    <th>수취인</th>
+                    <th>수취인전화번호</th>
+                    <th>우편번호</th>
+                    <th>배송지</th>
+                    <th>배송시 요청사항</th>
+                    <th>상품명</th>
+                    <th>구매수량</th>
+                    <th>상품가격</th>
+                    <th>마일리지 사용액</th>
+                    <th>총결제금액</th>
+                    <th>마일리지 적립액</th>
+                    <th>주문자</th>
+                    <th>주문자전화번호</th>
+                </tr>
+                {% for purchase in purchases %}
+{#                    <tr class="clickableRow" href="{% url 'forcompany:company_classes_detail' pk=item.pk %}">#}
+                    <tr purchase-id="{{ purchase.id }}" payment-id="{{ purchase.payment.id }}">
+                        <td class="clickable" href="{% url 'foradmin:function_purchase_update' pk=purchase.pk %}">{{ forloop.counter }}</td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-payment-save">저장하기</button>
+                        </td>
+                        <td class="clickable" href="{% url 'foradmin:function_payment_update' pk=purchase.payment.pk %}">{{ purchase.payment.order_id }}</td>
+                        <td>{{ purchase.payment.auth_date }}</td>
+                        <td>
+                            <select class="form-control select-status">
+                                <option value="b" {% ifequal purchase.payment.status 'b' %}selected='selected'{% endifequal %}>상품 준비중</option>
+                                <option value="r" {% ifequal purchase.payment.status 'r' %}selected='selected'{% endifequal %}>배송 대기</option>
+                                <option value="s" {% ifequal purchase.payment.status 's' %}selected='selected'{% endifequal %}>배송중</option>
+                                <option value="f" {% ifequal purchase.payment.status 'f' %}selected='selected'{% endifequal %}>배송 완료</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="shipping-number form-control" value="{{ purchase.payment.shipping_number }}">
+                        </td>
+{#                        <td>{{ purchase.payment.status_name }}</td>#}
+                        <td>{{ purchase.before_payment.name }}</td>
+                        <td>{{ purchase.before_payment.phone }}</td>
+                        <td>{{ purchase.before_payment.postcode }}</td>
+                        <td>{{ purchase.before_payment.address }}</td>
+                        <td>{{ purchase.before_payment.shipping_requirement }}</td>
+                        <td>{{ purchase.item_name }}</td>
+                        <td>{{ purchase.item_count }}개</td>
+                        <td>{{ purchase.price|intcomma }}원</td>
+                        <td>{{ purchase.before_payment.mileage|intcomma }}원</td>
+                        <td>{{ purchase.payment.auth_amount|intcomma }}원</td>
+                        <td>{{ purchase.new_mileage|intcomma }}원</td>
+                        <td>{{ purchase.user.profile.name }}</td>
+                        <td>{{ purchase.user.profile.phone }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

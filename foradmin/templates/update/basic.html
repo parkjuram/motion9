@@ -1,0 +1,14 @@
+{% extends "foradmin_base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        <input class="btn btn-default" type="submit" value="수정완료" />
+        <div class="spacer"></div>
+        {% bootstrap_form form %}
+{#        <input type="hidden" name="next" value="{% url 'forcompany:index' %}" />#}
+    </form>
+{% endblock content %}
+{#{% block footer %}#}
+{#{% endblock footer %}#}

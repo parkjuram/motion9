@@ -1,0 +1,27 @@
+{% extends "foradmin_base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block content %}
+    <div class='row'>
+        <form method="post" action="." class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            {% buttons %}
+                <button type="submit" class="btn btn-primary center-block">
+                    로그인
+{#                    {% bootstrap_icon "star" %}로그인#}
+                </button>
+            {% endbuttons %}
+
+        {#    <input type="submit" value="Log In" />#}
+            <input type="hidden" name="next" value="{% url 'foradmin:manage_shipping' %}" />
+        </form>
+
+{#        <p class="center-block"><a href="{% url 'auth_password_reset' %}">비밀번호 재설정</a></p>#}
+
+        <p><a href="{% url 'registration_register' %}">회원가입</a></p>
+
+    </div>
+
+{% endblock %}
