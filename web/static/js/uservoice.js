@@ -1,6 +1,3 @@
-/**
- * Created by Park juram on 14. 8. 4.
- */
 
 // Include the UserVoice JavaScript SDK (only needed once on a page)
 UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/nc4IBN1eQArehIraH1HoA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
@@ -36,7 +33,14 @@ UserVoice.push(['identify', {
 }]);
 
 // Add default trigger to the bottom-right corner of the window:
-UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+UserVoice.push(['addTrigger', {
+    mode: 'contact',
+    trigger_position: 'right',
+    trigger_style: 'tab',
+    width: '400px',
+    locale: 'ko',
+    contact_title: '문의사항 보내기'
+}]);
 
 // Or, use your own custom trigger:
 //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
