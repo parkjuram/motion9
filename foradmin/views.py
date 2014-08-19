@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def manage_shipping_view(request):
+    return render(request, 'manage_shipping.html', {} )

@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^user/', include('users.urls')),
     url(r'', include('web.urls')),
     url(r'mobile/', include('mobile.urls')),
+    url(r'foradmin/', include('foradmin.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
