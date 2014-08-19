@@ -2,6 +2,7 @@ Django==1.6.5
 Pillow==2.4.0
 South==0.8.4
 django-mathfilters==0.2.1
+django-registration==1.0
 gunicorn==18.0
 psycopg2==2.5.3
 pytz==2014.3
