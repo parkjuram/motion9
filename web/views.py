@@ -629,11 +629,20 @@ def index_view(request):
     except:
         main_image=''
 
+    set_category_images = []
+    try:
+        set_categorys = Category.objects.filter(is_set=True).all()
+        for set_category in set_categorys:
+            set_category_images.append( settings.MEDIA_URL + set_category.small_image.name )
+    except:
+        pass
+
     return render(request, 'index_web.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
                       'main_image': main_image,
+                      'set_category_images': set_category_images,
                       'next': 'index'
                   })
 

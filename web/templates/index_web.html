@@ -13,14 +13,10 @@
 
 {% block content %}
 <div class="index-content-wrapper">
-    <div class="index-content">
-        <a href="#" class="index-content-img"><img src="{% static 'img/surfer.jpg' %}"/></a>
-    </div>
-    <div class="index-content">
-        <a href="#" class="index-content-img"><img src="{% static 'img/surfer.jpg' %}"/></a>
-    </div>
-    <div class="index-content">
-        <a href="#" class="index-content-img"><img src="{% static 'img/surfer.jpg' %}"/></a>
-    </div>
+    {% for set_category_image in set_category_images %}
+        <div class="index-content">
+            <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}
