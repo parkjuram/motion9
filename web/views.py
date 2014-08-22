@@ -6,8 +6,10 @@ from django.core.urlresolvers import reverse
 from django.http.request import RAISE_ERROR
 from django.http.response import HttpResponse, Http404
 from django.shortcuts import render, redirect
+from django.template.loader import get_template
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
+from django.template import Context
 from common_controller import util
 from foradmin.models import MainImage
 from motion9 import settings
@@ -31,26 +33,54 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def test_view(request):
 
-    content = '<p>This is an <strong>important</strong> message.</p>'
-    send_mail(subject='is title',from_email='from@example.com',recipient_list=['parkjuram@naver.com'],fail_silently=True,html_content=content)
+    plaintext = get_template('email.txt')
+    htmly     = get_template('email.html')
 
-    # subject, from_email, to = 'hello', 'from@example.com', 'parkjuram@naver.com'
-    # text_content = ''
-    # html_content = '<p>This is an <strong>important</strong> message.</p>'
-    # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-    # msg.send()
-    # msg.attach_alternative(html_content, "text/html")
-    # msg.send()
+    payment_id = 28
+    payment = Payment.objects.get(id=payment_id)
 
-    # html_contents = """
-    # <table cellspacing="0" cellpadding="0" border="0" width="400">
-    # <tr>
-    # <td width="100">이게 내용</td>
-    # <td width="300">입니다다다다</td>
-    # </tr>
-    # </table>
-    # """
-    # send_mail('이게 제목입니다.', html_contents, 'from@example.com', ['parkjuram@naver.com'], fail_silently=False)
+    purchase_products = Purchase.objects.filter(payment_id=payment_id, type='p').all()
+    products = []
+    for purchase_set in purchase_products:
+        product = purchase_set.product
+        product_ = helper_get_product_detail(product, request.user)
+        product_['item_count'] = purchase_set.item_count
+        product_['total_price'] = purchase_set.price
+        products.append(product_)
+
+    purchase_sets = Purchase.objects.filter(payment_id=payment_id, type='s').all()
+    sets = []
+    for purchase_set in purchase_sets:
+        set = purchase_set.set
+        set_ = helper_get_set(set, request.user)
+        set_['item_count'] = purchase_set.item_count
+        set_['total_price'] = purchase_set.price
+        sets.append(set_)
+
+    purchase_custom_sets = Purchase.objects.filter(payment_id=payment_id, type='c').all()
+    custom_sets = []
+    for purchase_custom_set in purchase_custom_sets:
+        custom_set = purchase_custom_set.custom_set
+        custom_set_ = helper_get_custom_set(custom_set, request.user)
+        custom_set_['item_count'] = purchase_custom_set.item_count
+        custom_set_['total_price'] = purchase_custom_set.price
+        custom_sets.append(custom_set_)
+
+
+    d = Context({
+        'products': products,
+        'sets': sets,
+        'custom_sets': custom_sets,
+        'payment': payment,
+        'user_': request.user
+    })
+
+    subject, from_email, to = 'hello', "from@example.com", 'parkjuram@naver.com'
+    text_content = plaintext.render(d)
+    html_content = htmly.render(d)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
 
     return HttpResponse('success!')
     # return render(request, 'payment_complete_web.html')

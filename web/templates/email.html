@@ -1,0 +1,57 @@
+<ul>
+<li>주문 번호 : {{ payment.order_id }}</li>
+<li>주문 완료 시간 : {{ payment.auth_date }}</li>
+</ul>
+<div>
+    <div>결제 내역</div>
+    <table style="border:1px solid black;border-collapse:collapse;">
+        <tr style="border:1px solid black;border-collapse:collapse;">
+            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">
+                <span style="font-weight:900;">최종결제금액</span></td>
+            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ payment.auth_amount }}원</td>
+        </tr>
+{#        <tr style="border:1px solid black;border-collapse:collapse;">#}
+{#            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">결제내역</td>#}
+{#            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">신용카드 152,234원</td>#}
+{#        </tr>#}
+    </table>
+</div>
+<ul>
+<li>수취인 이름 : {{ payment.name }}</li>
+<li>수취인 : {{ payment.phone }}</li>
+<li>배송지 : ({{ payment.postcode }}){{ payment.address }}</li>
+</ul>
+<div>
+    <table style="border:1px solid black;border-collapse:collapse;">
+        <tr style="border:1px solid black;border-collapse:collapse;">
+            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">상품정보</th>
+            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">판매가</th>
+            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">수량</th>
+            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">구매가</th>
+        </tr>
+        {% for product in products %}
+            <tr style="border:1px solid black;border-collapse:collapse;">
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.name }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.discount_price }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.item_count }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.total_price }}</td>
+            </tr>
+        {% endfor %}
+        {% for set in sets %}
+            <tr style="border:1px solid black;border-collapse:collapse;">
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.name }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.discount_price }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.item_count }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.total_price }}</td>
+            </tr>
+        {% endfor %}
+        {% for custom_set in custom_sets %}
+            <tr style="border:1px solid black;border-collapse:collapse;">
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.name }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.discount_price }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.item_count }}</td>
+                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.total_price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

@@ -41,18 +41,22 @@ a:visited{
 }
 
 .container{
-    width : 1080px;
+    /*width : 1080px;*/
+    width: 100%;
     height: auto;
     min-height : 400px;
     position: relative;
-    margin-left : auto;
-    margin-right : auto;
+    /*margin-left : auto;*/
+    /*margin-right : auto;*/
     padding-bottom: 150px;
 }
 
 .row{
     position: relative;
-    width :  100%;
+    /*width :  100%;*/
+    width: auto;
+    display: table;
+    margin: 0 auto;
     clear: both;
 }
 

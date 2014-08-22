@@ -31,7 +31,9 @@
                 </div>
                 <div class="magazine-wrapper">
                     <div class="magazine-wrapper-title">
-                        <h4 class="lined-heading"><span>EDITOR'S NOTES</span></h4>
+                        {% if magazines|length > 0 %}
+                            <h4 class="lined-heading"><span>EDITOR'S NOTES</span></h4>
+                        {% endif %}
                     </div>
                     {% for magazine in magazines %}
                         <a href="{{ magazine.link }}" target="_blank">
