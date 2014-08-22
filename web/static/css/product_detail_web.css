@@ -369,3 +369,7 @@ a.basic-btn{
     color: #8C3946;
     font-size: 11px;
 }
+
+.ui-tooltip {
+    border: 1px solid red;
+}

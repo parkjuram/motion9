@@ -134,6 +134,7 @@ $(function(){
 
             if ( popup_object == null ) {
                 alert("팝업이 차단되어 있습니다.\n팝업차단을 해제하신 뒤 다시 시도하여 주십시오.");
+
             }
 
             payment_form.submit();
@@ -142,6 +143,7 @@ $(function(){
             if(plugin == null || plugin.VERSION == null)
             {
                 alert("플러그인을 설치해주세요.");
+                window.location = 'http://119.207.70.214/BillGateCreditPlugin.exe';
                 return;
             }
             ////// 수정 불가(필수 파라메터) //////////////////////

@@ -4,6 +4,16 @@
 
 $(function(){
 
+    $( document ).tooltip({position: {
+        my: "center",
+        at: "right+200",
+        track: false,
+        using: function(position, feedback) {
+            $(this).css(position);
+        }
+    }});
+
+
     var fixDiv = function() {
         var b = $(window).scrollTop();
         var d = $("#header").offset().top + 80;
