@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Category, Product, ProductDescriptionImage, ProductImage, Set, SetProduct, ChangeableProduct, \
     ChangeableProductInfo, BlogReview, Brand, Magazine, ProductMagazine, Tag, SetTag, Faq
+from web.models import SetDescriptionImage
+
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'category', 'original_price', 'discount_price', 'fit_skin_type', 'thumbnail_image', 'video_url', 'brand', 'brandname', 'maker', 'country', 'capacity', 'description', 'short_desc', 'use_expired_date', 'production_date', 'usage', 'ingredient', 'judge_result', 'precautions', 'quality_guarantee_standard')
@@ -59,9 +61,15 @@ class FaqAdmin(admin.ModelAdmin):
     list_display = ('title', 'content', 'is_active', 'created')
     list_editable = ('content', 'is_active',)
     # list_display_links = ()
-
-
 admin.site.register(Faq, FaqAdmin)
+
+class SetDescriptionImageAdmin(admin.ModelAdmin):
+    list_display = ('set', 'image')
+    list_editable = ('image',)
+    list_display_links = ('set', )
+admin.site.register(SetDescriptionImage, SetDescriptionImageAdmin)
+
+
 
 admin.site.register(Category)
 

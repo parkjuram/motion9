@@ -270,12 +270,16 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     else:
         set = set_object
 
+    description_images = set.setdescriptionimage_set.values_list('image', flat=True)
+    description_images = map(lambda x:settings.MEDIA_URL+x, description_images)
+
     set_ = {}
     set_.update({
         'id': set.id,
         'name': set.name,
         'category_name': set.category.name,
         'description': set.description,
+        'description_images': description_images,
         'big_img_url': set.big_img_url,
         'small_img_url': set.small_img_url,
         'discount_difference': set.discount_difference,

@@ -68,15 +68,18 @@
                 <div class="resp-tabs-container tab-box-shadow">
                     <div>
                         <div class="product-detail-info-wrapper">
-                            <div class="product-detail-info-header">상품특징</div>
-                            <div class="product-detail-info">
-                                {{ set.description }}
-                            </div>
+                            {% for description_image in set.description_images %}
+                                <img src="{{ description_image }}" alt="" />
+                            {% endfor %}
+{#                            <div class="product-detail-info-header">상품특징</div>#}
+{#                            <div class="product-detail-info">#}
+{#                                {{ set.description }}#}
+{#                            </div>#}
                         </div>
-                        <div class="product-detail-info-wrapper">
-                            <div class="product-detail-info-header">사용방법</div>
-                            <div class="product-detail-info">{{ set.description2 }}</div>
-                        </div>
+{#                        <div class="product-detail-info-wrapper">#}
+{#                            <div class="product-detail-info-header">사용방법</div>#}
+{#                            <div class="product-detail-info">{{ set.description2 }}</div>#}
+{#                        </div>#}
 
                     </div>
                     <div>

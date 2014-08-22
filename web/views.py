@@ -7,7 +7,7 @@ from django.http.request import RAISE_ERROR
 from django.http.response import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from common_controller import util
 from foradmin.models import MainImage
 from motion9 import settings
@@ -30,7 +30,27 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def test_view(request):
-    send_mail('이게 제목입니다.', '이게내용입니다.', 'from@example.com', ['parkjuram@naver.com'], fail_silently=False)
+
+    content = '<p>This is an <strong>important</strong> message.</p>'
+    send_mail(subject='is title',from_email='from@example.com',recipient_list=['parkjuram@naver.com'],fail_silently=True,html_content=content)
+
+    # subject, from_email, to = 'hello', 'from@example.com', 'parkjuram@naver.com'
+    # text_content = ''
+    # html_content = '<p>This is an <strong>important</strong> message.</p>'
+    # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    # msg.send()
+    # msg.attach_alternative(html_content, "text/html")
+    # msg.send()
+
+    # html_contents = """
+    # <table cellspacing="0" cellpadding="0" border="0" width="400">
+    # <tr>
+    # <td width="100">이게 내용</td>
+    # <td width="300">입니다다다다</td>
+    # </tr>
+    # </table>
+    # """
+    # send_mail('이게 제목입니다.', html_contents, 'from@example.com', ['parkjuram@naver.com'], fail_silently=False)
 
     return HttpResponse('success!')
     # return render(request, 'payment_complete_web.html')
