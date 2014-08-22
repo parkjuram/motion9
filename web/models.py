@@ -97,10 +97,7 @@ class Set(models.Model):
     name = models.TextField(null=False)
     category = models.ForeignKey('Category')
     description = models.TextField(null=False, blank=True)
-    big_img_url = models.TextField(null=False, blank=True)
-    custom_big_img_url = models.TextField(null=False, blank=True)
-    small_img_url = models.TextField(null=False, blank=True)
-    custom_small_img_url = models.TextField(null=False, blank=True)
+    big_img = models.ImageField(null=True, upload_to='set/image/')
     discount_difference = models.IntegerField(null=False, default=0)
 
     is_active = models.BooleanField(default=True)
