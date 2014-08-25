@@ -129,14 +129,24 @@
 .available-item-img{
     width : 62px;
     height : 62px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
     float : left;
     margin-top: 6px;
+    border: 1px solid #e5e5e5;
+    position: relative;
 }
 
 .available-item-img img{
-    width : 60px;
-    height : 60px;
-    border: 1px solid #e5e5e5;
+    max-height: 90%;
+    max-width: 90%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
 }
 
 .available-item-info{
