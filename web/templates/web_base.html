@@ -19,12 +19,18 @@
     </style>
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'js/jssor.slider.mini.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+
+{#    <script src="{% static 'js/jssor.core.js' %}"></script>#}
+{#    <script src="{% static 'js/jssor.slider.js' %}"></script>#}
+{#    <script src="{% static 'js/jssor.utils.js' %}"></script>#}
     <script src="{% static 'js/common_js.js' %}"></script>
     <script src="{% static 'js/common_js_web.js' %}"></script>
     <script src="{% static 'js/uservoice.js' %}"></script>
     <script src="{% static 'jqmodal/jqModal.js' %}"></script>
     <script src="{% static 'js/login_web.js' %}"></script>
+
     <script>
 
     var url_for_login_next = "{% url 'login_page' %}?next={{ request.get_full_path }}";

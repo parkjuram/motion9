@@ -123,9 +123,8 @@ a.basic-btn{
 }
 
 .belong-product-img img{
-    /*width : 80px;*/
-    /*height : 80px;*/
     height: 90%;
+    max-width: 90%;
     margin: auto;
     top: 0;
     left: 0;
