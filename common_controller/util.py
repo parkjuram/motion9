@@ -225,7 +225,7 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
         'name': set.name+"(My Collection)",
         'category_name': set.category.name,
         'description': set.description,
-        'big_img': set.big_img,
+        'big_img': settings.MEDIA_URL + set.big_img,
         'discount_difference': set.discount_difference,
         'products': []
     })
