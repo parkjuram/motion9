@@ -7,8 +7,10 @@
 }
 
 .set-img img{
-    width : 610px;
-    height: 240px;
+    width: 100%;
+    height: 100%;
+    /*width : 610px;*/
+    /*height: 240px;*/
 }
 /*
 .set-img-gallery{
