@@ -21,7 +21,7 @@
 }
 
 .available-product .product-item-name{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -51,7 +51,7 @@
 .available-product .product-info{
     width : 510px;
     float : left;
-    font-size: 10px;
+    font-size: 12px;
     padding : 0 8px;
     line-height: 16px;
     background-color: #ffffff;

@@ -35,14 +35,14 @@
                                 </div>
                                 <div class="product-info">
                                     <div class="product-item-name">
-                                        {{ product.name }}
+                                        {{ product.brandname }} {{ product.name }}
                                     </div>
                                     <div style="margin-top: 4px;">
                                         카테고리 > {{ product.category_name }}<br/>
-                                        브랜드 : {{ product.brandname }}<br/>
+{#                                        브랜드 : {{ product.brandname }}<br/>#}
                                         용량 : {{ product.capacity }}<br/>
-                                        원래 가격 : {{ product.original_price|intcomma }}원<br/>
-                                        세트 포함시 가격 : {{ product.discount_price|intcomma }}원 (할인율 : {{ product.discount_rate }}%)
+                                        시중 가격 : {{ product.original_price|intcomma }}원<br/>
+                                        판매 가격 : {{ product.discount_price|intcomma }}원 (할인율 : {{ product.discount_rate }}%)
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -57,10 +57,10 @@
                                             <img src="{{item.big_img_url }}" alt="" />
                                         </div>
                                         <div class="available-item-info">
-                                            <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}" target="_blank">{{item.name  }}</a></div>
+                                            <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}" target="_blank">{{ item.maker }} {{ item.name }}</a></div>
                                             <div style="margin-top : 4px; line-height: 16px;">
                                                 카테고리 > {{ item.category_name }}<br/>
-                                                브랜드 : {{ item.maker}}<br/>
+{#                                                브랜드 : {{ item.maker }} <br/>#}
                                                 가격 : {{ item.discount_price|intcomma }}원<br/>
                                                 용량 : {{ item.capacity }}<br/>
                                             </div>
