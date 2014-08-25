@@ -204,11 +204,11 @@
            {% for blog in blog_reviews %}
                <div class="belong-to-product-x-item">
                    <div class="belong-product-img">
-                       <a href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}"><img src="{{ blog.small_img_url }}" alt="" /></a>
+                       <a href="{{ blog.url }}" target="_blank" ><img src="{{ blog.small_img_url }}" alt="" /></a>
                    </div>
                    <div class="belong-product-info">
                        <div class="belong-product-name">
-                           <a href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}">{{ blog.writer|truncatechars:10 }}</a>
+                           <a href="{{ blog.url }}" target="_blank" >{{ blog.writer|truncatechars:10 }}</a>
                        </div>
                        <div class="belong-product-contents">
                            {{ blog.summary}}
