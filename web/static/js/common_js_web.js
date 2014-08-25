@@ -6,7 +6,7 @@ $(function(){
 
     $( document ).tooltip({position: {
         my: "center",
-        at: "right+200",
+        at: "right+100",
         track: false,
         using: function(position, feedback) {
             $(this).css(position);

@@ -184,7 +184,7 @@ def update(request):
         user_profile = request.user.profile
 
         name = request.POST.get('name', '')
-        print name
+
         if len(name)>0:
             user_profile.name=name
 

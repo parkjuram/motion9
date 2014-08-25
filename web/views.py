@@ -75,7 +75,7 @@ def test_view(request):
         'user_': request.user
     })
 
-    subject, from_email, to = 'hello', "from@example.com", 'parkjuram@naver.com'
+    subject, from_email, to = 'hello', "from@example.com", 'parkjuram@gmail.com'
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

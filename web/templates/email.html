@@ -1,57 +1,262 @@
-<ul>
-<li>주문 번호 : {{ payment.order_id }}</li>
-<li>주문 완료 시간 : {{ payment.auth_date }}</li>
-</ul>
-<div>
-    <div>결제 내역</div>
-    <table style="border:1px solid black;border-collapse:collapse;">
-        <tr style="border:1px solid black;border-collapse:collapse;">
-            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">
-                <span style="font-weight:900;">최종결제금액</span></td>
-            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ payment.auth_amount }}원</td>
+<table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tbody>
+        <tr>
+            <td style="margin:0;padding:0 0 10px;line-height:13px;color:#999999;font-family:verdana,arial;font-size:10px;text-align:left">
+            Your Order Confirmation. <a href="http://themotion9.com" style="font-family:verdana,arial;font-size:10px;color:#999999;text-decoration:underline" title="6pm.com" target="_blank"><span class="il">theMotion9</span>.com</a>
+            </td>
         </tr>
-{#        <tr style="border:1px solid black;border-collapse:collapse;">#}
-{#            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">결제내역</td>#}
-{#            <td style="border:1px solid black;border-collapse:collapse;padding:5px;">신용카드 152,234원</td>#}
-{#        </tr>#}
-    </table>
-</div>
-<ul>
-<li>수취인 이름 : {{ payment.name }}</li>
-<li>수취인 : {{ payment.phone }}</li>
-<li>배송지 : ({{ payment.postcode }}){{ payment.address }}</li>
-</ul>
-<div>
-    <table style="border:1px solid black;border-collapse:collapse;">
-        <tr style="border:1px solid black;border-collapse:collapse;">
-            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">상품정보</th>
-            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">판매가</th>
-            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">수량</th>
-            <th style="border:1px solid black;border-collapse:collapse;padding:5px;">구매가</th>
+    </tbody>
+</table>
+
+<table width="648" border="0" cellspacing="0" cellpadding="0" align="center" style="border:1px solid #cccccc;background:#fff;">
+    <tbody>
+        <tr>
+            <td width="642" height="75" valign="middle" style="background:#ffffff;padding-right:6px">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tbody>
+                        <tr>
+                            <td width="200" height="75" align="left" style="padding-left:10px;padding-right:15px">
+                                <a href="http://themotion9.com" style="font-family:verdana,arial;font-size:11px;color:#98002f;text-decoration:underline" title="theMotion9.com" target="_blank">
+                                    <img title="theMotion9.com" alt="themotion9.com" src="http://playsense.co.kr/ok/thumb_upload/LOGO7-1.png" width="250" border="0" />
+                                </a>
+                            </td>
+                            <td style="width:190px"></td>
+                            <td style="padding:6px 0 6px 25px">
+                                <table height="100%" width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
         </tr>
-        {% for product in products %}
-            <tr style="border:1px solid black;border-collapse:collapse;">
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.name }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.discount_price }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.item_count }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ product.total_price }}</td>
-            </tr>
-        {% endfor %}
-        {% for set in sets %}
-            <tr style="border:1px solid black;border-collapse:collapse;">
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.name }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.discount_price }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.item_count }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ set.total_price }}</td>
-            </tr>
-        {% endfor %}
-        {% for custom_set in custom_sets %}
-            <tr style="border:1px solid black;border-collapse:collapse;">
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.name }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.discount_price }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.item_count }}</td>
-                <td style="border:1px solid black;border-collapse:collapse;padding:5px;">{{ custom_set.total_price }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
+        <tr>
+            <td width="648" height="21" valign="middle" style="background-color:#98002f">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="height:100%">
+                    <tbody>
+                        <tr>
+                            <td style="background-color:#212121;border-right:1px solid #ffffff;text-align:center">
+                                <a href="http://themotion9.com/shop/set/" style="display:block;background-color:#212121;padding:3px 14px;font-family:verdana,arial;font-size:11px;color:#ffffff;text-decoration:none;text-transform:none" title="Shoes" target="_blank">Collections</a>
+                            </td>
+                            <td style="background-color:#212121;border-right:1px solid #ffffff;text-align:center">
+                                <a href="http://themotion9.com/shop/product/" style="display:block;background-color:#212121;padding:3px 14px;font-family:verdana,arial;font-size:11px;color:#ffffff;text-decoration:none;text-transform:none" title="Clothing" target="_blank">Products</a>
+                            </td>
+                            <td style="background-color:#212121;border-right:1px solid #ffffff;text-align:center">
+                                <a href="http://themotion9.com/customize/set/" style="display:block;background-color:#212121;padding:3px 14px;font-family:verdana,arial;font-size:11px;color:#ffffff;text-decoration:none;text-transform:none" title="Watches" target="_blank">My Collection</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="border-collapse:collapse">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="margin:0;padding:18px 24px 12px;color:#d2bb8f;font-size:16px;font-weight:bold;font-family:verdana,arial">
+                Thank You For Your Order!
+            </td>
+        </tr>
+        <tr>
+            <td style="border-collapse:collapse;padding:6px 24px">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tbody>
+                        <tr>
+                            <td style="border-collapse:collapse;vertical-align:top">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding:12px 18px;border-top:1px solid #cccccc;border-bottom:1px solid #cccccc;background-color:#f4f4f4">
+                                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;margin-bottom:0px;text-align:center">
+                                                    <b>주문번호:</b>
+                                                    <a href="http://themotion9.com/user/mypage/purchase/product/" style="font-family:verdana,arial;font-size:11px;color:#98002f;text-decoration:underline" title="188503260" target="_blank">188503260</a>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;text-transform:capitalize;margin:18px 0;padding:0;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555">
+                                    Hi
+                                    <span class="il">Motion9</span>
+                                    Shopper!
+                                </p>
+                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555">
+                                    이제 곧 당신의 맑고 생기있게 변화할 시간입니다! 현재 Motion9은 고객님이 주문하신 제품을 최대한 빠른 시간안에 배송해 드리려 준비하고 있습니다! 아래는 고객님의 주문에 대한 상세한 사항들이며 , 항상 그렇듯 필요하신 사항이 있으시다면 언제든지 알려주세요
+                                </p>
+                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555">
+                                    Your friends, <br/>
+                                    <a href="http://themotion9.com" style="font-family:verdana,arial;font-size:11px;color:#555555;text-decoration:none" title="theMotion9.com" target="_blank">
+                                        <span class="il">Motion9</span>
+                                    </a>
+                                </p>
+                            </td>
+
+                            <td style="border-collapse:collapse;padding-left:24px;vertical-align:top">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tbody>
+                                        <tr>
+                                            <td width="216" align="center" style="border-collapse:collapse">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                                    <tbody>
+                                                        <tr>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px 18px;text-align:left;background:#e5e5e5;font-family:verdana,arial;font-size:12px;color:#555555">
+                                주문 상세 내역
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-collapse:collapse;padding:0 24px">
+                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;padding-top:12px">
+                                    <b>주문정보:</b><br/>
+                                    Item  Ordered: 1<br/>
+                                    최종 결제 금액: $149.99
+                                </p>
+                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555">
+                                    <b>배송정보 & 결제정보 :</b><br/>
+                                    주문 시간: Sat Jul 12 07:57:54 PDT 2014 <!--주문완료시간-->
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-collapse:collapse;padding:0 24px 18px">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tbody>
+                                        <tr>
+                                            <td style="border-collapse:collapse;margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;vertical-align:top">
+                                                <b>배송 정보:</b><br/>
+                                                수취인 : Dohgeon Han<br/>
+                                                연락처 : 010-7357-0456<br/>
+                                                주소 : 서울특별시 서초구 반포동 123번지 123아파트 12동 123호
+                                            </td>
+                                            <td style="border-collapse:collapse;margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;vertical-align:top">
+                                                <b>결제 정보:</b><br/>
+                                                결제 수단 : 신용카드<br/>
+                                                결제 금액 : 123455원<br/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px 18px;text-align:left;background:#e5e5e5;font-family:verdana,arial;font-size:12px;color:#555555">
+                                주문 상품 정보
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom:1px dotted #dddddd;border-collapse:collapse">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tbody>
+                                        <tr>
+                                            <td width="100" align="center" style="padding:0px 12px;border-collapse:collapse">
+                                            </td>
+                                            <td width="100%" style="padding:0;border-collapse:collapse;line-height:20px;text-align:left;vertical-align:top;font-family:verdana,arial;font-size:11px;color:#555555;line-height:16px;padding-top:12px">
+                                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;margin-bottom:3px">
+                                                    <span style="font-family:verdana,arial;font-size:12px;font-weight:bold;line-height:16px;color:#212121;text-decoration:none" target="_blank">비오템 아쿠아파워 토너</span>
+                                                </p>
+                                                <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;margin-bottom:6px">
+                                                    시중가격 : 34,000원<br/>
+                                                    <span style="text-transform:capitalize">수량 :</span> 1개<br/>
+                                                </p>
+                                            </td>
+                                            <td width="100%" align="right" style="padding-right:24px;font-family:verdana,arial;font-size:12px;color:#555555;font-weight:bold;white-space: nowrap">
+                                                34,0000원
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-collapse:collapse;padding:12px 24px">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tbody>
+                                        <tr>
+                                            <td style="border-collapse:collapse;margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;text-align:right">
+                                                총 구매금액 (3 개):<br/>
+                                                배송료:<br/>
+                                            </td>
+                                            <td width="75" style="border-collapse:collapse;margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;padding-left:12px;text-align:right">
+                                                123,000원<br/>
+                                                0원<br/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:6px 18px;text-align:left;background:#e5e5e5;font-family:verdana,arial;font-size:12px;color:#555555;text-align:right;">
+                                Order Total: 123,000 원
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="648" style="border-collapse:collapse;border-top:1px dotted #cccccc;text-align:center;background:#e5e5e5">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tbody>
+                        <tr>
+                            <td width="648" height="5" valign="bottom" align="center" style="padding:15px 24px 3px;background:#e5e5e5">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="background:#e5e5e5">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="648" height="5" valign="middle" align="center" style="padding:0 24px;background:#e5e5e5">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="background:#e5e5e5">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="648" height="70" valign="top" align="left" style="color:#555555;padding:15px 24px 6px">
+                                <p style="font-family:NanumGothic;font-size:11px;text-align:left;margin:0 0 12px 0;padding:0;color:#555555">
+                                    (주) 아스델 | 대표이사 : 한도건 | 사업자 등록번호 : 119-86-58979 <br/>
+                                    <span style="font-family:NanumGothic;font-size:11px;color:#555555;text-decoration:none" >
+                                        <span class="il">통신판매업신고 : 2013-서울관악-0392 | </span>
+                                        <br/>개인정보관리책임자 : 박주람<br/>
+                                        <span>서울시 관악구 관악로1 서울대학교 35동 2F (주)아스델 | Tel : 02-871-4510 <br/>
+                                        </span>
+                                        <span style="font-family:NanumGothic;font-size:11px;text-align:left;margin:0 0 12px 0;padding:0;color:#555555">
+                                            © 2014
+                                            <a href="http://themotion9.com" style="font-family:NanumGothic;font-size:11px;color:#555555;text-decoration:none" target="_blank">Motion9</a><br/>
+                                            <br/>
+                                        </span>
+                                    </span>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
