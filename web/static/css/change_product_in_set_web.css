@@ -285,3 +285,33 @@
 #productDetailModal .modal-product-contents{
     margin-left: 20px;
 }
+
+#modalProductImg{
+    width : 180px;
+    height : 180px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#modalProductImg img{
+    /*width : 100%;*/
+    height : 95%;
+    border: 0;
+}
+
+#modalProductImgGallery{
+    width : 60px;
+    padding : 4px 6px;
+}
+
+#modalProductImgGallery img{
+    width : 50px;
+    height : 50px;
+    margin : 4px 0;
+    outline: 1px solid #e5e5e5;
+}
+
+#modalProductImgGallery img:hover{
+    outline: 2px solid #d2bb8f;
+}
