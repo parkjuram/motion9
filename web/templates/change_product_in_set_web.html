@@ -45,7 +45,7 @@
                                         카테고리 > {{ product.category_name }}<br/>
 {#                                        브랜드 : {{ product.brandname }}<br/>#}
                                         용량 : {{ product.capacity }}<br/>
-                                        시중 가격 : {{ product.original_price|intcomma }}원<br/>
+                                        매장 가격 : {{ product.original_price|intcomma }}원<br/>
                                         판매 가격 : {{ product.discount_price|intcomma }}원 (할인율 : {{ product.discount_rate }}%)
                                     </div>
                                 </div>
@@ -67,7 +67,8 @@
                                             <div style="margin-top : 4px; line-height: 16px;">
                                                 카테고리 > {{ item.category_name }}<br/>
 {#                                                브랜드 : {{ item.maker }} <br/>#}
-                                                가격 : {{ item.discount_price|intcomma }}원<br/>
+                                                매장 가격 : {{ item.original_price|intcomma }}원<br/>
+                                                판매 가격 : {{ item.discount_price|intcomma }}원<br/>
                                                 용량 : {{ item.capacity }}<br/>
                                             </div>
                                         </div>
