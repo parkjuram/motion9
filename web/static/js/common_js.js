@@ -113,10 +113,15 @@ $(function(){
 		});
 	});
 
-    $('.btn-for-cart').click(function(e){
+    $('.btn-for-cart').click( function(e) {
+        window.func_add_to_cart(e, this);
+    } );
+
+    window.func_add_to_cart = function(e, param_this) {
         e.preventDefault();
-        var productKey = $(this).attr('data-product');
-        var type = $(this).attr('data-type');
+
+        var productKey = $(param_this).attr('data-product');
+        var type = $(param_this).attr('data-type');
         if(type != 's' && type !='c')
             type = 'p';
 
@@ -131,26 +136,26 @@ $(function(){
             return;
 
         $.ajax({
-				  url: "/user/cart/add/",
-				  dataType: 'json',
-				  async : true,
-				  type:'POST',
-				  data:{product_or_set_id : productKey, type : type, how_many : howMany},
-				  success: function(data){
-					  if(!data.success && data.message == 'login required'){
-                          if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
-                            location.href= url_for_login_next;
-                      }else if(!data.success){
-                          alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
-                      }else{
-                          alert('장바구니에 추가되었습니다.');
-                      }
-				  },
-				  error:function(jqXHR, textStatus, errorThrown){
-					  console.log(textStatus);
-				  }
+              url: "/user/cart/add/",
+              dataType: 'json',
+              async : true,
+              type:'POST',
+              data:{product_or_set_id : productKey, type : type, how_many : howMany},
+              success: function(data){
+                  if(!data.success && data.message == 'login required'){
+                      if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
+                        location.href= url_for_login_next;
+                  }else if(!data.success){
+                      alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
+                  }else{
+                      alert('장바구니에 추가되었습니다.');
+                  }
+              },
+              error:function(jqXHR, textStatus, errorThrown){
+                  console.log(textStatus);
+              }
 		});
-	});
+    }
 
 
     $('.btn-for-purchase').click(function(e){

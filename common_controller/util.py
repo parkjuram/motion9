@@ -146,6 +146,8 @@ def helper_get_products(user=None, category_id=None, price_max_filter=None, pric
 
 def helper_get_product_detail(product_id_or_object, user=None):
 
+    print product_id_or_object
+
     if isinstance(product_id_or_object, unicode) or isinstance(product_id_or_object, int):
         product_object = None
         product_id = product_id_or_object

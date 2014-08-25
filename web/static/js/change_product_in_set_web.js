@@ -151,7 +151,15 @@ $(function(){
         }});
 
         $('body').css({overflow:'hidden'});
+
+        $('.btn-for-cart').click(function(e) {
+            console.log( this );
+            func_add_to_cart(e, this);
+        });
+
     };
+
+    console.log( func_add_to_cart );
 
     var onHideHandler = function(hash){
         hash.w.hide();

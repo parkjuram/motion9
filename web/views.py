@@ -36,7 +36,7 @@ def test_view(request):
     plaintext = get_template('email.txt')
     htmly     = get_template('email.html')
 
-    payment_id = 28
+    payment_id = 31
     payment = Payment.objects.get(id=payment_id)
 
     purchase_products = Purchase.objects.filter(payment_id=payment_id, type='p').all()
