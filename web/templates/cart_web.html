@@ -153,10 +153,10 @@
                         구매하신 내역이 없습니다.
                     </div>
                 {% endif %}
-                {% for custom_set in custom_sets%}
+                {% for custom_set in custom_sets %}
                 <div class="purchased-item">
                     <div class="purchased-item-img">
-                        <a href="#" target="_blank"><img src="{{ custom.big_img }}"/></a>
+                        <a href="#" target="_blank"><img src="{{ custom_set.big_img }}"/></a>
                     </div>
                     <div class="purchased-item-contents">
                         <div class="purchased-item-contents-wrapper">
