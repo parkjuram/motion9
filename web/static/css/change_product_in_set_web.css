@@ -15,6 +15,7 @@
 }
 
 .available-product{
+    height: 120px;
     position: relative;
     margin-top: 8px;
 }
@@ -26,15 +27,25 @@
 
 .available-product .product-img{
     width : 106px;
+    height: 106px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
     float : left;
     margin-left: 12px;
+    border: 1px solid #e5e5e5;
+    position: relative;
 }
 
 .available-product .product-img img{
-    width : 100px;
-    height :100px;
-    border: 1px solid #e5e5e5;
-
+    max-height: 90%;
+    max-width: 90%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
 }
 
 .available-product .product-info{
