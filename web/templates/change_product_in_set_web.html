@@ -4,7 +4,11 @@
 {% load humanize %}
 <link rel="stylesheet" href="{% static 'css/common_style_web.css'%}"/>
 <link rel="stylesheet" href="{% static 'css/change_product_in_set_web.css'%}"/>
+<link rel="stylesheet" href="{%  static 'magnific_popup/magnific-popup.css' %}"/>
+<link rel="stylesheet" href="{%  static 'spinner/jquery.spinner.css' %}"/>
 <script src="{% static 'js/change_product_in_set_web.js'%}"></script>
+<script src="{%  static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{%  static 'spinner/jquery.spinner.js' %}"></script>
 {% block subHeader %}
 {% endblock %}
 {% endblock %}
@@ -54,10 +58,12 @@
                                              <a href="#" class="basic-btn basic-lg-btn available-item-btn" data-original-key="{{ product.id}}" data-product="{{ item.id }}">선택</a>
                                        </div>
                                         <div class="available-item-img">
-                                            <img src="{{item.big_img_url }}" alt="" />
+                                            <a href="{% url 'product_modal' product_id=item.id %}" class="view-product-detail-btn">
+                                                <img src="{{ item.big_img_url }}" alt="" />
+                                            </a>
                                         </div>
                                         <div class="available-item-info">
-                                            <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}" target="_blank">{{ item.maker }} {{ item.name }}</a></div>
+                                            <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}" target="_blank">{{ item.brandname }} {{ item.name }}</a></div>
                                             <div style="margin-top : 4px; line-height: 16px;">
                                                 카테고리 > {{ item.category_name }}<br/>
 {#                                                브랜드 : {{ item.maker }} <br/>#}
@@ -130,5 +136,7 @@
    <div class="clearfix"></div>
 </div>
 
+<div id="productDetailModal" class="jqmWindow">
+</div>
 
 {% endblock %}

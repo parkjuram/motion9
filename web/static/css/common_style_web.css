@@ -104,19 +104,17 @@ a:visited{
 
 #brand{
     z-index: 1;
-    width : 90px;
-    margin-right : 30px;
     font-size: 18px;
     font-weight: bold;
-    padding-top : 14px;
     float : left;
+    height: 100%;
+    margin-right: 20px;
 }
 
 
 #header-main-menu{
     position: relative;
     font-size: 12px;
-    width : 960px;
     float : left;
 }
 

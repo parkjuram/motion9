@@ -244,3 +244,44 @@
 .purchase-btn-area{
     margin-top : 16px;
 }
+
+
+
+
+/* product modal styling */
+#productDetailModal{
+    z-index: 999!important;
+    height : 500px;
+    width: 700px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+#productDetailModal .modal-left-wrapper {
+    width : 400px;
+}
+
+#productDetailModal .modal-right-wrapper {
+    width : 280px;
+}
+
+#productDetailModal .modal-desc-wrapper {
+    margin-right: 20px;
+}
+
+
+#productDetailModal .box-header {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#productDetailModal .modal-product-category-box {
+    margin-top: 12px;
+    margin-bottom : 10px;
+    font-size: 12px;
+    padding-left: 20px;
+}
+
+#productDetailModal .modal-product-contents{
+    margin-left: 20px;
+}

@@ -107,7 +107,7 @@ $(function(){
                           if(addToCart)
                             alert('장바구니에 추가 되었습니다.');
                           else
-                            alert('저장');
+                            alert('My Collection에 저장 되었습니다.');
                       }else{
                           alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
                       }
@@ -129,6 +129,37 @@ $(function(){
         var setKey = $(this).attr('data-set');
         submitCustomSet(setKey, false);
     });
+
+    var modalOnloadHandler = function(hash){
+        $('#modalProductImgGallery').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            tLoading: 'Loading image #%curr%...',
+            mainClass: 'mfp-img-mobile',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            },
+            image: {
+                tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+            }
+        });
+
+        $('#modalCntSpinner').spinner({value:1, min : 1, afterChange: function(val){
+            console.log('hello' + val);
+        }});
+
+        $('body').css({overflow:'hidden'});
+    };
+
+    var onHideHandler = function(hash){
+        hash.w.hide();
+        hash.o.remove();
+        $('body').css({overflow: 'visible'});
+    };
+
+    $('#productDetailModal').jqm({modal:false, ajaxText:'불러오는중..', trigger: '.view-product-detail-btn',ajax:'@href', onLoad : modalOnloadHandler, onHide:onHideHandler});
 
 
    //$(window).scroll(fixDiv);

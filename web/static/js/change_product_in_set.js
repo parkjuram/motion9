@@ -2,11 +2,9 @@
  * Created by Park-Kunbae on 14. 3. 27.
  */
 $(function(){
-
-
-   $('.changeable-collapse-btn').click(function(e){
+    $('.changeable-collapse-btn').click(function(e){
         e.preventDefault();
-       console.log('hi');
+
         var collapsedMenu = $(this).parent().next('.list-collapsed');
 
         if(collapsedMenu.hasClass('list-collapsed-opened')){
