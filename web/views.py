@@ -41,11 +41,11 @@ def test_view(request):
 
     purchase_products = Purchase.objects.filter(payment_id=payment_id, type='p').all()
     products = []
-    for purchase_set in purchase_products:
-        product = purchase_set.product
+    for purchase_product in purchase_products:
+        product = purchase_product.product
         product_ = helper_get_product_detail(product, request.user)
-        product_['item_count'] = purchase_set.item_count
-        product_['total_price'] = purchase_set.price
+        product_['item_count'] = purchase_product.item_count
+        product_['total_price'] = purchase_product.price
         products.append(product_)
 
     purchase_sets = Purchase.objects.filter(payment_id=payment_id, type='s').all()
@@ -245,7 +245,9 @@ def payment_return_openbrowser_view(request):
             name= beforePayment.name,
             postcode = beforePayment.postcode,
             phone= beforePayment.phone,
-            address= beforePayment.address
+            address= beforePayment.address,
+            shipping_requirement= beforePayment.shipping_requirement,
+            mileage= beforePayment.mileage
         )
 
         user_profile.mileage = int(user_profile.mileage)-int(beforePayment.mileage)+int(auth_amount[0])/100

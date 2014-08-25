@@ -119,6 +119,8 @@ class Payment(models.Model):
     phone = models.TextField(null=False, blank=True, default='')
     postcode = models.CharField(max_length=10, null=True, default='')
     address = models.TextField(null=False, blank=True)
+    shipping_requirement = models.TextField(null=False, blank=True)
+    mileage = models.IntegerField(null=False, default=0)
 
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 

@@ -14,8 +14,6 @@ def manage_shipping_view(request):
 
         purchases = Purchase.objects.all()
         for purchase in purchases:
-            beforePayment = BeforePayment.objects.filter(order_id=purchase.payment.order_id).first()
-            purchase.before_payment = beforePayment
             if purchase.type == 'p':
                 purchase.item_name = purchase.product.name
             elif purchase.type == 's':
