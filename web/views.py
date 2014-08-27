@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.template import Context
 from common_controller import util
-from foradmin.models import MainImage
+from foradmin.models import MainImage, Advertisement
 from motion9 import settings
 
 from motion9.const import *
@@ -521,20 +521,13 @@ def shop_product_view(request, category_id=None, page_num=1):
         current_category = Category.objects.get(id=category_id).name
 
     brands = helper_get_brands()
-    adarea_items = [
-        {
-            'image_url':'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-27-798x350.jpg',
-            'link_url': 'http://www.naver.com'
-        },
-        {
-            'image_url':'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-5-610x343.jpg',
-            'link_url': 'http://www.daum.net'
-        },
-        {
-            'image_url':'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-33-610x343.jpg',
-            'link_url': 'http://www.google.com'
-        }
-    ]
+    advertisements = Advertisement.objects.filter(type='p').all()
+    adarea_items = []
+    for advertisement in advertisements:
+        adarea_items.append( {
+            'image_url': settings.MEDIA_URL + advertisement.image.name,
+            'link_url': advertisement.link
+        })
 
     return render(request, 'shopping_product_web.html',
                   {

@@ -316,3 +316,13 @@
 
 
 /* SHOP COLLECTION BUTTON CSS */
+.btn-stroke-black {
+    width: 120px;
+    padding: 15px 30px;
+    border: solid #0d0d0e 2px;
+}
+.btn-stroke-black:hover {
+    background: #0d0d0e;
+    color: white !important;
+    transition: 0.2s
+}

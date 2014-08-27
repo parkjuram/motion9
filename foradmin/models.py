@@ -7,3 +7,11 @@ class MainImage(models.Model):
     def __unicode__(self):
         return '(%r)MainImage : name(%s) is_set(%r)' % (self.id, self.name, self.image)
 
+class Advertisement(models.Model):
+    image = models.ImageField(null=True, upload_to='image/advertisement/')
+    type = models.CharField(null=False, blank=True)
+    link = models.TextField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '(%r)Advertisement : image(%s) link(%r)' % (self.id, self.image, self.link)
+
