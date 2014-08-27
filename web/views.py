@@ -66,6 +66,10 @@ def test_view(request):
         custom_set_['total_price'] = purchase_custom_set.price
         custom_sets.append(custom_set_)
 
+    payment.total_price = int(payment.mileage) + int(payment.auth_amount)
+    payment.auth_date = str(payment.auth_date)
+    payment.auth_date = payment.auth_date[:4] + "년 " + payment.auth_date[4:6] + "월 " + payment.auth_date[6:8] + "일 " + payment.auth_date[8:10] + "시 " + payment.auth_date[10:12] + "분 "
+    # print payment.auth_date
 
     d = Context({
         'products': products,
@@ -113,12 +117,7 @@ def before_payment(request):
 
 
 @csrf_exempt
-def payment_return_openbrowser_view(request):
-
-    is_success = service_id = order_id = order_date = transaction_id = \
-        auth_amount = auth_date = response_code = response_message = \
-        detail_response_code = detail_response_message = None
-    is_success = False
+def payment_return_view(request):
 
     service_id = request.POST.get('SERVICE_ID')
     order_id = request.POST.get('ORDER_ID')
@@ -126,6 +125,8 @@ def payment_return_openbrowser_view(request):
     post_response_code = request.POST.get('RESPONSE_CODE')
     check_sum = request.POST.get('CHECK_SUM')
     message = urllib.unquote_plus(request.POST.get('MESSAGE'))
+
+    is_success = False
 
     if post_response_code == "0000":
         temp = service_id+order_id+order_date
@@ -215,7 +216,6 @@ def payment_return_openbrowser_view(request):
 
                 is_success = True
 
-
     try:
         response_message = map( lambda x: x.decode('euc-kr'), response_message)
         detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
@@ -279,7 +279,10 @@ def payment_return_openbrowser_view(request):
 
         Cart.objects.filter(order_id=order_id).delete()
 
-    return redirect('payment_complete', payment_id=payment_id )
+    if is_success:
+        return redirect('payment_complete', payment_id=payment_id )
+    else:
+        raise Http404
 
 @csrf_exempt
 def payment_return_mobile_web_view(request):
@@ -449,187 +452,6 @@ def payment_return_mobile_web_view(request):
     #     'detail_response_message': detail_response_message
     # })
 
-@csrf_exempt
-def payment_return_explore_view(request):
-
-    is_success = service_id = order_id = order_date = transaction_id = auth_amount = auth_date = response_code = \
-        response_message = detail_response_code = detail_response_message = None
-
-    service_id = request.POST.get('SERVICE_ID')
-    order_id = request.POST.get('ORDER_ID')
-    order_date = request.POST.get('ORDER_DATE')
-    post_response_code = request.POST.get('RESPONSE_CODE')
-    check_sum = request.POST.get('CHECK_SUM')
-    message = request.POST.get('MESSAGE')
-    is_success = False
-
-    if post_response_code == "0000":
-        temp = service_id+order_id+order_date
-        checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + 'DIFF ' + check_sum + " " + temp
-        checksum = (Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]).strip()
-        if checksum == 'SUC':
-            credit_card_service_code = '0900'
-            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini", credit_card_service_code, message ]
-            return_message = (Popen(broker_message_command, stdout=PIPE).communicate()[0]).strip()
-            return_code = return_message[0:5]
-
-            this_data = {}
-            if return_code=='ERROR':
-                this_version = "0100"
-                this_merchantId = service_id
-                this_serviceCode = credit_card_service_code
-                this_command = "3011"
-                this_orderId = order_id
-                this_orderDate = order_date
-
-                util.billgate_put_data(this_data, "1002", return_message[6:10])
-                util.billgate_put_data(this_data, "1003", "API error!!")
-                util.billgate_put_data(this_data, "1009", return_message[10:12])
-                util.billgate_put_data(this_data, "1010", util.billgate_getErrorMessage(return_message[6:12]))
-            else:
-                # {{ Message.php
-
-                set_data_param = return_message
-                VERSION_LENGTH = 10
-                MERCHANT_ID_LENGTH = 20
-                SERVICE_CODE_LENGTH = 4
-                COMMAND_LENGTH = 4
-                ORDER_ID_LENGTH = 64
-                DATE_LENGTH = 14
-                TAG_LENGTH = 4
-                COUNT_LENGTH = 4
-                VALUE_LENGTH = 4
-
-                VERSION_INDEX = 0
-                MERCHANT_ID_INDEX = 10
-                SERVICE_CODE_INDEX = 30
-
-                COMMAND_INDEX = 0
-                ORDER_ID_INDEX = 4
-                ORDER_DATE_INDEX = 68
-                DATA_INDEX = 82
-
-                this_version = set_data_param[VERSION_INDEX:VERSION_INDEX+VERSION_LENGTH].strip()
-                this_merchantId = set_data_param[MERCHANT_ID_INDEX:MERCHANT_ID_INDEX+MERCHANT_ID_LENGTH].strip()
-                this_serviceCode = set_data_param[SERVICE_CODE_INDEX:SERVICE_CODE_INDEX+SERVICE_CODE_LENGTH].strip()
-
-                decrypted = set_data_param[VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH:VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH+len(set_data_param)]
-
-                this_command = decrypted[COMMAND_INDEX:COMMAND_INDEX+COMMAND_LENGTH].strip()
-                this_orderId = decrypted[ORDER_ID_INDEX:ORDER_ID_INDEX+ORDER_ID_LENGTH].strip()
-                this_orderDate = decrypted[ORDER_DATE_INDEX:ORDER_DATE_INDEX+DATE_LENGTH].strip()
-
-                bodyStr = decrypted[DATA_INDEX:DATA_INDEX+len(decrypted)].strip()
-                #this->parseData($bodyStr);
-                parse_data_param = bodyStr
-                arrData = parse_data_param.split("|")
-                for i in range(len(arrData)):
-                    if len(arrData[i]) != 0:
-                        arrValueData = arrData[i].split("=")
-                        tag = arrValueData[0]
-                        value = arrValueData[1]
-
-                        if this_data.has_key(tag):
-                            vt = this_data.get(tag)
-                        else:
-                            vt = []
-
-                        vt.append(value)
-                        this_data[tag] = vt
-                # Message.php }}
-
-            response_code = this_data.get('1002')[0]
-            response_message = this_data.get('1003')
-
-            detail_response_code = this_data.get('1009')
-            detail_response_message = this_data.get('1010')
-
-            if response_code == '0000':
-                auth_amount = this_data.get('1007')
-                transaction_id = this_data.get('1001')
-                auth_date = this_data.get('1005')
-
-                is_success = True
-
-
-    try:
-        response_message = map( lambda x: x.decode('euc-kr'), response_message)
-        detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
-    except:
-        pass
-
-    if is_success:
-        beforePayment = BeforePayment.objects.get(order_id=order_id)
-        if beforePayment is None:
-            raise Http404
-
-        user_ = beforePayment.user
-        user_profile = user_.profile
-
-        payment = Payment.objects.create(
-            user=user_,
-            service_id=service_id,
-            order_id=beforePayment.order_id,
-            order_date=order_date,
-            transaction_id=transaction_id[0],
-            auth_amount=auth_amount[0],
-            auth_date=auth_date[0],
-            response_code=response_code,
-            response_message=response_message[0],
-            detail_response_code=detail_response_code[0],
-            detail_response_message=detail_response_message[0],
-            name= beforePayment.name,
-            postcode = beforePayment.postcode,
-            phone= beforePayment.phone,
-            address= beforePayment.address
-        )
-
-        user_profile.mileage = int(user_profile.mileage)-int(beforePayment.mileage)+int(auth_amount[0])/100
-        user_profile.save()
-
-        carts = Cart.objects.filter(order_id=order_id).all()
-        for cart in carts:
-
-            if cart.type=='p':
-                price = cart.product.discount_price
-            elif cart.type=='s':
-                price = helper_get_set(cart.set).get('discount_price', 0)
-            elif cart.type=='c':
-                price = helper_get_custom_set(cart.custom_set).get('discount_price', 0)
-
-            Purchase.objects.create(
-                user=user_,
-                payment=payment,
-                price=price,
-                product=cart.product,
-                set=cart.set,
-                custom_set=cart.custom_set,
-                type=cart.type,
-                item_count=cart.item_count
-            )
-
-        if payment is not None:
-            payment_id = payment.id
-
-        Cart.objects.filter(order_id=order_id).delete()
-
-    return render(request, 'return_explorer.html', {
-        'payment_id': payment_id,
-        'message': message,
-        'return_message': return_message,
-        'is_success': is_success,
-        'service_id': service_id,
-        'order_id': order_id,
-        'order_date': order_date,
-        'transaction_id': transaction_id,
-        'auth_amount': auth_amount,
-        'auth_date': auth_date,
-        'response_code': response_code,
-        'response_message': response_message,
-        'detail_response_code': detail_response_code,
-        'detail_response_message': detail_response_message
-    })
-
 @login_required
 @csrf_exempt
 def payment_complete_view(request, payment_id=0):
@@ -662,6 +484,10 @@ def payment_complete_view(request, payment_id=0):
         custom_set_['total_price'] = purchase_custom_set.price
         custom_sets.append(custom_set_)
 
+    beforePayment = BeforePayment.objects.get(order_id=payment.order_id)
+    if beforePayment is not None:
+        util.send_payment_email(payment_id, request.user)
+        BeforePayment.objects.get(order_id=payment.order_id).delete()
 
     return render(request, 'payment_complete_web.html', {
         'products': products,

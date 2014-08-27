@@ -1,3 +1,5 @@
+{% load humanize %}
+
 <table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
     <tbody>
         <tr>
@@ -131,7 +133,7 @@
                                 <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;padding-top:12px">
                                     <b>주문정보:</b><br/>
 {#                                    Item  Ordered: 1<br/>#}
-                                    최종 결제 금액: {{ payment.auth_amount }}
+                                    최종 결제 금액: {{ payment.auth_amount|intcomma }} 원
                                 </p>
                                 <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555">
                                     <b>배송정보 :</b><br/>
@@ -178,12 +180,12 @@
                                                         <span style="font-family:verdana,arial;font-size:12px;font-weight:bold;line-height:16px;color:#212121;text-decoration:none" target="_blank">{{ product.name }}</span>
                                                     </p>
                                                     <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;margin-bottom:6px">
-                                                        시중가격 : {{ product.original_price }}원<br/>
+                                                        시중가격 : {{ product.original_price|intcomma }} 원<br/>
                                                         <span style="text-transform:capitalize">수량 :</span> {{ product.item_count }}개<br/>
                                                     </p>
                                                 </td>
                                                 <td width="100%" align="right" style="padding-right:24px;font-family:verdana,arial;font-size:12px;color:#555555;font-weight:bold;white-space: nowrap">
-                                                    {{ product.total_price }}원
+                                                    구매가격 : {{ product.total_price|intcomma }} 원
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -204,12 +206,12 @@
                                                         <span style="font-family:verdana,arial;font-size:12px;font-weight:bold;line-height:16px;color:#212121;text-decoration:none" target="_blank">{{ set.name }}</span>
                                                     </p>
                                                     <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;margin-bottom:6px">
-                                                        시중가격 : {{ set.original_price }}원<br/>
+                                                        시중가격 : {{ set.original_price|intcomma }} 원<br/>
                                                         <span style="text-transform:capitalize">수량 :</span> {{ set.item_count }}개<br/>
                                                     </p>
                                                 </td>
                                                 <td width="100%" align="right" style="padding-right:24px;font-family:verdana,arial;font-size:12px;color:#555555;font-weight:bold;white-space: nowrap">
-                                                    {{ set.total_price }}원
+                                                    구매가격 : {{ set.total_price|intcomma }} 원
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -230,12 +232,12 @@
                                                         <span style="font-family:verdana,arial;font-size:12px;font-weight:bold;line-height:16px;color:#212121;text-decoration:none" target="_blank">{{ custom_set.name }}</span>
                                                     </p>
                                                     <p style="margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;margin-bottom:6px">
-                                                        시중가격 : {{ custom_set.original_price }}원<br/>
+                                                        시중가격 : {{ custom_set.original_price|intcomma }} 원<br/>
                                                         <span style="text-transform:capitalize">수량 :</span> {{ custom_set.item_count }}개<br/>
                                                     </p>
                                                 </td>
                                                 <td width="100%" align="right" style="padding-right:24px;font-family:verdana,arial;font-size:12px;color:#555555;font-weight:bold;white-space: nowrap">
-                                                    {{ custom_set.total_price }}원
+                                                    구매가격 : {{ custom_set.total_price|intcomma }} 원
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -250,11 +252,13 @@
                                         <tr>
                                             <td style="border-collapse:collapse;margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;text-align:right">
                                                 총 구매금액 :<br/>
+                                                마일리지 사용액:<br/>
                                                 배송료:<br/>
                                             </td>
                                             <td width="75" style="border-collapse:collapse;margin:0 0 12px 0;padding:0;text-decoration:none;text-align:left;line-height:16px;font-family:verdana,arial;font-size:11px;color:#555555;padding-left:12px;text-align:right">
-                                                123,000원<br/>
-                                                0원<br/>
+                                                {{ payment.total_price|intcomma }} 원<br/>
+                                                {{ payment.mileage|intcomma }} 원<br/>
+                                                0 원<br/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -263,7 +267,7 @@
                         </tr>
                         <tr>
                             <td style="padding:6px 18px;text-align:left;background:#e5e5e5;font-family:verdana,arial;font-size:12px;color:#555555;text-align:right;">
-                                Order Total: 123,000 원
+                                Order Total: {{ payment.auth_amount|intcomma }} 원
                             </td>
                         </tr>
                     </tbody>

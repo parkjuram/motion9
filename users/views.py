@@ -311,8 +311,7 @@ def mypage_cart_view(request):
     item_code = str(user_.id)+"_"+current_datetime[8:]
     amount = str(cart_items['total_price'])
     user_ip = helper_get_user_ip(request)
-    return_url = request.build_absolute_uri(reverse('payment_return_explore'))
-    return_openbrowser_url = request.build_absolute_uri(reverse('payment_return_openbrowser'))
+    return_url = request.build_absolute_uri(reverse('payment_return'))
     using_type = '0000'
     currency = '0000'
     installment_period = '0'
@@ -336,7 +335,6 @@ def mypage_cart_view(request):
         'user_ip': user_ip,
         'installment_period': installment_period,
         'return_url': return_url,
-        'return_openbrowser_url': return_openbrowser_url,
         'check_sum': checksum
     }
 

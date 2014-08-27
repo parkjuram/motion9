@@ -2,9 +2,12 @@
 from subprocess import call, Popen, PIPE
 
 from django.conf import settings
-from django.http.response import HttpResponse
+from django.core.mail import EmailMultiAlternatives
+from django.http.response import HttpResponse, Http404
+from django.template import Context
+from django.template.loader import get_template
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine
-from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail
+from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment
 from django.core.exceptions import ObjectDoesNotExist
 
 from motion9.const import *
@@ -22,6 +25,62 @@ def validateEmail( email ):
         return True
     except ValidationError:
         return False
+
+def send_payment_email(payment_id, user):
+    plaintext = get_template('email.txt')
+    htmly     = get_template('email.html')
+
+    payment = Payment.objects.get(id=payment_id)
+
+    purchase_products = Purchase.objects.filter(payment_id=payment_id, type='p').all()
+    products = []
+    for purchase_product in purchase_products:
+        product = purchase_product.product
+        product_ = helper_get_product_detail(product, user)
+        product_['item_count'] = purchase_product.item_count
+        product_['total_price'] = purchase_product.price
+        products.append(product_)
+
+    purchase_sets = Purchase.objects.filter(payment_id=payment_id, type='s').all()
+    sets = []
+    for purchase_set in purchase_sets:
+        set = purchase_set.set
+        set_ = helper_get_set(set, user)
+        set_['item_count'] = purchase_set.item_count
+        set_['total_price'] = purchase_set.price
+        sets.append(set_)
+
+    purchase_custom_sets = Purchase.objects.filter(payment_id=payment_id, type='c').all()
+    custom_sets = []
+    for purchase_custom_set in purchase_custom_sets:
+        custom_set = purchase_custom_set.custom_set
+        custom_set_ = helper_get_custom_set(custom_set, user)
+        custom_set_['item_count'] = purchase_custom_set.item_count
+        custom_set_['total_price'] = purchase_custom_set.price
+        custom_sets.append(custom_set_)
+
+    payment.total_price = int(payment.mileage) + int(payment.auth_amount)
+
+    d = Context({
+        'products': products,
+        'sets': sets,
+        'custom_sets': custom_sets,
+        'payment': payment,
+        'user_': user
+    })
+
+    subject, from_email, to = 'hello', "from@example.com", 'parkjuram@gmail.com'
+    text_content = plaintext.render(d)
+    html_content = htmly.render(d)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    is_success = msg.send()
+
+    if is_success == 1:
+        return http_response_by_json(None)
+    else:
+        raise Http404
+
 
 def billgate_put_data(this_data, put_key, put_value):
     vt = None
