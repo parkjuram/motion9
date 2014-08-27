@@ -22,9 +22,15 @@
         <!-- Slides Container -->
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1300px;
             height: 360px; overflow: hidden;">
-            <div><img u="image" src="http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-27-798x350.jpg" /></div>
-            <div><img u="image" src="http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-5-610x343.jpg" /></div>
-            <div><img u="image" src="http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-33-610x343.jpg" /></div>
+            {% for adarea_item in adarea_items %}
+                <div>
+                    <img u="image" src="{{ adarea_item.image_url }}" href="{{ adarea_item.link_url }}" />
+{#                    <a class="btn btn-stroke-black" href="{{ adarea_item.link_url }}">SHOP COLLECTION</a>#}
+                    <a class="btn-stroke-black" href="{{ adarea_item.link_url }}" style="position: absolute; width: auto; height: auto;margin: auto;
+                        bottom: 0; left: 50%; margin-bottom: 50px;">SHOP COLLECTION
+                    </a>
+                </div>
+            {% endfor %}
         </div>
 
         <!-- Bullet Navigator Skin Begin -->

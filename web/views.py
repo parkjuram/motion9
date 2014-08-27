@@ -521,6 +521,20 @@ def shop_product_view(request, category_id=None, page_num=1):
         current_category = Category.objects.get(id=category_id).name
 
     brands = helper_get_brands()
+    adarea_items = [
+        {
+            'image_url':'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-27-798x350.jpg',
+            'link_url': 'http://www.naver.com'
+        },
+        {
+            'image_url':'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-5-610x343.jpg',
+            'link_url': 'http://www.daum.net'
+        },
+        {
+            'image_url':'http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-33-610x343.jpg',
+            'link_url': 'http://www.google.com'
+        }
+    ]
 
     return render(request, 'shopping_product_web.html',
                   {
@@ -531,7 +545,8 @@ def shop_product_view(request, category_id=None, page_num=1):
                       'categories': categories,
                       'current_page': 'shop_product',
                       'current_brand': brandname_filter,
-                      'brands': brands
+                      'brands': brands,
+                      'adarea_items': adarea_items
                   })
 
 
