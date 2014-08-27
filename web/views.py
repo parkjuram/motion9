@@ -33,58 +33,8 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def test_view(request):
 
-    plaintext = get_template('email.txt')
-    htmly     = get_template('email.html')
+    http_user_agent = request.META.get('HTTP_USER_AGENT').lower()
 
-    payment_id = 31
-    payment = Payment.objects.get(id=payment_id)
-
-    purchase_products = Purchase.objects.filter(payment_id=payment_id, type='p').all()
-    products = []
-    for purchase_product in purchase_products:
-        product = purchase_product.product
-        product_ = helper_get_product_detail(product, request.user)
-        product_['item_count'] = purchase_product.item_count
-        product_['total_price'] = purchase_product.price
-        products.append(product_)
-
-    purchase_sets = Purchase.objects.filter(payment_id=payment_id, type='s').all()
-    sets = []
-    for purchase_set in purchase_sets:
-        set = purchase_set.set
-        set_ = helper_get_set(set, request.user)
-        set_['item_count'] = purchase_set.item_count
-        set_['total_price'] = purchase_set.price
-        sets.append(set_)
-
-    purchase_custom_sets = Purchase.objects.filter(payment_id=payment_id, type='c').all()
-    custom_sets = []
-    for purchase_custom_set in purchase_custom_sets:
-        custom_set = purchase_custom_set.custom_set
-        custom_set_ = helper_get_custom_set(custom_set, request.user)
-        custom_set_['item_count'] = purchase_custom_set.item_count
-        custom_set_['total_price'] = purchase_custom_set.price
-        custom_sets.append(custom_set_)
-
-    payment.total_price = int(payment.mileage) + int(payment.auth_amount)
-    payment.auth_date = str(payment.auth_date)
-    payment.auth_date = payment.auth_date[:4] + "년 " + payment.auth_date[4:6] + "월 " + payment.auth_date[6:8] + "일 " + payment.auth_date[8:10] + "시 " + payment.auth_date[10:12] + "분 "
-    # print payment.auth_date
-
-    d = Context({
-        'products': products,
-        'sets': sets,
-        'custom_sets': custom_sets,
-        'payment': payment,
-        'user_': request.user
-    })
-
-    subject, from_email, to = 'hello', "from@example.com", 'parkjuram@gmail.com'
-    text_content = plaintext.render(d)
-    html_content = htmly.render(d)
-    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
 
     return HttpResponse('success!')
     # return render(request, 'payment_complete_web.html')
@@ -124,7 +74,12 @@ def payment_return_view(request):
     order_date = request.POST.get('ORDER_DATE')
     post_response_code = request.POST.get('RESPONSE_CODE')
     check_sum = request.POST.get('CHECK_SUM')
-    message = urllib.unquote_plus(request.POST.get('MESSAGE'))
+    http_user_agent = request.META.get('HTTP_USER_AGENT').lower()
+    if http_user_agent.find('firefox') == -1 and http_user_agent.find('chrome') == -1 and \
+                    http_user_agent.find('safari') == -1 and http_user_agent.find('opera') == -1:
+        message = request.POST.get('MESSAGE')
+    else:
+        message = urllib.unquote_plus(request.POST.get('MESSAGE'))
 
     is_success = False
 

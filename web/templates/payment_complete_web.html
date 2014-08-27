@@ -36,7 +36,7 @@
                     <div class="purchased-item-contents">
                         <div class="purchased-item-contents-wrapper">
                             <div class="purchased-item-name">
-                                <a href="{% url 'set' set_id=set.id %}" target="_blank">{{ set.name }}></a>
+                                <a href="{% url 'set' set_id=set.id %}" target="_blank">{{ set.name }}</a>
                             </div>
                             <div class="purchased-item-price">가격 :
                                 <span id="cart-set-price-{{ set.id }}">{{ set.discount_price|intcomma }}</span>
