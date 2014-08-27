@@ -20,8 +20,8 @@
     <div id="slider1_container" style="position: relative; margin: 0 auto;
         top: 0px; left: 0px; width: 1300px; height: 360px; overflow: hidden;">
         <!-- Slides Container -->
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1300px;
-            height: 360px; overflow: hidden;">
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; right: 0px; margin: auto; top: 0px; width: 1080px;
+            height: auto; overflow: hidden;">
             {% for adarea_item in adarea_items %}
                 <div>
                     <img u="image" src="{{ adarea_item.image_url }}" href="{{ adarea_item.link_url }}" />
