@@ -74,8 +74,8 @@ def _update_database(source_folder):
         run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration web --auto' % (source_folder,))
         run('cd %s && sudo ../virtualenv/bin/python manage.py migrate web' % (source_folder,))
 
-        # run('cd %s && ../virtualenv/bin/python manage.py schemamigration foradmin --initial' % (source_folder,))
-        run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration foradmin --auto' % (source_folder,))
+        run('cd %s && ../virtualenv/bin/python manage.py schemamigration foradmin --initial' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration foradmin --auto' % (source_folder,))
         run('cd %s && sudo ../virtualenv/bin/python manage.py migrate foradmin' % (source_folder,))
         #
         # # run('cd %s && ../virtualenv/bin/python manage.py schemamigration foradmin --initial' % (source_folder,))
