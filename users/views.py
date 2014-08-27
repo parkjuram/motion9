@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
@@ -122,14 +124,14 @@ def mobile_registration_view(request):
     return render(request, 'register.html')
 
 @csrf_exempt
-def login_(request, next='index'):
+def login_(request, next='login_page'):
     email = request.POST.get('email')
     password = request.POST.get('password')
 
     error = None
 
     if not(User.objects.filter(email=email).exists()):
-        error = 'user id is not exsit'
+        error = '아이디가 존재하지 않습니다.'
         logger.error(error)
     else:
         user = authenticate(username=email, password=password)
@@ -137,14 +139,18 @@ def login_(request, next='index'):
             auth_login(request, user)
             return redirect(next)
         else:
-            error = 'login fail'
+            error = '로그인에 실패하였습니다.'
             logger.error(error)
 
-    return HttpResponse(error)
+    messages.info(request, error)
+    return redirect(next)
 
 @csrf_exempt
 def login_view(request):
-    next = request.GET.get('next', 'index')
+    if request.user.is_authenticated():
+        return redirect('index')
+
+    next = request.GET.get('next', 'login_page')
     return render(request, 'login_web.html',
         {
             'next': next

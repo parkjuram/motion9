@@ -34,10 +34,31 @@
     padding: 10px 20px !important;
 }
 
+#messages { border:1px solid #C8DCC2; margin:1em 0; }
+#messages ul .debug{ background: #EEFAEA; padding: 0.5em, 0 0.5em 0; list-style: none;}
+#messages ul .info{
+    background: #EEFAEA; padding: 1em 1em 1em 1em; list-style: none;
+    font-size: 11px;
+    color: red;
+}
+#messages ul .success{ background: #EEFAEA; padding: 0.5em, 0 0.5em 0; list-style: none;}
+#messages ul .warning{ background: #FF3333; padding: 0.5em, 0 0.5em 0; list-style: none;}
+#messages ul .error{ background: #FF3333; padding: 5px, 0 5px 0; list-style: none;}
+#messages ul li { background: none; padding-left: 5px; padding-top: 8px; padding-bottom: 8px;font-size: 1.2em; }
+
 </style>
 {% endblock %}
 {% block content %}
     <div class="login-form">
+        {% if messages %}
+            <div id="messages">
+                <ul>
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         <div class="login-box-header">
             <h4 class="lined-heading"><span>로그인</span></h4>
         </div>
