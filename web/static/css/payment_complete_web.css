@@ -240,7 +240,6 @@
 .purchased-item-img img{
     /*width : 100%;*/
     /*height : 100%;*/
-    max-width: 90%;
     height: 90%;
     position: absolute;
     margin: auto;

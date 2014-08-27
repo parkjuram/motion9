@@ -1,17 +1,11 @@
 {% load humanize %}
 
     <script>
-        $(function() {
-            alert('jj');
-            $('.btn-for-cart').click(function(e) {
-                alert('clieck!');
-            });
-        })
     </script>
 
     <div class="modal-left-wrapper float-left">
         <div class="modal-desc-wrapper box-css">
-            <div class="box-header">{{ product.name }}</div>
+            <div class="box-header">{{ product.brandname }} {{ product.name }}</div>
             <div class="modal-product-category-box">
                 카테고리 > {{ product.category_name }}
             </div>
@@ -61,6 +55,6 @@
     <div class="box-css">
         <div class="modal-product-description">
             <div class="box-header">상세설명</div>
-            {{ product.description }}
+            <div class="modal-product-description-detail">{{ product.description }}</div>
         </div>
     </div>

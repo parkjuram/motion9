@@ -69,9 +69,11 @@ class SetDescriptionImageAdmin(admin.ModelAdmin):
     list_display_links = ('set', )
 admin.site.register(SetDescriptionImage, SetDescriptionImageAdmin)
 
-
-
-admin.site.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_set', 'small_image')
+    list_editable = ('is_set', 'small_image',)
+    # list_display_links = ()
+admin.site.register(Category, CategoryAdmin)
 
 admin.site.register(ProductDescriptionImage)
 admin.site.register(ProductImage)

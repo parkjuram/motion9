@@ -116,6 +116,10 @@ $(function(){
         }});
 
         $('body').css({overflow:'hidden'});
+
+        $('.btn-for-cart').click(function(e) {
+            func_add_to_cart(e, this);
+        });
     };
 
     var onHideHandler = function(hash){

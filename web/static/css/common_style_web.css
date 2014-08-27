@@ -562,3 +562,13 @@ h4.lined-heading span {
     color: #000000;
     background-color: #ffffff;
 }
+
+
+
+/* product modal css */
+.modal-product-description-detail{
+    padding: 20px 0px 0px 20px;
+    line-height: 18px;
+    font-size: 14px;
+    white-space: pre-line;
+}
