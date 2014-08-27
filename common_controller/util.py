@@ -60,6 +60,8 @@ def send_payment_email(payment_id, user):
         custom_sets.append(custom_set_)
 
     payment.total_price = int(payment.mileage) + int(payment.auth_amount)
+    payment.auth_date = str(payment.auth_date)
+    payment.auth_date = payment.auth_date[:4] + "년 " + payment.auth_date[4:6] + "월 " + payment.auth_date[6:8] + "일 " + payment.auth_date[8:10] + "시 " + payment.auth_date[10:12] + "분 "
 
     d = Context({
         'products': products,
