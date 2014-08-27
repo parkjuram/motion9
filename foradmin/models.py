@@ -9,7 +9,7 @@ class MainImage(models.Model):
 
 class Advertisement(models.Model):
     image = models.ImageField(null=True, upload_to='image/advertisement/')
-    type = models.CharField(null=False, blank=True)
+    type = models.CharField(max_length=20, null=False, blank=True)
     link = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
