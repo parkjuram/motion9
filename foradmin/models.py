@@ -8,7 +8,7 @@ class MainImage(models.Model):
         return '(%r)MainImage : name(%s) is_set(%r)' % (self.id, self.name, self.image)
 
 class Advertisement(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100, unique=True, default='default')
     type = models.CharField(max_length=20, null=False, blank=True)
     image = models.ImageField(null=True, upload_to='image/advertisement/')
     link = models.TextField(null=True, blank=True)
