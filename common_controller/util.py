@@ -69,7 +69,7 @@ def send_payment_email(payment_id, user):
         'user_': user
     })
 
-    subject, from_email, to = 'hello', "from@example.com", 'parkjuram@gmail.com'
+    subject, from_email, to = 'Thanks for payments!', "from@example.com", user.email
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

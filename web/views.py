@@ -484,10 +484,9 @@ def payment_complete_view(request, payment_id=0):
         custom_set_['total_price'] = purchase_custom_set.price
         custom_sets.append(custom_set_)
 
-    beforePayment = BeforePayment.objects.get(order_id=payment.order_id)
-    if beforePayment is not None:
+    if BeforePayment.objects.filter(order_id=payment.order_id).exists():
         util.send_payment_email(payment_id, request.user)
-        BeforePayment.objects.get(order_id=payment.order_id).delete()
+        BeforePayment.objects.filter(order_id=payment.order_id).delete()
 
     return render(request, 'payment_complete_web.html', {
         'products': products,
