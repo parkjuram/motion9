@@ -317,12 +317,19 @@
 
 /* SHOP COLLECTION BUTTON CSS */
 .btn-stroke-black {
+    color: white !important;
     width: 120px;
     padding: 15px 30px;
-    border: solid #0d0d0e 2px;
+    border: solid white 2px;
 }
 .btn-stroke-black:hover {
-    background: #0d0d0e;
-    color: white !important;
+    background: white;
+    color: #0d0d0e !important;
     transition: 0.2s
+}
+
+.item-title{
+    color: white;
+    font-size: 50px;
+    text-shadow: 6px 6px 6px rgba(150, 150, 150, 1);
 }

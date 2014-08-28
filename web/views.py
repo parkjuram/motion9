@@ -525,6 +525,7 @@ def shop_product_view(request, category_id=None, page_num=1):
     adarea_items = []
     for advertisement in advertisements:
         adarea_items.append( {
+            'title': advertisement.title,
             'image_url': settings.MEDIA_URL + advertisement.image.name,
             'link_url': advertisement.link
         })
