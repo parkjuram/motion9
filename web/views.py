@@ -659,12 +659,19 @@ def customize_set_view(request):
         return redirect('login_page')
 
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
-
-    print custom_sets
+    advertisements = Advertisement.objects.filter(type='p').all()
+    adarea_items = []
+    for advertisement in advertisements:
+        adarea_items.append( {
+            'title': advertisement.title,
+            'image_url': settings.MEDIA_URL + advertisement.image.name,
+            'link_url': advertisement.link
+        })
 
     return render(request, "shopping_custom_web.html",
           {
-              'custom_sets': custom_sets
+              'custom_sets': custom_sets,
+              'adarea_items': adarea_items
           })
 
     # set =
