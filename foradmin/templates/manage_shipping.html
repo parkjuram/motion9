@@ -156,14 +156,14 @@
                         </td>
 {#                        <td>{{ purchase.payment.status_name }}</td>#}
                         <td>{{ purchase.payment.name }}</td>
-                        <td>{{ purchase.phone }}</td>
-                        <td>{{ purchase.postcode }}</td>
-                        <td>{{ purchase.address }}</td>
-                        <td>{{ purchase.shipping_requirement }}</td>
+                        <td>{{ purchase.payment.phone }}</td>
+                        <td>{{ purchase.payment.postcode }}</td>
+                        <td>{{ purchase.payment.address }}</td>
+                        <td>{{ purchase.payment.shipping_requirement }}</td>
                         <td>{{ purchase.item_name }}</td>
                         <td>{{ purchase.item_count }}개</td>
                         <td>{{ purchase.price|intcomma }}원</td>
-                        <td>{{ purchase.mileage|intcomma }}원</td>
+                        <td>{{ purchase.payment.mileage|intcomma }}원</td>
                         <td>{{ purchase.payment.auth_amount|intcomma }}원</td>
                         <td>{{ purchase.new_mileage|intcomma }}원</td>
                         <td>{{ purchase.user.profile.name }}</td>

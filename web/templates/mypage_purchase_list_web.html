@@ -1,0 +1,66 @@
+{% extends "mypage_web.html" %}
+{% block subHeader %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{#<link rel="stylesheet" href="{% static 'css/mypage_interesting_set_web.css'%}"/>#}
+{#<script src="{% static 'js/mypage_interesting_set_web.js'%}"></script>#}
+{% endblock subHeader %}
+{% block purchaseList %}
+    {% if purchases.data|length > 0 %}
+        <table>
+            <tr>
+                <th>타입</th>
+                <th>주문번호</th>
+                <th>주문일자</th>
+
+                <th>주문내용</th>
+                <th>주문수량</th>
+                <th>금액</th>
+                <th>진행상태</th>
+                <th>배송조회</th>
+            </tr>
+            {% for purchase_item in purchases.data %}
+                <tr>
+                    <td>{{ purchase_item.purchase.type }}</td>
+                    <td>{{ purchase_item.payment.order_id }}</td>
+                    <td>{{ purchase_item.payment.auth_date }}</td>
+
+                    <td>{{ purchase_item.name }}</td>
+                    <td>{{ purchase_item.purchase.item_count }}</td>
+                    <td>{{ purchase_item.total_price|intcomma }}원</td>
+                    <td>{{ purchase_item.payment.status }}</td>
+                    <td><div class="basic-btn">배송조회</div></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock purchaseList %}
+
+{% block productPaging %}
+{% if purchases.data|length > 0  %}
+    <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
+      {% if not purchases.page_hasPrev %}
+          <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
+      {% else %}
+          <li><a href="{% url 'mypage_set' page_num=purchases.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+      {% endif %}
+
+      {% for pageNum in purchases.page_range %}
+        <li><a href="{% url 'mypage_set' page_num=pageNum %}" {% if pageNum == purchases.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+      {% endfor %}
+      {% if not purchases.page_hasNext  %}
+        <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
+      {% else %}
+        <li><a href="{% url 'mypage_set' page_num=purchases.page_right_count|add:1 %}" class="next">Next</a></li>
+      {% endif %}
+    </ul>
+
+{% else %}
+        <div class="clearfix"></div>
+        <div style="padding : 20px;">
+            아직 구매내역이 없습니다.
+        </div>
+{% endif %}
+
+{% endblock %}

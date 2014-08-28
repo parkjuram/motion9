@@ -31,14 +31,14 @@ urlpatterns = patterns('',
     url(r'^mypage/purchase/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
     url(r'^mypage/purchase/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
 
-    url(r'^mypage/purchase/product/$', 'users.views.mypage_purchase_product_view', name='mypage_purchase_product'),
-    url(r'^mypage/purchase/product/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_product_view', name='mypage_purchase_product'),
-
-    url(r'^mypage/purchase/set/$', 'users.views.mypage_purchase_set_view', name='mypage_purchase_set'),
-    url(r'^mypage/purchase/set/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_set_view', name='mypage_purchase_set'),
-
-    url(r'^mypage/purchase/custom_set/$', 'users.views.mypage_purchase_custom_set_view', name='mypage_purchase_custom_set'),
-    url(r'^mypage/purchase/custom_set/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_custom_set_view', name='mypage_purchase_custom_set'),
+    # url(r'^mypage/purchase/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
+    # url(r'^mypage/purchase/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_view', name='mypage_purchase'),
+    # url(r'^mypage/purchase/product/$', 'users.views.mypage_purchase_product_view', name='mypage_purchase_product'),
+    # url(r'^mypage/purchase/product/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_product_view', name='mypage_purchase_product'),
+    # url(r'^mypage/purchase/set/$', 'users.views.mypage_purchase_set_view', name='mypage_purchase_set'),
+    # url(r'^mypage/purchase/set/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_set_view', name='mypage_purchase_set'),
+    # url(r'^mypage/purchase/custom_set/$', 'users.views.mypage_purchase_custom_set_view', name='mypage_purchase_custom_set'),
+    # url(r'^mypage/purchase/custom_set/(?P<page_num>(\d+))/$', 'users.views.mypage_purchase_custom_set_view', name='mypage_purchase_custom_set'),
 
     url(r'^mypage/cart/$', 'users.views.mypage_cart_view', name='mypage_cart'),
     url(r'^mypage/cart/json/$', 'users.views.mypage_cart_json_view', name='mypage_cart_json'),
