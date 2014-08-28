@@ -16,9 +16,19 @@
     {% for set_category_images in set_category_images_row %}
         <div class="index-content-row">
             {% for set_category_image in set_category_images %}
-                <div class="index-content">
-                    <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
-                </div>
+                {% if forloop.first %}
+                    <div class="index-content float-left">
+                        <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+                    </div>
+                {% elif forloop.last %}
+                    <div class="index-content center-in-div">
+                        <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+                    </div>
+                {% else %}
+                    <div class="index-content float-right">
+                        <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+                    </div>
+                {% endif %}
             {% endfor %}
             <div class="clearfix"></div>
         </div>

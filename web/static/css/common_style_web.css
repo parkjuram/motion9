@@ -79,6 +79,15 @@ a:visited{
 
 
 
+.center-in-div{
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
 
 #header{
     z-index : 1;
