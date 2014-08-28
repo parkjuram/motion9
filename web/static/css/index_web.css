@@ -22,8 +22,15 @@
     padding-top: 20px;
 }
 
+.index-content-row {
+    align-content: center;
+    width:95%;
+    margin: 0 auto;
+}
+
 .index-content{
-    width : 100%;
+    width : 32%;
+    float: left;
     height : auto;
     margin-bottom: 20px;
 }
