@@ -13,9 +13,14 @@
 
 {% block content %}
 <div class="index-content-wrapper">
-    {% for set_category_image in set_category_images %}
-        <div class="index-content">
-            <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+    {% for set_category_images in set_category_images_row %}
+        <div class="index-content-row">
+            {% for set_category_image in set_category_images %}
+                <div class="index-content">
+                    <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+                </div>
+            {% endfor %}
+            <div class="clearfix"></div>
         </div>
     {% endfor %}
 </div>

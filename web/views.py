@@ -480,11 +480,19 @@ def index_view(request):
     except:
         main_image=''
 
-    set_category_images = []
+    set_category_images_row = []
     try:
         set_categorys = Category.objects.filter(is_set=True).all()
+
+        set_category_images = []
         for set_category in set_categorys:
             set_category_images.append( settings.MEDIA_URL + set_category.small_image.name )
+            if len(set_category_images) == 3:
+                set_category_images_row.append(set_category_images)
+                set_category_images = []
+
+        if len(set_category_images) != 0:
+            set_category_images_row.append(set_category_images)
     except:
         pass
 
@@ -493,7 +501,7 @@ def index_view(request):
                       'product_categories': product_categories,
                       'set_categories': set_categories,
                       'main_image': main_image,
-                      'set_category_images': set_category_images,
+                      'set_category_images_row': set_category_images_row,
                       'next': 'index'
                   })
 
