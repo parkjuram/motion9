@@ -700,6 +700,9 @@ def customize_set_save_view(request):
 
     if user is not None:
         custom_set, is_created = CustomSet.objects.get_or_create(user=user, set_id=set_id)
+        if not(is_created):
+            Cart.objects.filter(custom_set=custom_set).delete()
+
         for custom_item in custom_list:
             original_id = custom_item.get('original_id')
             new_id = custom_item.get('new_id')

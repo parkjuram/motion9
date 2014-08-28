@@ -192,7 +192,7 @@
     min-height : 52px;
     max-width : 52px;
     max-height : 52px;
-    display: table-cell;
+    display: block;
     vertical-align: middle;
     text-align: center;
     border: 1px solid #e5e5e5;
