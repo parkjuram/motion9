@@ -28,6 +28,10 @@
     margin: 0 auto;
 }
 
+.index-content-img {
+    opacity: 0.4;
+}
+
 .index-content{
     width : 32%;
     height : auto;
