@@ -3,9 +3,9 @@
 {% load mathfilters %}
     {% block purchaseTab %}
     <ul class="purchase-tab">
-        <li><a href="{% url 'mypage_purchase_product' %}">단품 구매목록</a></li>
+        <a href="{% url 'mypage_purchase_product' %}"><li>단품 구매목록</li></a>
         <li class="active">세트 구매목록</li>
-        <li><a href="{% url 'mypage_purchase_custom_set' %}">커스텀 세트 구매목록</a></li>
+        <a href="{% url 'mypage_purchase_custom_set' %}"><li>커스텀 세트 구매목록</li></a>
     </ul>
     {% endblock %}
     {% block purchaseTable %}

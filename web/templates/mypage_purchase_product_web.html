@@ -4,8 +4,8 @@
     {%block purchaseTab %}
     <ul class="purchase-tab">
         <li class="active">단품 구매목록</li>
-        <li><a href="{% url 'mypage_purchase_set' %}">세트 구매목록</a></li>
-        <li><a href="{% url 'mypage_purchase_custom_set' %}">커스텀 세트 구매목록</a></li>
+        <a href="{% url 'mypage_purchase_set' %}"><li>세트 구매목록</li></a>
+        <a href="{% url 'mypage_purchase_custom_set' %}"><li>커스텀 세트 구매목록</li></a>
     </ul>
     {% endblock %}
 

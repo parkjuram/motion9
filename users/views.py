@@ -452,12 +452,13 @@ def mypage_purchase_set_view(request, page_num=1):
         purchases = user.purchase_set.filter(type='s').all()
         sets = []
         for purchase in purchases:
+            payment = purchase.payment
             set = purchase.set
             set_ = helper_get_set(set, user)
             set_.update({
                 'item_count':purchase.item_count,
-                'status':helpger_get_purchase_status(purchase.status),
-                'shipping_number':purchase.shipping_number,
+                'status':helpger_get_purchase_status(payment.status),
+                'shipping_number':payment.shipping_number,
                 'price':purchase.price,
                 'created':purchase.created
             })
@@ -482,12 +483,13 @@ def mypage_purchase_custom_set_view(request, page_num=1):
         purchases = user.purchase_set.filter(type='c').all()
         custom_sets = []
         for purchase in purchases:
+            payment = purchase.payment
             custom_set = purchase.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
             custom_set_.update({
                 'item_count':purchase.item_count,
-                'status':helpger_get_purchase_status(purchase.status),
-                'shipping_number':purchase.shipping_number,
+                'status':helpger_get_purchase_status(payment.status),
+                'shipping_number':payment.shipping_number,
                 'price':purchase.price,
                 'created':purchase.created
             })

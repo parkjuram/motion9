@@ -553,7 +553,7 @@ def helper_add_set_cart(user, set_id, item_count):
     except Exception as e:
         logger.error(e)
 
-def helper_add_custom_set_cart(user, custom_set_id, item_count):
+def helper_add_custom_set_cart(user, custom_set_id, item_count=1):
     try:
         if Cart.objects.filter(user=user, custom_set_id=custom_set_id, type='c').exists():
             cart = Cart.objects.filter(user=user, custom_set_id=custom_set_id, type='c').first()

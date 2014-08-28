@@ -158,8 +158,6 @@ $(function(){
 
     };
 
-    console.log( func_add_to_cart );
-
     var onHideHandler = function(hash){
         hash.w.hide();
         hash.o.remove();
