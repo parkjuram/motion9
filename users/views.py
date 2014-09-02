@@ -20,8 +20,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_add_product_purchase, helper_add_set_purchase, helper_add_custom_set_purchase, \
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
-    helper_update_cart_items_count, helpger_get_purchase_status, helper_get_user_ip, \
-    helper_get_billgate_payment_checksum
+    helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
+    helper_get_billgate_payment_checksum, helper_get_type_name
 
 from .models import Interest
 
@@ -400,6 +400,8 @@ def mypage_purchase_view(request, page_num=1):
         item['total_price'] = purchase.price * purchase.item_count
         item['purchase'] = purchase
         item['payment'] = purchase.payment
+        item['type_name'] = helper_get_type_name(purchase.type)
+        item['status_name'] = helper_get_purchase_status(purchase.payment.status)
         purchase_list.append(item)
 
     purchase_list = helper_make_paging_data(len(purchase_list), purchase_list[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
@@ -454,7 +456,7 @@ def mypage_purchase_product_view(request, page_num=1):
             product_ = helper_get_product_detail(product, user)
             product_.update({
                 'item_count':purchase.item_count,
-                'status':helpger_get_purchase_status(payment.status),
+                'status':helper_get_purchase_status(payment.status),
                 'shipping_number':payment.shipping_number,
                 'price':purchase.price,
                 'created':purchase.created
@@ -487,7 +489,7 @@ def mypage_purchase_set_view(request, page_num=1):
             set_ = helper_get_set(set, user)
             set_.update({
                 'item_count':purchase.item_count,
-                'status':helpger_get_purchase_status(payment.status),
+                'status':helper_get_purchase_status(payment.status),
                 'shipping_number':payment.shipping_number,
                 'price':purchase.price,
                 'created':purchase.created
@@ -518,7 +520,7 @@ def mypage_purchase_custom_set_view(request, page_num=1):
             custom_set_ = helper_get_custom_set(custom_set, user)
             custom_set_.update({
                 'item_count':purchase.item_count,
-                'status':helpger_get_purchase_status(payment.status),
+                'status':helper_get_purchase_status(payment.status),
                 'shipping_number':payment.shipping_number,
                 'price':purchase.price,
                 'created':purchase.created

@@ -129,7 +129,7 @@ def http_response_by_json(error=None, json_={}):
 
     return HttpResponse(json.dumps(json_, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
-def helpger_get_purchase_status(status):
+def helper_get_purchase_status(status):
     if status == 'b':
         return '상품 준비중'
     elif status == 'r':
@@ -671,3 +671,14 @@ def helper_get_billgate_payment_checksum(temp):
     checksum = (Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]).strip()
 
     return checksum
+
+def helper_get_type_name(type):
+    type_name=''
+    if type=='p':
+        type_name='제품'
+    elif type=='s':
+        type_name='세트'
+    elif type=='c':
+        type_name='커스텀'
+
+    return type_name
