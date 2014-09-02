@@ -18,15 +18,15 @@
             {% for set_category_image in set_category_images %}
                 {% if forloop.first %}
                     <div class="index-content float-left">
-                        <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+                        <a href="{% url 'shop_set' category_id=set_category_image.id %}" class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
                     </div>
                 {% elif forloop.last %}
                     <div class="index-content center-in-div">
-                        <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+                        <a href="{% url 'shop_set' category_id=set_category_image.id %}" class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
                     </div>
                 {% else %}
                     <div class="index-content float-right">
-                        <a href="#" class="index-content-img"><img src="{{ set_category_image }}"/></a>
+                        <a href="{% url 'shop_set' category_id=set_category_image.id %}" class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
                     </div>
                 {% endif %}
             {% endfor %}

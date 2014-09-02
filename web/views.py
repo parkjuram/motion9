@@ -487,7 +487,10 @@ def index_view(request):
 
         set_category_images = []
         for set_category in set_categorys:
-            set_category_images.append( settings.MEDIA_URL + set_category.small_image.name )
+            set_category_images.append( {
+                'id': set_category.id,
+                'image_url': settings.MEDIA_URL + set_category.small_image.name
+            })
             if len(set_category_images) == 3:
                 set_category_images_row.append(set_category_images)
                 set_category_images = []
