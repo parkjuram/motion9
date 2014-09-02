@@ -31,7 +31,7 @@
                         <td>{{ purchase_item.purchase.item_count }}</td>
                         <td>{{ purchase_item.total_price|intcomma }}원</td>
                         <td>{{ purchase_item.status_name }}</td>
-                        <td align="center"><a href="http://www.cjgls.co.kr/kor/service/service02_01.asp?slipno={{ purchase_item.payment.shipping_number }}" taget="_blank" class="basic-btn">배송조회</a></td>
+                        <td align="center"><a href="http://www.cjgls.co.kr/kor/service/service02_01.asp?slipno={{ purchase_item.payment.shipping_number }}" target="_blank" class="basic-btn">배송조회</a></td>
                     </tr>
                 {% endfor %}
             </table>
