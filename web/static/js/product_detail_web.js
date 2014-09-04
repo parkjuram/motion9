@@ -6,6 +6,15 @@
 
 $(function(){
 
+    $.fn.scrollView = function () {
+        return this.each(function () {
+        $('html, body').animate({
+              scrollTop: $(this).offset().top-100
+            }, 500);
+        });
+    }
+
+
     $('.product-info-btn').click(function(e){
         e.preventDefault();
 
@@ -73,5 +82,21 @@ $(function(){
         width: 'auto', //auto or any custom width
         fit: true,   // 100% fits in a container
         activate: function() {}  // Callback function, gets called if tab is switched
+    });
+
+    $('.btn-magazine-fold').click(function(e) {
+        e.preventDefault();
+
+        var magazine_fold = $('.magazine-fold');
+        if ( magazine_fold.css('display') == 'none' ) {
+            magazine_fold.css('display',"block");
+            magazine_fold.scrollView();
+            $(this).text('닫기');
+        } else {
+            magazine_fold.css('display',"none");
+            $(this).text('더보기');
+            $(".magazine-wrapper").scrollView();
+        }
+        $(this).scroll();
     });
 });

@@ -4,14 +4,23 @@
 
 $(function(){
 
-    $( document ).tooltip({position: {
+    $( '.right-tooltip' ).tooltip({position: {
         my: "center",
         at: "right+100",
         track: false,
         using: function(position, feedback) {
             $(this).css(position);
         }
-    }});
+    }, tooltipClass: "ui-right-tooltip"});
+
+    $( '.left-tooltip' ).tooltip({position: {
+        my: "right",
+        at: "left",
+        track: false,
+        using: function(position, feedback) {
+            $(this).css(position);
+        }
+    }, tooltipClass: "ui-left-tooltip"});
 
     $(document).ready(function ($) {
         var options = {

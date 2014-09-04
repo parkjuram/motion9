@@ -73,7 +73,7 @@
 }
 
 #productDiscountRate {
-    color: #ff0000;
+    color: #0000FF;
     font-size: 20px;
 }
 
@@ -175,8 +175,13 @@ a.basic-btn{
 
 .belong-product-name{
     font-weight: bold;
-    font-size: 12px;
-    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+.belong-product-date{
+    font-weight: normal;
+    font-size: 9px;
+    margin-bottom: 2px;
 }
 
 .belong-product-contents{
@@ -370,7 +375,7 @@ a.basic-btn{
     font-size: 11px;
 }
 
-div.ui-tooltip {
+div.ui-right-tooltip {
     font-size: 11px;
     position: absolute;
     z-index: 10;
@@ -381,4 +386,35 @@ div.ui-tooltip {
     border: 1px solid #913C49;
     border-radius: 0px;
     line-height: 2;
+}
+
+div.ui-left-tooltip {
+    font-size: 11px;
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    background: white;
+    color: #8C3946;
+    padding: 5px;
+    border: 1px solid #913C49;
+    border-radius: 0px;
+    line-height: 2;
+}
+
+
+
+.magazine-fold {
+    display: none;
+}
+
+.btn-magazine-fold {
+    cursor: pointer;
+    position: relative;
+    left: 50%;
+    margin-left: -30px;
+    line-height: 100px;
+}
+
+.summary-detail{
+    color: #0099ff;
 }

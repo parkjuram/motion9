@@ -615,11 +615,14 @@ def product_view(request, product_id=None):
 
         blog_reivews = helper_get_blog_reviews(product_id)
         magazines = helper_get_product_magazines(product_id)
+        magazines_fold = magazines[4:]
+        magazines = magazines[:4]
 
         return render(request, "product_detail_web.html",
                       {
                           'product': product,
                           'magazines': magazines,
+                          'magazines_fold': magazines_fold,
                           'blog_reviews': blog_reivews
                       })
     else:

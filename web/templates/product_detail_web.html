@@ -46,11 +46,30 @@
                                     {% if magazine.author|length > 0 %}
                                         <span class="author">에디터 {{ magazine.author }}</span>
                                     {% endif %}
-
                                 </div>
                             </div>
                         </a>
                     {% endfor %}
+                    {% if magazines_fold|length > 0 %}
+                        <div class="magazine-fold">
+                            {% for magazine in magazines_fold %}
+                                <a href="{{ magazine.link }}" target="_blank">
+                                    <div class="magazine-item-container">
+                                        <div class="title">{{ magazine.title }}</div>
+                                        <div class="description">
+                                            <span class="magazine-title"> < {{ magazine.magazine_title }} > </span>
+                                            <span class="year">{{ magazine.year }}년</span>
+                                            <span class="month">{{ magazine.month }}월호, </span>
+                                            {% if magazine.author|length > 0 %}
+                                                <span class="author">에디터 {{ magazine.author }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <a class="basic-btn btn-magazine-fold">더보기</a>
+                    {% endif %}
                 </div>
 
 {#                <div class="float-right">#}
@@ -70,7 +89,7 @@
 {#        <div class="box-css no-shadow" style="background-color: #F3F3F3;">#}
         <div class="box-css no-shadow">
             <div class="quality-guarantee">
-                <a href="#" title="이 제품은 정품보증이 된 제품입니다.">
+                <a class="right-tooltip" href="#" title="이 제품은 정품보증이 된 제품입니다.">
                     <img class="icon" src="{% static "img/qg_ico.png" %}" />
                     <span class="text">Quality Guarantee</span>
                 </a>
@@ -166,7 +185,7 @@
 
             <div class="price-area">
                 <div class="price-origin float-left"><span id="productOriginPrice">{{ product.original_price|intcomma }}</span>원</div>
-                <div class="discount-rate float-right"><span id="productDiscountRate">{{ product.discount_rate }}%⬇</span></div>
+                <div class="discount-rate float-right"><span id="productDiscountRate">&#x25BC;{{ product.discount_rate }}%</span></div>
                 <div class="product-price price-saled">판매가 : <span id="productPrice">{{ product.discount_price|intcomma }}</span>원({{ product.discount_price|div:100|add:"0" }} 원 적립) </div>
 
                 <div class="clearfix"></div>
@@ -202,20 +221,25 @@
            </div>
            <div class="col-xs-12" style="padding-top: 4px; padding-bottom: 8px; ">
            {% for blog in blog_reviews %}
-               <div class="belong-to-product-x-item">
+               <div class="left-tooltip belong-to-product-x-item" title="{{ blog.summary }}">
                    <div class="belong-product-img">
                        <a href="{{ blog.url }}" target="_blank" ><img src="{{ blog.small_img_url }}" alt="" /></a>
                    </div>
                    <div class="belong-product-info">
                        <div class="belong-product-name">
                            <a href="{{ blog.url }}" target="_blank" >{{ blog.writer|truncatechars:10 }}</a>
+
+                       </div>
+                       <div class="belong-product-date">
+                           {{ blog.review_created_time }}
                        </div>
                        <div class="belong-product-contents">
-                           {{ blog.summary}}
+                            {{ blog.summary|truncatechars:50 }}<span class="summary-detail">(자세히 보기)</span>
                        </div>
                    </div>
                    <div class="clearfix"></div>
                </div>
+
            {% endfor %}
            </div>
         </div>
