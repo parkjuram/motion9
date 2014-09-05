@@ -4,9 +4,24 @@
 
 $(function(){
 
+    function openWithoutReferrer(url) {
+        var site = window.open("", "_blank");
+        site.document.open();
+        site.document.writeln('<script type="text/javascript">window.location = "' + url + '";</script>');
+        site.document.close();
+    }
+
+    var ttt;
+
+    // Open links with "hide-referrer" class without sending the referrer
+    $(document).on('click', 'a.hide-referrer', function(e) {
+        e.preventDefault();
+        openWithoutReferrer($(this).attr('href'));
+    });
+
     $( '.right-tooltip' ).tooltip({position: {
-        my: "center",
-        at: "right+100",
+        my: "left",
+        at: "right",
         track: false,
         using: function(position, feedback) {
             $(this).css(position);

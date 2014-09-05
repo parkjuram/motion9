@@ -153,15 +153,16 @@ a.basic-btn{
 }
 
 .belong-product-img{
-    width : 84px;
+    width : 100px;
     float: left;
     margin-left: 12px;
     margin-right : 8px;
 }
 
 .belong-product-img img{
-    width : 80px;
-    height : 80px;
+    width : 100px;
+    min-height : 80px;
+    border-radius: 8px;
     border: 1px solid #e5e5e5;
 }
 
@@ -176,16 +177,20 @@ a.basic-btn{
 .belong-product-name{
     font-weight: bold;
     font-size: 13px;
+    float: right;
+    margin-left: 20px;
 }
 
 .belong-product-date{
     font-weight: normal;
     font-size: 9px;
     margin-bottom: 2px;
+    float: right;
 }
 
 .belong-product-contents{
     font-size: 12px;
+    clear: right;
 }
 
 
@@ -402,6 +407,10 @@ div.ui-left-tooltip {
 }
 
 
+.ui-tooltip-content {
+    text-align: left;
+    white-space: pre-wrap;
+}
 
 .magazine-fold {
     display: none;
@@ -417,4 +426,5 @@ div.ui-left-tooltip {
 
 .summary-detail{
     color: #0099ff;
+    font-size: 10px;
 }

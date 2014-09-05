@@ -89,7 +89,8 @@
 {#        <div class="box-css no-shadow" style="background-color: #F3F3F3;">#}
         <div class="box-css no-shadow">
             <div class="quality-guarantee">
-                <a class="right-tooltip" href="#" title="이 제품은 정품보증이 된 제품입니다.">
+                <a class="right-tooltip" href="#" title="* Motion9에서 판매하는 제품은 백화점과 매장에서 판매하는 정품입니다. 정품이 아닐시 100% 보상해 드립니다.
+* Motion9은 최근에 생산된 제품만을 선별해서 제공하고 있습니다. 만약 상품 주문일로부터 18개월 이상 지난 상품일 경우 100% 보상해드립니다.">
                     <img class="icon" src="{% static "img/qg_ico.png" %}" />
                     <span class="text">Quality Guarantee</span>
                 </a>
@@ -223,18 +224,17 @@
            {% for blog in blog_reviews %}
                <div class="left-tooltip belong-to-product-x-item" title="{{ blog.summary }}">
                    <div class="belong-product-img">
-                       <a href="{{ blog.url }}" target="_blank" ><img src="{{ blog.small_img_url }}" alt="" /></a>
+                       <a href="{{ blog.url }}" class='hide-referrer'><img src="{{ blog.small_img_url }}" alt="" /></a>
                    </div>
                    <div class="belong-product-info">
+                       <div class="belong-product-contents">
+                            {{ blog.summary|truncatechars:50 }}<br/><span class="summary-detail">(자세히 보기)</span>
+                       </div>
                        <div class="belong-product-name">
-                           <a href="{{ blog.url }}" target="_blank" >{{ blog.writer|truncatechars:10 }}</a>
-
+                           <a href="{{ blog.url }}" class='hide-referrer' target="_blank" >by {{ blog.writer|truncatechars:10 }}</a>
                        </div>
                        <div class="belong-product-date">
-                           {{ blog.review_created_time }}
-                       </div>
-                       <div class="belong-product-contents">
-                            {{ blog.summary|truncatechars:50 }}<span class="summary-detail">(자세히 보기)</span>
+                           {{ blog.review_created_time|date:'Y-m-d' }}
                        </div>
                    </div>
                    <div class="clearfix"></div>

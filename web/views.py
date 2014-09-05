@@ -35,6 +35,7 @@ logger = logging.getLogger(__name__)
 def test_view(request):
 
     http_user_agent = request.META.get('HTTP_USER_AGENT').lower()
+    # print request.META.get('HTTP_REFERER')
 
 
     return HttpResponse('success!')
