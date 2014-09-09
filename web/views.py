@@ -585,6 +585,10 @@ def shop_set_view(request, category_id=None, page_num=1):
             'link_url': advertisement.link
         })
 
+    # print sets['data'][0].keys()
+    # print sets['data'][0]['products']
+    # print sets['data'][0]['products'][0]['name']
+
     return render(request, 'shopping_set_web.html',
                   {
                       'sets': sets,

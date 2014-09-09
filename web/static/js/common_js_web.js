@@ -6,9 +6,7 @@ $(function(){
 
     function openWithoutReferrer(url) {
         var site = window.open("", "_blank");
-        site.document.open();
-        site.document.writeln('<script type="text/javascript">window.location = "' + url + '";</script>');
-        site.document.close();
+        site.location.href = "javascript:location.replace('" + url + "')";
     }
 
     var ttt;

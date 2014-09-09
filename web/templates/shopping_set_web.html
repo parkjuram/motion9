@@ -130,7 +130,9 @@
                         세트구성
                     </div>
                     <div class="set-item-info-contents">
-                        BB크림, 스킨, 로션, 에센스, 발모제, 탈모제, 썬크림
+                        {% for product in set.products %}
+                            {{ product.brandname }} {{ product.name }}<br/>
+                        {% endfor %}
                     </div>
                     <div class="set-item-info-bottom">
                         {{ set.discount_price|intcomma }}원 &nbsp;&nbsp;<a href="{% url "set" set_id=set.id %}" class="basic-btn">자세히 보기</a>
