@@ -4,6 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
     helper_get_custom_set_list, helper_get_custom_set
+from foradmin.models import MainImage
+from motion9 import settings
 
 from web.models import Category
 
@@ -14,10 +16,18 @@ def index_view(request):
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
 
+    main_image = MainImage.objects.filter(name='Main_m').all()[0]
+    main_image_url = settings.MEDIA_URL + main_image.image.name
+
+
+    # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
+
+
     return render(request, 'index.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
+                      'main_image_url': main_image_url
                   })
 
 @csrf_exempt
