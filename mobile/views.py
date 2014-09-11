@@ -19,7 +19,8 @@ def index_view(request):
     main_image = MainImage.objects.filter(name='Main_m').all()[0]
     main_image_url = settings.MEDIA_URL + main_image.image.name
 
-
+    category_images = Category.objects.filter(is_set=True).all()
+    category_images = list(map(lambda x:settings.MEDIA_URL+x.name, category_images))
     # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
 
 
@@ -27,7 +28,8 @@ def index_view(request):
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
-                      'main_image_url': main_image_url
+                      'main_image_url': main_image_url,
+                      'category_images': category_images
                   })
 
 @csrf_exempt
