@@ -51,7 +51,7 @@
             <div class="box-css user-profile">
                 <div class="profile-user-name">{{ user.profile.name }}</div>
                 <div>
-                    {{ user.email }}
+                    {{ user.email|truncatechars }}
                 </div>
                 <p class="user-mileage">
                     적립금 : {{ user.profile.mileage }} 원
