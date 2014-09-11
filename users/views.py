@@ -242,7 +242,6 @@ def update(request):
 
 @login_required
 def mypage_view(request, page_num=1):
-    test = 'test'
     page_num = int(page_num)
     user = helper_get_user(request)
     if user is not None:
