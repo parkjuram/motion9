@@ -5,7 +5,7 @@ class MainImage(models.Model):
     image = models.ImageField(null=True, upload_to='image/main/')
 
     def __unicode__(self):
-        return '(%r)MainImage : name(%s) is_set(%r)' % (self.id, self.name, self.image)
+        return '(%r)MainImage : name(%s) image(%r)' % (self.id, self.name, self.image)
 
 class Advertisement(models.Model):
     title = models.CharField(max_length=100, unique=True, default='default')
