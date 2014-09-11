@@ -20,7 +20,7 @@ def index_view(request):
     main_image_url = settings.MEDIA_URL + main_image.image.name
 
     category_images = Category.objects.filter(is_set=True).all()
-    category_images = list(map(lambda x:settings.MEDIA_URL+x.name, category_images))
+    category_images = list(map(lambda x:settings.MEDIA_URL+x.small_image.name, category_images))
     # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
 
 
