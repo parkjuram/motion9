@@ -4,6 +4,7 @@ from datetime import datetime
 class Category(models.Model):
     name = models.TextField(null=False)
     is_set = models.BooleanField(null=False, default=False)
+    big_image = models.ImageField(null=True, upload_to='categoryimage/big/')
     small_image = models.ImageField(null=True, upload_to='categoryimage/')
 
     def __unicode__(self):
