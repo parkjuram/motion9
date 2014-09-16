@@ -1,3 +1,7 @@
+.ui-content{
+    background-color : white;
+}
+
 a{
     color : inherit;
     text-shadow : none;
@@ -11,6 +15,23 @@ a:hover{
 }
 
 
+.select-wrapper {
+    border: 1px solid #dddddd;
+    margin: 20px;
+    border-radius: 3px;
+    background-color: white;
+    height : 44px;
+}
+
+.ui-select .ui-btn {
+    line-height: 44px;
+    padding: 0;
+}
+
+.ui-icon-carat-d:after {
+    background-image: url('../img/arrow_down.png');
+}
+
 .mypage-wrapper{
     height : 180px;
     text-shadow : none;
@@ -22,7 +43,6 @@ a:hover{
     position : relative;
     padding-top : 20px;
 }
-
 
 .mypage-user-name{
 
