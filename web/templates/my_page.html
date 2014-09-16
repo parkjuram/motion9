@@ -16,6 +16,17 @@
     <h2 class="ui-title">My Page</h2>
 {% endblock %}
 {% block content %}
+
+<div class="select-wrapper">
+        <select id="mobileMypageList" data-mini="true" data-shadow="false">
+            <option value="#subProductCategory">내 정보</option>
+            <option value="#subSetCategory">관심 컬렉션</option>
+            <option value="#subSetCategory">관심 제품</option>
+            <option value="#subSetCategory">구매 내역</option>
+        </select>
+</div>
+
+
 <div class="mypage-wrapper">
     <div class="mypage-user-name">
         {{ user.profile.name }}
