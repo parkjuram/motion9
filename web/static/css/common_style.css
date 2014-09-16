@@ -252,29 +252,7 @@ img.profile-img{
     background-color : #FCFCFC;
 }
 
-.ui-panel {
-    width: 22em;
-}
-.ui-panel-position-left {
-    left: -22em;
-}
-/* positioning: content wrap, fixed toolbars and dismiss */
-/* panel left open */
-.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open,
-.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,
-.ui-panel-dismiss-position-left.ui-panel-dismiss-open {
-    left: 22em;
-    right: -22em;
-}
-/* animated: panel left open (for reveal and push) */
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal,
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
-.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
-    -webkit-transform: translate3d(22em,0,0);
-    -moz-transform: translate3d(22em,0,0);
-    transform: translate3d(22em,0,0);
-}
+
 
 .ui-panel-wrapper{
     background: inherit !important;
