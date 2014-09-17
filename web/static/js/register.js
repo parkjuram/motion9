@@ -23,7 +23,7 @@ $(function(){
 
           email.val(response.email);
 //          emailCheck(email);
-          name.val(response.last_name + response.first_name);
+//          name.val(response.last_name + response.first_name);
 
           if(response.gender == 'male'){
               $('#sex_m').attr('selected', 'selected');
