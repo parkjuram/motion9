@@ -57,11 +57,15 @@ $(function(){
     $('#joinBtn').click(function(e){
         e.preventDefault();
 
-        if($(this).attr('data-enable')==true){
-            $('#register').submit();
-        }else{
-            alert('Email을 확인해주세요.');
-        }
+        console.log('register join btn clicked!');
+
+        $('#register').submit();
+
+//        if($(this).attr('data-enable')=="true"){
+//            $('#register').submit();
+//        }else{
+//            alert('Email을 확인해주세요.');
+//        }
 
 
     });

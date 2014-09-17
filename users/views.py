@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.db.utils import DataError
 from django.contrib.auth import authenticate, login as auth_login, logout
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
@@ -87,31 +87,39 @@ def registration(request, next='index'):
     password = request.POST.get('password')
     password_confirm = request.POST.get('password_confirm')
     sex = request.POST.get('sex')
+    error = None
 
     if User.objects.filter(email=email).exists():
-        return HttpResponse('already exist email')
-
-    if password == password_confirm:
-        try:
-            user = User.objects.create_user(username=email, email=email, password=password)
-            user.profile.name=name
-            user.profile.sex=sex
-            user.profile.save()
-        except ValueError as e:
-            logger.error(e)
-            return HttpResponse('Registraion ValueError!')
-        except IntegrityError as e:
-            logger.error(e)
-            return HttpResponse('Registraion IntegrityError!')
-
+        error = 'already exist email'
     else:
-        return HttpResponse('password and confirm is not identical')
+        if password == password_confirm:
+            try:
+                user = User.objects.create_user(username=email, email=email, password=password)
+                user.profile.name=name
+                user.profile.sex=sex
+                user.profile.save()
+            except ValueError as e:
+                logger.error(e)
+                error = 'Registraion ValueError!'
+            except IntegrityError as e:
+                logger.error(e)
+                error = 'Registraion IntegrityError!'
 
-    user = authenticate(username=email, password=password)
-    if user is not None and user.is_active:
-        auth_login(request, user)
+        else:
+            error = 'password and confirm is not identical'
 
-    return redirect(next)
+    if error is None:
+        user = authenticate(username=email, password=password)
+        if user is not None and user.is_active:
+            auth_login(request, user)
+
+        return redirect(next)
+    else:
+        messages.info(request, error)
+        return redirect('mobile_registration_page')
+
+
+
 
 @csrf_exempt
 def registration_view(request):
@@ -121,7 +129,11 @@ def registration_view(request):
 
 @csrf_exempt
 def mobile_registration_view(request):
-    return render(request, 'register.html')
+    next = request.GET.get('next', 'mobile_index')
+
+    return render(request, 'register.html', {
+        'next': next
+    })
 
 @csrf_exempt
 def login_(request, next='login_page'):

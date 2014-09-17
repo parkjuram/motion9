@@ -10,7 +10,15 @@
 {% block content %}
        <form method="post" id="register" action="{% url 'registration' next=next %}">
 			<div class="ui-grid-solo">
-
+                {% if messages %}
+                    <div id="messages">
+                        <ul>
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
 				<div class="ui-block-a form-box">
 					<div class="boxed">
 						<div class="form-contents">
@@ -18,7 +26,7 @@
                                 <a href="#" class="facebook-btn fb-join-btn" style="margin:12px 0;">Facebook을 통해 가입</a>
                             </div>
 							<div>
-								<label for="email">Email <span class="warning-message">* 이미 존재하는 이메일이거나 형식이 올바르지 않습니다.</span></label>
+                                <label for="email">이메일</label>
 								<input type="text" name="email" id="email" data-clear-btn="true" data-mini="true"/>
 							</div>
 							<div>
@@ -26,8 +34,12 @@
 								<input type="text" name="name" id="name" data-clear-btn="true" data-mini="true"/>
 							</div>
 							<div>
-								<label for="password_i">비밀번호</label>
-								<input type="password" name="password" id="password_i" data-clear-btn="true" data-mini="true"/>
+								<label for="password">비밀번호</label>
+								<input type="password" name="password" id="password" data-clear-btn="true" data-mini="true"/>
+							</div>
+                            <div>
+								<label for="password_confirm">비밀번호 확인</label>
+								<input type="password" name="password_confirm" id="password_confirm" data-clear-btn="true" data-mini="true"/>
 							</div>
 							<div class="sex-wrapper">
 								<label for="sex">성별</label>
