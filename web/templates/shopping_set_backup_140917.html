@@ -1,0 +1,113 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+<link rel="stylesheet" href="{% static 'css/shopping_set.css'%}"/>
+<script src="{% static 'js/shopping_set.js'%}"></script>
+{% endblock %}
+
+{% block title %}
+    <h2 class="ui-title">세트상품</h2>
+{% endblock %}
+
+{% block content %}
+<div class="main-header-img">
+    <img src="{% static "img/black.jpg" %}"/>
+</div>
+<div class="category-box">
+    <div class="select-wrapper">
+      <div class="select-box-border">
+        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option value="#subSetCategory">Collection</option>
+            <option value="#subProductCategory">Products</option>
+        </select>
+      </div>
+    </div>
+    <div class="select-wrapper">
+        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
+            <option {% if current_category_id == '18' %} selected="selected" {% endif %} value="18">쿨가이 컬렉션</option>
+            <option {% if current_category_id == '30' %} selected="selected" {% endif %} value="30">꽃중년 컬렉션</option>
+            <option {% if current_category_id == '27' %} selected="selected" {% endif %} value="27">스포츠 컬렉션</option>
+            <option {% if current_category_id == '28' %} selected="selected" {% endif %} value="28">비즈니스맨 컬렉션</option>
+            <option {% if current_category_id == '31' %} selected="selected" {% endif %} value="31">계절 컬렉션</option>
+        </select>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div id="productGrid">
+    {% for set in sets.data %}
+    <div class="product-item">
+        <div class="item-image">
+            <img src="{{ set.big_img }}"/>
+            <div class="product-title">
+                <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">자세히 보기</a>
+            </div>
+        </div>
+        <div>
+            <div class="item-contents-left">
+                <div style="margin-bottom: 16px;">
+                    <div>
+                        <img src="{% static "img/sim_detail.png" %}"/>
+                    </div>
+                    <div>
+                        {{ set.description }}
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <img src="{% static "img/set_comp.png" %}"/>
+                    </div>
+                    <div>
+                        에센스, 비비크림, 로션, 스
+                    </div>
+                </div>
+            </div>
+            <div class="item-contents-right">
+                <div class="item-price">
+                    {{ set.discount_price|intcomma }}원
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="interest-btn">
+           {% if set.is_interested %}
+               <a href="#" class="btn-for-interest interest-done"  data-type="s" data-product="{{ set.id }}">관심취소</a>
+           {% else %}
+               <a href="#" class="btn-for-interest"  data-type="s" data-product="{{ set.id }}">관심하기</a>
+           {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="paging-area">
+    <ul class="pagination">
+      {% if not sets.page_hasPrev %}
+          <li class="disabled"><a href="#" data-ajax="false" class="previous" onClick="javascript:return false;">Prev</a></li>
+      {% else %}
+          {% if current_category_id != null %}
+            <li><a  data-ajax="false" href="{% url 'mobile_shop_set' page_num=sets.page_left_count|sub:1 category_id=current_category_id%}" class="previous">Prev</a></li>
+          {% else %}
+            <li><a  data-ajax="false" href="{% url 'mobile_shop_set' page_num=sets.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+          {% endif %}
+      {% endif %}
+
+      {% for pageNum in sets.page_range %}
+          {% if current_category_id != null %}
+            <li {% if pageNum == sets.page_num %} class="active" {% endif %}><a href="{% url 'mobile_shop_set' page_num=pageNum category_id=current_category_id%}" data-ajax="false">{{ pageNum  }}</a></li>
+         {% else %}
+            <li {% if pageNum == sets.page_num %} class="active" {% endif %}><a href="{% url 'mobile_shop_set' page_num=pageNum%}" data-ajax="false">{{ pageNum  }}</a></li>
+         {% endif %}
+      {% endfor %}
+      {% if not sets.page_hasNext  %}
+        <li class="disabled"><a data-ajax="false"  href="#" class="next" onClick="javascript:return false;">Next</a></li>
+      {% else %}
+          {% if current_category_id != null %}
+            <li><a data-ajax="false"  href="{% url 'mobile_shop_set' page_num=sets.page_right_count|add:1 category_id=current_category_id %}" class="next">Next</a></li>
+          {% else %}
+            <li><a data-ajax="false"  href="{% url 'mobile_shop_set' page_num=sets.page_right_count|add:1%}" class="next">Next</a></li>
+          {% endif %}
+      {% endif %}
+    </ul>
+</div>
+{% endblock %}

@@ -105,17 +105,18 @@ a:hover{
 }
 
 .product-title{
+    right : 0px;
     text-shadow : none;
     background-color : rgba(0,0,0,0.75);
     position : absolute;
-    bottom : 4px;
-    width : 100%;
+    bottom : 10px;
+    width : 40%;
     color : white;
     font-size: 14px;
-    height : 24px;
+    /*height : 24px;*/
     text-align : right;
     padding : 9px 0;
-    line-height : 22px;
+    line-height : 25px;
 }
 
 .product-title a{

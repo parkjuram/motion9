@@ -39,9 +39,11 @@
     {% for set in sets.data %}
     <div class="product-item">
         <div class="item-image">
-            <img src="{{ set.big_img }}"/>
+            <img src="{{ set.small_img }}"/>
             <div class="product-title">
-                <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">자세히 보기</a>
+                <div class="item-price">
+                <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false"> {{ set.discount_price|intcomma }}원</a>
+                    </div>
             </div>
         </div>
         <div>
@@ -55,18 +57,12 @@
                     </div>
                 </div>
                 <div>
-                    <div>
-                        <img src="{% static "img/set_comp.png" %}"/>
-                    </div>
+
                     <div>
                         에센스, 비비크림, 로션, 스
                     </div>
                 </div>
             </div>
-            <div class="item-contents-right">
-                <div class="item-price">
-                    {{ set.discount_price|intcomma }}원
-                </div>
             </div>
             <div class="clearfix"></div>
         </div>
