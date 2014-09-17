@@ -75,9 +75,14 @@ class CategoryAdmin(admin.ModelAdmin):
     # list_display_links = ()
 admin.site.register(Category, CategoryAdmin)
 
+class SetAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'description', 'big_img', 'small_img', 'discount_difference', 'is_active' )
+    list_editable = ('description', 'big_img', 'small_img', 'discount_difference', 'is_active',)
+    list_display_links = ('name', 'category',)
+admin.site.register(Set, SetAdmin)
+
 admin.site.register(ProductDescriptionImage)
 admin.site.register(ProductImage)
-admin.site.register(Set)
 admin.site.register(SetProduct)
 admin.site.register(ChangeableProduct)
 admin.site.register(ChangeableProductInfo)

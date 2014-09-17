@@ -670,6 +670,7 @@ def mobile_login_view(request):
         'next': 'mobile_index'
     })
 
+@login_required
 def mobile_mypage_view(request, page_num=1):
     page_num = int(page_num)
     user = helper_get_user(request)
@@ -693,7 +694,7 @@ def mobile_mypage_view(request, page_num=1):
             })
 
     else:
-        logger.error('have_to_login')
+        return redirect('mobile_index')
 
 def mobile_mypage_set_view(request, page_num=1):
     page_num = int(page_num)
