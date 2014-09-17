@@ -13,8 +13,20 @@ a.facebook-btn{
     text-align: center;
 }
 
-a.gold-btn {
-
+input.gold-btn {
+    text-align : center;
+    width: 60px;
+    display : inline-block;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0px;
+    color: white !important;
+    font-size: 12px;
+    font-weight: normal;
+    background: #d2bb8f;
+    padding: 8px 10px;
+    text-decoration: none !important;
+    text-shadow : none !important;
     box-sizing: border-box;
     padding-top : 10px;
     padding-bottom: 10px;

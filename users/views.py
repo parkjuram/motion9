@@ -116,7 +116,7 @@ def registration(request, next='index'):
         return redirect(next)
     else:
         messages.info(request, error)
-        return redirect('mobile_registration_page')
+        return HttpResponseRedirect(reverse('mobile_registration_page'))
 
 
 
