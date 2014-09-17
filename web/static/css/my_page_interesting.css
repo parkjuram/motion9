@@ -29,10 +29,12 @@
 .item-image{
     width : 100%;
     position : relative;
+    text-align: center;
+    padding: 20px 0px 20px 0px;
 }
 
 .item-image img{
-    width : 100%;
+    /*width : 100%;*/
 }
 
 
