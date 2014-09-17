@@ -121,7 +121,11 @@ def registration_view(request):
 
 @csrf_exempt
 def mobile_registration_view(request):
-    return render(request, 'register.html')
+    next = request.GET.get('next', 'index')
+
+    return render(request, 'register.html', {
+        'next': next
+    })
 
 @csrf_exempt
 def login_(request, next='login_page'):
