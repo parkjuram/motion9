@@ -39,7 +39,7 @@
     {% for set in sets.data %}
     <div class="product-item">
         <div class="item-image">
-            <img src="{{ set.big_img_url }}"/>
+            <img src="{{ set.big_img }}"/>
             <div class="product-title">
                 <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">자세히 보기</a>
             </div>
@@ -52,7 +52,7 @@
                     </div>
                     <div>
                         {{ set.description }}
-                    </div/>
+                    <div/>
                 </div>
                 <div>
                     <div>
@@ -60,7 +60,7 @@
                     </div>
                     <div>
                         에센스, 비비크림, 로션, 스
-                    </div/>
+                    <div/>
                 </div>
             </div>
             <div class="item-contents-right">
