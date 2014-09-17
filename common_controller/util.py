@@ -338,6 +338,11 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     else:
         big_img = ''
 
+    if set.small_img.name is not None:
+        small_img = settings.MEDIA_URL + set.small_img.name
+    else:
+        small_img = ''
+
     set_ = {}
     set_.update({
         'id': set.id,
@@ -346,6 +351,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
         'description': set.description,
         'description_images': description_images,
         'big_img': big_img,
+        'small_img': small_img,
         'discount_difference': set.discount_difference,
         'is_interested': True if user is not None and set.interest_set.filter(user=user).count()>0 else False,
         'products': []
