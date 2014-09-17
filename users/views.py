@@ -671,9 +671,11 @@ def mobile_login_view(request):
     })
 
 @login_required
-def mobile_mypage_view(request, page_num=1):
+def mobile_mypage_interesting_view(request, page_num=1):
     page_num = int(page_num)
     user = helper_get_user(request)
+
+
     if user is not None:
         interests = user.interest_set.filter(type='p').all()
         products = []
@@ -695,6 +697,20 @@ def mobile_mypage_view(request, page_num=1):
 
     else:
         return redirect('mobile_index')
+
+def mobile_mypage_myinfo_view(request, page_num=1):
+
+    user = helper_get_user(request)
+    if user is not None:
+
+
+        return render(request, 'my_page_myinfo.html',
+            {
+                'tab_name': 'myinfo'
+            })
+
+    else:
+        logger.error('have_to_login')
 
 def mobile_mypage_set_view(request, page_num=1):
     page_num = int(page_num)

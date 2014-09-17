@@ -1,0 +1,42 @@
+{% extends "my_page.html" %}
+{% block header_append %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>
+<script src="{% static 'js/my_page_interesting_set.js'%}"></script>
+{% endblock %}
+{% block detail %}
+    <div class="mypage-wrapper">
+        <div class="mypage-user-name">
+            {{ user.profile.name }}
+        </div>
+        <br/>
+        <div class="mypage-user-email">
+            {{ user.email }}
+        </div>
+        <br/>
+        <div class="mypage-user-info">
+          성별 :
+          {% if user.profile.sex == 'M'%}
+                남자
+          {% else %}
+                여자
+          {% endif %}
+          <br/>
+          나이 : {{ user.profile.age }}세 <br/>
+          적립 : {{ user.profile.mileage| intcomma }}원<br/>
+          주소 : {{ user.profile.address }}<br/>
+        </div>
+
+
+        <div class="my-page-edit-box">
+            <a href="#" class="mypage-edit-btn">EDIT</a>
+        </div>
+        <br/>
+        <br/>
+    </div>
+{% endblock %}
+

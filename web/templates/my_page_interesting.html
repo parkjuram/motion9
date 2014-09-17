@@ -33,16 +33,16 @@
               {% if not interests.page_hasPrev %}
                   <li class="disabled"><a href="#" data-ajax="false" class="previous" onClick="javascript:return false;">Prev</a></li>
               {% else %}
-                  <li><a  data-ajax="false" href="{% url 'mobile_mypage' page_num=interests.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+                  <li><a  data-ajax="false" href="{% url 'mobile_mypage_product' page_num=interests.page_left_count|sub:1 %}" class="previous">Prev</a></li>
               {% endif %}
 
               {% for pageNum in interests.page_range %}
-                <li {% if pageNum == interests.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_mypage' page_num=pageNum %}" >{{ pageNum  }}</a></li>
+                <li {% if pageNum == interests.page_num %} class="active" {% endif %}><a  data-ajax="false"  href="{% url 'mobile_mypage_product' page_num=pageNum %}" >{{ pageNum  }}</a></li>
               {% endfor %}
               {% if not interests.page_hasNext  %}
                 <li class="disabled"><a data-ajax="false"  href="#" class="next" onClick="javascript:return false;">Next</a></li>
               {% else %}
-                <li><a data-ajax="false"  href="{% url 'mobile_mypage' page_num=interests.page_right_count|add:1 %}" class="next">Next</a></li>
+                <li><a data-ajax="false"  href="{% url 'mobile_mypage_product' page_num=interests.page_right_count|add:1 %}" class="next">Next</a></li>
               {% endif %}
             </ul>
         </div>

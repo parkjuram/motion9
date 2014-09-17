@@ -1,7 +1,10 @@
 
 $(function(){
 
-
+    $('#mobileMypageList').change(function(e){
+        var url = $(this).val();
+        location.href = url;
+    });
 
   var mySwiper = $('.swiper-container').swiper({
     //Your options here:
