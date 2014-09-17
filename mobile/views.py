@@ -89,6 +89,7 @@ def shop_set_view(request, category_id=None, page_num=1):
                   {
                       'sets': sets,
                       'current_category': current_category,
+                      'current_category_id': category_id,
                       'categories': categories,
                       'current_page': 'shop_set'
                   })

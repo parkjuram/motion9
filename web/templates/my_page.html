@@ -19,92 +19,14 @@
 
 <div class="select-wrapper">
         <select id="mobileMypageList" data-mini="true" data-shadow="false">
-            <option value="#subProductCategory">내 정보</option>
-            <option value="#subSetCategory">관심 컬렉션</option>
-            <option value="#subSetCategory">관심 제품</option>
-            <option value="#subSetCategory">구매 내역</option>
+            <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">내 정보</option>
+            <option {% if tab_name == 'interesting_set' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_set' %}">관심 컬렉션</option>
+            <option {% if tab_name == 'interesting_product' %} selected="selected" {% endif %}  value="{% url 'mobile_mypage_product' %}">관심 제품</option>
+            <option {% if tab_name == 'product_list' %} selected="selected" {% endif %}  value="{{ request.get_full_path }}">구매 내역</option>
         </select>
 </div>
 
 
-<div class="mypage-wrapper">
-    <div class="mypage-user-name">
-        {{ user.profile.name }}
-    </div>
-    <div class="mypage-user-email">
-        {{ user.email }}
-    </div>
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <!--First Slide-->
-          <div class="swiper-slide">
-             <div class="mypage-user-info">
-                성별 :
-                 {% if user.profile.sex == 'M'%}
-                    남자
-                 {% else %}
-                    여자
-                 {% endif %}
-                 <br/>
-                나이 : {{ user.profile.age }}세 <br/>
-                피부타입 :
-                 {% if user.profile.skin_type == 'd' %}
-                     건성
-                 {% elif user.profile.skin_type == 'o' %}
-                     지성
-                 {% elif user.profile.skin.type == 's' %}
-                     민감성
-                 {% else %}
-                     복합성
-                 {% endif %}
-                 <br/>
-                피부색 :
-                 {% if user.profile.skin_color == 'b' %}
-                     밝은
-                 {% elif user.profile.skin_color == 'w' %}
-                     백인
-                 {% elif user.profile.skin.color == 'm' %}
-                     중간
-                 {% elif user.profile.skin.color == 'd' %}
-                     어두운
-                 {% else %}
-                     흑인
-                 {% endif %}
-                 <br/>
-                <a href="#" id="mypage-next-btn"><img src="{% static "img/profile_right.png" %}"/></a>
-             </div>
-          </div>
-
-          <!--Second Slide-->
-          <div class="swiper-slide">
-             <div class="mypage-user-info">
-                적립 : {{ user.profile.mileage| intcomma }}원<br/>
-                주소 : {{ user.profile.address }}<br/>
-                <a href="#" id="mypage-prev-btn"><img src="{% static "img/profile_left.png" %}"/></a>
-             </div>
-          </div>
-          <!--Etc..-->
-        </div>
-    </div>
-
-
-    <div class="my-page-edit-box">
-        <a href="#" class="mypage-edit-btn">EDIT</a>
-    </div>
-</div>
-<div>
-    <ul class="tab-menu">
-        <li>
-            <a href="{% url "mobile_mypage_set" %}" data-ajax="false" class="tab-btn {% if tab_name == 'interesting_set' %} tab-selected {% endif %}">관심 세트</a>
-        </li>
-        <li>
-            <a href="{% url "mobile_mypage" %}" data-ajax="false" class="tab-btn {% if tab_name == 'interesting_product' %} tab-selected {% endif %}">관심 제품</a>
-        </li>
-        <li>
-            <a href="{% url "mypage_purchase" %}" data-ajax="false" class="tab-btn {% if tab_name == 'purchase' %} tab-selected {% endif %}">구매 내역</a>
-        </li>
-    </ul>
-</div>
 {% block detail %}
 {% endblock %}
 {% endblock %}

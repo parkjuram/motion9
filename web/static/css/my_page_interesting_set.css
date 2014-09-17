@@ -52,7 +52,7 @@
 .product-title{
     text-shadow : none;
     background-color : rgba(0,0,0,0.75);
-    position : absolute;
+    /*position : absolute;*/
     bottom : 4px;
     width : 100%;
     color : white;

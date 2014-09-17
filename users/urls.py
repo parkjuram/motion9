@@ -60,11 +60,16 @@ urlpatterns = patterns('',
 
     url(r'^mobile/login_page/$', 'users.views.mobile_login_view', name='mobile_login_page'),
 
-    url(r'^mobile/mypage/$', 'users.views.mobile_mypage_view', name='mobile_mypage'),
-    url(r'^mobile/mypage/(?P<page_num>(\d+))/$', 'users.views.mobile_mypage_view', name='mobile_mypage'),
+    url(r'^mobile/mypage/$', 'users.views.mobile_mypage_myinfo_view', name='mobile_mypage'),
+
+    url(r'^mobile/mypage/myinfo/$', 'users.views.mobile_mypage_myinfo_view', name='mobile_mypage_myinfo'),
 
     url(r'^mobile/mypage/set/$', 'users.views.mobile_mypage_set_view', name='mobile_mypage_set'),
     url(r'^mobile/mypage/set/(?P<page_num>(\d+))/$', 'users.views.mobile_mypage_set_view', name='mobile_mypage_set'),
+
+    url(r'^mobile/mypage/product/$', 'users.views.mobile_mypage_interesting_view', name='mobile_mypage_product'),
+    url(r'^mobile/mypage/product/(?P<page_num>(\d+))/$', 'users.views.mobile_mypage_interesting_view', name='mobile_mypage_product'),
+
 
     url(r'^mobile/mypage/before_purchase/$', 'users.views.mobile_mypage_before_purchase_view', name='mobile_mypage_before_purchase'),
 

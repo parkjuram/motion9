@@ -4,24 +4,25 @@ $(function(){
     var setCategoryList = [['쿨가이 컬렉션', 18], ['꽃중년 컬렉션', 30], ['스포츠 컬렉션', 27], ['비즈니스맨 컬렉션', 28], ['계절 컬렉션', 31]];
 
     $('#mainCategoryList').change(function(e){
-       var target = $('#subCategoryList');
-        var list;
+//       var target = $('#subCategoryList');
+//        var list;
         if($(this).val() == '#subProductCategory'){
-            list = productCategoryList;
-        }else{
-            list = setCategoryList;
+            location.href = '/mobile/shop/product/';
         }
-
-        target.children().each(function(){
-            $(this).remove();
-        });
-
-        for(var i = 0 ; i < list.length; i++){
-            var option = $('<option value="'+list[i][1]+'">'+list[i][0]+'</option>');
-            target.append(option);
-        }
-
-        target.selectmenu( "refresh", true );
+//        else{
+//            list = setCategoryList;
+//        }
+//
+//        target.children().each(function(){
+//            $(this).remove();
+//        });
+//
+//        for(var i = 0 ; i < list.length; i++){
+//            var option = $('<option value="'+list[i][1]+'">'+list[i][0]+'</option>');
+//            target.append(option);
+//        }
+//
+//        target.selectmenu( "refresh", true );
     });
 
     $('#subCategoryList').change(function(e){
