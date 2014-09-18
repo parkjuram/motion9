@@ -126,41 +126,76 @@ a:visited{
 
 
 .product-info-btn{
-    background : url('../img/product_detail.png') top center no-repeat;
+    background : url('../img/dec.png') top center no-repeat;
     background-size : 30px 30px;
     border-right : 1px solid #e5e5e5;
+     color : #bababa !important;
 }
 
 .selected-product-info-btn{
-    background : url('../img/product_detail_down.png') top center no-repeat;
-    color : #d2bb8f !important;
+    background : url('../img/dec_dwn.png') top center no-repeat;
+     background-size : 30px 30px;
+    color : black !important;
 }
 
 .product-items-btn{
-    background : url('../img/set_goosung.png') top center no-repeat;
+    background : url('../img/set.png') top center no-repeat;
     background-size : 30px 30px;
     border-right : 1px solid #e5e5e5;
+     color : #bababa !important;
 
 }
 
 .selected-product-items-btn{
-    background : url('../img/set_goosung_down.png') top center no-repeat;
-    color : #d2bb8f !important;
+    background : url('../img/set_dwn.png') top center no-repeat;
+     background-size : 30px 30px;
+    color : black !important;
 }
 
 .product-rule-btn{
-    background : url('../img/product_info.png') top center no-repeat;
+    background : url('../img/info.png') top center no-repeat;
     background-size : 30px 30px;
+     color : #bababa !important;
 }
 
 .selected-product-rule-btn{
-    background : url('../img/product_info_down.png') top center no-repeat;
-    color : #d2bb8f !important;
+    background : url('../img/info_down.png') top center no-repeat;
+     background-size : 30px 30px;
+    color : black !important;
 }
 
 .custom-set-btn-box{
+
     padding : 6px 8px;
     border-bottom : 1px solid #e5e5e5;
+}
+
+.my-page-edit-box{
+
+    margin-top : 16px;
+    position : relative;
+    text-align : center;
+
+}
+
+
+.mypage-edit-btn{
+   /*width: */
+  /*height : 16px;*/
+    /*line-height : 16px;*/
+  display : inline-block;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;;
+  /*color: #d2bb8f !important;*/
+  color: white !important;
+  font-size: 14px;
+  background: #222222;
+  padding: 8px 10px;
+  text-decoration: none;
+  text-shadow: none;
+  border : 1px solid #222222;
+  border-radius : 3px;
+  font-weight:normal;
 }
 
 
