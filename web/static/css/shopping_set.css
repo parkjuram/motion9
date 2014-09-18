@@ -78,7 +78,7 @@ a:hover{
 }
 
 .item-contents-left{
-    width : 66%;
+    width : 95%;
     padding : 2%;
     float:left;
 }
@@ -100,7 +100,7 @@ a:hover{
 }
 
 .item-price{
-    font-size : 16px;
+    font-size : 14px;
     text-align: right;
 }
 
@@ -121,13 +121,18 @@ a:hover{
 
 .product-title a{
     margin-right : 28px;
-    color : #d2bb8f !important;
+    color : white !important;
     text-decoration : none;
     display : inline-block;
     width : 95%;
     padding-right : 5%;
 }
 
+.ui-page-theme-a {
+
+    font-weight : normal;
+
+}
 
 
 a{
@@ -137,7 +142,7 @@ a{
 .interest-btn{
     border-top : 1px solid #e9e9e9;
     width : 100%;
-    height : 18px;
+    line-height : 28px;
     padding : 7px 0 4px 0;
     background-color : white;
     text-align : center;
