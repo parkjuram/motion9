@@ -79,13 +79,13 @@
             <ul class="custom-menu-list">
 
                 {% if user.is_authenticated %}
-                   <li><a href="{% url "mobile_mypage" %}" data-ajax="false">{{ user.profile.name }}님</a><!--<img class="profile-img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c85.18.229.229/s100x100/180837_10150110963568938_908650_n.jpg"/>--></li>
+                    <li><a href="{% url "mobile_mypage" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">{{ user.profile.name }}님</a><!--<img class="profile-img" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c85.18.229.229/s100x100/180837_10150110963568938_908650_n.jpg"/>--></li>
                 {% else %}
-                   <li><a href="{% url 'mobile_login_page' %}" data-ajax="false">Login</a></li>
+                    <li><a href="{% url 'mobile_login_page' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Login</a></li>
                 {% endif %}
-                <li><a href="/mobile/" data-ajax="false">Home</a></li>
-                <li class="list-collapsible">
-                    <a href="#" class="collapse-btn">Collection +</a>
+                <li><a href="/mobile/" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>
+              <li class="list-collapsible">
+                    <a href="#" class="collapse-btn" style="padding: 20px 0px 20px 0px; padding-left: 5%;">  Collection + </a>
                     <ul class="list-collapsed">
                         <li ><a href="{% url "mobile_shop_set" %}" data-ajax="false">전체</a></li>
                         <li ><a href="{% url "mobile_shop_set" category_id=18 %}" data-ajax="false">쿨가이 컬렉션</a></li>
@@ -96,9 +96,9 @@
                     </ul>
                 </li>
                 <li class="list-collapsible">
-                    <a href="#" class="collapse-btn">Products +</a>
+                    <a href="#" class="collapse-btn" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Products +</a>
                     <ul class="list-collapsed">
-                        <li ><a href="{% url "mobile_shop_product" %}" data-ajax="false">전체</a></li>
+                       <li ><a href="{% url "mobile_shop_product" %}" data-ajax="false">전체</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=1 %}" data-ajax="false">스킨</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=2 %}" data-ajax="false">로션</a></li>
                         <li ><a href="{% url "mobile_shop_product" category_id=5 %}" data-ajax="false">에센스</a></li>
@@ -114,10 +114,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{% url "mobile_customize_set" %}" data-ajax="false">My Collection</a>
+                    <a href="{% url "mobile_customize_set" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false">Logout</a></li>
+                    <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
                 {% endif %}
             </ul>
         </div>

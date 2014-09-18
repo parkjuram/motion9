@@ -39,26 +39,26 @@
         <div class="item-image">
             <img src="{{ set.small_img }}"/>
         </div>
-        {#    <div class="swiper-container">#}
-        {#        <div class="swiper-wrapper">#}
-        {#          <div class="swiper-slide">#}
-        {#                <div class="item-image">#}
-        {#                 <img src="{{ set.small_img  }}"/>#}
-        {#                    </div>#}
-        {#           </div>#}
-        {##}
-        {#        {% for image in product.images %}#}
-        {#            {% if forloop.first %}#}
-        {#            {% else %}#}
-        {#                <div class="swiper-slide">#}
-        {#                    <img src="{{image}}" />#}
-        {#                </div>#}
-        {#            {% endif %}#}
-        {#        {% endfor %}#}
-        {#        </div>#}
-        {#        <div class="pagination">#}
-        {#        </div>#}
-        {#    </div>#}
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                        <div class="item-image">
+                         <img src="{{ set.small_img  }}"/>
+                            </div>
+                   </div>
+
+                {% for image in product.images %}
+                    {% if forloop.first %}
+                    {% else %}
+                        <div class="swiper-slide">
+                            <img src="{{image}}" />
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
         <div class="product-title">
             {{ set.name }}
             <div class="product-price">
@@ -96,16 +96,17 @@
                 </a>
             </div>
             {% for product in set.products %}
-                <div class="product-item">
-                    <div class="product-item-img">
-                        <img src="{{ product.big_img_url }}"/>
+                <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+                    <div class="product-item">
+                        <div class="product-item-img">
+                            <img src="{{ product.big_img_url }}"/>
+                        </div>
+                        <div class="product-item-contents">
+                            {{ product.name|truncatechars:18 }}
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="product-item-contents">
-                        <a href="#" class="view-product-btn"
-                           data-product="{{ product.id }}">{{ product.name|truncatechars:18 }}</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                </a>
             {% endfor %}
         </div>
         <div class="tab-content" id="productInfo">

@@ -105,7 +105,7 @@ ul.custom-menu-list li:nth-child(1){
 
 ul.custom-menu-list li{
     width : 100%;
-    padding : 20px 0px 20px 0px;
+    /*padding : 20px 0px 20px 0px;*/
     font-size : 14px;
     border-bottom : 1px solid #e5e5e5;
     position : relative;
@@ -118,12 +118,12 @@ ul.custom-menu-list li a{
 }
 
 ul.custom-menu-list li.list-collapsible{
-    padding : 10px 0px 10px 0px;
+    /*padding : 10px 0px 10px 0px;*/
 }
 
 ul.custom-menu-list a.collapse-btn{
     width : 95%;
-    padding : 10px 0 10px 5%;
+    /*padding : 10px 0 10px 5%;*/
     display : inline-block;
     /*background : url('../img/down_arrow.png') 90% 50% no-repeat;*/
     background-size : 16px 12px;
@@ -132,8 +132,8 @@ ul.custom-menu-list a.collapse-btn{
 ul.custom-menu-list ul.list-collapsed{
     background-color: #ffffff;
     /*background-color : #f3f3f3;*/
-    margin-top: 10px;
-    margin-bottom: -10px;
+    /*margin-top: 10px;*/
+    /*margin-bottom: -10px;*/
     width : 100%;
     display : none;
 }
