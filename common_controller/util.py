@@ -343,6 +343,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     else:
         small_img = ''
 
+
     set_ = {}
     set_.update({
         'id': set.id,

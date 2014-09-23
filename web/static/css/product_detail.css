@@ -129,36 +129,39 @@ a:visited{
 
 
 .product-info-btn{
-    background : url('../img/product_detail.png') top center no-repeat;
+    background : url('../img/dec.png') top center no-repeat;
     background-size : 30px 30px;
     border-right : 1px solid #e5e5e5;
 }
 
 .selected-product-info-btn{
-    background : url('../img/product_detail_down.png') top center no-repeat;
-    color : #d2bb8f !important;
+    background : url('../img/dec_dwn.png') top center no-repeat;
+     background-size : 30px 30px;
+    color : black !important;
 }
 
 .product-items-btn{
-    background : url('../img/set_goosung.png') top center no-repeat;
+    background : url('../img/blog.png') top center no-repeat;
     background-size : 30px 30px;
     border-right : 1px solid #e5e5e5;
 
 }
 
 .selected-product-items-btn{
-    background : url('../img/set_goosung_down.png') top center no-repeat;
-    color : #d2bb8f !important;
+    background : url('../img/blog_dwn.png') top center no-repeat;
+     background-size : 30px 30px;
+    color : black !important;
 }
 
 .product-rule-btn{
-    background : url('../img/product_info.png') top center no-repeat;
+    background : url('../img/info.png') top center no-repeat;
     background-size : 30px 30px;
 }
 
 .selected-product-rule-btn{
-    background : url('../img/product_info_down.png') top center no-repeat;
-    color : #d2bb8f !important;
+    background : url('../img/info_down.png') top center no-repeat;
+    background-size : 30px 30px;
+    color : black !important;
 }
 
 
@@ -195,7 +198,7 @@ a:visited{
 .product-item-contents{
     width : 65%;
     float: left;
-    padding : 10px 5%;
+    padding : 0px 10px 0px 10px;
 }
 
 .footer-bar{
@@ -203,7 +206,8 @@ a:visited{
     width : 98%;
     height : 38px;
     padding : 9px 1%;
-    background-color : #d2bb8f;
+    background-color : white;
+    border-color : white;
 }
 
 .footer-bar .gold-btn{

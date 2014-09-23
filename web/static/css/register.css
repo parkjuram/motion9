@@ -10,7 +10,6 @@
 
 a.facebook-btn{
     width : 140px;
-    text-align: center;
 }
 
 input.gold-btn {
@@ -31,4 +30,24 @@ input.gold-btn {
     padding-top : 10px;
     padding-bottom: 10px;
     width : 100%;
+}
+
+.form-input-horizontal label{
+    max-width: 100px;
+    float: left;
+    margin-right : 8px;
+    line-height: 48px;
+}
+
+.form-input-horizontal input{
+    vertical-align: baseline;
+    float: left;
+}
+
+.form-input-horizontal .send-to-input{
+    width : 100px;
+}
+
+.form-input-horizontal .send-to-input-small{
+    width : 70px;
 }

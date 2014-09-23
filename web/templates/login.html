@@ -1,29 +1,46 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-{% load static %}
-    <script src="{% static 'js/login.js'%}"></script>
+    {% load static %}
+    <script src="{% static 'js/login.js' %}"></script>
 {% endblock %}
 {% block content %}
 
     <div style="margin : 0 20px;">
-        <form id="facebookLoginForm" data-ajax="false" method="post" action="{% url 'check_facebook_token' next='mobile_index' %}">
+        <form id="facebookLoginForm" data-ajax="false" method="post"
+              action="{% url 'check_facebook_token' next='mobile_index' %}">
             <input type="hidden" id="fbEmail" name="email"/>
             <input type="hidden" id="fbToken" name="token"/>
         </form>
         <form method="post" action="{% url "login" next=next %}" data-ajax="false">
+            <div style="margin : 20px 0px; text-align : center;">
+                <a href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;"
+                   class="fb-login-btn facebook-btn">facebook으로 로그인</a>
+            </div>
+            <div class="login-box-header">
+                <h4 class="lined-heading"><span>Sign in</span></h4>
+            </div>
 
-            <input type="text" class="login-form" name="email" id="name" value="" data-clear-btn="true" data-mini="true" placeholder="이메일">
-            <input type="password" class="login-form" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true" placeholder="비밀번호">
             <div>
-                <div style="margin : 20px 0px; text-align : center;">
-                    <a href="#" class="gold-btn" id="loginBtn" style="width : 44%; display:inline-block; margin-right : 4%;padding : 14px 2%;">로그인</a><a href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;" class="fb-login-btn facebook-btn">페이스북 로그인</a>
+                이메일
+                <input type="text" class="login-form" size="40px" name="email" id="name" value="" data-clear-btn="true"
+                       data-mini="true">
+            </div>
+            <div>비밀번호
+                <input type="password" class="login-form" name="password" id="password" value=""
+                        data-clear-btn="true" autocomplete="off" data-mini="true">
+            </div>
+            <div>
+                <div style="margin : 20px 0px; text-align : right;">
+                    <a href="#" class="gold-btn" id="loginBtn"
+                       style="width : 30%; display:inline-block; padding : 14px 2%;">로그인</a>
                 </div>
             </div>
         </form>
 
 
-        <div style="text-align:right; margin-bottom : 20px;">
-            <a href="{% url 'mobile_registration_page' %}" data-ajax="false" style="width : 30%; display:inline-block;" class="basic-btn">회원가입</a>
+        <div style="text-align:right; margin : 20px 0px; margin-bottom : 20px;">
+            <a href="{% url 'mobile_registration_page' %}" data-ajax="false"
+               style="width : 30%; display:inline-block; padding : 14px 2%;" class="basic-btn">회원가입</a>
         </div>
 
 
