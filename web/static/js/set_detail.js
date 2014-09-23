@@ -80,7 +80,7 @@ $(function(){
               success: function(data){
                   console.log(data);
                   img.attr('src', data.big_img_url);
-                  name.text(data.name);
+                  name.text(data.brandname +" "+ data.name);
                   desc.text(data.description);
                   btn.attr('href', '/mobile/product/'+id);
 

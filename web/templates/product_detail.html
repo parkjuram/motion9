@@ -64,7 +64,8 @@
     <div class="product-title">
         {{ product.brandname }} {{ product.name }}
         <div class="product-price">
-            {{ product.discount_price|intcomma }}원 <span class="item-original-price">{{ product.original_price }}원</span> (<span>{{ product.discount_rate }}</span>% 할인)
+            {{ product.discount_price|intcomma }}원 <span class="item-original-price">{{ product.original_price }}원</span>
+            (<span>{{ product.discount_rate }}</span>% 할인)
         </div>
         {% if product.is_interested %}
             <a href="#" class="interest-btn btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
@@ -194,7 +195,7 @@
 {% block footer %}
 <div data-role="footer" data-position="fixed">
     <div class="footer-bar">
-        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%;">구매</a><a href="#" class="gold-btn btn-for-cart" data-type="p" data-product="{{product.id}}">장바구니</a>
+        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%; background-color:#292929; padding:10 10 10 10; border-radius:4px;">구매</a><a href="#" class="gold-btn btn-for-cart" style="background-color:#292929; padding:10 10 10 10; border-radius:4px;" data-type="p" data-product="{{product.id}}">장바구니</a>
     </div>
 </div>
 
