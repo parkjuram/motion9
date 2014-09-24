@@ -732,7 +732,7 @@ def mobile_mypage_cart_view(request):
 def mobile_mypage_before_purchase_view(request):
 
     cart_items = helper_get_cart_items(helper_get_user(request))
-    payment_items = helper_get_payment_item(request, cart_items['total_price'])
+    payment_items = helper_get_payment_item(request, cart_items['total_price'], True)
     helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
     profile_items = helper_get_profile_item(request)
 

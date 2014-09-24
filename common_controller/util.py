@@ -693,7 +693,7 @@ def helper_get_user_ip(request):
 
     return user_ip
 
-def helper_get_payment_item(request, total_price):
+def helper_get_payment_item(request, total_price, is_mobile=False):
 
     user = request.user
 
@@ -704,7 +704,10 @@ def helper_get_payment_item(request, total_price):
     item_code = str(user.id)+"_"+current_datetime[8:]
     amount = str(total_price)
     user_ip = helper_get_user_ip(request)
-    return_url = request.build_absolute_uri(reverse('payment_return'))
+    if is_mobile:
+        return_url = request.build_absolute_uri(reverse('payment_return_mobile_web'))
+    else:
+        return_url = request.build_absolute_uri(reverse('payment_return'))
     using_type = '0000'
     currency = '0000'
     installment_period = '0'
