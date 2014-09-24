@@ -22,7 +22,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
     helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
-    helper_set_order_id_in_cart
+    helper_put_order_id_in_cart
 
 from .models import Interest
 
@@ -322,7 +322,7 @@ def mypage_cart_view(request):
 
     cart_items = helper_get_cart_items(helper_get_user(request))
     payment_items = helper_get_payment_item(request, cart_items['total_price'])
-    helper_set_order_id_in_cart(request.user, payment_items['order_id'] )
+    helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
     profile_items = helper_get_profile_item(request)
 
     if request.user.is_authenticated():
@@ -368,6 +368,7 @@ def mypage_purchase_view(request, page_num=1):
         item['payment'] = purchase.payment
         item['type_name'] = helper_get_type_name(purchase.type)
         item['status_name'] = helper_get_purchase_status(purchase.payment.status)
+        item['datetime'] = item['payment'].auth_date[:4]+"/"+item['payment'].auth_date[4:6]+"/"+item['payment'].auth_date[6:8]+"\n"+item['payment'].auth_date[8:10]+":"+item['payment'].auth_date[10:12]
         purchase_list.append(item)
 
     purchase_list = helper_make_paging_data(len(purchase_list), purchase_list[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
@@ -732,12 +733,15 @@ def mobile_mypage_before_purchase_view(request):
 
     cart_items = helper_get_cart_items(helper_get_user(request))
     payment_items = helper_get_payment_item(request, cart_items['total_price'])
-    # cart_items = helper_get_cart_items( user_, order_id )
-
-    cart_items.update( {'payment_items':payment_items} )
+    helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
+    profile_items = helper_get_profile_item(request)
 
     if request.user.is_authenticated():
+        cart_items.update( {
+            'payment_items': payment_items,
+            'profile_items': profile_items,
+            'user_profile': request.user.profile
+        } )
         return render(request, 'purchase.html', cart_items )
     else:
         return redirect('mobile_login_page')
-
