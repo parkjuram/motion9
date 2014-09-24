@@ -328,7 +328,7 @@ def mypage_cart_view(request):
         cart_items.update( {
             'payment_items': payment_items,
             'profile_items': profile_items,
-            'user_profile': request.profile
+            'user_profile': request.user.profile
         } )
         return render(request, 'cart_web.html', cart_items )
     else:
