@@ -21,6 +21,7 @@ a:hover{
     border-radius: 3px;
     background-color: white;
     height : 44px;
+
 }
 
 .ui-select .ui-btn {
@@ -30,6 +31,8 @@ a:hover{
 
 .ui-icon-carat-d:after {
     background-image: url('../img/arrow_down.png');
+    background-size: 12px 10px;
+    margin-right: 15px;
 }
 
 .mypage-wrapper{

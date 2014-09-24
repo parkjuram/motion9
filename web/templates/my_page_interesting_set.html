@@ -12,43 +12,89 @@
     {% if interests.data|length > 0 %}
         <div id="productGrid">
         {% for set in interests.data %}
-            <div class="product-item">
-                <div class="item-image">
-                    <img src="{{ set.big_img_url }}"/>
-                    <div class="product-title">
-                        <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">자세히 보기</a>
-                    </div>
-                </div>
-                <div>
-                    <div class="item-contents-left">
-                        <div style="margin-bottom: 16px;">
-                            <div>
-                                <img src="{% static "img/sim_detail.png" %}"/>
+
+           <div class="product-item">
+                <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">
+                    <div class="item-image">
+                        <img src="{{ set.small_img }}"/>
+
+                        <div class="product-title">
+                            <div class="item-price">
+                                {{ set.discount_price|intcomma }}원 &nbsp;
                             </div>
-                            <div>
-                                {{ set.description }}
-                            </div/>
-                        </div>
-                        <div>
-                            <div>
-                                <img src="{% static "img/set_comp.png" %}"/>
-                            </div>
-                            <div>
-                                에센스, 비비크림, 로션, 스
-                            </div/>
                         </div>
                     </div>
-                    <div class="item-contents-right">
-                        <div class="item-price">
-                            {{ set.discount_price|intcomma }}원
+                    <div>
+                        <div class="item-contents-left">
+                            <div style="margin-bottom: 16px;">
+                                <div>
+                                    <img src="{% static "img/quotmark_1.png" %}" height="20px"/>
+
+                                    {{ set.description }}
+
+                                    <img src="{% static "img/quotmark_2.png" %}" height="20px"/>
+                                </div>
+                            </div>
+                            <div>
+
+                                <div>
+                                    {% for product in set.products %}
+                                        {{ product.brandname }} {{ product.name }}<br/>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                </div>
-                <div class="interest-btn">
+
+                </a>
+
+
+
+               <div class="interest-btn">
                    <a href="#" class="mypage-interesting-del-btn"  data-type="s" data-product="{{ set.id }}">삭제</a>
                 </div>
+
             </div>
+
+{#            #}
+{#            <div class="product-item">#}
+{#                <div class="item-image">#}
+{#                    <img src="{{ set.small_img }}"/>#}
+{#                    <div class="product-title">#}
+{#                        <a href="{% url 'mobile_set' set_id=set.id %}" data-ajax="false">자세히 보기</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div>#}
+{#                    <div class="item-contents-left">#}
+{#                        <div style="margin-bottom: 16px;">#}
+{#                            <div>#}
+{#                                <img src="{% static "img/sim_detail.png" %}"/>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                {{ set.description }}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <div>#}
+{#                                <img src="{% static "img/set_comp.png" %}"/>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                에센스, 비비크림, 로션, 스#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="item-contents-right">#}
+{#                        <div class="item-price">#}
+{#                            {{ set.discount_price|intcomma }}원#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="clearfix"></div>#}
+{#                </div>#}
+{#                <div class="interest-btn">#}
+{#                   <a href="#" class="mypage-interesting-del-btn"  data-type="s" data-product="{{ set.id }}">삭제</a>#}
+{#                </div>#}
+{#            </div>#}
 
             {% endfor %}
         </div>

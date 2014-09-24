@@ -67,7 +67,7 @@ $(function(){
           mode: 'horizontal',
           loop: false,
           calculateHeight: true,
-          pagination: '.pagination',
+         //pagination: '.pagination',
           //createPagination: false,
           //paginationClickable: false,
           noSwiping: true

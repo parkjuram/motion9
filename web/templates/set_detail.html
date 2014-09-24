@@ -37,15 +37,15 @@
     <div class="product-img">
 
         <div class="item-image">
-            <img src="{{ set.small_img }}"/>
+            <img src="{{ set.small_img }}" style="display:block;"/>
         </div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                        <div class="item-image">
-                         <img src="{{ set.small_img  }}"/>
-                            </div>
-                   </div>
+{#                  <div class="swiper-slide">#}
+{#                        <div class="item-image">#}
+{#                         <img src="{{ set.small_img  }}"/>#}
+{#                            </div>#}
+{#                   </div>#}
 
                 {% for image in product.images %}
                     {% if forloop.first %}
@@ -99,10 +99,11 @@
                 <a href="#" class="view-product-btn" data-product="{{ product.id }}">
                     <div class="product-item">
                         <div class="product-item-img">
-                            <img src="{{ product.big_img_url }}"/>
+                            <img src="{{ product.big_img_url }}"
+                                 style="max-width:100%; max-height:100%; width:auto; height:auto; position:absolute; margin:auto; left:0; right:0; top:0; bottom:0; "/>
                         </div>
                         <div class="product-item-contents">
-                            {{ product.name|truncatechars:18 }}
+                           {{product.brandname }} {{ product.name|truncatechars:18 }}
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -216,9 +217,9 @@
 
             </div>
             <div style="text-align: center;">
-                <a href="#" class="gold-btn" id="popupDetailBtn" style="margin-right:2%;">자세히</a><a href="#"
+                <a href="#" class="gold-btn" id="popupDetailBtn" style="margin-right:2%; background-color:#292929; border-radius:3px; padding:10px;">자세히</a><a href="#"
                                                                                                     class="gold-btn"
-                                                                                                    data-rel="back">닫기</a>
+                                                                                                    data-rel="back" style="background-color:#292929; border-radius:3px; padding:10px;">닫기</a>
             </div>
         </div>
     </div>
@@ -228,8 +229,8 @@
     <div data-role="footer" data-position="fixed">
         <div class="footer-bar">
             <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop"
-               style="margin-right:2%;">구매</a><a href="#" class="gold-btn btn-for-cart" data-type="s"
-                                                 data-product="{{ set.id }}">장바구니</a>
+               style="margin-right:2%; background-color:#292929; padding:10 10 10 10; border-radius:4px;">구매</a><a href="#" class="gold-btn btn-for-cart" data-type="s"
+                                                 data-product="{{ set.id }}" style="background-color:#292929; padding:10 10 10 10; border-radius:4px;">장바구니</a>
         </div>
     </div>
 

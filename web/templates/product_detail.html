@@ -14,33 +14,33 @@
     <h2 class="ui-title">제품 정보</h2>
 {% endblock %}
 {% block content %}
-<div class="category-box">
-    <div class="select-wrapper">
-     <div class="select-box-border">
-        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#subProductCategory">모든제품</option>
-            <option value="#subSetCategory">세트상품</option>
-        </select>
-     </div>
-    </div>
-    <div class="select-wrapper">
-        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option {% if current_category == '1' %} selected="selected" {% endif %} value="1">스킨</option>
-            <option {% if current_category == '2' %} selected="selected" {% endif %} value="2">로션</option>
-            <option {% if current_category == '5' %} selected="selected" {% endif %} value="5">에센스</option>
-            <option {% if current_category == '4' %} selected="selected" {% endif %} value="4">비비크림, 선크림</option>
-            <option {% if current_category == '14' %} selected="selected" {% endif %} value="14">수분크림, 아이크림</option>
-            <option {% if current_category == '23' %} selected="selected" {% endif %} value="23">마스크/팩</option>
-            <option {% if current_category == '3' %} selected="selected" {% endif %} value="3">클렌징/스크럽</option>
-            <option {% if current_category == '33' %} selected="selected" {% endif %} value="33">립밤</option>
-            <option {% if current_category_id == '24' %} selected="selected" {% endif %} value="24">바디</option>
-            <option {% if current_category_id == '22' %} selected="selected" {% endif %} value="22">헤어</option>
-            <option {% if current_category_id == '25' %} selected="selected" {% endif %} value="25">향수</option>
-            <option {% if current_category_id == '26' %} selected="selected" {% endif %} value="26">기타</option>
-        </select>
-    </div>
-    <div class="clearfix"></div>
-</div>
+{#<div class="category-box">#}
+{#    <div class="select-wrapper">#}
+{#     <div class="select-box-border">#}
+{#        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">#}
+{#            <option value="#subProductCategory">모든제품</option>#}
+{#            <option value="#subSetCategory">세트상품</option>#}
+{#        </select>#}
+{#     </div>#}
+{#    </div>#}
+{#    <div class="select-wrapper">#}
+{#        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">#}
+{#            <option {% if current_category == '1' %} selected="selected" {% endif %} value="1">스킨</option>#}
+{#            <option {% if current_category == '2' %} selected="selected" {% endif %} value="2">로션</option>#}
+{#            <option {% if current_category == '5' %} selected="selected" {% endif %} value="5">에센스</option>#}
+{#            <option {% if current_category == '4' %} selected="selected" {% endif %} value="4">비비크림, 선크림</option>#}
+{#            <option {% if current_category == '14' %} selected="selected" {% endif %} value="14">수분크림, 아이크림</option>#}
+{#            <option {% if current_category == '23' %} selected="selected" {% endif %} value="23">마스크/팩</option>#}
+{#            <option {% if current_category == '3' %} selected="selected" {% endif %} value="3">클렌징/스크럽</option>#}
+{#            <option {% if current_category == '33' %} selected="selected" {% endif %} value="33">립밤</option>#}
+{#            <option {% if current_category_id == '24' %} selected="selected" {% endif %} value="24">바디</option>#}
+{#            <option {% if current_category_id == '22' %} selected="selected" {% endif %} value="22">헤어</option>#}
+{#            <option {% if current_category_id == '25' %} selected="selected" {% endif %} value="25">향수</option>#}
+{#            <option {% if current_category_id == '26' %} selected="selected" {% endif %} value="26">기타</option>#}
+{#        </select>#}
+{#    </div>#}
+{#    <div class="clearfix"></div>#}
+{#</div>#}
 <div class="product-img">
     <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -64,7 +64,8 @@
     <div class="product-title">
         {{ product.brandname }} {{ product.name }}
         <div class="product-price">
-            {{ product.discount_price|intcomma }}원 <span class="item-original-price">{{ product.original_price }}원</span> (<span>{{ product.discount_rate }}</span>% 할인)
+            {{ product.discount_price|intcomma }}원 <span class="item-original-price">{{ product.original_price }}원</span>
+            (<span>{{ product.discount_rate }}</span>% 할인)
         </div>
         {% if product.is_interested %}
             <a href="#" class="interest-btn btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
@@ -194,7 +195,7 @@
 {% block footer %}
 <div data-role="footer" data-position="fixed">
     <div class="footer-bar">
-        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%;">구매</a><a href="#" class="gold-btn btn-for-cart" data-type="p" data-product="{{product.id}}">장바구니</a>
+        <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop" style="margin-right:2%; background-color:#292929; padding:10 10 10 10; border-radius:4px;">구매</a><a href="#" class="gold-btn btn-for-cart" style="background-color:#292929; padding:10 10 10 10; border-radius:4px;" data-type="p" data-product="{{product.id}}">장바구니</a>
     </div>
 </div>
 
