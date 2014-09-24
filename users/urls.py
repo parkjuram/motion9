@@ -48,6 +48,7 @@ urlpatterns = patterns('',
     url(r'^interest/add/$', 'users.views.add_interest', name='add_interest'),
     url(r'^interest/del/$', 'users.views.delete_interest', name='del_interest'),
 
+    url(r'^cart/update/$', 'users.views.update_cart', name='update_cart'),
     url(r'^cart/add/$', 'users.views.add_cart', name='add_cart'),
     url(r'^cart/del/$', 'users.views.delete_cart', name='del_cart'),
 

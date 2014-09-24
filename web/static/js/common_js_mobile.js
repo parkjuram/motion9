@@ -2,12 +2,33 @@
  * Created by Park-Kunbae on 14. 3. 31.
  */
 
+
 $(function(){
-    var renderCart = function(target, data){
+
+    var updateCartTotalPrice = function () {
+        var sumPrice = $('#cartTotalPrice');
+        var sum = 0;
+
+        $('select.cart-item-count').each(function (i, v) {
+            var id = $(this).attr('data-id');
+            var cnt = parseInt($(this).val());
+            var price;
+            var total;
+
+            price = parsePrice($('#cart-item-' + id).text());
+            total = price * cnt;
+            sum += total;
+        });
+
+        sumPrice.text(numberFormatter(sum));
+    }
+
+    var renderCartList = function(target, data){
         var keys = ['sets', 'products', 'custom_sets'];
 
         target = $(target);
         var imgUrl;
+        var cartId;
         var productId;
         var productName;
         var productPrice;
@@ -40,7 +61,9 @@ $(function(){
             }
 
             for(var i = 0 ; i < list.length ; i++){
+                console.log ( list );
                 html = '';
+                cartId = list[i].cart_id;
                 productId = list[i].id;
                 productPrice = list[i].discount_price;
                 productName = list[i].name;
@@ -48,7 +71,7 @@ $(function(){
                 howMany = list[i].item_count;
 
                 var htmlPrepend = "<li>"
-                    + "<a class='cart-delete-btn' data-type='"+type+"' data-id='"+productId+"' href='#' >X</a>"
+                    + "<a class='cart-delete-btn' data-type='"+type+"' cart-id='"+cartId+"' data-id='"+productId+"' href='#' >X</a>"
                     + "<div class='cart-item-img'>"
                     +   "<img src='"+imgUrl+"'/>"
                     + "</div>"
@@ -57,7 +80,7 @@ $(function(){
                     +       productName
                     + "     <div class='cart-select-box-wrapper'>"
                     + "         <lable>수량 : </lable>"
-                    + "         <select class='cart-item-count' "+name+i+"]' data-id='"+productId+"' data-shadow='false' data-corner='false'>";
+                    + "         <select class='cart-item-count' "+name+i+"]' cart-id='"+cartId+"' data-id='"+productId+"' data-shadow='false' data-corner='false'>";
 
                 var htmlPost = '</select>'
                     + '     </div>'
@@ -79,27 +102,30 @@ $(function(){
                 target.append($(html));
             }
 
-            $('select.cart-item-count').change(function(e){
-                var sumPrice = $('#cartTotalPrice');
-                var sum=0;
+            $('select.cart-item-count').change(function (e) {
 
-               $('select.cart-item-count').each(function(i, v){
-                   var id = $(this).attr('data-id');
-                   var cnt = parseInt($(this).val());
-                   var price;
-                   var total;
-
-                   price = parsePrice($('#cart-item-'+id).text());
-                   total = price * cnt;
-                   sum+=total;
-               });
-
-               sumPrice.text(numberFormatter(sum));
-           });
+                $.ajax({
+                    url: url_for_update_cart,
+                    dataType: 'json',
+                    data: {
+                        cart_item_id: $(this).attr('cart-id'),
+                        cart_item_count: $(this).val()
+                    },
+                    async: true,
+                    type: 'post',
+                    success: function(data, textStatus, jqXHR) {
+                        updateCartTotalPrice();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                    },
+                    complete: function(jqXHR, textStatus) {
+                    }
+                });
+            });
 
         }
 
-
+        updateCartTotalPrice();
 
 
         $('.cart-delete-btn').click(function(e){
@@ -143,40 +169,64 @@ $(function(){
     });
 
 
-
-
-
-    $('#openCartBtn').click(function(e){
+    $('#btn-open-cart').click( function(e) {
         e.preventDefault();
         $.mobile.loading('show');
-        var target = $('#cartPanel .custom-menu-list');
 
-        if(target.length != 0){
-            target.html('');
-            if($('.cart-delete-btn').length > 0){
-                $('.cart-delete-btn').unbind('click');
+        var cart_panel = $('#panel-cart');
+        var cart_list = cart_panel.find('.custom-menu-list');
+        cart_list.empty();
+
+        $.ajax({
+            url: url_for_cart_info_as_json,
+            dataType: 'json',
+            async: true,
+            type: 'get',
+            success: function(data, textStatus, jqXHR) {
+                renderCartList(cart_list, data);
+                cart_panel.panel('open');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            },
+            complete: function(jqXHR, textStatus) {
+                $.mobile.loading('hide');
             }
-
-            $.ajax({
-                  url: '/user/mypage/cart/json/',
-                  dataType: 'json',
-                  async : true,
-                  type:'get',
-                  success: function(data){
-
-                      renderCart('#cartPanel .custom-menu-list', data);
-                      $.mobile.loading('hide');
-                      $('#cartPanel').panel('open');
-                  },
-                  error:function(jqXHR, textStatus, errorThrown){
-                      console.log(textStatus);
-                  }
-            });
-        }else{
-            $.mobile.loading('hide');
-            $('#cartPanel').panel('open');
-        }
+        });
     });
+
+
+//    $('#openCartBtn').click(function(e){
+//        e.preventDefault();
+//        $.mobile.loading('show');
+//        var target = $('#cartPanel .custom-menu-list');
+//
+//        if(target.length != 0){
+//            target.html('');
+//            if($('.cart-delete-btn').length > 0){
+//                $('.cart-delete-btn').unbind('click');
+//            }
+//
+//            $.ajax({
+//                  url: '/user/mypage/cart/json/',
+//                  dataType: 'json',
+//                  async : true,
+//                  type:'get',
+//                  success: function(data){
+//
+//                      renderCart('#cartPanel .custom-menu-list', data);
+//                      $.mobile.loading('hide');
+//                      $('#cartPanel').panel('open');
+//                  },
+//                  error:function(jqXHR, textStatus, errorThrown){
+//                      console.log(textStatus);
+//                  }
+//            });
+//        }else{
+//            $.mobile.loading('hide');
+//            $('#cartPanel').panel('open');
+//        }
+//    });
 
     $('#cartBuyBtn').click(function(e){
         e.preventDefault();
