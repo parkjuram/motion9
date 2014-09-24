@@ -87,6 +87,8 @@ def registration(request, next='index'):
     password = request.POST.get('password')
     password_confirm = request.POST.get('password_confirm')
     sex = request.POST.get('sex')
+    age = request.POST.get('age')
+
     error = None
 
     if User.objects.filter(email=email).exists():
@@ -95,8 +97,9 @@ def registration(request, next='index'):
         if password == password_confirm:
             try:
                 user = User.objects.create_user(username=email, email=email, password=password)
-                user.profile.name=name
-                user.profile.sex=sex
+                user.profile.name = name
+                user.profile.sex = sex
+                user.profile.age = age
                 user.profile.save()
             except ValueError as e:
                 logger.error(e)
