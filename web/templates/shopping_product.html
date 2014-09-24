@@ -52,7 +52,9 @@
     <div class="product-item" >
 
            <div class="item-image">
-               <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
+               <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
+               <img src="{{product.big_img_url}}" style="width:100%; height:auto;" />
+               </a>
            </div>
            <div class="item-title" >
                <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
