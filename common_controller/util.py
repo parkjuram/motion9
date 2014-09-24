@@ -4,8 +4,10 @@ from subprocess import call, Popen, PIPE
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.http.response import HttpResponse, Http404
+from django.core.urlresolvers import reverse
 from django.template import Context
 from django.template.loader import get_template
+import time
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment
 from django.core.exceptions import ObjectDoesNotExist
@@ -455,6 +457,21 @@ def helper_make_paging_data( all_object_length, lists, item_count_per_page, curr
     })
     return lists
 
+def helper_get_profile_item(request):
+    phone_number = request.user.profile.phone
+    phones = phone_number.split('-')
+    if len(phones)==3:
+        return {
+            'phone1': phones[0],
+            'phone2': phones[0],
+            'phone3': phones[0],
+        }
+    return None
+
+
+def helper_put_order_id_in_cart(user, order_id):
+    user.cart_set.update(order_id=order_id)
+
 def helper_get_cart_items(user, order_id=None):
 
     if order_id is not None:
@@ -467,6 +484,7 @@ def helper_get_cart_items(user, order_id=None):
         for product_cart in product_carts:
             product = product_cart.product
             product_ = helper_get_product_detail(product, user)
+            product_['cart_id'] = product_cart.id
             product_['item_count'] = product_cart.item_count
             product_['total_price'] = int(product_['discount_price'])*product_cart.item_count
             total_price += product_['total_price']
@@ -477,6 +495,7 @@ def helper_get_cart_items(user, order_id=None):
         for set_cart in set_carts:
             set = set_cart.set
             set_ = helper_get_set(set,user)
+            set_['cart_id'] = set_cart.id
             set_['item_count'] = set_cart.item_count
             set_['total_price'] = int(set_['discount_price'])*set_cart.item_count
             total_price += set_['total_price']
@@ -487,6 +506,7 @@ def helper_get_cart_items(user, order_id=None):
         for custom_set_cart in custom_set_carts:
             custom_set = custom_set_cart.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
+            custom_set_['cart_id'] = custom_set_cart.id
             custom_set_['item_count'] = custom_set_cart.item_count
             custom_set_['total_price'] = int(custom_set_['discount_price'])*custom_set_cart.item_count
             total_price += custom_set_['total_price']
@@ -672,6 +692,49 @@ def helper_get_user_ip(request):
         user_ip = request.META.get('REMOTE_ADDR')
 
     return user_ip
+
+def helper_get_payment_item(request, total_price, is_mobile=False):
+
+    user = request.user
+
+    current_datetime = time.strftime("%Y%m%d%H%M%S")
+    order_id = current_datetime+'_'+str(user.id)
+    service_id = 'M1406684' # TEST:'glx_api', REAL:'M1406684'
+    order_date = current_datetime
+    item_code = str(user.id)+"_"+current_datetime[8:]
+    amount = str(total_price)
+    user_ip = helper_get_user_ip(request)
+    if is_mobile:
+        return_url = request.build_absolute_uri(reverse('payment_return_mobile_web'))
+    else:
+        return_url = request.build_absolute_uri(reverse('payment_return'))
+    using_type = '0000'
+    currency = '0000'
+    installment_period = '0'
+    # get checksum
+    checksum = helper_get_billgate_payment_checksum(service_id+order_id+amount)
+
+    if checksum=='8001' or checksum=='8003' or checksum=='8009':
+        return None
+        # return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
+
+    payment_items = {
+        'service_id': service_id,
+        'order_id': order_id,
+        'order_date': order_date,
+        'user_id': user.username,
+        'item_code': item_code,
+        'using_type': using_type,
+        'currency': currency,
+        'item_name': '',
+        'amount': amount,
+        'user_ip': user_ip,
+        'installment_period': installment_period,
+        'return_url': return_url,
+        'check_sum': checksum
+    }
+
+    return payment_items
 
 def helper_get_billgate_payment_checksum(temp):
     checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + 'GEN ' + temp

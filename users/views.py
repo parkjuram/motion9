@@ -21,7 +21,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
-    helper_get_billgate_payment_checksum, helper_get_type_name
+    helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
+    helper_put_order_id_in_cart
 
 from .models import Interest
 
@@ -30,7 +31,7 @@ import logging
 import urllib2
 import json
 import time
-from users.models import OrderTempInfo
+from users.models import OrderTempInfo, Cart
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -318,67 +319,20 @@ def billgate_payment_checksum(request):
     return http_response_by_json(None, {'checksum':checksum})
 
 
+#@mobile_login_required
 @login_required
 def mypage_cart_view(request):
 
-    current_datetime = time.strftime("%Y%m%d%H%M%S")
-    user_ = helper_get_user(request)
-    order_id = current_datetime+'_'+str(user_.id)
-    cart_items = helper_get_cart_items( user_, order_id )
-    OrderTempInfo.objects.create(order_id=order_id, original_amount=str(cart_items['total_price']))
+    cart_items = helper_get_cart_items(helper_get_user(request))
+    payment_items = helper_get_payment_item(request, cart_items['total_price'])
+    helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
+    profile_items = helper_get_profile_item(request)
 
-    service_id = 'M1406684' # TEST:'glx_api', REAL:'M1406684'
-    order_date = current_datetime
-    item_code = str(user_.id)+"_"+current_datetime[8:]
-    amount = str(cart_items['total_price'])
-    user_ip = helper_get_user_ip(request)
-    return_url = request.build_absolute_uri(reverse('payment_return'))
-    using_type = '0000'
-    currency = '0000'
-    installment_period = '0'
-
-    # checksum
-    checksum = helper_get_billgate_payment_checksum(service_id+order_id+amount)
-
-    if checksum=='8001' or checksum=='8003' or checksum=='8009':
-        return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
-
-    payment_items = {
-        'service_id': service_id,
-        'order_id': order_id,
-        'order_date': order_date,
-        'user_id': user_.username,
-        'item_code': item_code,
-        'using_type': using_type,
-        'currency': currency,
-        'item_name': '',
-        'amount': amount,
-        'user_ip': user_ip,
-        'installment_period': installment_period,
-        'return_url': return_url,
-        'check_sum': checksum
-    }
-
-    user_profile = user_.profile
-    phone = user_profile.phone
-    phones = phone.split("-")
-    phone1 = phone2 = phone3 = ''
-    if len(phones)==3:
-        phone1=phones[0]
-        phone2=phones[1]
-        phone3=phones[2]
-
-    profile_items = {
-        'phone1': phone1,
-        'phone2': phone2,
-        'phone3': phone3,
-    }
-
-    if cart_items is not None:
+    if request.user.is_authenticated():
         cart_items.update( {
             'payment_items': payment_items,
             'profile_items': profile_items,
-            'user_profile': user_profile
+            'user_profile': request.user.profile
         } )
         return render(request, 'cart_web.html', cart_items )
     else:
@@ -387,7 +341,7 @@ def mypage_cart_view(request):
 
 @csrf_exempt
 def mypage_cart_json_view(request):
-    cart_items = helper_get_cart_items( helper_get_user(request) )
+    cart_items = helper_get_cart_items(helper_get_user(request))
 
     if cart_items is not None:
         return http_response_by_json(None, cart_items)
@@ -417,6 +371,7 @@ def mypage_purchase_view(request, page_num=1):
         item['payment'] = purchase.payment
         item['type_name'] = helper_get_type_name(purchase.type)
         item['status_name'] = helper_get_purchase_status(purchase.payment.status)
+        item['datetime'] = item['payment'].auth_date[:4]+"/"+item['payment'].auth_date[4:6]+"/"+item['payment'].auth_date[6:8]+"\n"+item['payment'].auth_date[8:10]+":"+item['payment'].auth_date[10:12]
         purchase_list.append(item)
 
     purchase_list = helper_make_paging_data(len(purchase_list), purchase_list[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
@@ -584,6 +539,22 @@ def delete_interest(request):
         helper_delete_set_interest(user, product_or_set_id)
 
     return http_response_by_json()
+
+@csrf_exempt
+def update_cart(request):
+    cart_item_id = request.POST.get('cart_item_id', '')
+    cart_item_count = request.POST.get('cart_item_count', '')
+
+    if cart_item_id != '' and cart_item_count != '':
+        try:
+            cart_item = Cart.objects.get(id=cart_item_id)
+            cart_item.item_count = cart_item_count
+            cart_item.save()
+        except ObjectDoesNotExist as e:
+            return http_response_by_json(CODE_PARAMS_WRONG)
+
+        return http_response_by_json()
+    return http_response_by_json(CODE_PARAMS_WRONG)
 
 
 @csrf_exempt
@@ -758,75 +729,22 @@ def mobile_mypage_cart_view(request):
     return render(request, 'cart.html', cart_items)
 
 
+
+#@mobile_login_required
 @csrf_exempt
 def mobile_mypage_before_purchase_view(request):
-    product_id_list = request.POST.get('product_id', None)
-    product_count_list = request.POST.get('product_cnt', None)
 
-    if product_id_list is not None and product_count_list is not None\
-            and len(product_id_list) == len(product_count_list):
-        helper_update_cart_items_count( helper_get_user(request),
-                                        product_id_list,
-                                        product_count_list,
-                                        'p')
+    cart_items = helper_get_cart_items(helper_get_user(request))
+    payment_items = helper_get_payment_item(request, cart_items['total_price'], True)
+    helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
+    profile_items = helper_get_profile_item(request)
 
-    set_id_list = request.POST.get('set_id', None)
-    set_count_list = request.POST.get('set_cnt', None)
-
-    if set_id_list is not None and set_count_list is not None\
-            and len(set_id_list) == len(set_count_list):
-        helper_update_cart_items_count( helper_get_user(request),
-                                        set_id_list,
-                                        set_count_list,
-                                        's')
-
-    custom_set_id_list = request.POST.get('custom_set_id', None)
-    custom_set_count_list = request.POST.get('custom_set_cnt', None)
-
-    if custom_set_id_list is not None and custom_set_count_list is not None\
-            and len(custom_set_id_list) == len(custom_set_count_list):
-        helper_update_cart_items_count( helper_get_user(request),
-                                        custom_set_id_list,
-                                        custom_set_count_list,
-                                        'c')
-
-    cart_items = helper_get_cart_items( helper_get_user(request) )
-
-    current_datetime = time.strftime("%Y%m%d%H%M%S")
-    order_id = 'motion9_' + current_datetime
-    user_ = helper_get_user(request)
-
-    cart_items = helper_get_cart_items( user_, order_id )
-
-    # testing option
-    # service_id = 'glx_api'
-    service_id = 'M1406684'
-    order_date = current_datetime
-    item_name = user_.username+"_"+current_datetime
-    item_code = str(user_.id)+"_"+current_datetime[8:]
-    amount = str(cart_items['total_price'])
-    installment_period='0:3'
-    return_url = request.build_absolute_uri(reverse('payment_return_mobile_web'))
-
-    payment_items = {
-        'service_id': service_id,
-        'order_id': order_id,
-        'order_date': order_date,
-        'user_id': user_.username,
-        'user_name': user_.profile.name,
-        'user_email': user_.email,
-        'item_code': item_code,
-        'item_name': item_name,
-        'card_type': '',
-        'amount': amount,
-        'installment_period': installment_period,
-        'return_url': return_url,
-        'appname': 'WEB'
-    }
-
-    if cart_items is not None:
-        cart_items.update( {'payment_items':payment_items} )
+    if request.user.is_authenticated():
+        cart_items.update( {
+            'payment_items': payment_items,
+            'profile_items': profile_items,
+            'user_profile': request.user.profile
+        } )
         return render(request, 'purchase.html', cart_items )
     else:
         return redirect('mobile_login_page')
-

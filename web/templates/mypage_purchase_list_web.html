@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{ purchase_item.type_name }}</td>
                         <td>{{ purchase_item.payment.order_id }}</td>
-                        <td>{{ purchase_item.payment.auth_date }}</td>
+                        <td>{{ purchase_item.datetime }}</td>
 
                         <td>{{ purchase_item.name }}</td>
                         <td>{{ purchase_item.purchase.item_count }}</td>
@@ -45,16 +45,16 @@
       {% if not purchases.page_hasPrev %}
           <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
       {% else %}
-          <li><a href="{% url 'mypage_set' page_num=purchases.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+          <li><a href="{% url 'mypage_purchase' page_num=purchases.page_left_count|sub:1 %}" class="previous">Prev</a></li>
       {% endif %}
 
       {% for pageNum in purchases.page_range %}
-        <li><a href="{% url 'mypage_set' page_num=pageNum %}" {% if pageNum == purchases.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
+        <li><a href="{% url 'mypage_purchase' page_num=pageNum %}" {% if pageNum == purchases.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
       {% endfor %}
       {% if not purchases.page_hasNext  %}
         <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
       {% else %}
-        <li><a href="{% url 'mypage_set' page_num=purchases.page_right_count|add:1 %}" class="next">Next</a></li>
+        <li><a href="{% url 'mypage_purchase' page_num=purchases.page_right_count|add:1 %}" class="next">Next</a></li>
       {% endif %}
     </ul>
 
