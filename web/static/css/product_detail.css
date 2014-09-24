@@ -73,6 +73,13 @@ a:visited{
     z-index:99;
 }
 
+.product-name{
+    white-space: nowrap;
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .product-price{
     font-size: 16px;
     color : #d2bb8f;
@@ -90,7 +97,7 @@ a:visited{
     color : white;
     position : absolute;
     right : 24px;
-    top : 12px;
+    top : 34px;
 }
 
 
