@@ -54,6 +54,9 @@ class Cart(models.Model):
             ("user", "set"),
             ("user", "custom_set"))
 
+    def __unicode__(self):
+        return '[%r]Cart' % (self.id)
+
 class OrderTempInfo(models.Model):
     order_id = models.CharField(max_length=64, null=False, unique=True)
     original_amount = models.CharField(max_length=9, null=True)

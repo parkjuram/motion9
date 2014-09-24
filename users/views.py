@@ -30,7 +30,7 @@ import logging
 import urllib2
 import json
 import time
-from users.models import OrderTempInfo
+from users.models import OrderTempInfo, Cart
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -582,6 +582,22 @@ def delete_interest(request):
 
     return http_response_by_json()
 
+@csrf_exempt
+def update_cart(request):
+    cart_item_id = request.POST.get('cart_item_id', '')
+    cart_item_count = request.POST.get('cart_item_count', '')
+
+    if cart_item_id != '' and cart_item_count != '':
+        try:
+            cart_item = Cart.objects.get(id=cart_item_id)
+            cart_item.item_count = cart_item_count
+            cart_item.save()
+        except ObjectDoesNotExist as e:
+            return http_response_by_json(CODE_PARAMS_WRONG)
+
+        return http_response_by_json()
+    return http_response_by_json(CODE_PARAMS_WRONG)
+
 
 @csrf_exempt
 def add_cart(request):
@@ -755,43 +771,58 @@ def mobile_mypage_cart_view(request):
     return render(request, 'cart.html', cart_items)
 
 
+
+#@mobile login required need
 @csrf_exempt
 def mobile_mypage_before_purchase_view(request):
-    product_id_list = request.POST.get('product_id', None)
-    product_count_list = request.POST.get('product_cnt', None)
+    # product_id_list = request.POST.get('product_id', None)
+    # product_count_list = request.POST.get('product_cnt', None)
+    #
+    # if product_id_list is not None and product_count_list is not None\
+    #         and len(product_id_list) == len(product_count_list):
+    #     helper_update_cart_items_count( helper_get_user(request),
+    #                                     product_id_list,
+    #                                     product_count_list,
+    #                                     'p')
+    #
+    # set_id_list = request.POST.get('set_id', None)
+    # set_count_list = request.POST.get('set_cnt', None)
+    #
+    # if set_id_list is not None and set_count_list is not None\
+    #         and len(set_id_list) == len(set_count_list):
+    #     helper_update_cart_items_count( helper_get_user(request),
+    #                                     set_id_list,
+    #                                     set_count_list,
+    #                                     's')
+    #
+    # custom_set_id_list = request.POST.get('custom_set_id', None)
+    # custom_set_count_list = request.POST.get('custom_set_cnt', None)
+    #
+    # if custom_set_id_list is not None and custom_set_count_list is not None\
+    #         and len(custom_set_id_list) == len(custom_set_count_list):
+    #     helper_update_cart_items_count( helper_get_user(request),
+    #                                     custom_set_id_list,
+    #                                     custom_set_count_list,
+    #                                     'c')
 
-    if product_id_list is not None and product_count_list is not None\
-            and len(product_id_list) == len(product_count_list):
-        helper_update_cart_items_count( helper_get_user(request),
-                                        product_id_list,
-                                        product_count_list,
-                                        'p')
+    cart_items = helper_get_cart_items(helper_get_user(request))
 
-    set_id_list = request.POST.get('set_id', None)
-    set_count_list = request.POST.get('set_cnt', None)
-
-    if set_id_list is not None and set_count_list is not None\
-            and len(set_id_list) == len(set_count_list):
-        helper_update_cart_items_count( helper_get_user(request),
-                                        set_id_list,
-                                        set_count_list,
-                                        's')
-
-    custom_set_id_list = request.POST.get('custom_set_id', None)
-    custom_set_count_list = request.POST.get('custom_set_cnt', None)
-
-    if custom_set_id_list is not None and custom_set_count_list is not None\
-            and len(custom_set_id_list) == len(custom_set_count_list):
-        helper_update_cart_items_count( helper_get_user(request),
-                                        custom_set_id_list,
-                                        custom_set_count_list,
-                                        'c')
-
-    cart_items = helper_get_cart_items( helper_get_user(request) )
-
+    ############### payment module start ###############
     current_datetime = time.strftime("%Y%m%d%H%M%S")
     order_id = 'motion9_' + current_datetime
     user_ = helper_get_user(request)
+
+    ##### if testing
+    # service_id = 'glx_api'
+    ###### if real
+    service_id = 'M1406684'
+    order_date = current_datetime
+
+    ############### payment module end ###############
+
+
+
+
 
     cart_items = helper_get_cart_items( user_, order_id )
 

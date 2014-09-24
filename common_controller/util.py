@@ -466,6 +466,7 @@ def helper_get_cart_items(user, order_id=None):
         for product_cart in product_carts:
             product = product_cart.product
             product_ = helper_get_product_detail(product, user)
+            product_['cart_id'] = product_cart.id
             product_['item_count'] = product_cart.item_count
             product_['total_price'] = int(product_['discount_price'])*product_cart.item_count
             total_price += product_['total_price']
@@ -476,6 +477,7 @@ def helper_get_cart_items(user, order_id=None):
         for set_cart in set_carts:
             set = set_cart.set
             set_ = helper_get_set(set,user)
+            set_['cart_id'] = set_cart.id
             set_['item_count'] = set_cart.item_count
             set_['total_price'] = int(set_['discount_price'])*set_cart.item_count
             total_price += set_['total_price']
@@ -486,6 +488,7 @@ def helper_get_cart_items(user, order_id=None):
         for custom_set_cart in custom_set_carts:
             custom_set = custom_set_cart.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
+            custom_set_['cart_id'] = custom_set_cart.id
             custom_set_['item_count'] = custom_set_cart.item_count
             custom_set_['total_price'] = int(custom_set_['discount_price'])*custom_set_cart.item_count
             total_price += custom_set_['total_price']
