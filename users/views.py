@@ -21,7 +21,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_delete_product_purchase, helper_delete_set_purchase, helper_delete_custom_set_purchase, \
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
-    helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item
+    helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
+    helper_set_order_id_in_cart
 
 from .models import Interest
 
@@ -321,7 +322,7 @@ def mypage_cart_view(request):
 
     cart_items = helper_get_cart_items(helper_get_user(request))
     payment_items = helper_get_payment_item(request, cart_items['total_price'])
-    # cart_items = helper_get_cart_items( user_, order_id )
+    helper_set_order_id_in_cart(request.user, payment_items['order_id'] )
     profile_items = helper_get_profile_item(request)
 
     if request.user.is_authenticated():

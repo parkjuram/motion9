@@ -469,6 +469,9 @@ def helper_get_profile_item(request):
     return None
 
 
+def helper_set_order_id_in_cart(user, order_id):
+    user.cart_set.update(order_id=order_id)
+
 def helper_get_cart_items(user, order_id=None):
 
     if order_id is not None:
