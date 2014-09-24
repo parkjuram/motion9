@@ -99,7 +99,8 @@
                 <a href="#" class="view-product-btn" data-product="{{ product.id }}">
                     <div class="product-item">
                         <div class="product-item-img">
-                            <img src="{{ product.big_img_url }}" style="width:auto; height:100%"/>
+                            <img src="{{ product.big_img_url }}"
+                                 style="max-width:100%; max-height:100%; width:auto; height:auto; position:absolute; margin:auto; left:0; right:0; top:0; bottom:0; "/>
                         </div>
                         <div class="product-item-contents">
                            {{product.brandname }} {{ product.name|truncatechars:18 }}
