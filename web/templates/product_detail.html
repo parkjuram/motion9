@@ -62,7 +62,9 @@
         </div>
     </div>
     <div class="product-title">
+        <div class="product-name">
         {{ product.brandname }} {{ product.name }}
+        </div>
         <div class="product-price">
             {{ product.discount_price|intcomma }}원 <span class="item-original-price">{{ product.original_price }}원</span>
             (<span>{{ product.discount_rate }}</span>% 할인)
