@@ -60,7 +60,9 @@
                 </div>
             </div>
         <div class="product-title">
-            {{ set.name }}
+            <div class="product-name">
+                {{ set.name }}
+            </div>
             <div class="product-price">
                 {{ set.discount_price|intcomma }}원 <span
                     class="item-original-price">{{ set.original_price|intcomma }}원</span>
