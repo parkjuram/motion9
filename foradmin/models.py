@@ -16,3 +16,9 @@ class Advertisement(models.Model):
     def __unicode__(self):
         return '(%r)Advertisement : image(%s) link(%r)' % (self.id, self.image, self.link)
 
+class Preference(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    content = models.TextField(null=True, blank=True)
+
+    def __unicode__(self):
+        return '(%r)Preference : name(%s) content(%r)' % (self.id, self.name, self.content)

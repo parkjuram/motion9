@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MainImage, Advertisement
+from .models import MainImage, Advertisement, Preference
 
 
 class MainImageAdmin(admin.ModelAdmin):
@@ -11,3 +11,9 @@ class AdvertisementAdmin(admin.ModelAdmin):
     list_editable = ( 'type', 'image', 'link')
 
 admin.site.register(Advertisement, AdvertisementAdmin)
+
+class PreferenceAdmin(admin.ModelAdmin):
+    list_display = ('name','content')
+    list_editable = ('content',)
+    list_display_links = ('name',)
+admin.site.register(Preference, PreferenceAdmin)
