@@ -46,8 +46,8 @@ $(function(){
 //                original_item.find('.changeable-item-img img').attr('src', data.small_img_url);
                 console.log(data)
                 original_item.attr('product-id',data.id);
-                original_item.find('#changeable-product-name').text(data.name);
-                original_item.find('#changeable-product-price').text(data.discount_price);
+                original_item.find('#changeable-product-name').text(data.brandname+" "+data.name);
+                original_item.find('#changeable-product-price').text(numberFormatter(data.discount_price)+"원");
             },
             error:function(jqXHR, textStatus, errorThrown){
                 
