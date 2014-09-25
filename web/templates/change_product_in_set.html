@@ -30,8 +30,18 @@
 {#                                    <img src="{{ product.small_img_url }}"/>#}
 {#                                </div>#}
                                 <div class="changeable-item-name">
-                                    <div id="changeable-product-name">{{ product.name }}</div>
-                                    <div id="changeable-product-price">{{ product.discount_price|intcomma }}원</div>
+
+                                    <div  class="product-item">
+                                        <div class="product-item-img">
+                                        <img src="{% static "img/detail_view.png" %}"  style="width:35px; height:auto; position:relative; margin:auto; left:0; right:0; top:0; bottom:0; "/>
+                                    </div>
+                                     <div class="product-item-contents">
+                                          <div id="changeable-product-name">{{ product.brandname }} {{ product.name }}</div>
+                                            <div id="changeable-product-price">{{ product.discount_price|intcomma }}원</div>
+                                    </div>
+                                </div>
+
+
 
                                     <div class="changeable-btn">
                                             변경 가능 제품 보기
@@ -51,7 +61,7 @@
 {#                                    <img src="{{ product.small_img_url }}" alt=""/>#}
 {#                                </div>#}
                                 <div class="available-item-info">
-                                    <div class="available-item-name">{{ product.name }}</div>
+                                    <div class="available-item-name">{{ product.brandname }} {{ product.name }}</div>
                                     <div class="available-item-price">{{ product.discount_price|intcomma }}원</div>
                                     <div class="available-item-btns" original-product-id="{{ product.id }}"
                                          product-id="{{ product.id }}" product-description="{{ product.description }}"
@@ -71,7 +81,7 @@
 {#                                        <img src="{{ item.small_img_url }}" alt=""/>#}
 {#                                    </div>#}
                                     <div class="available-item-info">
-                                        <div class="available-item-name">{{ item.name }}</div>
+                                        <div class="available-item-name">{{ item.brandname }} {{ item.name }}</div>
                                         <div class="available-item-price">{{ item.discount_price|intcomma }}원</div>
                                         <div class="available-item-btns" original-product-id="{{ product.id }}"
                                              product-id="{{ item.id }}" product-description="{{ item.description }}"
@@ -92,11 +102,18 @@
 {#                                <img src="{{ product.small_img_url }}"/>#}
 {#                            </div>#}
                             <div class="changeable-item-name">
-                                {{ product.name }}<br/>
-                                {{ product.discount_price|intcomma }}원<br/>
+                                <div  class="product-item">
+                                        <div class="product-item-img">
+                                        <img src="{% static "img/detail_view.png" %}"  style="width:35px; height:auto; position:relative; margin:auto; left:0; right:0; top:0; bottom:0; "/>
+                                    </div>
+                                     <div class="product-item-contents">
 
+                                        {{ product.brandname }} {{ product.name }}<br/>
+                                        {{ product.discount_price|intcomma }}원<br/>
+                                    </div>
+                                </div>
                                 <div class="changeable-item-box-wrapper">
-                                      기본 고정 제품
+                                      고정 제품
                                 </div>
 
 {#                                <div class="changeable-btn">기본 고정 제품</div>#}
@@ -115,7 +132,9 @@
 {#            <h5 style="font-size: 14px;" id="popup-product-name"></h5>#}
 {#        </div>#}
         <div role="main" class="ui-content">
+            <div style="text-align:center;">
             <img id="popup-product-image" src="" />
+            </div>
             <div id="popup-product-description">
             </div>
             <div style="padding-top:10px; text-align: center;">
@@ -130,7 +149,7 @@
     <div data-role="footer" data-position="fixed" data-tap-toggle="false" id="change-product-footer">
         <div class="footer-bar">
             <div class='set-price'>{{ set.discount_price|intcomma }}원</div>
-            <a href="#" class="gold-btn" style="margin-right:2%; background-color:#292929; padding:10 10 10 10; border-radius:4px;">돌아가기</a>
+            <a href="#" class="gold-btn" style="margin-right:2%; background-color:#292929; padding:10 10 10 10; border-radius:4px;">초기화</a>
             <a href="#" class="gold-btn" style="margin-right:2%; background-color:#292929; padding:10 10 10 10; border-radius:4px;">저장하기</a>
         </div>
     </div>

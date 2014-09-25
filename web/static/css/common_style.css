@@ -244,6 +244,9 @@ img.profile-img{
   color : white !important;
 }
 
+.black-btn:visited{
+    color : white !important;
+}
 
 .facebook-btn {
   width: 60px;
