@@ -12,7 +12,6 @@ from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, Produ
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
 from django.core.exceptions import ObjectDoesNotExist
 
-from common_controller import util
 from motion9.const import *
 import logging
 import math
@@ -785,7 +784,7 @@ def helper_get_payment_complete_item(request, payment_id):
         custom_sets.append(custom_set_)
 
     if BeforePayment.objects.filter(order_id=payment.order_id).exists():
-        util.send_payment_email(payment_id, request.user)
+        send_payment_email(payment_id, request.user)
         BeforePayment.objects.filter(order_id=payment.order_id).delete()
 
     return {
