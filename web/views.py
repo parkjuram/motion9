@@ -262,10 +262,6 @@ def payment_return_view(request):
 
 @csrf_exempt
 def payment_return_mobile_web_view(request):
-    is_success = None
-    service_id = None
-    order_id = None
-    order_date = None
     transaction_id = None
     auth_amount = None
     auth_date = None
@@ -409,7 +405,7 @@ def payment_return_mobile_web_view(request):
         if payment is not None:
             payment_id = payment.id
 
-    return redirect('payment_complete', payment_id=payment_id )
+    return redirect('mobile_payment_complete', payment_id=payment_id )
 
     # return render(request, 'return_explorer.html', {
     #     'payment_id': payment_id,
