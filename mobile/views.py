@@ -181,4 +181,3 @@ def payment_complete_view(request, payment_id=None):
     payment_complete_item = helper_get_payment_complete_item(request, payment_id)
 
     return render(request, 'payment_complete.html', payment_complete_item)
-    # payment = Payment.objects.get(id=payment_id)
