@@ -9,7 +9,7 @@ from django.template import Context
 from django.template.loader import get_template
 import time
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine
-from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment
+from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
 from django.core.exceptions import ObjectDoesNotExist
 
 from motion9.const import *
@@ -752,3 +752,45 @@ def helper_get_type_name(type):
         type_name='커스텀'
 
     return type_name
+
+def helper_get_payment_complete_item(request, payment_id):
+    payment = Payment.objects.get(id=payment_id)
+
+    purchase_products = Purchase.objects.filter(payment_id=payment_id, type='p').all()
+    products = []
+    for purchase_set in purchase_products:
+        product = purchase_set.product
+        product_ = helper_get_product_detail(product, request.user)
+        product_['item_count'] = purchase_set.item_count
+        product_['total_price'] = purchase_set.price
+        products.append(product_)
+
+    purchase_sets = Purchase.objects.filter(payment_id=payment_id, type='s').all()
+    sets = []
+    for purchase_set in purchase_sets:
+        set = purchase_set.set
+        set_ = helper_get_set(set, request.user)
+        set_['item_count'] = purchase_set.item_count
+        set_['total_price'] = purchase_set.price
+        sets.append(set_)
+
+    purchase_custom_sets = Purchase.objects.filter(payment_id=payment_id, type='c').all()
+    custom_sets = []
+    for purchase_custom_set in purchase_custom_sets:
+        custom_set = purchase_custom_set.custom_set
+        custom_set_ = helper_get_custom_set(custom_set, request.user)
+        custom_set_['item_count'] = purchase_custom_set.item_count
+        custom_set_['total_price'] = purchase_custom_set.price
+        custom_sets.append(custom_set_)
+
+    if BeforePayment.objects.filter(order_id=payment.order_id).exists():
+        send_payment_email(payment_id, request.user)
+        BeforePayment.objects.filter(order_id=payment.order_id).delete()
+
+    return {
+        'products': products,
+        'sets': sets,
+        'custom_sets': custom_sets,
+        'payment': payment,
+        'user_': request.user
+    }

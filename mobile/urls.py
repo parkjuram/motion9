@@ -27,6 +27,9 @@ urlpatterns = patterns('',
     url(r'^customize/set/(?P<set_id>(\d+))/$', 'mobile.views.customize_set_detail_view', name='mobile_customize_set_detail'),
     # url(r'^customize/set/save/$', 'mobile.views.customize_set_save_view', name='mobile_customize_set_save'),
 
+    url(r'^payment/complete/$', 'mobile.views.payment_complete_view', name='mobile_payment_complete'),
+    url(r'^payment/complete/(?P<payment_id>(\d+))/$', 'mobile.views.payment_complete_view', name='mobile_payment_complete'),
+
     # url(r'^test/$', 'web.views.test_view', name='test'),
     # url(r'^$', 'web.views.index_view', name='index'),
     # url(r'^index/$', 'web.views.index_view', name='index'),

@@ -3,9 +3,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
-    helper_get_custom_set_list, helper_get_custom_set
+    helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item
 from foradmin.models import MainImage
 from motion9 import settings
+from users.models import Payment
 
 from web.models import Category
 
@@ -167,3 +168,14 @@ def customize_set_detail_view(request, set_id):
           {
               'custom_set': custom_set
           })
+
+# @mobile_login_required
+@csrf_exempt
+def payment_complete_view(request, payment_id=None):
+    if payment_id == None:
+        return http_response_by_json(CODE_PARAMS_WRONG)
+
+    payment_complete_item = helper_get_payment_complete_item(request, payment_id)
+
+    return render(request, 'payment_complete.html', payment_complete_item)
+    # payment = Payment.objects.get(id=payment_id)

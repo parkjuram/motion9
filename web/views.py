@@ -46,6 +46,8 @@ def test_view(request):
 @login_required
 def before_payment(request):
 
+    print request.POST
+
     order_id = request.POST.get('order_id', '')
 
     name = request.POST.get('name', '')
@@ -54,18 +56,25 @@ def before_payment(request):
     basic_address = request.POST.get('basic_address', '')
     detail_address = request.POST.get('detail_address', '')
     shipping_requirement = request.POST.get('shipping_requirement', '')
-    mileage = request.POST.get('mileage', 0)
+    mileage = request.POST.get('mileage', '')
+    if len(mileage)==0:
+        mileage=0
 
-    BeforePayment.objects.create(
-        user=request.user,
-        order_id=order_id,
-        name=name,
-        phone=phone,
-        postcode=postcode,
-        address=basic_address+' '+detail_address,
-        shipping_requirement=shipping_requirement,
-        mileage=mileage
-    )
+    try:
+        BeforePayment.objects.create(
+            user=request.user,
+            order_id=order_id,
+            name=name,
+            phone=phone,
+            postcode=postcode,
+            address=basic_address+' '+detail_address,
+            shipping_requirement=shipping_requirement,
+            mileage=mileage
+        )
+    except Exception as e:
+        pass
+
+    return http_response_by_json()
 
 
 @csrf_exempt
@@ -262,10 +271,6 @@ def payment_return_view(request):
 
 @csrf_exempt
 def payment_return_mobile_web_view(request):
-    is_success = None
-    service_id = None
-    order_id = None
-    order_date = None
     transaction_id = None
     auth_amount = None
     auth_date = None
@@ -284,22 +289,16 @@ def payment_return_mobile_web_view(request):
     is_success = False
 
     if post_response_code == "0000":
-        service_code = '0900'
-        broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",service_code]
-        broker_message_command.append(message)
-
-        return_message = Popen(broker_message_command, stdout=PIPE).communicate()[0]
-        return_message = return_message.strip()
-
+        credit_card_service_code = '0900'
+        broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini", credit_card_service_code, message]
+        return_message = Popen(broker_message_command, stdout=PIPE).communicate()[0].strip()
         return_code = return_message[0:5]
 
         this_data = {}
-
         if return_code=='ERROR':
-
             this_version = "0100"
             this_merchantId = service_id
-            this_serviceCode = service_code
+            this_serviceCode = credit_card_service_code
             this_command = "3011"
             this_orderId = order_id
             this_orderDate = order_date
@@ -308,8 +307,6 @@ def payment_return_mobile_web_view(request):
             util.billgate_put_data(this_data, "1003", "API error!!")
             util.billgate_put_data(this_data, "1009", return_message[10:12])
             util.billgate_put_data(this_data, "1010", util.billgate_getErrorMessage(return_message[6:12]))
-
-
         else:
             # {{ Message.php
 
@@ -369,17 +366,11 @@ def payment_return_mobile_web_view(request):
         detail_response_message = this_data.get('1010')
 
         if response_code == '0000':
-            transaction_id = this_data.get('1001')
             auth_amount = this_data.get('1007')
-            auth_number = this_data.get('1004')
+            transaction_id = this_data.get('1001')
             auth_date = this_data.get('1005')
 
             is_success = True
-        else:
-            transaction_id = this_data.get('1001')
-            auth_amount = ""
-            auth_number = ""
-            auth_date = ""
 
     try:
         response_message = map( lambda x: x.decode('euc-kr'), response_message)
@@ -387,16 +378,20 @@ def payment_return_mobile_web_view(request):
     except:
         pass
 
-    payment_id=0
+    # payment_id=0
 
     if is_success:
+        beforePayment = BeforePayment.objects.get(order_id=order_id)
+        if beforePayment is None:
+            raise Http404
 
-        user_ = helper_get_user(request)
+        user_ = beforePayment.user
+        user_profile = user_.profile
 
         payment = Payment.objects.create(
             user=user_,
             service_id=service_id,
-            order_id=order_id,
+            order_id=beforePayment.order_id,
             order_date=order_date,
             transaction_id=transaction_id[0],
             auth_amount=auth_amount[0],
@@ -404,12 +399,48 @@ def payment_return_mobile_web_view(request):
             response_code=response_code,
             response_message=response_message[0],
             detail_response_code=detail_response_code[0],
-            detail_response_message=detail_response_message[0]
+            detail_response_message=detail_response_message[0],
+            name= beforePayment.name,
+            postcode = beforePayment.postcode,
+            phone= beforePayment.phone,
+            address= beforePayment.address,
+            shipping_requirement= beforePayment.shipping_requirement,
+            mileage= beforePayment.mileage
         )
+
+        user_profile.mileage = int(user_profile.mileage)-int(beforePayment.mileage)+int(auth_amount[0])/100
+        user_profile.save()
+
+        carts = Cart.objects.filter(order_id=order_id).all()
+        for cart in carts:
+
+            if cart.type=='p':
+                price = cart.product.discount_price
+            elif cart.type=='s':
+                price = helper_get_set(cart.set).get('discount_price', 0)
+            elif cart.type=='c':
+                price = helper_get_custom_set(cart.custom_set).get('discount_price', 0)
+
+            Purchase.objects.create(
+                user=user_,
+                payment=payment,
+                price=price,
+                product=cart.product,
+                set=cart.set,
+                custom_set=cart.custom_set,
+                type=cart.type,
+                item_count=cart.item_count
+            )
+
         if payment is not None:
             payment_id = payment.id
 
-    return redirect('payment_complete', payment_id=payment_id )
+        Cart.objects.filter(order_id=order_id).delete()
+
+    if is_success:
+        return redirect('mobile_payment_complete', payment_id=payment_id)
+    else:
+        raise Http404
 
     # return render(request, 'return_explorer.html', {
     #     'payment_id': payment_id,
