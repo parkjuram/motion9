@@ -281,7 +281,7 @@ def payment_return_mobile_web_view(request):
 
     if post_response_code == "0000":
         credit_card_service_code = '0900'
-        broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini", service_code, message]
+        broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini", credit_card_service_code, message]
         return_message = Popen(broker_message_command, stdout=PIPE).communicate()[0].strip()
         return_code = return_message[0:5]
 
