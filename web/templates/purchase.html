@@ -6,6 +6,11 @@
 <script src="{% static 'jqmodal/jqModal.js' %}"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script src="{% static 'js/purchase.js' %}"></script>
+    <script type="text/javascript">
+
+        var url_before_payment = "{% url 'before_payment' %}";
+
+    </script>
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">구매</h2>
@@ -164,7 +169,7 @@
                 수취인 이름
             </label>
             <div class="inline-input-wrapper">
-                <input type="text"/>
+                <input id="sendTo" type="text"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -173,7 +178,7 @@
                 연락처
             </label>
             <div class="inline-input-wrapper phone-form-wrapper">
-                <input type="text" /><input type="text"/><input type="text"/>
+                <input id="phone1" type="text" /><input id="phone2" type="text"/><input id="phone3" type="text"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -184,7 +189,7 @@
             <div class="inline-input-wrapper address-form-wrapper">
                 <input type="text" name="postal_code" id="postalcode" disabled="disabled"/> <a href="#" class="gold-btn" id="searchAddressBtn" >주소 검색</a>
                 <input type="text" name="basic_address" id="basicAddress" disabled="disabled"/>
-                <input type="text" name="detail_address"/>
+                <input type="text" name="detail_address" id="detailAddress"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -193,7 +198,7 @@
                 배송유의사항
            </label>
             <div class="inline-input-wrapper">
-                <input type="text"/>
+                <input id=shippingRequirement" type="text"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -215,7 +220,7 @@
                 마일리지 사용
            </label>
             <div class="inline-input-wrapper">
-                <input type="text"/>
+                <input id="mileage" type="text"/>
             </div>
             <div class="clearfix"></div>
         </div>
