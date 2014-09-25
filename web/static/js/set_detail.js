@@ -72,9 +72,7 @@ $(function(){
         var desc = $('#popupDetailDesc');
         var btn = $('#popupDetailBtn');
 
-<<<<<<< HEAD
        $.ajax({
-//              url: '/mobile/product/'+id+'/json/',
            url: url_reverse_for_product_detail_by_json(product_id),
            dataType: 'json',
            async: true,
@@ -92,25 +90,5 @@ $(function(){
 
            }
        });
-=======
-        $.ajax({
-              url: '/mobile/product/'+id+'/json/',
-              dataType: 'json',
-              async : true,
-              type:'POST',
-              success: function(data){
-                  console.log(data);
-                  img.attr('src', data.big_img_url);
-                  name.text(data.brandname +" "+ data.name);
-                  desc.text(data.description);
-                  btn.attr('href', '/mobile/product/'+id+'/');
-                  dialog.popup('open');
-              },
-              error:function(jqXHR, textStatus, errorThrown){
-
-              }
-		});
->>>>>>> 08addaf377f6ff4e22b63d0184f4c8c648a68952
-
     });
 });
