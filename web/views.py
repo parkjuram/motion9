@@ -46,6 +46,8 @@ def test_view(request):
 @login_required
 def before_payment(request):
 
+    print request.POST
+
     order_id = request.POST.get('order_id', '')
 
     name = request.POST.get('name', '')
@@ -54,18 +56,25 @@ def before_payment(request):
     basic_address = request.POST.get('basic_address', '')
     detail_address = request.POST.get('detail_address', '')
     shipping_requirement = request.POST.get('shipping_requirement', '')
-    mileage = request.POST.get('mileage', 0)
+    mileage = request.POST.get('mileage', '')
+    if len(mileage)==0:
+        mileage=0
 
-    BeforePayment.objects.create(
-        user=request.user,
-        order_id=order_id,
-        name=name,
-        phone=phone,
-        postcode=postcode,
-        address=basic_address+' '+detail_address,
-        shipping_requirement=shipping_requirement,
-        mileage=mileage
-    )
+    try:
+        BeforePayment.objects.create(
+            user=request.user,
+            order_id=order_id,
+            name=name,
+            phone=phone,
+            postcode=postcode,
+            address=basic_address+' '+detail_address,
+            shipping_requirement=shipping_requirement,
+            mileage=mileage
+        )
+    except Exception as e:
+        pass
+
+    return http_response_by_json()
 
 
 @csrf_exempt
