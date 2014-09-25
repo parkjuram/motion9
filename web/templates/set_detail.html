@@ -127,7 +127,10 @@
         <div class="tab-content" id="productRule">
             {% for product in set.products %}
                 <div style="margin-top : 18px;">
+
+                   <div style="padding: 0px; margin: 40px 0px 0px 30px;"> {{ product.brandname }} {{ product.name }}</div>
                     <table class="product-info-table">
+
                         <tr>
                             <td class="item-spec-head">사이즈 및 용량</td>
                             <td>{{ product.capacity }}</td>
@@ -219,9 +222,9 @@
 
             </div>
             <div style="text-align: center;">
-                <a href="#" class="black-btn" id="popupDetailBtn" style="margin-right:2%; background-color:#292929; border-radius:3px; padding:10px;">자세히</a><a href="#"
-                                                                                                    class="gold-btn"
-                                                                                                    data-rel="back" style="background-color:#292929; border-radius:3px; padding:10px;">닫기</a>
+                <a href="#" class="black-btn" id="popupDetailBtn" style="margin-right:2%; padding:10px;">자세히</a><a href="#"
+                                                                                                    class="black-btn"
+                                                                                                    data-rel="back" style="padding:10px;">닫기</a>
             </div>
         </div>
     </div>

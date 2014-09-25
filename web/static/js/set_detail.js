@@ -82,8 +82,7 @@ $(function(){
                   img.attr('src', data.big_img_url);
                   name.text(data.brandname +" "+ data.name);
                   desc.text(data.description);
-                  btn.attr('href', '/mobile/product/'+id);
-
+                  btn.attr('href', '/mobile/product/'+id+'/');
                   dialog.popup('open');
               },
               error:function(jqXHR, textStatus, errorThrown){
