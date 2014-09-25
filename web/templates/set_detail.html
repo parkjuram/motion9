@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/set_detail.css' %}"/>
 
+    <script>
+    var url_for_product_detail = "{% url 'mobile_product' product_id=1987654321 %}";
+    function url_reverse_for_product_detail(product_id) {
+        return url_for_product_detail.replace("1987654321", product_id)
+    }
+
+    var url_for_product_detail_by_json = "{% url 'mobile_product_json' product_id=1987654321 %}";
+    function url_reverse_for_product_detail_by_json(product_id) {
+        return url_for_product_detail_by_json.replace("1987654321", product_id)
+    }
+    </script>
+
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">세트 정보</h2>
@@ -219,9 +231,9 @@
 
             </div>
             <div style="text-align: center;">
-                <a href="#" class="black-btn" id="popupDetailBtn" style="margin-right:2%; background-color:#292929; border-radius:3px; padding:10px;">자세히</a><a href="#"
-                                                                                                    class="gold-btn"
-                                                                                                    data-rel="back" style="background-color:#292929; border-radius:3px; padding:10px;">닫기</a>
+                <a href="#" target="_self" class="black-btn" id="popupDetailBtn" style="margin-right:2%; background-color:#292929; border-radius:3px; padding:10px;">자세히</a>
+                <a href="#" class="gold-btn" data-rel="back"
+                   style="background-color:#292929; border-radius:3px; padding:10px;">닫기</a>
             </div>
         </div>
     </div>

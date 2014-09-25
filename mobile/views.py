@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from common_controller.decorators import mobile_login_required
 
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
@@ -169,7 +172,7 @@ def customize_set_detail_view(request, set_id):
               'custom_set': custom_set
           })
 
-# @mobile_login_required
+@mobile_login_required
 @csrf_exempt
 def payment_complete_view(request, payment_id=None):
     if payment_id == None:

@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from common_controller.decorators import mobile_login_required
 from motion9 import const
 
 from motion9.const import *
@@ -652,8 +653,9 @@ def make_custom_set(request):
 # mobile part
 
 def mobile_login_view(request):
+    next = request.GET.get('next', 'mobile_index')
     return render(request, 'login.html', {
-        'next': 'mobile_index'
+        'next': next
     })
 
 @login_required
@@ -684,6 +686,7 @@ def mobile_mypage_interesting_view(request, page_num=1):
     else:
         return redirect('mobile_index')
 
+@mobile_login_required
 def mobile_mypage_myinfo_view(request, page_num=1):
 
     user = helper_get_user(request)

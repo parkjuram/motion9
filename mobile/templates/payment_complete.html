@@ -1,9 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>dddd</title>
-</head>
-<body>
-payment complete test page!
-</body>
-</html>
+{% extends "mobile_base.html" %}
+{% load static %}
+
+{% block header %}
+
+    <script src="{% static 'js/payment_complete.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'css/payment_complete.css'%}"/>
+
+{% endblock header %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+    <div class="content-title">구매 완료</div>
+
+{% endblock content %}
