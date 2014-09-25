@@ -1,5 +1,6 @@
 {% extends "mobile_base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block header %}
 
@@ -14,5 +15,41 @@
 {% block content %}
 
     <div class="content-title">구매 완료</div>
+
+    {% for item in products %}
+        <div class="content-item-wrapper">
+            <div class="content-item-name">상품명 : {{ item.name }}</div>
+            <div class="content-item-count">수량 : {{ item.item_count }}개</div>
+            <div class="content-item-price">가격 :{{ item.discount_price|intcomma }}원</div>
+        </div>
+    {% endfor %}
+    {% for item in sets %}
+        <div class="content-item-wrapper">
+            <div class="content-item-name">상품명 : {{ item.name }}</div>
+            <div class="content-item-count">수량 : {{ item.item_count }}개</div>
+            <div class="content-item-price">가격 :{{ item.discount_price|intcomma }}원</div>
+        </div>
+    {% endfor %}
+    {% for item in custom_sets %}
+        <div class="content-item-wrapper">
+            <div class="content-item-name">상품명 : {{ item.name }}</div>
+            <div class="content-item-count">수량 : {{ item.item_count }}개</div>
+            <div class="content-item-price">가격 :{{ item.discount_price|intcomma }}원</div>
+        </div>
+    {% endfor %}
+
+    <div class="content-item-wrapper">
+        <div class="content-item-name">배송지 정보</div>
+        <div class="content-item-label">수취인 성명</div>
+        <div class="content-item-label-content">{{ payment.name }}</div>
+        <div class="content-item-label">수취인 번호</div>
+        <div class="content-item-label-content">{{ payment.phone }}</div>
+        <div class="content-item-label">수취인 주소</div>
+        <div class="content-item-label-content">{{ payment.postcode }}{{ payment.address }}</div>
+        <div class="content-item-label">주문 번호</div>
+        <div class="content-item-label-content">{{ payment.order_id }}</div>
+        <div class="content-item-label">배송시 요청사항</div>
+        <div class="content-item-label-content">{{ payment.shipping_requirement }}</div>
+    </div>
 
 {% endblock content %}
