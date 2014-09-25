@@ -32,7 +32,7 @@
     {% for product in products %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
-            <img src="{{ product.small_img_url }}"/>
+            <img src="{{ product.small_img }}"/>
         </div>
         <div class="purchase-product-info">
             {{ product.name }}<br/>
@@ -63,7 +63,7 @@
     {% for set in sets %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
-            <img src="{{ set.small_img_url }}"/>
+            <img src="{{ set.small_img }}"/>
         </div>
         <div class="purchase-product-info">
             {{ set.name }}<br/>
@@ -94,7 +94,7 @@
     {% for custom in custom_sets %}
     <div class="purchase-wrapper purchased-item">
         <div class="purchase-product-img">
-            <img src="{{ custom.small_img_url }}"/>
+            <img src="{{ custom.small_img }}"/>
         </div>
         <div class="purchase-product-info">
             {{ custom.name }}<br/>
@@ -132,7 +132,7 @@
                 주문자 이름
             </label>
             <div class="inline-input-wrapper">
-                <input type="text"/>
+                <input type="text" value="{{ user_profile.name }}"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -141,7 +141,7 @@
                 이메일
             </label>
             <div class="inline-input-wrapper">
-                <input type="text"/>
+                <input type="text" value="{{ user.email }}"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -150,7 +150,9 @@
                 연락처
             </label>
             <div class="inline-input-wrapper phone-form-wrapper">
-                <input type="text" /><input type="text"/><input type="text"/>
+                <input type="text" value="{{ profile_items.phone1 }}"/>
+                <input type="text" value="{{ profile_items.phone2 }}"/>
+                <input type="text" value="{{ profile_items.phone3 }}"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -245,7 +247,7 @@
     <div class="footer-bar">
         <a href="#" class="purchase-btn gold-btn" >결제하기</a>
     </div>
-    <form name="payment" method="post" >
+    <form name="payment" method="post" style="display:none" >
         <input type="text" name="SERVICE_ID" value="{{ payment_items.service_id }}"><br>
         <input type="text" name="ORDER_ID" value="{{ payment_items.order_id }}"><br>
         <input type="text" name="ORDER_DATE" value="{{ payment_items.order_date }}"><br>
