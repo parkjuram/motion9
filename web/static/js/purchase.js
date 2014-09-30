@@ -88,8 +88,10 @@ $(function () {
                 'shipping_requirement': $('#shippingRequirement').val(),
                 'mileage': $('#mileage').val()
             },
-            complete: function(jqXHR, textStatus) {
-                startPayment();
+            success: function (data) {
+                if (data.success) {
+                    startPayment();
+                }
             }
         })
     });
