@@ -1,14 +1,21 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-{% load static %}
-{% load humanize %}
-<link rel="stylesheet" href="{% static 'css/purchase.css' %}"/>
-<script src="{% static 'jqmodal/jqModal.js' %}"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
-<script src="{% static 'js/purchase.js' %}"></script>
+    {% load static %}
+    {% load humanize %}
+    <link rel="stylesheet" href="{% static 'css/purchase.css' %}"/>
+    <script src="{% static 'jqmodal/jqModal.js' %}"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
+    <script src="{% static 'js/purchase.js' %}"></script>
     <script type="text/javascript">
 
-        var url_before_payment = "{% url 'before_payment' %}";
+        var urlBeforePayment = "{% url 'before_payment' %}";
+        var urlGetBillgatePaymentChecksum = "{% url 'billgate_payment_checksum' %}";
+
+        var serviceId = "{{ payment_items.service_id }}";
+        var orderId = "{{ payment_items.order_id }}";
+
+        var userMileage = "{{ user.profile.mileage }}";
+        var totalPrice = "{{ total_price }}";
 
     </script>
 {% endblock %}
@@ -17,10 +24,11 @@
 {% endblock %}
 
 {% block content %}
-<div id="addressLayer">
-    <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px" onclick="closeDaumPostcode()">
-</div>
-<div class="page-wrapper">
+    <div id="addressLayer">
+        <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer"
+             style="cursor:pointer;position:absolute;right:-3px;top:-3px" onclick="closeDaumPostcode()">
+    </div>
+    <div class="page-wrapper">
     <div class="section-header">
         주문리스트 확인
     </div>
@@ -30,97 +38,103 @@
         </div>
     {% endif %}
     {% for product in products %}
-    <div class="purchase-wrapper purchased-item">
-        <div class="purchase-product-img">
-            <img src="{{ product.small_img }}"/>
+        <div class="purchase-wrapper purchased-item">
+            <div class="purchase-product-img">
+                <img src="{{ product.small_img_url }}"/>
+            </div>
+            <div class="purchase-product-info">
+                {{ product.name }}<br/>
+                가격 : <span id="cart-product-price-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원<br/>
+            </div>
+            <div class='cart-select-box-wrapper'>
+                <label>수량 : </label>
+                <select data-shadow='false' class="cart-item-count" data-type="p" data-id="{{ product.id }}"
+                        data-corner='false'>
+                    <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                    <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                    <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                    <option {% if product.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                    <option {% if product.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                    <option {% if product.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                    <option {% if product.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                    <option {% if product.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                    <option {% if product.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                    <option {% if product.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                    {% if product.item_count > 10 %}
+                        <option selected="selected">{{ product.item_count }}</option>
+                    {% endif %}
+                </select>
+
+                <div class="clearfix"></div>
+                총 가격 : <span id="cart-product-total-price-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
+            </div>
         </div>
-        <div class="purchase-product-info">
-            {{ product.name }}<br/>
-            가격 : <span id="cart-product-price-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원<br/>
-        </div>
-        <div class='cart-select-box-wrapper'>
-            <label>수량 : </label>
-            <select data-shadow='false' class="cart-item-count" data-type="p" data-id="{{ product.id }}" data-corner='false'>
-                <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
-                <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
-                <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
-                <option {% if product.item_count == 4 %} selected="selected" {% endif %}>4</option>
-                <option {% if product.item_count == 5 %} selected="selected" {% endif %}>5</option>
-                <option {% if product.item_count == 6 %} selected="selected" {% endif %}>6</option>
-                <option {% if product.item_count == 7 %} selected="selected" {% endif %}>7</option>
-                <option {% if product.item_count == 8 %} selected="selected" {% endif %}>8</option>
-                <option {% if product.item_count == 9 %} selected="selected" {% endif %}>9</option>
-                <option {% if product.item_count == 10 %} selected="selected" {% endif %}>10</option>
-                {% if product.item_count > 10 %}
-                    <option selected="selected">{{ product.item_count }}</option>
-                {% endif %}
-            </select>
-            <div class="clearfix"></div>
-            총 가격 : <span id="cart-product-total-price-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
-        </div>
-    </div>
     {% endfor %}
     {% for set in sets %}
-    <div class="purchase-wrapper purchased-item">
-        <div class="purchase-product-img">
-            <img src="{{ set.small_img }}"/>
+        <div class="purchase-wrapper purchased-item">
+            <div class="purchase-product-img">
+                <img src="{{ set.small_img_url }}"/>
+            </div>
+            <div class="purchase-product-info">
+                {{ set.name }}<br/>
+                가격 : <span id="cart-set-price-{{ set.id }}">{{ set.discount_price|intcomma }}</span>원<br/>
+            </div>
+            <div class='cart-select-box-wrapper'>
+                <label>수량 : </label>
+                <select data-shadow='false' class="cart-item-count" data-type="s" data-id="{{ set.id }}"
+                        data-corner='false'>
+                    <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                    <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                    <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                    <option {% if set.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                    <option {% if set.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                    <option {% if set.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                    <option {% if set.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                    <option {% if set.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                    <option {% if set.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                    <option {% if set.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                    {% if set.item_count > 10 %}
+                        <option selected="selected">{{ set.item_count }}</option>
+                    {% endif %}
+                </select>
+
+                <div class="clearfix"></div>
+                총 가격 : <span id="cart-set-total-price-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
+            </div>
         </div>
-        <div class="purchase-product-info">
-            {{ set.name }}<br/>
-            가격 : <span id="cart-set-price-{{ set.id }}">{{ set.discount_price|intcomma }}</span>원<br/>
-        </div>
-        <div class='cart-select-box-wrapper'>
-            <label>수량 : </label>
-            <select data-shadow='false' class="cart-item-count" data-type="s" data-id="{{ set.id }}" data-corner='false'>
-                <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
-                <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>
-                <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>
-                <option {% if set.item_count == 4 %} selected="selected" {% endif %}>4</option>
-                <option {% if set.item_count == 5 %} selected="selected" {% endif %}>5</option>
-                <option {% if set.item_count == 6 %} selected="selected" {% endif %}>6</option>
-                <option {% if set.item_count == 7 %} selected="selected" {% endif %}>7</option>
-                <option {% if set.item_count == 8 %} selected="selected" {% endif %}>8</option>
-                <option {% if set.item_count == 9 %} selected="selected" {% endif %}>9</option>
-                <option {% if set.item_count == 10 %} selected="selected" {% endif %}>10</option>
-                {% if set.item_count > 10 %}
-                    <option selected="selected">{{ set.item_count }}</option>
-                {% endif %}
-            </select>
-            <div class="clearfix"></div>
-            총 가격 : <span id="cart-set-total-price-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
-        </div>
-    </div>
     {% endfor %}
     {% for custom in custom_sets %}
-    <div class="purchase-wrapper purchased-item">
-        <div class="purchase-product-img">
-            <img src="{{ custom.small_img }}"/>
+        <div class="purchase-wrapper purchased-item">
+            <div class="purchase-product-img">
+                <img src="{{ custom.small_img_url }}"/>
+            </div>
+            <div class="purchase-product-info">
+                {{ custom.name }}<br/>
+                가격 : <span id="cart-custom-price-{{ custom.id }}">{{ custom.discount_price|intcomma }}</span>원<br/>
+            </div>
+            <div class='cart-select-box-wrapper'>
+                <label>수량 : </label>
+                <select data-shadow='false' class="cart-item-count" data-type="c" data-id="{{ custom.id }}"
+                        data-corner='false'>
+                    <option {% if custom.item_count == 1 %} selected="selected" {% endif %}>1</option>
+                    <option {% if custom.item_count == 2 %} selected="selected" {% endif %}>2</option>
+                    <option {% if custom.item_count == 3 %} selected="selected" {% endif %}>3</option>
+                    <option {% if custom.item_count == 4 %} selected="selected" {% endif %}>4</option>
+                    <option {% if custom.item_count == 5 %} selected="selected" {% endif %}>5</option>
+                    <option {% if custom.item_count == 6 %} selected="selected" {% endif %}>6</option>
+                    <option {% if custom.item_count == 7 %} selected="selected" {% endif %}>7</option>
+                    <option {% if custom.item_count == 8 %} selected="selected" {% endif %}>8</option>
+                    <option {% if custom.item_count == 9 %} selected="selected" {% endif %}>9</option>
+                    <option {% if custom.item_count == 10 %} selected="selected" {% endif %}>10</option>
+                    {% if custom.item_count > 10 %}
+                        <option selected="selected">{{ custom.item_count }}</option>
+                    {% endif %}
+                </select>
+
+                <div class="clearfix"></div>
+                총 가격 : <span id="cart-custom-total-price-{{ custom.id }}">{{ custom.total_price|intcomma }}</span>원
+            </div>
         </div>
-        <div class="purchase-product-info">
-            {{ custom.name }}<br/>
-            가격 : <span id="cart-custom-price-{{ custom.id }}">{{ custom.discount_price|intcomma }}</span>원<br/>
-        </div>
-        <div class='cart-select-box-wrapper'>
-            <label>수량 : </label>
-            <select data-shadow='false' class="cart-item-count"  data-type="c" data-id="{{ custom.id }}" data-corner='false'>
-                <option {% if custom.item_count == 1 %} selected="selected" {% endif %}>1</option>
-                <option {% if custom.item_count == 2 %} selected="selected" {% endif %}>2</option>
-                <option {% if custom.item_count == 3 %} selected="selected" {% endif %}>3</option>
-                <option {% if custom.item_count == 4 %} selected="selected" {% endif %}>4</option>
-                <option {% if custom.item_count == 5 %} selected="selected" {% endif %}>5</option>
-                <option {% if custom.item_count == 6 %} selected="selected" {% endif %}>6</option>
-                <option {% if custom.item_count == 7 %} selected="selected" {% endif %}>7</option>
-                <option {% if custom.item_count == 8 %} selected="selected" {% endif %}>8</option>
-                <option {% if custom.item_count == 9 %} selected="selected" {% endif %}>9</option>
-                <option {% if custom.item_count == 10 %} selected="selected" {% endif %}>10</option>
-                {% if custom.item_count > 10 %}
-                    <option selected="selected">{{ custom.item_count }}</option>
-                {% endif %}
-            </select>
-            <div class="clearfix"></div>
-            총 가격 : <span id="cart-custom-total-price-{{ custom.id }}">{{ custom.total_price|intcomma }}</span>원
-        </div>
-    </div>
     {% endfor %}
 
     <div class="section-header">
@@ -131,6 +145,7 @@
             <label>
                 주문자 이름
             </label>
+
             <div class="inline-input-wrapper">
                 <input type="text" value="{{ user_profile.name }}"/>
             </div>
@@ -140,6 +155,7 @@
             <label>
                 이메일
             </label>
+
             <div class="inline-input-wrapper">
                 <input type="text" value="{{ user.email }}"/>
             </div>
@@ -149,6 +165,7 @@
             <label>
                 연락처
             </label>
+
             <div class="inline-input-wrapper phone-form-wrapper">
                 <input type="text" value="{{ profile_items.phone1 }}"/>
                 <input type="text" value="{{ profile_items.phone2 }}"/>
@@ -161,15 +178,17 @@
         배송지 정보
     </div>
     <div class="purchase-wrapper">
-        <form>
-        <label>
-            <input type="checkbox" name="chckbox-0" data-mini="true" style="display:none;">기본배송지
-        </label>
-        </form>
+{#        <form>#}
+{#            {% csrf_token %}#}
+{#            <label>#}
+{#                <input type="checkbox" name="chckbox-0" data-mini="true" style="display:none;">기본배송지#}
+{#            </label>#}
+{#        </form>#}
         <div class="purchase-inline-input">
             <label>
                 수취인 이름
             </label>
+
             <div class="inline-input-wrapper">
                 <input id="sendTo" type="text"/>
             </div>
@@ -179,8 +198,9 @@
             <label>
                 연락처
             </label>
+
             <div class="inline-input-wrapper phone-form-wrapper">
-                <input id="phone1" type="text" /><input id="phone2" type="text"/><input id="phone3" type="text"/>
+                <input id="phone1" type="text"/><input id="phone2" type="text"/><input id="phone3" type="text"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -188,19 +208,23 @@
             <label>
                 주소
             </label>
+
             <div class="inline-input-wrapper address-form-wrapper">
-                <input type="text" name="postal_code" id="postalcode" disabled="disabled"/> <a href="#" class="gold-btn" id="searchAddressBtn" >주소 검색</a>
-                <input type="text" name="basic_address" id="basicAddress" disabled="disabled"/>
-                <input type="text" name="detail_address" id="detailAddress"/>
+                <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user.profile.postcode }}"/> <a href="#" class="gold-btn"
+                                                                                               id="searchAddressBtn">주소
+                검색</a>
+                <input type="text" name="basic_address" id="basicAddress" disabled="disabled" value="{{ user.profile.basic_address }}"/>
+                <input type="text" name="detail_address" id="detailAddress" value="{{ user.profile.detail_address }}"/>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="purchase-inline-input">
             <label>
                 배송유의사항
-           </label>
+            </label>
+
             <div class="inline-input-wrapper">
-                <input id=shippingRequirement" type="text"/>
+                <input id=shipping_requirement" type="text"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -210,19 +234,19 @@
     </div>
     <div class="purchase-wrapper">
         <div style="padding-bottom : 8px;">
-           구매총액 : <span id="totalPurchasePrice">240000</span> 원
+            구매총액 : <span id="totalPurchasePrice">{{ total_price|intcomma }}</span>
         </div>
     </div>
     <div class="purchase-wrapper">
         <div>
-            마일리지 (보유 : 12000point)
+            마일리지 (보유 : {{ user.profile.mileage|intcomma }} 원)
         </div>
         <div class="purchase-inline-input">
             <label>
                 마일리지 사용
-           </label>
+            </label>
             <div class="inline-input-wrapper">
-                <input id="mileage" type="text"/>
+                <input id="mileage" type="text" value="0"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -232,7 +256,7 @@
     </div>
     <div class="purchase-wrapper">
         <div style="padding-bottom : 8px;">
-           총 결제액 : <span id="cart-sum-price">{{ total_price|intcomma }}</span> 원
+            총 결제액 : <span id="cart-sum-price">{{ total_price|intcomma }}</span> 원
         </div>
     </div>
     <div class="section-header">
@@ -240,14 +264,16 @@
     </div>
     <div class="purchase-wrapper">
         <ul>
-            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method" checked="checked"/>신용카드</label></li>
-{#            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"/>무통장입금</label></li>#}
+            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"
+                              checked="checked"/>신용카드</label></li>
+            {#            <li><label><input type="radio" data-mini="true" class="purchase-method" name="purchase_method"/>무통장입금</label></li>#}
         </ul>
     </div>
     <div class="footer-bar">
-        <a href="#" class="purchase-btn gold-btn" >결제하기</a>
+        <a href="#" class="purchase-btn gold-btn">결제하기</a>
     </div>
     <form name="payment" method="post" style="display:none" >
+        {% csrf_token %}
         <input type="text" name="SERVICE_ID" value="{{ payment_items.service_id }}"><br>
         <input type="text" name="ORDER_ID" value="{{ payment_items.order_id }}"><br>
         <input type="text" name="ORDER_DATE" value="{{ payment_items.order_date }}"><br>
@@ -262,6 +288,6 @@
         <input type="text" name="RETURN_URL" value="{{ payment_items.return_url }}"><br>
         <input type="text" name="APPNAME" value="{{ payment_items.appname }}"><br>
     </form>
-</div>
+    </div>
 
 {% endblock %}

@@ -51,6 +51,7 @@
              {% if user.is_authenticated %}
                 <div class="cart-item-list-wrapper">
                 <form id="cartBuyForm" method="post" data-ajax="false" action="/user/mobile/mypage/before_purchase/">
+                    {% csrf_token %}
                     <ul class="custom-menu-list"></ul>
 
                     <div>

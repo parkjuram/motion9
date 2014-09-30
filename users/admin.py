@@ -31,8 +31,14 @@ class PurchaseAdmin(admin.ModelAdmin):
 admin.site.register(Purchase, PurchaseAdmin)
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message', 'status', 'shipping_number', 'phone', 'postcode', 'address', 'created')
-    list_editable = ('service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount', 'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message',  'status', 'shipping_number', 'phone', 'postcode', 'address', )
+    list_display = ('user', 'service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount',
+                    'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message',
+                    'name', 'status', 'shipping_number', 'phone', 'postcode', 'address', 'shipping_requirement', 'mileage', 'created')
+
+    list_editable = ('service_id', 'order_id', 'order_date', 'transaction_id', 'auth_amount',
+                     'auth_date', 'response_code', 'response_message', 'detail_response_code', 'detail_response_message',
+                     'name', 'status', 'shipping_number', 'phone', 'postcode', 'address', 'shipping_requirement', 'mileage',)
+
     list_display_links = ('user',)
 
 admin.site.register(Payment, PaymentAdmin)
