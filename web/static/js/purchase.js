@@ -87,7 +87,7 @@ $(function () {
                 'basic_address': $('#basicAddress').val(),
                 'detail_address': $('#detailAddress').val(),
                 'shipping_requirement': $('#shippingRequirement').val(),
-                'mileage': $('#mileage').val().replaceAll(",","")
+                'mileage': replaceAll(",","",$('#mileage').val() )
             },
             success: function (data) {
                 if (data.success) {
@@ -156,6 +156,10 @@ $(function () {
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function replaceAll(find, replace, str) {
+        return str.replace(new RegExp(find, 'g'), replace);
     }
 
 });
