@@ -733,7 +733,7 @@ def mobile_mypage_cart_view(request):
 
 
 
-#@mobile_login_required
+@mobile_login_required
 @csrf_exempt
 def mobile_mypage_before_purchase_view(request):
 
@@ -742,12 +742,10 @@ def mobile_mypage_before_purchase_view(request):
     helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
     profile_items = helper_get_profile_item(request)
 
-    if request.user.is_authenticated():
-        cart_items.update( {
-            'payment_items': payment_items,
-            'profile_items': profile_items,
-            'user_profile': request.user.profile
-        } )
-        return render(request, 'purchase.html', cart_items )
-    else:
-        return redirect('mobile_login_page')
+    cart_items.update( {
+        'payment_items': payment_items,
+        'profile_items': profile_items,
+        'user_profile': request.user.profile
+    } )
+
+    return render(request, 'purchase.html', cart_items )
