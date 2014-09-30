@@ -93,7 +93,7 @@ $(function () {
                     startPayment();
                 }
             }
-        })
+        });
     });
 
     /*****  mileage usage relate part   *****/
