@@ -210,7 +210,7 @@
             </label>
 
             <div class="inline-input-wrapper address-form-wrapper">
-                <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user.profile.postcode }}"/> <a href="#" class="gold-btn"
+                <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user.profile.postcode }}"/> <a href="#" class="black-btn"
                                                                                                id="searchAddressBtn">주소
                 검색</a>
                 <input type="text" name="basic_address" id="basicAddress" disabled="disabled" value="{{ user.profile.basic_address }}"/>
@@ -270,7 +270,7 @@
         </ul>
     </div>
     <div class="footer-bar">
-        <a href="#" class="purchase-btn gold-btn">결제하기</a>
+        <a href="#" class="purchase-btn black-btn">결제하기</a>
     </div>
     <form name="payment" method="post" style="display:none" >
         {% csrf_token %}

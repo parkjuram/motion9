@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from common_controller.decorators import mobile_login_required
 from motion9 import const
+from datetime import datetime
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
@@ -692,6 +693,8 @@ def mobile_mypage_myinfo_view(request, page_num=1):
     user = helper_get_user(request)
     if user is not None:
 
+        if user.profile.age is not None:
+            user.profile.age = datetime.now().year - user.profile.age + 1
 
         return render(request, 'my_page_myinfo.html',
             {
