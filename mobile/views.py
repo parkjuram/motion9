@@ -143,6 +143,7 @@ def set_view(request, set_id):
                     'set': set
                 })
 
+@mobile_login_required
 @csrf_exempt
 def customize_set_make_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request), True)
@@ -152,6 +153,7 @@ def customize_set_make_view(request, set_id):
               'set': set
           })
 
+@mobile_login_required
 @csrf_exempt
 def customize_set_view(request):
     custom_sets = helper_get_custom_set_list(helper_get_user(request))

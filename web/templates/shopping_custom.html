@@ -13,25 +13,25 @@
 <div class="main-header-img">
     <img src="{% static "img/black.jpg" %}"/>
 </div>
-<div class="category-box">
-    <div class="select-wrapper">
-      <div class="select-box-border">
-        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#">세제품</option>
-            <option value="#">단일상품</option>
-        </select>
-      </div>
-    </div>
-    <div class="select-wrapper">
-        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">
-            <option value="#">피부가 꺼먼새끼</option>
-            <option value="#">운동 많이 하는 새끼</option>
-            <option value="#">그냥 피부 더러운 새끼</option>
-            <option value="#">못생긴 새끼</option>
-        </select>
-    </div>
-    <div class="clearfix"></div>
-</div>
+{#<div class="category-box">#}
+{#    <div class="select-wrapper">#}
+{#      <div class="select-box-border">#}
+{#        <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">#}
+{#            <option value="#">세제품</option>#}
+{#            <option value="#">단일상품</option>#}
+{#        </select>#}
+{#      </div>#}
+{#    </div>#}
+{#    <div class="select-wrapper">#}
+{#        <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">#}
+{#            <option value="#">피부가 꺼먼새끼</option>#}
+{#            <option value="#">운동 많이 하는 새끼</option>#}
+{#            <option value="#">그냥 피부 더러운 새끼</option>#}
+{#            <option value="#">못생긴 새끼</option>#}
+{#        </select>#}
+{#    </div>#}
+{#    <div class="clearfix"></div>#}
+{#</div>#}
 <div id="productGrid">
     {% for set in custom_sets %}
     <div class="product-item">
