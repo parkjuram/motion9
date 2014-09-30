@@ -8,7 +8,14 @@
     <script src="{% static 'js/purchase.js' %}"></script>
     <script type="text/javascript">
 
-        var url_before_payment = "{% url 'before_payment' %}";
+        var urlBeforePayment = "{% url 'before_payment' %}";
+        var urlGetBillgatePaymentChecksum = "{% url 'billgate_payment_checksum' %}";
+
+        var serviceId = "{{ payment_items.service_id }}";
+        var orderId = "{{ payment_items.order_id }}";
+
+        var userMileage = "{{ user.profile.mileage }}";
+        var totalPrice = "{{ total_price }}";
 
     </script>
 {% endblock %}
@@ -172,6 +179,7 @@
     </div>
     <div class="purchase-wrapper">
         <form>
+            {% csrf_token %}
             <label>
                 <input type="checkbox" name="chckbox-0" data-mini="true" style="display:none;">기본배송지
             </label>
@@ -226,20 +234,19 @@
     </div>
     <div class="purchase-wrapper">
         <div style="padding-bottom : 8px;">
-            구매총액 : <span id="totalPurchasePrice">240000</span> 원
+            구매총액 : <span id="totalPurchasePrice">{{ total_price|intcomma }}</span>
         </div>
     </div>
     <div class="purchase-wrapper">
         <div>
-            마일리지 (보유 : 12000point)
+            마일리지 (보유 : {{ user.profile.mileage|intcomma }} 원)
         </div>
         <div class="purchase-inline-input">
             <label>
                 마일리지 사용
             </label>
-
             <div class="inline-input-wrapper">
-                <input id="mileage" type="text"/>
+                <input id="mileage" type="text" value="0"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -266,6 +273,7 @@
         <a href="#" class="purchase-btn gold-btn">결제하기</a>
     </div>
     <form name="payment" method="post" style="display:none" >
+        {% csrf_token %}
         <input type="text" name="SERVICE_ID" value="{{ payment_items.service_id }}"><br>
         <input type="text" name="ORDER_ID" value="{{ payment_items.order_id }}"><br>
         <input type="text" name="ORDER_DATE" value="{{ payment_items.order_date }}"><br>

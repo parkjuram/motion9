@@ -75,7 +75,7 @@ $(function () {
 
     $('.purchase-btn').click(function (e) {
         $.ajax({
-            url: url_before_payment,
+            url: urlBeforePayment,
             dataType: 'json',
             type:'POST',
             data: {
@@ -93,4 +93,66 @@ $(function () {
             }
         })
     });
+
+    /*****  mileage usage relate part   *****/
+
+    var mileage = $('#mileage');
+
+    mileage.focusout( function(e){
+        console.log('mileage.focusout');
+        var self = $(this);
+        var value = parseInt( self.val() );
+        var errorMessage = null;
+        var resultPrice = parseInt(totalPrice);
+
+        if ( value == NaN ) {
+            value = 0;
+        } else if ( value%1000 != 0 ) {
+            value = 0;
+            errorMessage = '천원 단위로 사용 가능합니다.';
+        } else if ( value > userMileage ) {
+            value = 0;
+            errorMessage = '보유한 적립금보다 많습니다.';
+        } else if ( value > totalPrice ) {
+            value = 0;
+            errorMessage = '상품금액보다 많은 적립금을 사용할 수 없습니다.';
+        } else {
+            resultPrice = resultPrice - value;
+        }
+
+        self.val(numberWithCommas(value));
+        updateResultPrice(resultPrice);
+        if ( errorMessage != null ) {
+            alert( errorMessage );
+        }
+
+
+
+    });
+
+    // result price = total price - mileage
+    function updateResultPrice(resultPrice) {
+        $.ajax({
+            url: urlGetBillgatePaymentChecksum,
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                service_id: serviceId,
+                order_id: orderId,
+                amount: resultPrice
+            },
+            success: function (data) {
+                if (data.success) {
+                    $('#cart-sum-price').text(numberWithCommas(resultPrice));
+                    $('input[name="AMOUNT"]').val(resultPrice);
+//                    $('input[name="CHECK_SUM"]').val(data.checksum);
+                }
+            }
+        });
+    }
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
 });
