@@ -178,12 +178,12 @@
         배송지 정보
     </div>
     <div class="purchase-wrapper">
-        <form>
-            {% csrf_token %}
-            <label>
-                <input type="checkbox" name="chckbox-0" data-mini="true" style="display:none;">기본배송지
-            </label>
-        </form>
+{#        <form>#}
+{#            {% csrf_token %}#}
+{#            <label>#}
+{#                <input type="checkbox" name="chckbox-0" data-mini="true" style="display:none;">기본배송지#}
+{#            </label>#}
+{#        </form>#}
         <div class="purchase-inline-input">
             <label>
                 수취인 이름
@@ -210,11 +210,11 @@
             </label>
 
             <div class="inline-input-wrapper address-form-wrapper">
-                <input type="text" name="postal_code" id="postalcode" disabled="disabled"/> <a href="#" class="gold-btn"
+                <input type="text" name="postal_code" id="postalcode" disabled="disabled" value="{{ user.profile.postcode }}"/> <a href="#" class="gold-btn"
                                                                                                id="searchAddressBtn">주소
                 검색</a>
-                <input type="text" name="basic_address" id="basicAddress" disabled="disabled"/>
-                <input type="text" name="detail_address" id="detailAddress"/>
+                <input type="text" name="basic_address" id="basicAddress" disabled="disabled" value="{{ user.profile.basic_address }}"/>
+                <input type="text" name="detail_address" id="detailAddress" value="{{ user.profile.detail_address }}"/>
             </div>
             <div class="clearfix"></div>
         </div>

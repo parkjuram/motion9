@@ -288,7 +288,7 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
         'name': set.name+"(My Collection)",
         'category_name': set.category.name,
         'description': set.description,
-        'big_img': settings.MEDIA_URL + set.big_img.name,
+        'big_img_url': settings.MEDIA_URL + set.big_img.name,
         'discount_difference': set.discount_difference,
         'products': []
     })
@@ -463,8 +463,8 @@ def helper_get_profile_item(request):
     if len(phones)==3:
         return {
             'phone1': phones[0],
-            'phone2': phones[0],
-            'phone3': phones[0],
+            'phone2': phones[1],
+            'phone3': phones[2],
         }
     return None
 
