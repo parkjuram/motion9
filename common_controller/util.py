@@ -353,7 +353,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
         'category_name': set.category.name,
         'description': set.description,
         'description_images': description_images,
-        'big_img': big_img,
+        'big_img_url': big_img,
         'small_img': small_img,
         'discount_difference': set.discount_difference,
         'is_interested': True if user is not None and set.interest_set.filter(user=user).count()>0 else False,
