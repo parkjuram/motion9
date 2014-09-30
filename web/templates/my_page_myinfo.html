@@ -26,7 +26,8 @@
                 여자
           {% endif %}
           <br/>
-          나이 : {{ user.profile.age }}세 <br/>
+{#        {% int test =  now %}#}
+          나이 : {{user.profile.age }}세 <br/>
           적립 : {{ user.profile.mileage| intcomma }}원<br/>
           주소 : {{ user.profile.address }}<br/>
         </div>
