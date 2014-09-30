@@ -74,6 +74,18 @@ $(function () {
     }
 
     $('.purchase-btn').click(function (e) {
+
+        console.log({
+                'order_id': $('input[name="ORDER_ID"]').val(),
+                'name': $('#sendTo').val(),
+                'phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),
+                'postcode': $('#postalcode').val(),
+                'basic_address': $('#basicAddress').val(),
+                'detail_address': $('#detailAddress').val(),
+                'shipping_requirement': $('#shippingRequirement').val(),
+                'mileage': $('#mileage').val()
+            });
+
         $.ajax({
             url: urlBeforePayment,
             dataType: 'json',
@@ -90,7 +102,7 @@ $(function () {
             },
             success: function (data) {
                 if (data.success) {
-                    startPayment();
+//                    startPayment();
                 }
             }
         });
