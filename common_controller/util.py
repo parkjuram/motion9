@@ -315,8 +315,6 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
         'discount_rate' : round(float(custom_set_['original_price']-custom_set_['discount_price'])/custom_set_['original_price']*100,1)  if custom_set_['original_price'] is not 0 else 0
     })
 
-    print custom_set_
-
     return custom_set_
 
 
