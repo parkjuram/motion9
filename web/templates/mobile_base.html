@@ -17,6 +17,8 @@
     <script src="{% static 'js/common_js.js' %}"></script>
     <script src="{% static 'js/common_js_mobile.js'%}"></script>
     <script>
+        var url_for_login_next = "{% url 'mobile_login_page' %}?next={{ request.get_full_path }}";
+
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -51,13 +53,13 @@
                 <form id="cartBuyForm" method="post" data-ajax="false" action="/user/mobile/mypage/before_purchase/">
                     <ul class="custom-menu-list"></ul>
 
-                    <div >
+                    <div>
                         <div class="cart-footer-bar">
                             <div style="margin : 16px 0;">
                                 총 결제 금액 : <span id="cartTotalPrice">{{ total_price|intcomma }}</span>원
                             </div>
                             <div style="text-align : center; margin-bottom : 16px;">
-                                <a href="#" id="cartBuyBtn" style=" width : 80%;" data-ajax="false" class="gold-btn">구매 하기</a>
+                                <a href="#" id="cartBuyBtn" style=" width : 80%;" data-ajax="false" class="black-btn">구매 하기</a>
                             </div>
                         </div>
                     </div>
@@ -120,7 +122,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{% url "mobile_customize_set" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>
+{#                    <a href="{% url "mobile_customize_set" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>#}
+                      <a href="javascript:alert('현재 준비중입니다. PC에서 이용해 주세요.');" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
