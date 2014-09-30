@@ -30,7 +30,7 @@
                 <div class="purchased-item">
                     <div class="purchased-item-img">
                         <a href="{% url 'set' set_id=set.id %}" target="_blank">
-                            <img src="{{ set.big_img }}"/>
+                            <img src="{{ set.big_img_url }}"/>
                         </a>
                     </div>
                     <div class="purchased-item-contents">
@@ -95,7 +95,7 @@
             {% for custom_set in custom_sets %}
                 <div class="purchased-item">
                     <div class="purchased-item-img">
-                        <a href="#" target="_blank"><img src="{{ custom_set.big_img }}"/></a>
+                        <a href="#" target="_blank"><img src="{{ custom_set.big_img_url }}"/></a>
                     </div>
                     <div class="purchased-item-contents">
                         <div class="purchased-item-contents-wrapper">
