@@ -300,10 +300,11 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
         product = set_product.product
         if product.get_custom_set_detail_from_original_product.filter(custom_set=custom_set).count() > 0:
             custom_set_detail = product.get_custom_set_detail_from_original_product.filter(custom_set=custom_set).first()
-            product = custom_set_detail.new_product
+            product = helper_get_product_detail(custom_set_detail.new_product, user)
+            custom_set_['products'].append(product)
 
-            original_price += product.original_price
-            discount_price += product.discount_price
+            original_price += product['original_price']
+            discount_price += product['discount_price']
 
     custom_set_.update({
         'original_price': original_price,
@@ -313,8 +314,6 @@ def helper_get_custom_set(custom_set_id_or_object, user=None):
     custom_set_.update({
         'discount_rate' : round(float(custom_set_['original_price']-custom_set_['discount_price'])/custom_set_['original_price']*100,1)  if custom_set_['original_price'] is not 0 else 0
     })
-
-
 
     return custom_set_
 
