@@ -71,10 +71,10 @@ def before_payment(request):
             shipping_requirement=shipping_requirement,
             mileage=mileage
         )
-    except Exception as e:
-        pass
+        return http_response_by_json()
 
-    return http_response_by_json()
+    except Exception as e:
+        return http_response_by_json( CODE_PARAMS_WRONG )
 
 
 @csrf_exempt
