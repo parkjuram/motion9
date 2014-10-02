@@ -17,11 +17,12 @@
             <div class="slider__wrapper">
             {% for adarea_item in adarea_items %}
                 <div class="slider__item">
-                    <div class="slider_test">
-                        <img u="image" style="width:100%; height:auto;" src="http://themotion9.com/media/image/advertisement/SPORT_ad_1.jpg" href="{{ adarea_item.link_url }}" />
-                        <div class="shop-collection-wrapper">
-                            <a class="btn-shop-collection btn-stroke-black">SHOP COLLECTION</a>
-                        </div>
+                    <img src="{{ adarea_item.image_url }}" href="{{ adarea_item.link_url }}" />
+                    <div class="shop-collection-wrapper">
+                        <a class="btn-shop-collection btn-stroke-black" href="{{ adarea_item.link_url }}" >SHOP COLLECTION</a>
+                    </div>
+                    <div class="item-title">
+                        {{ adarea_item.title }}
                     </div>
                 </div>
             {% endfor %}
