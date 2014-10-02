@@ -14,13 +14,18 @@
 {% block content %}
     <div class="main-header-area">
         <div class="slider">
-            <ul class="slider__wrapper">
+            <div class="slider__wrapper">
             {% for adarea_item in adarea_items %}
-                <li class="slider__item">
-                    <img u="image" style="width:100%; height:auto;" src="{{ adarea_item.image_url }}" href="{{ adarea_item.link_url }}" />
-                </li>
+                <div class="slider__item">
+                    <div class="slider_test">
+                        <img u="image" style="width:100%; height:auto;" src="http://themotion9.com/media/image/advertisement/SPORT_ad_1.jpg" href="{{ adarea_item.link_url }}" />
+                        <div class="shop-collection-wrapper">
+                            <a class="btn-shop-collection btn-stroke-black">SHOP COLLECTION</a>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-            </ul>
+            </div>
         </div>
     </div>
     <div class="category-box">

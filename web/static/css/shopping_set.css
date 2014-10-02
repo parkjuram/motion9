@@ -155,11 +155,34 @@ a{
     display: inline-block;
 }
 
+/*.slider__item{*/
+    /*position: absolute;*/
+    /*height: auto;*/
+    /*width: 100%;*/
+/*}*/
 
+.slider__item {
+    position: relative;
+    text-align: center;
+    height: 100%;
+}
 
+.slider_test {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    display: block;
+}
 
-
-
-
-
-
+/*.shop-collection-wrapper {*/
+    /*position: absolute;*/
+    /*width: 100%;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*text-align: center;*/
+    /*height: auto;*/
+    /*bottom: 0;*/
+    /*left: 50%;*/
+    /*margin: 0 0 10px -30px;*/
+/*}*/
