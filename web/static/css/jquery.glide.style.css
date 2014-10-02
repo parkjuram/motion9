@@ -25,24 +25,26 @@
 }
 .slider__arrows-item--right {
   bottom: 50%;
-  right: 30px;
+  right: 15px;
 }
 .slider__arrows-item--left {
   bottom: 50%;
-  left: 30px;
+  left: 15px;
 }
 .slider__nav {
   position: absolute;
-  bottom: 30px;
+  bottom: 15px;
+    display: none;
 }
 .slider__nav-item {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   float: left;
   clear: none;
   display: block;
   margin: 0 5px;
   background: #fff;
+  border-radius: 5px;
 }
 .slider__nav-item--current {
   background: #ccc;

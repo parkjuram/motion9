@@ -9,12 +9,11 @@ class MainImage(models.Model):
 
 class Advertisement(models.Model):
     title = models.CharField(max_length=100, unique=True, default='default')
-    type = models.CharField(max_length=20, null=False, blank=True)
+    category = models.ForeignKey('web.Category',null=True)
     image = models.ImageField(null=True, upload_to='image/advertisement/')
-    link = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
-        return '(%r)Advertisement : image(%s) link(%r)' % (self.id, self.image, self.link)
+        return '(%r)Advertisement : image(%r)' % (self.id, self.image)
 
 class Preference(models.Model):
     name = models.CharField(max_length=100, unique=True)

@@ -14,13 +14,19 @@
 {% block content %}
     <div class="main-header-area">
         <div class="slider">
-            <ul class="slider__wrapper">
+            <div class="slider__wrapper">
             {% for adarea_item in adarea_items %}
-                <li class="slider__item">
-                    <img u="image" style="width:100%; height:auto;" src="{{ adarea_item.image_url }}" href="{{ adarea_item.link_url }}" />
-                </li>
+                <div class="slider__item">
+                    <img src="{{ adarea_item.image_url }}" />
+                    <div class="shop-collection-wrapper">
+                        <a class="btn-shop-collection btn-stroke-black" target="_self" href="{% url 'mobile_shop_set' category_id=adarea_item.category_id %}" >SHOP COLLECTION</a>
+                    </div>
+                    <div class="item-title">
+                        {{ adarea_item.title }}
+                    </div>
+                </div>
             {% endfor %}
-            </ul>
+            </div>
         </div>
     </div>
     <div class="category-box">
