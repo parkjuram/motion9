@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.template import Context
 from django.template.loader import get_template
 import time
+from foradmin.models import Advertisement
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
 from django.core.exceptions import ObjectDoesNotExist
@@ -793,3 +794,15 @@ def helper_get_payment_complete_item(request, payment_id):
         'payment': payment,
         'user_': request.user
     }
+
+def helper_get_adarea_items():
+    advertisements = Advertisement.objects.all()
+    adarea_items = []
+    for advertisement in advertisements:
+        adarea_items.append( {
+            'title': advertisement.title,
+            'category_id': advertisement.category_id,
+            'image_url': settings.MEDIA_URL + advertisement.image.name,
+        })
+
+    return adarea_items

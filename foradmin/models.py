@@ -13,7 +13,7 @@ class Advertisement(models.Model):
     image = models.ImageField(null=True, upload_to='image/advertisement/')
 
     def __unicode__(self):
-        return '(%r)Advertisement : image(%s) link(%r)' % (self.id, self.image, self.link)
+        return '(%r)Advertisement : image(%r)' % (self.id, self.image)
 
 class Preference(models.Model):
     name = models.CharField(max_length=100, unique=True)
