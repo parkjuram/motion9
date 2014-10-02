@@ -223,7 +223,11 @@ a:visited{
     width : 38%;
 }
 
-
+#purchaseDialog .black-btn{
+    font-size: 16px;
+    border : 1px solid white;
+    width : 38%;
+}
 
 
 

@@ -102,6 +102,12 @@ def shop_set_view(request, category_id=None, page_num=1):
 def product_view(request, product_id=None):
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
+
+        product['category_guide_image'] = MainImage.objects.filter(name=product['category_name']).first()
+        if product['category_guide_image'] is not None:
+            product['category_guide_image'] = settings.MEDIA_URL + product['category_guide_image'].image.name
+
+
         blog_reivews = helper_get_blog_reviews(product_id)
 
         return render(request, "product_detail.html",
@@ -116,6 +122,7 @@ def product_view(request, product_id=None):
 def product_modal_view(request, product_id=None):
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
+
         blog_reivews = helper_get_blog_reviews(product_id)
 
         return render(request, "product_detail_for_modal.html",
