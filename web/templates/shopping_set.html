@@ -19,7 +19,7 @@
                 <div class="slider__item">
                     <img src="{{ adarea_item.image_url }}" />
                     <div class="shop-collection-wrapper">
-                        <a class="btn-shop-collection btn-stroke-black" href="{% url 'mobile_shop_set' category_id=adarea_item.category_id %}" >SHOP COLLECTION</a>
+                        <a class="btn-shop-collection btn-stroke-black" target="_self" href="{% url 'mobile_shop_set' category_id=adarea_item.category_id %}" >SHOP COLLECTION</a>
                     </div>
                     <div class="item-title">
                         {{ adarea_item.title }}

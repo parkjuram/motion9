@@ -2,8 +2,7 @@ $(function(){
 
     $('.slider').glide({
         arrowLeftText: '<',
-        arrowRightText: '>',
-        autoplay: false
+        arrowRightText: '>'
     });
 
     var productCategoryList = [['스킨', 1], ['로션', 2], ['에센스', 5], ['비비크림, 선크림', 4], ['수분크림, 아이크림', 14], ['마스크/팩', 23], ['클렌징/스크럽', 3], ['립밤', 33], ['바디', 24], ['헤어', 22], ['향수', 25], ['기타', 26]];
