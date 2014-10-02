@@ -58,6 +58,17 @@ function getContextPath(){
 
 $(function(){
 
+    function openWithoutReferrer(url) {
+        var site = window.open("", "_blank");
+        site.location.href = "javascript:location.replace('" + url + "')";
+    }
+
+    // Open links with "hide-referrer" class without sending the referrer
+    $(document).on('click', 'a.hide-referrer', function(e) {
+        e.preventDefault();
+        openWithoutReferrer($(this).attr('href'));
+    });
+
     $.ajaxSetup({ cache: true });
       $.getScript('//connect.facebook.net/ko_kr/all.js', function(){
         FB.init({

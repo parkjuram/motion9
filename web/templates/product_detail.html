@@ -93,11 +93,11 @@
         <div class="product-item">
 
             <div class="product-item-img">
-                <a href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}"><img src="{{ blog.small_img_url }}"/></a>
+                <a class="hide-referrer" href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}"><img src="{{ blog.small_img_url }}"/></a>
             </div>
             <div class="product-item-contents">
                 <div>
-                    <a href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}">{{ blog.writer|truncatechars:10 }}</a>
+                    <a class="hide-referrer" href="{{ blog.url }}" target="_blank" title="{{ blog.writer }}">{{ blog.writer|truncatechars:10 }}</a>
                 </div>
                 <div>
                     {{ blog.summary}}
