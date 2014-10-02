@@ -317,3 +317,8 @@ a:visited{
     color : #6e6e6e;
     line-height: 22px;
 }
+
+.product-detail-info img{
+    width:100%;
+    height:auto;
+}
