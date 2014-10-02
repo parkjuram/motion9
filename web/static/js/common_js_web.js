@@ -9,8 +9,6 @@ $(function(){
         site.location.href = "javascript:location.replace('" + url + "')";
     }
 
-    var ttt;
-
     // Open links with "hide-referrer" class without sending the referrer
     $(document).on('click', 'a.hide-referrer', function(e) {
         e.preventDefault();
