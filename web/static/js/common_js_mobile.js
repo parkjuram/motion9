@@ -66,12 +66,16 @@ $(function(){
                 cartId = list[i].cart_id;
                 productId = list[i].id;
                 productPrice = list[i].discount_price;
-                productName = list[i].name;
+                if(list[i].brandname!=null)
+                    productName = list[i].brandname+' '+list[i].name;
+                else
+                    productName = list[i].name;
+
                 imgUrl = list[i].big_img_url;
                 howMany = list[i].item_count;
 
-                var htmlPrepend = "<li>"
-                    + "<a class='cart-delete-btn' data-type='"+type+"' cart-id='"+cartId+"' data-id='"+productId+"' href='#' >X</a>"
+                var htmlPrepend = "<li style='padding:3%;'>"
+                    + "<div>"
                     + "<div class='cart-item-img'>"
                     +   "<img src='"+imgUrl+"'/>"
                     + "</div>"
@@ -88,7 +92,9 @@ $(function(){
                     + '가격 : <span id="cart-item-' + productId + '">'
                     + numberFormatter(productPrice) + '</span>원'
                     + '</div>'
+                    + "<a class='black-btn' style='width:auto; position:absolute; top:50%; margin-top:-16px' data-type='"+type+"' cart-id='"+cartId+"' data-id='"+productId+"' href='#' >삭제</a>"
                     + '<div class="clearfix"></div>'
+                    + "</div>"
                     + '</li>';
 
                 html += htmlPrepend;

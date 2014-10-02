@@ -70,9 +70,9 @@
             (<span>{{ product.discount_rate }}</span>% 할인)
         </div>
         {% if product.is_interested %}
-            <a href="#" class="interest-btn btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
+             <a href="#" class="interest-btn btn-for-interest interest-done"  data-type="p" data-product="{{ product.id }}">관심취소</a>
         {% else %}
-            <a href="#" class="interest-btn btn-for-interest interest-done"  data-type="p" data-product="{{ product.id }}">관심취소</a>
+             <a href="#" class="interest-btn btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
         {% endif %}
     </div>
 </div>

@@ -11,7 +11,7 @@ $(function(){
                   if(data == 'valid')
                     location.href= 'login success url';
                   else
-                    location.href= '/user/registration_page';
+                    location.href= '/user/mobile_registration_page';
               },
               error:function(jqXHR, textStatus, errorThrown){
                   console.log(textStatus);

@@ -528,12 +528,16 @@ a.cart-delete-btn:hover{
     margin-right : 10px;
     float: left;
 
-
 }
 
 .cart-item-img img{
-    width : 50px;
+    max-width : 100%;
+    max-height : 100%;
+    width : auto;
     height : 50px;
+    position : absolute;
+    top : 50%;
+    margin-top : -25px;
 }
 
 
@@ -551,7 +555,7 @@ a.cart-delete-btn:hover{
 
 .cart-item-info {
     float: left;
-    width : auto;
+    width : 50%;
     font-size : 12px;
 }
 

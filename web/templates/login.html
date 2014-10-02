@@ -6,6 +6,17 @@
 {% block content %}
 
     <div style="margin : 0 20px;">
+
+        {% if messages %}
+            <div id="messages">
+                <ul>
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
         <form id="facebookLoginForm" data-ajax="false" method="post"
               action="{% url 'check_facebook_token' next='mobile_index' %}">
             <input type="hidden" id="fbEmail" name="email"/>
