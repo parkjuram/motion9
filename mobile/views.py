@@ -89,13 +89,13 @@ def shop_set_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
-    advertisements = Advertisement.objects.filter(type='p').all()
+    advertisements = Advertisement.objects.all()
     adarea_items = []
     for advertisement in advertisements:
         adarea_items.append( {
             'title': advertisement.title,
+            'set_id': advertisement.set_id,
             'image_url': settings.MEDIA_URL + advertisement.image.name,
-            'link_url': advertisement.link
         })
 
     return render(request, 'shopping_set.html',

@@ -7,8 +7,9 @@ class MainImageAdmin(admin.ModelAdmin):
 admin.site.register(MainImage, MainImageAdmin)
 
 class AdvertisementAdmin(admin.ModelAdmin):
-    list_display = ( 'title', 'type', 'image', 'link')
-    list_editable = ( 'type', 'image', 'link')
+    list_display = ( 'title', 'set', 'image')
+    list_editable = ( 'image', )
+    list_display_links = ('set',)
 
 admin.site.register(Advertisement, AdvertisementAdmin)
 
