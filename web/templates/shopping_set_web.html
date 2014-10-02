@@ -20,9 +20,9 @@
             height: 360px; overflow: hidden;">
             {% for adarea_item in adarea_items %}
                 <div>
-                    <img u="image" style="width:100%; height:100%;" src="{{ adarea_item.image_url }}" href="{% url 'shop_set' category_id=adarea_item.category_id %}" />
+                    <img u="image" style="width:100%; height:100%;" src="{{ adarea_item.image_url }}" />
 {#                    <a class="btn btn-stroke-black" href="{{ adarea_item.link_url }}">SHOP COLLECTION</a>#}
-                    <a class="btn-stroke-black" href="{{ adarea_item.link_url }}" style="position: absolute; height: auto; bottom: 0; left: 50%; margin: 0px 0px 50px -90px;">
+                    <a class="btn-stroke-black" href="{% url 'shop_set' category_id=adarea_item.category_id %}" style="position: absolute; height: auto; bottom: 0; left: 50%; margin: 0px 0px 50px -90px;">
                         SHOP COLLECTION
                     </a>
                     <div class="item-title" style="position: absolute; height: auto; bottom: 0; left: 0; right: 0; margin-bottom: 165px; text-align: center;">
