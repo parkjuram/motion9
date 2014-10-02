@@ -12,8 +12,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="main-header-img">
-        <img src="{% static "img/black.jpg" %}"/>
+    <div class="main-header-area">
+        <div class="slider">
+            <ul class="slider__wrapper">
+            {% for adarea_item in adarea_items %}
+                <li class="slider__item">
+                    <img u="image" style="width:100%; height:auto;" src="{{ adarea_item.image_url }}" href="{{ adarea_item.link_url }}" />
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
     <div class="category-box">
         <div class="select-wrapper">

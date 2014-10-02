@@ -97,6 +97,7 @@ class ProductImage(models.Model):
 class Set(models.Model):
     name = models.TextField(null=False)
     category = models.ForeignKey('Category')
+    displayed_category_text = models.TextField(null=False, blank=True)
     description = models.TextField(null=False, blank=True)
     big_img = models.ImageField(null=True, upload_to='set/image/')
     small_img = models.ImageField(null=True, upload_to='set/image/small')

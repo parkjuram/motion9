@@ -7,7 +7,7 @@ from common_controller.decorators import mobile_login_required
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
     helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item
-from foradmin.models import MainImage
+from foradmin.models import MainImage, Advertisement
 from motion9 import settings
 from users.models import Payment
 
@@ -89,13 +89,23 @@ def shop_set_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
+    advertisements = Advertisement.objects.filter(type='p').all()
+    adarea_items = []
+    for advertisement in advertisements:
+        adarea_items.append( {
+            'title': advertisement.title,
+            'image_url': settings.MEDIA_URL + advertisement.image.name,
+            'link_url': advertisement.link
+        })
+
     return render(request, 'shopping_set.html',
                   {
                       'sets': sets,
                       'current_category': current_category,
                       'current_category_id': category_id,
                       'categories': categories,
-                      'current_page': 'shop_set'
+                      'current_page': 'shop_set',
+                      'adarea_items': adarea_items
                   })
 
 @csrf_exempt
