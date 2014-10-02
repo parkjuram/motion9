@@ -122,20 +122,32 @@ def registration(request, next='index'):
         return redirect(next)
     else:
         messages.info(request, error)
-        return HttpResponseRedirect(reverse('mobile_registration_page'))
+        return redirect(next)
+        # return HttpResponseRedirect(reverse(next))
+        # return HttpResponseRedirect(reverse('mobile_registration_page'))
 
 
 
 
 @csrf_exempt
 def registration_view(request):
+
+    if request.user.is_authenticated():
+        return redirect('index')
+
+    next = request.GET.get('next', 'registration_page')
+
     return render(request, 'register_web.html', {
-        'next':'index'
+        'next': next
     })
 
 @csrf_exempt
 def mobile_registration_view(request):
-    next = request.GET.get('next', 'mobile_index')
+
+    if request.user.is_authenticated():
+        return redirect('mobile_index')
+
+    next = request.GET.get('next', 'mobile_registration_page')
 
     return render(request, 'register.html', {
         'next': next
@@ -654,7 +666,12 @@ def make_custom_set(request):
 # mobile part
 
 def mobile_login_view(request):
-    next = request.GET.get('next', 'mobile_index')
+
+    if request.user.is_authenticated():
+        return redirect('mobile_index')
+
+    next = request.GET.get('next', 'mobile_login_page')
+
     return render(request, 'login.html', {
         'next': next
     })

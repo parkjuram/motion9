@@ -194,7 +194,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 # Login
 LOGIN_URL = '/user/login_page/'
 
-
+# Mobile Login
+MOBILE_LOGIN_URL = '/user/mobile/login_page'
 
 
 # Email
