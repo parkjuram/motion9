@@ -40,11 +40,9 @@
 
 .purchase-product-img{
 
-    width : auto;
-    height : auto;
-
-    max-width : 80px;
-    max-height : 80px;
+    width : 80px;
+    height : 80px;
+    text-align : center;
 
     float: left;
 }
@@ -53,7 +51,7 @@
 .purchase-product-img img{
 
     width : auto;
-    height : auto;
+    height : 80px;
     max-width : 80px;
     max-height : 80px;
 }
@@ -74,7 +72,7 @@
 .cart-select-box-wrapper label{
     width : 30px;
     font-size : 12px;
-    font-weight : none;
+    font-weight : normal;
     float: left;
 
 }
