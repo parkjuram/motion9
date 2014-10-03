@@ -17,23 +17,37 @@ from motion9.const import *
 
 @csrf_exempt
 def index_view(request):
+    # category_images = Category.objects.filter(is_set=True).all()
+    # category_images = list(map(lambda x:settings.MEDIA_URL+x.small_image.name, category_images))
+    # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
+
+
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
 
     main_image = MainImage.objects.filter(name='Main_m').all()[0]
     main_image_url = settings.MEDIA_URL + main_image.image.name
+    #
+    # set_category_images_row = []
+    try:
+        set_categorys = Category.objects.filter(is_set=True).all()
 
-    category_images = Category.objects.filter(is_set=True).all()
-    category_images = list(map(lambda x:settings.MEDIA_URL+x.small_image.name, category_images))
-    # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
+        set_category_images = []
+        for set_category in set_categorys:
+            set_category_images.append( {
+                'id': set_category.id,
+                'image_url': settings.MEDIA_URL + set_category.small_image.name
+            })
 
+    except:
+        pass
 
     return render(request, 'index.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
                       'main_image_url': main_image_url,
-                      'category_images': category_images
+                      'set_category_images': set_category_images,
                   })
 
 @csrf_exempt

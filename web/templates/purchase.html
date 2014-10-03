@@ -50,6 +50,7 @@
                 <label>수량 : </label>
                 <select data-shadow='false' class="cart-item-count" data-type="p" data-id="{{ product.id }}"
                         data-corner='false'>
+                    <option {% if product.item_count == 0 %} selected="selected" {% endif %}>0</option>
                     <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
                     <option {% if product.item_count == 2 %} selected="selected" {% endif %}>2</option>
                     <option {% if product.item_count == 3 %} selected="selected" {% endif %}>3</option>
@@ -73,7 +74,7 @@
     {% for set in sets %}
         <div class="purchase-wrapper purchased-item">
             <div class="purchase-product-img">
-                <img src="{{ set.small_img_url }}"/>
+                <img src="{{ set.small_img }}"/>
             </div>
             <div class="purchase-product-info">
                 {{ set.name }}<br/>
@@ -83,6 +84,7 @@
                 <label>수량 : </label>
                 <select data-shadow='false' class="cart-item-count" data-type="s" data-id="{{ set.id }}"
                         data-corner='false'>
+                    <option {% if set.item_count == 0 %} selected="selected" {% endif %}>0</option>
                     <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
                     <option {% if set.item_count == 2 %} selected="selected" {% endif %}>2</option>
                     <option {% if set.item_count == 3 %} selected="selected" {% endif %}>3</option>
@@ -116,6 +118,7 @@
                 <label>수량 : </label>
                 <select data-shadow='false' class="cart-item-count" data-type="c" data-id="{{ custom.id }}"
                         data-corner='false'>
+                    <option {% if custom.item_count == 0 %} selected="selected" {% endif %}>0</option>
                     <option {% if custom.item_count == 1 %} selected="selected" {% endif %}>1</option>
                     <option {% if custom.item_count == 2 %} selected="selected" {% endif %}>2</option>
                     <option {% if custom.item_count == 3 %} selected="selected" {% endif %}>3</option>

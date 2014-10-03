@@ -92,7 +92,7 @@ $(function(){
                     + '가격 : <span id="cart-item-' + productId + '">'
                     + numberFormatter(productPrice) + '</span>원'
                     + '</div>'
-                    + "<a class='black-btn' style='width:auto; position:absolute; top:50%; margin-top:-16px' data-type='"+type+"' cart-id='"+cartId+"' data-id='"+productId+"' href='#' >삭제</a>"
+                    + "<a href='#' class='black-btn cart-delete-btn' style='width:auto; position:absolute; top:50%; margin-top:-16px' data-type='"+type+"' cart-id='"+cartId+"' data-id='"+productId+"' >삭제</a>"
                     + '<div class="clearfix"></div>'
                     + "</div>"
                     + '</li>';
@@ -189,8 +189,10 @@ $(function(){
             async: true,
             type: 'get',
             success: function(data, textStatus, jqXHR) {
-                renderCartList(cart_list, data);
-                cart_panel.panel('open');
+
+                       renderCartList(cart_list, data);
+                       cart_panel.panel('open');
+
             },
             error: function(jqXHR, textStatus, errorThrown) {
 
@@ -240,5 +242,15 @@ $(function(){
 
         $('#cartBuyForm').submit();
     });
+
+
+    $('#btn-open-cart-logout').click( function(e) {
+        e.preventDefault();
+        $.mobile.loading('show');
+
+        if(confirm('로그인이 필요 합니다. 로그인 하시겠습니까?'))
+                        location.href= url_for_login_next;
+
+	});
 
 });
