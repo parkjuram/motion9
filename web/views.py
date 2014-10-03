@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.template import Context
 from common_controller import util
-from foradmin.models import MainImage, Advertisement
+from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
 
 from motion9.const import *
@@ -532,13 +532,16 @@ def index_view(request):
     except:
         pass
 
+    main_notice = Preference.objects.filter(name='MainNotice').first()
+
     return render(request, 'index_web.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
                       'main_image': main_image,
                       'set_category_images_row': set_category_images_row,
-                      'next': 'index'
+                      'next': 'index',
+                      'main_notice': main_notice
                   })
 
 @csrf_exempt

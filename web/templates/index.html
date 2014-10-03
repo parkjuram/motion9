@@ -9,9 +9,10 @@
 
 
 <div id="productList">
-  <div style="border : 1px solid #d8d9dd; width : 100%; height : auto;">
-        <img src='{{ main_image_url }}' style="width:100%; height:auto" >
-  </div>
+    <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; position:relative;">
+        <img src='{{ main_image_url }}' style="width:100%; height:auto" />
+        <div class="main-notice">{{ main_notice.content }}</div>
+    </div>
   <div  style="border : 1px solid #d8d9dd; width : 100%; height : auto">
 {#      {% for category_images in category_images %}#}
 {#        <a href="{% url "mobile_shop_product" category_id=category_images.id %}" class="top-menu-btn"><img src='{{ category_images.image }}' style="width:100%; height:auto" ></a>#}

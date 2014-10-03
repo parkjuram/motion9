@@ -43,12 +43,16 @@ def index_view(request):
     except:
         pass
 
+
+    main_notice = Preference.objects.filter(name='MainNotice').first()
+
     return render(request, 'index.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
                       'main_image_url': main_image_url,
                       'set_category_images': set_category_images,
+                      'main_notice': main_notice
                   })
 
 @csrf_exempt
@@ -208,6 +212,9 @@ def payment_complete_view(request, payment_id=None):
     payment_complete_item = helper_get_payment_complete_item(request, payment_id)
 
     return render(request, 'payment_complete.html', payment_complete_item)
+
+def ship_view(request):
+    return render(request, 'ship.html')
 
 def mobile_faq_view(request):
     faq_items = helper_get_faq_items(request)
