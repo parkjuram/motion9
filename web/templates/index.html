@@ -13,9 +13,14 @@
         <img src='{{ main_image_url }}' style="width:100%; height:auto" >
   </div>
   <div  style="border : 1px solid #d8d9dd; width : 100%; height : auto">
-      {% for image in category_images %}
-        <img src='{{ image }}' style="width:100%; height:auto" >
-      {% endfor %}
+{#      {% for category_images in category_images %}#}
+{#        <a href="{% url "mobile_shop_product" category_id=category_images.id %}" class="top-menu-btn"><img src='{{ category_images.image }}' style="width:100%; height:auto" ></a>#}
+{#      {% endfor %}#}
+
+            {% for set_category_image in set_category_images %}
+                <a href="{% url 'mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img" target="_self" ><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>
+            {% endfor %}
+
   </div>
 </div>
 {% endblock %}

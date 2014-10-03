@@ -487,24 +487,24 @@ ol, ul {
     /*width : 85%;*/
 }
 
-a.cart-delete-btn{
-    display: inline-block;
-    width : 8px !important;
-    color: white !important;
-    font-size: 12px;
-    position: absolute;
-    padding : 2px 5px !important;
-    right: 12px;
-    text-decoration: none;
-    box-shadow: 0 1px 0 #fff;
-    top: 9px;
-    background-color: black;
-    border-radius: 15px;
-}
+/*a.cart-delete-btn{*/
+    /*display: inline-block;*/
+    /*width : 8px !important;*/
+    /*color: white !important;*/
+    /*font-size: 12px;*/
+    /*position: absolute;*/
+    /*padding : 2px 5px !important;*/
+    /*right: 12px;*/
+    /*text-decoration: none;*/
+    /*box-shadow: 0 1px 0 #fff;*/
+    /*top: 9px;*/
+    /*background-color: black;*/
+    /*border-radius: 15px;*/
+/*}*/
 
-a.cart-delete-btn:hover{
-    color : #e5e5e5;
-}
+/*a.cart-delete-btn:hover{*/
+    /*color : #e5e5e5;*/
+/*}*/
 
 
 #panel-cart .ui-btn{
@@ -531,7 +531,7 @@ a.cart-delete-btn:hover{
 }
 
 .cart-item-img img{
-    max-width : 100%;
+    max-width : 50px;
     max-height : 100%;
     width : auto;
     height : 50px;

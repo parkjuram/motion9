@@ -147,7 +147,7 @@
              {% if user.is_authenticated  %}
 	    	    <a href="#" id="btn-open-cart" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>
             {% else %}
-                <a href="javascript:alert('로그인이 필요 합니다.');" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>
+                <a href="#" id="btn-open-cart-logout" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>
             {% endif %}
     	</div>
         {% block special_header %}
