@@ -7,7 +7,7 @@ from common_controller.decorators import mobile_login_required
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
     helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item, helper_get_adarea_items
-from foradmin.models import MainImage, Advertisement
+from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
 from users.models import Payment
 
@@ -207,3 +207,18 @@ def payment_complete_view(request, payment_id=None):
     payment_complete_item = helper_get_payment_complete_item(request, payment_id)
 
     return render(request, 'payment_complete.html', payment_complete_item)
+
+
+def agreement_of_utilization_view(request):
+    service = Preference.objects.filter(name='Service').first()
+
+    return render(request, 'agreement_of_utilization.html', {
+        'service': service
+    })
+
+def privacy_view(request):
+    privacy = Preference.objects.filter(name='Privacy').first()
+
+    return render(request, 'privacy.html', {
+        'privacy': privacy
+    })

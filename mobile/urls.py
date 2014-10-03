@@ -30,6 +30,9 @@ urlpatterns = patterns('',
     url(r'^payment/complete/$', 'mobile.views.payment_complete_view', name='mobile_payment_complete'),
     url(r'^payment/complete/(?P<payment_id>(\d+))/$', 'mobile.views.payment_complete_view', name='mobile_payment_complete'),
 
+    url(r'^agreement_of_utilization/$', 'mobile.views.agreement_of_utilization_view', name='mobile_agreement_of_utilization'),
+    url(r'^privacy/$', 'mobile.views.privacy_view', name='mobile_privacy'),
+
     # url(r'^test/$', 'web.views.test_view', name='test'),
     # url(r'^$', 'web.views.index_view', name='index'),
     # url(r'^index/$', 'web.views.index_view', name='index'),
