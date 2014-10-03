@@ -22,7 +22,7 @@
             <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">내 정보</option>
             <option {% if tab_name == 'interesting_set' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_set' %}">관심 컬렉션</option>
             <option {% if tab_name == 'interesting_product' %} selected="selected" {% endif %}  value="{% url 'mobile_mypage_product' %}">관심 제품</option>
-            <option {% if tab_name == 'product_list' %} selected="selected" {% endif %}  value="{{ request.get_full_path }}">구매 내역</option>
+            <option {% if tab_name == 'purchase_list' %} selected="selected" {% endif %}  value="{% url 'mobile_mypage_purchase_list' %}">구매 내역</option>
         </select>
 </div>
 

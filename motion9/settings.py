@@ -164,6 +164,7 @@ DATABASES = {
         'PASSWORD': 'gksehrjs0710',
         'HOST': '175.126.82.107',
         'PORT': '',
+        'ATOMIC_REQUESTS': True
     }
 }
 
