@@ -40,7 +40,6 @@ class Product(models.Model):
     thumbnail_text = models.CharField(max_length=30, blank=True)
     video_url = models.URLField(blank=True)
     brand = models.ForeignKey(Brand)
-    brandname = models.CharField(max_length=30, blank=True)
     maker = models.CharField(max_length=30, blank=True)
     country = models.CharField(max_length=30, blank=True)
     capacity = models.CharField(max_length=10, blank=True)

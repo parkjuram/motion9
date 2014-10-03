@@ -28,3 +28,8 @@
 .content-item-wrapper div {
     line-height: 20px;
 }
+
+.content-item-inquiry-shipping-state {
+    margin-top: 10px;
+    text-align: center;
+}
