@@ -815,7 +815,9 @@ def helper_get_purchase_items(request):
     purchase_list = request.user.purchase_set.all()
     for purchase in purchase_list:
         if purchase.type == 'p':
-            items.append(model_to_dict(purchase.product))
+            product_dict = model_to_dict(purchase.product)
+            product_dict['brandname'] = purchase.product.brand.name_eng if purchase.product.brand.is_repr_to_eng is True else purchase.product.brand.name_kor
+            items.append(product_dict)
         elif purchase.type == 's':
             items.append(model_to_dict(purchase.set))
         elif purchase.type == 'c':

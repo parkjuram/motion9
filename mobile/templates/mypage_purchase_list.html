@@ -17,13 +17,18 @@
     {% for item in purchase_items %}
         <div class="content-item-wrapper">
 
+            <div class="content-item-name">상품명 : {{ item.brandname }} {{ item.name }}</div>
+            <hr/>
             <div class="content-item">주문번호 :{{ item.purchase.payment.order_id }}</div>
             <div class="content-item">주문일자 :{{ item.datetime }}</div>
-
-            <div class="content-item-name">상품명 : {{ item.name }}</div>
             <div class="content-item-count">주문수량 : {{ item.purchase.item_count }}개</div>
             <div class="content-item-price">총 가격 :{{ item.total_price|intcomma }}원</div>
-            <div class="content-item">주문배송상태 :{{ item.status_name }}</div>
+            <div class="content-item">
+                <span class="label">주문배송상태 :{{ item.status_name }}</span>
+            </div>
+            <div class="content-item-inquiry-shipping-state">
+                <a class="black-btn" href="http://www.cjgls.co.kr/kor/service/service02_01.asp?slipno={{ item.purchase.payment.shipping_number }}" target="_blank" >배송조회</a>
+            </div>
         </div>
     {% endfor %}
 
