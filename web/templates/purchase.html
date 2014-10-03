@@ -43,7 +43,7 @@
                 <img src="{{ product.small_img_url }}"/>
             </div>
             <div class="purchase-product-info">
-                {{ product.name }}<br/>
+                {{ product.brandname }} {{ product.name }}<br/>
                 가격 : <span id="cart-product-price-{{ product.id }}">{{ product.discount_price|intcomma }}</span>원<br/>
             </div>
             <div class='cart-select-box-wrapper'>
