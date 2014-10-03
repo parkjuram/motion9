@@ -95,7 +95,7 @@ def registration(request, next='index'):
     error = None
 
     if User.objects.filter(email=email).exists():
-        error = 'already exist email'
+        error = '이미 가입된 E-mail 입니다.'
     else:
         if password == password_confirm:
             try:
@@ -112,7 +112,16 @@ def registration(request, next='index'):
                 error = 'Registraion IntegrityError!'
 
         else:
-            error = 'password and confirm is not identical'
+            error = '비밀번호를 확인해 주세요.'
+
+    if email=='':
+        error = 'E-mail을 입력해 주세요.'
+    else :
+        if password=='' :
+            error = '비밀번호를 입력해 주세요.'
+        else :
+            if name=='':
+                error = '이름을 입력해 주세요.'
 
     if error is None:
         user = authenticate(username=email, password=password)
