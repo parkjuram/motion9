@@ -836,6 +836,4 @@ def helper_get_purchase_items(request):
 def helper_get_faq_items(request):
     faq_items = Faq.objects.filter(is_active=True).order_by('id').values()
 
-    print faq_items
-
     return faq_items
