@@ -162,4 +162,8 @@ $(function () {
         return str.replace(new RegExp(find, 'g'), replace);
     }
 
+    $('#btnCloseLayer').click(function(e) {
+       $(element).jqmHide();
+    });
+
 });
