@@ -42,25 +42,31 @@
 {#    <div class="clearfix"></div>#}
 {#</div>#}
 <div class="product-img">
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <!--First Slide-->
-           <div class="swiper-slide">
-             <img src="{{ product.small_img_url }}"/>
-           </div>
 
-        {% for image in product.images %}
-            {% if forloop.first %}
-            {% else %}
-                <div class="swiper-slide">
-                    <img src="{{image}}" />
-                </div>
-            {% endif %}
-        {% endfor %}
-        </div>
-        <div class="pagination">
-        </div>
+    <div class="item-image">
+        <img src="{{ product.small_img_url }}" style="display:block;"/>
     </div>
+
+{#    <div class="swiper-container">#}
+{#        <div class="swiper-wrapper">#}
+{#          <!--First Slide-->#}
+{#           <div class="swiper-slide">#}
+{#             <img src="{{ product.small_img_url }}"/>#}
+{#           </div>#}
+{##}
+{#        {% for image in product.images %}#}
+{#            {% if forloop.first %}#}
+{#            {% else %}#}
+{#                <div class="swiper-slide">#}
+{#                    <img src="{{image}}" />#}
+{#                </div>#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#        </div>#}
+{#        <div class="pagination">#}
+{#        </div>#}
+{#    </div>#}
+
     <div class="product-title">
         <div class="product-name">
         {{ product.brandname }} {{ product.name }}

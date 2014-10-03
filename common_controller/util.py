@@ -353,6 +353,7 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
         'name': set.name,
         'category_name': set.category.name,
         'description': set.description,
+        'displayed_category_text': set.displayed_category_text,
         'description_images': description_images,
         'big_img_url': big_img,
         'small_img': small_img,

@@ -78,9 +78,10 @@
                             <div>
 
                                 <div>
-                                    {% for product in set.products %}
-                                        {{ product.brandname }} {{ product.name }}<br/>
-                                    {% endfor %}
+{#                                    {% for product in set.products %}#}
+{#                                        {{ product.brandname }} {{ product.name }}<br/>#}
+{#                                    {% endfor %}#}
+                                    {{ set.displayed_category_text }}
                                 </div>
                             </div>
                         </div>
