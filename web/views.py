@@ -440,7 +440,7 @@ def payment_return_mobile_web_view(request):
     if is_success:
         return redirect('mobile_payment_complete', payment_id=payment_id)
     else:
-        return redirect('mobile_purchase')
+        return redirect('mobile_mypage_before_purchase')
 
     # return render(request, 'return_explorer.html', {
     #     'payment_id': payment_id,
