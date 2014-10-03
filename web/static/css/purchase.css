@@ -162,3 +162,7 @@
     -webkit-overflow-scrolling:touch;
     z-index: 999;
 }
+
+#btnCloseLayer{
+    z-index: 1000;
+}
