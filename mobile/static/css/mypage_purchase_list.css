@@ -1,0 +1,30 @@
+.content-title {
+    border: 1px solid #dddddd;
+    margin: 20px;
+    border-radius: 3px;
+    background-color: white;
+    height : 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.content-item-wrapper {
+    height : auto;
+    text-shadow : none;
+    background-color : white;
+    font-size : 14px;
+    line-height : 18px;
+    color : #000000;
+    position : relative;
+    padding-top : 20px;
+    margin : 20px;
+    padding : 20px;
+    border-radius : 4px;
+    border: 1px solid #eaeaea;
+}
+
+.content-item-wrapper div {
+    line-height: 20px;
+}

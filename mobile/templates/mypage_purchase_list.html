@@ -1,0 +1,30 @@
+{% extends "my_page.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block header_append %}
+
+    <script src="{% static 'js/mypage_purchase_list.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'css/mypage_purchase_list.css'%}"/>
+
+{% endblock header_append %}
+
+{% block title %}
+{% endblock title %}
+
+{% block detail %}
+
+    {% for item in purchase_items %}
+        <div class="content-item-wrapper">
+
+            <div class="content-item">주문번호 :{{ item.purchase.payment.order_id }}</div>
+            <div class="content-item">주문일자 :{{ item.datetime }}</div>
+
+            <div class="content-item-name">상품명 : {{ item.name }}</div>
+            <div class="content-item-count">주문수량 : {{ item.purchase.item_count }}개</div>
+            <div class="content-item-price">총 가격 :{{ item.total_price|intcomma }}원</div>
+            <div class="content-item">주문배송상태 :{{ item.status_name }}</div>
+        </div>
+    {% endfor %}
+
+{% endblock detail %}

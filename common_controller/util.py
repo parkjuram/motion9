@@ -3,6 +3,7 @@ from subprocess import call, Popen, PIPE
 
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
+from django.forms.models import model_to_dict
 from django.http.response import HttpResponse, Http404
 from django.core.urlresolvers import reverse
 from django.template import Context
@@ -806,3 +807,25 @@ def helper_get_adarea_items():
         })
 
     return adarea_items
+
+def helper_get_purchase_items(request):
+    items = []
+
+    purchase_list = request.user.purchase_set.all()
+    for purchase in purchase_list:
+        if purchase.type == 'p':
+            items.append(model_to_dict(purchase.product))
+        elif purchase.type == 's':
+            items.append(model_to_dict(purchase.set))
+        elif purchase.type == 'c':
+            items.append(model_to_dict(purchase.custom_set))
+
+        item = items.pop()
+        item['purchase'] = purchase
+        item['total_price'] = purchase.price * purchase.item_count
+        item['type_name'] = helper_get_type_name(purchase.type)
+        item['status_name'] = helper_get_purchase_status(purchase.payment.status)
+        item['datetime'] = purchase.payment.auth_date[:4]+"/"+purchase.payment.auth_date[4:6]+"/"+purchase.payment.auth_date[6:8]+"\n"+purchase.payment.auth_date[8:10]+":"+purchase.payment.auth_date[10:12]
+        items.append(item)
+
+    return items

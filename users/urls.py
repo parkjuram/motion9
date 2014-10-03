@@ -71,6 +71,7 @@ urlpatterns = patterns('',
     url(r'^mobile/mypage/product/$', 'users.views.mobile_mypage_interesting_view', name='mobile_mypage_product'),
     url(r'^mobile/mypage/product/(?P<page_num>(\d+))/$', 'users.views.mobile_mypage_interesting_view', name='mobile_mypage_product'),
 
+    url(r'^mobile/mypage/purchase/$', 'users.views.mobile_mypage_purchase_list_view', name='mobile_mypage_purchase_list'),
 
     url(r'^mobile/mypage/before_purchase/$', 'users.views.mobile_mypage_before_purchase_view', name='mobile_mypage_before_purchase'),
 

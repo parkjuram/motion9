@@ -24,7 +24,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
     helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
-    helper_put_order_id_in_cart
+    helper_put_order_id_in_cart, helper_get_purchase_items
 
 from .models import Interest
 
@@ -751,6 +751,15 @@ def mobile_mypage_cart_view(request):
     cart_items = helper_get_cart_items( helper_get_user(request) )
     return render(request, 'cart.html', cart_items)
 
+
+@mobile_login_required
+def mobile_mypage_purchase_list_view(request):
+    purchase_items = helper_get_purchase_items(request)
+
+    return render(request, 'mypage_purchase_list.html', {
+        'purchase_items': purchase_items,
+        'tab_name': 'purchase_list'
+    })
 
 
 @mobile_login_required
