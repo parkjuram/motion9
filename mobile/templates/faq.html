@@ -1,0 +1,27 @@
+{% extends "mobile_base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block header %}
+
+    <script src="{% static 'js/payment_complete.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'css/payment_complete.css'%}"/>
+
+{% endblock header %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+    <div class="content-title">FAQ</div>
+
+    {% for item in faq_items %}
+        <div class="content-item-wrapper">
+            <div class="content-item-name">{{ item.title }}</div>
+            <hr/>
+            <div class="content-item-count" style="white-space: pre-wrap;">{{ item.content }}</div>
+        </div>
+    {% endfor %}
+
+{% endblock content %}

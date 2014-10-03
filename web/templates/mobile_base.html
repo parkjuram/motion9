@@ -131,6 +131,7 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
                 {% endif %}
+                <li><a href="{% url 'mobile_faq' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
             </ul>
         </div>
 	</div><!-- /panel -->
