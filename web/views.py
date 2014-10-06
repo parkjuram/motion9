@@ -571,7 +571,7 @@ def shop_product_view(request, category_id=None, page_num=1):
         current_category = Category.objects.get(id=category_id).name
 
     brands = helper_get_brands()
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     return render(request, 'shopping_product_web.html',
                   {
@@ -606,7 +606,7 @@ def shop_set_view(request, category_id=None, page_num=1):
         current_category = Category.objects.get(id=category_id).name
 
     brands = helper_get_brands()
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     # print sets['data'][0].keys()
     # print sets['data'][0]['products']
@@ -693,7 +693,7 @@ def customize_set_view(request):
         return redirect('login_page')
 
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     return render(request, "shopping_custom_web.html",
           {

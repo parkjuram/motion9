@@ -192,6 +192,16 @@ a{
     cursor: pointer;
 }
 
+.btn-stroke-black:visited {
+    color: white !important;
+}
+
+.btn-stroke-black:hover {
+    background: white;
+    color: #0d0d0e !important;
+    transition: 0.2s
+}
+
 /*.slider__item{*/
     /*position: absolute;*/
     /*height: auto;*/
