@@ -6,8 +6,9 @@ from common_controller.decorators import mobile_login_required
 
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
-    helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item, helper_get_adarea_items
-from foradmin.models import MainImage, Advertisement
+    helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item, helper_get_adarea_items, \
+    helper_get_faq_items
+from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
 from users.models import Payment
 
@@ -42,12 +43,16 @@ def index_view(request):
     except:
         pass
 
+
+    main_notice = Preference.objects.filter(name='MainNotice').first()
+
     return render(request, 'index.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
                       'main_image_url': main_image_url,
                       'set_category_images': set_category_images,
+                      'main_notice': main_notice
                   })
 
 @csrf_exempt
@@ -207,3 +212,28 @@ def payment_complete_view(request, payment_id=None):
     payment_complete_item = helper_get_payment_complete_item(request, payment_id)
 
     return render(request, 'payment_complete.html', payment_complete_item)
+
+def ship_view(request):
+    return render(request, 'ship.html')
+
+def mobile_faq_view(request):
+    faq_items = helper_get_faq_items(request)
+
+    return render(request, 'faq.html', {
+        'faq_items': faq_items
+    })
+
+
+def agreement_of_utilization_view(request):
+    service = Preference.objects.filter(name='Service').first()
+
+    return render(request, 'agreement_of_utilization.html', {
+        'service': service
+    })
+
+def privacy_view(request):
+    privacy = Preference.objects.filter(name='Privacy').first()
+
+    return render(request, 'privacy.html', {
+        'privacy': privacy
+    })

@@ -94,3 +94,12 @@
 .service-list.team .service-links li {width: 50%; font-size: 10px;}
 
 
+.main-notice {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 15px;
+    font-weight: bold;
+    white-space: pre-line;
+    text-shadow: 1px 1px #FFFFFF;
+}

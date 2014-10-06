@@ -44,3 +44,13 @@
     border: 0;
 }
 
+
+.main-notice {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    font-size: 30px;
+    font-weight: bold;
+    white-space: pre-line;
+    text-shadow: 1px 1px #FFFFFF;
+}

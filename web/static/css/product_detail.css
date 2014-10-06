@@ -322,3 +322,8 @@ a:visited{
     width:100%;
     height:auto;
 }
+
+.ship-info {
+    color: grey;
+    font-weight: normal;
+}

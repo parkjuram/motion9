@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="{% static 'css/product_detail.css' %}"/>
 {% endblock %}
 {% block title %}
-    <h2 class="ui-title">제품 정보</h2>
+    <h2 class="ui-title">Products</h2>
 {% endblock %}
 {% block content %}
 {#<div class="category-box">#}
@@ -115,6 +115,9 @@
     </div>
     <div class="tab-content" id="productInfo">
         <div class="product-detail-info-wrapper">
+            <a target="_self" href="{% url 'mobile_ship' %}" class="ship-info">배송, 환불 정보</a>
+        </div>
+        <div class="product-detail-info-wrapper">
             <div class="product-detail-info-header">상품특징</div>
             <div class="product-detail-info">
                 {{ product.description }}
@@ -171,7 +174,7 @@
             </tr>
             <tr>
                 <td class="item-spec-head">소비자 상담관련 전화번호</td>
-                <td>02-871-4510</td>
+                <td>02-554-4511</td>
             </tr>
         </table>
     </div>

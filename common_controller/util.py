@@ -10,7 +10,7 @@ from django.template import Context
 from django.template.loader import get_template
 import time
 from foradmin.models import Advertisement
-from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine
+from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine, Faq
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -832,3 +832,8 @@ def helper_get_purchase_items(request):
         items.append(item)
 
     return items
+
+def helper_get_faq_items(request):
+    faq_items = Faq.objects.filter(is_active=True).order_by('id').values()
+
+    return faq_items
