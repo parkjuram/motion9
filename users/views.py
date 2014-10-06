@@ -284,6 +284,7 @@ def mypage_view(request, page_num=1):
     page_num = int(page_num)
     user = helper_get_user(request)
     if user is not None:
+
         interests = user.interest_set.filter(type='p').all()
         products = []
         for interest in interests:
@@ -295,6 +296,11 @@ def mypage_view(request, page_num=1):
             products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
         else:
             products = {'data':products}
+
+        if user.profile.age is not None:
+            user.profile.age = datetime.now().year - user.profile.age + 1
+        else:
+            user.profile.age = ''
 
         return render(request, 'mypage_interesting_web.html',
             {
@@ -721,6 +727,8 @@ def mobile_mypage_myinfo_view(request, page_num=1):
 
         if user.profile.age is not None:
             user.profile.age = datetime.now().year - user.profile.age + 1
+        else:
+            user.profile.age = ''
 
         return render(request, 'my_page_myinfo.html',
             {
@@ -787,3 +795,18 @@ def mobile_mypage_before_purchase_view(request):
     } )
 
     return render(request, 'purchase.html', cart_items )
+
+
+@mobile_login_required
+def mobile_mypage_myinfo_edit_view(request, page_num=1):
+
+    user = helper_get_user(request)
+    if user is not None:
+
+        return render(request, 'my_page_myinfo_edit.html',
+            {
+                'tab_name': 'myinfo'
+            })
+
+    else:
+        logger.error('have_to_login')

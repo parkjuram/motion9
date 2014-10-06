@@ -65,6 +65,14 @@
                     여자
                     {% endif %}
                 </p>
+                <p class="user-age">
+                       나이 : {{ user.profile.age }}<br/>
+                </p>
+                <p class="user-address">
+                       주소 : {{ user.profile.postcode }}<br/>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profile.basic_address }}<br/>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profile.detail_address }}<br/>
+                </p>
 {#                <p class="user-age">#}
 {#                    나이 :#}
 {#                     {% if user.profile.age != none %}#}

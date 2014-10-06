@@ -5,8 +5,15 @@
 
 <script src="{% static 'js/index.js'%}"></script>
 {% endblock %}
-{% block content %}
 
+
+{% block title %}
+    <div style="text-align:center;">
+        <img src ="{% static "img/LOGO_black.png" %}" class="main-logo-img" >
+    </div>
+{% endblock %}
+
+{% block content %}
 
 <div id="productList">
     <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; position:relative;">
