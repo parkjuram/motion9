@@ -176,6 +176,27 @@ img.profile-img{
     margin : 10px 8px;
 }
 
+.mobile-back-btn {
+    position : absolute;
+    display : flex;
+    box-shadow : none;
+    margin-top : 0px;
+    width : 40px;
+    height : 40px;
+    padding : 10px;
+
+}
+
+.mobile-back-btn img{
+    position : absolute;
+    /*top:10px;*/
+    /*left:5px;*/
+    width : auto;
+    height : auto;
+    /*margin : 10px 8px;;*/
+    /*background : url('../img/btn_back_view_m.png');*/
+    /*background-size : 37px 35px;*/
+}
 
 .basic-btn {
   width: 60px;
@@ -193,7 +214,7 @@ img.profile-img{
 }
 
 .basic-btn:visited{
-    color : #black !important;
+    color : black !important;
 }
 
 .basic-btn:hover {
