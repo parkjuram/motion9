@@ -11,6 +11,7 @@ class Advertisement(models.Model):
     title = models.CharField(max_length=100, unique=True, default='default')
     category = models.ForeignKey('web.Category',null=True)
     image = models.ImageField(null=True, upload_to='image/advertisement/')
+    mobile_image = models.ImageField(null=True, upload_to='image/advertisement/mobile/')
 
     def __unicode__(self):
         return '(%r)Advertisement : image(%r)' % (self.id, self.image)
