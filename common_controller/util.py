@@ -804,7 +804,7 @@ def helper_get_adarea_items(request):
         adarea_items.append( {
             'title': advertisement.title,
             'category_id': advertisement.category_id,
-            'image_url': settings.MEDIA_URL + advertisement.mobile_image.name if request.is_mobile else advertisement.image.name
+            'image_url': ( settings.MEDIA_URL + advertisement.mobile_image.name ) if request.is_mobile else ( settings.MEDIA_URL + advertisement.image.name )
         })
 
     return adarea_items
