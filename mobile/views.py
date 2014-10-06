@@ -18,6 +18,8 @@ from motion9.const import *
 
 @csrf_exempt
 def index_view(request):
+    if not(request.is_mobile):
+        return redirect('index')
     # category_images = Category.objects.filter(is_set=True).all()
     # category_images = list(map(lambda x:settings.MEDIA_URL+x.small_image.name, category_images))
     # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
