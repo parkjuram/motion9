@@ -110,7 +110,7 @@ def shop_set_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     return render(request, 'shopping_set.html',
                   {
