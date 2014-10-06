@@ -105,3 +105,48 @@ a:hover{
 }
 
 
+
+
+.slider__item {
+    position: relative;
+}
+
+.slider__item img {
+    float: left;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.slider__item > div {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.slider__item .shop-collection-wrapper {
+    bottom: 10%;
+}
+
+.slider__item .item-title {
+    bottom: 50%;
+    background: transparent;
+    color: white;
+    font-size: 20px;
+}
+
+
+/* SHOP COLLECTION BUTTON CSS */
+.btn-stroke-black {
+    font-size: 10px;
+    color: white !important;
+    width: 120px;
+    padding: 5px 25px;
+    border: solid white 2px;
+    cursor: pointer;
+}
+.btn-stroke-black:hover {
+    background: white;
+    color: #0d0d0e !important;
+    transition: 0.2s
+}

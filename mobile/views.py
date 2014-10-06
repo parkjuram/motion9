@@ -82,6 +82,8 @@ def shop_product_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
+    adarea_items = helper_get_adarea_items(request)
+
     return render(request, 'shopping_product.html',
                   {
 
@@ -89,7 +91,8 @@ def shop_product_view(request, category_id=None, page_num=1):
                       'current_category': current_category,
                       'current_category_id': category_id,
                       'categories': categories,
-                      'current_page': 'shop_product'
+                      'current_page': 'shop_product',
+                      'adarea_items': adarea_items
                   })
 
 @csrf_exempt
