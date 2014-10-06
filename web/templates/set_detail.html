@@ -19,13 +19,17 @@
     function url_reverse_for_product_detail_by_json(product_id) {
         return url_for_product_detail_by_json.replace("1987654321", product_id)
     }
+
+
     </script>
 
 {% endblock %}
 {% block title %}
     <h2 class="ui-title">세트 정보</h2>
 {% endblock %}
+
 {% block content %}
+
 {#    <div class="category-box">#}
 {#        <div class="select-wrapper">#}
 {#            <div class="select-box-border">#}
@@ -47,7 +51,11 @@
 {#        <div class="clearfix"></div>#}
 {#    </div>#}
     <div class="product-img">
-
+        <div>
+            <a  class="mobile-back-btn" id="mobile-back-btn"data-role="button" data-rel="back">
+                <img src="{% static "img/btn_back_view_m.png" %}" style="width : auto; height : auto;">
+            </a>
+        </div>
         <div class="item-image">
             <img src="{{ set.small_img }}" style="display:block;"/>
         </div>

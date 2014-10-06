@@ -40,7 +40,7 @@
 
 .purchase-product-img{
 
-    width : 80px;
+    width : auto;
     height : 80px;
     text-align : center;
 
@@ -59,7 +59,7 @@
 .purchase-product-info{
     padding : 8px 10px;
     float : left;
-    width : 260px;
+    width : auto;
     line-height: 22px;
 }
 
