@@ -36,7 +36,7 @@ a:hover{
 }
 
 .mypage-wrapper{
-    height : 200px;
+    height : auto;
     text-shadow : none;
     /*background: url('../img/profile_bg.png') top center repeat-y #ECECEC;*/
     background-color : white;
@@ -48,6 +48,7 @@ a:hover{
     padding-top : 20px;
     margin : 20px;
     padding : 20px;
+    padding-bottom : 0px;
     border-radius : 4px;
     border: 1px solid #eaeaea;
 }
@@ -117,7 +118,7 @@ a:hover{
 }
 
 .mypage-edit-btn:visited{
-    color: #d2bb8f !important;
+    color: white !important;
 }
 
 

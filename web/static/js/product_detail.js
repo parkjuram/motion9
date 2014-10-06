@@ -1,5 +1,13 @@
 $(function(){
 
+    $.fn.scrollView = function () {
+        return this.each(function () {
+        $('html, body').animate({
+              scrollTop: $(this).offset().top-100
+            }, 500);
+        });
+    }
+
    $('a.tab-btn').click(function(e){
         e.preventDefault();
 
@@ -39,6 +47,22 @@ $(function(){
     });
 
 
+    $('.btn-magazine-fold').click(function(e) {
+        e.preventDefault();
+
+        var magazine_fold = $('.magazine-fold');
+        if ( magazine_fold.css('display') == 'none' ) {
+            magazine_fold.css('display',"block");
+            magazine_fold.scrollView();
+            $(this).text('닫기');
+        } else {
+            magazine_fold.css('display',"none");
+            $(this).text('더보기');
+            $(".magazine-wrapper").scrollView();
+        }
+        $(this).scroll();
+    });
+
     $('a.tab-btn').click(function(e){
         e.preventDefault();
 
@@ -59,7 +83,6 @@ $(function(){
 
    });
 
-
   var container = document.querySelector('.swiper-container');
   imagesLoaded(container, function() {	//when all images are loaded, it is triggered
       var mySwiper = $('.swiper-container').swiper({
@@ -74,4 +97,6 @@ $(function(){
           //etc..
       });
   });
+
+
 });

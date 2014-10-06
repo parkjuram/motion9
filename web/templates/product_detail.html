@@ -134,6 +134,50 @@
                     {{ product.description2 }}
              </div>
         </div>
+
+         <div class="magazine-wrapper">
+                    <div class="magazine-wrapper-title">
+                        {% if magazines|length > 0 %}
+                            <h4 class="lined-heading"><span>EDITOR'S NOTES</span></h4>
+                        {% endif %}
+                    </div>
+                    {% for magazine in magazines %}
+                        <a href="{{ magazine.link }}" target="_blank">
+                            <div class="magazine-item-container">
+                                <div class="title">{{ magazine.title }}</div>
+                                <div class="description">
+                                    <span class="magazine-title"> < {{ magazine.magazine_title }} > </span>
+                                    <span class="year">{{ magazine.year }}년</span>
+                                    <span class="month">{{ magazine.month }}월호, </span>
+                                    {% if magazine.author|length > 0 %}
+                                        <span class="author">에디터 {{ magazine.author }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    {% if magazines_fold|length > 0 %}
+                        <div class="magazine-fold">
+                            {% for magazine in magazines_fold %}
+                                <a href="{{ magazine.link }}" target="_blank">
+                                    <div class="magazine-item-container">
+                                        <div class="title">{{ magazine.title }}</div>
+                                        <div class="description">
+                                            <span class="magazine-title"> < {{ magazine.magazine_title }} > </span>
+                                            <span class="year">{{ magazine.year }}년</span>
+                                            <span class="month">{{ magazine.month }}월호, </span>
+                                            {% if magazine.author|length > 0 %}
+                                                <span class="author">에디터 {{ magazine.author }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <a class="black-btn btn-magazine-fold">더보기</a>
+                    {% endif %}
+                </div>
+
     </div>
     <div class="tab-content" id="productRule">
         <table class="product-info-table">

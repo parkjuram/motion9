@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from common_controller.decorators import mobile_login_required
 
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
-    helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, \
+    helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, helper_get_product_magazines, \
     helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item, helper_get_adarea_items, \
     helper_get_faq_items
 from foradmin.models import MainImage, Advertisement, Preference
@@ -131,10 +131,15 @@ def product_view(request, product_id=None):
 
 
         blog_reivews = helper_get_blog_reviews(product_id)
+        magazines = helper_get_product_magazines(product_id)
+        magazines_fold = magazines[4:]
+        magazines = magazines[:4]
 
         return render(request, "product_detail.html",
                       {
                           'product': product,
+                          'magazines': magazines,
+                          'magazines_fold': magazines_fold,
                           'blog_reviews': blog_reivews
                       })
     else:

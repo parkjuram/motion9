@@ -87,6 +87,7 @@ urlpatterns = patterns('',
     url(r'^mobile/mypage/cart/$', 'users.views.mobile_mypage_cart_view', name='mobile_mypage_cart'),
 
 
+    url(r'^mobile/mypage/edit/$', 'users.views.mobile_mypage_myinfo_edit_view', name='mobile_mypage_myinfo_edit'),
 
 # @app.route('/mypage/set', methods = ['GET'])
 # @app.route('/mypage/set/<int:pageNum>', methods = ['GET'])
