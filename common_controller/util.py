@@ -797,14 +797,14 @@ def helper_get_payment_complete_item(request, payment_id):
         'user_': request.user
     }
 
-def helper_get_adarea_items():
+def helper_get_adarea_items(request):
     advertisements = Advertisement.objects.all()
     adarea_items = []
     for advertisement in advertisements:
         adarea_items.append( {
             'title': advertisement.title,
             'category_id': advertisement.category_id,
-            'image_url': settings.MEDIA_URL + advertisement.image.name,
+            'image_url': ( settings.MEDIA_URL + advertisement.mobile_image.name ) if request.is_mobile else ( settings.MEDIA_URL + advertisement.image.name )
         })
 
     return adarea_items

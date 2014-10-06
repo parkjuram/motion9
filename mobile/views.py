@@ -18,6 +18,8 @@ from motion9.const import *
 
 @csrf_exempt
 def index_view(request):
+    if not(request.is_mobile):
+        return redirect('index')
     # category_images = Category.objects.filter(is_set=True).all()
     # category_images = list(map(lambda x:settings.MEDIA_URL+x.small_image.name, category_images))
     # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
@@ -80,6 +82,8 @@ def shop_product_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
+    adarea_items = helper_get_adarea_items(request)
+
     return render(request, 'shopping_product.html',
                   {
 
@@ -87,7 +91,8 @@ def shop_product_view(request, category_id=None, page_num=1):
                       'current_category': current_category,
                       'current_category_id': category_id,
                       'categories': categories,
-                      'current_page': 'shop_product'
+                      'current_page': 'shop_product',
+                      'adarea_items': adarea_items
                   })
 
 @csrf_exempt
@@ -108,7 +113,7 @@ def shop_set_view(request, category_id=None, page_num=1):
     else:
         current_category = Category.objects.get(id=category_id).name
 
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     return render(request, 'shopping_set.html',
                   {

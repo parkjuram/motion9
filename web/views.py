@@ -18,7 +18,7 @@ from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands, helper_get_product_magazines, \
-    helper_add_custom_set_cart, helper_get_adarea_items
+    helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items
 from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment
 
@@ -505,6 +505,9 @@ def payment_complete_view(request, payment_id=0):
 
 @csrf_exempt
 def index_view(request):
+    if request.is_mobile:
+        return redirect('mobile_index')
+
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
 
@@ -568,7 +571,7 @@ def shop_product_view(request, category_id=None, page_num=1):
         current_category = Category.objects.get(id=category_id).name
 
     brands = helper_get_brands()
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     return render(request, 'shopping_product_web.html',
                   {
@@ -603,7 +606,7 @@ def shop_set_view(request, category_id=None, page_num=1):
         current_category = Category.objects.get(id=category_id).name
 
     brands = helper_get_brands()
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     # print sets['data'][0].keys()
     # print sets['data'][0]['products']
@@ -690,7 +693,7 @@ def customize_set_view(request):
         return redirect('login_page')
 
     custom_sets = helper_get_custom_set_list(helper_get_user(request))
-    adarea_items = helper_get_adarea_items()
+    adarea_items = helper_get_adarea_items(request)
 
     return render(request, "shopping_custom_web.html",
           {
@@ -744,7 +747,7 @@ def customize_set_save_view(request):
 
 @csrf_exempt
 def help_faq_view(request):
-    faqs = Faq.objects.filter(is_active=True).values('title','content')
+    faqs = helper_get_faq_items(request)
     return render(request, 'help_faq.html', {
         'faqs':faqs
     })
