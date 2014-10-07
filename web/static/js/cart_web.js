@@ -8,12 +8,14 @@ $(function(){
     var element = document.getElementById('addressLayer');
     $(element).jqm({modal:false});
 
-    function closeDaumPostcode() {
+    closeDaumPostcode = function() {
         // iframe을 넣은 element를 안보이게 한다.
-        element.style.display = 'none';
+//        element.style.display = 'none';
+        $(element).jqmHide();
     }
 
     function showDaumPostcode() {
+        console.log('showDaumPostCode();');
         new daum.Postcode({
             oncomplete: function(data) {
                 // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -37,9 +39,6 @@ $(function(){
        $(element).jqmHide();
     });
 
-    function closeDaumPostcode(){
-        $(element).jqmHide();
-    }
 
    $('#searchAddressBtn').click(function(e){
         showDaumPostcode();
