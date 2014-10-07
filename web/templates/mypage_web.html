@@ -70,8 +70,13 @@
                 </p>
                 <p class="user-address">
                        주소 : {{ user.profile.postcode }}<br/>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profile.basic_address }}<br/>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profile.detail_address }}<br/>
+
+                    <div style="margin-left:32px">
+                        {{ user.profile.basic_address }}<br/>
+                    </div>
+                    <div style="margin-left:32px">
+                       {{ user.profile.detail_address }}<br/>
+                    </div>
                 </p>
 {#                <p class="user-age">#}
 {#                    나이 :#}

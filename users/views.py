@@ -204,6 +204,8 @@ def logout_(request):
 @csrf_exempt
 @login_required
 def account_modify_view(request):
+
+    next = request.GET.get('next', 'mypage')
     user_ = helper_get_user(request)
     user_profile = user_.profile
     phone = user_profile.phone
@@ -219,11 +221,12 @@ def account_modify_view(request):
         'phone1': phone1,
         'phone2': phone2,
         'phone3': phone3,
+        'next': next
     } )
 
 @csrf_exempt
 @login_required
-def update(request):
+def update(request, next='mypage'):
 
     if helper_get_user(request) is not None:
         user_profile = request.user.profile
@@ -273,7 +276,8 @@ def update(request):
 
         try:
             user_profile.save()
-            return redirect('mypage')
+            return redirect(next)
+            # return redirect('mypage')
         except DataError:
             logger.error('date input format not correct')
     else:
@@ -801,11 +805,27 @@ def mobile_mypage_before_purchase_view(request):
 def mobile_mypage_myinfo_edit_view(request, page_num=1):
 
     user = helper_get_user(request)
+    user_profile = user.profile
+
+    next = request.GET.get('next', 'mobile_mypage')
+
+    phone = user_profile.phone
+    phones = phone.split("-")
+    phone1 = phone2 = phone3 = ''
+    if len(phones) == 3:
+        phone1 = phones[0]
+        phone2 = phones[1]
+        phone3 = phones[2]
+
     if user is not None:
 
         return render(request, 'my_page_myinfo_edit.html',
             {
-                'tab_name': 'myinfo'
+                'tab_name': 'myinfo',
+                'phone1': phone1,
+                'phone2': phone2,
+                'phone3': phone3,
+                'next': next
             })
 
     else:
