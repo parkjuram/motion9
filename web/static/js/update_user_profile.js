@@ -1,16 +1,20 @@
 /**
  * Created by Juram-Park on 14. 8. 7.
  */
+
 $(function(){
+
     var element = document.getElementById('addressLayer');
+
+
+//    function closeDaumPostcode(){
+//        $(element).jqmHide();
+//    }
+
     $(element).jqm({modal:false});
 
-    function closeDaumPostcode() {
-        // iframe을 넣은 element를 안보이게 한다.
-        element.style.display = 'none';
-    }
-
     function showDaumPostcode() {
+        console.log('showDaumPostCode();');
         new daum.Postcode({
             oncomplete: function(data) {
                 // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -24,16 +28,23 @@ $(function(){
             height : '100%'
         }).embed(element);
 
-
-
         $(element).jqmShow();
     }
 
-    function closeDaumPostcode(){
+
+
+    closeDaumPostcode = function() {
+        // iframe을 넣은 element를 안보이게 한다.
+//        element.style.display = 'none';
         $(element).jqmHide();
     }
 
+
+
+
+
     $('#searchAddressBtn').click(function(e){
+
         showDaumPostcode();
     });
 
@@ -47,4 +58,9 @@ $(function(){
         e.preventDefault();
         location.href = url_mypage;
     })
+
+//    $('#btnColoseLayer').click( function(e){
+//        e.preventDefault();
+//        closeDaumPostcode();
+//    })
 });
