@@ -352,7 +352,7 @@ a:visited{
 
 .magazine-wrapper {
     padding : 12px 14px;
-    float: right;
+    /*float: right;*/
 }
 
 .magazine-wrapper-title {
