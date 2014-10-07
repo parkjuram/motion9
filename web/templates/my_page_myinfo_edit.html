@@ -1,5 +1,6 @@
 {% extends "my_page.html" %}
 {% block header_append %}
+
     {% load static %}
     {% load humanize %}
     {% load mathfilters %}
@@ -7,13 +8,22 @@
     <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/register.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/purchase.css' %}"/>
+    <script src="{% static 'jqmodal/jqModal.js' %}"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
     <script>
         var url_mypage = "{% url 'mobile_mypage' %}";
     </script>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
-    <script src="{% static 'js/update_user_profile_web.js'%}"></script>
+    <script src="{% static 'js/update_user_profile.js' %}"></script>
+
 {% endblock %}
-{% block detail %}
+
+{% block content %}
+
+   <div id="addressLayer">
+    <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px" onclick="closeDaumPostcode()">
+</div>
+
     {% if messages %}
         <div id="messages">
             <ul>
@@ -23,78 +33,66 @@
             </ul>
         </div>
     {% endif %}
-    <form method="post" action="{% url 'update' %}">
+    <form name="update" method="post" action="{% url 'update' next=next %}">
         <div class="ui-grid-solo">
             <div class="ui-block-a form-box">
-                <div class="boxed">
-                    <div class="form-contents">
+                    <div class="boxed">
+                        <div class="form-contents">
 
-                        {#							<div>#}
-                        {#                                <label for="email">E-mail </label>#}
-                        {#								<input type="text" name="email" id="email" class="send-to-input" data-clear-btn="true" data-inline="true" value="{{ user.email }}"/>#}
-                        {#							</div>#}
-                        {#							<div>#}
-                        {#								<label for="password">P.W</label>#}
-                        {#								<input type="password" name="password" id="password" data-clear-btn="true" data-mini="true" />#}
-                        {#							</div>#}
-                        {#                            <div>#}
-                        {#								<label for="password_confirm">P.W Confirm </label>#}
-                        {#								<input type="password" name="password_confirm" id="password_confirm" data-clear-btn="true" data-mini="true"/>#}
-                        {#							</div>#}
-                        <div class="name-wrapper">
-                            <label for="name">이름</label>
-                            <input type="text" name="name" id="name" data-clear-btn="true" data-mini="true"
-                                   value="{{ user.profile.name }}"/>
-                        </div>
-
-                        <div class="name-wrapper">
-                            <input type="hidden" id="phone" name="phone"/>
-
-                                <label for="phone1">연락처</label>
-                                <div>
-                                    <input type="text" class="input-phone" name="phone1" id="phone1"
-                                           value="{{ phone1 }}"/>
-                                    <input type="text" class="input-phone" name="phone2" id="phone2"
-                                           value="{{ phone2 }}"/>
-                                    <input type="text" class="input-phone" name="phone3" id="phone3"
-                                           value="{{ phone3 }}"/>
-                                </div>
-                        </div>
-
-                        <div class="form-box">
-                            <label>주소</label>
-
-                            <div>
-                                <div class="form-address-input-container">
-                                    <input type="text" name="postcode" id="postalcode" readonly
-                                           value="{{ user_profile.postcode }}"/> <a href="#" id="searchAddressBtn"
-                                                                                    class="basic-btn">우편번호 검색</a>
-                                </div>
-                                <div class="form-address-input-container address-expanded-form">
-                                    <input type="text" name="basic_address" id="basicAddress" readonly
-                                           value="{{ user_profile.basic_address }}"/>
-                                </div>
-                                <div class="form-address-input-container address-expanded-form">
-                                    <input type="text" name="detail_address" value="{{ user_profile.detail_address }}"/>
-                                </div>
-
+                            <br/>
+                            <div class="name-wrapper">
+                                <label for="name">이름</label>
+                                <input type="text" name="name" id="name" data-clear-btn="true" data-mini="true"
+                                       value="{{ user.profile.name }}"/>
                             </div>
-                        </div>
 
-                        <div class="sex-wrapper">
-                            <label for="sex">성별</label>
-                            <select name="sex" id="sex" data-mini="true">
-                                <option value="M" id="sex_m"
-                                        {% if user.profile.sex == 'M' %}selected="selected" {% endif %}>남자
-                                </option>
-                                <option value="F" id="sex_f"
-                                        {% if user.profile.sex == 'F' %}selected="selected"  {% endif %}>여자
-                                </option>
-                            </select>
-                        </div>
-                        <div class="sex-wrapper">
-                            <label for="age">출생년도 </label>
-                            <select name="age" id="age" data-mini="true">
+                            <div class="purchase-inline-input">
+                                <label style="font-size:16px; width:100%">
+                                    연락처
+                                </label>
+
+                                <div class="inline-input-wrapper phone-form-wrapper">
+                                    <input type="text" name="phone1" value="{{ phone1 }}"/>
+                                    <input type="text" name="phone2" value="{{ phone2 }}"/>
+                                    <input type="text" name="phone3" value="{{ phone3 }}"/>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <br/>
+                            <div class="purchase-inline-input">
+                                <label style="font-size:16px; width:100%">
+                                    주소
+                                </label>
+
+                                <div class="inline-input-wrapper address-form-wrapper" style="width:100%">
+                                    <input type="text" name="postcode" id="postalcode" readonly
+                                           value="{{ user.profile.postcode }}"/> <a href="#" class="black-btn"
+                                                                                    id="searchAddressBtn">주소
+                                    검색</a>
+                                    <input type="text" name="basic_address" id="basicAddress" readonly
+                                           value="{{ user.profile.basic_address }}" />
+                                    <input type="text" name="detail_address" id="detailAddress" value="{{ user.profile.detail_address }}"/>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <br/>
+                            <div class="sex-wrapper">
+                                <label for="sex">성별</label>
+                                <select name="sex" id="sex" data-mini="true">
+                                    <option value="M" id="sex_m"
+                                            {% if user.profile.sex == 'M' %}selected="selected" {% endif %}>남자
+                                    </option>
+                                    <option value="F" id="sex_f"
+                                            {% if user.profile.sex == 'F' %}selected="selected"  {% endif %}>여자
+                                    </option>
+                                </select>
+                            </div>
+                            <br/>
+                            <div class="sex-wrapper">
+                                <label for="age">출생년도 </label>
+                                <select name="age" id="age" data-mini="true">
 
                                 <option value="1950" id="1950"
                                         {% if user.profile.age == 1950 %}selected="selected"  {% endif %}>1950
@@ -298,18 +296,18 @@
                                         {% if user.profile.age == 2014 %}selected="selected"  {% endif %}>2014
                                 </option>
 
-                            </select>
-                        </div>
+                                </select>
+                            </div>
 
-                        <div style="margin-top : 24px;">
-                            {#                                 <a href="#"  data-enable="false" id="joinBtn" class="gold-btn">회원가입</a>#}
+                            <div style="margin-top : 24px; text-align:center;">
+                                {#                                 <a href="#"  data-enable="false" id="joinBtn" class="gold-btn">회원가입</a>#}
 
-                            <a href="#" id='btn-update' class="black-btn" style="padding : 8px 40px;">수정</a> &nbsp;&nbsp;&nbsp;
-                            <a href="#" id='btn-cancel' class="black-btn" style="padding : 8px 40px;">취소</a> &nbsp;&nbsp;&nbsp;
+                                <a href="#" id='btn-update' class="black-btn">수정</a> &nbsp;&nbsp;&nbsp;
+                                <a href="#" id='btn-cancel' class="black-btn">취소</a> &nbsp;&nbsp;&nbsp;
 
+                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 

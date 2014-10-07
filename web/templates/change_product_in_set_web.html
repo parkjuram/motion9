@@ -57,7 +57,7 @@
                                         </div>
                                         <div class="available-item-info">
                                             <div class="available-item-name"><a href="{% url 'product' product_id=item.id %}" target="_blank">{{ item.brandname }} {{ item.name }}</a></div>
-                                            <div style="margin-top : 4px; line-height: 16px;">
+                                            <div style="margin-top : 4px; line-height: 16px; font-size:12px;">
                                                 카테고리 > {{ item.category_name }}<br/>
 {#                                                브랜드 : {{ item.maker }} <br/>#}
                                                 매장 가격 : {{ item.original_price|intcomma }}원<br/>

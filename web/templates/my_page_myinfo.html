@@ -30,10 +30,15 @@
           나이 : {{user.profile.age }} <br/>
           적립 : {{ user.profile.mileage| intcomma }}원<br/>
           주소 : {{ user.profile.postcode }}<br/>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profile.basic_address }}<br/>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.profile.detail_address }}<br/>
-        </div>
 
+            <div style="margin-left:37px">
+                {{ user.profile.basic_address }}<br/>
+            </div>
+            <div style="margin-left:37px">
+                {{ user.profile.detail_address }}<br/>
+            </div>
+
+        </div>
 
         <div class="my-page-edit-box">
             <a href="{% url 'mobile_mypage_myinfo_edit' %}"  target="_self" class="mypage-edit-btn">EDIT</a>
