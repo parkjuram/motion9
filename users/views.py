@@ -586,7 +586,11 @@ def update_cart(request):
         except ObjectDoesNotExist as e:
             return http_response_by_json(CODE_PARAMS_WRONG)
 
-        return http_response_by_json()
+        cart_items = helper_get_cart_items(request.user)
+        
+        return http_response_by_json(None, {
+            'total_price': cart_items['total_price']
+        })
     return http_response_by_json(CODE_PARAMS_WRONG)
 
 

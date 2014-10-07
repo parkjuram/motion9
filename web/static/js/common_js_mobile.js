@@ -107,10 +107,10 @@ $(function(){
                 target.append($(html));
             }
 
-            $('select.cart-item-count').change(function (e) {
+            target.find('select.cart-item-count').change(function (e) {
 
                 $.ajax({
-                    url: url_for_update_cart,
+                    url: urlForUpdateCart,
                     dataType: 'json',
                     data: {
                         cart_item_id: $(this).attr('cart-id'),

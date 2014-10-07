@@ -10,6 +10,7 @@
 
         var urlBeforePayment = "{% url 'before_payment' %}";
         var urlGetBillgatePaymentChecksum = "{% url 'billgate_payment_checksum' %}";
+        var urlForUpdateCart = "{% url 'update_cart' %}";
 
         var serviceId = "{{ payment_items.service_id }}";
         var orderId = "{{ payment_items.order_id }}";
@@ -48,7 +49,7 @@
             </div>
             <div class='cart-select-box-wrapper'>
                 <label>수량 : </label>
-                <select data-shadow='false' class="cart-item-count" data-type="p" data-id="{{ product.id }}"
+                <select data-shadow='false' class="cart-item-count" data-type="p" cart-id="{{ product.cart_id }}" data-id="{{ product.id }}"
                         data-corner='false'>
                     <option {% if product.item_count == 0 %} selected="selected" {% endif %}>0</option>
                     <option {% if product.item_count == 1 %} selected="selected" {% endif %}>1</option>
@@ -67,7 +68,7 @@
                 </select>
 
                 <div class="clearfix"></div>
-                총 가격 : <span id="cart-product-total-price-{{ product.id }}">{{ product.total_price|intcomma }}</span>원
+{#                총 가격 : <span id="cart-product-total-price-{{ product.id }}">{{ product.total_price|intcomma }}</span>원#}
             </div>
         </div>
     {% endfor %}
@@ -82,7 +83,7 @@
             </div>
             <div class='cart-select-box-wrapper'>
                 <label>수량 : </label>
-                <select data-shadow='false' class="cart-item-count" data-type="s" data-id="{{ set.id }}"
+                <select data-shadow='false' class="cart-item-count" data-type="s" cart-id="{{ set.cart_id }}" data-id="{{ set.id }}"
                         data-corner='false'>
                     <option {% if set.item_count == 0 %} selected="selected" {% endif %}>0</option>
                     <option {% if set.item_count == 1 %} selected="selected" {% endif %}>1</option>
@@ -101,7 +102,7 @@
                 </select>
 
                 <div class="clearfix"></div>
-                총 가격 : <span id="cart-set-total-price-{{ set.id }}">{{ set.total_price|intcomma }}</span>원
+{#                총 가격 : <span id="cart-set-total-price-{{ set.id }}">{{ set.total_price|intcomma }}</span>원#}
             </div>
         </div>
     {% endfor %}
@@ -116,7 +117,7 @@
             </div>
             <div class='cart-select-box-wrapper'>
                 <label>수량 : </label>
-                <select data-shadow='false' class="cart-item-count" data-type="c" data-id="{{ custom.id }}"
+                <select data-shadow='false' class="cart-item-count" data-type="c" cart-id="{{ custom.cart_id }}" data-id="{{ custom.id }}"
                         data-corner='false'>
                     <option {% if custom.item_count == 0 %} selected="selected" {% endif %}>0</option>
                     <option {% if custom.item_count == 1 %} selected="selected" {% endif %}>1</option>
@@ -135,7 +136,7 @@
                 </select>
 
                 <div class="clearfix"></div>
-                총 가격 : <span id="cart-custom-total-price-{{ custom.id }}">{{ custom.total_price|intcomma }}</span>원
+{#                총 가격 : <span id="cart-custom-total-price-{{ custom.id }}">{{ custom.total_price|intcomma }}</span>원#}
             </div>
         </div>
     {% endfor %}

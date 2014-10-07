@@ -42,7 +42,7 @@
                         'shipping_number': shipping_number
                     },
                     success: function (data) {
-                        if (data.success == true ) {
+                        if (data.success) {
                             window.document.location = "{% url 'foradmin:manage_shipping' %}";
                         } else {
                             alert('에러가 발생했습니다! 관리자에게 문의해주세요.');
