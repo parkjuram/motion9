@@ -9,7 +9,7 @@ $(function(){
         var sumPrice = $('#cartTotalPrice');
         var sum = 0;
 
-        $('select.cart-item-count').each(function (i, v) {
+        $('#panel-cart select.cart-item-count').each(function (i, v) {
             var id = $(this).attr('data-id');
             var cnt = parseInt($(this).val());
             var price;
@@ -61,7 +61,6 @@ $(function(){
             }
 
             for(var i = 0 ; i < list.length ; i++){
-                console.log ( list );
                 html = '';
                 cartId = list[i].cart_id;
                 productId = list[i].id;
@@ -238,7 +237,6 @@ $(function(){
 
     $('#cartBuyBtn').click(function(e){
         e.preventDefault();
-        console.log('here');
 
         $('#cartBuyForm').submit();
     });
