@@ -707,7 +707,7 @@ def helper_get_payment_item(request, total_price, is_mobile=False):
     amount = str(total_price)
     user_ip = helper_get_user_ip(request)
     if is_mobile:
-        return_url = request.build_absolute_uri(reverse('payment_return_mobile_web'))
+        return_url = request.build_absolute_uri(reverse('mobile_mypage_before_purchase'))
     else:
         return_url = request.build_absolute_uri(reverse('payment_return'))
     using_type = '0000'

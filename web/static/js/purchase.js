@@ -75,26 +75,45 @@ $(function () {
 
     $('.purchase-btn').click(function (e) {
 
-        $.ajax({
-            url: urlBeforePayment,
-            dataType: 'json',
-            type:'POST',
-            data: {
-                'order_id': $('input[name="ORDER_ID"]').val(),
-                'name': $('#sendTo').val(),
-                'phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),
-                'postcode': $('#postalcode').val(),
-                'basic_address': $('#basicAddress').val(),
-                'detail_address': $('#detailAddress').val(),
-                'shipping_requirement': $('#shippingRequirement').val(),
-                'mileage': replaceAll(",","",$('#mileage').val() )
-            },
-            success: function (data) {
-                if (data.success) {
-                    startPayment();
+        var errorMessage = null;
+
+        if($('#postalcode').val()=='' || $('#basicAddress').val()==''){
+            errorMessage = '주소를 입력해 주십시오.';
+        }else if($('#sendTo').val()==''){
+            errorMessage = '수취인 이름을 입력해 주십시오.';
+        }else if($('#phone1').val()=='' || $('#phone2').val()=='' || $('#phone3').val()==''){
+            errorMessage = '수취인 전화번호를 입력해 주십시오.';
+        }else if($('#cart-sum-price').val()==''){
+            errorMessage = '결제금액 1000원 미만은 결제되지 않습니다.'
+        }
+
+        if ( errorMessage != null ) {
+            alert( errorMessage );
+        }else{
+            $.ajax({
+                url: urlBeforePayment,
+                dataType: 'json',
+                type:'POST',
+                data: {
+                    'order_id': $('input[name="ORDER_ID"]').val(),
+                    'name': $('#sendTo').val(),
+                    'phone': $('#phone1').val()+"-"+$('#phone2').val()+"-"+$('#phone3').val(),
+                    'postcode': $('#postalcode').val(),
+                    'basic_address': $('#basicAddress').val(),
+                    'detail_address': $('#detailAddress').val(),
+                    'shipping_requirement': $('#shippingRequirement').val(),
+                    'mileage': replaceAll(",","",$('#mileage').val() )
+                },
+
+                success: function (data) {
+                    if (data.success) {
+                        startPayment();
+                    }
                 }
-            }
-        });
+
+            });
+        }
+
     });
 
     /*****  mileage usage relate part   *****/
