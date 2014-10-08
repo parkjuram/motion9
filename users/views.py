@@ -786,9 +786,8 @@ def mobile_mypage_purchase_list_view(request):
         'tab_name': 'purchase_list'
     })
 
-
-@mobile_login_required
 @csrf_exempt
+@mobile_login_required
 def mobile_mypage_before_purchase_view(request):
 
     cart_items = helper_get_cart_items(helper_get_user(request))
@@ -800,7 +799,7 @@ def mobile_mypage_before_purchase_view(request):
         'payment_items': payment_items,
         'profile_items': profile_items,
         'user_profile': request.user.profile
-    } )
+    })
 
     return render(request, 'purchase.html', cart_items )
 
