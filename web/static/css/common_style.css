@@ -177,25 +177,21 @@ img.profile-img{
 }
 
 .mobile-back-btn {
-    position : absolute;
+    position : fixed;
     display : flex;
     box-shadow : none;
     margin-top : 0px;
     width : 40px;
     height : 40px;
     padding : 10px;
-
+    z-index : 100;
 }
 
 .mobile-back-btn img{
     position : absolute;
-    /*top:10px;*/
-    /*left:5px;*/
     width : auto;
     height : auto;
-    /*margin : 10px 8px;;*/
-    /*background : url('../img/btn_back_view_m.png');*/
-    /*background-size : 37px 35px;*/
+    display : block;
 }
 
 .basic-btn {
