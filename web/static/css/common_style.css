@@ -188,7 +188,7 @@ img.profile-img{
 }
 
 .mobile-back-btn img{
-    position : absolute;
+    position : relative;
     width : auto;
     height : auto;
     display : block;
