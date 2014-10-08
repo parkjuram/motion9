@@ -459,8 +459,8 @@ def payment_return_mobile_web_view(request):
     #     'detail_response_message': detail_response_message
     # })
 
-@login_required
 @csrf_exempt
+@login_required
 def payment_complete_view(request, payment_id=0):
     payment = Payment.objects.get(id=payment_id)
 
