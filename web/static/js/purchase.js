@@ -201,7 +201,8 @@ $(function () {
             type: 'post',
             success: function (data, textStatus, jqXHR) {
                 if ( data.success ) {
-                    updateResultPrice( data.total_price );
+                    totalPrice = data.total_price;
+                    updateResultPrice( totalPrice );
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
