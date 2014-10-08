@@ -193,7 +193,7 @@
             </label>
 
             <div class="inline-input-wrapper">
-                <input id="sendTo" type="text"/>
+                <input id="sendTo" type="text" value="{{ user_profile.name }}"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -203,7 +203,9 @@
             </label>
 
             <div class="inline-input-wrapper phone-form-wrapper">
-                <input id="phone1" type="text"/><input id="phone2" type="text"/><input id="phone3" type="text"/>
+                <input id="phone1" type="text" value="{{ profile_items.phone1 }}"/>
+                <input id="phone2" type="text" value="{{ profile_items.phone2 }}"/>
+                <input id="phone3" type="text" value="{{ profile_items.phone3 }}"/>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -227,7 +229,7 @@
             </label>
 
             <div class="inline-input-wrapper">
-                <input id=shipping_requirement" type="text"/>
+                <input id=shippingRequirement" type="text"/>
             </div>
             <div class="clearfix"></div>
         </div>
