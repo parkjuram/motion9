@@ -112,9 +112,11 @@
                         </div>
                         <div class="set-final-info">
                             <div class="set-final-price-box">
-                                    원래가격 : {{ set.original_price|intcomma }}원<br/>
-                                    할인 된 가격 : {{ set.discount_price|intcomma }}원<br/>
-                                    할인율 : {{ set.discount_rate }}%<br/>
+                                <span class="set-price">컬렉션 판매가 : {{ set.discount_price|intcomma }}원</span><br/>
+                                <span class="note-desc">* 컬렉션을 커스텀으로 재구성시 할인율과 컬렉션 판매 가격은 변동될 수 있으며 '저장'후 My Collection 메뉴에서 확인하실 수 있습니다.</span>
+{#                                    원래가격 : {{ set.original_price|intcomma }}원<br/>#}
+{#                                    할인 된 가격 : {{ set.discount_price|intcomma }}원<br/>#}
+{#                                    할인율 : {{ set.discount_rate }}%<br/>#}
                             </div>
                             <br/>
                            <div class="purchase-btn-area">

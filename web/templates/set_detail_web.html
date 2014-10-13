@@ -155,7 +155,7 @@
             </div>
 
             <div class="price-area">
-                <div class="product-price price-origin">원래 가격 : {{ set.original_price|intcomma }}원 (<span class="price-discount">할인율 : {{ set.discount_rate }}%</span>)</div>
+                <div class="product-price price-origin">총 제품 가격 : {{ set.original_price|intcomma }}원</div>
                 <div class="product-how-many">
                     <div style="width :80px; margin-top : 6px; float: left;">
                         구매수량 :
@@ -165,9 +165,9 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="product-price price-saled">판매가 : <span id="productPrice">{{ set.discount_price|intcomma }}</span>원</div>
+                <div class="product-price price-saled">컬렉션 판매가 : <span id="productPrice">{{ set.discount_price|intcomma }}</span>원 (<span>-{{ set.discount_rate }}%</span>)</div>
                 <div class="product-price price-total">
-                    총 상품 금액 : <span id="productFinalPrice">{{ set.discount_price|intcomma }}</span>원
+                    총 구매 금액 : <span id="productFinalPrice">{{ set.discount_price|intcomma }}</span>원
                 </div>
                 <div class="product-btn-area">
                     {% if set.is_interested %}
@@ -182,7 +182,7 @@
         </div>
         <div class="box-css">
            <div class="box-header">
-               세트 구성
+               컬렉션 구성
            </div>
            <div class="col-xs-12" style="padding-top: 4px; padding-bottom: 8px; padding-left: 12px">
            {% for product in set.products %}

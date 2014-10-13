@@ -237,6 +237,14 @@
     margin-top: 12px;
 }
 
+.set-price {
+    font-size: 14px;
+}
+
+.note-desc {
+    color: red;
+}
+
 .set-final-info{
     margin-bottom : 20px;
 }

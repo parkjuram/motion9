@@ -142,8 +142,11 @@
 		</div>
 
         {% block title %}
-    	<h2 class="ui-title" style="font-size:15px;">Motion9</h2>
+            <div style="text-align:center; height:100%; margin-top:4px">
+                <img src ="{% static "img/LOGO_black.png" %}" class="main-logo-img" >
+            </div>
         {% endblock %}
+
     	<div  class="ui-btn-right">
              {% if user.is_authenticated  %}
 	    	    <a href="#" id="btn-open-cart" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>

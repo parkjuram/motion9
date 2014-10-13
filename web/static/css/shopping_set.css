@@ -182,6 +182,12 @@ a{
 }
 
 
+.item-price-info {
+    text-align: right;
+    font-size: 15px;
+}
+
+
 /* SHOP COLLECTION BUTTON CSS */
 .btn-stroke-black {
     font-size: 10px;

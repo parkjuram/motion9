@@ -591,6 +591,14 @@ ol, ul {
     text-align : center;
 }
 
+.main-logo-img {
+    width : auto;
+    height : auto;
+    max-width : 100%;
+    max-height : 80%;
+    max-width : 100%;
+}
+
 #messages { border:1px solid #C8DCC2; margin:1em 0; }
 #messages ul .debug{ background: #EEFAEA; padding: 0.5em, 0 0.5em 0; list-style: none;}
 #messages ul .info{

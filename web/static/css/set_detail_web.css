@@ -56,11 +56,13 @@
 }
 
 .price-saled{
+    font-size: 14px;
     margin-bottom: 6px;
+    color: blue;
 }
 
 .price-saled span{
-    color : black;
+    /*color : black;*/
 }
 
 .price-discount{
@@ -73,6 +75,7 @@
 }
 
 .price-total{
+    font-size: 14px;
     font-weight: bold;
 }
 
