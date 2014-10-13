@@ -86,7 +86,7 @@
             <div class="product-price">
                 {{ set.discount_price|intcomma }}원 <span
                     class="item-original-price">{{ set.original_price|intcomma }}원</span>
-                (<span>{{ product.discount_rate }}</span>% 할인)
+                (<span>{{ set.discount_rate }}</span>% 할인)
             </div>
             {% if set.is_interested %}
                 <a href="#" class="interest-btn btn-for-interest interest-done" data-type="s" data-product="{{ set.id }}">관심취소</a>

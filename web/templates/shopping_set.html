@@ -58,7 +58,7 @@
                     <div class="item-image">
                         <img src="{{ set.small_img }}"/>
 
-                        <div class="product-title">
+                        <div class="product-title" style="display: none;">
                             <div class="item-price">
                                 {{ set.discount_price|intcomma }}원 &nbsp;
                             </div>
@@ -81,7 +81,8 @@
 {#                                    {% for product in set.products %}#}
 {#                                        {{ product.brandname }} {{ product.name }}<br/>#}
 {#                                    {% endfor %}#}
-                                    {{ set.displayed_category_text }}
+                                    {{ set.discount_price|intcomma }}원 ({{ set.discount_rate }}% 할인)
+{#                                    {{ set.displayed_category_text }}#}
                                 </div>
                             </div>
                         </div>
