@@ -423,7 +423,7 @@ def helper_get_set_list(category_id, user, price_max_filter=None, price_min_filt
     if category_id is not None:
         sets = sets.filter(category__id=category_id)
 
-    sets = sets.filter(is_active=True).order_by('name').all()
+    sets = sets.filter(is_active=True).order_by('category__id', 'name').all()
     sets_ = []
 
     for set in sets:
