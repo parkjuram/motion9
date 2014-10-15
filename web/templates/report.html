@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>
 <script src="{% static 'js/my_page_interesting_set.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/report.css'%}"/>
-<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>
+{#<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>#}
 {% block header_append %}
 {% endblock %}
 {% endblock %}
@@ -51,31 +51,26 @@
         </div>
         <br/>
     </div>
-<div id="productGrid">
-    {% for product in products.data %}
-    <div class="product-item" >
 
-           <div class="item-image">
-               <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
-               <img src="{{product.big_img_url}}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
-               </a>
-           </div>
-           <div class="item-title" >
-               <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
-               <div class="item-price">
-                   {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ product.discount_rate }}%</span>
+    <div id="productGrid">
+        {% for product in products.data %}
+        <div class="product-item" >
+
+               <div class="item-image">
+                   <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
+                   <img src="{{product.big_img_url}}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
+                   </a>
                </div>
-           </div>
-           <div class="interest-btn">
-               {% if product.is_interested %}
-                   <a href="#" class=" btn-for-interest interest-done"  data-type="p" data-product="{{ product.id }}">관심취소</a>
-               {% else %}
-                   <a href="#" class=" btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
-               {% endif %}
-           </div>
+               <div class="item-title" >
+                   <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
+                   <div class="item-price">
+                       {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ product.discount_rate }}%</span>
+                   </div>
+               </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+
      <div class="mypage-wrapper">
         <div class="mypage-user-email">
             로션
@@ -97,13 +92,6 @@
                <div class="item-price">
                    {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ product.discount_rate }}%</span>
                </div>
-           </div>
-           <div class="interest-btn">
-               {% if product.is_interested %}
-                   <a href="#" class=" btn-for-interest interest-done"  data-type="p" data-product="{{ product.id }}">관심취소</a>
-               {% else %}
-                   <a href="#" class=" btn-for-interest"  data-type="p" data-product="{{ product.id }}">관심하기</a>
-               {% endif %}
            </div>
     </div>
     {% endfor %}
