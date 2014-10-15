@@ -50,7 +50,7 @@
         <div class="login-box-header">
             <h4 class="lined-heading"><span>로그인</span></h4>
         </div>
-        <form method="post" data-form="login-page-form" action="{% url 'login' next=next  fail='registration_page'%}" >
+        <form method="post" data-form="login-page-form" action="{% url 'login' next=next %}" >
             <div class="form-box">
                 <label for="email">이메일</label>
                 <input type="text" name="email" id="email"/>
