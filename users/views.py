@@ -50,7 +50,7 @@ def check_email_view(request):
     return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
 @csrf_exempt
-def check_facebook_token_view(request, next='index'):
+def check_facebook_token_view(request, next='index', fail='registration_page'):
     token = request.POST.get('token', None)
     email = request.POST.get('email', None)
 
@@ -77,7 +77,8 @@ def check_facebook_token_view(request, next='index'):
                 return redirect(next)
 
             except ObjectDoesNotExist as e:
-                return redirect('registration_page')
+                return redirect(fail)
+                # return redirect('registration_page')
 
         else:
             http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )

@@ -18,7 +18,7 @@
         {% endif %}
 
         <form id="facebookLoginForm" data-ajax="false" method="post"
-              action="{% url 'check_facebook_token' next='mobile_index' %}">
+              action="{% url 'check_facebook_token' next='mobile_index' fail='mobile_registration_page'%}">
             <input type="hidden" id="fbEmail" name="email"/>
             <input type="hidden" id="fbToken" name="token"/>
         </form>
