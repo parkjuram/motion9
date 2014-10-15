@@ -89,6 +89,11 @@ urlpatterns = patterns('',
 
     url(r'^mobile/mypage/edit/$', 'users.views.mobile_mypage_myinfo_edit_view', name='mobile_mypage_myinfo_edit'),
 
+    url(r'^mobile/report/$', 'users.views.mobile_report_view', name='mobile_report'),
+
+
+
+
 # @app.route('/mypage/set', methods = ['GET'])
 # @app.route('/mypage/set/<int:pageNum>', methods = ['GET'])
 # @login_required

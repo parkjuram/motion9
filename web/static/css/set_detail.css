@@ -311,19 +311,21 @@ a:visited{
 }
 
 
-#popupDetailName{
-    width : 90%;
-    padding : 6px 5%;
-    margin : 0;
+#popupDetailName {
+    width: 90%;
+    padding: 6px 5%;
+    margin: 0;
+
 }
 
 #popupDetailImg{
-    width : 100px;
+    text-align : center;
     margin : 0px auto;
 }
 
 #popupDetailImg img{
-    width : 100%;
+    height : 150px;
+    width : auto;
 }
 
 #popupDetailDesc{
