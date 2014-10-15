@@ -841,7 +841,7 @@ def mobile_mypage_myinfo_edit_view(request, page_num=1):
 
 
 
-@mobile_login_required
+# @mobile_login_required
 def mobile_report_view(request, category_id=None, page_num=1):
 
     user = helper_get_user(request)
