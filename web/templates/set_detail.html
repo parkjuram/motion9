@@ -126,7 +126,8 @@
                                  style="max-width:100%; max-height:100%; width:auto; height:auto; position:absolute; margin:auto; left:0; right:0; top:0; bottom:0; "/>
                         </div>
                         <div class="product-item-contents">
-                           {{product.brandname }} {{ product.name|truncatechars:18 }}
+{#                           {{product.brandname }} {{ product.name|truncatechars:18 }}#}
+                           {{product.brandname }} {{ product.name }}
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -238,7 +239,7 @@
     <div data-role="popup" id="productDetailDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false"
          style="width:90%; margin:0 auto;">
         <div data-role="header" data-theme="a">
-            <h5 style="font-size: 14px;" id="popupDetailName"></h5>
+            <h5 style="font-size: 14px; margin: 10px;" class="product-name-detail" id="popupDetailName"></h5>
         </div>
         <div role="main" class="ui-content">
             <div id="popupDetailImg">

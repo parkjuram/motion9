@@ -241,6 +241,7 @@ a:visited{
 .product-item-contents{
     width : 75%;
     padding : 10px 5%;
+    line-height : 20px;
 }
 
 .footer-bar{
@@ -376,4 +377,14 @@ a:visited{
 .ship-info {
     color: grey;
     font-weight: normal;
+}
+
+
+#popupDetailName.product-name-detail.ui-title{
+    white-space : normal;
+}
+
+.product-name-detail{
+   line-height : 20px;
+   margin : 10px;
 }
