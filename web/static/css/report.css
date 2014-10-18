@@ -168,8 +168,10 @@ a.tab-selected{
 
 
 .product-item{
+    border-radius : 4px;
+    border : 1px solid #F2F2F2;
     width : 46%;
-    margin : 1%;
+    margin : 10px;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
     -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
     -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
@@ -212,8 +214,6 @@ a.tab-selected{
 }
 
 
-
-
 .interest-btn{
     width : 100%;
     height : 18px;
@@ -229,3 +229,32 @@ a.tab-selected{
     display: inline-block;
 }
 
+h4.spb_heading, h4.lined-heading {
+	font-weight: normal;
+	margin-top: 30px;
+	border-bottom: 2px solid transparent;
+	position: relative;
+	margin-bottom: 0;
+	text-align: center;
+}
+h4.spb_heading:before, h4.lined-heading:before {
+    content: "";
+    display: block;
+    border-top: 2px solid #F2F2F2;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+h4.spb_heading span, h4.lined-heading span {
+    padding: 0 10px;
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+h4.lined-heading span {
+    color: #000000;
+    background-color: #ffffff;
+}

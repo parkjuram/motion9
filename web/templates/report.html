@@ -4,8 +4,8 @@
 {% load humanize %}
 
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
-<script src="{% static "swiper/idangerous.swiper.js" %}"></script>
-<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
+{#<script src="{% static "swiper/idangerous.swiper.js" %}"></script>#}
+{#<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>#}
 <script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
 {#<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>#}
 {#<script src="{% static 'js/my_page_interesting_set.js'%}"></script>#}
@@ -26,9 +26,9 @@
         <div class="select-wrapper">
                 <select id="mobileMypageList" data-mini="true" data-shadow="false">
                     <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/13</option>
-                    <option {% if tab_name == 'interesting_set' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_set' %}">관심 컬렉션</option>
-                    <option {% if tab_name == 'interesting_product' %} selected="selected" {% endif %}  value="{% url 'mobile_mypage_product' %}">관심 제품</option>
-                    <option {% if tab_name == 'purchase_list' %} selected="selected" {% endif %}  value="{% url 'mobile_mypage_purchase_list' %}">구매 내역</option>
+                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/14</option>
+                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/15</option>
+                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/16</option>
                 </select>
         </div>
 
@@ -53,15 +53,20 @@
         <br/>
     </div>
 
-    <div id="productGrid">
+    <div id="productGrid" >
+    {#style="position:relative; height:999px;"#}
         {% for product in products.data %}
-        <div class="product-item">
-
+        <div class="product-item"  >
+    {#style="position:absolute; left:0px; top:0px;"#}
                <div class="item-image">
                    <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
-                   <img src="{{product.big_img_url}}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
+                       <img src="{{product.big_img_url}}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
                    </a>
                </div>
+            <br/>
+                <div class="login-box-header">
+                    <h4 class="lined-heading"><span> </span></h4>
+                </div>
                <div class="item-title" >
                    <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
                    <div class="item-price">
