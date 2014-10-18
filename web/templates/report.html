@@ -53,9 +53,9 @@
         <br/>
     </div>
 
-    <div id="productGrid" style="position:relative; height:999px;">
+    <div id="productGrid">
         {% for product in products.data %}
-        <div class="product-item" style="position:absolute; left:0px; top:0px;" >
+        <div class="product-item">
 
                <div class="item-image">
                    <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
@@ -79,15 +79,17 @@
         <br/>
     </div>
 
-<div id="productGrid" style="position:relative; height:999px;">
+<div id="productGrid" >
+{#style="position:relative; height:999px;"#}
     {% for product in products.data %}
-    <div class="product-item" style="position:absolute; left:0px; top:0px;" >
-
+    <div class="product-item"  >
+{#style="position:absolute; left:0px; top:0px;"#}
            <div class="item-image">
                <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
-               <img src="{{product.big_img_url}}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
+                   <img src="{{product.big_img_url}}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
                </a>
            </div>
+           <br/>
            <div class="item-title" >
                <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
                <div class="item-price">
