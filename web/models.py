@@ -114,8 +114,8 @@ class Set(models.Model):
 
 class SetDescriptionImage(models.Model):
     set = models.ForeignKey(Set)
-    image = models.ImageField(null=False, blank=True, default='', upload_to='set/desc/')
-    small_image = models.ImageField(null=False, blank=True, default='', upload_to='set/desc/small/')
+    image = models.ImageField(null=True, upload_to='set/desc/')
+    small_image = models.ImageField(null=True, upload_to='set/desc/small/')
 
 class Tag(models.Model):
     name = models.TextField(unique=True)
