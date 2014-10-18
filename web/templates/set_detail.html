@@ -144,9 +144,11 @@
                 </div>
             </div>
             <div class="product-detail-info-wrapper">
-                <div class="product-detail-info-header">사용방법</div>
-                <div class="product-detail-info">{{ set.description2 }}</div>
+                {{ set.description_detail }}
             </div>
+            {% for description_image in set.small_description_images %}
+                <img src="{{ description_image }}" alt="" />
+            {% endfor %}
         </div>
         <div class="tab-content" id="productRule">
             {% for product in set.products %}

@@ -98,8 +98,9 @@ class Set(models.Model):
     category = models.ForeignKey('Category')
     displayed_category_text = models.TextField(null=False, blank=True)
     description = models.TextField(null=False, blank=True)
+    description_detail = models.TextField(null=False, blank=True)
     big_img = models.ImageField(null=True, upload_to='set/image/')
-    small_img = models.ImageField(null=True, upload_to='set/image/small')
+    small_img = models.ImageField(null=True, upload_to='set/image/small/')
     discount_difference = models.IntegerField(null=False, default=0)
 
     is_active = models.BooleanField(default=True)
@@ -114,6 +115,7 @@ class Set(models.Model):
 class SetDescriptionImage(models.Model):
     set = models.ForeignKey(Set)
     image = models.ImageField(null=True, upload_to='set/desc/')
+    small_image = models.ImageField(null=True, upload_to='set/desc/small/')
 
 class Tag(models.Model):
     name = models.TextField(unique=True)

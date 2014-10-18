@@ -336,6 +336,9 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
     description_images = set.setdescriptionimage_set.values_list('image', flat=True)
     description_images = map(lambda x:settings.MEDIA_URL+x, description_images)
 
+    small_description_images = set.setdescriptionimage_set.values_list('small_image', flat=True)
+    small_description_images = map(lambda x:settings.MEDIA_URL+x, small_description_images)
+
     if set.big_img.name is not None:
         big_img = settings.MEDIA_URL + set.big_img.name
     else:
@@ -353,8 +356,10 @@ def helper_get_set(set_id_or_object, user=None, with_custom_info=False, with_det
         'name': set.name,
         'category_name': set.category.name,
         'description': set.description,
+        'description_detail': set.description_detail,
         'displayed_category_text': set.displayed_category_text,
         'description_images': description_images,
+        'small_description_images': small_description_images,
         'big_img_url': big_img,
         'small_img': small_img,
         'discount_difference': set.discount_difference,
