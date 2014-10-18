@@ -200,10 +200,10 @@ a.tab-selected{
 
 .product-item{
     background-color : white;
-    width : 49%;
+    width : 48%;
     position : relative;
     margin : 20px auto;
-    display : inline-block;
+    /*display : inline-block;*/
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
     -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
     -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);

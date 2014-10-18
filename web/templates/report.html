@@ -7,8 +7,8 @@
 <script src="{% static "swiper/idangerous.swiper.js" %}"></script>
 <link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
 <script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
-<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>
-<script src="{% static 'js/my_page_interesting_set.js'%}"></script>
+{#<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>#}
+{#<script src="{% static 'js/my_page_interesting_set.js'%}"></script>#}
 <link rel="stylesheet" href="{% static 'css/report.css'%}"/>
 {#<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>#}
 {% block header_append %}
@@ -53,9 +53,9 @@
         <br/>
     </div>
 
-    <div id="productGrid">
+    <div id="productGrid" style="position:relative; height:999px;">
         {% for product in products.data %}
-        <div class="product-item" >
+        <div class="product-item" style="position:absolute; left:0px; top:0px;" >
 
                <div class="item-image">
                    <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
@@ -79,9 +79,9 @@
         <br/>
     </div>
 
-<div id="productGrid">
+<div id="productGrid" style="position:relative; height:999px;">
     {% for product in products.data %}
-    <div class="product-item" >
+    <div class="product-item" style="position:absolute; left:0px; top:0px;" >
 
            <div class="item-image">
                <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
