@@ -344,7 +344,7 @@ def mypage_set_view(request, page_num=1):
     else:
         logger.error('have_to_login')
 
-@csrf_exempt
+# @csrf_exempt
 def billgate_payment_checksum(request):
     service_id=request.POST.get('service_id')
     order_id=request.POST.get('order_id')
@@ -791,7 +791,6 @@ def mobile_mypage_purchase_list_view(request):
         'tab_name': 'purchase_list'
     })
 
-@csrf_exempt
 @mobile_login_required
 def mobile_mypage_before_purchase_view(request):
 

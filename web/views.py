@@ -42,7 +42,6 @@ def test_view(request):
     # return render(request, 'payment_complete_web.html')
     # return render(request, 'uservoice_test.html')
 
-@csrf_exempt
 @login_required
 def before_payment(request):
 
@@ -77,7 +76,7 @@ def before_payment(request):
         return http_response_by_json( CODE_PARAMS_WRONG )
 
 
-@csrf_exempt
+# @csrf_exempt
 def payment_return_view(request):
 
     service_id = request.POST.get('SERVICE_ID')
@@ -269,7 +268,7 @@ def payment_return_view(request):
         else:
             raise Http404
 
-@csrf_exempt
+# @csrf_exempt
 def payment_return_mobile_web_view(request):
     transaction_id = None
     auth_amount = None
@@ -459,7 +458,7 @@ def payment_return_mobile_web_view(request):
     #     'detail_response_message': detail_response_message
     # })
 
-@csrf_exempt
+# @csrf_exempt
 @login_required
 def payment_complete_view(request, payment_id=0):
     payment = Payment.objects.get(id=payment_id)
