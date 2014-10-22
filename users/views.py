@@ -841,7 +841,7 @@ def mobile_mypage_myinfo_edit_view(request, page_num=1):
 
 
 
-# @mobile_login_required
+@mobile_login_required
 def mobile_report_view(request, category_id=None, page_num=1):
 
     user = helper_get_user(request)
@@ -865,6 +865,43 @@ def mobile_report_view(request, category_id=None, page_num=1):
     if user is not None:
 
         return render(request, 'report.html',
+            {
+                'products': products_,
+                'tab_name': 'myinfo',
+                'phone1': phone1,
+                'phone2': phone2,
+                'phone3': phone3,
+                'next': next
+            })
+
+    else:
+        logger.error('have_to_login')
+
+
+@mobile_login_required
+def mobile_report_detail_view(request, category_id=None, page_num=1):
+
+    user = helper_get_user(request)
+    user_profile = user.profile
+
+    products_ = helper_get_products(helper_get_user(request), category_id)
+
+    if page_num is not None:
+        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
+    else:
+        products_ = {'data': products_}
+
+    phone = user_profile.phone
+    phones = phone.split("-")
+    phone1 = phone2 = phone3 = ''
+    if len(phones) == 3:
+        phone1 = phones[0]
+        phone2 = phones[1]
+        phone3 = phones[2]
+
+    if user is not None:
+
+        return render(request, 'report_detail.html',
             {
                 'products': products_,
                 'tab_name': 'myinfo',

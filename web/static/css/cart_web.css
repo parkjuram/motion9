@@ -212,3 +212,7 @@
 input#mileage {
     text-align: right;
 }
+
+#postalcode{
+    width: 50%;
+}
