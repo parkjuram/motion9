@@ -1,0 +1,159 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+{% load static %}
+{% load humanize %}
+
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+{#<script src="{% static "swiper/idangerous.swiper.js" %}"></script>#}
+{#<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>#}
+<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+{#<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>#}
+{#<script src="{% static 'js/my_page_interesting_set.js'%}"></script>#}
+<link rel="stylesheet" href="{% static 'css/report.css'%}"/>
+<script src="{% static 'js/report.js'%}"></script>
+{#<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>#}
+{% block header_append %}
+{% endblock %}
+{% endblock %}
+
+{% block title %}
+    <h2 class="ui-title">Report</h2>
+{% endblock %}
+
+{% block content %}
+{% block detail %}
+
+    <div id="productGrid" >
+        <div class="product-detail">
+            <div class="item-image">
+                <img src="" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
+               </div>
+                <br/>
+        </div>
+
+        <div class="product-detail">
+            이름
+            <br/>
+            가격
+            <br/>
+            네이버 쇼핑 평점
+            <br/>
+        </div>
+    </div>
+
+     <div class="report-title-wrapper">
+        <div class="report-title-text">
+            블로그 리뷰
+        </div>
+        <br/>
+    </div>
+
+    <div class="blog-product-item">
+        <div class="blog-product-item-img">
+               <img src="{% static "img/post-img-5.jpg"%}"/>
+        </div>
+        <div class="blog-product-item-contents">
+            <div class="blog-product-item-contents-name">
+                    Connie Pistilli
+            </div>
+            <div class="blog-product-item-contents-date">
+                   2014년 9월 12일
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-summary">
+                매ㅑ너러ㅔㅁ내ㅑ러멘래ㅓㅑㅐㅋ퍼ㅑㅐㄴㄹㅇ
+                ㅁ너ㅑㅐ래ㅑㅁ럼내ㅑㄻ냐ㅐㅇ럼ㄴㅇ러ㅐㅑㅓ
+                매ㅑㅇ러ㅐ먄ㅇ러ㅑㅐㅁ냐ㅐㅇ래ㅑㅁㄴ러ㅑㅐ
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-more">
+                자세히 보기
+            </div>
+
+        </div>
+    </div>
+    <br/>
+    <div class="blog-product-item">
+        <div class="blog-product-item-img">
+                <a class="hide-referrer" href="{{ blog.url }}" target="_blank"><img src="{% static "img/post-img-5.jpg"%}"/></a>
+        </div>
+        <div class="blog-product-item-contents">
+            <div class="blog-product-item-contents-name">
+                    Connie Pistilli
+            </div>
+            <div class="blog-product-item-contents-date">
+                   2014년 9월 12일
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-summary">
+                매ㅑ너러ㅔㅁ내ㅑ러멘래ㅓㅑㅐㅋ퍼ㅑㅐㄴㄹㅇ
+                ㅁ너ㅑㅐ래ㅑㅁ럼내ㅑㄻ냐ㅐㅇ럼ㄴㅇ러ㅐㅑㅓ
+                매ㅑㅇ러ㅐ먄ㅇ러ㅑㅐㅁ냐ㅐㅇ래ㅑㅁㄴ러ㅑㅐ
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-more">
+                자세히 보기
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div class="report-title-wrapper">
+        <div class="report-title-text">
+            카페/댓글 리뷰
+        </div>
+        <br/>
+    </div>
+
+    <div class="blog-product-item">
+        <div class="blog-product-item-img">
+               <img src="{% static "img/post-img-5.jpg"%}"/>
+        </div>
+        <div class="blog-product-item-contents">
+            <div class="blog-product-item-contents-name">
+                    Connie Pistilli
+            </div>
+            <div class="blog-product-item-contents-date">
+                   2014년 9월 12일
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-summary">
+                매ㅑ너러ㅔㅁ내ㅑ러멘래ㅓㅑㅐㅋ퍼ㅑㅐㄴㄹㅇ
+                ㅁ너ㅑㅐ래ㅑㅁ럼내ㅑㄻ냐ㅐㅇ럼ㄴㅇ러ㅐㅑㅓ
+                매ㅑㅇ러ㅐ먄ㅇ러ㅑㅐㅁ냐ㅐㅇ래ㅑㅁㄴ러ㅑㅐ
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-more">
+                자세히 보기
+            </div>
+
+        </div>
+    </div>
+    <br/>
+    <div class="blog-product-item">
+        <div class="blog-product-item-img">
+                <a class="hide-referrer" href="{{ blog.url }}" target="_blank"><img src="{% static "img/post-img-5.jpg"%}"/></a>
+        </div>
+        <div class="blog-product-item-contents">
+            <div class="blog-product-item-contents-name">
+                    Connie Pistilli
+            </div>
+            <div class="blog-product-item-contents-date">
+                   2014년 9월 12일
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-summary">
+                매ㅑ너러ㅔㅁ내ㅑ러멘래ㅓㅑㅐㅋ퍼ㅑㅐㄴㄹㅇ
+                ㅁ너ㅑㅐ래ㅑㅁ럼내ㅑㄻ냐ㅐㅇ럼ㄴㅇ러ㅐㅑㅓ
+                매ㅑㅇ러ㅐ먄ㅇ러ㅑㅐㅁ냐ㅐㅇ래ㅑㅁㄴ러ㅑㅐ
+            </div>
+            <br/>
+            <div class="blog-product-item-contents-more">
+                자세히 보기
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% endblock %}
