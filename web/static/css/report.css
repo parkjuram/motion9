@@ -171,6 +171,7 @@ a.tab-selected{
     border-radius : 4px;
     border : 1px solid #565a5c;
     width : 44%;
+    height: 250px;
     margin : 5px;
     margin-left : 10px;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
