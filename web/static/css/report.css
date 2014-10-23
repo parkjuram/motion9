@@ -328,7 +328,7 @@ h4.lined-heading span {
     height : 120px;
     box-sizing: border-box;
     float: left;
-    text-align: left;
+    text-align: center;
 }
 
 
@@ -372,4 +372,9 @@ h4.lined-heading span {
     font-size : 12px;
     color : black;
     text-align : center;
+}
+
+.tab-btn{
+    padding : .7em 0px;
+    border : 1px solid black;
 }
