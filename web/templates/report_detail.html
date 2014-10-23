@@ -26,7 +26,7 @@
     <div id="productGrid" >
         <div class="product-detail">
             <div class="item-image">
-                <img src="{{ product.big_img_url }}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
+                <img src="{{ product.big_img_url }}" style="max-width:100%; max-height:250px; width:auto; height:auto;" />
                </div>
                 <br/>
         </div>
@@ -34,7 +34,7 @@
         <div class="product-detail">
             이름 : {{ product.brandname }} {{ product.name }}
             <br/>
-            가격 : {{ product.original_price|intcomma }}
+            가격 : {{ product.original_price|intcomma }} 원
             <br/>
             네이버 쇼핑 평점 :
             <br/>
