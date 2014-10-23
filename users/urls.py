@@ -91,7 +91,7 @@ urlpatterns = patterns('',
 
     url(r'^mobile/report/$', 'users.views.mobile_report_view', name='mobile_report'),
 
-    url(r'^mobile/report/detail/$', 'users.views.mobile_report_detail_view', name='mobile_report_detail'),
+    url(r'^mobile/report/detail/(?P<product_id>(\d+))/$', 'users.views.mobile_report_detail_view', name='mobile_report_detail'),
 
 
 
