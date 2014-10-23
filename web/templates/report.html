@@ -54,14 +54,12 @@
         <br/>
     </div>
 
-    <div id="productGrid" >
-    {#style="position:relative; height:999px;"#}
+    <div id="productGrid">
         {% for product in products.data %}
         <div class="product-item"  >
-    {#style="position:absolute; left:0px; top:0px;"#}
                <div class="item-image">
                    <a href="{% url 'mobile_report_detail' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false">
-                       <img src="{{product.big_img_url}}" style="max-width:100%; max-height:100%; width:auto; height:auto;" />
+                       <img src="{{product.big_img_url}}" style="max-width:150px; max-height:120px; width:auto; height:auto;" />
                    </a>
                </div>
                 <br/>
