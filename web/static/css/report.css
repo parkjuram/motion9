@@ -45,7 +45,7 @@ a:hover{
     margin-right: 15px;
 }
 
-.mypage-wrapper{
+.report-wrapper{
     height : auto;
     text-shadow : none;
     /*background: url('../img/profile_bg.png') top center repeat-y #ECECEC;*/
@@ -70,9 +70,24 @@ a:hover{
     color :black;
 }
 
-.mypage-user-email{
+.report-title{
     font-size : 14px;
     text-align : left;
+    float : left;
+}
+
+.report-main-title{
+    font-size : 14px;
+    text-align : left;
+    border : 1px solid black;
+    padding : 5px;
+}
+
+
+.report-btn{
+    font-size : 14px;
+    float : right;
+    border : 1px solid black;
 }
 
 .mypage-user-info{

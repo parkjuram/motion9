@@ -23,7 +23,7 @@
 {% block content %}
 {% block detail %}
 
-    <div class="mypage-wrapper">
+    <div class="report-wrapper">
         <div class="select-wrapper">
                 <select id="mobileMypageList" data-mini="true" data-shadow="false">
                     <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/13</option>
@@ -35,26 +35,44 @@
 
         <br/>
 
-        <div class="select-wrapper">
-            ASJDPOFASPIDOFJPFID
-        </div>
 
-        <br/>
-        <div class="mypage-user-email">
+        <div class="report-title">
                         전체 가격대 : 5000 ~ 10000원
 {#            전체 가격대 : {{ user.email }}#}
         </div>
         <br/>
-    </div>
+        <br/>
 
-    <div class="mypage-wrapper">
-        <div class="mypage-user-email">
-            스킨
+         <div class="report-main-title">
+                ASJDPOFASPIDOFJPFID
+            <br/>
+                 afvojiafv
+            <br/>
+                 afvojasifv
+            <br/>
+                 asfjvoiasjvio
+            <br/>
+
+        </div>
+
+        <br/>
+
+        <div style="text-align:center;  border : 1px solid black;" >
+            전체 재분석 요청
         </div>
         <br/>
     </div>
 
-    <div id="productGrid" style="min-height:1000px;">
+    <div class="report-wrapper" style="height:30px;">
+        <div class="report-title">
+            스킨
+        </div>
+        <div class="report-btn">
+            다른 제품 분석 요청
+        </div>
+    </div>
+
+    <div id="productGrid" style="min-height:900px;">
         {% for product in products.data %}
         <div class="product-item"  >
                <div class="item-image">
@@ -76,11 +94,13 @@
         {% endfor %}
     </div>
 
-     <div class="mypage-wrapper">
-        <div class="mypage-user-email">
+     <div class="report-wrapper" style="height:30px;">
+        <div class="report-title">
             로션
         </div>
-        <br/>
+        <div class="report-btn">
+            다른 제품 분석 요청
+        </div>
     </div>
 
 {#    <div id="productGrid" >#}
