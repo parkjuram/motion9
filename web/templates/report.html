@@ -67,14 +67,14 @@
                     <h4 class="lined-heading"><span> </span></h4>
                 </div>
                <div class="item-title" >
-                   <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
+                   <a href="{% url 'mobile_report_detail' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
                    <div class="item-price">
                        {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ product.discount_rate }}%</span>
                    </div>
                </div>
         </div>
-        {% endfor %}
                 <div class="clearfix"></div>
+        {% endfor %}
     </div>
 
      <div class="mypage-wrapper">
