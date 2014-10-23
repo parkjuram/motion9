@@ -13,6 +13,9 @@ from django.views.decorators.csrf import csrf_exempt
 from common_controller.decorators import mobile_login_required
 from motion9 import const
 from datetime import datetime
+from foradmin.models import MainImage, Advertisement, Preference
+from motion9 import settings
+
 
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
@@ -24,7 +27,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
     helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
-    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products
+    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines
 
 from .models import Interest
 
@@ -879,37 +882,51 @@ def mobile_report_view(request, category_id=None, page_num=1):
 
 
 @mobile_login_required
-def mobile_report_detail_view(request, category_id=None, page_num=1):
+def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=None):
 
-    user = helper_get_user(request)
-    user_profile = user.profile
+    if product_id is not None:
+        product = helper_get_product_detail(product_id, helper_get_user(request))
 
-    products_ = helper_get_products(helper_get_user(request), category_id)
+        product['category_guide_image'] = MainImage.objects.filter(name=product['category_name']).first()
+        if product['category_guide_image'] is not None:
+            product['category_guide_image'] = settings.MEDIA_URL + product['category_guide_image'].image.name
 
-    if page_num is not None:
-        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
+        blog_reivews = helper_get_blog_reviews(product_id)
+        magazines = helper_get_product_magazines(product_id)
+        magazines_fold = magazines[4:]
+        magazines = magazines[:4]
+
+        user = helper_get_user(request)
+        user_profile = user.profile
+
+        phone = user_profile.phone
+        phones = phone.split("-")
+        phone1 = phone2 = phone3 = ''
+        if len(phones) == 3:
+            phone1 = phones[0]
+            phone2 = phones[1]
+            phone3 = phones[2]
+
+        if user is not None:
+
+            return render(request, 'report_detail.html',
+                {
+                    'tab_name': 'myinfo',
+                    'phone1': phone1,
+                    'phone2': phone2,
+                    'phone3': phone3,
+                    'next': next,
+                    'product': product,
+                    'magazines': magazines,
+                    'magazines_fold': magazines_fold,
+                    'blog_reviews': blog_reivews
+                })
+
+        else:
+            logger.error('have_to_login')
+
     else:
-        products_ = {'data': products_}
+        return render(request, "404.html")
 
-    phone = user_profile.phone
-    phones = phone.split("-")
-    phone1 = phone2 = phone3 = ''
-    if len(phones) == 3:
-        phone1 = phones[0]
-        phone2 = phones[1]
-        phone3 = phones[2]
 
-    if user is not None:
 
-        return render(request, 'report_detail.html',
-            {
-                'products': products_,
-                'tab_name': 'myinfo',
-                'phone1': phone1,
-                'phone2': phone2,
-                'phone3': phone3,
-                'next': next
-            })
-
-    else:
-        logger.error('have_to_login')

@@ -26,4 +26,23 @@ $(function(){
         });
     });
 
+    $('.btn-detail').click(function(e) {
+        e.preventDefault();
+
+       var test =  $(this).parent;
+
+
+        var magazine_fold = $('.blog-product-item-contents-summary');
+        if ( magazine_fold.css('display') == 'none' ) {
+            magazine_fold.css('display',"block");
+//            magazine_fold.scrollView();
+            $(this).text('자세히 보기');
+        } else {
+            magazine_fold.css('display',"none");
+            $(this).text('닫기');
+//            $(".magazine-wrapper").scrollView();
+        }
+        $(this).scroll();
+    });
+
 });
