@@ -46,7 +46,7 @@
     color: #212121;
     display: block;
     font-size: 13px;
-    /*height: 80px;*/
+    white-space: pre-wrap;
     height: auto;
     line-height: 20px;
     list-style-image: none;
