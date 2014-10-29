@@ -35,6 +35,8 @@
         <div class="product-detail">
             이름 : {{ product.brandname }} {{ product.name }}
             <br/>
+            상세설명 :
+            <br/>
             가격 : {{ product.original_price|intcomma }} 원
             <br/>
             네이버 쇼핑 평점 :
@@ -46,7 +48,7 @@
 
       <div data-role="navbar" style="width:95%; margin:5px;">
         <ul>
-          <li><a href="#one" data-ajax="false" class="tab-btn" style="border-color:black">블로그 리뷰</a></li>
+          <li><a href="#one" data-ajax="false" class="tab-btn">블로그 리뷰</a></li>
           <li><a href="#two" data-ajax="false" class="tab-btn">카페/댓글 리뷰</a></li>
           <li><a href="#three" data-ajax="false" class="tab-btn">EDITOR'S NOTES</a></li>
         </ul>

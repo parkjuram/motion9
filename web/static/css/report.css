@@ -415,4 +415,5 @@ h4.lined-heading span {
 .tab-btn{
     padding : .7em 0px;
     border : 1px solid black;
+    border-color : black;
 }
