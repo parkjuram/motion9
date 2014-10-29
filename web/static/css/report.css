@@ -83,6 +83,20 @@ a:hover{
     padding : 5px;
 }
 
+.report-main-title-contents{
+    height : 50px;
+    overflow : hidden;
+}
+
+.report-main-title-more{
+    margin-top : 10px;
+    text-align : center;
+}
+
+/*.view-title-btn{*/
+    /*margin-top : 10px;*/
+    /*text-align : center;*/
+/*}*/
 
 .report-btn{
     font-size : 14px;
@@ -329,6 +343,7 @@ h4.lined-heading span {
     width : auto;
     padding : 9px 10px;
     min-height : 120px;
+    margin-bottom : 10px;
     /*border-bottom : 1px solid #e5e5e5;*/
 }
 
@@ -383,6 +398,12 @@ h4.lined-heading span {
 .blog-product-item-contents-summary{
     font-size : 12px;
     color : black;
+}
+
+.blog-product-item-contents-summary-detail{
+    font-size : 12px;
+    color : black;
+    display : none;
 }
 
 .blog-product-item-contents-more{

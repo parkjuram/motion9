@@ -29,20 +29,71 @@ $(function(){
     $('.btn-detail').click(function(e) {
         e.preventDefault();
 
-       var test =  $(this).parent;
+        var test =  $(this).parent;
+        var blog_summary = $('.blog-product-item-contents-summary');
+        var blog_summary_detail = $('.blog-product-item-contents-summary-detail')
 
-
-        var magazine_fold = $('.blog-product-item-contents-summary');
-        if ( magazine_fold.css('display') == 'none' ) {
-            magazine_fold.css('display',"block");
+        if ( blog_summary.css('display') == 'none' ) {
+            blog_summary.css('display',"block");
+            blog_summary_detail.css('display',"none");
 //            magazine_fold.scrollView();
             $(this).text('자세히 보기');
         } else {
-            magazine_fold.css('display',"none");
+            blog_summary.css('display',"none");
+            blog_summary_detail.css('display', "block");
             $(this).text('닫기');
 //            $(".magazine-wrapper").scrollView();
         }
         $(this).scroll();
+    });
+
+     $('.view-title-btn').click(function(e){
+        e.preventDefault();
+
+        var contents = $('.report-main-title-contents');
+//        var more_btn = $('.report-main-title-more')
+
+        if ( contents.css('height') == '50px') {
+            contents.css('height',"auto");
+//            magazine_fold.scrollView();
+            $(this).text('닫기');
+        } else {
+            contents.css('height',"50px");
+            $(this).text('더보기');
+//            $(".magazine-wrapper").scrollView();
+        }
+        $(this).scroll();
+
+     });
+
+
+     $('.view-product-btn').click(function(e){
+        e.preventDefault();
+        var product_id = $(this).attr('data-product');
+        var dialog = $('#productDetailDialog');
+        var img = $('#popupDetailImg').find('img');
+        var name = $('#popupDetailName');
+        var desc = $('#popupDetailDesc');
+        var btn = $('#popupDetailBtn');
+//
+//       $.ajax({
+//           url: url_reverse_for_product_detail_by_json(product_id),
+//           dataType: 'json',
+//           async: true,
+//           type: 'POST',
+//           success: function (data) {
+//               console.log(data);
+//               img.attr('src', data.big_img_url);
+//               name.text(data.brandname + " " + data.name);
+//               desc.text(data.description);
+//               btn.attr('href', url_reverse_for_product_detail(product_id));
+
+               dialog.popup('open');
+//           },
+//           error: function (jqXHR, textStatus, errorThrown) {
+//
+//           }
+//       });
     });
 
 });

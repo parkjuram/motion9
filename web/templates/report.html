@@ -44,22 +44,40 @@
         <br/>
 
          <div class="report-main-title">
-                ASJDPOFASPIDOFJPFID
-            <br/>
-                 afvojiafv
-            <br/>
-                 afvojasifv
-            <br/>
-                 asfjvoiasjvio
-            <br/>
 
+            <div class="report-main-title-contents">
+                    ASJDPOFASPIDOFJPFID
+                <br/>
+                     afvojiafv
+                <br/>
+                     afvojasifv
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+            </div>
+
+            <div class="report-main-title-more">
+                <a href="#" class="view-title-btn">
+                        더보기
+                </a>
+            </div>
         </div>
 
         <br/>
 
-        <div style="text-align:center;  border : 1px solid black;" >
-            전체 재분석 요청
-        </div>
+        <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+            <div style="text-align:center;  border : 1px solid black;" >
+                전체 재분석 요청
+            </div>
+        </a>
         <br/>
     </div>
 
@@ -67,9 +85,11 @@
         <div class="report-title">
             스킨
         </div>
-        <div class="report-btn">
-            다른 제품 분석 요청
-        </div>
+        <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+            <div class="report-btn">
+                다른 제품 분석 요청
+            </div>
+        </a>
     </div>
 
     <div id="productGrid" style="min-height:900px;">
@@ -98,9 +118,11 @@
         <div class="report-title">
             로션
         </div>
-        <div class="report-btn">
-            다른 제품 분석 요청
-        </div>
+        <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+            <div class="report-btn">
+                다른 제품 분석 요청
+            </div>
+        </a>
     </div>
 
 {#    <div id="productGrid" >#}
@@ -123,6 +145,27 @@
 {#        </div>#}
 {#        {% endfor %}#}
 {#    </div>#}
+
+
+
+<div data-role="popup" id="productDetailDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false"
+         style="margin:0 auto;">
+    <div data-role="header" data-theme="a">
+        <h5 style="font-size: 14px; margin: 10px;" class="product-name-detail" id="popupDetailName"></h5>
+    </div>
+    <div role="main" class="ui-content">
+        <div id="popupDetailImg">
+            <img src=""/>
+        </div>
+        <div id="popupDetailDesc">
+
+        </div>
+        <div style="text-align: center;">
+            <a href="#" target="_self" class="black-btn" id="popupDetailBtn" style="padding:10px;">자세히</a>
+            <a href="#" class="black-btn" data-rel="back" style="padding:10px;">닫기</a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 {% endblock %}
