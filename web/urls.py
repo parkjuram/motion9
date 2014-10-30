@@ -39,4 +39,10 @@ urlpatterns = patterns('',
     url(r'^customize/set/save/$', 'web.views.customize_set_save_view', name='customize_set_save'),
 
     url(r'^help/faq/$', 'web.views.help_faq_view', name='help_faq'),
+
+    url(r'^report/$', 'web.views.report_view', name='report'),
+
+    url(r'^report/detail/(?P<product_id>(\d+))/modal/$', 'web.views.report_detail_modal_view', name='report_detail_modal'),
+
+
 )

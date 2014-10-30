@@ -752,6 +752,76 @@ def help_faq_view(request):
         'faqs':faqs
     })
 
+@login_required
+def report_view(request, category_id=None, page_num=1):
+
+    user = helper_get_user(request)
+    user_profile = user.profile
+    page_num = int(page_num)
+    price_max_filter = request.GET.get('price_max', None)
+    price_min_filter = request.GET.get('price_min', None)
+    brandname_filter = request.GET.get('brandname', None)
+    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter, brandname_filter)
+
+    if page_num is not None:
+        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
+    else:
+        products_ = {'data': products_}
+
+    # return http_response_by_json(None, products_ )
+
+    categories = Category.objects.filter(is_set=False).all()
+
+    if category_id is None:
+        current_category = 'all'
+    else:
+        current_category = Category.objects.get(id=category_id).name
+
+    brands = helper_get_brands()
+    adarea_items = helper_get_adarea_items(request)
+    phone = user_profile.phone
+    phones = phone.split("-")
+    phone1 = phone2 = phone3 = ''
+
+    if user is not None:
+
+        return render(request, 'report_web.html',
+            {
+                'products': products_,
+                'current_category': current_category,
+                'current_category_id': category_id,
+                'categories': categories,
+                'current_page': 'shop_product',
+                'current_brand': brandname_filter,
+                'brands': brands,
+                'adarea_items': adarea_items,
+                'tab_name': 'myinfo',
+                'next': next
+            })
+
+    else:
+        logger.error('have_to_login')
+
+
+@login_required
+def report_detail_modal_view(request, category_id=None, page_num=1, product_id=None):
+
+    if product_id is not None:
+        product = helper_get_product_detail(product_id, helper_get_user(request))
+        blog_reivews = helper_get_blog_reviews(product_id)
+
+        return render(request, "product_detail_for_modal.html",
+                      {
+                          'product': product,
+                          'blog_reviews': blog_reivews
+                      })
+    else:
+        return render(request, "404.html")
+
+
+
+
+
 # render example
 # return render_to_response('shopping_product_web.html',
 #               {
@@ -760,23 +830,6 @@ def help_faq_view(request):
 #                   'categories': categories,
 #                   'current_page': 'shop_product'
 #               }, RequestContext(request))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
