@@ -1,0 +1,198 @@
+{% extends "web_base.html" %}
+{% block header %}
+{% load static %}
+{% load humanize %}
+
+<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+{#<script src="{% static "swiper/idangerous.swiper.js" %}"></script>#}
+{#<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>#}
+<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script src="{% static "js/shopping_product_web.js" %}"></script>
+{#<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>#}
+{#<script src="{% static 'js/my_page_interesting_set.js'%}"></script>#}
+<link rel="stylesheet" href="{% static 'css/report_web.css'%}"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+<link rel="stylesheet" href="{% static "css/shopping_product_web.css" %}" type="text/css" />
+<script src="{% static 'js/report.js'%}"></script>
+{#<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>#}
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="row">
+
+      <div class="select-wrapper" style="border:0px; margin-top:40px;">
+                <select id="mobileMypageList" data-mini="true" data-shadow="false" style="width:100%; height:40px; text-align:center;">
+                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/13</option>
+                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/14</option>
+                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/15</option>
+                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/16</option>
+                </select>
+        </div>
+
+        <br/>
+
+
+    <div class="report-wrapper">
+        <div class="report-title">
+                        전체 가격대 : 5000 ~ 10000원
+{#            전체 가격대 : {{ user.email }}#}
+        </div>
+        <br/>
+        <br/>
+
+         <div class="report-main-title">
+
+            <div class="report-main-title-contents">
+                    ASJDPOFASPIDOFJPFID
+                <br/>
+                     afvojiafv
+                <br/>
+                     afvojasifv
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+                     asfjvoiasjvio
+                <br/>
+            </div>
+
+            <div class="report-main-title-more">
+                <a href="#" class="view-title-btn">
+                        더보기
+                </a>
+            </div>
+        </div>
+
+        <br/>
+
+        <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+            <div style="text-align:center;  border : 1px solid black;" >
+                전체 재분석 요청
+            </div>
+        </a>
+        <br/>
+    </div>
+
+
+    <div class="report-wrapper" style="padding:0px; border :0px; margin-top:20px;">
+        <div class="report-wrapper" style="width:488px; height:40px; float:left; margin:0px; margin-right:10px;">
+            <div class="report-title">
+                스킨
+            </div>
+            <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+                <div class="report-btn">
+                    다른 제품 분석 요청
+                </div>
+            </a>
+        </div>
+
+         <div class="report-wrapper" style="width:488px; height:40px; float:right;  margin:0px; margin-left:10px;">
+            <div class="report-title">
+                로션
+            </div>
+            <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+                <div class="report-btn">
+                    다른 제품 분석 요청
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-container float-left" style="width:520px; margin:10px;">
+        <div class="box-css" style="margin-bottom: 50px;">
+            <div id="productGrid" style="margin-bottom: 20px; margin-left:0px;">
+                {% for product in products.data %}
+                <div class="product-item" style="width:240px; margin-left:0px;">
+                    <div class="product-item-img"  id="item-{{product.id}}" data-attr="{{product.id}}">
+                        <div class="product-opacity-bg product-hover-area">
+                            <a href="{% url 'product' product_id=product.id %}"><img src="{% static "img/detail_black.png" %}" class="icon"/></a>
+                        </div>
+                        <img src="{{product.big_img_url}}"/>
+                    </div>
+                    <div class="product-item-info">
+                        <div class="product-item-brand">
+                            {{ product.brandname }}
+                        </div>
+                        <div class="product-item-name">
+                            <a href="{% url 'product' product_id=product.id %}" title="{{ product.name }}">{{product.name}}</a>
+                        </div>
+                        <div class="product-item-info-contents">
+                           카테고리 > {{ product.category_name }}<br/>
+                           가격 : {{ product.discount_price|intcomma }}원 <br/>
+                           용량 : {{ product.capacity }}
+                        </div>
+                        <div class="product-hover-area">
+                            <div class="product-item-desc"><span class="text-deco-through">{{ product.original_price|intcomma }}원</span> -> <span>{{ product.discount_price|intcomma }}원</span></div>
+                            <div class="product-item-btn-group">
+                                {% if product.is_interested %}
+                                    <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest interest-done">관심취소</a>&nbsp;&nbsp;</div>
+                                {% else %}
+                                    <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest">관심하기</a>&nbsp;&nbsp;</div>
+                                {% endif %}
+                                <div class="product-item-btn">&nbsp;&nbsp;<img src="{% static "img/Add_to_basket_black.png" %}"/><a href="#" data-type='p' data-product="{{ product.id }}" class="btn-for-cart"> 장바구니</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container float-left" style="width:520px; margin:10px;">
+        <div class="box-css" style="margin-bottom: 50px;">
+            <div id="productGrid" style="margin-bottom: 20px; margin-left:0px;">
+                {% for product in products.data %}
+                <div class="product-item" style="width:240px; margin-left:0px;">
+                    <div class="product-item-img"  id="item-{{product.id}}" data-attr="{{product.id}}">
+                        <div class="product-opacity-bg product-hover-area">
+                            <a href="/report/detail/{{ product.id }}/modal" class="view-report-detail-btn" data-product="{{ product.id }}"><img src="{% static "img/detail_black.png" %}" class="icon"/></a>
+                        </div>
+                        <img src="{{product.big_img_url}}"/>
+                    </div>
+                    <div class="product-item-info">
+                        <div class="product-item-brand">
+                            {{ product.brandname }}
+                        </div>
+                        <div class="product-item-name">
+                            <a href="{% url 'product' product_id=product.id %}" title="{{ product.name }}">{{product.name}}</a>
+                        </div>
+                        <div class="product-item-info-contents">
+                           카테고리 > {{ product.category_name }}<br/>
+                           가격 : {{ product.discount_price|intcomma }}원 <br/>
+                           용량 : {{ product.capacity }}
+                        </div>
+                        <div class="product-hover-area">
+                            <div class="product-item-desc"><span class="text-deco-through">{{ product.original_price|intcomma }}원</span> -> <span>{{ product.discount_price|intcomma }}원</span></div>
+                            <div class="product-item-btn-group">
+                                {% if product.is_interested %}
+                                    <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest interest-done">관심취소</a>&nbsp;&nbsp;</div>
+                                {% else %}
+                                    <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest">관심하기</a>&nbsp;&nbsp;</div>
+                                {% endif %}
+                                <div class="product-item-btn">&nbsp;&nbsp;<img src="{% static "img/Add_to_basket_black.png" %}"/><a href="#" data-type='p' data-product="{{ product.id }}" class="btn-for-cart"> 장바구니</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="reportDetailModal" class="jqmWindow">
+</div>
+{% endblock %}
