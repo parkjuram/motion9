@@ -447,8 +447,8 @@ h4.lined-heading span {
 }
 .one-btn.ui-btn:focus {
     padding : .7em 0px;
-    border : 1px solid black;
-    border-color : #292929;
+    border : 1px solid #e5e5e5; !important;
+    /*border-color : #292929; !important;*/
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
@@ -456,8 +456,8 @@ h4.lined-heading span {
 }
 .two-btn.ui-btn:focus {
     padding : .7em 0px;
-    border : 1px solid black;
-    border-color : #292929;
+    border : 1px solid #e5e5e5; !important;
+    /*border-color : #292929; !important;*/
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
