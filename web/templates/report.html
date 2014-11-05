@@ -126,18 +126,21 @@
 
 <div data-role="popup" id="productDetailDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false"
          style="margin:0 auto;">
-    <div data-role="header" data-theme="a">
-        <h5 style="font-size: 14px; margin: 10px;" class="product-name-detail" id="popupDetailName"></h5>
-    </div>
+{#    <div data-role="header" data-theme="a">#}
+{#        <h5 style="font-size: 14px; margin: 10px;" class="product-name-detail" id="popupDetailName"></h5>#}
+{#    </div>#}
     <div role="main" class="ui-content">
-        <div id="popupDetailImg">
-            <img src=""/>
+        <div class="report-title" style="float:none;">
+            * 재분석 요청 사유
         </div>
-        <div id="popupDetailDesc">
-
-        </div>
+{#        <div class="report-wrapper">#}
+            <textarea onclick="if(this.value=='재분석 요청 사유 혹은 원하는 제품의 리뷰를 찾는다면 적어주세요.' +
+             '아무것도 적지 않으신면 ' +
+              '000님께 맞는 제품을 다시 선정해서 분석해드립니다.'){this.value=''}">
+            </textarea>
+{#        </div>#}
         <div style="text-align: center;">
-            <a href="#" target="_self" class="black-btn" id="popupDetailBtn" style="padding:10px;">자세히</a>
+            <a href="#" target="_self" class="black-btn" id="popupDetailBtn" style="padding:10px;">요청</a>
             <a href="#" class="black-btn" data-rel="back" style="padding:10px;">닫기</a>
         </div>
     </div>
