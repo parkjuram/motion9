@@ -24,8 +24,7 @@ $( document ).on( "pageinit", function( event ) {
             }, {scope: 'public_profile,email,user_friends'});
             */
         } else {
-          // The person is not logged into Facebook, so we're not sure if
-          // they are logged into this app or not.
+            FB.login( fbLoginCallback, {scope: 'public_profile,email,user_friends' });
         }
     }
 
