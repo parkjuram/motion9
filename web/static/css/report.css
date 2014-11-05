@@ -344,6 +344,7 @@ h4.lined-heading span {
     padding : 9px 10px;
     min-height : 120px;
     margin-bottom : 10px;
+    display : flex;
     /*border-bottom : 1px solid #e5e5e5;*/
 }
 
@@ -371,7 +372,7 @@ h4.lined-heading span {
     height: 50px;
     /*position : absolute;*/
     /*top : 50%;*/
-    margin-top : 35px;
+    /*margin-top : 35px;*/
     border-radius : 150px;
     /*border: 1px solid #e5e5e5;*/
     -webkit-border-radius: 150px;
