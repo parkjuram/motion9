@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
+from users.models import UserSurvey
+
 
 class CustomSetAdmin(admin.ModelAdmin):
     list_display = ('user', 'set', 'is_active', 'created')
@@ -57,5 +59,15 @@ class BeforePaymentAdmin(admin.ModelAdmin):
 
 admin.site.register(BeforePayment, BeforePaymentAdmin)
 
+
+class UserSurveyAdmin(admin.ModelAdmin):
+    list_display = ('user', 'survey_item', 'survey_item_option')
+    list_display_links = ('user', 'survey_item', 'survey_item_option',)
+
+admin.site.register(UserSurvey, UserSurveyAdmin)
+
+
 admin.site.register(Interest)
+
+
 

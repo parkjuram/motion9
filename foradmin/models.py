@@ -22,3 +22,14 @@ class Preference(models.Model):
 
     def __unicode__(self):
         return '(%r)Preference : name(%s) content(%r)' % (self.id, self.name, self.content)
+
+class SurveyItem(models.Model):
+    question = models.TextField(unique=True)
+    type = models.CharField(max_length=20, null=False, default='radio-vertical')
+
+class SurveyItemOption(models.Model):
+    item = models.ForeignKey('foradmin.SurveyItem', related_name='get_options')
+    content = models.TextField(blank=True)
+
+    class Meta:
+        unique_together = ('item', 'content',)
