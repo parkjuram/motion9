@@ -27,9 +27,15 @@ class SurveyItem(models.Model):
     question = models.TextField(unique=True)
     type = models.CharField(max_length=20, null=False, default='radio-vertical')
 
+    def __unicode__(self):
+        return '(%r)SurveyItem : question(%s) type(%s)' % (self.id, self.question, self.type)
+
 class SurveyItemOption(models.Model):
     item = models.ForeignKey('foradmin.SurveyItem', related_name='get_options')
     content = models.TextField(blank=True)
 
     class Meta:
         unique_together = ('item', 'content',)
+
+    def __unicode__(self):
+        return '(%r)SurveyItemOption : item(%r) content(%s)' % (self.id, self.item, self.content)
