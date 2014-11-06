@@ -929,4 +929,11 @@ def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=
         return render(request, "404.html")
 
 
+@mobile_login_required
+def mobile_report_form_view(request):
 
+        return render(request, 'report_form.html',
+            {
+                'next': reverse('mobile_report_form')+'#two'
+                # 'next': "{% url 'mobile_report_form' %}"
+            })

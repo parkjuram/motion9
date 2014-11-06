@@ -464,3 +464,8 @@ h4.lined-heading span {
     box-shadow: none !important;
     text-shadow: none ! important;
 }
+
+#productDetailDialog-popup{
+    width:400px;
+    max-width:100%;
+}
