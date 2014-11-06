@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     url(r'^check/token/facebook/$', 'users.views.check_facebook_token_view', name='check_facebook_token'),
     url(r'^check/token/facebook/(?P<next>(\w+))/fail/(?P<fail>(\w+))/$', 'users.views.check_facebook_token_view', name='check_facebook_token'),
 
-    url(r'^registration/(?P<next>(\w+))/$', 'users.views.registration', name='registration'),
+    url(r'^registration/(?P<next>([\w:/#]+))/$', 'users.views.registration', name='registration'),
     url(r'^registration_page/$', 'users.views.registration_view', name='registration_page'),
 
     url(r'^mobile/registration_page/$', 'users.views.mobile_registration_view', name='mobile_registration_page'),
@@ -90,6 +90,8 @@ urlpatterns = patterns('',
     url(r'^mobile/mypage/edit/$', 'users.views.mobile_mypage_myinfo_edit_view', name='mobile_mypage_myinfo_edit'),
 
     url(r'^mobile/report/$', 'users.views.mobile_report_view', name='mobile_report'),
+
+    url(r'^mobile/report/form/$', 'users.views.mobile_report_form_view', name='mobile_report_form'),
 
     url(r'^mobile/report/detail/(?P<product_id>(\d+))/$', 'users.views.mobile_report_detail_view', name='mobile_report_detail'),
 
