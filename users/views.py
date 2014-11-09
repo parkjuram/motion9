@@ -27,7 +27,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
     helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
-    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines
+    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines, helper_get_survey_items
 
 from .models import Interest
 
@@ -932,8 +932,15 @@ def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=
 @mobile_login_required
 def mobile_report_form_view(request):
 
+        survey = helper_get_survey_items(request)
+
+        survey_two = survey[3:]
+        survey = survey[:3]
+
         return render(request, 'report_form.html',
             {
-                'next': reverse('mobile_report_form')+'#two'
+                'next': reverse('mobile_report_form'),
+                'survey': survey,
+                'survey_two': survey_two
                 # 'next': "{% url 'mobile_report_form' %}"
             })
