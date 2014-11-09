@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Motion9</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load static %}
+    {% load humanize %}
+    {% load mathfilters %}
+
+    <link rel="stylesheet" href="{% static 'css/jquery.mobile-1.4.1.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/common_style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/jquery.glide.style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}"/>
+    <script src="{% static 'js/register.js' %}"></script>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'js/jquery.mobile-1.4.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.glide.js' %}"></script>
+    <script src="{% static 'js/common_js.js' %}"></script>
+    <script src="{% static 'js/common_js_mobile.js'%}"></script>
+    <script>
+        var url_for_login_next = "{% url 'mobile_login_page' %}?next={{ request.get_full_path }}";
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-53577084-1', 'auto');
+      ga('require', 'displayfeatures');
+      {% if user.is_authenticated %}
+      ga('set', '&uid', '{{ user.email }}');
+      {% endif %}
+      ga('send', 'pageview');
+
+    </script>
+    <script>
+        var url_for_cart_info_as_json = "{% url 'mypage_cart_json' %}";
+        var urlForUpdateCart = "{% url 'update_cart' %}";
+
+    </script>
+    {% block header %}
+    {% endblock %}
+
+</head>
+<body>
+
+{#<!-- Start of first page -->#}
+{#<div data-role="page" id="one">#}
+{#	<div role="main" class="ui-content">#}
+{#        <div class="report-wrapper">#}
+{#		    <p>화장품 분석 보고서를 받아 보시기 위해 먼저 간단히 MOTION9에 가입하셔야 합니다.</p>#}
+{#            <p>5가지 정도의 문항 입력 후 최소 24시간 최대 48시간에 고객님의 피부를 위한 화장품 분석 보고서를 받아 보실 수 있습니다.</p>#}
+{#        </div>#}
+{#        <div class="report-wrapper">#}
+{#            <a href="#two">9초만에 가입하고 리뷰 분석 보고서 받기</a>#}
+{#        </div>#}
+{#	</div>#}
+{#</div>#}
+
+<!-- Start of three page -->
+<div data-role="page" id="one">
+
+	<div role="main" class="ui-content">
+
+            <div>
+                <form>
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>질문 1 :</legend>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+                    <label for="radio-choice-h-2a">One</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">Two</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+                    <label for="radio-choice-h-2c">Three</label>
+                    </fieldset>
+                </form>
+            </div>
+            <div>
+                <form>
+                    <fieldset data-role="controlgroup">
+                    <legend>질문 2 :</legend>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
+                    <label for="radio-choice-v-2a">One</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2b" value="off">
+                    <label for="radio-choice-v-2b">Two</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
+                    <label for="radio-choice-v-2c">Three</label>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="report-wrapper">
+                <a href="#two">다음</a>
+            </div>
+
+	</div>
+</div>
+
+<!-- Start of fourth page -->
+<div data-role="page" id="two">
+
+{#	<div data-role="header">#}
+{#		<h1>Bar</h1>#}
+{#	</div><!-- /header -->#}
+
+	<div role="main" class="ui-content">
+
+            <div>
+                <form>
+                    <fieldset data-role="controlgroup">
+                    <legend>질문 3 :</legend>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
+                    <label for="radio-choice-v-2a">One</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2b" value="off">
+                    <label for="radio-choice-v-2b">Two</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
+                    <label for="radio-choice-v-2c">Three</label>
+                    </fieldset>
+                </form>
+            </div>
+
+             <div>
+                <form>
+                    <fieldset data-role="controlgroup">
+                    <legend>질문 4 :</legend>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
+                    <label for="radio-choice-v-2a">One</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2b" value="off">
+                    <label for="radio-choice-v-2b">Two</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
+                    <label for="radio-choice-v-2c">Three</label>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div>
+                <form>
+                    <fieldset data-role="controlgroup">
+                    <legend>질문 5 :</legend>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
+                    <label for="radio-choice-v-2a">One</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2b" value="off">
+                    <label for="radio-choice-v-2b">Two</label>
+                    <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
+                    <label for="radio-choice-v-2c">Three</label>
+                    </fieldset>
+                </form>
+            </div>
+
+        <div class="report-wrapper">
+            <a href="#one">뒤로가기</a>
+        </div>
+        <div class="report-wrapper">
+            <a href="#three">다음</a>
+        </div>
+
+    </div><!-- /content -->
+
+{#	<div data-role="footer">#}
+{#		<h4>Page Footer</h4>#}
+{#	</div><!-- /footer -->#}
+</div><!-- /page -->
+
+<!-- Start of fourth page -->
+<div data-role="page" id="three">
+
+{#	<div data-role="header">#}
+{#		<h1>Bar</h1>#}
+{#	</div><!-- /header -->#}
+
+	<div role="main" class="ui-content">
+		<p>그 외 화장품 관련 분석 요청</p>
+
+            <textarea  id='popupText' onclick="document.getElementById('popupText').value='';">
+ex) 수분크림은 꼭 필요해요.
+비오템 아쿠아 로션 리뷰 분석해주세요.
+            </textarea>
+        <div class="report-wrapper">
+             <a href="{% url 'mobile_index' %}">보고서 요청</a>
+        </div>
+
+	</div><!-- /content -->
+
+{#	<div data-role="footer">#}
+{#		<h4>Page Footer</h4>#}
+{#	</div><!-- /footer -->#}
+</div><!-- /page -->
+
+</body>
+
+</html>
