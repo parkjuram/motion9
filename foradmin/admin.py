@@ -1,5 +1,5 @@
 from django.contrib import admin
-from foradmin.models import SurveyItem, SurveyItemOption
+from foradmin.models import SurveyItem, SurveyItemOption, Survey
 from .models import MainImage, Advertisement, Preference
 
 
@@ -20,10 +20,15 @@ class PreferenceAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
 admin.site.register(Preference, PreferenceAdmin)
 
+class SurveyAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created')
+    list_display_links = ('title',)
+admin.site.register(Survey, SurveyAdmin)
+
 class SurveyItemAdmin(admin.ModelAdmin):
-    list_display = ('question','type')
+    list_display = ('item', 'question','type')
     list_editable = ('type',)
-    list_display_links = ('question',)
+    list_display_links = ('item', 'question',)
 admin.site.register(SurveyItem, SurveyItemAdmin)
 
 class SurveyItemOptionAdmin(admin.ModelAdmin):

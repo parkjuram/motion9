@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 class MainImage(models.Model):
@@ -23,12 +24,24 @@ class Preference(models.Model):
     def __unicode__(self):
         return '(%r)Preference : name(%s) content(%r)' % (self.id, self.name, self.content)
 
-class SurveyItem(models.Model):
-    question = models.TextField(unique=True)
-    type = models.CharField(max_length=20, null=False, default='radio-vertical')
+
+class Survey(models.Model):
+    title = models.TextField(unique=True)
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     def __unicode__(self):
-        return '(%r)SurveyItem : question(%s) type(%s)' % (self.id, self.question, self.type)
+        return '%r - Survey : title[%s]' % (self.id, self.title)
+
+class SurveyItem(models.Model):
+    item = models.ForeignKey('foradmin.Survey', related_name='get_questions')
+    question = models.TextField()
+    type = models.CharField(max_length=20, null=False, default='radio-vertical')
+
+    class Meta:
+        unique_together = ('item', 'question',)
+
+    def __unicode__(self):
+        return '%r - SurveyItem : item[%r] question[%s] type[%s]' % (self.id, self.item, self.question, self.type)
 
 class SurveyItemOption(models.Model):
     item = models.ForeignKey('foradmin.SurveyItem', related_name='get_options')
@@ -38,4 +51,4 @@ class SurveyItemOption(models.Model):
         unique_together = ('item', 'content',)
 
     def __unicode__(self):
-        return '(%r)SurveyItemOption : item(%r) content(%s)' % (self.id, self.item_id, self.content)
+        return '%r - SurveyItemOption : item[%r] content[%s]' % (self.id, self.item, self.content)
