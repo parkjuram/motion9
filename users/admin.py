@@ -61,13 +61,9 @@ admin.site.register(BeforePayment, BeforePaymentAdmin)
 
 
 class UserSurveyAdmin(admin.ModelAdmin):
-    list_display = ('user', 'survey_item', 'survey_item_option')
-    list_display_links = ('user', 'survey_item', 'survey_item_option',)
+    list_display = ('user', 'survey')
+    list_display_links = ('user', 'survey',)
 
 admin.site.register(UserSurvey, UserSurveyAdmin)
 
-
 admin.site.register(Interest)
-
-
-
