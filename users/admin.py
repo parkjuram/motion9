@@ -68,7 +68,7 @@ class UserSurveyAdmin(admin.ModelAdmin):
 admin.site.register(UserSurvey, UserSurveyAdmin)
 
 class UserSurveyDetailAdmin(admin.ModelAdmin):
-    list_display = ('user_survey', 'survey_item_option', 'comments', 'created')
+    list_display = ('user_survey', 'survey_item_option')
     list_display_links = ('user_survey', 'survey_item_option',)
     
 admin.site.register(UserSurveyDetail, UserSurveyDetailAdmin)
