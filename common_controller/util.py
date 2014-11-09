@@ -11,7 +11,7 @@ from django.template.loader import get_template
 import time
 from foradmin.models import Advertisement, SurveyItem, Survey
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine, Faq
-from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
+from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment, UserSurvey
 from django.core.exceptions import ObjectDoesNotExist
 
 from motion9.const import *
@@ -858,4 +858,15 @@ def helper_get_survey_items(request):
         })
         survey_items_.append(item_)
 
-    return survey_items_
+    return {
+        'survey_id': survey.id,
+        'survey_items': survey_items_
+    }
+
+def helper_request_survey(request, data):
+    user_survey = UserSurvey(user=request.user, comments=data.comments )
+    user_survey.survey_id = data.survey_id
+    user_survey.save()
+
+    for option in data.options:
+        UserSurvey.objects.create(user_survey=user_survey, survey_item_option = option)

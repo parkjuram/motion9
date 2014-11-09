@@ -95,12 +95,6 @@ urlpatterns = patterns('',
 
     url(r'^mobile/report/detail/(?P<product_id>(\d+))/$', 'users.views.mobile_report_detail_view', name='mobile_report_detail'),
 
-
-
-
-# @app.route('/mypage/set', methods = ['GET'])
-# @app.route('/mypage/set/<int:pageNum>', methods = ['GET'])
-# @login_required
-# def myPageSetWeb(pageNum=None):
+    url(r'^survey/request/$', 'users.views.request_survey', name='request_survey'),
 
 )
