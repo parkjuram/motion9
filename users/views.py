@@ -935,14 +935,27 @@ def mobile_report_form_view(request):
 
         survey = helper_get_survey_items(request)
 
-        survey_two = survey[3:]
-        survey = survey[:3]
+        survey_ = []
+        survey_group = []
+        survey_range = len(survey)+1
+
+        for i in range(len(survey)):
+            survey[i].update({
+                'label_index': str(i+1)
+            })
+            survey_group.append(survey[i])
+            if (i+1)%1==0:
+                survey_.append(survey_group)
+                survey_group = []
+
+        if len(survey_group)!=0:
+            survey_.append(survey_group)
 
         return render(request, 'report_form.html',
             {
                 'next': reverse('mobile_report_form'),
-                'survey': survey,
-                'survey_two': survey_two
+                'survey': survey_,
+                'survey_range': survey_range
                 # 'next': "{% url 'mobile_report_form' %}"
             })
 
