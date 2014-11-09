@@ -148,7 +148,7 @@ class BeforePayment(models.Model):
 
 class UserSurvey(models.Model):
     user = models.ForeignKey('auth.User')
-    survey_item_option = models.ForeignKey('foradmin.SurveyItemOption')
+    survey_item_option = models.ForeignKey('foradmin.SurveyItemOption', null=True)
 
     class Meta:
         unique_together = ('user', 'survey_item_option',)
