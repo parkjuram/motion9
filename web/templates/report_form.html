@@ -54,6 +54,7 @@
 <body>
 
 <form value="{{ survey.survey_id }}">
+{%  csrf_token %}
     {% for survey_group in survey %}
         <div data-role="page" id="page-num-{{ forloop.counter0 }}">
             <div role="main" class="ui-content">

@@ -959,7 +959,7 @@ def mobile_report_form_view(request):
                       # 'next': "{% url 'mobile_report_form' %}"
                   })
 
-
+@csrf_exempt
 def request_survey(request):
     data = {
         'survey_id': request.POST.get('survey_id', None),
