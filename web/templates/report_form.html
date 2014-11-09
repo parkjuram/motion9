@@ -22,6 +22,7 @@
     <script src="{% static 'js/jquery.glide.js' %}"></script>
     <script src="{% static 'js/common_js.js' %}"></script>
     <script src="{% static 'js/common_js_mobile.js'%}"></script>
+{#    <script src="{% static 'js/report_form.js' %}"></script>#}
     <script>
         var url_for_login_next = "{% url 'mobile_login_page' %}?next={{ request.get_full_path }}";
 
@@ -64,19 +65,19 @@
 {#</div>#}
 
 <!-- Start of three page -->
-<form>
-    {% for survey_group in survey %}
+<form value="{{ survey.survey_id }}">
+    {% for survey_group in survey.survey_items %}
         <div data-role="page" id="page-num-{{ forloop.counter0 }}">
             <div role="main" class="ui-content">
                 {% for survey_items in survey_group %}
-                    <div style="margin-bottom:40px; border:1px solid #e5e5e5; padding:10px 0px;">
-                        <fieldset data-role="controlgroup">
+                    <div class="report-box">
+                        <fieldset data-role="controlgroup">1
                             <legend class="report-radio-title">{{ survey_items.label_index }}. {{ survey_items.question }} </legend>
                             {% for option in survey_items.options %}
-                                <input type="radio" name="radio-{{ forloop.parentloop.counter }}"
-                                       id="r-{{ forloop.counter }}" value="{{ option.id }}">
+                                <input type="radio" name="radio-name-{{ forloop.parentloop.counter }}"
+                                       id="radio-id-{{ forloop.counter }}" value="{{ option.id }}">
                                 <label style="border:0px; background:#f9f9f9; font-size:15px; color:#292929;"
-                                       for="r-{{ forloop.counter }}">{{ option.content }}</label>
+                                       for="radio-label-{{ forloop.counter }}">{{ option.content }}</label>
                             {% endfor %}
                         </fieldset>
                     </div>
@@ -100,20 +101,20 @@
 <div data-role="page" id="page-num-{{ survey_range|sub:1 }}">
 
 	<div role="main" class="ui-content">
-        <div  class="report-radio-title">
-		    그 외 화장품 관련 분석 요청
-        </div>
-            <textarea  id='reportText' style="padding:10px 12px; border:1px solid #e5e5e5; font-size:12px; color:#a9a9a9; margin:0; background:rgba(253,245,247,0.38); box-shadow:none;"
-                       onclick="document.getElementById('reportText').value='';">
-ex) 수분크림은 꼭 필요해요.
-      비오템 아쿠아 로션 리뷰 분석해주세요.
-            </textarea>
-        <div style="text-align: center; margin-top : 50px;">
-             <a href="{% url 'mobile_index' %}" class="black-btn" style="width:70px;">보고서 요청</a>
-        </div>
-        <div style="text-align: center; margin-top : 20px;">
-                   {{survey_range}}/{{ survey_range }}
-        </div>
+            <div class="report-radio-title">
+                그 외 화장품 관련 분석 요청
+            </div>
+                <textarea  id='reportText' style="padding:10px 12px; border:1px solid #e5e5e5; font-size:12px; color:#a9a9a9; margin:0; background:rgba(253,245,247,0.38); box-shadow:none; border-radius:0px;"
+                           onclick="document.getElementById('reportText').value='';">
+    ex) 수분크림은 꼭 필요해요.
+          비오템 아쿠아 로션 리뷰 분석해주세요.
+                </textarea>
+            <div style="text-align: center; margin-top : 50px;">
+                 <a href="{% url 'mobile_index' %}" id="report-btn" class="black-btn" style="width:70px;">보고서 요청</a>
+            </div>
+            <div style="text-align: center; margin-top : 20px;">
+                       {{survey_range}}/{{ survey_range }}
+            </div>
 	</div><!-- /content -->
 
 </div><!-- /page -->
