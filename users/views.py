@@ -961,7 +961,11 @@ def mobile_report_form_view(request):
 
 
 def request_survey(request):
-    data = request.POST.get('data', None)
+    data = {
+        'survey_id': request.POST.get('survey_id', None),
+        'comments': request.POST.get('comments', ''),
+        'options': request.POST.get('options', None)
+    }
     if data is None:
         pass
     else:
