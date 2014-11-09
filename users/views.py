@@ -936,9 +936,9 @@ def mobile_report_form_view(request):
 
         survey_ = []
         survey_group = []
-        survey_range = len(survey)+1
+        survey_range = len(survey.survey_items)+1
 
-        for i in range(len(survey)):
+        for i in range(len(survey.survey_items)):
             survey[i].update({
                 'label_index': str(i+1)
             })
@@ -954,6 +954,7 @@ def mobile_report_form_view(request):
             {
                 'next': reverse('mobile_report_form'),
                 'survey': survey_,
+                'survey_id': survey.survey_id,
                 'survey_range': survey_range
                 # 'next': "{% url 'mobile_report_form' %}"
             })
