@@ -148,10 +148,10 @@ class BeforePayment(models.Model):
 
 class UserSurvey(models.Model):
     user = models.ForeignKey('auth.User')
-    survey = models.ForeignKey('foradmin.Survey')
+    survey_item_option = models.ForeignKey('foradmin.SurveyItemOption', null=True)
 
     class Meta:
-        unique_together = ('user', 'survey',)
+        unique_together = ('user', 'survey_item_option',)
 
     def __unicode__(self):
         return '%r - UserSurvey : user[%r] survey[%r]' % (self.id, self.user, self.survey, )
