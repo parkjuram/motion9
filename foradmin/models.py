@@ -51,4 +51,4 @@ class SurveyItemOption(models.Model):
         unique_together = ('item', 'content',)
 
     def __unicode__(self):
-        return '%r - SurveyItemOption : item[%r] content[%s]' % (self.id, self.item, self.content)
+        return '%r - SurveyItemOption : item[%s] content[%s]' % (self.id, self.item.question, self.content)
