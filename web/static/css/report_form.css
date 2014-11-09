@@ -1,3 +1,11 @@
+body{
+    font-family: Muli, 'Nanum Gothic', Geneva, sans-serif;
+    _font-family: 'Nanum Gothic', Muli, Geneva, sans-serif;
+	/*font-size : 12px;*/
+	/*background-color : #F3F3F3;*/
+}
+
+
 .black-btn {
   text-align : center;
   width: 60px;
@@ -41,4 +49,8 @@
     color : #a9a9a9;
     margin : 0;
     background : rgba(253,245,247,0.38);
+}
+
+.ui-controlgroup-label{
+    border-bottom : 1px solid #e5e5e5;
 }

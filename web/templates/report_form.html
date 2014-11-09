@@ -65,78 +65,39 @@
 
 <!-- Start of three page -->
 <form>
-<div data-role="page" id="one">
-
-	<div role="main" class="ui-content">
-            {% for survey_items in survey %}
-                <div>
-                       <fieldset data-role="controlgroup">
-                            <legend class="report-radio-title">{{   survey_items.question }} </legend>
-                           {% for option in survey_items.options %}
-                                <input type="radio" name="radio-{{ forloop.parentloop.counter }}" id="r-{{ forloop.counter }}" value="on" >
-                                <label style="border:0px; background:#f9f9f9; font-size:15px; color:#292929;" for="r-{{ forloop.counter }}">{{ option }}</label>
-    {#                            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">#}
-                           {% endfor %}
+    {% for survey_group in survey %}
+        <div data-role="page" id="page-num-{{ forloop.counter0 }}">
+            <div role="main" class="ui-content">
+                {% for survey_items in survey_group %}
+                    <div style="margin-bottom:40px; border:1px solid #e5e5e5; padding:10px 0px;">
+                        <fieldset data-role="controlgroup">
+                            <legend class="report-radio-title">{{ survey_items.label_index }}. {{ survey_items.question }} </legend>
+                            {% for option in survey_items.options %}
+                                <input type="radio" name="radio-{{ forloop.parentloop.counter }}"
+                                       id="r-{{ forloop.counter }}" value="{{ option.id }}">
+                                <label style="border:0px; background:#f9f9f9; font-size:15px; color:#292929;"
+                                       for="r-{{ forloop.counter }}">{{ option.content }}</label>
+                            {% endfor %}
                         </fieldset>
+                    </div>
+                {% endfor %}
+                <div style="text-align: center;">
+                    {% if forloop.first %}
+                    {% else %}
+                        <a href="#page-num-{{ forloop.counter0|sub:1 }}" class="black-btn">뒤로가기</a>
+                    {% endif %}
+                    <a href="#page-num-{{ forloop.counter }}" class="black-btn">다음</a>
                 </div>
-            {% endfor %}
 
-            <div style="text-align: center;">
-                <a href="#two" class="black-btn">다음</a>
-            </div>
-
-            <div style="text-align: center; margin-top : 20px;">
-                1/3
-            </div>
-
-	</div>
-</div>
-
-<!-- Start of fourth page -->
-<div data-role="page" id="two">
-
-{#	<div data-role="header">#}
-{#		<h1>Bar</h1>#}
-{#	</div><!-- /header -->#}
-
-	<div role="main" class="ui-content">
-
-            {% for survey_items in survey_two %}
-                <div>
-                       <fieldset data-role="controlgroup">
-                            <legend class="report-radio-title">{{   survey_items.question }} </legend>
-                           {% for option in survey_items.options %}
-                                <input type="radio" name="radio-two-{{ forloop.parentloop.counter }}" id="r-two-{{ forloop.counter }}" value="on" >
-                                <label style="border:0px; background:#f9f9f9; font-size:15px; color:#292929;" for="r-two-{{ forloop.counter }}">{{ option }}</label>
-    {#                            <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">#}
-                           {% endfor %}
-                        </fieldset>
+                <div style="text-align: center; margin-top : 20px;">
+                   {{ forloop.counter }}/{{ survey_range }}
                 </div>
-            {% endfor %}
 
-        <div style="text-align: center;">
-            <a href="#one" class="black-btn">뒤로가기</a>
-
-            <a href="#three" class="black-btn">다음</a>
+            </div>
         </div>
-
-        <div style="text-align: center; margin-top : 20px;">
-            2/3
-        </div>
-
-    </div><!-- /content -->
-
-{#	<div data-role="footer">#}
-{#		<h4>Page Footer</h4>#}
-{#	</div><!-- /footer -->#}
-</div><!-- /page -->
-
-<!-- Start of fourth page -->
-<div data-role="page" id="three">
-
-{#	<div data-role="header">#}
-{#		<h1>Bar</h1>#}
-{#	</div><!-- /header -->#}
+    {% endfor %}
+{#<!-- Start of fourth page -->#}
+<div data-role="page" id="page-num-{{ survey_range|sub:1 }}">
 
 	<div role="main" class="ui-content">
         <div  class="report-radio-title">
@@ -150,12 +111,11 @@ ex) 수분크림은 꼭 필요해요.
         <div style="text-align: center; margin-top : 50px;">
              <a href="{% url 'mobile_index' %}" class="black-btn" style="width:70px;">보고서 요청</a>
         </div>
-
+        <div style="text-align: center; margin-top : 20px;">
+                   {{survey_range}}/{{ survey_range }}
+        </div>
 	</div><!-- /content -->
 
-{#	<div data-role="footer">#}
-{#		<h4>Page Footer</h4>#}
-{#	</div><!-- /footer -->#}
 </div><!-- /page -->
 
 </form>
