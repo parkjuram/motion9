@@ -148,10 +148,22 @@ class BeforePayment(models.Model):
 
 class UserSurvey(models.Model):
     user = models.ForeignKey('auth.User')
-    survey_item_option = models.ForeignKey('foradmin.SurveyItemOption', null=True)
+    survey = models.ForeignKey('foradmin.Survey', null=True)
+    comments = models.TextField(blank=True, default='')
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     class Meta:
-        unique_together = ('user', 'survey_item_option',)
+        unique_together = ('user', 'survey', 'created', )
 
     def __unicode__(self):
-        return '%r - UserSurvey : user[%r] survey[%r]' % (self.id, self.user, self.survey, )
+        return '%r - UserSurvey : user[%r] survey[%r] comments[%s]' % (self.id, self.user, self.survey, self.comments )
+
+class UserSurveyDetail(models.Model):
+    user_survey = models.ForeignKey('users.UserSurvey')
+    survey_item_option = models.ForeignKey('foradmin.SurveyItemOption')
+
+    class Meta:
+        unique_together = ('user_survey', 'survey_item_option', )
+
+    def __unicode__(self):
+        return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%r]' % (self.id, self.user_survey, self.survey_item_option)

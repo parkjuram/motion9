@@ -27,7 +27,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
     helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
-    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines, helper_get_survey_items
+    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines, helper_get_survey_items, \
+    helper_request_survey
 
 from .models import Interest
 
@@ -958,3 +959,14 @@ def mobile_report_form_view(request):
                 'survey_range': survey_range
                 # 'next': "{% url 'mobile_report_form' %}"
             })
+
+
+def request_survey(request):
+    data = request.POST.get('data', None)
+    if data is None:
+        pass
+    else:
+        data = json.loads(data)
+        helper_request_survey(request, data)
+
+        return http_response_by_json()

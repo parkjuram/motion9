@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
-from users.models import UserSurvey
+from users.models import UserSurvey, UserSurveyDetail
 
 
 class CustomSetAdmin(admin.ModelAdmin):
@@ -61,9 +61,16 @@ admin.site.register(BeforePayment, BeforePaymentAdmin)
 
 
 class UserSurveyAdmin(admin.ModelAdmin):
-    list_display = ('user', 'survey_item_option')
-    list_display_links = ('user', 'survey_item_option',)
+    list_display = ('user', 'survey', 'comments', 'created')
+    list_editable = ('comments',)
+    list_display_links = ('user', 'survey',)
 
 admin.site.register(UserSurvey, UserSurveyAdmin)
+
+class UserSurveyDetailAdmin(admin.ModelAdmin):
+    list_display = ('user_survey', 'survey_item_option')
+    list_display_links = ('user_survey', 'survey_item_option',)
+    
+admin.site.register(UserSurveyDetail, UserSurveyDetailAdmin)
 
 admin.site.register(Interest)
