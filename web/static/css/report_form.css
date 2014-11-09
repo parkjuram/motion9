@@ -1,0 +1,44 @@
+.black-btn {
+  text-align : center;
+  width: 60px;
+  border-radius: 3px;
+  display : inline-block;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  color: white !important;
+  font-size: 12px;
+  font-weight: normal;
+  background-color: #292929;
+  padding: 8px 10px;
+  text-decoration: none !important;
+  text-shadow : none !important;
+
+}
+
+.report-radio-title{
+
+    font-size : 20px;
+    color : #292929;
+    margin-bottom : 17px;
+
+}
+
+.radio-label{
+    border : 0px; !important;
+    background : #f9f9f9; !important;
+}
+
+.ui-page-theme-a .ui-radio-on:after, html .ui-bar-a .ui-radio-on:after, html .ui-body-a .ui-radio-on:after, html body .ui-group-theme-a .ui-radio-on:after, .ui-btn.ui-radio-on.ui-btn-a:after{
+
+    border-color : #292929; !important;
+
+}
+
+.report-text{
+    padding : 10px 12px;
+    border : 1px solid #e5e5e5;
+    font-size : 12px;
+    color : #a9a9a9;
+    margin : 0;
+    background : rgba(253,245,247,0.38);
+}
