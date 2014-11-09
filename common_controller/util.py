@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.template import Context
 from django.template.loader import get_template
 import time
-from foradmin.models import Advertisement, SurveyItem
+from foradmin.models import Advertisement, SurveyItem, Survey
 from web.models import Product, Set, ChangeableProduct, BlogReview, Brand, ProductMagazine, Faq
 from users.models import Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
 from django.core.exceptions import ObjectDoesNotExist
@@ -844,7 +844,8 @@ def helper_get_faq_items(request):
     return faq_items
 
 def helper_get_survey_items(request):
-    survey_items = SurveyItem.objects.all()
+    survey = Survey.objects.last()
+    survey_items = survey.get_questions.all()
 
     survey_items_ = []
     for item in survey_items:
