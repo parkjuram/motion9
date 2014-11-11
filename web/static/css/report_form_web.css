@@ -76,15 +76,17 @@ body{
     width:100%;
 }
 
-.register-form .form-box input{
-    border: 1px solid #e4e4e4;
-    padding: 8px 10px;
-    width : 96%;
-    height : 30px;
-}
+
 .checkbox-wrapper{
     width : 90px;
-    float: left;
+    /*float: left;*/
     margin-right: 12px;
     margin-top : 4px;
+    padding : 10px;
+}
+
+.report-box input{
+    border : 1px solid #e4e4e4;
+    padding : 8px 10px;
+    height : 30px;
 }
