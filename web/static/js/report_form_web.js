@@ -7,8 +7,8 @@ $(function () {
 
         var options = [];
 
-        $.each( $('fieldset[data-role="controlgroup"] :checked'), function( index ) {
-           options.push( $(this).val() );
+        $.each($('fieldset[data-role="controlgroup"] :checked'), function (index) {
+            options.push($(this).val());
         });
 
 
@@ -31,15 +31,4 @@ $(function () {
         });
 
     });
-
-
 });
-
-
-    $(document).ready(function() {
-        $("#survey-section-container").steps({
-            bodyTag: "section",
-            transitionEffect: "slideLeft",
-            autoFocus: true
-        });
-    });
