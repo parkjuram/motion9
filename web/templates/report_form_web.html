@@ -1,114 +1,83 @@
 {% extends "web_base.html" %}
+
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
 {% block header %}
-    {% load static %}
-    {% load humanize %}
-    {% load mathfilters %}
 
-    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
-    {#<script src="{% static "swiper/idangerous.swiper.js" %}"></script>#}
-    {#<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>#}
-    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
-
-    <script src="{% static "js/shopping_product_web.js" %}"></script>
-    {#    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>#}
-    {#    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.css' %}"/>#}
-    {#    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>#}
-    {#<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>#}
-    {#<script src="{% static 'js/my_page_interesting_set.js'%}"></script>#}
-    <link rel="stylesheet" href="{% static 'css/report_web.css' %}"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
-    <link rel="stylesheet" href="{% static "css/shopping_product_web.css" %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static "css/jquery.steps.css" %}" type="text/css"/>
-    <script src="{% static 'js/report.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/report_form_web.css' %}"/>
     <script src="{% static 'js/report_form_web.js' %}"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/report_form_web.css' %}"/>
 
-    <script src="{% static 'js/jquery.steps.js' %}"></script>
-    <script src="{% static 'js/jquery.steps.min.js' %}"></script>
-
-    {#<link rel="stylesheet" href="{% static 'css/register_web.css' %}"/>#}
-    {#<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>#}
 {% endblock %}
 
 
 {% block content %}
 
-
     <div class="row">
 
-
-
         <form value="{{ survey.survey_id }}">
-        {% csrf_token %}
-            <div id="survey-section-container">
-
-                {% for survey_group in survey %}
-
-                    <section>
-                    <div data-role="page" id="page-num-{{ forloop.counter0 }}"
-                         data-title="page-num-{{ forloop.counter0 }}">
-                        <div role="main" class="ui-content">
-                            {% for survey_items in survey_group %}
-
-                                <div class="report-box">
-                                    <label class="report-radio-title"
-                                           for="radio-name-{{ forloop.parentloop.counter }}">{{ survey_items.label_index }}. {{ survey_items.question }}</label>
-                                    {% for option in survey_items.options %}
-                                        <div class="checkbox-wrapper">
-                                            <input type="radio" name="radio-name-{{ forloop.parentloop.counter }}"
-                                                   id="radio-id-{{ forloop.counter }}" value="{{ option.id }}"/>
-                                            <label for="radio-id-{{ forloop.counter }}">{{ option.content }}</label>
-                                        </div>
-                                    {% endfor %}
-                                    <div class="clearfix"></div>
-                                </div>
-                            {% endfor %}
-
-                            <div style="text-align: center;">
-                                {% if forloop.first %}
-                                {% else %}
-                                    <a href="#page-num-{{ forloop.counter0|sub:1 }}" class="black-btn">뒤로가기</a>
-                                {% endif %}
-                                <a href="#page-num-{{ forloop.counter }}" class="black-btn">다음</a>
-                            </div>
-
-                            <div style="text-align: center; margin-top : 20px;">
-                                {{ forloop.counter }}/{{ survey|length|add:'1' }}
-                            </div>
-
-                        </div>
-                    </div>
-                    </section>
-                {% endfor %}
-
-                <section>
-                <div data-role="page" id="page-num-{{ survey|length }}" data-title="page-num-{{ survey|length }}"
-                     style="margin-top:40px;">
+            {% csrf_token %}
+            {% for survey_group in survey %}
+                <div data-role="page" id="page-num-{{ forloop.counter0 }}"
+                     data-title="page-num-{{ forloop.counter0 }}">
                     <div role="main" class="ui-content">
-                        <div class="report-radio-title">
-                            그 외 화장품 관련 분석 요청
-                        </div>
-                        <textarea id='reportText'
-                                  style="padding:10px 12px; border:1px solid #e5e5e5; font-size:12px; color:#a9a9a9; margin:0; background:rgba(253,245,247,0.38); box-shadow:none; border-radius:0px;"
-                                  onclick="document.getElementById('reportText').value='';">
-                            ex) 수분크림은 꼭 필요해요.
-                            비오템 아쿠아 로션 리뷰 분석해주세요.
-                        </textarea>
+                        {% for survey_items in survey_group %}
 
-                        <div style="text-align: center; margin-top : 50px;">
-                            <a href="#page-num-{{ survey|length|sub:1 }}" class="black-btn">뒤로가기</a>
-                            <a href="#" id="report-btn" survey_id="{{ survey.survey_id }}" class="black-btn"
-                               style="width:70px;">보고서 요청</a>
+                            <div class="report-box">
+                                <label class="report-radio-title"
+                                       for="radio-name-{{ forloop.parentloop.counter }}">{{ survey_items.label_index }}. {{ survey_items.question }}</label>
+                                {% for option in survey_items.options %}
+                                    <div class="checkbox-wrapper">
+                                        <input type="radio" name="radio-name-{{ forloop.parentloop.counter }}"
+                                               id="radio-id-{{ forloop.counter }}" value="{{ option.id }}"/>
+                                        <label for="radio-id-{{ forloop.counter }}">{{ option.content }}</label>
+                                    </div>
+                                {% endfor %}
+                                <div class="clearfix"></div>
+                            </div>
+                        {% endfor %}
+
+                        <div style="text-align: center;">
+                            {% if forloop.first %}
+                            {% else %}
+                                <a href="#page-num-{{ forloop.counter0|sub:1 }}" class="black-btn">뒤로가기</a>
+                            {% endif %}
+                            <a href="#page-num-{{ forloop.counter }}" class="black-btn">다음</a>
                         </div>
 
                         <div style="text-align: center; margin-top : 20px;">
-                            {{ survey|length|add:'1' }}/{{ survey|length|add:'1' }}
+                            {{ forloop.counter }}/{{ survey|length|add:'1' }}
                         </div>
+
                     </div>
                 </div>
-
                 </section>
+            {% endfor %}
+
+            <div data-role="page" id="page-num-{{ survey|length }}" data-title="page-num-{{ survey|length }}"
+                 style="margin-top:40px;">
+                <div role="main" class="ui-content">
+                    <div class="report-radio-title">
+                        그 외 화장품 관련 분석 요청
+                    </div>
+                    <textarea id='reportText'
+                              style="padding:10px 12px; border:1px solid #e5e5e5; font-size:12px; color:#a9a9a9; margin:0; background:rgba(253,245,247,0.38); box-shadow:none; border-radius:0px;"
+                              onclick="document.getElementById('reportText').value='';">
+                        ex) 수분크림은 꼭 필요해요.
+                        비오템 아쿠아 로션 리뷰 분석해주세요.
+                    </textarea>
+
+                    <div style="text-align: center; margin-top : 50px;">
+                        <a href="#page-num-{{ survey|length|sub:1 }}" class="black-btn">뒤로가기</a>
+                        <a href="#" id="report-btn" survey_id="{{ survey.survey_id }}" class="black-btn"
+                           style="width:70px;">보고서 요청</a>
+                    </div>
+
+                    <div style="text-align: center; margin-top : 20px;">
+                        {{ survey|length|add:'1' }}/{{ survey|length|add:'1' }}
+                    </div>
+                </div>
             </div>
         </form>
 

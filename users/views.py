@@ -952,5 +952,6 @@ def request_survey(request):
         pass
     else:
         helper_request_survey(request, data)
-
         return http_response_by_json()
+
+    return http_response_by_json(CODE_PARAMS_WRONG)
