@@ -970,7 +970,6 @@ def request_survey(request):
     if data is None:
         pass
     else:
-        data = json.loads(data)
         helper_request_survey(request, data)
 
         return http_response_by_json()
