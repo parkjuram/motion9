@@ -67,35 +67,6 @@ $(function(){
      });
 
 
-     $('.view-product-btn').click(function(e){
-        e.preventDefault();
-        var product_id = $(this).attr('data-product');
-        var dialog = $('#productDetailDialog');
-        var img = $('#popupDetailImg').find('img');
-        var name = $('#popupDetailName');
-        var desc = $('#popupDetailDesc');
-        var btn = $('#popupDetailBtn');
-//
-//       $.ajax({
-//           url: url_reverse_for_product_detail_by_json(product_id),
-//           dataType: 'json',
-//           async: true,
-//           type: 'POST',
-//           success: function (data) {
-//               console.log(data);
-//               img.attr('src', data.big_img_url);
-//               name.text(data.brandname + " " + data.name);
-//               desc.text(data.description);
-//               btn.attr('href', url_reverse_for_product_detail(product_id));
-
-               dialog.popup('open');
-//           },
-//           error: function (jqXHR, textStatus, errorThrown) {
-//
-//           }
-//       });
-    });
-
         var modalOnloadHandler = function(hash){
         $('#modalProductImgGallery').magnificPopup({
             delegate: 'a',
