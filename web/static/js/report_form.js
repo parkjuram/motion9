@@ -15,7 +15,6 @@ $(function () {
         $.ajax({
             url: urlRequestSurvey,
             dataType: 'json',
-            async: true,
             type: 'POST',
             data: {
                 'survey_id': $(this).attr('survey_id'),

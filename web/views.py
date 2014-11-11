@@ -18,7 +18,7 @@ from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands, helper_get_product_magazines, \
-    helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items
+    helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items, helper_get_survey_items
 from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment
 
@@ -819,7 +819,34 @@ def report_detail_modal_view(request, category_id=None, page_num=1, product_id=N
         return render(request, "404.html")
 
 
+@login_required
+def report_form_view(request):
+    survey = helper_get_survey_items(request)
 
+    survey_ = []
+    survey_group = []
+    survey_range = len(survey['survey_items']) + 1
+
+    for i in range(len(survey['survey_items'])):
+        survey['survey_items'][i].update({
+            'label_index': str(i + 1)
+        })
+        survey_group.append(survey['survey_items'][i])
+        if (i + 1) % 3 == 0:
+            survey_.append(survey_group)
+            survey_group = []
+
+    if len(survey_group) != 0:
+        survey_.append(survey_group)
+
+    return render(request, 'report_form_web.html',
+                  {
+                      'next': reverse('report_form'),
+                      'survey': survey_,
+                      'survey_id': survey['survey_id'],
+                      'survey_range': survey_range
+                      # 'next': "{% url 'mobile_report_form' %}"
+                  })
 
 
 # render example
