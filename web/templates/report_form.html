@@ -22,7 +22,7 @@
     <script src="{% static 'js/jquery.glide.js' %}"></script>
     <script src="{% static 'js/common_js.js' %}"></script>
     <script src="{% static 'js/common_js_mobile.js'%}"></script>
-{#    <script src="{% static 'js/report_form.js' %}"></script>#}
+    <script src="{% static 'js/report_form.js' %}"></script>
     <script>
         var url_for_login_next = "{% url 'mobile_login_page' %}?next={{ request.get_full_path }}";
 
@@ -40,6 +40,8 @@
 
     </script>
     <script>
+
+        var urlRequestSurvey = "{% url 'request_survey' %}";
         var url_for_cart_info_as_json = "{% url 'mypage_cart_json' %}";
         var urlForUpdateCart = "{% url 'update_cart' %}";
 
@@ -51,33 +53,20 @@
 
 <body>
 
-{#<!-- Start of first page -->#}
-{#<div data-role="page" id="one">#}
-{#	<div role="main" class="ui-content">#}
-{#        <div class="report-wrapper">#}
-{#		    <p>화장품 분석 보고서를 받아 보시기 위해 먼저 간단히 MOTION9에 가입하셔야 합니다.</p>#}
-{#            <p>5가지 정도의 문항 입력 후 최소 24시간 최대 48시간에 고객님의 피부를 위한 화장품 분석 보고서를 받아 보실 수 있습니다.</p>#}
-{#        </div>#}
-{#        <div class="report-wrapper">#}
-{#            <a href="#two">9초만에 가입하고 리뷰 분석 보고서 받기</a>#}
-{#        </div>#}
-{#	</div>#}
-{#</div>#}
-
-<!-- Start of three page -->
 <form value="{{ survey.survey_id }}">
-    {% for survey_group in survey.survey_items %}
+{%  csrf_token %}
+    {% for survey_group in survey %}
         <div data-role="page" id="page-num-{{ forloop.counter0 }}">
             <div role="main" class="ui-content">
                 {% for survey_items in survey_group %}
                     <div class="report-box">
-                        <fieldset data-role="controlgroup">1
+                        <fieldset data-role="controlgroup">
                             <legend class="report-radio-title">{{ survey_items.label_index }}. {{ survey_items.question }} </legend>
                             {% for option in survey_items.options %}
                                 <input type="radio" name="radio-name-{{ forloop.parentloop.counter }}"
                                        id="radio-id-{{ forloop.counter }}" value="{{ option.id }}">
                                 <label style="border:0px; background:#f9f9f9; font-size:15px; color:#292929;"
-                                       for="radio-label-{{ forloop.counter }}">{{ option.content }}</label>
+                                       for="radio-id-{{ forloop.counter }}">{{ option.content }}</label>
                             {% endfor %}
                         </fieldset>
                     </div>
@@ -91,33 +80,34 @@
                 </div>
 
                 <div style="text-align: center; margin-top : 20px;">
-                   {{ forloop.counter }}/{{ survey_range }}
+                    {{ forloop.counter }}/{{ survey|length|add:'1' }}
                 </div>
 
             </div>
         </div>
     {% endfor %}
-{#<!-- Start of fourth page -->#}
-<div data-role="page" id="page-num-{{ survey_range|sub:1 }}">
 
-	<div role="main" class="ui-content">
+    <div data-role="page" id="page-num-{{ survey|length }}">
+        <div role="main" class="ui-content">
             <div class="report-radio-title">
                 그 외 화장품 관련 분석 요청
             </div>
-                <textarea  id='reportText' style="padding:10px 12px; border:1px solid #e5e5e5; font-size:12px; color:#a9a9a9; margin:0; background:rgba(253,245,247,0.38); box-shadow:none; border-radius:0px;"
-                           onclick="document.getElementById('reportText').value='';">
-    ex) 수분크림은 꼭 필요해요.
-          비오템 아쿠아 로션 리뷰 분석해주세요.
-                </textarea>
+            <textarea id='reportText'
+                      style="padding:10px 12px; border:1px solid #e5e5e5; font-size:12px; color:#a9a9a9; margin:0; background:rgba(253,245,247,0.38); box-shadow:none; border-radius:0px;"
+                      onclick="document.getElementById('reportText').value='';">
+                ex) 수분크림은 꼭 필요해요.
+                비오템 아쿠아 로션 리뷰 분석해주세요.
+            </textarea>
+
             <div style="text-align: center; margin-top : 50px;">
-                 <a href="{% url 'mobile_index' %}" id="report-btn" class="black-btn" style="width:70px;">보고서 요청</a>
+                <a href="#page-num-{{ survey|length|sub:1 }}" class="black-btn">뒤로가기</a>
+                <a href="#" id="report-btn" survey_id="{{ survey.survey_id }}" class="black-btn" style="width:70px;">보고서 요청</a>
             </div>
             <div style="text-align: center; margin-top : 20px;">
-                       {{survey_range}}/{{ survey_range }}
+                {{ survey|length|add:'1' }}/{{ survey|length|add:'1' }}
             </div>
-	</div><!-- /content -->
-
-</div><!-- /page -->
+        </div>
+    </div>
 
 </form>
 
