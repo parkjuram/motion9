@@ -156,7 +156,7 @@ class UserSurvey(models.Model):
         unique_together = ('user', 'survey', 'created', )
 
     def __unicode__(self):
-        return '%r - UserSurvey : user[%r] survey[%r] comments[%s]' % (self.id, self.user, self.survey, self.comments )
+        return '%r - UserSurvey : user[%s] survey[%s] comments[%s]' % (self.id, self.user.username, self.survey.title, self.comments )
 
 class UserSurveyDetail(models.Model):
     user_survey = models.ForeignKey('users.UserSurvey')
@@ -166,4 +166,4 @@ class UserSurveyDetail(models.Model):
         unique_together = ('user_survey', 'survey_item_option', )
 
     def __unicode__(self):
-        return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%r]' % (self.id, self.user_survey, self.survey_item_option)
+        return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%s]' % (self.id, self.user_survey.id, self.survey_item_option.content)
