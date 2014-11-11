@@ -78,15 +78,20 @@ body{
 
 
 .checkbox-wrapper{
-    width : 90px;
+    width : auto;
     /*float: left;*/
     margin-right: 12px;
     margin-top : 4px;
     padding : 10px;
+    font-size : 15px;
+}
+
+.checkbox-wrapper input{
+    width : 20px;
+    height : 25px;
 }
 
 .report-box input{
     border : 1px solid #e4e4e4;
     padding : 8px 10px;
-    height : 30px;
 }

@@ -16,7 +16,8 @@
 
     <div class="row">
 
-        <form value="{{ survey.survey_id }}">
+        <div class="container" style="width:1080px; margin-top:50px;">
+            <form value="{{ survey.survey_id }}">
             {% csrf_token %}
             {% for survey_group in survey %}
                 <div data-role="page" id="page-num-{{ forloop.counter0 }}"
@@ -80,7 +81,7 @@
                 </div>
             </div>
         </form>
-
+        </div>
 
     </div>
 
