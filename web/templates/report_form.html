@@ -16,7 +16,13 @@
 {#    <link rel="stylesheet" href="{% static 'css/report.css'%}"/>#}
 {#    <link rel="stylesheet" href="{% static 'css/register.css' %}"/>#}
 {#    <script src="{% static 'js/register.js' %}"></script>#}
+    <script>
 
+        var urlRequestSurvey = "{% url 'request_survey' %}";
+        var url_for_cart_info_as_json = "{% url 'mypage_cart_json' %}";
+        var urlForUpdateCart = "{% url 'update_cart' %}";
+
+    </script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="{% static 'js/jquery.mobile-1.4.1.min.js' %}"></script>
     <script src="{% static 'js/jquery.glide.js' %}"></script>
@@ -39,13 +45,7 @@
       ga('send', 'pageview');
 
     </script>
-    <script>
 
-        var urlRequestSurvey = "{% url 'request_survey' %}";
-        var url_for_cart_info_as_json = "{% url 'mypage_cart_json' %}";
-        var urlForUpdateCart = "{% url 'update_cart' %}";
-
-    </script>
     {% block header %}
     {% endblock %}
 
