@@ -3,14 +3,12 @@ $(function () {
     $('#report-btn').click(function (e) {
         e.preventDefault();
 
-        var errorMessage = null;
-
         var options = [];
+        var dialog = $('#productDetailDialog');
 
         $.each( $('fieldset[data-role="controlgroup"] :checked'), function( index ) {
            options.push( $(this).val() );
         });
-
 
         $.ajax({
             url: urlRequestSurvey,
@@ -21,14 +19,15 @@ $(function () {
                 'comments': $('#reportText').val().trim(),
                 'options': options
             },
-
             success: function (data) {
+               console.log(data);
                 if (data.success) {
-                    alert('request success!');
+                   dialog.popup('open');
+                   alert('test');
                 }
             }
-
         });
 
     });
+
 });

@@ -858,13 +858,6 @@ def mobile_report_view(request, category_id=None, page_num=1):
     else:
         products_ = {'data': products_}
 
-    phone = user_profile.phone
-    phones = phone.split("-")
-    phone1 = phone2 = phone3 = ''
-    if len(phones) == 3:
-        phone1 = phones[0]
-        phone2 = phones[1]
-        phone3 = phones[2]
 
     if user is not None:
 
@@ -872,9 +865,6 @@ def mobile_report_view(request, category_id=None, page_num=1):
             {
                 'products': products_,
                 'tab_name': 'myinfo',
-                'phone1': phone1,
-                'phone2': phone2,
-                'phone3': phone3,
                 'next': next
             })
 
@@ -900,22 +890,12 @@ def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=
         user = helper_get_user(request)
         user_profile = user.profile
 
-        phone = user_profile.phone
-        phones = phone.split("-")
-        phone1 = phone2 = phone3 = ''
-        if len(phones) == 3:
-            phone1 = phones[0]
-            phone2 = phones[1]
-            phone3 = phones[2]
 
         if user is not None:
 
             return render(request, 'report_detail.html',
                 {
                     'tab_name': 'myinfo',
-                    'phone1': phone1,
-                    'phone2': phone2,
-                    'phone3': phone3,
                     'next': next,
                     'product': product,
                     'magazines': magazines,
