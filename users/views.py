@@ -961,11 +961,13 @@ def mobile_report_form_view(request):
 
 @csrf_exempt
 def request_survey(request):
+
     data = {
         'survey_id': request.POST.get('survey_id', None),
         'comments': request.POST.get('comments', ''),
-        'options': request.POST.get('options', None)
+        'options': request.POST.getlist('options[]', None)
     }
+
     if data is None:
         pass
     else:
