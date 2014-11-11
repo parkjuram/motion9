@@ -1,19 +1,14 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-{% load static %}
-{% load humanize %}
+    {% load static %}
+    {% load humanize %}
 
-<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
-{#<script src="{% static "swiper/idangerous.swiper.js" %}"></script>#}
-{#<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>#}
-<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
-{#<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>#}
-{#<script src="{% static 'js/my_page_interesting_set.js'%}"></script>#}
-<link rel="stylesheet" href="{% static 'css/report.css'%}"/>
-<script src="{% static 'js/report.js'%}"></script>
-{#<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>#}
-{% block header_append %}
-{% endblock %}
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/report.css' %}"/>
+    <script src="{% static 'js/report.js' %}"></script>
+    {% block header_append %}
+    {% endblock %}
 {% endblock %}
 
 {% block title %}
@@ -21,130 +16,139 @@
 {% endblock %}
 
 {% block content %}
-{% block detail %}
+    {% block detail %}
 
-    <div id="productGrid" style="height:260px;">
+        <div id="productGrid" style="height:260px;">
 
-        <div class="product-detail">
-            <div class="item-image">
-                <img src="{{ product.big_img_url }}" style="max-width:100%; max-height:250px; width:auto; height:auto;" />
-               </div>
+            <div class="product-detail">
+                <div class="item-image">
+                    <img src="{{ product.big_img_url }}"
+                         style="max-width:100%; max-height:250px; width:auto; height:auto;"/>
+                </div>
                 <br/>
-        </div>
-
-        <div class="product-detail" style="padding-left : 5px; padding-top : 5px; margin-left : 5px; height : 245px;">
-            이름 : {{ product.brandname }} {{ product.name }}
-            <br/>
-            상세설명 :
-            <br/>
-            가격 : {{ product.original_price|intcomma }} 원
-            <br/>
-            네이버 쇼핑 평점 :
-            <br/>
-        </div>
-    </div>
-
-    <div data-role="tabs" id="tabs">
-
-      <div data-role="navbar" style="width:95%; margin:5px;">
-        <ul>
-          <li><a href="#one" data-ajax="false" class="ui-btn-active ui-state-persist one-btn">리뷰</a></li>
-          <li><a href="#two" data-ajax="false" class="two-btn">EDITOR'S NOTES</a></li>
-        </ul>
-      </div>
-
-      <div id="one" class="ui-body-d ui-content">
-
-        <div class="blog-product-item">
-            <div class="blog-product-item-img">
-                   <img src="{% static "img/post-img-5.jpg"%}"/>
             </div>
-            <div class="blog-product-item-contents">
-                <div class="blog-product-item-contents-name">
-                        Connie Pistilli
-                </div>
-                <div class="blog-product-item-contents-date">
-                       2014년 9월 12일
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary">
-                    test - summary
-                    asjdiofjasodifj<br/>
-                    asjfdojasdiof<br/>
-                    asjdfiojasifod<br/>
-                    afv<br/>
-                    asfvasfv<br/>
-                    asfvasfvafsvasv<br/>
-                    asfvasfvasfvafjoivajㅓ먀ㅐㄴ레퍼먀낼펌ㅍ<br/>
-                    ㅁ러ㅑ패ㅁㄿ매ㅑㄴㄹ퍼ㅐㅑㄴㅁㄹ퍼<br/>
-                    ㅁ럼래ㅑ퍼먀ㅐㄹ패ㅓ먄랴ㅐㅁ너래ㅑㄴㄻ파ㅣ믄ㄹ파ㅣ<br/>
-                    ㅁㄹ퍄맨ㄹ퍼먀ㅐㄴㄹ퍼먀낼펌ㄴ랴패ㅓㅁ냐ㅐㄿ<br/>
-                    ㅁㄴ러ㅑ패먼ㄹ패ㅑㅁㄴ러<br/>
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary-detail">
-                    test - detail
-                    asjdiofjasodifj<br/>
-                    asjfdojasdiof<br/>
-                    asjdfiojasifod<br/>
-                    afv<br/>
-                    asfvasfv<br/>
-                    asfvasfvafsvasv<br/>
-                    asfvasfvasfvafjoivajㅓ먀ㅐㄴ레퍼먀낼펌ㅍ<br/>
-                    ㅁ러ㅑ패ㅁㄿ매ㅑㄴㄹ퍼ㅐㅑㄴㅁㄹ퍼<br/>
-                    ㅁ럼래ㅑ퍼먀ㅐㄹ패ㅓ먄랴ㅐㅁ너래ㅑㄴㄻ파ㅣ믄ㄹ파ㅣ<br/>
-                    ㅁㄹ퍄맨ㄹ퍼먀ㅐㄴㄹ퍼먀낼펌ㄴ랴패ㅓㅁ냐ㅐㄿ<br/>
-                    ㅁㄴ러ㅑ패먼ㄹ패ㅑㅁㄴ러<br/>
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-more">
-                    <a class="btn-detail"> 자세히 보기 </a>
-                </div>
 
+            <div class="product-detail"
+                 style="padding-left : 5px; padding-top : 5px; margin-left : 5px; height : 245px;">
+                이름 : {{ product.brandname }} {{ product.name }}
+                <br/>
+                상세설명 :
+                <br/>
+                가격 : {{ product.original_price|intcomma }} 원
+                <br/>
+                네이버 쇼핑 평점 :
+                <br/>
             </div>
         </div>
 
-        <div class="login-box-header">
-            <h4 class="lined-heading" style="width:98%;"><span> </span></h4>
+        <div data-role="tabs" id="tabs">
+
+            <div data-role="navbar" style="width:95%; margin:5px;">
+                <ul>
+                    <li><a href="#one" data-ajax="false" class="ui-btn-active ui-state-persist one-btn">리뷰</a></li>
+                    <li><a href="#two" data-ajax="false" class="two-btn">EDITOR'S NOTES</a></li>
+                </ul>
+            </div>
+
+            <div id="one" class="ui-body-d ui-content">
+
+                <div class="blog-product-item">
+                    <div class="blog-product-item-img">
+                        <img src="{% static "img/post-img-5.jpg" %}"/>
+                    </div>
+                    <div class="blog-product-item-contents">
+                        <div class="blog-product-item-contents-name">
+                            Connie Pistilli
+                        </div>
+                        <div class="blog-product-item-contents-date">
+                            2014년 9월 12일
+                        </div>
+                        <br/>
+
+                        <div class="blog-product-item-contents-summary">
+                            test - summary
+                            asjdiofjasodifj<br/>
+                            asjfdojasdiof<br/>
+                            asjdfiojasifod<br/>
+                            afv<br/>
+                            asfvasfv<br/>
+                            asfvasfvafsvasv<br/>
+                            asfvasfvasfvafjoivajㅓ먀ㅐㄴ레퍼먀낼펌ㅍ<br/>
+                            ㅁ러ㅑ패ㅁㄿ매ㅑㄴㄹ퍼ㅐㅑㄴㅁㄹ퍼<br/>
+                            ㅁ럼래ㅑ퍼먀ㅐㄹ패ㅓ먄랴ㅐㅁ너래ㅑㄴㄻ파ㅣ믄ㄹ파ㅣ<br/>
+                            ㅁㄹ퍄맨ㄹ퍼먀ㅐㄴㄹ퍼먀낼펌ㄴ랴패ㅓㅁ냐ㅐㄿ<br/>
+                            ㅁㄴ러ㅑ패먼ㄹ패ㅑㅁㄴ러<br/>
+                        </div>
+                        <br/>
+
+                        <div class="blog-product-item-contents-summary-detail">
+                            test - detail
+                            asjdiofjasodifj<br/>
+                            asjfdojasdiof<br/>
+                            asjdfiojasifod<br/>
+                            afv<br/>
+                            asfvasfv<br/>
+                            asfvasfvafsvasv<br/>
+                            asfvasfvasfvafjoivajㅓ먀ㅐㄴ레퍼먀낼펌ㅍ<br/>
+                            ㅁ러ㅑ패ㅁㄿ매ㅑㄴㄹ퍼ㅐㅑㄴㅁㄹ퍼<br/>
+                            ㅁ럼래ㅑ퍼먀ㅐㄹ패ㅓ먄랴ㅐㅁ너래ㅑㄴㄻ파ㅣ믄ㄹ파ㅣ<br/>
+                            ㅁㄹ퍄맨ㄹ퍼먀ㅐㄴㄹ퍼먀낼펌ㄴ랴패ㅓㅁ냐ㅐㄿ<br/>
+                            ㅁㄴ러ㅑ패먼ㄹ패ㅑㅁㄴ러<br/>
+                        </div>
+                        <br/>
+
+                        <div class="blog-product-item-contents-more">
+                            <a class="btn-detail"> 자세히 보기 </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="login-box-header">
+                    <h4 class="lined-heading" style="width:98%;"><span> </span></h4>
+                </div>
+
+                <div class="blog-product-item">
+                    <div class="blog-product-item-img">
+                        <a class="hide-referrer" href="{{ blog.url }}" target="_blank"><img
+                                src="{% static "img/post-img-5.jpg" %}"/></a>
+                    </div>
+                    <div class="blog-product-item-contents">
+                        <div class="blog-product-item-contents-name">
+                            Connie Pistilli
+                        </div>
+                        <div class="blog-product-item-contents-date">
+                            2014년 9월 12일
+                        </div>
+                        <br/>
+
+                        <div class="blog-product-item-contents-summary">
+                            test - summary
+                        </div>
+                        <br/>
+
+                        <div class="blog-product-item-contents-summary-detail">
+                            test - detail
+                            asjdiofjasodifj
+                            asjfdojasdiof
+                            asjdfiojasifod
+
+                        </div>
+                        <br/>
+
+                        <div class="blog-product-item-contents-more">
+                            <a class="btn-detail"> 자세히 보기 </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="two" class="ui-body-d ui-content">
+                test
+            </div>
+
         </div>
 
-        <div class="blog-product-item">
-            <div class="blog-product-item-img">
-                    <a class="hide-referrer" href="{{ blog.url }}" target="_blank"><img src="{% static "img/post-img-5.jpg"%}"/></a>
-            </div>
-            <div class="blog-product-item-contents">
-                <div class="blog-product-item-contents-name">
-                        Connie Pistilli
-                </div>
-                <div class="blog-product-item-contents-date">
-                       2014년 9월 12일
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary">
-                    test - summary
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary-detail">
-                    test - detail
-                    asjdiofjasodifj
-                    asjfdojasdiof
-                    asjdfiojasifod
 
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-more">
-                    <a class="btn-detail"> 자세히 보기 </a>
-                </div>
-            </div>
-        </div>
-      </div>
-
-      <div id="two" class="ui-body-d ui-content">
-            test
-      </div>
-
-     </div>
-
-
-{% endblock %}
+    {% endblock %}
 {% endblock %}

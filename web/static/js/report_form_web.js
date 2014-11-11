@@ -24,11 +24,11 @@ $(function () {
 
             success: function (data) {
                 if (data.success) {
-                    alert('request success!');
                 }
             }
 
         });
 
     });
+    
 });
