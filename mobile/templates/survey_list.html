@@ -19,7 +19,7 @@
     <ul>
         {% for survey_item in survey_list %}
             <li>
-                <a href="{% url "mobile_survey_result" pk=survey_item.id %}">{{ survey_item.created }} 화장품 보고서</a>
+                <a href="{% url "mobile_survey_result" pk=survey_item.id %}" target="_self">{{ survey_item.created }} 화장품 보고서</a>
             </li>
         {% endfor %}
     </ul>
