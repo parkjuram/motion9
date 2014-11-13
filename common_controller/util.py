@@ -877,5 +877,5 @@ def helper_get_survey_list(request):
     return survey_list
 
 def helper_get_survey_result_item(request, survey_id):
-    survey_item = request.user.get_survey_list.filter(id=survey_id)
+    survey_item = request.user.get_survey_list.filter(id=survey_id).values()[0]
     return survey_item

@@ -7,6 +7,12 @@
 {#    <script src="{% static 'js/survey_list.js'%}"></script>#}
 {#    <link rel="stylesheet" href="{% static 'css/survey_list.css'%}"/>#}
 
+    <style type="text/css">
+    .ui-page > .ui-content{
+        height:100%;
+    }
+    </style>
+
 {% endblock header %}
 
 {% block title %}
@@ -14,8 +20,8 @@
 
 {% block content %}
 
-    {% with 'img/'|add:survey_result_item.result_file_name as result_file_url %}
-        <iframe src="{% static result_file_url %}{{ survey_result_item.result_file_name }}" style="border: 0; width: 100%; height: 100%">Your browser doesn't support iFrames.</iframe>
+    {% with 'html/'|add:survey_result_item.result_file_name as result_file_url %}
+        <iframe src="{% static result_file_url %}" style="border: 0; width: 100%; height: 100%">Your browser doesn't support iFrames.</iframe>
     {% endwith %}
 
 
