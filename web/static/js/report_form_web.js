@@ -3,14 +3,12 @@ $(function () {
     $('#report-btn').click(function (e) {
         e.preventDefault();
 
-        var errorMessage = null;
-
         var options = [];
+        var dialog = $('#productDetailDialog');
 
-        $.each($('fieldset[data-role="controlgroup"] :checked'), function (index) {
-            options.push($(this).val());
+        $.each( $('fieldset[data-role="controlgroup"] :checked'), function( index ) {
+           options.push( $(this).val() );
         });
-
 
         $.ajax({
             url: urlRequestSurvey,
@@ -21,14 +19,32 @@ $(function () {
                 'comments': $('#reportText').val().trim(),
                 'options': options
             },
-
             success: function (data) {
+               console.log(data);
                 if (data.success) {
+                    alert('success');
                 }
             }
-
         });
 
     });
-    
+
+    $('.black-btn').click(function (e) {
+
+        var btn_id = $(this).attr('id');
+        var current_page_id = $('#'+$(this).attr('page_id'));
+        var next_page_id = $('#page-num-'+btn_id);
+
+        current_page_id.css('display',"none");
+        next_page_id.css('display',"block");
+
+    });
+
+
+
 });
+
+window.onload = function() {
+    var page_id = $('#page-num-0');
+    page_id.css('display',"block");
+};
