@@ -870,3 +870,12 @@ def helper_request_survey(request, data):
 
     for option in data['options']:
         UserSurveyDetail.objects.create(user_survey=user_survey, survey_item_option_id=option)
+
+
+def helper_get_survey_list(request):
+    survey_list = request.user.get_survey_list.values()
+    return survey_list
+
+def helper_get_survey_result_item(request, survey_id):
+    survey_item = request.user.get_survey_list.filter(id=survey_id)
+    return survey_item

@@ -147,9 +147,10 @@ class BeforePayment(models.Model):
         return '(%r)BeforePayment' % (self.id)
 
 class UserSurvey(models.Model):
-    user = models.ForeignKey('auth.User')
+    user = models.ForeignKey('auth.User', related_name='get_survey_list')
     survey = models.ForeignKey('foradmin.Survey', null=True)
     comments = models.TextField(blank=True, default='')
+    result_file_name = models.TextField(blank=True, default='')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     class Meta:

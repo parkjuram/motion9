@@ -1,0 +1,27 @@
+{% extends "mobile_base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block header %}
+
+    <script src="{% static 'js/survey_list.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'css/survey_list.css'%}"/>
+
+{% endblock header %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+    <div class="content-title">서베이 목록</div>
+
+    <ul>
+        {% for survey_item in survey_list %}
+            <li>
+                <a href="{% url "mobile_survey_result" pk=survey_item.id %}">{{ survey_item.created }} 화장품 보고서</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
