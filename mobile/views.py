@@ -7,7 +7,7 @@ from common_controller.decorators import mobile_login_required
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, helper_get_product_magazines, \
     helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item, helper_get_adarea_items, \
-    helper_get_faq_items, helper_get_survey_list, helper_get_survey_item, helper_get_survey_result_item
+    helper_get_faq_items, helper_get_survey_list, helper_get_survey_result_item
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
 from users.models import Payment
