@@ -46,5 +46,6 @@ urlpatterns = patterns('',
 
     url(r'^report/form/$', 'web.views.report_form_view', name='report_form'),
 
+    url(r'^report/form/index/$', 'web.views.report_form_index_view', name='report_form_index'),
 
 )

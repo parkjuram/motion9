@@ -1,0 +1,32 @@
+{% extends "web_base.html" %}
+
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+{% block header %}
+
+    <script src="{% static 'js/report_form_web.js' %}"></script>
+    <script>
+        var urlRequestSurvey = "{% url 'request_survey' %}";
+    </script>
+    <link rel="stylesheet" href="{% static 'css/report_form_web.css' %}"/>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="container" style="width:800px; margin-top:50px;">
+            <div class="ui-content">
+                ajsdifojasdifojasdfoiajdsfio
+            </div>
+
+            <a href="{% url 'report_form' %}" class="black-btn"  target="_self">9초만에 가입하고 리뷰 분석 보고서 받기</a>
+
+        </div>
+
+    </div>
+
+{% endblock %}

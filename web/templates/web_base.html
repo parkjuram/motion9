@@ -22,9 +22,6 @@
     <script src="{% static 'js/jssor.slider.mini.js' %}"></script>
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
 
-{#    <script src="{% static 'js/jssor.core.js' %}"></script>#}
-{#    <script src="{% static 'js/jssor.slider.js' %}"></script>#}
-{#    <script src="{% static 'js/jssor.utils.js' %}"></script>#}
     <script src="{% static 'js/common_js.js' %}"></script>
     <script src="{% static 'js/common_js_web.js' %}"></script>
     <script src="{% static 'js/uservoice.js' %}"></script>
@@ -80,16 +77,13 @@
                 <li class="clearfix"></li>
             </ul>
             <ul id="header-right-menu-list">
-                <!--
-                <li><span><input type="text" class="header-search rounded" placeholder="Search.."></span></li>
-                -->
                 <li><a href="{% url 'mypage' %}">My Page</a></li>
                 <li><a href="{% url 'mypage_cart' %}">Cart</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout'%}" class="">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'login_page' %}">Login</a></li>
-                    <li><a href="{% url 'registration_page' %}">회원가입</a></li>
+                    <li><a href="{% url 'registration_page' %}?next={{ next }}" target="_self">회원가입</a></li>
                 {% endif %}
                 <li><a href="#" id="headerSearchBtn" data-attr="menuSearch" style="display: none;">검색</a></li>
 

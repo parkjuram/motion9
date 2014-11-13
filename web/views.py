@@ -819,6 +819,14 @@ def report_detail_modal_view(request, category_id=None, page_num=1, product_id=N
         return render(request, "404.html")
 
 
+@csrf_exempt
+def report_form_index_view(request):
+
+    return render(request, 'report_form_index_web.html',
+                  {
+                      'next': reverse('report_form'),
+                  })
+
 @login_required
 def report_form_view(request):
     survey = helper_get_survey_items(request)
