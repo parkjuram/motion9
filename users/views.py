@@ -909,6 +909,14 @@ def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=
     else:
         return render(request, "404.html")
 
+@csrf_exempt
+def mobile_report_form_index_view(request):
+
+    return render(request, 'report_form_index.html',
+                  {
+                      'next': reverse('mobile_report_form'),
+                  })
+
 
 @mobile_login_required
 def mobile_report_form_view(request):
