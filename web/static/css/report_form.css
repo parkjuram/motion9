@@ -9,7 +9,7 @@ body{
 .black-btn {
   text-align : center;
   width: 60px;
-  border-radius: 3px;
+  border-radius: 0px;
   display : inline-block;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -17,20 +17,19 @@ body{
   font-size: 12px;
   font-weight: normal;
   background-color: #292929;
-  padding: 8px 10px;
+  padding: 15px 20px;
   text-decoration: none !important;
   text-shadow : none !important;
-
 }
 
 .report-radio-title{
     width : auto;
-    font-size : 20px;
+    font-size : 14px;
     /*color : #292929;*/
     color : white;
     /*margin-bottom : 17px;*/
-     background:#292929;
-    padding : 10px;
+    background:#292929;
+    padding : 25px;
     display : block;
 }
 
@@ -43,6 +42,11 @@ body{
 
     border-color : #292929; !important;
 
+}
+
+.ui-btn.ui-checkbox-off:after, .ui-btn.ui-checkbox-on:after, .ui-btn.ui-radio-off:after, .ui-btn.ui-radio-on:after{
+    width : 15px;
+    height : 15px;
 }
 
 .report-text{
@@ -70,10 +74,11 @@ body{
 }
 
 .report-box{
-    margin-bottom:40px;
-    border:1px solid #e5e5e5;
-    padding:0px;
-    width:100%;
+    margin-bottom : 40px;
+    border : 1px solid #e5e5e5;
+    padding : 0px;
+    width : 100%;
+    box-shadow : 6px 6px 10px #e3e3e3;
 }
 
 .register-form .form-box input{
@@ -87,4 +92,27 @@ body{
     float: left;
     margin-right: 12px;
     margin-top : 4px;
+}
+
+.textarea-box{
+    padding : 10px 0px;
+    border : 1px solid #e5e5e5;
+    font-size : 14px !important;
+    color : #a9a9a9 !important;
+    margin : 0;
+    background : rgba(253,245,247,0.38);
+    box-shadow : none;
+    border-radius : 0px;
+    height : 200px;
+}
+
+.label-content{
+    border : 0px !important;
+    /*background : #f9f9f9;*/
+    font-size : 13px !important;
+    color : #292929;
+}
+
+.ui-controlgroup-controls{
+    padding: 20px;
 }
