@@ -61,8 +61,8 @@ admin.site.register(BeforePayment, BeforePaymentAdmin)
 
 
 class UserSurveyAdmin(admin.ModelAdmin):
-    list_display = ('user', 'survey', 'comments', 'created')
-    list_editable = ('comments',)
+    list_display = ('user', 'survey', 'result_file_name', 'comments', 'created')
+    list_editable = ('result_file_name', 'comments',)
     list_display_links = ('user', 'survey',)
 
 admin.site.register(UserSurvey, UserSurveyAdmin)
