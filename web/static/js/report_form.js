@@ -22,8 +22,7 @@ $(function () {
             success: function (data) {
                console.log(data);
                 if (data.success) {
-                   dialog.popup('open');
-                   alert('test');
+                    alert('success');
                 }
             }
         });
