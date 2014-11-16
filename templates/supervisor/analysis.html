@@ -1,0 +1,81 @@
+{% extends "supervisor/base.html" %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(function() {
+            $('.btn-save').click(function() {
+                var form_count = $('input.result-file-name').size();
+                var ids = "";
+                var values = "";
+                $('input.result-file-name').each(function(index, object) {
+                    object = $(object);
+                    if ( ids=="" ) {
+                        ids = object.attr('user-survey-id');
+                        values = object.val();
+                    } else {
+                        ids = ids + "@" + object.attr('user-survey-id');
+                        values = values + "@" + object.val();
+                    }
+                });
+
+                $.ajax({
+                    url: "{% url 'supervisor:analysis' %}",
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        ids: ids,
+                        values: values,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(data) {
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+
+                    }
+                })
+
+
+            });
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block content %}
+    <div class='row'>
+        <div class='col-sm-custom-20'>
+            <table class="table table-hover">
+                <tr>
+                    <th>#</th>
+                    <th>이름</th>
+                    <th>아이디</th>
+                    <th>성별</th>
+                    <th>나이</th>
+                    <th>링크주소<br/>(템플릿)</th>
+                    {% for item in analysis_list.0.question %}
+                        <th>{{ item.title }}</th>
+                    {% endfor %}
+                    <th>Comments</th>
+                </tr>
+                {% for item in analysis_list %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.sex }}</td>
+                        <td>{{ item.age }}</td>
+                        <td>
+                            <input class='result-file-name' type="text" user-survey-id="{{ item.id }}" value="{{ item.result_file_name }}">
+                        </td>
+                        {% for detail_item in item.question %}
+                            <td>{{ detail_item.answer }}</td>
+                        {% endfor %}
+                        <td>{{ item.comments }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <button type="button" class="btn btn-default btn-save">저장하기</button>
+        </div>
+    </div>
+{% endblock content %}

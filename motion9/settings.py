@@ -15,7 +15,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 TEMPLATE_DIRS = (
-    PROJECT_PATH + '/templates/'
+    PROJECT_PATH + '/templates/',
+    PROJECT_PATH + '/../templates/',
 )
 
 CHARSET = 'utf-8'
@@ -53,7 +54,7 @@ INSTALLED_APPS = (
     'web',
     'mobile',
     'users',
-
+    'supervisor',
 )
 
 SITE_ID = 1
