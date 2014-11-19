@@ -32,7 +32,7 @@ class SurveyItemAdmin(admin.ModelAdmin):
 admin.site.register(SurveyItem, SurveyItemAdmin)
 
 class SurveyItemOptionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'item','content')
-    list_editable = ('content',)
+    list_display = ('id', 'item','content', 'order')
+    list_editable = ('content', 'order', )
     list_display_links = ('item',)
 admin.site.register(SurveyItemOption, SurveyItemOptionAdmin)

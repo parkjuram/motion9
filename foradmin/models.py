@@ -46,9 +46,10 @@ class SurveyItem(models.Model):
 class SurveyItemOption(models.Model):
     item = models.ForeignKey('foradmin.SurveyItem', related_name='get_options')
     content = models.TextField(blank=True)
+    order = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('item', 'content',)
 
     def __unicode__(self):
-        return '%r - SurveyItemOption : item[%s] content[%s]' % (self.id, self.item.question, self.content)
+        return '%r - SurveyItemOption : item[%s] content[%s] order[%r]' % (self.id, self.item.question, self.content, self.order)
