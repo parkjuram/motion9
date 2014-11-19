@@ -851,7 +851,7 @@ def helper_get_survey_items(request):
     survey_items_ = []
     for item in survey_items:
         item_ = {}
-        options = item.get_options.values('id', 'content')
+        options = item.get_options.order_by('order').values('id', 'content')
         item_.update( {
             'question': item.question,
             'type': item.type,
