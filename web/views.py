@@ -840,7 +840,7 @@ def report_form_view(request):
             'label_index': str(i + 1)
         })
         survey_group.append(survey['survey_items'][i])
-        if (i + 1) % 1 == 0:
+        if (i + 1) % 3 == 0:
             survey_.append(survey_group)
             survey_group = []
 

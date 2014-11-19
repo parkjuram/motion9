@@ -1,38 +1,74 @@
 {% extends "web_base.html" %}
 {% block header %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/index_web.css' %}"/>
-<script src="{% static 'js/index_web.js' %}"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index_web.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/popup_layer.css' %}"/>
+
+    <script src="{% static 'js/popup_layer.js' %}"></script>
+    <script src="{% static 'js/index_web.js' %}"></script>
+
 {% endblock %}
 {% block ad_area %}
-<div class="ad-area">
-    <img src="{{ main_image }}"/>
-    <div class="main-notice">{{ main_notice.content }}</div>
-{#    <img src="http://cdn.shopify.com/s/files/1/0090/5112/files/Acetate_Stone_Landing2.jpg?11276"/>#}
-</div>
+    <div class="ad-area">
+        <img src="{{ main_image }}"/>
+
+        <div class="main-notice">{{ main_notice.content }}</div>
+        {#    <img src="http://cdn.shopify.com/s/files/1/0090/5112/files/Acetate_Stone_Landing2.jpg?11276"/>#}
+    </div>
 {% endblock %}
 
 {% block content %}
-<div class="index-content-wrapper">
-    {% for set_category_images in set_category_images_row %}
-        <div class="index-content-row">
-            {% for set_category_image in set_category_images %}
-                {% if forloop.first %}
-                    <div class="index-content float-left">
-                        <a href="{% url 'shop_set' category_id=set_category_image.id %}" class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
+
+    <div class="index-content-wrapper">
+        {% for set_category_images in set_category_images_row %}
+            <div class="index-content-row">
+                {% for set_category_image in set_category_images %}
+                    {% if forloop.first %}
+                        <div class="index-content float-left">
+                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
+                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
+                        </div>
+                    {% elif forloop.last %}
+                        <div class="index-content center-in-div">
+                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
+                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
+                        </div>
+                    {% else %}
+                        <div class="index-content float-right">
+                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
+                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {#    <a href="#" class="btn-example" onclick="layer_open('layer2');return false;">예제-2 보기</a>#}
+
+    <div class="layer">
+        <div class="bg"></div>
+        <div id="layer2" class="pop-layer">
+            <div class="pop-container">
+                <div class="pop-conts">
+                    <!--content //-->
+                    <p class="ctxt mb20">Thank you.<br>
+                        09.
+                        Your registration was submitted successfully.<br>
+                        10.
+                        Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
+                        11.
+                        Hope to see you soon!
+                        12.
+                    </p>
+                    <div class="btn-r">
+                        <a href="#" class="cbtn">Close</a>
                     </div>
-                {% elif forloop.last %}
-                    <div class="index-content center-in-div">
-                        <a href="{% url 'shop_set' category_id=set_category_image.id %}" class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
-                    </div>
-                {% else %}
-                    <div class="index-content float-right">
-                        <a href="{% url 'shop_set' category_id=set_category_image.id %}" class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
-                    </div>
-                {% endif %}
-            {% endfor %}
-            <div class="clearfix"></div>
+                    <!--// content-->
+                </div>
+            </div>
         </div>
-    {% endfor %}
-</div>
+    </div>
+
 {% endblock %}
