@@ -1,27 +1,33 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/index.css'%}"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 
-<script src="{% static 'js/index.js'%}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<div id="productList">
-    <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; position:relative;">
-        <img src='{{ main_image_url }}' style="width:100%; height:auto" />
-        <div class="main-notice">{{ main_notice.content }}</div>
-    </div>
-  <div  style="border : 1px solid #d8d9dd; width : 100%; height : auto">
-{#      {% for category_images in category_images %}#}
-{#        <a href="{% url "mobile_shop_product" category_id=category_images.id %}" class="top-menu-btn"><img src='{{ category_images.image }}' style="width:100%; height:auto" ></a>#}
-{#      {% endfor %}#}
+    <div id="productList">
+        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; position:relative;">
+            <img src='{{ main_image_url }}' style="width:100%; height:auto"/>
+
+            <div class="main-notice">{{ main_notice.content }}</div>
+        </div>
+        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto">
+              <a href="{% url 'mobile_report_form_index' %}" class="index-content-img"
+                   target="_self">내게 맞는 회장품 찾기 테스트 중입니다. </a>
+        </div>
+        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto">
+            {#      {% for category_images in category_images %}#}
+            {#        <a href="{% url "mobile_shop_product" category_id=category_images.id %}" class="top-menu-btn"><img src='{{ category_images.image }}' style="width:100%; height:auto" ></a>#}
+            {#      {% endfor %}#}
 
             {% for set_category_image in set_category_images %}
-                <a href="{% url 'mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img" target="_self" ><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>
+                <a href="{% url 'mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img"
+                   target="_self"><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>
             {% endfor %}
 
-  </div>
-</div>
+        </div>
+    </div>
 {% endblock %}

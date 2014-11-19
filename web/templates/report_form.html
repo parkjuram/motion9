@@ -50,10 +50,15 @@
 
 <body>
 
+<div style="text-align:center; height:40px; width:100%;">
+      <a href="{% url 'mobile_index' %}" target="_self">
+    <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img" style="height:40px;"></a>
+</div>
+
 <form value="{{ survey.survey_id }}">
     {% csrf_token %}
     {% for survey_group in survey %}
-        <div data-role="page" id="page-num-{{ forloop.counter0 }}">
+        <div data-role="page" id="page-num-{{ forloop.counter0 }}" style="margin-top:40px; background: white; ">
             <div role="main" class="ui-content">
                 {% for survey_items in survey_group %}
                     <div class="report-box">
@@ -84,19 +89,21 @@
         </div>
     {% endfor %}
 
-    <div data-role="page" id="page-num-{{ survey|length }}">
+    <div data-role="page" id="page-num-{{ survey|length }}" style="margin-top:50px; background: white; ">
         <div role="main" class="ui-content">
             <div class="report-radio-title">
                 그 외 화장품 관련 분석 요청
             </div>
-            <textarea id='reportText' class="textarea-box"onclick="document.getElementById('reportText').value='';">
+            <textarea id='reportText' class="textarea-box"
+                      onclick="document.getElementById('reportText').value='';">
                 ex) 수분크림은 꼭 필요해요.
                 비오템 아쿠아 로션 리뷰 분석해주세요.
             </textarea>
 
             <div style="text-align: center; margin-top : 50px;">
                 <a href="#page-num-{{ survey|length|sub:1 }}" class="black-btn">뒤로가기</a>
-                <a href="#" id="report-btn" survey_id="{{ survey_id }}" class="black-btn" style="width:70px;">보고서 요청</a>
+                <a href="#" id="report-btn" survey_length="{{ survey|length }}" survey_id="{{ survey_id }}" url="{% url 'mobile_survey_list' %}"
+                   class="black-btn" style="width:70px;">보고서 요청</a>
             </div>
             <div style="text-align: center; margin-top : 20px;">
                 {{ survey|length|add:'1' }}/{{ survey|length|add:'1' }}
@@ -105,25 +112,6 @@
     </div>
 
 </form>
-
-<div data-role="popup" id="productDetailDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false"
-     style="width:300px;">
-    <div data-role="header" data-theme="a">
-        <h5 style="font-size: 14px;" id="popupDetailName"></h5>
-    </div>
-    <div role="main" class="ui-content">
-        <div id="popupDetailImg">
-            <img src=""/>
-        </div>
-        <div id="popupDetailDesc">
-
-        </div>
-        <div style="text-align: center;">
-            <a href="#" class="gold-btn" id="popupDetailBtn" style="margin-right:2%;">자세히</a>
-            <a href="#" class="gold-btn" data-rel="back">닫기</a>
-        </div>
-    </div>
-</div>
 
 </body>
 

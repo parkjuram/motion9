@@ -108,9 +108,10 @@ body{
 
 .label-content{
     border : 0px !important;
-    background : white;
+    background : white !important;
     font-size : 13px !important;
     color : #292929;
+    white-space : pre-line;
 }
 
 .ui-controlgroup-controls{
@@ -118,3 +119,10 @@ body{
     /*background : white;*/
 }
 
+.footer-div{
+    font-size: 10px;
+    font-weight: normal;
+    padding: 10px 30px;
+    line-height: 14px;
+    text-align: right;
+}

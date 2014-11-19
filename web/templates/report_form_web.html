@@ -36,7 +36,7 @@
                                             <div class="checkbox-wrapper">
                                                 <input type="radio" name="radio-name-{{ survey_items.label_index  }}"
                                                        id="radio-id-{{ forloop.counter }}" value="{{ option.id }}"/>
-                                                <label for="radio-id-{{ forloop.counter }}">{{ option.content }}</label>
+                                                <label for="radio-id-{{ forloop.counter }}" class="label-content">{{ option.content }}</label>
                                             </div>
                                         {% endfor %}
                                         <div class="clearfix"></div>
@@ -78,7 +78,7 @@
                         <div style="text-align: center; margin-top : 50px;">
                             <a href="#" id='{{ survey|length|sub:1 }}' page_id="page-num-{{ survey|length }}"
                                class="black-btn">뒤로가기</a>
-                            <a href="#" id="report-btn" survey_id="{{ survey_id }}" class="black-btn">보고서 요청</a>
+                            <a href="#" id="report-btn" survey_length ="{{ survey|length }}"survey_id="{{ survey_id }}"  url="{% url 'request_survey' %}" class="black-btn">보고서 요청</a>
                         </div>
 
                         <div style="text-align: center; margin-top : 20px;">
