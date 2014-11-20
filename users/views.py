@@ -146,11 +146,10 @@ def registration(request, next='index'):
 
 @csrf_exempt
 def registration_view(request):
+    next = request.GET.get('next', 'registration_page' if request.is_mobile else 'mobile_registration_page')
 
     if request.user.is_authenticated():
-        return redirect('index')
-
-    next = request.GET.get('next', 'registration_page')
+        return redirect(next)
 
     return render(request, 'register_web.html', {
         'next': next

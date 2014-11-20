@@ -161,19 +161,13 @@ $(function(){
 
     function fbLoginCallback(response) {
         if (response.status === 'connected') {
-          // Logged into your app and Facebook.
-            //testAPI();
             FB.api('/me', function(user_info) {
                 $('#fbEmail').val(user_info.email);
                 $('#fbToken').val(response.authResponse.accessToken);
                 $('#facebookLoginForm').submit();
             });
-
-
-
         } else if (response.status === 'not_authorized') {
-
-            window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page'+"&response_type=token&scope=public_profile,email,user_friends");
+            window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page/?next='+next+"&response_type=token&scope=public_profile,email,user_friends");
 
             /*
             FB.login(function(response) {

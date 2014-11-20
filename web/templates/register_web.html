@@ -1,9 +1,12 @@
 {% extends "web_base.html" %}
-{% block header %}
 {% load static %}
+{% block header %}
 <link rel="stylesheet" href="{% static 'css/register_web.css' %}"/>
+<script type="text/javascript">
+var next = "{{ next }}";
+</script>
 <script src="{% static 'js/register_web.js' %}"></script>
-{% endblock %}
+{% endblock header %}
 {% block content %}
     <div class="register-form">
         <div class="register-header">

@@ -55,7 +55,7 @@ $(function(){
 
     $('.fb-join-btn').click(function(e){
         e.preventDefault();
-        window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page'+"&response_type=token&scope=public_profile,email,user_friends");
+        window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page/?next='+next+"&response_type=token&scope=public_profile,email,user_friends");
     });
 
     function emailCheck(el){
