@@ -6,7 +6,6 @@ urlpatterns = patterns('',
 
     url(r'^check/email/$', 'users.views.check_email_view', name='check_email'),
     url(r'^check/token/facebook/$', 'users.views.check_facebook_token_view', name='check_facebook_token'),
-    url(r'^check/token/facebook/(?P<next>(\w+))/fail/(?P<fail>(\w+))/$', 'users.views.check_facebook_token_view', name='check_facebook_token'),
 
     url(r'^registration/(?P<next>([\w:/#]+))/$', 'users.views.registration', name='registration'),
     url(r'^registration_page/$', 'users.views.registration_view', name='registration_page'),

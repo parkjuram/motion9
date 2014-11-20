@@ -54,18 +54,17 @@ def check_email_view(request):
     return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
 @csrf_exempt
-def check_facebook_token_view(request, next='index', fail='registration_page'):
+def check_facebook_token_view(request):
+    next = request.GET.get('next', 'index' if request.is_mobile else 'mobile_index')
     token = request.POST.get('token', None)
     email = request.POST.get('email', None)
 
     if token is None:
         http_response_by_json( const.CODE_PARAMS_WRONG )
     else:
-
         app_token_url = 'https://graph.facebook.com/v2.0/oauth/access_token?client_id=1450591788523941&client_secret=f99304b17095fd8c2a7d737a9be8c39b&grant_type=client_credentials'
         contents = urllib2.urlopen(app_token_url).read()
         app_token = contents[13:]
-
 
         token_check_url = 'https://graph.facebook.com/debug_token?input_token='+token+'&access_token='+app_token
 
@@ -81,7 +80,10 @@ def check_facebook_token_view(request, next='index', fail='registration_page'):
                 return redirect(next)
 
             except ObjectDoesNotExist as e:
-                return redirect(fail)
+                if request.is_mobile:
+                    return redirect('mobile_registration_page')
+                else:
+                    return redirect('registration_page')
 
         else:
             http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )

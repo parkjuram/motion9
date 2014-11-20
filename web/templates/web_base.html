@@ -161,7 +161,7 @@
 </div>
 
 <div id="loginBox" class="login-box">
-    <form id="facebookLoginForm" method="post" action="{% url 'check_facebook_token' next='index'  fail='registration_page'%}">
+    <form id="facebookLoginForm" method="post" action="{% url 'check_facebook_token' %}?next={{ next }}">
         <input type="hidden" id="fbEmail" name="email"/>
         <input type="hidden" id="fbToken" name="token"/>
     </form>
