@@ -149,7 +149,7 @@ def registration_view(request):
     next = request.GET.get('next', 'mobile_registration_page' if request.is_mobile else 'registration_page')
 
     if request.user.is_authenticated():
-        return redirect(next)
+        return redirect('mobile_index' if request.is_mobile else 'index')
 
     return render(request, 'register_web.html', {
         'next': next
