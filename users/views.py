@@ -55,7 +55,7 @@ def check_email_view(request):
 
 @csrf_exempt
 def check_facebook_token_view(request):
-    next = request.GET.get('next', 'index' if request.is_mobile else 'mobile_index')
+    next = request.GET.get('next', 'mobile_index' if request.is_mobile else 'index')
     token = request.POST.get('token', None)
     email = request.POST.get('email', None)
 
@@ -146,7 +146,7 @@ def registration(request, next='index'):
 
 @csrf_exempt
 def registration_view(request):
-    next = request.GET.get('next', 'registration_page' if request.is_mobile else 'mobile_registration_page')
+    next = request.GET.get('next', 'mobile_registration_page' if request.is_mobile else 'registration_page')
 
     if request.user.is_authenticated():
         return redirect(next)
