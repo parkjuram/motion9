@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -250,6 +251,9 @@ def privacy_view(request):
 @mobile_login_required
 def survey_list_view(request):
     survey_list = helper_get_survey_list(request)
+    for item in survey_list:
+        item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 (준비중)" if len(item['result_file_name']) == 0 else ""
+
     return render(request, 'survey_list.html', {
         'survey_list': survey_list
     })

@@ -14,9 +14,10 @@
     <div class="content-title">분석 보고서 목록</div>
 
     <div class="content-list">
+
         {% for survey_item in survey_list %}
             <a href="{% url "mobile_survey_result" pk=survey_item.id %}"
-               target="_self">{{ survey_item.created|date:"Y년 m월 d일" }} 분석 보고서</a>
+               target="_self">{{ survey_item.display_name }}</a>
             <br/>
             <div class="login-box-header">
                 <h4 class="lined-heading"><span> </span></h4>
@@ -24,10 +25,11 @@
 
             <div class="clearfix"></div>
         {% endfor %}
-    </div>
 
-    <div class="content-title" style="color : white; background-color : black;">
-        <a href="{% url 'mobile_report_form' %}" target="_self">나의 피부 진단</a>
     </div>
-
+    <a href="{% url 'mobile_report_form' %}" target="_self">
+        <div class="content-title" style="color : white; background-color : black;">
+            나의 피부 진단
+        </div>
+    </a>
 {% endblock content %}
