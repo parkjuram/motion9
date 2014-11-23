@@ -12,7 +12,9 @@
     <div class="ad-area">
         <img src="{{ main_image }}"/>
 
-        <div class="main-notice">{{ main_notice.content }}</div>
+        <div class="main-notice">{{ main_notice.content }}
+         <a href="{% url 'report_form_index' %}" class="basic-btn">바로가기</a></div>
+
         {#    <img src="http://cdn.shopify.com/s/files/1/0090/5112/files/Acetate_Stone_Landing2.jpg?11276"/>#}
     </div>
 {% endblock %}
@@ -53,17 +55,14 @@
             <div class="pop-container">
                 <div class="pop-conts">
                     <!--content //-->
-                    <p class="ctxt mb20">Thank you.<br>
-                        09.
-                        Your registration was submitted successfully.<br>
-                        10.
-                        Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
-                        11.
-                        Hope to see you soon!
-                        12.
+                    <p class="ctxt mb20">
+                        화장품 분석 보고서를 받아 보시기 위해 먼저 간단히 MOTION9에 가입하셔야 합니다.<br/>
+                        5가지 정도의 문항 입력 후 최소 24시간 최대 48시간에 고객님의 피부를 위한 화장품 분석 보고서를 받아 보실 수 있습니다.
                     </p>
+                    <br/>
                     <div class="btn-r">
-                        <a href="#" class="cbtn">Close</a>
+                        <a href="{% url 'report_form_index' %}" class="basic-btn">바로가기</a>
+                        <a href="#" class="basic-btn" id="layer-btn">Close</a>
                     </div>
                     <!--// content-->
                 </div>
