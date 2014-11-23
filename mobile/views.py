@@ -252,7 +252,12 @@ def privacy_view(request):
 def survey_list_view(request):
     survey_list = helper_get_survey_list(request)
     for item in survey_list:
-        item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 (준비중)" if len(item['result_file_name']) == 0 else ""
+        if len(item['result_file_name'])==0:
+            item['is_analysis_finish'] = False
+        else:
+            item['is_analysis_finish'] = True
+
+        item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 (준비중)" if item['is_analysis_finish'] == False else ""
 
     return render(request, 'survey_list.html', {
         'survey_list': survey_list

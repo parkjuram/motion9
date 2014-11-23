@@ -17,7 +17,7 @@
 
         {% for survey_item in survey_list %}
             <a href="{% url "mobile_survey_result" pk=survey_item.id %}"
-               target="_self">{{ survey_item.display_name }}</a>
+               target="_self" is-analysis-finish="{{ survey_item.is_analysis_finish }}">{{ survey_item.display_name }}</a>
             <br/>
             <div class="login-box-header">
                 <h4 class="lined-heading"><span> </span></h4>

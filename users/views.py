@@ -945,7 +945,6 @@ def mobile_report_form_view(request):
                       'survey': survey_,
                       'survey_id': survey['survey_id'],
                       'survey_range': survey_range
-                      # 'next': "{% url 'mobile_report_form' %}"
                   })
 
 @csrf_exempt

@@ -51,8 +51,8 @@
 <body>
 
 <div style="text-align:center; height:40px; width:100%;">
-      <a href="{% url 'mobile_index' %}" target="_self">
-    <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img" style="height:40px;"></a>
+    <a href="{% url 'mobile_index' %}" target="_self">
+        <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img" style="height:40px;"></a>
 </div>
 
 <form value="{{ survey.survey_id }}">
@@ -102,8 +102,8 @@
 
             <div style="text-align: center; margin-top : 50px;">
                 <a href="#page-num-{{ survey|length|sub:1 }}" class="black-btn">뒤로가기</a>
-                <a href="#" id="report-btn" survey_length="{{ survey|length }}" survey_id="{{ survey_id }}" url="{% url 'mobile_survey_list' %}"
-                   class="black-btn" style="width:70px;">보고서 요청</a>
+                <a href="#" id="report-btn" survey_length="{{ survey|length }}" survey_id="{{ survey_id }}"
+                   url="{% url 'mobile_survey_list' %}" class="black-btn" style="width:70px;">보고서 요청</a>
             </div>
             <div style="text-align: center; margin-top : 20px;">
                 {{ survey|length|add:'1' }}/{{ survey|length|add:'1' }}
