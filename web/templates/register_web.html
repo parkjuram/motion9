@@ -15,6 +15,10 @@ var next = "{{ next }}";
         </div>
         <form method="post" data-form="register" action="{% url 'registration' next=next%}" >
 
+            <div class="form-btns">
+                <a href="#" class="fb-join-btn facebook-btn">페이스북으로 로그인</a>
+            </div>
+
             <div class="form-box">
                 <label for="email">E-mail <span class="warning-message">* 이미 존재하는 이메일이거나 형식이 올바르지 않습니다.</span></label>
                 <input type="text" class="input-text" name="email" id="email">
@@ -127,7 +131,6 @@ var next = "{{ next }}";
 
             <div class="form-btns">
                 <a href="#" class="basic-btn login-submit-btn" id="joinBtn" data-form="register" data-enable="false" style="padding : 8px 40px;">회원가입</a> &nbsp;&nbsp;&nbsp;
-                <a href="#" class="fb-join-btn facebook-btn">페이스북으로 가입</a>
             </div>
             <div class="already-member-area">
                 이미 회원 이세요? <a href="{% url 'login_page' %}">로그인 하기</a>

@@ -25,7 +25,8 @@ class AnalysisView(SuperuserRequiredMixin, View):
                 'age':item.user.profile.age,
                 'result_file_name': item.result_file_name,
                 'question':[],
-                'comments': item.comments
+                'comments': item.comments,
+                'created': item.created
             }
             for detail_item in item.get_survey_detail.all():
                 analysis_['question'].append({

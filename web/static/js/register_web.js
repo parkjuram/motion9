@@ -1,23 +1,7 @@
-$(function(){
-
-    var registerPageInit = function(response) {
-        console.log(response.status);
-        if (response.status === 'connected') {
-            wireDataWithForm();
-        } else if (response.status === 'not_authorized') {
-
-        } else {
-
-        }
-    }
-
-    var rr;
-
-    console.log('ttt');
+$(function () {
 
     function wireDataWithForm(){
-        var name  = $('#name');
-        var email  = $('#email');
+        var name  = $('#name'), email  = $('#email');
 
         FB.api('/me', function(response) {
 
@@ -37,6 +21,18 @@ $(function(){
             }
         });
     }
+
+    function registerPageInit(response) {
+        if (response.status === 'connected') {
+            wireDataWithForm();
+        } else if (response.status !== 'not_authorized') {
+
+        }
+    }
+
+    var rr;
+
+    console.log('ttt');
 
     $.ajaxSetup({ cache: true });
       $.getScript('//connect.facebook.net/ko_kr/all.js', function(){
