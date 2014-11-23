@@ -47,10 +47,9 @@
 
 .main-notice {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 20%;
     font-size: 30px;
-    font-weight: bold;
-    white-space: pre-line;
+    font-weight: bold
     text-shadow: 1px 1px #FFFFFF;
 }
