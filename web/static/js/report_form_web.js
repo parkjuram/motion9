@@ -26,7 +26,7 @@ $(function () {
                 success: function (data) {
                     console.log(data);
                     if (data.success) {
-                        alert('설문이 완료되었습니다.');
+                        alert('보고서 요청이 완료되었습니다.');
                         location.href = url;
                     }
                 }
