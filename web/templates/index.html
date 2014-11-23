@@ -15,8 +15,14 @@
             <div class="main-notice">{{ main_notice.content }}</div>
         </div>
         <div style="border : 1px solid #d8d9dd; width : 100%; height : auto">
-              <a href="{% url 'mobile_report_form_index' %}" class="index-content-img"
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'mobile_report_form' %}" class="index-content-img"
                    target="_self">내게 맞는 회장품 찾기 테스트 중입니다. </a>
+            {% else %}
+                <a href="{% url 'mobile_report_form_index' %}" class="index-content-img"
+                   target="_self">내게 맞는 회장품 찾기 테스트 중입니다. </a>
+            {% endif %}
         </div>
         <div style="border : 1px solid #d8d9dd; width : 100%; height : auto">
             {#      {% for category_images in category_images %}#}
