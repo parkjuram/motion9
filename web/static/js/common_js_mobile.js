@@ -5,7 +5,7 @@
 
 $(function(){
 
-    var updateCartTotalPrice = function () {
+   function updateCartTotalPrice() {
         var sumPrice = $('#cartTotalPrice');
         var sum = 0;
 
