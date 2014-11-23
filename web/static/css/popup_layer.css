@@ -32,7 +32,7 @@
     width: 410px;
     height: auto;
     background-color: #fff;
-    border: 5px solid #3571B5;
+    border: 5px solid #e5e5e5;
     z-index: 10;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .pop-layer p.ctxt {
-    color: #666;
+    color: black;
     line-height: 25px;
 }
 
@@ -49,7 +49,7 @@
     width: 100%;
     margin: 10px 0 20px;
     padding-top: 10px;
-    border-top: 1px solid #DDD;
+    /*border-top: 1px solid #DDD;*/
     text-align: right;
 }
 
