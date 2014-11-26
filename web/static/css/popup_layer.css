@@ -29,28 +29,29 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 410px;
+    width: 600px;
     height: auto;
     background-color: #fff;
-    border: 5px solid #e5e5e5;
+    /*border: 5px solid #e5e5e5;*/
     z-index: 10;
 }
 
 .pop-layer .pop-container {
-    padding: 20px 25px;
+    padding: 40px 40px 10px 40px;
 }
 
 .pop-layer p.ctxt {
     color: black;
     line-height: 25px;
+    font-size : 20px;
 }
 
 .pop-layer .btn-r {
     width: 100%;
-    margin: 10px 0 20px;
+    margin: 10px 0px;
     padding-top: 10px;
     /*border-top: 1px solid #DDD;*/
-    text-align: right;
+    text-align: center;
 }
 
 a.cbtn {
@@ -68,4 +69,8 @@ a.cbtn:hover {
     border: 1px solid #091940;
     background-color: #1f326a;
     color: #fff;
+}
+
+.main-btn{
+
 }

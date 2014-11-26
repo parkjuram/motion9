@@ -11,11 +11,17 @@
 {% block ad_area %}
     <div class="ad-area">
         <img src="{{ main_image }}"/>
-
-        <div class="main-notice">{{ main_notice.content }}
-         <a href="{% url 'report_form_index' %}" class="basic-btn">바로가기</a></div>
-
-        {#    <img src="http://cdn.shopify.com/s/files/1/0090/5112/files/Acetate_Stone_Landing2.jpg?11276"/>#}
+        {% if user.is_authenticated %}
+            <div class="main-notice">{{ main_notice.content }}
+                <a href="#" class="main-btn">자세히 알아보기</a>
+                <a href="{% url 'report_form' %}" class="main-btn">나의 피부 진단</a>
+            </div>
+        {% else %}
+            <div class="main-notice">{{ main_notice.content }}
+                <a href="#" class="main-btn">자세히 알아보기</a>
+                <a href="{% url 'report_form_index' %}" class="main-btn">나의 피부 진단</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -59,10 +65,14 @@
                         화장품 분석 보고서를 받아 보시기 위해 먼저 간단히 MOTION9에 가입하셔야 합니다.<br/>
                         5가지 정도의 문항 입력 후 최소 24시간 최대 48시간에 고객님의 피부를 위한 화장품 분석 보고서를 받아 보실 수 있습니다.
                     </p>
-                    <br/>
+                    <br/><br/>
                     <div class="btn-r">
-                        <a href="{% url 'report_form_index' %}" class="basic-btn">바로가기</a>
-                        <a href="#" class="basic-btn" id="layer-btn">Close</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'report_form' %}" class="basic-btn" style="display:inline-block; width:100px; line-height:30px; font-size:15px;">시작하기</a>
+                        {% else %}
+                            <a href="{% url 'report_form_index' %}" class="basic-btn" style="display:inline-block; width:100px; line-height:30px; font-size:15px;">시작하기</a>
+                        {% endif %}
+{#                        <a href="#" class="basic-btn" id="layer-btn" style="width:400px;">닫기</a>#}
                     </div>
                     <!--// content-->
                 </div>
