@@ -856,6 +856,15 @@ def report_form_view(request):
                       'survey_range': survey_range
                   })
 
+
+@csrf_exempt
+def survey_detail_view(request):
+    return render(request, 'survey_detail_web.html',
+                  {
+                      'next': reverse('report_form'),
+                  })
+
+
 @login_required
 def survey_list_in_json(request):
     survey_list = helper_get_survey_list(request, True)
