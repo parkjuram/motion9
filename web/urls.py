@@ -52,4 +52,6 @@ urlpatterns = patterns('',
 
     url(r'^survey/detail/$', 'web.views.survey_detail_view', name='survey_detail'),
 
+    url(r'^survey/(?P<pk>(\d+))/$', 'web.views.survey_result_view', name='survey_result'),
+
 )

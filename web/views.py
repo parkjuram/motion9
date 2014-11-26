@@ -19,7 +19,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands, helper_get_product_magazines, \
     helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items, helper_get_survey_items, \
-    helper_get_survey_list
+    helper_get_survey_list, helper_get_survey_result_item
 from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment
 
@@ -873,4 +873,10 @@ def survey_list_in_json(request):
         item['created'] = item['created'].strftime("%Y %m %d")
 
     return http_response_by_json(None, {'data': list(survey_list)})
-    # return HttpResponse(json.dumps({'data': list(survey_list)}, ensure_ascii=True), content_type="application/json; charset=utf-8")
+
+@login_required
+def survey_result_view(request, pk):
+    survey_result_item = helper_get_survey_result_item(request, pk)
+    return render(request, 'web/survey_result.html', {
+        'survey_result_item': survey_result_item
+    })

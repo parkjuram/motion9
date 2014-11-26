@@ -1,0 +1,268 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+    {% load static %}
+    {% load humanize %}
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static "swiper/idangerous.swiper.js" %}"></script>
+    <script src="{% static "js/set_detail.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/set_detail.css' %}"/>
+
+    <script>
+    var url_for_product_detail = "{% url 'mobile_product' product_id=1987654321 %}";
+    function url_reverse_for_product_detail(product_id) {
+        return url_for_product_detail.replace("1987654321", product_id)
+    }
+
+    var url_for_product_detail_by_json = "{% url 'mobile_product_json' product_id=1987654321 %}";
+    function url_reverse_for_product_detail_by_json(product_id) {
+        return url_for_product_detail_by_json.replace("1987654321", product_id)
+    }
+
+
+    </script>
+
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">Collection</h2>
+{% endblock %}
+
+{% block content %}
+
+{#    <div class="category-box">#}
+{#        <div class="select-wrapper">#}
+{#            <div class="select-box-border">#}
+{#                <select id="mainCategoryList" data-mini="true" data-inline="true" data-shadow="false">#}
+{#                    <option value="#subSetCategory">세트상품</option>#}
+{#                    <option value="#subProductCategory">모든제품</option>#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="select-wrapper">#}
+{#            <select id="subCategoryList" data-mini="true" data-inline="true" data-shadow="false">#}
+{#                <option {% if current_category == '18' %} selected="selected" {% endif %} value="18">쿨가이 컬렉션</option>#}
+{#                <option {% if current_category == '30' %} selected="selected" {% endif %} value="19">꽃중년 컬렉션</option>#}
+{#                <option {% if current_category == '27' %} selected="selected" {% endif %} value="20">스포츠 컬렉션</option>#}
+{#                <option {% if current_category == '28' %} selected="selected" {% endif %} value="21">비즈니스맨 컬렉션</option>#}
+{#                <option {% if current_category == '31' %} selected="selected" {% endif %} value="21">계절 컬렉션</option>#}
+{#            </select>#}
+{#        </div>#}
+{#        <div class="clearfix"></div>#}
+{#    </div>#}
+    <div class="product-img">
+        <div>
+            <a  class="mobile-back-btn" id="mobile-back-btn"data-role="button" data-rel="back">
+                <img src="{% static "img/btn_back_view_m.png" %}" style="width : auto; height : auto;">
+            </a>
+        </div>
+        <div class="item-image">
+            <img src="{{ set.small_img }}" style="display:block;"/>
+        </div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+{#                  <div class="swiper-slide">#}
+{#                        <div class="item-image">#}
+{#                         <img src="{{ set.small_img  }}"/>#}
+{#                            </div>#}
+{#                   </div>#}
+
+                {% for image in product.images %}
+                    {% if forloop.first %}
+                    {% else %}
+                        <div class="swiper-slide">
+                            <img src="{{image}}" />
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+        <div class="product-title">
+            <div class="product-name">
+                {{ set.name }}
+            </div>
+            <div class="product-price">
+                {{ set.discount_price|intcomma }}원 <span
+                    class="item-original-price">{{ set.original_price|intcomma }}원</span>
+                (<span>{{ set.discount_rate }}</span>% 할인)
+            </div>
+            {% if set.is_interested %}
+                <a href="#" class="interest-btn btn-for-interest interest-done" data-type="s" data-product="{{ set.id }}">관심취소</a>
+            {% else %}
+                <a href="#" class="interest-btn btn-for-interest" data-type="s"
+                   data-product="{{ set.id }}">관심하기</a>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <ul class="tab-menu">
+            <li>
+                <a href="#productInfo" class="tab-btn product-info-btn">상품 정보</a>
+            </li>
+            <li>
+                <a href="#productItems" class="tab-btn product-items-btn selected-product-items-btn">세트 구성</a>
+            </li>
+            <li>
+                <a href="#productRule" class="tab-btn product-rule-btn">상품 정보 고시</a>
+            </li>
+        </ul>
+        <div class="tab-content tab-selected" id="productItems">
+            <div class="custom-set-btn-box">
+{#                <a href="{% url 'mobile_customize_set_make' set_id=set.id %}" data-ajax="false" style="font-weight:normal;">#}
+                <a href="javascript:alert('현재 준비중입니다. PC에서 이용해 주세요.');" data-ajax="false" style="font-weight:normal;">
+                    <div class="mypage-edit-btn">
+                        <img src="{% static "img/Customize.png" %}" style="vertical-align:middle; height:25px;"/>
+                        컬렉션 수정
+                    </div>
+                </a>
+            </div>
+            {% for product in set.products %}
+                <a href="#" class="view-product-btn" data-product="{{ product.id }}">
+                    <div class="product-item">
+                        <div class="product-item-img">
+                            <img src="{{ product.big_img_url }}"
+                                 style="max-width:100%; max-height:100%; width:auto; height:auto; position:absolute; margin:auto; left:0; right:0; top:0; bottom:0; "/>
+                        </div>
+                        <div class="product-item-contents">
+{#                           {{product.brandname }} {{ product.name|truncatechars:18 }}#}
+                           {{product.brandname }} {{ product.name }}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="tab-content" id="productInfo">
+            <div class="product-detail-info-wrapper">
+                <a target="_self" href="{% url 'mobile_ship' %}" class="ship-info">배송, 환불 정보</a>
+            </div>
+            <div class="product-detail-info-wrapper">
+                <div class="product-detail-info-header">상품특징</div>
+                <div class="product-detail-info" style="white-space: pre-line;">
+                    {{ set.description }}
+                </div>
+            </div>
+            <div class="product-detail-info-wrapper">
+                {{ set.description_detail }}
+            </div>
+            {% for description_image in set.small_description_images %}
+                <img src="{{ description_image }}" alt="" style="max-width: 100%;"/>
+            {% endfor %}
+        </div>
+        <div class="tab-content" id="productRule">
+            {% for product in set.products %}
+                <div style="margin-top : 18px;">
+
+                   <div style="padding: 0px; margin: 40px 0px 0px 30px;"> {{ product.brandname }} {{ product.name }}</div>
+                    <table class="product-info-table">
+
+                        <tr>
+                            <td class="item-spec-head">사이즈 및 용량</td>
+                            <td>{{ product.capacity }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">제품 주요 사양</td>
+                            <td>{{ product.fit_skin_type }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">사용기한</td>
+                            <td>{{ product.production_date }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">사용 방법</td>
+                            <td>{{ product.usage }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">제조자 및 제조판매업자</td>
+                            <td>{{ product.maker }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">제조국</td>
+                            <td>{{ product.country }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">주요성분 및 전성분</td>
+                            <td>{{ product.ingredient }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">식풍의약품안전청 심사필 유무</td>
+                            <td>{{ product.judge_result }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">사용시 주의사항</td>
+                            <td>{{ product.precautions }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">품질 보증기준</td>
+                            <td>{{ product.quality_guarantee_standard }}</td>
+                        </tr>
+                        <tr>
+                            <td class="item-spec-head">소비자 상담관련 전화번호</td>
+                            <td>02-554-4511</td>
+                        </tr>
+                    </table>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div data-role="popup" id="purchaseDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false"
+         style="width:300px;">
+        <div data-role="header" data-theme="a">
+            <h1 style="font-size: 18px;">수량 선택</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <div id="purchaseDialogSelect">
+                <select data-inline="true" id="howMany" data-shadow="false">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+            <div style="text-align: center;">
+                <a href="#" data-product="{{ set.id }}" data-mobile="true" data-type="s"
+                   class="black-btn btn-for-purchase" style="margin-right:2%;">구매</a><a href="#" class="black-btn"
+                                                                                       data-rel="back">닫기</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div data-role="popup" id="productDetailDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false"
+         style="width:90%; margin:0 auto;">
+        <div data-role="header" data-theme="a">
+            <h5 style="font-size: 14px; margin: 10px;" class="product-name-detail" id="popupDetailName"></h5>
+        </div>
+        <div role="main" class="ui-content">
+            <div id="popupDetailImg">
+                <img src=""/>
+            </div>
+            <div id="popupDetailDesc">
+
+            </div>
+            <div style="text-align: center;">
+                <a href="#" target="_self" class="black-btn" id="popupDetailBtn" style="margin-right:2%; padding:10px;">자세히</a>
+                <a href="#" class="black-btn" data-rel="back" style="padding:10px;">닫기</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div data-role="footer" data-position="fixed">
+        <div class="footer-bar">
+            <a href="#purchaseDialog" class="gold-btn" data-rel="popup" data-position-to="window" data-transition="pop"
+               style="margin-right:2%; background-color:#292929; padding:10 10 10 10; border-radius:4px;">구매</a><a href="#" class="gold-btn btn-for-cart" data-type="s"
+                                                 data-product="{{ set.id }}" style="background-color:#292929; padding:10 10 10 10; border-radius:4px;">장바구니</a>
+        </div>
+    </div>
+
+{% endblock %}
