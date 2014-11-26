@@ -2,7 +2,7 @@
  * Created by Park-Kunbae on 14. 3. 31.
  */
 
-$(function(){
+$(function () {
 
     function openWithoutReferrer(url) {
         var site = window.open("", "_blank");
@@ -10,25 +10,25 @@ $(function(){
     }
 
     // Open links with "hide-referrer" class without sending the referrer
-    $(document).on('click', 'a.hide-referrer', function(e) {
+    $(document).on('click', 'a.hide-referrer', function (e) {
         e.preventDefault();
         openWithoutReferrer($(this).attr('href'));
     });
 
-    $( '.right-tooltip' ).tooltip({position: {
+    $('.right-tooltip').tooltip({position: {
         my: "left",
         at: "right",
         track: false,
-        using: function(position, feedback) {
+        using: function (position, feedback) {
             $(this).css(position);
         }
     }, tooltipClass: "ui-right-tooltip"});
 
-    $( '.left-tooltip' ).tooltip({position: {
+    $('.left-tooltip').tooltip({position: {
         my: "right",
         at: "left",
         track: false,
-        using: function(position, feedback) {
+        using: function (position, feedback) {
             $(this).css(position);
         }
     }, tooltipClass: "ui-left-tooltip"});
@@ -72,6 +72,7 @@ $(function(){
             }
         };
         var jssor_slider1 = new $JssorSlider$('slider1_container', options);
+
         function ScaleSlider() {
             var bodyWidth = document.body.clientWidth;
             if (bodyWidth)
@@ -79,6 +80,7 @@ $(function(){
             else
                 window.setTimeout(ScaleSlider, 30);
         }
+
         ScaleSlider();
 
         if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
@@ -87,42 +89,42 @@ $(function(){
     });
 
 
-    var fixDiv = function() {
+    var fixDiv = function () {
         var b = $(window).scrollTop();
         var d = $("#header").offset().top + 80;
         var c = $("#nav-top-btn");
         if (b > d) {
-            c.css({position:"fixed", top:"90%", display:"block"});
+            c.css({position: "fixed", top: "90%", display: "block"});
         } else {
-            c.css({position:"absolute",top:"0px", display : 'none'});
+            c.css({position: "absolute", top: "0px", display: 'none'});
         }
     };
 
     $(window).scroll(fixDiv);
 
-    $('.login-box, .login-form').keypress(function(e){
-        if(e.keyCode == 13){
+    $('.login-box, .login-form').keypress(function (e) {
+        if (e.keyCode == 13) {
             $(this).find('form').submit();
         }
     });
 
 
-    $('.login-submit-btn').click(function(e){
+    $('.login-submit-btn').click(function (e) {
         e.preventDefault();
 
         var isEnable = $(this).attr('data-enable');
 
-        if(isEnable && isEnable == 'false'){
+        if (isEnable && isEnable == 'false') {
             alert('이메일을 확인하세요.');
-        }else{
+        } else {
             var formType = $(this).attr('data-form');
-            var form = $('form').filter(function(){
-               return $(this).attr('data-form') == formType;
+            var form = $('form').filter(function () {
+                return $(this).attr('data-form') == formType;
             });
 
             var formType = $(this).attr('data-form');
-            var form = $('form').filter(function(){
-               return $(this).attr('data-form') == formType;
+            var form = $('form').filter(function () {
+                return $(this).attr('data-form') == formType;
             });
 
             form.submit();
@@ -131,63 +133,63 @@ $(function(){
 
     });
 
-    $('#loginBox').jqm({modal:false});
-    $('.login-btn').click(function(e){
+    $('#loginBox').jqm({modal: false});
+    $('.login-btn').click(function (e) {
         e.preventDefault();
         $('#loginBox').jqmShow();
 
 
     });
 
-    function loginCheck(email){
+    function loginCheck(email) {
         $.ajax({
-              url: "/user/logincheck/",
-              dataType: 'json',
-              async : true,
-              type:'POST',
-              data:{email : email},
-              success: function(data){
-                  if(data == 'valid')
-                    location.href= 'login success url';
-                  else
-                    location.href= '/user/registration_page';
-              },
-              error:function(jqXHR, textStatus, errorThrown){
-                  console.log(textStatus);
-              }
-		});
+            url: "/user/logincheck/",
+            dataType: 'json',
+            async: true,
+            type: 'POST',
+            data: {email: email},
+            success: function (data) {
+                if (data == 'valid')
+                    location.href = 'login success url';
+                else
+                    location.href = '/user/registration_page';
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
     }
 
 
     function fbLoginCallback(response) {
         if (response.status === 'connected') {
-            FB.api('/me', function(user_info) {
+            FB.api('/me', function (user_info) {
                 $('#fbEmail').val(user_info.email);
                 $('#fbToken').val(response.authResponse.accessToken);
                 $('#facebookLoginForm').submit();
             });
         } else if (response.status === 'not_authorized') {
-            window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://"+location.host+'/user/registration_page/?next='+next+"&response_type=token&scope=public_profile,email,user_friends");
+            window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=1450591788523941&redirect_uri=http://" + location.host + '/user/registration_page/?next=' + next + "&response_type=token&scope=public_profile,email,user_friends");
 
             /*
-            FB.login(function(response) {
-              if (response.status === 'connected') {
-                // Logged into your app and Facebook.
-                 console.log('logged in');
-              } else if (response.status === 'not_authorized') {
-                // The person is logged into Facebook, but not your app.
-                console.log('facebook logged in but not the app');
-              } else {
-                // The person is not logged into Facebook, so we're not sure if
-                // they are logged into this app or not.
-                  console.log('wtff');
-              }
-            }, {scope: 'public_profile,email,user_friends'});
-            */
+             FB.login(function(response) {
+             if (response.status === 'connected') {
+             // Logged into your app and Facebook.
+             console.log('logged in');
+             } else if (response.status === 'not_authorized') {
+             // The person is logged into Facebook, but not your app.
+             console.log('facebook logged in but not the app');
+             } else {
+             // The person is not logged into Facebook, so we're not sure if
+             // they are logged into this app or not.
+             console.log('wtff');
+             }
+             }, {scope: 'public_profile,email,user_friends'});
+             */
         } else {
-            FB.login(function(response) {
+            FB.login(function (response) {
                 if (response.authResponse) {
-                    FB.api('/me', function(user_info) {
+                    FB.api('/me', function (user_info) {
                         $('#fbEmail').val(user_info.email);
                         $('#fbToken').val(response.authResponse.accessToken);
                         $('#facebookLoginForm').submit();
@@ -201,37 +203,37 @@ $(function(){
                 }
             }, {scope: 'public_profile,email,user_friends' });
 //            alert('페이스북에 로그인을 먼저 해주세요.');
-          // The person is not logged into Facebook, so we're not sure if
-          // they are logged into this app or not.
+            // The person is not logged into Facebook, so we're not sure if
+            // they are logged into this app or not.
         }
     }
 
 
-    $('.fb-login-btn').click(function(e){
+    $('.fb-login-btn').click(function (e) {
         e.preventDefault();
 
         FB.getLoginStatus(fbLoginCallback);
     });
 
 
-    var subMenuInitialize = function(){
+    var subMenuInitialize = function () {
 
         $('.header-sub-menu').removeClass('header-sub-menu-selected');
 
-        var selectedMainMenu = $('#header-main-menu-list a').filter(function(){
+        var selectedMainMenu = $('#header-main-menu-list a').filter(function () {
             return $(this).hasClass('selected');
         }).attr('data-attr');
 
-        $('#'+selectedMainMenu).addClass('header-sub-menu-selected');
+        $('#' + selectedMainMenu).addClass('header-sub-menu-selected');
     };
 
-    var mainMenuSelection = function(){
+    var mainMenuSelection = function () {
         var menuLinks = $('#header-main-menu-list a');
-        menuLinks.click(function(e){
+        menuLinks.click(function (e) {
             e.preventDefault();
 
-            if($(this).attr('data-directly') == 'true')
-                location.href=$(this).attr('href');
+            if ($(this).attr('data-directly') == 'true')
+                location.href = $(this).attr('href');
 
             // before 2014-07-30 front
 //            menuLinks.removeClass('selected');
@@ -241,7 +243,7 @@ $(function(){
 
             // after 2014-07-30 front
 
-            if ( $('#header-main-menu-list a.selected').attr('data-attr') == $(this).attr('data-attr') ) {
+            if ($('#header-main-menu-list a.selected').attr('data-attr') == $(this).attr('data-attr')) {
                 menuLinks.removeClass('selected');
                 subMenuInitialize();
             } else {
@@ -252,7 +254,7 @@ $(function(){
             // after 2014-07-30 end
         });
 
-        $('#headerSearchBtn').click(function(e){
+        $('#headerSearchBtn').click(function (e) {
             e.preventDefault();
             menuLinks.removeClass('selected');
             subMenuInitialize();
@@ -262,4 +264,42 @@ $(function(){
 
     subMenuInitialize();
     mainMenuSelection();
+});
+
+
+$(document).ready(function () {
+    $("#analysis-dialog").dialog({
+        dialogClass: 'notitle-dialog',
+        autoOpen: false,
+        modal: true,
+        height: 800,
+        width: 500,
+        open: function (ev, ui) {
+            $.ajax({
+                url: surveyListInJsonUrl,
+                dataType: 'json',
+                data: {
+                    csrfmiddlewaretoken: csrfToken
+                },
+                async: true,
+                type: 'post',
+                success: function (data, textStatus, jqXHR) {
+                    for( i in data.data ) {
+                        console.log(data.data[i]);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                },
+                complete: function (jqXHR, textStatus) {
+                }
+            });
+            jQuery('.ui-widget-overlay').bind('click', function () {
+                jQuery('#analysis-dialog').dialog('close');
+            });
+        }
+    });
+
+    $("#btn-survey-list").click(function () {
+        $("#analysis-dialog").dialog("open");
+    });
 });

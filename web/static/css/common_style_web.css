@@ -574,6 +574,15 @@ h4.lined-heading span {
 
 
 
+/* analysis(survey) dialog */
+#analysis-dialog {
+    padding: 0px;
+}
+.notitle-dialog .ui-dialog-titlebar { display: none; }
+.ui-resizable-handle { display: none; }
+
+
+
 /* product modal css */
 .modal-product-description-detail{
     padding: 20px 0px 0px 20px;
