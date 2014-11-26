@@ -858,9 +858,10 @@ def report_form_view(request):
 
 @login_required
 def survey_list_in_json(request):
-    survey_list = helper_get_survey_list(request)
+    survey_list = helper_get_survey_list(request, True)
 
     for item in survey_list:
         item['created'] = item['created'].strftime("%Y %m %d")
 
-    return HttpResponse(json.dumps({'data': list(survey_list)}, ensure_ascii=False), content_type="application/json; charset=utf-8")
+    return http_response_by_json(None, {'data': list(survey_list)})
+    # return HttpResponse(json.dumps({'data': list(survey_list)}, ensure_ascii=True), content_type="application/json; charset=utf-8")

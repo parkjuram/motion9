@@ -284,9 +284,19 @@ $(document).ready(function () {
                 async: true,
                 type: 'post',
                 success: function (data, textStatus, jqXHR) {
+                    var i, item, innerHtml="";
+                    innerHtml += '<div class="content-title">분석 보고서 목록</div><div class="content-list">';
                     for( i in data.data ) {
-                        console.log(data.data[i]);
+                        item = data.data[i];
+                        innerHtml += '<a href="'+ getSurveyResultUrl(item.id) +'" target="_self" is-analysis-finish="'+
+                            item.is_analysis_finish+'" >'+item.display_name+'</a>';
+                        innerHtml += '<br/>';
+                        innerHtml += '<div class="login-box-header"><h4 class="lined-heading"><span></span></h4></div>';
+                        innerHtml += '<div class="clearfix"></div>';
                     }
+                    innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">나의 피부 진단</div></a>';
+                    console.log( innerHtml );
+                    $('#analysis-dialog').html(innerHtml);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                 },
@@ -300,6 +310,10 @@ $(document).ready(function () {
     });
 
     $("#btn-survey-list").click(function () {
-        $("#analysis-dialog").dialog("open");
+        if (isUserLogin) {
+            $("#analysis-dialog").dialog("open");
+        } else {
+            window.document.location = getLoginUrl();
+        }
     });
 });

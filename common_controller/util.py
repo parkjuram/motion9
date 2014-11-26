@@ -132,7 +132,7 @@ def http_response_by_json(error=None, json_={}):
             'message': ERROR_CODE_AND_MESSAGE_DICT[error],
         })
 
-    return HttpResponse(json.dumps(json_, ensure_ascii=False), content_type="application/json; charset=utf-8")
+    return HttpResponse(json.dumps(json_, ensure_ascii=True), content_type="application/json; charset=utf-8")
 
 def helper_get_purchase_status(status):
     if status == 'b':
@@ -872,8 +872,17 @@ def helper_request_survey(request, data):
         UserSurveyDetail.objects.create(user_survey=user_survey, survey_item_option_id=option)
 
 
-def helper_get_survey_list(request):
+def helper_get_survey_list(request, is_display_name_need=False):
     survey_list = request.user.get_survey_list.values()
+    if is_display_name_need:
+        for item in survey_list:
+            if len(item['result_file_name']) == 0:
+                item['is_analysis_finish'] = False
+            else:
+                item['is_analysis_finish'] = True
+
+            item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 " + ( "(분석중)" if item['is_analysis_finish'] == False else "" )
+
     return survey_list
 
 def helper_get_survey_result_item(request, survey_id):
