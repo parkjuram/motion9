@@ -23,7 +23,6 @@ def index_view(request):
     # category_images = list(map(lambda x:settings.MEDIA_URL+x.small_image.name, category_images))
     # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
 
-
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
 
@@ -269,3 +268,7 @@ def survey_result_view(request, pk):
     return render(request, 'survey_result.html', {
         'survey_result_item': survey_result_item
     })
+
+def survey_detail_view(request):
+
+    return render(request, 'survey_detail.html')

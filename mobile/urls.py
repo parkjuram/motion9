@@ -40,6 +40,7 @@ urlpatterns = patterns('',
     url(r'^surveys/$', 'mobile.views.survey_list_view', name='mobile_survey_list'),
     url(r'^surveys/(?P<pk>(\d+))/$', 'mobile.views.survey_result_view', name='mobile_survey_result'),
 
+    url(r'^surveys/detail/$', 'mobile.views.survey_detail_view', name='mobile_survey_detail'),
 
 
     # url(r'^test/$', 'web.views.test_view', name='test'),

@@ -864,3 +864,8 @@ def survey_list_in_json(request):
         item['created'] = item['created'].strftime("%Y %m %d")
 
     return HttpResponse(json.dumps({'data': list(survey_list)}, ensure_ascii=False), content_type="application/json; charset=utf-8")
+
+@csrf_exempt
+def survey_detail_view(request):
+
+    return render(request, 'survey_detail_web.html')
