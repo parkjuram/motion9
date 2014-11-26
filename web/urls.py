@@ -50,5 +50,6 @@ urlpatterns = patterns('',
 
     url(r'^survey/list/json', 'web.views.survey_list_in_json', name='survey_list_in_json'),
 
+    url(r'^survey/detail/$', 'web.views.survey_detail_view', name='survey_detail'),
 
 )

@@ -13,12 +13,12 @@
         <img src="{{ main_image }}"/>
         {% if user.is_authenticated %}
             <div class="main-notice">{{ main_notice.content }}
-                <a href="#" class="main-btn">자세히 알아보기</a>
+                <a href="{% url 'survey_detail' %}" class="main-btn">자세히 알아보기</a>
                 <a href="{% url 'report_form' %}" class="main-btn">나의 피부 진단</a>
             </div>
         {% else %}
             <div class="main-notice">{{ main_notice.content }}
-                <a href="#" class="main-btn">자세히 알아보기</a>
+                <a href="{% url 'survey_detail' %}" class="main-btn">자세히 알아보기</a>
                 <a href="{% url 'report_form_index' %}" class="main-btn">나의 피부 진단</a>
             </div>
         {% endif %}
