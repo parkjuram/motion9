@@ -18,7 +18,8 @@ from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands, helper_get_product_magazines, \
-    helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items, helper_get_survey_items
+    helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items, helper_get_survey_items, \
+    helper_get_survey_list
 from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment
 
@@ -853,71 +854,13 @@ def report_form_view(request):
                       'survey': survey_,
                       'survey_id': survey['survey_id'],
                       'survey_range': survey_range
-                      # 'next': "{% url 'mobile_report_form' %}"
                   })
 
+@login_required
+def survey_list_in_json(request):
+    survey_list = helper_get_survey_list(request)
 
-# render example
-# return render_to_response('shopping_product_web.html',
-#               {
-#                   'products': products_,
-#                   'current_category': current_category,
-#                   'categories': categories,
-#                   'current_page': 'shop_product'
-#               }, RequestContext(request))
+    for item in survey_list:
+        item['created'] = item['created'].strftime("%Y %m %d")
 
-
-
-
-
-
-# @csrf_exempt
-# def payment_pay_explore_view(request):
-#     current_datetime = time.strftime("%Y%m%d%H%M%S")
-#
-#     # testing option
-#     service_id = 'glx_api'
-#     order_date = current_datetime
-#     order_id = 'arsdale_' + order_date
-#     user_id = 'arsdale@naver.com'
-#     user_name = 'arsdale'
-#     item_name = 'beyond_sun_2014'
-#     item_code = '01_01_2014'
-#     amount = '1000'
-#     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-#     if x_forwarded_for:
-#         user_ip = x_forwarded_for.split(',')[0]
-#     else:
-#         user_ip = request.META.get('REMOTE_ADDR')
-#     return_url = request.build_absolute_uri(reverse('payment_return_explore'))
-#
-#
-#     # checksum
-#     temp = service_id+order_id+amount
-#     checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + \
-#         'GEN ' + temp
-#
-#     checksum = Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]
-#     checksum = checksum.strip()
-#
-#     print checksum
-#
-#     if checksum=='8001' or checksum=='8003' or checksum=='8009':
-#         return HttpResponse('error code : '+checksum+' \nError Message: make checksum error! Please contact your system administrator!')
-#
-#
-#     return render(request, 'pay_explorer.html', {
-#         'service_id': service_id,
-#         'order_id': order_id,
-#         'order_date': order_date,
-#         'user_id': user_id,
-#         'item_code': 'TEST_CD1',
-#         'using_type': '0000',
-#         'currency': '0000',
-#         'item_name': item_name,
-#         'amount': amount,
-#         'user_ip': user_ip,
-#         'installment_period': '0:3',
-#         'return_url': return_url,
-#         'check_sum': checksum
-#     })
+    return HttpResponse(json.dumps({'data': list(survey_list)}, ensure_ascii=False), content_type="application/json; charset=utf-8")
