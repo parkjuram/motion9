@@ -868,4 +868,7 @@ def survey_list_in_json(request):
 @csrf_exempt
 def survey_detail_view(request):
 
-    return render(request, 'survey_detail_web.html')
+    return render(request, 'survey_detail_web.html',
+                  {
+                      'next': reverse('report_form'),
+                  })
