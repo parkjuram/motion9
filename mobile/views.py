@@ -249,14 +249,7 @@ def privacy_view(request):
 
 @mobile_login_required
 def survey_list_view(request):
-    survey_list = helper_get_survey_list(request)
-    for item in survey_list:
-        if len(item['result_file_name']) == 0:
-            item['is_analysis_finish'] = False
-        else:
-            item['is_analysis_finish'] = True
-
-        item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 " + ( "(분석중)" if item['is_analysis_finish'] == False else "" )
+    survey_list = helper_get_survey_list(request, True)
 
     return render(request, 'survey_list.html', {
         'survey_list': survey_list

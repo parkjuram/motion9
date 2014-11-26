@@ -856,19 +856,21 @@ def report_form_view(request):
                       'survey_range': survey_range
                   })
 
-@login_required
-def survey_list_in_json(request):
-    survey_list = helper_get_survey_list(request)
-
-    for item in survey_list:
-        item['created'] = item['created'].strftime("%Y %m %d")
-
-    return HttpResponse(json.dumps({'data': list(survey_list)}, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
 @csrf_exempt
 def survey_detail_view(request):
-
     return render(request, 'survey_detail_web.html',
                   {
                       'next': reverse('report_form'),
                   })
+
+
+@login_required
+def survey_list_in_json(request):
+    survey_list = helper_get_survey_list(request, True)
+
+    for item in survey_list:
+        item['created'] = item['created'].strftime("%Y %m %d")
+
+    return http_response_by_json(None, {'data': list(survey_list)})
+    # return HttpResponse(json.dumps({'data': list(survey_list)}, ensure_ascii=True), content_type="application/json; charset=utf-8")

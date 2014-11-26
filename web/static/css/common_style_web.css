@@ -146,11 +146,12 @@ a:visited{
 
 }
 #header-right-menu-list li{
-    float : left;
+    float : right;
     text-align: center;
 }
 
 #header-right-menu-list a{
+    float : left;
     padding : 23px 11px;
 }
 

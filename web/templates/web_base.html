@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static "jqmodal/jqModal.css" %}"/>
     <link rel="stylesheet" href="{% static "css/login_web.css" %}"/>
     <link rel="stylesheet" href="{% static "css/tsc_pagination.css" %}"/>
+    <link rel="stylesheet" href="{% static 'css/survey_list.css' %}"/>
     <style>
         body {
             min-width: 970px;
@@ -23,6 +24,27 @@
         var surveyListInJsonUrl = "{% url 'survey_list_in_json' %}";
         var mobileSurveyListUrl = "{% url 'mobile_survey_list' %}";
         var url_for_login_next = "{% url 'login_page' %}?next={{ request.get_full_path }}";
+
+        var surveyResultUrl = "{% url 'mobile_survey_result' pk=1987654321 %}";
+        function getSurveyResultUrl(pk) {
+            return surveyResultUrl.replace("1987654321", pk);
+        }
+
+        var reportFormUrl = "{% url 'report_form' %}";
+        function getReportFormUrl() {
+            return reportFormUrl;
+        }
+
+        var loginUrl = "{% url 'login_page' %}";
+        function getLoginUrl() {
+            return loginUrl;
+        }
+
+        var isUserLogin = false;
+        {% if user.is_authenticated %}
+            isUserLogin = true;
+        {% endif %}
+
     </script>
 
     <script src="{% static 'common/js/jquery-1.11.1.min.js' %}"></script>
@@ -35,6 +57,7 @@
     <script src="{% static 'js/uservoice.js' %}"></script>
     <script src="{% static 'jqmodal/jqModal.js' %}"></script>
     <script src="{% static 'js/login_web.js' %}"></script>
+    <script src="{% static 'js/survey_list.js' %}"></script>
 
     <script>
 
@@ -92,15 +115,15 @@
                 <li class="clearfix"></li>
             </ul>
             <ul id="header-right-menu-list">
-                <li><a href="{% url 'mypage' %}">My Page</a></li>
-                <li><a href="{% url 'mypage_cart' %}">Cart</a></li>
+                <li><a href="#" id="headerSearchBtn" data-attr="menuSearch" style="display: none;">검색</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}" class="">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'login_page' %}">Login</a></li>
                     <li><a href="{% url 'registration_page' %}?next={{ next }}" target="_self">회원가입</a></li>
                 {% endif %}
-                <li><a href="#" id="headerSearchBtn" data-attr="menuSearch" style="display: none;">검색</a></li>
+                <li><a href="{% url 'mypage_cart' %}">Cart</a></li>
+                <li><a href="{% url 'mypage' %}">My Page</a></li>
 
                 <li class="clearfix"></li>
             </ul>
