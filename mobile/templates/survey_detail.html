@@ -11,18 +11,11 @@
 
 {% block content %}
 
-    <div class="content-title">분석 보고서 목록</div>
-
-    <div class="content-list">
-
-{#        <a href="{% url "mobile_survey_result"%}" target="_self"> </a>#}
-        <br/>
+    <div>
+        <a class="mobile-back-btn" id="mobile-back-btn" data-role="button" data-rel="back">
+            <img src="{% static "img/btn_back_view_m.png" %}" style="width : auto; height : auto;">
+        </a>
     </div>
-
-    <a href="{% url 'mobile_report_form' %}" target="_self">
-        <div class="content-title" style="color : white; background-color : black;">
-            나의 피부 진단
-        </div>
-    </a>
+    <img src="{% static 'img/ship.png' %}" style="width:100%; height:auto;" />
 
 {% endblock content %}
