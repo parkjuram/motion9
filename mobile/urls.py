@@ -37,10 +37,10 @@ urlpatterns = patterns('',
     url(r'^agreement_of_utilization/$', 'mobile.views.agreement_of_utilization_view', name='mobile_agreement_of_utilization'),
     url(r'^privacy/$', 'mobile.views.privacy_view', name='mobile_privacy'),
 
-    url(r'^surveys/$', 'mobile.views.survey_list_view', name='mobile_survey_list'),
-    url(r'^surveys/(?P<pk>(\d+))/$', 'mobile.views.survey_result_view', name='mobile_survey_result'),
+    url(r'^survey/$', 'mobile.views.survey_list_view', name='mobile_survey_list'),
+    url(r'^survey/(?P<pk>(\d+))/$', 'mobile.views.survey_result_view', name='mobile_survey_result'),
 
-    url(r'^surveys/detail/$', 'mobile.views.survey_detail_view', name='mobile_survey_detail'),
+    url(r'^survey/detail/$', 'mobile.views.survey_detail_view', name='mobile_survey_detail'),
 
 
     # url(r'^test/$', 'web.views.test_view', name='test'),

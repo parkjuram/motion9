@@ -258,7 +258,7 @@ def survey_list_view(request):
 @mobile_login_required
 def survey_result_view(request, pk):
     survey_result_item = helper_get_survey_result_item(request, pk)
-    return render(request, 'survey_result.html', {
+    return render(request, 'mobile/survey_result.html', {
         'survey_result_item': survey_result_item
     })
 
