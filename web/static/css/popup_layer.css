@@ -31,9 +31,14 @@
     left: 50%;
     width: 600px;
     height: auto;
-    background-color: #fff;
+    background-color: #FAF9F7;
     /*border: 5px solid #e5e5e5;*/
     z-index: 10;
+    box-shadow : 0 0 25px rgba(0,0,0,.3);
+    border-radius : 5px;
+    -webkit-border-radius : 5px;
+    background-clip : border-box;
+    -webkit-box-shadow : 0 0 25px rgba(0,0,0,.3);
 }
 
 .pop-layer .pop-container {
@@ -54,6 +59,14 @@
     text-align: center;
 }
 
+.pop-layer-one {
+    background-color: #FAF9F7;
+}
+
+.pop-layer-two {
+    background-color: #e5e5e5;
+}
+
 a.cbtn {
     display: inline-block;
     height: 25px;
@@ -69,8 +82,4 @@ a.cbtn:hover {
     border: 1px solid #091940;
     background-color: #1f326a;
     color: #fff;
-}
-
-.main-btn{
-
 }
