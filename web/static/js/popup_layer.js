@@ -48,9 +48,17 @@ $(function () {
 
     window.onload = function () {
 
-        layer_open('layer2');
+        layer_open('layer1');
         return false;
 
     }
+
+    $('#layer_next').click(function (e) {
+        e.preventDefault();
+        layer_open('layer2');
+        return false;
+    });
+
+
 
 });
