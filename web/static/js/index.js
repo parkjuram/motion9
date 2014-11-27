@@ -1,3 +1,7 @@
-$(document).on("pageshow", function(event) {
-    $( ".selector" ).popup( "open");
+$(document).on("pageshow", function() {
+    var popup = setInterval(function(){
+        $(".selector").popup("open");
+        clearInterval(popup);
+    },1);
 });
+
