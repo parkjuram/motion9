@@ -46,7 +46,7 @@
 }
 
 .pop-layer p.ctxt {
-    color: black;
+    color: white;
     line-height: 25px;
     font-size : 20px;
 }
@@ -60,7 +60,8 @@
 }
 
 .pop-layer-one {
-    background-color: #FAF9F7;
+    /*background-color: #FAF9F7;*/
+    background-color: black;
 }
 
 .pop-layer-two {
@@ -82,4 +83,19 @@ a.cbtn:hover {
     border: 1px solid #091940;
     background-color: #1f326a;
     color: #fff;
+}
+
+.lined-heading{
+    font-size : 25px;
+    line-height : 70px;
+    margin-bottom : 30px !important;
+}
+
+h4.spb_heading, h4.lined-heading{
+    height : 70px;
+}
+
+h4.lined-heading span{
+    background-color : black;
+    color : white;
 }
