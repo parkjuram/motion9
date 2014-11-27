@@ -7,6 +7,17 @@
 {#    <script src="{% static 'js/survey_list.js'%}"></script>#}
 {#    <link rel="stylesheet" href="{% static 'css/survey_list.css'%}"/>#}
 
+    <script>
+    window.onload = function () {
+        if (typeof history.pushState === "function") {
+            history.pushState("jibberish", null, null);
+            window.onpopstate = function () {
+                history.pushState('newjibberish', null, null);
+            };
+        }
+    }
+    </script>
+
     <style type="text/css">
     .ui-page > .ui-content{
         height:100%;
