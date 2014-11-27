@@ -99,9 +99,9 @@
                 {% endif %}
                    <li>
                      {% if user.is_authenticated %}
-                        <a href="{% url "mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">나의 피부 진단</a>
+                        <a href="{% url "mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">나만의 피부 진단</a>
                      {% else %}
-                        <a href="{% url "mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">나의 피부 진단</a>
+                        <a href="{% url "mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">나만의 피부 진단</a>
                      {% endif %}
                    </li>
                 <li><a href="/mobile/" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>

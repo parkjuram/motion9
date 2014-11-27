@@ -40,7 +40,7 @@ $(function () {
             e.preventDefault();
         });
 
-        $('#layer-btn').click(function(e) {
+        $('.layer-close').click(function(e) {
             $('.layer').fadeOut();
             e.preventDefault();
         });
