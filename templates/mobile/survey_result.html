@@ -7,24 +7,6 @@
 {#    <script src="{% static 'js/survey_list.js'%}"></script>#}
 {#    <link rel="stylesheet" href="{% static 'css/survey_list.css'%}"/>#}
 
-    <script type="text/javascript">
-    function reSize()
-    {
-        try{
-        var oBody	=	ifrm.document.body;
-        var oFrame	=	document.all("ifrm");
-
-        oFrame.style.height = oBody.scrollHeight + (oBody.offsetHeight - oBody.clientHeight);
-        oFrame.style.width = oBody.scrollWidth + (oBody.offsetWidth - oBody.clientWidth);
-        }
-        //An error is raised if the IFrame domain != its container's domain
-        catch(e)
-        {
-        window.status =	'Error: ' + e.number + '; ' + e.description;
-        }
-    }
-    </script>
-
     <style type="text/css">
     .ui-page > .ui-content{
         height:100%;
@@ -38,9 +20,11 @@
 
 {% block content %}
 
+    <div style="-webkit-overflow-scrolling:touch; overflow: auto;">
     {% with 'html/'|add:survey_result_item.result_file_name as result_file_url %}
-        <iframe id="ifrm" onload=reSize() src="{% static result_file_url %}" style="border: 0;" height="100%" width="100%" >Your browser doesn't support iFrames.</iframe>
+        <iframe src="{% static result_file_url %}" style="border: 0;" height="100%" width="100%">Your browser doesn't support iFrames.</iframe>
     {% endwith %}
+    </div>
 
 
 {% endblock content %}
