@@ -7,6 +7,23 @@
 {#    <script src="{% static 'js/survey_list.js'%}"></script>#}
 {#    <link rel="stylesheet" href="{% static 'css/survey_list.css'%}"/>#}
 
+    <script>
+    window.onload = function () {
+        if (typeof history.pushState === "function") {
+            history.pushState("jibberish", null, null);
+            window.onpopstate = function () {
+{#                history.pushState('newjibberish', null, null);#}
+
+                if (document.getElementById("ifrm").contentWindow.history.length > 0){
+                    document.getElementById("ifrm").contentWindow.history.go(-1);
+                } else {
+                    window.history.back();
+                }
+            };
+        }
+    }
+    </script>
+
     <style type="text/css">
     .ui-page > .ui-content{
         height:100%;
@@ -20,9 +37,11 @@
 
 {% block content %}
 
+    <div style="-webkit-overflow-scrolling:touch; overflow: auto; width:100%; height:100%;">
     {% with 'html/'|add:survey_result_item.result_file_name as result_file_url %}
-        <iframe src="{% static result_file_url %}" style="position: relative; border: 0; width: 100%; height: 100%">Your browser doesn't support iFrames.</iframe>
+        <iframe id="ifrm" src="{% static result_file_url %}" style="border: 0;" height="100%" width="100%">Your browser doesn't support iFrames.</iframe>
     {% endwith %}
+    </div>
 
 
 {% endblock content %}
