@@ -12,9 +12,11 @@
         if (typeof history.pushState === "function") {
             history.pushState("jibberish", null, null);
             window.onpopstate = function () {
-                history.pushState('newjibberish', null, null);
-                var frm=document.getElementById("ifrm");
-                if ( !frm.window.history.back() ) {
+{#                history.pushState('newjibberish', null, null);#}
+
+                if (document.getElementById("ifrm").contentWindow.history.length > 0){
+                    document.getElementById("ifrm").contentWindow.history.go(-1);
+                } else {
                     window.history.back();
                 }
             };
