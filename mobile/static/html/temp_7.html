@@ -1,0 +1,85 @@
+<!-- 템플릿1-->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+	window.onload = function () {
+    var ImageMap = function (map, img) {
+            var n,
+                areas = map.getElementsByTagName('area'),
+                len = areas.length,
+                coords = [],
+                previousWidth = 900;
+            for (n = 0; n < len; n++) {
+                coords[n] = areas[n].coords.split(',');
+            }
+            this.resize = function () {
+                var n, m, clen,
+                    x = img.offsetWidth / previousWidth;
+                for (n = 0; n < len; n++) {
+                    clen = coords[n].length;
+                    for (m = 0; m < clen; m++) {
+                        coords[n][m] *= x;
+                    }
+                    areas[n].coords = coords[n].join(',');
+                }
+                previousWidth = document.body.clientWidth;
+                return true;
+            };
+            window.onresize = this.resize;
+        },
+        imageMap = new ImageMap(document.getElementById('map_ID'), document.getElementById('img_ID'));
+    imageMap.resize();
+    return;
+}
+
+
+</script>
+<style>
+p.pos_fixed {
+    position: fixed;
+    bottom: 100px;
+    left: 2px;
+    color: white;
+    background-color: #000;
+    width: 240px;
+    padding: 4px;
+    opacity:0.5;
+    border-radius: 2px;
+}
+</style>
+
+</head>
+<body>
+    <!--  템플릿 번호  -->
+	<div style="max-width:100%;width:auto;text-align:center;">
+		<img id='img_ID' style="max-width:100%;width:auto;text-align:center;"src="temp_7.png"  usemap="#image-maps-2014-11-13-062223" border="0" alt="" />
+	</div>
+
+  
+        <map name="image-maps-2014-11-13-062223" id="map_ID">
+        <!--  1,1 좌표  -->
+        <area  alt="" title="" href="ki1.html" shape="rect" coords="17,1386,430,1873" target="_self" />
+         <!--  1,2 좌표  -->
+        <area  alt="" title="" href="cr1.html" shape="rect" coords="464,1387,878,1873" target="_self" />
+        <!--  2,1 좌표  -->
+        <area  alt="" title="" href="ki5.html" shape="rect" coords="17,2059,431,2545" target="_self" />
+        <!--  2,2 좌표  -->
+        <area  alt="" title="" href="cr6.html" shape="rect" coords="464,2059,878,2545" target="_self" />
+        <!--  3,1 좌표  -->
+        <area  alt="" title="" href="ki6.html" shape="rect" coords="18,2729,432,3214" target="_self" />
+        <!--  3,2 좌표  -->
+        <area  alt="" title="" href="lz6.html" shape="rect" coords="464,2728,878,3213" target="_self" />
+        <!--  4,1 좌표  -->
+        <area  alt="" title="" href="he3.html" shape="rect" coords="18,3399,432,3884" target="_self" />
+        <!--  4,2 좌표  -->
+        <area  alt="" title="" href="ro1.html" shape="rect" coords="462,3396,879,3884" target="_self" />
+        <!--  5,1 좌표  -->
+        <!-- <area  alt="" title="" href="lz1.html" shape="rect" coords="16,4063,433,4555" target="_self" /> -->
+        <!--  5,2 좌표  -->
+        <!-- <area  alt="" title="" href="kc3.html" shape="rect" coords="461,4060,880,4553" target="_self" /> -->
+	</map>
+    <p class="pos_fixed">제품을 클릭하면 각 제품의 상세 분석을 볼 수 있습니다!</p>
+</body>
+</html>
+
