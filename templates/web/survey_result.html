@@ -8,7 +8,7 @@
 {% block content %}
 
     {% with 'html/'|add:survey_result_item.result_file_name as result_file_url %}
-        <iframe src="{% static result_file_url %}" style="border: 0; width: 100%; height: 100%; position: absolute;">Your browser doesn't support iFrames.</iframe>
+        <iframe src="{% static result_file_url %}" style="border: 0; width: 100%; height: 100%; position: absolute;" scrolling="no" >Your browser doesn't support iFrames.</iframe>
     {% endwith %}
 
 
