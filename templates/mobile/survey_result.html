@@ -67,7 +67,7 @@
 
     <div id='ifrm-container' style="width: 100%; height: 100%;">
     {% with 'html/'|add:survey_result_item.result_file_name as result_file_url %}
-        <iframe id="ifrm" src="{% static result_file_url %}" style="border: 0;" height="100%" width="100%" marginheight="0" frameborder="0" onLoad="autoResize('ifrm');">Your browser doesn't support iFrames.</iframe>
+        <iframe id="ifrm" name="ifrm" src="{% static result_file_url %}" style="border: 0;" height="100%" width="100%" marginheight="0" frameborder="0" onLoad="autoResize('ifrm');">Your browser doesn't support iFrames.</iframe>
     {% endwith %}
     </div>
 
