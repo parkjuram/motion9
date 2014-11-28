@@ -25,6 +25,30 @@
 {#        document.getElementById(id).width= (newwidth) + "px";#}
     }
 
+    setTimeout(function () {
+        var startY = 0;
+        var startX = 0;
+        var b = document.body;
+        b.addEventListener('touchstart', function (event) {
+            parent.window.scrollTo(0, 1);
+            startY = event.targetTouches[0].pageY;
+            startX = event.targetTouches[0].pageX;
+        });
+        b.addEventListener('touchmove', function (event) {
+            event.preventDefault();
+            var posy = event.targetTouches[0].pageY;
+            var h = parent.document.getElementById("ifrm-container");
+            var sty = h.scrollTop;
+
+            var posx = event.targetTouches[0].pageX;
+            var stx = h.scrollLeft;
+            h.scrollTop = sty - (posy - startY);
+            h.scrollLeft = stx - (posx - startX);
+            startY = posy;
+            startX = posx;
+        });
+    }, 1000);
+
     </script>
 
     <style type="text/css">
@@ -41,7 +65,7 @@
 
 {% block content %}
 
-    <div style="width: 100%; height: 100%; overflow: auto; -webkit-overflow-scrolling: touch;">
+    <div id='ifrm-container' style="width: 100%; height: 100%; overflow: auto; -webkit-overflow-scrolling: touch;">
     {% with 'html/'|add:survey_result_item.result_file_name as result_file_url %}
         <iframe id="ifrm" src="{% static result_file_url %}" style="border: 0;" height="100%" width="100%" marginheight="0" frameborder="0" onLoad="autoResize('ifrm');">Your browser doesn't support iFrames.</iframe>
     {% endwith %}
