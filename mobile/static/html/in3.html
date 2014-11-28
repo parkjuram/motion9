@@ -1,6 +1,39 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width">
+<script type="text/javascript">
+    if (typeof(jQuery) == "undefined") {
+        var iframeBody = document.getElementsByTagName("body")[0];
+        var jQuery = function (selector) { return parent.jQuery(selector, iframeBody); };
+        var $ = jQuery;
+    }
+
+</script>
+<style>
+.iframe-back-btn {
+    position : fixed;
+    display : flex;
+    box-shadow : none;
+    margin-top : 0px;
+    width : auto;
+    height : auto;
+    padding : 10px;
+    z-index : 100;
+}
+
+.iframe-back-btn img{
+    position : relative;
+    width : auto;
+    height : auto;
+    display : block;
+}
+    </style>
 </head>
-<body style="width:auto; max-width:100%; text-align:center;"><img style="width:auto; max-width:100%;" src="in3.png" ></body>
+<body style="width:auto; max-width:100%; text-align:center;">
+<a class="iframe-back-btn" onclick="window.history.back();">
+    <img src="btn_back_view_m.png">
+</a>
+<img style="width:auto; max-width:100%;" src="in3.png" >
+</body>
 </html>
