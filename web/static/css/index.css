@@ -16,7 +16,14 @@
 
 .index-content-text{
     font-size : 15px !important;
+    text-align : left !important;
+    line-height : 30px;
+    /*margin : 50px;*/
+    margin-bottom : 20px;
+    font-weight : bold;
 }
+
+
 
 .index-content-btn{
     color:white !important; background-color:black; width:30%; display:inline-block; padding : 14px 2%; height:10px; line-height:10px;
@@ -111,4 +118,9 @@
     font-weight: bold;
     white-space: pre-line;
     text-shadow: 1px 1px #FFFFFF;
+}
+
+.ui-overlay-shadow{
+    -webkit-box-shadow : none;
+    box-shadow : none;
 }

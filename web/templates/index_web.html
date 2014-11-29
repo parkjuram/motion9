@@ -60,65 +60,54 @@
         <div class="bg"></div>
 
         <div id="layer1" class="pop-layer pop-layer-one">
-            <div class="pop-container">
-                <div class="pop-conts">
+            <div class="pop-container" style="width:400px;">
+                <div>
                     <!--content //-->
-                    <h4 class="lined-heading"><span><img style="display:block; max-width:100%;height:70px;"
-                                                         src="{% static 'img/LOGO7.png' %}"/></span></h4>
 
-                    <p class="ctxt mb20">
-                         MOTION9는 19세 이상의 성인 남성들에게 제공되는 서비스입니다.<BR/>
-                        <BR/>
-                        <div  style="text-align:center; color : white;">
-                            - MEN ONLY -
-                        </div>
-                    </p>
-                    <br/><br/>
-
-                    <div class="btn-r">
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'report_form' %}" id="layer_next"
-                               style="display:inline-block; width:100px; color : white; line-height:30px; font-size:25px;">Enter</a>
-                        {% else %}
-                            <a href="{% url 'report_form_index' %}" id="layer_next"
-                               style="display:inline-block; width:100px; color : white; line-height:30px; font-size:25px;">Enter</a>
-                        {% endif %}
-                    </div>
+                    <a href="#"
+                       class="black-btn index-content-btn" target="_self" id="layer_next"
+                       style="font-size:15px; border-radius: 0px;"><img
+                            src="{% static 'img/popup_first.png' %}" style="width:400px; height:auto;"/></a>
                     <!--// content-->
                 </div>
             </div>
         </div>
 
         <div id="layer2" class="pop-layer pop-layer-two" style="display:none; position:relative;">
-            <div class="pop-container">
-                <div class="pop-conts">
+            <div class="pop-container" style="margin:0px; border:0px; padding:0px;">
+                <div class="pop-conts" style="display: inline-flex;">
                     <!--content //-->
-                    <h4 class="lined-heading"><span style="background-color:white;"><img style="display:block; max-width:100%;height:70px;"
-                                                         src="{% static 'img/LOGO_black.png' %}"/></span></h4>
 
-                    <p class="ctxt mb20" style="color:black;">
-                        MOTION9은 남성들의 피부 관리를 도와드리는 서비스입니다.<br/>
-                        <br/>
-                        개개인의 피부에 맞는 화장품을 찾아서 분석해 드립니다.<br/>
-                        <br/>
-                        선착순 1000명까지 무료로 진행합니다.<br/>
-                        <br/>
+                    <!--content //-->
 
-                    </p>
-                    <br/><br/>
+                    <a href="#"
+                       class="black-btn index-content-btn" target="_self" id="layer_next"
+                       style="min-width:480px;font-size:15px; border-radius: 0px;"><img
+                            src="{% static 'img/pop_img.png' %}" style="width:480px; height:349;"/></a>
+                    <!--// content-->
+                    <div style="padding: 25px 30px 25px 30px;">
+                        <div style="text-align:center;">
+                            <img src="{% static 'img/LOGO_black.png' %}" style="height:50px"/></div>
+                        <p class="ctxt mb20" style="color:black; font-size:15px; font-weight:bold;">
+                            * MOTION9은 남성들의 피부 관리를 도와드립니다. <br/>* 개개인의 피부, 라이프스타일, 예산까지 고려하여 <br/>&nbsp;&nbsp;&nbsp;맞는
+                            화장품을 찾아서 분석해 드립니다.<br/>* 선착순 1000명까지 무료로 보고서를 작성해 드립니다! <br/>
+                        </p>
 
-                    <div class="btn-r">
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'report_form' %}"
-                               style="display:inline-block; width:100px; color:black; line-height:30px; font-size:25px;">Enter</a>
-                            <a href="#" class="layer-close"
-                               style="display:inline-block; width:100px; color:black; line-height:30px; font-size:25px;">Close</a>
-                        {% else %}
-                            <a href="{% url 'report_form_index' %}"
-                               style="display:inline-block; width:100px; color:black;  line-height:30px; font-size:25px;">Enter</a>
-                            <a href="#" class="layer-close"
-                               style="display:inline-block; width:100px; color:black;  line-height:30px; font-size:25px;">Close</a>
-                        {% endif %}
+                        <div style="text-align:center;">
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'report_form' %}" class="basic-btn"
+                                   style="display:inline-block; width:150px; line-height:30px; font-size:14px;">화장품 보고서
+                                    신청</a>
+                                <a href="#" class="basic-btn layer-close"
+                                   style="display:inline-block; width:150px; line-height:30px; font-size:14px; margin-left:20px;">닫기</a>
+                            {% else %}
+                                <a href="{% url 'report_form_index' %}" class="basic-btn"
+                                   style="display:inline-block; width:150px; line-height:30px; font-size:14px;">화장품 보고서
+                                    신청</a>
+                                <a href="#" class="basic-btn layer-close"
+                                   style="display:inline-block; width:150px; line-height:30px; font-size:14px; margin-left:20px;">닫기</a>
+                            {% endif %}
+                        </div>
                     </div>
                     <!--// content-->
                 </div>

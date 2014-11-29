@@ -40,7 +40,7 @@ $(function () {
             e.preventDefault();
         });
 
-        $('.layer-close').click(function(e) {
+        $('.layer-close').click(function (e) {
             $('.layer').fadeOut();
             e.preventDefault();
         });
@@ -55,10 +55,12 @@ $(function () {
 
     $('#layer_next').click(function (e) {
         e.preventDefault();
+        var layer_one = $('#layer1');
+
+        layer_one.css('display', "none");
         layer_open('layer2');
         return false;
     });
-
 
 
 });

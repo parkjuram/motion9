@@ -11,6 +11,13 @@
 
 {% block content %}
 
-    <img src="{% static 'img/ship.png' %}" style="width:100%; height:auto;" />
-
+    <img src="{% static 'img/info_survey.png' %}" style="width:100%; height:auto;"/>
+    <div style="text-align : center;">
+        <a href="{% if user.is_authenticated %}
+                {% url 'mobile_report_form' %}
+            {% else %}
+                {% url 'mobile_report_form_index' %}
+            {% endif %}"
+           class="black-btn index-content-btn" target="_self" style="width:80px; border-radius: 0px;">시작하기</a>
+    </div>
 {% endblock content %}
