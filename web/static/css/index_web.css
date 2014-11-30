@@ -44,14 +44,14 @@
 .main-notice {
     position: absolute;
     top: 65%;
-    left: 10%;
+    left: 5%;
     font-size: 30px;
     font-weight: bold
     text-shadow: 1px 1px #FFFFFF;
 }
 
 .main-btn{
-  width: 130px;
+  width: 100px;
   height : 30px;
   line-height : 30px;
   /*border-radius: 4px;*/
@@ -67,7 +67,7 @@
 }
 
 a.main-btn:hover{
-  width: 130px;
+  width: 100px;
   height : 30px;
   line-height : 30px;
   /*border-radius: 4px;*/
