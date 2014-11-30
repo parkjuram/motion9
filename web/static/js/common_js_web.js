@@ -316,4 +316,5 @@ $(document).ready(function () {
             window.document.location = getLoginUrl();
         }
     });
+
 });

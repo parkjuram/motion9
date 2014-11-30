@@ -62,5 +62,11 @@ $(function () {
         return false;
     });
 
-
+    $("#btn-survey").click(function(){
+        if (isUserLogin) {
+            $("#analysis-dialog").dialog("open");
+        } else {
+            window.document.location = getLoginUrl();
+        }
+    });
 });
