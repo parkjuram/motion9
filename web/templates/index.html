@@ -10,6 +10,9 @@
 
     <div id="productList">
         <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; position:relative;">
+
+            <a href="{% url 'mobile_survey_detail' %}" class="black-btn index-content-btn"
+               style="position:absolute; top : 85%; left:50%; margin-left:-67.5px;" target="_self">자세히 알아보기</a>
             <img src='{{ main_image_url }}' style="width:100%; height:auto"/>
 
             <div class="main-notice">{{ main_notice.content }}</div>
@@ -17,40 +20,43 @@
         <div style="width:auto; height:auto;  text-align:center; margin:20px;">
 
 
-            <div class="index-content-text">* MOTION9은 남성들의 피부 관리를 도와드립니다. <br/>* 개개인의 피부, 라이프스타일, 예산까지 고려하여 <br/>&nbsp;&nbsp;&nbsp;맞는 화장품을 찾아서 분석해 드립니다.<br/>* 선착순 1000명까지 무료로 보고서를 작성해 드립니다! <br/>
+            <div class="index-content-text">* MOTION9은 남성들의 피부 관리를 도와드립니다. <br/>* 개개인의 피부, 라이프스타일, 예산까지 고려하여 <br/>&nbsp;&nbsp;&nbsp;맞는
+                화장품을 찾아서 분석해 드립니다.<br/>* 선착순 1000명까지 무료로 보고서를 작성해 드립니다! <br/>
             </div>
-            <a href="{% url 'mobile_survey_detail' %}" class="black-btn index-content-btn"
-               style="" target="_self">자세히 알아보기</a>
             <a href="{% if user.is_authenticated %}
                         {% url 'mobile_report_form' %}
                        {% else %}
                         {% url 'mobile_report_form_index' %}
                        {% endif %}"
-               class="black-btn index-content-btn" style="margin-left:20px;" target="_self">시작하기</a>
+               class="black-btn index-content-btn" target="_self">보고서 신청</a>
+            <a href="{% url 'mobile_survey_list' %}" class="black-btn index-content-btn" style="margin-left:20px;" target="_self">보고서 보기</a>
+
         </div>
-        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; text-align:center;">
+        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; text-align:center; padding:10px">
             {#      {% for category_images in category_images %}#}
             {#        <a href="{% url "mobile_shop_product" category_id=category_images.id %}" class="top-menu-btn"><img src='{{ category_images.image }}' style="width:100%; height:auto" ></a>#}
             {#      {% endfor %}#}
 
-{#            {% for set_category_image in set_category_images %}#}
-{#                <a href="{% url 'mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img"#}
-{#                   target="_self"><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>#}
-{#            {% endfor %}#}
+            {#            {% for set_category_image in set_category_images %}#}
+            {#                <a href="{% url 'mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img"#}
+            {#                   target="_self"><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>#}
+            {#            {% endfor %}#}
 
-            <a href="#" class="index-content-img"><img src="{%  static 'img/MAIN_2_m.png' %}" style="width:95%; height:auto"/></a>
+            <a href="#" class="index-content-img"><img src="{% static 'img/MAIN_2_m.png' %}"
+                                                       style="width:90%; height:auto"/></a>
         </div>
     </div>
 
     {#    <a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Delete page...</a>#}
     <div class="selector" data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-history="false"
-         data-dismissible="false" style="max-width:400px; height:100px; text-align:center; background:transparent; border:0px;">
-{#        <div data-role="header" data-theme="a"#}
-{#             style="background-color:#e5e5e5 !important; padding:10px; color:black; text-shadow:none;">#}
-{#            <h1>Test 중입니다. </h1>#}
-{#        </div>#}
+         data-dismissible="false"
+         style="max-width:400px; height:100px; text-align:center; background:transparent; border:0px;">
+        {#        <div data-role="header" data-theme="a"#}
+        {#             style="background-color:#e5e5e5 !important; padding:10px; color:black; text-shadow:none;">#}
+        {#            <h1>Test 중입니다. </h1>#}
+        {#        </div>#}
 
-            <a href="#" data-rel="back"><img src="{% static 'img/popup_first.png' %}" style="width:90%; height:auto;"/></a>
+        <a href="#" data-rel="back"><img src="{% static 'img/popup_first.png' %}" style="width:90%; height:auto;"/></a>
 
     </div>
 {% endblock %}

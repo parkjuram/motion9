@@ -26,7 +26,13 @@
 
 
 .index-content-btn{
-    color:white !important; background-color:black; width:30%; display:inline-block; padding : 14px 2%; height:10px; line-height:10px;
+    color:white !important;
+    background-color:black;
+    width:120px;
+    display:inline-block;
+    padding : 14px 2%;
+    height:10px;
+    line-height:10px;
 }
 
 .service-links {
