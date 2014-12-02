@@ -37,7 +37,9 @@
     border-radius:0px;
 }
 
-
+.index-content-btn:visited{
+    color:black !important;
+}
 
 .service-links {
     background-color: #fbfbfb;
