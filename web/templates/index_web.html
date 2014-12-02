@@ -29,34 +29,41 @@
 
 {% block content %}
 
-    <div class="index-content-wrapper">
-        {% for set_category_images in set_category_images_row %}
-            <div class="index-content-row">
-                {% for set_category_image in set_category_images %}
-                    {% if forloop.first %}
-                        <div class="index-content float-left">
-                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
-                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
-                        </div>
-                    {% elif forloop.last %}
-                        <div class="index-content center-in-div">
-                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
-                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
-                        </div>
-                    {% else %}
-                        <div class="index-content float-right">
-                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
-                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                <div class="clearfix"></div>
-            </div>
-        {% endfor %}
-    </div>
+    {#    <div class="index-content-wrapper">#}
+    {#        {% for set_category_images in set_category_images_row %}#}
+    {#            <div class="index-content-row">#}
+    {#                {% for set_category_image in set_category_images %}#}
+    {#                    {% if forloop.first %}#}
+    {#                        <div class="index-content float-left">#}
+    {#                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"#}
+    {#                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>#}
+    {#                        </div>#}
+    {#                    {% elif forloop.last %}#}
+    {#                        <div class="index-content center-in-div">#}
+    {#                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"#}
+    {#                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>#}
+    {#                        </div>#}
+    {#                    {% else %}#}
+    {#                        <div class="index-content float-right">#}
+    {#                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"#}
+    {#                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>#}
+    {#                        </div>#}
+    {#                    {% endif %}#}
+    {#                {% endfor %}#}
+    {#                <div class="clearfix"></div>#}
+    {#            </div>#}
+    {#        {% endfor %}#}
+    {#    </div>#}
 
     {#    <a href="#" class="btn-example" onclick="layer_open('layer2');return false;">예제-2 보기</a>#}
 
+    <div class="index-content-wrapper">
+        <div class="index-content-row">
+            <div class="index-content center-in-div" style="max-width:1080px !important; width:100% !important;">
+                <img src="{% static 'img/MAIN_2.png' %}"/>
+            </div>
+        </div>
+    </div>
 
     <div class="layer">
         <div class="bg"></div>

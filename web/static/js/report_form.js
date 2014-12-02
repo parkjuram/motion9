@@ -26,7 +26,7 @@ $(function () {
                 success: function (data) {
                     console.log(data);
                     if (data.success) {
-                        alert('보고서 요청이 완료되었습니다.');
+                        alert('설문이 완료되었습니다.\n분석에는 1~2일이 소요됩니다.\n분석이 완료되면 이메일로 알려드리겠습니다.');
                         location.href = url;
                     }
                 }
