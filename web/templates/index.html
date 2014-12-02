@@ -19,17 +19,17 @@
         </div>
         <div style="width:auto; height:auto;  text-align:center; margin:20px;">
 
-
-            <div class="index-content-text">* MOTION9은 남성들의 피부 관리를 도와드립니다. <br/>* 개개인의 피부, 라이프스타일, 예산까지 고려하여 <br/>&nbsp;&nbsp;&nbsp;맞는
-                화장품을 찾아서 분석해 드립니다.<br/>* 선착순 1000명까지 무료로 보고서를 작성해 드립니다! <br/>
-            </div>
+            <img src="{% static 'img/main_3_m.png' %}" style="width:90%; height:auto;"/>
+{#            <div class="index-content-text">* MOTION9은 남성들의 피부 관리를 도와드립니다. <br/>* 개개인의 피부, 라이프스타일, 예산까지 고려하여 <br/>&nbsp;&nbsp;&nbsp;맞는#}
+{#                화장품을 찾아서 분석해 드립니다.<br/>* 선착순 1000명까지 무료로 보고서를 작성해 드립니다! <br/>#}
+{#            </div>#}
             <a href="{% if user.is_authenticated %}
                         {% url 'mobile_report_form' %}
                        {% else %}
                         {% url 'mobile_report_form_index' %}
                        {% endif %}"
-               class="black-btn index-content-btn" target="_self">보고서 신청</a>
-            <a href="{% url 'mobile_survey_list' %}" class="black-btn index-content-btn" style="margin-left:20px;" target="_self">보고서 보기</a>
+               class="black-btn index-content-btn" target="_self" style="width:30%;">보고서 신청</a>
+            <a href="{% url 'mobile_survey_list' %}" class="black-btn index-content-btn" style="margin-left:20px; width:30%;" target="_self">보고서 보기</a>
 
         </div>
         <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; text-align:center; padding:10px">
