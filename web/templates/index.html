@@ -28,16 +28,17 @@
                        {% endif %}"
                class="black-btn index-content-btn" style="margin-left:20px;" target="_self">시작하기</a>
         </div>
-        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto">
+        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; text-align:center;">
             {#      {% for category_images in category_images %}#}
             {#        <a href="{% url "mobile_shop_product" category_id=category_images.id %}" class="top-menu-btn"><img src='{{ category_images.image }}' style="width:100%; height:auto" ></a>#}
             {#      {% endfor %}#}
 
-            {% for set_category_image in set_category_images %}
-                <a href="{% url 'mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img"
-                   target="_self"><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>
-            {% endfor %}
+{#            {% for set_category_image in set_category_images %}#}
+{#                <a href="{% url 'mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img"#}
+{#                   target="_self"><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>#}
+{#            {% endfor %}#}
 
+            <a href="#" class="index-content-img"><img src="{%  static 'img/MAIN_2_m.png' %}" style="width:95%; height:auto"/></a>
         </div>
     </div>
 
