@@ -291,7 +291,7 @@ $(document).ready(function () {
                         innerHtml += '<a href="'+ getSurveyResultUrl(item.id) +'" target="_self" is-analysis-finish="'+
                             item.is_analysis_finish+'" >'+item.display_name+'</a>';
                         innerHtml += '<br/>';
-                        innerHtml += '<div class="login-box-header"><h4 class="lined-heading"><span></span></h4></div>';
+                        innerHtml += '<div class="login-box-header"><h4 class="lined-heading-survey"><span></span></h4></div>';
                         innerHtml += '<div class="clearfix"></div>';
                     }
                     innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">나의 피부 진단</div></a>';
