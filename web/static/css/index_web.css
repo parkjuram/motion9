@@ -84,3 +84,10 @@ a.main-btn:hover {
     text-align: center;
     font-weight: bold;
 }
+
+.report-count{
+    text-align:center;
+    color:red;
+    font-size:20px;
+    font-weight:bold;
+}

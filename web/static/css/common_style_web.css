@@ -578,6 +578,7 @@ h4.lined-heading span {
 /* analysis(survey) dialog */
 #analysis-dialog {
     padding: 0px;
+    background: white;
 }
 .notitle-dialog .ui-dialog-titlebar { display: none; }
 .ui-resizable-handle { display: none; }

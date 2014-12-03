@@ -325,7 +325,8 @@ h4.lined-heading span {
 
 
 .ui-page{
-    background-color : #FCFCFC;
+    /*background-color : #FCFCFC;*/
+    background-color : white;
 }
 
 

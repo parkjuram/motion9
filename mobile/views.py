@@ -8,7 +8,7 @@ from common_controller.decorators import mobile_login_required
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
     helper_get_product_detail, helper_get_blog_reviews, http_response_by_json, helper_get_set, helper_get_product_magazines, \
     helper_get_custom_set_list, helper_get_custom_set, helper_get_payment_complete_item, helper_get_adarea_items, \
-    helper_get_faq_items, helper_get_survey_list, helper_get_survey_result_item
+    helper_get_faq_items, helper_get_survey_list, helper_get_survey_result_item, helper_get_report_count
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
 from users.models import Payment
@@ -28,7 +28,9 @@ def index_view(request):
 
     main_image = MainImage.objects.filter(name='Main_m').all()[0]
     main_image_url = settings.MEDIA_URL + main_image.image.name
-    #
+
+    report_count = helper_get_report_count(request);
+
     # set_category_images_row = []
     try:
         set_categorys = Category.objects.filter(is_set=True).all()
@@ -52,7 +54,8 @@ def index_view(request):
                       'set_categories': set_categories,
                       'main_image_url': main_image_url,
                       'set_category_images': set_category_images,
-                      'main_notice': main_notice
+                      'main_notice': main_notice,
+                      'report_count' : report_count
                   })
 
 @csrf_exempt
