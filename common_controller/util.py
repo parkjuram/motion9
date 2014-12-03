@@ -888,3 +888,7 @@ def helper_get_survey_list(request, is_display_name_need=False):
 def helper_get_survey_result_item(request, survey_id):
     survey_item = request.user.get_survey_list.filter(id=survey_id).values()[0]
     return survey_item
+
+def helper_get_report_count(request):
+    report_count = UserSurvey.objects.count()
+    return report_count
