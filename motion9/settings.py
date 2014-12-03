@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'mobile',
     'users',
     'supervisor',
+    'common',
 )
 
 SITE_ID = 1
