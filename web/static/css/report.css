@@ -273,15 +273,16 @@ a.tab-selected{
     width : 100%
 }
 
-h4.spb_heading, h4.lined-heading {
-	font-weight: normal;
-    height:30px;
-	border-bottom: 1px solid #e5e5e5 transparent;
-	position: relative;
-	margin-bottom: 0;
-	text-align: center;
+h4.spb_heading, h4.lined-heading-survey {
+	font-weight : normal;
+    height : 30px;
+	border-bottom : 1px solid #e5e5e5 transparent;
+	position : relative;
+	margin-bottom : 0;
+    margin-top : 0;
+	text-align : center;
 }
-h4.spb_heading:before, h4.lined-heading:before {
+h4.spb_heading:before, h4.lined-heading-survey:before {
     content: "";
     display: block;
     border-top: 1px solid #e5e5e5;
@@ -291,14 +292,14 @@ h4.spb_heading:before, h4.lined-heading:before {
     top: 50%;
     z-index: 1;
 }
-h4.spb_heading span, h4.lined-heading span {
+h4.spb_heading span, h4.lined-heading-survey span {
     padding: 0 10px;
     position: relative;
     display: inline-block;
     z-index: 1;
 }
 
-h4.lined-heading span {
+h4.lined-heading-survey span {
     color: #000000;
     background-color: #ffffff;
 }

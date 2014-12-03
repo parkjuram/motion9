@@ -19,7 +19,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_get_products, helper_get_set_list, helper_get_blog_reviews, \
     helper_get_custom_set, helper_get_custom_set_list, helper_get_brands, helper_get_product_magazines, \
     helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items, helper_get_survey_items, \
-    helper_get_survey_list, helper_get_survey_result_item
+    helper_get_survey_list, helper_get_survey_result_item, helper_get_report_count
 from .models import Product, Category, BlogReview, Set, Brand
 from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment
 
@@ -511,6 +511,7 @@ def index_view(request):
 
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
+    report_count = helper_get_report_count(request);
 
     try:
         main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
@@ -545,7 +546,8 @@ def index_view(request):
                       'main_image': main_image,
                       'set_category_images_row': set_category_images_row,
                       'next': 'index',
-                      'main_notice': main_notice
+                      'main_notice': main_notice,
+                      'report_count' :report_count
                   })
 
 @csrf_exempt

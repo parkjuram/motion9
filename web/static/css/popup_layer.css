@@ -53,7 +53,10 @@
     color: white;
     line-height: 40px;
     font-size : 20px;
-    padding: 25px 30px 25px 30px;
+    padding: 5px 30px 5px 30px;
+    color:black;
+    font-size:15px;
+    font-weight:bold;
 }
 
 .pop-layer .btn-r {

@@ -294,7 +294,7 @@ $(document).ready(function () {
                         innerHtml += '<div class="login-box-header"><h4 class="lined-heading-survey"><span></span></h4></div>';
                         innerHtml += '<div class="clearfix"></div>';
                     }
-                    innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">나의 피부 진단</div></a>';
+                    innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">보고서 신청</div></a>';
                     console.log( innerHtml );
                     $('#analysis-dialog').html(innerHtml);
                 },
