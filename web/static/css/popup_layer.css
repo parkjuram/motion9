@@ -95,17 +95,17 @@ a.cbtn:hover {
     color: #fff;
 }
 
-.lined-heading{
-    font-size : 25px;
-    line-height : 70px;
-    margin-bottom : 30px !important;
-}
+/*.lined-heading{*/
+    /*font-size : 25px;*/
+    /*line-height : 70px;*/
+    /*margin-bottom : 30px !important;*/
+/*}*/
 
-h4.spb_heading, h4.lined-heading{
-    height : 70px;
-}
+/*h4.spb_heading, h4.lined-heading{*/
+    /*height : 70px;*/
+/*}*/
 
-h4.lined-heading span{
-    background-color : black;
-    color : white;
-}
+/*h4.lined-heading span{*/
+    /*background-color : black;*/
+    /*color : white;*/
+/*}*/

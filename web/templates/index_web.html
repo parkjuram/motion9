@@ -63,6 +63,38 @@
                 <img src="{% static 'img/MAIN_2.png' %}"/>
             </div>
         </div>
+{#         <div class="index-content-row">#}
+    <div class="index-content-row" style="width:1080px;">
+            <div class="magazine-wrapper-title" style="margin-top:40px; width:1080px;">
+                <h4 class="lined-heading"><span style="font-size:20px;">&nbsp;&nbsp;&nbsp;&nbsp;MOTION9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COLLECTION&nbsp;&nbsp;&nbsp;&nbsp;</span></h4>
+            </div>
+
+    </div>
+{#        </div>#}
+        {% for set_category_images in set_category_images_row %}
+            <div class="index-content-row">
+                {% for set_category_image in set_category_images %}
+                    {% if forloop.first %}
+                        <div class="index-content float-left">
+                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
+                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
+                        </div>
+                    {% elif forloop.last %}
+                        <div class="index-content center-in-div">
+                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
+                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
+                        </div>
+                    {% else %}
+                        <div class="index-content float-right">
+                            <a href="{% url 'shop_set' category_id=set_category_image.id %}"
+                               class="index-content-img"><img src="{{ set_category_image.image_url }}"/></a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+
     </div>
 
     <div class="layer">
