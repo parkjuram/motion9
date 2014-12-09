@@ -3,7 +3,12 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/comparable_detail_list.css') }}"/>
 {% endblock %}
 {% block title %}
-    <h2 class="ui-title">2개 제품 비교</h2>
+    <div style="text-align:center; height:100%; margin-top:4px">
+        <a href="{% url 'mobile_index' %}" target="_self">
+            <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img">
+        </a>
+    </div>
+{#    <h2 class="ui-title">2개 제품 비교</h2>#}
 {% endblock %}
 {% block content %}
 <div class="ui-grid-solo">

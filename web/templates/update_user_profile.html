@@ -4,7 +4,12 @@
 <script src="{% static 'js/insert_profile_info.js'%}"></script>
 {% endblock %}
 {% block title %}
-    <h2 class="ui-title">내정보 수정</h2>
+        <div style="text-align:center; height:100%; margin-top:4px">
+            <a href="{% url 'mobile_index' %}" target="_self">
+                <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img">
+            </a>
+        </div>
+{#    <h2 class="ui-title">내정보 수정</h2>#}
 {% endblock %}
 {% block content %}
        <form method="post" action="{% url 'updateUserProfile' %}" data-ajax="false" >
