@@ -4,7 +4,12 @@
 <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 {% endblock %}
 {% block title %}
-    <h2 class="ui-title">장바구니</h2>
+    <div style="text-align:center; height:100%; margin-top:4px">
+        <a href="{% url 'mobile_index' %}" target="_self">
+            <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img">
+        </a>
+    </div>
+{#    <h2 class="ui-title">장바구니</h2>#}
 {% endblock %}
 {% block special_header%}
     <div class="total-cost-box">
