@@ -805,6 +805,31 @@ def report_view(request, category_id=None, page_num=1):
     else:
         logger.error('have_to_login')
 
+@login_required
+def report_detail_view(request, product_id=None):
+
+    if product_id is not None:
+        product = helper_get_product_detail(product_id, helper_get_user(request))
+
+        product['category_guide_image'] = MainImage.objects.filter(name=product['category_name']).first()
+        if product['category_guide_image'] is not None:
+            product['category_guide_image'] = settings.MEDIA_URL + product['category_guide_image'].image.name
+
+        blog_reivews = helper_get_blog_reviews(product_id)
+        magazines = helper_get_product_magazines(product_id)
+        magazines_fold = magazines[4:]
+        magazines = magazines[:4]
+
+        return render(request, "report_detail_web.html",
+                      {
+                          'product': product,
+                          'magazines': magazines,
+                          'magazines_fold': magazines_fold,
+                          'blog_reviews': blog_reivews
+                      })
+    else:
+        return render(request, "404.html")
+
 
 @login_required
 def report_detail_modal_view(request, category_id=None, page_num=1, product_id=None):

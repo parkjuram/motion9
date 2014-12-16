@@ -1,270 +1,645 @@
-{% extends "mobile_base.html" %}
+{% extends "web_base.html" %}
 {% block header %}
-{% load static %}
-{% load humanize %}
+    {% load static %}
+    {% load humanize %}
+    {% load mathfilters %}
+    <link rel="stylesheet" href="{% static 'css/product_detail_web.css' %}"/>
+    <link rel="stylesheet" href="{% static 'magnific_popup/magnific-popup.css' %}"/>
+    <link rel="stylesheet" href="{% static 'spinner/jquery.spinner.css' %}"/>
+    <link rel="stylesheet" href="{% static 'tab/easy-responsive-tabs.css' %}"/>
+    <script src="{% static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/product_detail_web.js' %}"></script>
+    <script src="{% static 'spinner/jquery.spinner.js' %}"></script>
+    <script src="{% static 'tab/easyResponsiveTabs.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/report_detail.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report_layout.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report_default.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report_components_rounded.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
 
-<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
-{#<script src="{% static "swiper/idangerous.swiper.js" %}"></script>#}
-{#<link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>#}
-<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
-{#<link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>#}
-{#<script src="{% static 'js/my_page_interesting_set.js'%}"></script>#}
-<link rel="stylesheet" href="{% static 'css/report.css'%}"/>
-<script src="{% static 'js/report.js'%}"></script>
-{#<link rel="stylesheet" href="{% static 'css/shopping_product.css'%}"/>#}
-{% block header_append %}
 {% endblock %}
-{% endblock %}
-
-{% block title %}
-        <div style="text-align:center; height:100%; margin-top:4px">
-            <a href="{% url 'mobile_index' %}" target="_self">
-                <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img">
-            </a>
-        </div>
-{#    <h2 class="ui-title">Report</h2>#}
-{% endblock %}
-
 {% block content %}
-{% block detail %}
+    <div class="row" style="margin-top: 50px !important">
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container" style="background-color : #eff3f8">
+	<!-- BEGIN PAGE HEAD -->
+	<!-- END PAGE HEAD -->
+	<!-- BEGIN PAGE CONTENT -->
+	<div class="page-content">
+		<div class="container">
+			<!-- BEGIN PAGE BREADCRUMB -->
+			<ul class="page-breadcrumb breadcrumb hide">
+				<li>
+					<a href="#">Home</a><i class="fa fa-circle"></i>
+				</li>
+				<li class="active">
+					 Dashboard
+				</li>
+			</ul>
+			<!-- END PAGE BREADCRUMB -->
+			<!-- BEGIN PAGE CONTENT INNER -->
+			<div class="row margin-top-10">
+				<div class="col-md-6 col-sm-12">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">Sales Summary</span>
+								<span class="caption-helper hide">weekly stats...</span>
+							</div>
+							<div class="actions">
+								<div class="btn-group btn-group-devided" data-toggle="buttons">
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
+									<input type="radio" name="options" class="toggle" id="option1">Today</label>
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+									<input type="radio" name="options" class="toggle" id="option2">Week</label>
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+									<input type="radio" name="options" class="toggle" id="option2">Month</label>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="row list-separated">
+								<div class="col-md-3 col-sm-3 col-xs-6">
+									<div class="font-grey-mint font-sm">
+										 Total Sales
+									</div>
+									<div class="uppercase font-hg font-red-flamingo">
+										 13,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-3 col-xs-6">
+									<div class="font-grey-mint font-sm">
+										 Revenue
+									</div>
+									<div class="uppercase font-hg theme-font">
+										 4,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-3 col-xs-6">
+									<div class="font-grey-mint font-sm">
+										 Expenses
+									</div>
+									<div class="uppercase font-hg font-purple">
+										 11,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-3 col-xs-6">
+									<div class="font-grey-mint font-sm">
+										 Growth
+									</div>
+									<div class="uppercase font-hg font-blue-sharp">
+										 9,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</div>
+							</div>
+							<ul class="list-separated list-inline-xs hide">
+								<li>
+									<div class="font-grey-mint font-sm">
+										 Total Sales
+									</div>
+									<div class="uppercase font-hg font-red-flamingo">
+										 13,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</li>
+								<li>
+								</li>
+								<li class="border">
+									<div class="font-grey-mint font-sm">
+										 Revenue
+									</div>
+									<div class="uppercase font-hg theme-font">
+										 4,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</li>
+								<li class="divider">
+								</li>
+								<li>
+									<div class="font-grey-mint font-sm">
+										 Expenses
+									</div>
+									<div class="uppercase font-hg font-purple">
+										 11,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</li>
+								<li class="divider">
+								</li>
+								<li>
+									<div class="font-grey-mint font-sm">
+										 Growth
+									</div>
+									<div class="uppercase font-hg font-blue-sharp">
+										 9,760 <span class="font-lg font-grey-mint">$</span>
+									</div>
+								</li>
+							</ul>
+							<div id="sales_statistics" class="portlet-body-morris-fit morris-chart" style="height: 260px">
+							</div>
+						</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">Member Activity</span>
+								<span class="caption-helper hide">weekly stats...</span>
+							</div>
+							<div class="actions">
+								<div class="btn-group btn-group-devided" data-toggle="buttons">
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
+									<input type="radio" name="options" class="toggle" id="option1">Today</label>
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+									<input type="radio" name="options" class="toggle" id="option2">Week</label>
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+									<input type="radio" name="options" class="toggle" id="option2">Month</label>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="row number-stats margin-bottom-30">
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="stat-left">
+										<div class="stat-chart">
+											<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+											<div id="sparkline_bar"></div>
+										</div>
+										<div class="stat-number">
+											<div class="title">
+												 Total
+											</div>
+											<div class="number">
+												 2460
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="stat-right">
+										<div class="stat-chart">
+											<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+											<div id="sparkline_bar2"></div>
+										</div>
+										<div class="stat-number">
+											<div class="title">
+												 New
+											</div>
+											<div class="number">
+												 719
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable table-scrollable-borderless">
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+										 MEMBER
+									</th>
+									<th>
+										 Earnings
+									</th>
+									<th>
+										 CASES
+									</th>
+									<th>
+										 CLOSED
+									</th>
+									<th>
+										 RATE
+									</th>
+								</tr>
+								</thead>
+								<tr>
+									<td class="fit">
+										<img class="user-pic" src="../../assets/admin/layout3/img/avatar4.jpg">
+									</td>
+									<td>
+										<a href="javascript:;" class="primary-link">Brain</a>
+									</td>
+									<td>
+										 $345
+									</td>
+									<td>
+										 45
+									</td>
+									<td>
+										 124
+									</td>
+									<td>
+										<span class="bold theme-font">80%</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="fit">
+										<img class="user-pic" src="../../assets/admin/layout3/img/avatar5.jpg">
+									</td>
+									<td>
+										<a href="javascript:;" class="primary-link">Nick</a>
+									</td>
+									<td>
+										 $560
+									</td>
+									<td>
+										 12
+									</td>
+									<td>
+										 24
+									</td>
+									<td>
+										<span class="bold theme-font">67%</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="fit">
+										<img class="user-pic" src="../../assets/admin/layout3/img/avatar6.jpg">
+									</td>
+									<td>
+										<a href="javascript:;" class="primary-link">Tim</a>
+									</td>
+									<td>
+										 $1,345
+									</td>
+									<td>
+										 450
+									</td>
+									<td>
+										 46
+									</td>
+									<td>
+										<span class="bold theme-font">98%</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="fit">
+										<img class="user-pic" src="../../assets/admin/layout3/img/avatar7.jpg">
+									</td>
+									<td>
+										<a href="javascript:;" class="primary-link">Tom</a>
+									</td>
+									<td>
+										 $645
+									</td>
+									<td>
+										 50
+									</td>
+									<td>
+										 89
+									</td>
+									<td>
+										<span class="bold theme-font">58%</span>
+									</td>
+								</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">TASKS</span>
+								<span class="caption-helper">16 pending</span>
+							</div>
+							<div class="inputs">
+								<div class="portlet-input input-small input-inline">
+									<div class="input-icon right">
+										<i class="icon-magnifier"></i>
+										<input type="text" class="form-control form-control-solid" placeholder="search...">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="task-content">
+								<div class="scroller"  data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+									<!-- START TASK LIST -->
+									<ul class="task-list">
 
-    <div id="productGrid" style="height:260px;">
+										<li>
+											<div class="task-checkbox">
+												<input type="checkbox" class="liChild" value=""/>
+											</div>
+											<div class="task-title">
+												<span class="task-title-sp">
+												Technical Management Meeting </span>
+												<span class="label label-sm label-warning">Company</span>
+											</div>
+											<div class="task-config">
+												<div class="task-config-btn btn-group">
+													<a class="btn btn-xs default" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+													<i class="fa fa-cog"></i><i class="fa fa-angle-down"></i>
+													</a>
+													<ul class="dropdown-menu pull-right">
+														<li>
+															<a href="javascript:;">
+															<i class="fa fa-check"></i> Complete </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+															<i class="fa fa-pencil"></i> Edit </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+															<i class="fa fa-trash-o"></i> Cancel </a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class="last-line">
+											<div class="task-checkbox">
+												<input type="checkbox" class="liChild" value=""/>
+											</div>
+											<div class="task-title">
+												<span class="task-title-sp">
+												KeenThemes Investment Discussion </span>
+												<span class="label label-sm label-warning">KeenThemes </span>
+											</div>
+											<div class="task-config">
+												<div class="task-config-btn btn-group">
+													<a class="btn btn-xs default" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+													<i class="fa fa-cog"></i><i class="fa fa-angle-down"></i>
+													</a>
+													<ul class="dropdown-menu pull-right">
+														<li>
+															<a href="javascript:;">
+															<i class="fa fa-check"></i> Complete </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+															<i class="fa fa-pencil"></i> Edit </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+															<i class="fa fa-trash-o"></i> Cancel </a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</li>
+									</ul>
+									<!-- END START TASK LIST -->
+								</div>
+							</div>
+							<div class="task-footer">
+								<div class="btn-arrow-link pull-right">
+									<a href="javascript:;">See All Tasks</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">Customer Support</span>
+								<span class="caption-helper">45 pending</span>
+							</div>
+							<div class="inputs">
+								<div class="portlet-input input-inline input-small ">
+									<div class="input-icon right">
+										<i class="icon-magnifier"></i>
+										<input type="text" class="form-control form-control-solid" placeholder="search...">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="scroller"  data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+								<div class="general-item-list">
+									<div class="item">
+										<div class="item-head">
+											<div class="item-details">
+												<img class="item-pic" src="../../assets/admin/layout3/img/avatar4.jpg">
+												<a href="" class="item-name primary-link">Nick Larson</a>
+												<span class="item-label">3 hrs ago</span>
+											</div>
+											<span class="item-status"><span class="badge badge-empty badge-success"></span> Open</span>
+										</div>
+										<div class="item-body">
+											 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+										</div>
+									</div>
+									<div class="item">
+										<div class="item-head">
+											<div class="item-details">
+												<img class="item-pic" src="../../assets/admin/layout3/img/avatar3.jpg">
+												<a href="" class="item-name primary-link">Mark</a>
+												<span class="item-label">5 hrs ago</span>
+											</div>
+											<span class="item-status"><span class="badge badge-empty badge-warning"></span> Pending</span>
+										</div>
+										<div class="item-body">
+											 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat tincidunt ut laoreet.
+										</div>
+									</div>
+									<div class="item">
+										<div class="item-head">
+											<div class="item-details">
+												<img class="item-pic" src="../../assets/admin/layout3/img/avatar6.jpg">
+												<a href="" class="item-name primary-link">Nick Larson</a>
+												<span class="item-label">8 hrs ago</span>
+											</div>
+											<span class="item-status"><span class="badge badge-empty badge-primary"></span> Closed</span>
+										</div>
+										<div class="item-body">
+											 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+					<!-- BEGIN REGIONAL STATS PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">Regional Stats</span>
+							</div>
+							<div class="actions">
+								<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+								<i class="icon-cloud-upload"></i>
+								</a>
+								<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+								<i class="icon-wrench"></i>
+								</a>
+								<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#">
+								</a>
+								<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+								<i class="icon-trash"></i>
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div id="region_statistics_loading">
+								<img src="../../assets/admin/layout/img/loading.gif" alt="loading"/>
+							</div>
+							<div id="region_statistics_content" class="display-none">
+								<div class="btn-toolbar margin-bottom-10">
+									<div class="btn-group btn-group-circle" data-toggle="buttons">
+										<a href="" class="btn grey-salsa btn-sm active">
+										Users </a>
+										<a href="" class="btn grey-salsa btn-sm">
+										Orders </a>
+									</div>
+									<div class="btn-group pull-right">
+										<a href="" class="btn btn-circle grey-salsa btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+										Select Region <span class="fa fa-angle-down">
+										</span>
+										</a>
+										<ul class="dropdown-menu pull-right">
+											<li>
+												<a href="javascript:;" id="regional_stat_world">
+												World </a>
+											</li>
+											<li>
+												<a href="javascript:;" id="regional_stat_usa">
+												USA </a>
+											</li>
+											<li>
+												<a href="javascript:;" id="regional_stat_europe">
+												Europe </a>
+											</li>
+											<li>
+												<a href="javascript:;" id="regional_stat_russia">
+												Russia </a>
+											</li>
+											<li>
+												<a href="javascript:;" id="regional_stat_germany">
+												Germany </a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div id="vmap_world" class="vmaps display-none">
+								</div>
+								<div id="vmap_usa" class="vmaps display-none">
+								</div>
+								<div id="vmap_europe" class="vmaps display-none">
+								</div>
+								<div id="vmap_russia" class="vmaps display-none">
+								</div>
+								<div id="vmap_germany" class="vmaps display-none">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END REGIONAL STATS PORTLET-->
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light">
+						<div class="portlet-title tabbable-line">
+							<div class="caption caption-md">
+								<i class="icon-globe theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">Feeds</span>
+							</div>
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab_1_1" data-toggle="tab">
+									System </a>
+								</li>
+								<li>
+									<a href="#tab_1_2" data-toggle="tab">
+									Activities </a>
+								</li>
+							</ul>
+						</div>
+						<div class="portlet-body">
+							<!--BEGIN TABS-->
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab_1_1">
+									<div class="scroller" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+										<ul class="feeds">
+											<li>
+												<div class="col1">
+													<div class="cont">
+														<div class="cont-col1">
+															<div class="label label-sm label-success">
+																<i class="fa fa-bell-o"></i>
+															</div>
+														</div>
+														<div class="cont-col2">
+															<div class="desc">
+																 You have 4 pending tasks. <span class="label label-sm label-info">
+																Take action <i class="fa fa-share"></i>
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col2">
+													<div class="date">
+														 Just now
+													</div>
+												</div>
+											</li>
+											<li>
+												<a href="javascript:;">
+												<div class="col1">
+													<div class="cont">
+														<div class="cont-col1">
+															<div class="label label-sm label-success">
+																<i class="fa fa-bell-o"></i>
+															</div>
+														</div>
+														<div class="cont-col2">
+															<div class="desc">
+																 New version v1.4 just lunched!
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col2">
+													<div class="date">
+														 20 mins
+													</div>
+												</div>
+												</a>
+											</li>
 
-        <div class="product-detail">
-            <div class="item-image">
-                <img src="{{ product.big_img_url }}" style="max-width:100%; max-height:250px; width:auto; height:auto;" />
-               </div>
-                <br/>
-        </div>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!--END TABS-->
+						</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT INNER -->
+		</div>
+	</div>
+	<!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->
 
-        <div class="product-detail">
-            이름 : {{ product.brandname }} {{ product.name }}
-            <br/>
-            상세설명 :
-            <br/>
-            가격 : {{ product.original_price|intcomma }} 원
-            <br/>
-            네이버 쇼핑 평점 :
-            <br/>
-        </div>
+
+
     </div>
-
-    <div data-role="tabs" id="tabs">
-
-      <div data-role="navbar" style="width:95%; margin:5px;">
-        <ul>
-          <li><a href="#one" data-ajax="false" class="tab-btn">블로그 리뷰</a></li>
-          <li><a href="#two" data-ajax="false" class="tab-btn">카페/댓글 리뷰</a></li>
-          <li><a href="#three" data-ajax="false" class="tab-btn">EDITOR'S NOTES</a></li>
-        </ul>
-      </div>
-
-      <div id="one" class="ui-body-d ui-content">
-
-        <div class="blog-product-item">
-            <div class="blog-product-item-img">
-                   <img src="{% static "img/post-img-5.jpg"%}"/>
-            </div>
-            <div class="blog-product-item-contents">
-                <div class="blog-product-item-contents-name">
-                        Connie Pistilli
-                </div>
-                <div class="blog-product-item-contents-date">
-                       2014년 9월 12일
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary">
-                    test - summary
-                    asjdiofjasodifj<br/>
-                    asjfdojasdiof<br/>
-                    asjdfiojasifod<br/>
-                    afv<br/>
-                    asfvasfv<br/>
-                    asfvasfvafsvasv<br/>
-                    asfvasfvasfvafjoivajㅓ먀ㅐㄴ레퍼먀낼펌ㅍ<br/>
-                    ㅁ러ㅑ패ㅁㄿ매ㅑㄴㄹ퍼ㅐㅑㄴㅁㄹ퍼<br/>
-                    ㅁ럼래ㅑ퍼먀ㅐㄹ패ㅓ먄랴ㅐㅁ너래ㅑㄴㄻ파ㅣ믄ㄹ파ㅣ<br/>
-                    ㅁㄹ퍄맨ㄹ퍼먀ㅐㄴㄹ퍼먀낼펌ㄴ랴패ㅓㅁ냐ㅐㄿ<br/>
-                    ㅁㄴ러ㅑ패먼ㄹ패ㅑㅁㄴ러<br/>
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary-detail">
-                    test - detail
-                    asjdiofjasodifj<br/>
-                    asjfdojasdiof<br/>
-                    asjdfiojasifod<br/>
-                    afv<br/>
-                    asfvasfv<br/>
-                    asfvasfvafsvasv<br/>
-                    asfvasfvasfvafjoivajㅓ먀ㅐㄴ레퍼먀낼펌ㅍ<br/>
-                    ㅁ러ㅑ패ㅁㄿ매ㅑㄴㄹ퍼ㅐㅑㄴㅁㄹ퍼<br/>
-                    ㅁ럼래ㅑ퍼먀ㅐㄹ패ㅓ먄랴ㅐㅁ너래ㅑㄴㄻ파ㅣ믄ㄹ파ㅣ<br/>
-                    ㅁㄹ퍄맨ㄹ퍼먀ㅐㄴㄹ퍼먀낼펌ㄴ랴패ㅓㅁ냐ㅐㄿ<br/>
-                    ㅁㄴ러ㅑ패먼ㄹ패ㅑㅁㄴ러<br/>
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-more">
-                    <a class="btn-detail"> 자세히 보기 </a>
-                </div>
-
-            </div>
-        </div>
-        <br/>
-        <br/>
-        <div class="blog-product-item">
-            <div class="blog-product-item-img">
-                    <a class="hide-referrer" href="{{ blog.url }}" target="_blank"><img src="{% static "img/post-img-5.jpg"%}"/></a>
-            </div>
-            <div class="blog-product-item-contents">
-                <div class="blog-product-item-contents-name">
-                        Connie Pistilli
-                </div>
-                <div class="blog-product-item-contents-date">
-                       2014년 9월 12일
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary">
-                    test - summary
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-summary-detail">
-                    test - detail
-                    asjdiofjasodifj
-                    asjfdojasdiof
-                    asjdfiojasifod
-
-                </div>
-                <br/>
-                <div class="blog-product-item-contents-more">
-                    <a class="btn-detail"> 자세히 보기 </a>
-                </div>
-            </div>
-        </div>
-      </div>
-
-      <div id="two" class="ui-body-d ui-content">
-
-
-            <div class="blog-product-item">
-                <div class="blog-product-item-img">
-                       <img src="{% static "img/post-img-5.jpg"%}"/>
-                </div>
-                <div class="blog-product-item-contents">
-                    <div class="blog-product-item-contents-name">
-                            Connie Pistilli
-                    </div>
-                    <div class="blog-product-item-contents-date">
-                           2014년 9월 12일
-                    </div>
-                    <br/>
-                    <div class="blog-product-item-contents-summary">
-                        매ㅑ너러ㅔㅁ내ㅑ러멘래ㅓㅑㅐㅋ퍼ㅑㅐㄴㄹㅇ
-                        ㅁ너ㅑㅐ래ㅑㅁ럼내ㅑㄻ냐ㅐㅇ럼ㄴㅇ러ㅐㅑㅓ
-                        매ㅑㅇ러ㅐ먄ㅇ러ㅑㅐㅁ냐ㅐㅇ래ㅑㅁㄴ러ㅑㅐ
-                    </div>
-                    <br/>
-                    <div class="blog-product-item-contents-more">
-                        자세히 보기
-                    </div>
-
-                </div>
-            </div>
-            <br/>
-            <br/>
-            <div class="blog-product-item">
-                <div class="blog-product-item-img">
-                        <a class="hide-referrer" href="{{ blog.url }}" target="_blank"><img src="{% static "img/post-img-5.jpg"%}"/></a>
-                </div>
-                <div class="blog-product-item-contents">
-                    <div class="blog-product-item-contents-name">
-                            Connie Pistilli
-                    </div>
-                    <div class="blog-product-item-contents-date">
-                           2014년 9월 12일
-                    </div>
-                    <br/>
-                    <div class="blog-product-item-contents-summary">
-                        매ㅑ너러ㅔㅁ내ㅑ러멘래ㅓㅑㅐㅋ퍼ㅑㅐㄴㄹㅇ
-                        ㅁ너ㅑㅐ래ㅑㅁ럼내ㅑㄻ냐ㅐㅇ럼ㄴㅇ러ㅐㅑㅓ
-                        매ㅑㅇ러ㅐ먄ㅇ러ㅑㅐㅁ냐ㅐㅇ래ㅑㅁㄴ러ㅑㅐ
-                    </div>
-                    <br/>
-                    <div class="blog-product-item-contents-more">
-                        자세히 보기
-                    </div>
-                </div>
-            </div>
-      </div>
-
-      <div id="three" class="ui-body-d ui-content">
-            test
-      </div>
-
-     </div>
-
-
 {% endblock %}
-{% endblock %}
-
-
-
-{% load humanize %}
-
-    <script>
-    </script>
-
-    <div class="modal-left-wrapper float-left">
-        <div class="modal-desc-wrapper box-css">
-            <div class="box-header">{{ product.brandname }} {{ product.name }}</div>
-            <div class="modal-product-category-box">
-                카테고리 > {{ product.category_name }}
-            </div>
-            <div class="modal-product-contents">
-                <div class="float-left">
-                    <div id="modalProductImg">
-                        <img src="{{ product.big_img_url }}" alt="" />
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-right-wrapper float-left">
-        <div class="modal-puchase box-css">
-            <div class="box-header">
-                정보
-            </div>
-            <div class="price-area">
-                <div class="product-price price-saled">판매가 : <span id="modalProductPrice">{{ product.discount_price|intcomma }}원</span></div>
-                <div class="product-how-many">
-                    <div style="width :80px; margin-top : 6px; float: left;">
-                        구매수량 :
-                    </div>
-                    <div style="width : 100px; margin-left:2px; float:left;">
-                        <input type="text" id="modalCntSpinner" />
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="product-price price-total">
-                    총 상품 금액 : <span id="modalProductFinalPrice">{{ product.discount_price|intcomma }}</span>원
-                </div>
-                <div class="product-btn-area">
-                    <a href="{% url 'product' product_id=product.id %}" class="basic-btn">상세 페이지로 이동</a>
-                    <a href="#" class="basic-btn btn-for-cart" data-type="p" data-product="{{ product.id }}">장바구니</a>
-                </div>
-            </div>
-{#            <div style="margin-left: 20px; margin-bottom: 20px;">#}
-{#                <div class="tag-header">태그</div>#}
-{#                <div class="tag-list">#}
-{#                    <a href="#">여드름</a>, <a href="#">하얀피부</a>#}
-{#                </div>#}
-{#            </div>#}
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="box-css">
-        <div class="modal-product-description">
-            <div class="box-header">상세설명</div>
-            <div class="modal-product-description-detail">{{ product.description }}</div>
-        </div>
-    </div>

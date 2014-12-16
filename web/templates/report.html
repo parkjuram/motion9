@@ -24,14 +24,14 @@
 {% block detail %}
 
     <div class="report-wrapper">
-        <div class="select-wrapper">
-                <select id="mobileMypageList" data-mini="true" data-shadow="false">
-                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/13</option>
-                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/14</option>
-                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/15</option>
-                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/16</option>
-                </select>
-        </div>
+{#        <div class="select-wrapper">#}
+{#                <select id="mobileMypageList" data-mini="true" data-shadow="false">#}
+{#                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/13</option>#}
+{#                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/14</option>#}
+{#                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/15</option>#}
+{#                    <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">김현기님 을 위한 화장품 분석 report - 2014/10/16</option>#}
+{#                </select>#}
+{#        </div>#}
 
         <br/>
 
@@ -100,7 +100,7 @@
                </div>
                 <br/>
                 <div class="login-box-header">
-                    <h4 class="lined-heading"><span> </span></h4>
+                    <h4 class="lined-heading-survey"><span> </span></h4>
                 </div>
                <div class="item-title" >
                    <a href="{% url 'mobile_report_detail' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">[{{ product.brandname }}] {{product.name}}</a>
