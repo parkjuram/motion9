@@ -1,5 +1,5 @@
 .ui-content{
-    background-color : white;
+    background-color : #eff3f8;
     /*height:200px;*/
 }
 
@@ -52,7 +52,7 @@ a:hover{
     text-shadow : none;
     /*background: url('../img/profile_bg.png') top center repeat-y #ECECEC;*/
     /*background : #e5e5e5;*/
-    background-color : white;
+    background-color : #fff;
     font-size : 14px;
     /*width : 100%;*/
     line-height : 30px;
@@ -60,8 +60,8 @@ a:hover{
     position : relative;
     margin : 10px;
     padding : 10px;
-    border-radius : 0px;
-    border: 1px solid #292929;
+    border-radius : 4px;
+    /*border: 1px solid #292929;*/
 }
 
 .mypage-user-name{
@@ -198,15 +198,16 @@ a.tab-selected{
 
 
 .product-item{
-    border-radius : 0px;
-    border : 1px solid #e5e5e5;
-    border-color : #e5e5e5;
+    border-radius : 4px;
+    /*border : 1px solid #e5e5e5;*/
+    /*border-color : #e5e5e5;*/
     width : 43%;
     min-height: 270px;
     margin : 10px;
-    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
-    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
-    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    background-color : #fff;
+    /*box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);*/
+    /*-moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);*/
+    /*-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);*/
 }
 
 .item-title{
@@ -285,13 +286,14 @@ h4.spb_heading, h4.lined-heading-survey {
 h4.spb_heading:before, h4.lined-heading-survey:before {
     content: "";
     display: block;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #eee;
     width: 100%;
     height: 2px;
     position: absolute;
     top: 50%;
     z-index: 1;
 }
+
 h4.spb_heading span, h4.lined-heading-survey span {
     padding: 0 10px;
     position: relative;
@@ -305,15 +307,16 @@ h4.lined-heading-survey span {
 }
 
 .product-detail{
-    border-radius : 0px;
-    border : 1px solid #e5e5e5;
+    border-radius : 4px;
+    /*border : 1px solid #e5e5e5;*/
     width : 44%;
     height: 250px;
     margin : 5px;
     margin-left : 10px;
-    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
-    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
-    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);
+    background-color : white;
+    /*box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);*/
+    /*-moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);*/
+    /*-webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.13);*/
     min-height : 150px;
 }
 
@@ -469,4 +472,8 @@ h4.lined-heading-survey span {
 #productDetailDialog-popup{
     width:400px;
     max-width:100%;
+}
+
+.report-grid{
+
 }
