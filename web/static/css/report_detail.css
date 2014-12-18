@@ -3839,7 +3839,7 @@ Portlets
 .portlet.light {
   padding: 12px 20px 15px 20px;
   background-color: #fff;
-  min-height: 400px;
+  /*min-height: 400px;*/
 }
 .portlet.light.bordered {
   border: 1px solid #e1e1e1 !important;
@@ -12641,5 +12641,5 @@ Transparent Button
 .row{
     width: 100% !important;
     margin : 0px !important;
-    max-height: 500px;
+    /*max-height: 500px;*/
 }

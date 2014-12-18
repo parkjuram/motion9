@@ -4128,6 +4128,7 @@ Dashboard Stats 2
   background: #fff;
   padding: 15px 15px 30px 15px;
   margin-bottom: 20px;
+  min-height: 320px;
 }
 .dashboard-stat2 .display {
   margin-bottom: 20px;
@@ -4168,6 +4169,11 @@ Dashboard Stats 2
   font-size: 26px;
 }
 .dashboard-stat2 .progress-info {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  bottom: 0;
+  position: absolute;
+  width: 75%;
   clear: both;
 }
 .dashboard-stat2 .progress-info .progress {
