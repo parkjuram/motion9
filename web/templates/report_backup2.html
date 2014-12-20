@@ -1,0 +1,391 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+    {% load static %}
+    {% load humanize %}
+
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/report.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report_detail.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report_layout.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report_default.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/report_components_rounded.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/common_style.css' %}"/>
+    <script src="{% static 'js/report.js' %}"></script>
+    {#    <style type="text/css">#}
+    {#    .jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}#}
+    {#    </style>#}
+    {% block header_append %}
+    {% endblock %}
+{% endblock %}
+
+{% block title %}
+    <div style="text-align:center; height:100%; margin-top:4px">
+        <a href="{% url 'mobile_index' %}" target="_self">
+            <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img">
+        </a>
+    </div>
+    {#    <h2 class="ui-title">Report</h2>#}
+{% endblock %}
+
+{% block content %}
+    {% block detail %}
+        <!-- BEGIN PAGE CONTAINER -->
+        <div class="page-container">
+        <!-- BEGIN PAGE HEAD -->
+        <div class="page-content">
+            <div class="container">
+                <div class="row margin-top-10">
+                    <div class="col-md-6 col-sm-12">
+                        <!-- BEGIN PORTLET-->
+                        <div class="portlet light "
+                             style="padding:0px; margin:0px; padding-left:15px; padding-right:15px; min-height:0px;">
+                            <div class="portlet-title" style="border-bottom:0px; min-height:0px;">
+                                <div class="caption caption-md">
+                                    <span class="caption-subject theme-font bold uppercase">화장품 분석 보고서</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PORTLET-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE HEAD -->
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+        <div class="container">
+        <!-- BEGIN PAGE CONTENT INNER -->
+
+        <div class="row margin-top-10">
+            <div class="col-md-6 col-sm-12">
+                <!-- BEGIN PORTLET-->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <span class="caption-subject theme-font bold uppercase">예산</span>
+                        </div>
+
+                    </div>
+
+                    <div class="portlet-body" style="margin-top : 30px;">
+                        <div class="row list-separated">
+                            <div class="col-md-3 col-sm-3 col-xs-6" style="padding:0px; width:100%">
+                                <div class="font-grey-mint font-sm">
+                                    상세설명
+                                </div>
+                                <div class="uppercase font-hg" style="font-size:15px;">
+                                    랩시리즈와 비오템이 막상막하의 대결을 펼쳤지만 자외선차단제 분야에서는 비오템 UV 디펜스를 사용한다고 밝힌 그루밍 가이들이
+                                    많았다는 사실!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+
+        <div class="row margin-top-10">
+            <div class="col-md-6 col-sm-12">
+                <!-- BEGIN PORTLET-->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <span class="caption-subject theme-font bold uppercase">분석 총평</span>
+                        </div>
+
+                    </div>
+
+                    <div class="portlet-body" style="margin-top : 30px;">
+                        <div class="row list-separated">
+                            <div class="col-md-3 col-sm-3 col-xs-6" style="padding:0px; width:100%">
+                                <div class="font-grey-mint font-sm">
+                                    상세설명
+                                </div>
+                                <div class="uppercase font-hg" style="font-size:15px;">
+                                    랩시리즈와 비오템이 막상막하의 대결을 펼쳤지만 자외선차단제 분야에서는 비오템 UV 디펜스를 사용한다고 밝힌 그루밍 가이들이
+                                    많았다는 사실!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+        <div class="row margin-top-10">
+            <div class="col-md-6 col-sm-12">
+                <!-- BEGIN PORTLET-->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <span class="caption-subject theme-font bold uppercase">Comment</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="margin-top : 30px;">
+                        <div class="row list-separated">
+                            <div class="col-md-3 col-sm-3 col-xs-6" style="padding:0px; width:100%">
+                                <div class="font-grey-mint font-sm">
+                                    상세설명
+                                </div>
+                                <div class="uppercase font-hg" style="font-size:15px;">
+                                    랩시리즈와 비오템이 막상막하의 대결을 펼쳤지만 자외선차단제 분야에서는 비오템 UV 디펜스를 사용한다고 밝힌 그루밍 가이들이
+                                    많았다는 사실!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PORTLET-->
+            </div>
+        </div>
+
+
+        <div class="row margin-top-10">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h3>스킨
+                    </h3>
+                </div>
+                <!-- END PAGE TITLE -->
+
+                <div class="dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-green-sharp" style="font-size:20px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++
+                            </h3>
+                            <small>100ml / 15,000원</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-pie-chart"></i>
+                        </div>
+                    </div>
+                    <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                        <div class="product-x-img" style="width:80%; position:absolute; text-align:center;">
+                            <img src="{% static 'img/test.jpg' %}" alt="" style="width:30%"/>
+                        </div>
+                    </a>
+
+                    <div class="progress-info">
+                        <div class="progress">
+									<span style="width: 50%;" class="progress-bar progress-bar-success green-sharp">
+									<span class="sr-only">50% progress</span>
+									</span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title">progress</div>
+                            <div class="status-number">50%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h3>&nbsp;
+                    </h3>
+                </div>
+                <!-- END PAGE TITLE -->
+
+                <div class="dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-red-haze" style="font-size:20px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
+                            <small>100ml / 15,000원</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-like"></i>
+                        </div>
+                    </div>
+                    <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                        <div class="product-x-img" style="width:80%; position:absolute; text-align:center;">
+                            <img src="{% static 'img/test.jpg' %}" alt="" style="width:30%"/>
+                        </div>
+                    </a>
+
+                    <div class="progress-info">
+                        <div class="progress">
+									<span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
+									<span class="sr-only">85% change</span>
+									</span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title">change</div>
+                            <div class="status-number">85%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row margin-top-10">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h3>로션
+                    </h3>
+                </div>
+                <!-- END PAGE TITLE -->
+
+                <div class="dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-blue-sharp" style="font-size:20px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++
+                            </h3>
+                            <small>100ml / 15,000원</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-pie-chart"></i>
+                        </div>
+                    </div>
+                    <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                        <div class="product-x-img" style="width:80%; position:absolute; text-align:center;">
+                            <img src="{% static 'img/test.jpg' %}" alt="" style="width:30%"/>
+                        </div>
+                    </a>
+
+                    <div class="progress-info">
+                        <div class="progress">
+									<span style="width: 50%;" class="progress-bar progress-bar-success blue-sharp">
+									<span class="sr-only">50% progress</span>
+									</span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title">progress</div>
+                            <div class="status-number">50%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h3>&nbsp;
+                    </h3>
+                </div>
+                <!-- END PAGE TITLE -->
+
+                <div class="dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-purple-sharp" style="font-size:20px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF
+                                50/PA+++</h3>
+                            <small>100ml / 15,000원</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-like"></i>
+                        </div>
+                    </div>
+                    <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                        <div class="product-x-img" style="width:80%; position:absolute; text-align:center;">
+                            <img src="{% static 'img/test.jpg' %}" alt="" style="width:30%"/>
+                        </div>
+                    </a>
+
+                    <div class="progress-info">
+                        <div class="progress">
+									<span style="width: 85%;" class="progress-bar progress-bar-success purple-sharp">
+									<span class="sr-only">85% change</span>
+									</span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title">change</div>
+                            <div class="status-number">85%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row margin-top-10">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h3>수분크림
+                    </h3>
+                </div>
+                <!-- END PAGE TITLE -->
+
+                <div class="dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-yellow-gold" style="font-size:20px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++
+                            </h3>
+                            <small>100ml / 15,000원</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-pie-chart"></i>
+                        </div>
+                    </div>
+                    <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                        <div class="product-x-img" style="width:80%; position:absolute; text-align:center;">
+                            <img src="{% static 'img/test.jpg' %}" alt="" style="width:30%"/>
+                        </div>
+                    </a>
+
+                    <div class="progress-info">
+                        <div class="progress">
+									<span style="width: 50%;" class="progress-bar progress-bar-success yellow-gold">
+									<span class="sr-only">50% progress</span>
+									</span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title">progress</div>
+                            <div class="status-number">50%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h3>&nbsp;
+                    </h3>
+                </div>
+                <!-- END PAGE TITLE -->
+
+                <div class="dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-grey-silver" style="font-size:20px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
+                            <small>100ml / 15,000원</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-like"></i>
+                        </div>
+                    </div>
+                    <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                        <div class="product-x-img" style="width:80%; position:absolute; text-align:center;">
+                            <img src="{% static 'img/test.jpg' %}" alt="" style="width:30%"/>
+                        </div>
+                    </a>
+
+                    <div class="progress-info">
+                        <div class="progress">
+									<span style="width: 85%;" class="progress-bar progress-bar-success grey-silver">
+									<span class="sr-only">85% change</span>
+									</span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title">change</div>
+                            <div class="status-number">85%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT INNER -->
+        </div>
+        </div>
+        <!-- END PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTAINER -->
+
+
+
+    {% endblock %}
+{% endblock %}

@@ -8,7 +8,9 @@
     {% load static %}
 
     <link rel="stylesheet" href="{% static "common/css/jquery-ui.min.css" %}"/>
+{% block common_style_css %}
     <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
+{% endblock %}
     <link rel="stylesheet" href="{% static "jqmodal/jqModal.css" %}"/>
     <link rel="stylesheet" href="{% static "css/login_web.css" %}"/>
     <link rel="stylesheet" href="{% static "css/tsc_pagination.css" %}"/>

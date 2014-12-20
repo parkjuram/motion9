@@ -907,3 +907,7 @@ def survey_result_view(request, pk):
     return render(request, 'web/survey_result.html', {
         'survey_result_item': survey_result_item
     })
+
+@login_required
+def chart_view(request):
+    return render(request, 'chart_test/charts_flotcharts.html')
