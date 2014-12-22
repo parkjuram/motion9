@@ -35,10 +35,9 @@ UserVoice.push(['identify', {
 // Add default trigger to the bottom-right corner of the window:
 UserVoice.push(['addTrigger', {
     mode: 'contact',
-    trigger_position: 'right',
-    trigger_style: 'tab',
-    locale: 'ko',
-    contact_title: '문의사항 보내기'
+    trigger_position: 'bottom-right',
+    locale: 'ko'
+//    contact_title: '문의사항 보내기'
 }]);
 
 // Or, use your own custom trigger:
