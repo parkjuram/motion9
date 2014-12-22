@@ -4176,7 +4176,7 @@ Dashboard Stats 2
   margin-bottom: 30px;
   bottom: 0;
   position: absolute;
-  width: 75%;
+  width: 80%;
   clear: both;
 }
 .dashboard-stat2 .progress-info .progress {
@@ -9353,7 +9353,7 @@ Red Default
   border-color: "";
 }
 .red.btn:hover, .red.btn:focus, .red.btn:active, .red.btn.active {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   background-color: #c63927;
 }
 .open .red.btn.dropdown-toggle {
