@@ -285,7 +285,24 @@ $(document).ready(function () {
                 type: 'post',
                 success: function (data, textStatus, jqXHR) {
                     var i, item, innerHtml="";
-                    innerHtml += '<div class="content-title">분석 보고서 목록</div><div class="content-list">';
+//                    innerHtml += '<div class="page-container" style="background-color:#e6e9f2;">';
+//                    innerHtml += '<div class="page-content">';
+//                    innerHtml += '<div class="row">';
+//                    innerHtml += '<div class="col-md-6 col-sm-12">';
+//                    innerHtml += '<div class="portlet light">';
+//                    innerHtml += '<div class="portlet-title">';
+//                    innerHtml += '<div class="caption caption-md">';
+//                    innerHtml += '<i class="icon-bar-chart theme-font-color hide"></i>';
+//                    innerHtml += '<span class="caption-subject theme-font-color bold uppercase">분석 보고서 목록</span>';
+//                    innerHtml += '</div>';
+//                    innerHtml += ' <div style="text-align:right;">
+//                    innerHtml += '<a href="'+reportFormUrl+'" target="_self" class="btn btn-lg red" style="font-size:11px; color:#FFFFFF !important;">보고서 신청</a>';
+//                    innerHtml += '</div>';
+//                    innerHtml += '</div>';
+//                    innerHtml += '<div class="portlet-body">';
+//                    innerHtml += '<div class="scroller" style="height: 305px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">';
+//                    innerHtml += '<div class="general-item-list">';
+                      innerHtml += '<div class="content-title">분석 보고서 목록</div><div class="content-list">';
                     for( i in data.data ) {
                         item = data.data[i];
                         innerHtml += '<a href="'+ getSurveyResultUrl(item.id) +'" target="_self" is-analysis-finish="'+
@@ -295,6 +312,18 @@ $(document).ready(function () {
                         innerHtml += '<div class="clearfix"></div>';
                     }
                     innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">보고서 신청</div></a>';
+
+//                    for( i in data.data ) {
+//                        item = data.data[i];
+//                        innerHtml += '<a href="'+ getSurveyResultUrl(item.id) +'" target="_self" is-analysis-finish="'+
+//                            item.is_analysis_finish+'" >'+item.display_name+'</a>';
+//                        innerHtml += '<br/>';
+//                        innerHtml += '<div class="login-box-header"><h4 class="lined-heading-survey"><span></span></h4></div>';
+//                        innerHtml += '<div class="clearfix"></div>';
+//                    }
+//                    innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">보고서 신청</div></a>';
+
+
                     console.log( innerHtml );
                     $('#analysis-dialog').html(innerHtml);
                 },

@@ -26,7 +26,7 @@
         var surveyListInJsonUrl = "{% url 'survey_list_in_json' %}";
         var mobileSurveyListUrl = "{% url 'mobile_survey_list' %}";
         var url_for_login_next = "{% url 'login_page' %}?next={{ request.get_full_path }}";
-
+        var getUserName = "{{ user.profile.name }}";
         var surveyResultUrl = "{% url 'survey_result' pk=1987654321 %}";
         function getSurveyResultUrl(pk) {
             return surveyResultUrl.replace("1987654321", pk);
