@@ -101,16 +101,19 @@
             <ul id="header-main-menu-list">
 
                 {% if current_page and current_page == 'shop_product' %}
-                    <li><a href="#" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" class="selected" data-attr="menuProduct">Products</a></li>
+{#                    <li><a href="#" data-attr="menuCollection">Collection</a></li>#}
+{#                    <li><a href="#" class="selected" data-attr="menuProduct">Products</a></li>#}
+                    <li><a href="#" class="selected" data-attr="menuProduct">Shop</a></li>
                 {% elif current_page and current_page == 'shop_set' %}
-                    <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" data-attr="menuProduct">Products</a></li>
+{#                    <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>#}
+{#                    <li><a href="#" data-attr="menuProduct">Products</a></li>#}
+                    <li><a href="#" data-attr="menuProduct">Shop</a></li>
                 {% else %}
-                    <li><a href="#" data-attr="menuCollection">Collection</a></li>
-                    <li><a href="#" data-attr="menuProduct">Products</a></li>
+{#                    <li><a href="#" data-attr="menuCollection">Collection</a></li>#}
+{#                    <li><a href="#" data-attr="menuProduct">Products</a></li>#}
+                    <li><a href="#" data-attr="menuProduct">Shop</a></li>
                 {% endif %}
-                <li><a href="{% url 'customize_set' %}" data-directly="true">My Collection</a></li>
+{#                <li><a href="{% url 'customize_set' %}" data-directly="true">My Collection</a></li>#}
 
                 <li><a href="#" data-attr="menuHelp">Help</a></li>
                 <li><a href="#" id="btn-survey-list">피부 관리 보고서</a></li>
