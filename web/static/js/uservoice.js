@@ -37,7 +37,6 @@ UserVoice.push(['addTrigger', {
     mode: 'contact',
     trigger_position: 'right',
     trigger_style: 'tab',
-    width: '400px',
     locale: 'ko',
     contact_title: '문의사항 보내기'
 }]);
