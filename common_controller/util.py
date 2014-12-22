@@ -881,7 +881,9 @@ def helper_get_survey_list(request, is_display_name_need=False):
             else:
                 item['is_analysis_finish'] = True
 
-            item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 " + ( "(분석중)" if item['is_analysis_finish'] == False else "" )
+            item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 "
+
+            # item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 " + ( "(분석중)" if item['is_analysis_finish'] == False else "" )
 
     return survey_list
 
