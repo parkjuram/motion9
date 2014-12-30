@@ -109,11 +109,21 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="portlet-title">
 								<div class="caption caption-md">
 									<i class="icon-bar-chart theme-font-color hide"></i>
-									<span class="caption-subject theme-font-color bold uppercase">분석 총평</span>
+									<span class="caption-subject theme-font-color bold uppercase">분석 총평
+                                    <i class="icon-book-open"></i>
+                                    </span>
 								</div>
 							</div>
 							<div class="portlet-body">
-								<div class="row list-separated">
+                                <div class="font-black-mint font-sm">
+											[text field]<br/>
+                                        최우선 피부미백 방법은 일단 자외선 차단이다.<br/>
+                                        사계절 내내 자외선 차단제 사용은 피룻다. 남자 화이트닝 스킨로션을 꼼꼼히 바르고
+                                        스케일링 미백시술을 받느다 해도 장시간 자외선에 노출이 된다면 피부미백에 아무런 효과가 없어진다.
+
+										</div>
+								<!--<div class="row list-separated">
+
 									<div class="col-md-3 col-sm-3 col-xs-6">
 										<div class="font-grey-mint font-sm">
 											Total Sales
@@ -186,7 +196,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											9,760 <span class="font-lg font-grey-mint">$</span>
 										</div>
 									</li>
-								</ul>
+								</ul>-->
                                 <div id="sales_statistics" class="portlet-body-morris-fit morris-chart" style="height: 260px; display:none;">
                                 </div>
 							</div>
@@ -199,7 +209,9 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="portlet-title">
 							    <div class="caption caption-md">
 									<i class="icon-bar-chart theme-font-color hide"></i>
-									<span class="caption-subject theme-font-color bold uppercase">예산</span>
+									<span class="caption-subject theme-font-color bold uppercase">예산
+                                     <i class="icon-pie-chart"></i>
+                                    </span>
 								</div>
                             </div>
 							<div class="tools">
@@ -213,8 +225,18 @@ License: You must have a valid license purchased only from themeforest(the above
 								</a>
 							</div>
                             <div class="portlet-body">
-                                <h4>예산은 10,000원 입니다.</h4>
-                                <div id="pie_chart_6" class="chart">
+                                 <div class="font-black-mint font-sm">
+									[text field]<br/>
+                                     전체 예산과 그 중 각 카테고리별로 차지하는 예산 비중입니다.<br/>
+                                     		분석을 요청하실 때 기입하셨던 예산과 약간 차이가 있을 수 있습니다.
+										</div><br/>
+                                <div class="font-grey-mint font-sm">
+											총 예산
+										</div>
+										<div class="uppercase font-hg font-red-flamingo">
+											13,760 <span class="font-lg font-grey-mint">원</span>
+										</div>
+                                <div id="pie_chart_1" class="chart">
                                 </div>
                             </div>
 						</div>
@@ -224,7 +246,8 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="portlet-title">
 								<div class="caption caption-md">
 									<i class="icon-bar-chart theme-font-color hide"></i>
-									<span class="caption-subject theme-font-color bold uppercase">추가 Comment</span>
+									<span class="caption-subject theme-font-color bold uppercase">추가 Comment
+                                    <i class="icon-speech"></i></span>
 								</div>
 							</div>
 							<div class="portlet-body">
@@ -360,8 +383,9 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <!-- BEGIN PAGE TITLE -->
                         <div class="page-title">
-                            <h3>스킨
-                            </h3>
+                            <div class="top-news">
+                            <div class="btn red" style="width:100%;"><span style="margin-bottom:0px;">스킨
+                            </span></div></div>
                         </div>
                         <!-- END PAGE TITLE -->
                         <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
@@ -376,24 +400,31 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="display">
                                             <div class="number">
                                                 <h3 class="font-green-sharp" style="font-size:15px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
-                                                <small>100ml</small>
+                                                <small>25,000원/100ml</small><br/>
+                                                <span>(250원/ml)</span>
                                             </div>
-                                            <div class="icon">
-                                                <i class="icon-pie-chart"></i>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="progress-info">
-                                    <div class="progress">
+                                <div class="progress-info" style="border-top:1px solid #eee;">
+                                   <!--<div class="progress">
                                         <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
                                         <span class="sr-only">76% progress</span>
                                         </span>
+                                    </div>-->
+                                    <div class="status" style="float:right;">
+                                        <div class="status-number" >
+                                        <div class="icon">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </div>
+                                            </div>
+
+                                        <div class="status-title" style="margin-top:3px; margin-right:10px;">분석 보고서 보기
+                                        </div>
+
                                     </div>
-                                    <div class="status">
-                                        <div class="status-title">progress</div>
-                                        <div class="status-number">76%</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </a>
@@ -411,24 +442,31 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="display">
                                             <div class="number">
                                                 <h3 class="font-red-haze" style="font-size:15px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
-                                                <small>100ml</small>
+                                                <small>25,000원/100ml</small><br/>
+                                                <span>(250원/ml)</span>
                                             </div>
-                                            <div class="icon">
-                                                <i class="icon-like"></i>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="progress-info">
-                                    <div class="progress">
-                                        <span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
-                                        <span class="sr-only">85% change</span>
+                                <div class="progress-info" style="border-top:1px solid #eee;">
+                                   <!--<div class="progress">
+                                        <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
+                                        <span class="sr-only">76% progress</span>
                                         </span>
+                                    </div>-->
+                                    <div class="status" style="float:right;">
+                                        <div class="status-number" >
+                                        <div class="icon">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </div>
+                                            </div>
+
+                                        <div class="status-title" style="margin-top:3px; margin-right:10px;">분석 보고서 보기
+                                        </div>
+
                                     </div>
-                                    <div class="status">
-                                        <div class="status-title">change</div>
-                                        <div class="status-number">85%</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </a>
@@ -436,9 +474,11 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <!-- BEGIN PAGE TITLE -->
                         <div class="page-title">
-                            <h3>로션
-                            </h3>
+                            <div class="top-news">
+                            <div class="btn blue" style="width:100%;"><span style="margin-bottom:0px;">로션
+                            </span></div></div>
                         </div>
+
                         <!-- END PAGE TITLE -->
                         <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
                             <div class="dashboard-stat2">
@@ -452,24 +492,31 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="display">
                                             <div class="number">
                                                 <h3 class="font-blue-sharp" style="font-size:15px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
-                                                <small>100ml</small>
+                                                <small>25,000원/100ml</small><br/>
+                                                <span>(250원/ml)</span>
                                             </div>
-                                            <div class="icon">
-                                                <i class="icon-basket"></i>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="progress-info">
-                                    <div class="progress">
-                                        <span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
-                                        <span class="sr-only">45% grow</span>
+                                <div class="progress-info" style="border-top:1px solid #eee;">
+                                   <!--<div class="progress">
+                                        <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
+                                        <span class="sr-only">76% progress</span>
                                         </span>
+                                    </div>-->
+                                    <div class="status" style="float:right;">
+                                        <div class="status-number" >
+                                        <div class="icon">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </div>
+                                            </div>
+
+                                        <div class="status-title" style="margin-top:3px; margin-right:10px;">분석 보고서 보기
+                                        </div>
+
                                     </div>
-                                    <div class="status">
-                                        <div class="status-title">grow</div>
-                                        <div class="status-number">45%</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </a>
@@ -487,24 +534,31 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="display">
                                             <div class="number">
                                                 <h3 class="font-purple-soft" style="font-size:15px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
-                                                <small>100ml</small>
+                                                <small>25,000원/100ml</small><br/>
+                                                <span>(250원/ml)</span>
                                             </div>
-                                            <div class="icon">
-                                                <i class="icon-user"></i>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="progress-info">
-                                    <div class="progress">
-                                        <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
-                                        <span class="sr-only">56% change</span>
+                                <div class="progress-info" style="border-top:1px solid #eee;">
+                                   <!--<div class="progress">
+                                        <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
+                                        <span class="sr-only">76% progress</span>
                                         </span>
+                                    </div>-->
+                                    <div class="status" style="float:right;">
+                                        <div class="status-number" >
+                                        <div class="icon">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </div>
+                                            </div>
+
+                                        <div class="status-title" style="margin-top:3px; margin-right:10px;">분석 보고서 보기
+                                        </div>
+
                                     </div>
-                                    <div class="status">
-                                        <div class="status-title">change</div>
-                                        <div class="status-number">57%</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -514,9 +568,11 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <!-- BEGIN PAGE TITLE -->
                         <div class="page-title">
-                            <h3>수분크림
-                            </h3>
+                            <div class="top-news">
+                            <div class="btn green" style="width:100%;"><span style="margin-bottom:0px;">수분크림
+                            </span></div></div>
                         </div>
+
                         <!-- END PAGE TITLE -->
                         <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
                             <div class="dashboard-stat2">
@@ -530,24 +586,31 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="display">
                                             <div class="number">
                                                 <h3 class="font-green-sharp" style="font-size:15px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
-                                                <small>100ml</small>
+                                                <small>25,000원/100ml</small><br/>
+                                                <span>(250원/ml)</span>
                                             </div>
-                                            <div class="icon">
-                                                <i class="icon-like"></i>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="progress-info">
-                                    <div class="progress">
+                                <div class="progress-info" style="border-top:1px solid #eee;">
+                                   <!--<div class="progress">
                                         <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
                                         <span class="sr-only">76% progress</span>
                                         </span>
+                                    </div>-->
+                                    <div class="status" style="float:right;">
+                                        <div class="status-number" >
+                                        <div class="icon">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </div>
+                                            </div>
+
+                                        <div class="status-title" style="margin-top:3px; margin-right:10px;">분석 보고서 보기
+                                        </div>
+
                                     </div>
-                                    <div class="status">
-                                        <div class="status-title">progress</div>
-                                        <div class="status-number">76%</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </a>
@@ -565,24 +628,31 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="display">
                                             <div class="number">
                                                 <h3 class="font-red-haze" style="font-size:15px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++</h3>
-                                                <small>100ml</small>
+                                                <small>25,000원/100ml</small><br/>
+                                                <span>(250원/ml)</span>
                                             </div>
-                                            <div class="icon">
-                                                <i class="icon-like"></i>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="progress-info">
-                                    <div class="progress">
-                                        <span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
-                                        <span class="sr-only">85% change</span>
+                                <div class="progress-info" style="border-top:1px solid #eee;">
+                                   <!--<div class="progress">
+                                        <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
+                                        <span class="sr-only">76% progress</span>
                                         </span>
+                                    </div>-->
+                                    <div class="status" style="float:right;">
+                                        <div class="status-number" >
+                                        <div class="icon">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </div>
+                                            </div>
+
+                                        <div class="status-title" style="margin-top:3px; margin-right:10px;">분석 보고서 보기
+                                        </div>
+
                                     </div>
-                                    <div class="status">
-                                        <div class="status-title">change</div>
-                                        <div class="status-number">85%</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
