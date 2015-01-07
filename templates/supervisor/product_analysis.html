@@ -1,0 +1,22 @@
+{% extends "supervisor/base.html" %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+{% block content %}
+    <div class='row'>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-expanded="true">
+                Dropdown
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                {% for product in products %}
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{ product.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock content %}

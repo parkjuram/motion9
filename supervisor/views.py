@@ -1,6 +1,7 @@
 from braces.views._access import LoginRequiredMixin, SuperuserRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
+from common.models import NProduct
 from common_controller.util import helper_get_survey_result_item
 from users.models import UserSurvey
 
@@ -52,3 +53,10 @@ class AnalysisView(SuperuserRequiredMixin, View):
             UserSurvey.objects.filter(id=id).update(result_file_name=str(value))
 
         return redirect("supervisor:analysis")
+
+class ProductAnalysisView(SuperuserRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        products = NProduct.objects.values()
+        return render(request,
+                      "supervisor/product_analysis.html",
+                      {'products': products} )

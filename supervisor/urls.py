@@ -1,19 +1,27 @@
 from django.conf.urls import patterns, url
 from foradmin.views import PurchaseUpdateView, PaymentUpdateView
-from supervisor.views import AnalysisView, SupervisorView
+from supervisor.views import AnalysisView, SupervisorView, ProductAnalysisView
 
 urlpatterns = patterns('',
 
     url(
         regex=r'^$',
         view=SupervisorView.as_view(),
-        name='supervisor'
+        name='index'
     ),
     url(
         regex=r'^analysis/$',
         view=AnalysisView.as_view(),
         name='analysis'
     ),
+
+    url(
+        regex=r'^analysis/product/$',
+        view=ProductAnalysisView.as_view(),
+        name='analysis_product'
+    ),
+
+
 
     # url(r'^manage/shipping/$', 'foradmin.views.manage_shipping_view', name='manage_shipping'),
     # # url(r'^manage/purchase/update/(?P<pk>\d+)/$', 'foradmin.views.purchase_update', name='purchase_update'),
