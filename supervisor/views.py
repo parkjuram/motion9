@@ -8,6 +8,7 @@ from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
 from common_controller.util import helper_get_survey_result_item, http_response_by_json
 from users.models import UserSurvey
+import json
 
 
 class SupervisorView(SuperuserRequiredMixin, View):
@@ -81,7 +82,8 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
             total_count = request.POST.get('total_count')
             skin_type = request.POST.get('skin_type')
             feature = request.POST.get('feature')
-            analysis_detail_list = request.POST.get('analysis_detail_list')
+            analysis_detail_list = json.loads(request.POST.get('analysis_detail_list'))
+            print analysis_detail_list
 
             product_analysis, created = ProductAnalysis.objects.get_or_create(product_id=product_id,
                                                                               defaults={ 'total_count': total_count,
@@ -89,15 +91,23 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
                                                                                          'feature': feature })
 
             if not(created):
-                product_analysis.update( total_count=total_count, skin_type=skin_type, feature=feature)
+                product_analysis.total_count= total_count
+                product_analysis.skin_type= skin_type
+                product_analysis.feature= feature
+                product_analysis.save()
 
             for analysis_detail_item in analysis_detail_list:
-                product_analysis_detail, created = ProductAnalysisDetail.object.get_or_create(product_analysis=product_analysis, content=analysis_detail_item['keyword'],
+                print "here"
+                product_analysis_detail, created = ProductAnalysisDetail.objects.get_or_create(product_analysis_id=product_analysis.id, content=analysis_detail_item['keyword'],
                                                            defaults={ 'count': analysis_detail_item['count'],
                                                                       'type': analysis_detail_item['type'] })
 
+                print "here2"
                 if not(created):
-                    product_analysis_detail.update(count= analysis_detail_item['count'], type= analysis_detail_item['type'])
+                    print "here3"
+                    product_analysis_detail.count= analysis_detail_item['count']
+                    product_analysis_detail.type= analysis_detail_item['type']
+                    product_analysis_detail.save()
 
             return http_response_by_json(None)
 

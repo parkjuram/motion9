@@ -18,6 +18,6 @@ class ProductAnalysisAdmin(admin.ModelAdmin):
 admin.site.register(ProductAnalysis, ProductAnalysisAdmin)
 
 class ProductAnalysisDetailAdmin(admin.ModelAdmin):
-    list_display = ('product_analysis', 'content', 'count', 'type')
+    list_display = ('id', 'content', 'count', 'type')
 
 admin.site.register(ProductAnalysisDetail, ProductAnalysisDetailAdmin)

@@ -115,6 +115,8 @@
             });
             var feature = $('.radio-feature:checked').val();
 
+            console.log(analysisDetailList);
+
             $.ajax({
                 url: urlForProductAnalysis,
                 dataType: 'json',
@@ -124,7 +126,7 @@
                     total_count: totalAnalysedCount,
                     skin_type: skinType,
                     feature: feature,
-                    analysis_detail_list: analysisDetailList
+                    analysis_detail_list: JSON.stringify(analysisDetailList)
                 },
                 success: function(data) {
                     if ( data.success ) {
