@@ -1,8 +1,12 @@
+# -*- coding:utf-8 -*-
 from braces.views._access import LoginRequiredMixin, SuperuserRequiredMixin
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from common.models import NProduct
-from common_controller.util import helper_get_survey_result_item
+from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
+from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
+from common_controller.util import helper_get_survey_result_item, http_response_by_json
 from users.models import UserSurvey
 
 
@@ -60,3 +64,18 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
         return render(request,
                       "supervisor/product_analysis.html",
                       {'products': products} )
+
+
+    def post(self, request, *args, **kwargs):
+        querys = request.POST.get('queryConcatString').split("@");
+        querys = map(lambda x:'"'+x+'"', querys)
+        querys = map(lambda x:x.encode('utf-8'), querys)
+        blog_review_link_scrapper = BlogReviewLinkScrapper()
+        blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list = querys)
+        analysis_blog_review = AnalysisBlogReview()
+        analysis_result_list = analysis_blog_review.startAnalysis(blog_url_list)
+        return http_response_by_json(None, {'analysis_result_list':analysis_result_list} )
+
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(ProductAnalysisView, self).dispatch(*args, **kwargs)
