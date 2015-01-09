@@ -77,10 +77,18 @@ def _update_database(source_folder):
         # run('cd %s && ../virtualenv/bin/python manage.py schemamigration foradmin --initial' % (source_folder,))
         run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration foradmin --auto' % (source_folder,))
         run('cd %s && sudo ../virtualenv/bin/python manage.py migrate foradmin' % (source_folder,))
-        #
-        # # run('cd %s && ../virtualenv/bin/python manage.py schemamigration foradmin --initial' % (source_folder,))
-        # run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration foradmin --auto' % (source_folder,))
-        # run('cd %s && sudo ../virtualenv/bin/python manage.py migrate foradmin' % (source_folder,))
+        
+        run('cd %s && ../virtualenv/bin/python manage.py schemamigration mobile --initial' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration mobile --auto' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py migrate mobile' % (source_folder,))
+
+        run('cd %s && ../virtualenv/bin/python manage.py schemamigration supervisor --initial' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration supervisor --auto' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py migrate supervisor' % (source_folder,))
+
+        run('cd %s && ../virtualenv/bin/python manage.py schemamigration common --initial' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py schemamigration common --auto' % (source_folder,))
+        # run('cd %s && sudo ../virtualenv/bin/python manage.py migrate common' % (source_folder,))
 
     # one-off fake database migration. remove me before next deploy
     # run('cd %s && ../virtualenv/bin/python manage.py migrate lists --fake 0001' % (
