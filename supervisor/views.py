@@ -3,7 +3,7 @@ from braces.views._access import LoginRequiredMixin, SuperuserRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
-from common.models import NProduct
+from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
 from common_controller.util import helper_get_survey_result_item, http_response_by_json
@@ -67,14 +67,39 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
 
 
     def post(self, request, *args, **kwargs):
-        querys = request.POST.get('queryConcatString').split("@");
-        querys = map(lambda x:'"'+x+'"', querys)
-        querys = map(lambda x:x.encode('utf-8'), querys)
-        blog_review_link_scrapper = BlogReviewLinkScrapper()
-        blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list = querys)
-        analysis_blog_review = AnalysisBlogReview()
-        analysis_result_list = analysis_blog_review.startAnalysis(blog_url_list)
-        return http_response_by_json(None, {'analysis_result_list':analysis_result_list} )
+        if ( request.POST.has_key('queryConcatString') ):
+            querys = request.POST.get('queryConcatString').split("@");
+            querys = map(lambda x:'"'+x+'"', querys)
+            querys = map(lambda x:x.encode('utf-8'), querys)
+            blog_review_link_scrapper = BlogReviewLinkScrapper()
+            blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list = querys)
+            analysis_blog_review = AnalysisBlogReview()
+            analysis_result_list = analysis_blog_review.startAnalysis(blog_url_list)
+            return http_response_by_json(None, {'analysis_result_list':analysis_result_list} )
+        else:
+            product_id = request.POST.get('product_id')
+            total_count = request.POST.get('total_count')
+            skin_type = request.POST.get('skin_type')
+            feature = request.POST.get('feature')
+            analysis_detail_list = request.POST.get('analysis_detail_list')
+
+            product_analysis, created = ProductAnalysis.objects.get_or_create(product_id=product_id,
+                                                                              defaults={ 'total_count': total_count,
+                                                                                         'skin_type': skin_type,
+                                                                                         'feature': feature })
+
+            if not(created):
+                product_analysis.update( total_count=total_count, skin_type=skin_type, feature=feature)
+
+            for analysis_detail_item in analysis_detail_list:
+                product_analysis_detail, created = ProductAnalysisDetail.object.get_or_create(product_analysis=product_analysis, content=analysis_detail_item['keyword'],
+                                                           defaults={ 'count': analysis_detail_item['count'],
+                                                                      'type': analysis_detail_item['type'] })
+
+                if not(created):
+                    product_analysis_detail.update(count= analysis_detail_item['count'], type= analysis_detail_item['type'])
+
+            return http_response_by_json(None)
 
     @csrf_exempt
     def dispatch(self, *args, **kwargs):

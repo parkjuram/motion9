@@ -1,7 +1,11 @@
 (function() {
     var analysisResultList;
+
     var selectedProductId;
     var totalAnalysedCount;
+
+    var skinType = "";
+    var feature = "no";
 
     function updateAnalysisTable(minCount, maxCount) {
 
@@ -13,13 +17,13 @@
         for (i = 0; i < analysisResultList.length; i++) {
             analysisResultItem = analysisResultList[i];
             if ( analysisResultItem.count>=minCount && analysisResultItem.count<=maxCount) {
-                result += "<tr><td><div class=\"checkbox\"><label><input type=\"checkbox\" value=\"\"></label></div></td><td>"
-                + "<input type=\"text\" value=\"" + analysisResultItem.keyword + "\"></td>"
-                + "<td><input type=\"number\" value=\"" + analysisResultItem.count + "\">"
-                + "</td><td><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox1\" value=\"option1\">피부타입</label>"
-                + "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">특징</label>"
-                + "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">효과</label>"
-                + "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">기타</label></td></tr>";
+                result += "<tr><td><div class=\"checkbox\"><label><input class= \"is-apply\" type=\"checkbox\" value=\"\"></label></div></td><td>"
+                + "<input class=\"text-keyword\" type=\"text\" value=\"" + analysisResultItem.keyword + "\"></td>"
+                + "<td><input class=\"number-count\" type=\"number\" value=\"" + analysisResultItem.count + "\">"
+                + "</td><td><label class=\"checkbox-inline\"><input class=\"checkbox-type\" type=\"checkbox\" value=\"skintype\">피부타입</label>"
+                + "<label class=\"checkbox-inline\"><input class=\"checkbox-type\" type=\"checkbox\" value=\"feature\">특징</label>"
+                + "<label class=\"checkbox-inline\"><input class=\"checkbox-type\" type=\"checkbox\" value=\"effect\">효과</label>"
+                + "<label class=\"checkbox-inline\"><input class=\"checkbox-type\" type=\"checkbox\" value=\"etc\">기타</label></td></tr>";
             }
         }
         $('#table-analysis-result').html(result);
@@ -30,6 +34,7 @@
         var btnSelectProduct = $('#btn-select-product');
         var btnStartAnalysis = $('#btn-start-analysis');
         var btnApplyCountFilter = $('#btn-apply-count-filter');
+        var btnEnterToDatabase = $('#btn-enter-to-database');
 
 
         selectProduct.change(function() {
@@ -85,6 +90,53 @@
             var minCount = $('#min-count').val(), maxCount = $('#max-count').val();
             updateAnalysisTable(minCount, maxCount);
             return false;
+        });
+
+        btnEnterToDatabase.click(function() {
+            var analysisDetailList = [];
+            $('#table-analysis-result tr').each(function (index, object) {
+                if ($(object).find(".is-apply:checked").length > 0) {
+                    var keyword = $(object).find('.text-keyword').val();
+                    var count = $(object).find('.number-count').val();
+
+                    $(object).find('.checkbox-type:checked').each(function (index, object) {
+                        var type = $(object).val();
+                        analysisDetailList.push( {
+                            'keyword': keyword,
+                            'count': count,
+                            'type': type
+                        });
+                    });
+                }
+            });
+            var skinType ="";
+            $('.checkbox-skin-type:checked').each( function(index, object) {
+                skinType += object.value;
+            });
+            var feature = $('.radio-feature:checked').val();
+
+            $.ajax({
+                url: urlForProductAnalysis,
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    product_id: selectedProductId,
+                    total_count: totalAnalysedCount,
+                    skin_type: skinType,
+                    feature: feature,
+                    analysis_detail_list: analysisDetailList
+                },
+                success: function(data) {
+                    if ( data.success ) {
+                        alert('success');
+                    } else {
+                        alert('fail');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('fail');
+                }
+            });
         });
     });
 

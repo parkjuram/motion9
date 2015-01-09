@@ -71,16 +71,16 @@
         <div class="form-inline">
             <b>피부타입</b>
             <label class="checkbox-inline">
-                <input type="checkbox" id="inlineCheckbox1" value="option1">건성
+                <input class="checkbox-skin-type" type="checkbox" value="d">건성
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" id="inlineCheckbox2" value="option2">중성
+                <input class="checkbox-skin-type" type="checkbox" value="n">중성
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" id="inlineCheckbox2" value="option2">지성
+                <input class="checkbox-skin-type" type="checkbox" value="o">지성
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" id="inlineCheckbox2" value="option2">복합성
+                <input class="checkbox-skin-type" type="checkbox" value="c">복합성
             </label>
         </div>
 
@@ -89,22 +89,22 @@
         <div class="form-inline">
             <b>특징</b>
             <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="option1">미백
+                <input class="radio-feature" type="radio" name="radioForFeature" value="wh">미백
             </label>
-            <label class="checkbox-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="option2">주름
+            <label class="radio-inline">
+                <input class="radio-feature" type="radio" name="radioForFeature" value="wr">주름
             </label>
-            <label class="checkbox-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="option2">트러블
+            <label class="radio-inline">
+                <input class="radio-feature" type="radio" name="radioForFeature" value="tr">트러블
             </label>
-            <label class="checkbox-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="option2" checked>특징없음
+            <label class="radio-inline">
+                <input class="radio-feature" type="radio" name="radioForFeature" value="no" checked>특징없음
             </label>
         </div>
 
         <br>
 
-        <button id="btn-start-analysis" class="btn btn-primary" disabled="disabled">DB에 입력하기</button>
+        <button id="btn-enter-to-database" class="btn btn-primary">DB에 입력하기</button>
 
         <br>
 
