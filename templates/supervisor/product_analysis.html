@@ -6,8 +6,8 @@
     <script>
         var urlForProductAnalysis = "{% url 'supervisor:analysis_product' %}";
     </script>
-    <script src="{% static "common/js/csrf.js" %}"></script>
-    <script src="{% static "supervisor/js/product_analysis.js" %}"></script>
+    <script src="{% static "common/js/csrf.js" %}" async></script>
+    <script src="{% static "supervisor/js/product_analysis.js" %}" async></script>
 {% endblock javascripts %}
 
 {% block content %}
@@ -17,7 +17,7 @@
                 제품
                 <select id="select-product" class="form-control">
                     {% for product in products %}
-                        <option>{{ product.name }}</option>
+                        <option value="{{ product.id }}">{{ product.name }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -47,7 +47,7 @@
             빈도로 필터하기
             <div class="form-group">
                 <label class="sr-only" for="min-count">Min count</label>
-                <input type="numbernumbernumbernumbernumber" class="form-control" id="min-count" placeholder="Min Count">
+                <input type="number" class="form-control" id="min-count" placeholder="Min Count">
             </div>
             ~
             <div class="form-group">

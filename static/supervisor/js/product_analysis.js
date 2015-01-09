@@ -1,5 +1,7 @@
 (function() {
     var analysisResultList;
+    var selectedProductId;
+    var totalAnalysedCount;
 
     function updateAnalysisTable(minCount, maxCount) {
 
@@ -11,7 +13,13 @@
         for (i = 0; i < analysisResultList.length; i++) {
             analysisResultItem = analysisResultList[i];
             if ( analysisResultItem.count>=minCount && analysisResultItem.count<=maxCount) {
-                result += "<tr><td><div class=\"checkbox\"><label><input type=\"checkbox\" value=\"\"></label></div></td><td>" + analysisResultItem.keyword + "</td><td>" + analysisResultItem.count + "</td><td><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox1\" value=\"option1\">피부타입</label><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">특징</label><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">효과</label><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">기타</label></td></tr>";
+                result += "<tr><td><div class=\"checkbox\"><label><input type=\"checkbox\" value=\"\"></label></div></td><td>"
+                + "<input type=\"text\" value=\"" + analysisResultItem.keyword + "\"></td>"
+                + "<td><input type=\"number\" value=\"" + analysisResultItem.count + "\">"
+                + "</td><td><label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox1\" value=\"option1\">피부타입</label>"
+                + "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">특징</label>"
+                + "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">효과</label>"
+                + "<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox2\" value=\"option2\">기타</label></td></tr>";
             }
         }
         $('#table-analysis-result').html(result);
@@ -25,9 +33,13 @@
 
 
         selectProduct.change(function() {
+            selectedProductId = undefined;
             btnStartAnalysis.attr("disabled","disabled");
         });
         btnSelectProduct.click(function() {
+            selectedProductId = selectProduct.val();
+            console.log(selectedProductId);
+
             btnStartAnalysis.removeAttr("disabled");
             return false;
         });
@@ -56,6 +68,8 @@
                 success: function(data) {
                     if ( data.success ) {
                         analysisResultList = data.analysis_result_list;
+                        totalAnalysedCount = analysisResultList.length;
+                        console.log( totalAnalysedCount );
                         updateAnalysisTable();
                         $('#btn-start-analysis').button('reset');
                     }
