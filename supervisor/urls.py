@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from foradmin.views import PurchaseUpdateView, PaymentUpdateView
-from supervisor.views import AnalysisView, SupervisorView, ProductAnalysisView
+from supervisor.views import AnalysisView, SupervisorView, ProductAnalysisView, UserSurveyListView
 
 urlpatterns = patterns('',
 
@@ -19,6 +19,12 @@ urlpatterns = patterns('',
         regex=r'^analysis/product/$',
         view=ProductAnalysisView.as_view(),
         name='analysis_product'
+    ),
+
+    url(
+        regex=r'^survey/$',
+        view=UserSurveyListView.as_view(),
+        name='user_survey_list'
     ),
 
 

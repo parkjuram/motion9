@@ -168,3 +168,5 @@ class UserSurveyDetail(models.Model):
 
     def __unicode__(self):
         return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%s]' % (self.id, self.user_survey.id, self.survey_item_option.content)
+
+

@@ -3,7 +3,7 @@ from braces.views._access import LoginRequiredMixin, SuperuserRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
-from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail
+from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail, NUserSurvey
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
 from common_controller.util import helper_get_survey_result_item, http_response_by_json
@@ -83,7 +83,6 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
             skin_type = request.POST.get('skin_type')
             feature = request.POST.get('feature')
             analysis_detail_list = json.loads(request.POST.get('analysis_detail_list'))
-            print analysis_detail_list
 
             product_analysis, created = ProductAnalysis.objects.get_or_create(product_id=product_id,
                                                                               defaults={ 'total_count': total_count,
@@ -97,20 +96,44 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
                 product_analysis.save()
 
             for analysis_detail_item in analysis_detail_list:
-                print "here"
                 product_analysis_detail, created = ProductAnalysisDetail.objects.get_or_create(product_analysis_id=product_analysis.id, content=analysis_detail_item['keyword'],
                                                            defaults={ 'count': analysis_detail_item['count'],
                                                                       'type': analysis_detail_item['type'] })
 
-                print "here2"
                 if not(created):
-                    print "here3"
                     product_analysis_detail.count= analysis_detail_item['count']
                     product_analysis_detail.type= analysis_detail_item['type']
                     product_analysis_detail.save()
 
             return http_response_by_json(None)
 
-    @csrf_exempt
-    def dispatch(self, *args, **kwargs):
-        return super(ProductAnalysisView, self).dispatch(*args, **kwargs)
+class UserSurveyListView(SuperuserRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        user_surveys = NUserSurvey.objects.all()
+        user_surveys_ = []
+        for user_survey in user_surveys:
+            username = user_survey.user.profile().name
+            email = user_survey.user.email
+            survey_enter_date = user_survey.created
+            user_survey_ = {
+                'username': username,
+                'email': email,
+                'survey_enter_date': survey_enter_date
+            }
+            if user_survey.survey_result.exists():
+                is_entered = True
+                entered_date = user_survey.survey_result.created
+                user_survey_.update( {
+                    'is_entered': is_entered,
+                    'entered_date': entered_date
+                })
+
+            user_surveys_.append(user_survey_)
+
+
+        return render(request,
+                      "supervisor/user_survey_list.html",
+                      {'user_surveys': user_surveys_} )
+
+    def post(self, request, *args, **kwargs):
+        pass
