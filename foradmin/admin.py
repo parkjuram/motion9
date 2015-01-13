@@ -26,13 +26,9 @@ class SurveyAdmin(admin.ModelAdmin):
 admin.site.register(Survey, SurveyAdmin)
 
 class SurveyItemAdmin(admin.ModelAdmin):
-    list_display = ('item', 'question','type')
-    list_editable = ('type',)
-    list_display_links = ('item', 'question',)
+    list_display = ('survey', 'question', 'type', 'order')
 admin.site.register(SurveyItem, SurveyItemAdmin)
 
 class SurveyItemOptionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'item','content', 'order')
-    list_editable = ('content', 'order', )
-    list_display_links = ('item',)
+    list_display = ('survey_item', 'content','order', 'order')
 admin.site.register(SurveyItemOption, SurveyItemOptionAdmin)

@@ -25,11 +25,11 @@
                 <td>{{ user_survey.username }}</td>
                 <td>{{ user_survey.email }}</td>
                 <td>{{ user_survey.survey_enter_date }}</td>
-                {% if user_survey.is_entered %}
-                    입력완료
+                <td>{% if user_survey.is_entered %}
+                    <a href="{% url 'supervisor:create_or_update_survey_result' user_survey_id=user_survey.id %}" type="button" class="btn btn-success">입력완료</a>
                 {% else %}
-                    입력미완료
-                {% endif %}
+                    <a href="{% url 'supervisor:create_or_update_survey_result' user_survey_id=user_survey.id %}" type="button" class="btn btn-primary">입력미완료</a>
+                {% endif %}</td>
                 <td>{{ user_survey.entered_date }}</td>
             </tr>
         {% endfor %}

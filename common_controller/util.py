@@ -846,12 +846,12 @@ def helper_get_faq_items(request):
 
 def helper_get_survey_items(request):
     survey = Survey.objects.last()
-    survey_items = survey.get_questions.all()
+    survey_items = survey.items.all()
 
     survey_items_ = []
     for item in survey_items:
         item_ = {}
-        options = item.get_options.order_by('order').values('id', 'content')
+        options = item.options.order_by('order').values('id', 'content')
         item_.update( {
             'question': item.question,
             'type': item.type,

@@ -1,0 +1,72 @@
+{% extends "supervisor/base.html" %}
+{% load staticfiles %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <script src="{% static "common/js/csrf.js" %}" async></script>
+{% endblock javascripts %}
+
+{% block content %}
+    <div class="row">
+        <h3>설문내용</h3>
+        {% for user_survey_detail in user_survey_details %}
+            <h4>{{ user_survey_detail.question }}</h4>
+            <h6>{{ user_survey_detail.answer }}</h6>
+        {% endfor %}
+        <br>
+    </div>
+    <div class="row">
+        <h3>입력내용</h3>
+        <textarea class="form-control" rows="4" placeholder="분석총평"></textarea>
+        <br>
+
+        <form class="form-inline">
+            예산
+            <input type="number" class="form-control" id="min-count" placeholder="Min Budget"> ~
+            <input type="number" class="form-control" id="min-count" placeholder="Max Budget">
+        </form>
+        <br>
+
+        <textarea class="form-control" rows="4" placeholder="추가 Comments"></textarea>
+        <br>
+    </div>
+
+    <div class="row">
+        <h4>필터</h4>
+        <form class="form-inline">
+            가격
+            <input type="number" class="form-control" id="min-count" placeholder="Min price"> ~
+            <input type="number" class="form-control" id="min-count" placeholder="Max price">
+        </form>
+    </div>
+
+    <div class="row">
+        <h3>화장품 리스트</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>화장품</th>
+                <th>가격</th>
+                <th>브랜드</th>
+                <th>카테고리</th>
+                <th>피부타입</th>
+                <th>특징</th>
+                <th>키워드</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.brand }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.skin_type }}</td>
+                    <td>{{ product.feature }}</td>
+                    <td>
+                        {% for keyword in product.keyword %}
+                            ({{ keyword }})
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

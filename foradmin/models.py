@@ -36,7 +36,7 @@ class Survey(models.Model):
 
 @python_2_unicode_compatible
 class SurveyItem(models.Model):
-    survey = models.ForeignKey('foradmin.Survey')
+    survey = models.ForeignKey('foradmin.Survey', related_name='items')
     question = models.TextField()
     type = models.CharField(max_length=20, null=False, default='radio-vertical')
     order = models.IntegerField(null=False, default=0)
@@ -45,11 +45,11 @@ class SurveyItem(models.Model):
         unique_together = (("survey", "question"),)
 
     def __str__(self):
-        return '%r - SurveyItem : item[%r] question[%s] type[%s]' % (self.id, self.item, self.question, self.type)
+        return self.survey.title + "|" + self.question
 
 @python_2_unicode_compatible
 class SurveyItemOption(models.Model):
-    survey_item = models.ForeignKey('foradmin.SurveyItem')
+    survey_item = models.ForeignKey('foradmin.SurveyItem', related_name='options')
     content = models.TextField(null=False, blank=True)
     order = models.IntegerField(null=False, default=0)
 
@@ -57,4 +57,4 @@ class SurveyItemOption(models.Model):
         unique_together = ('survey_item', 'content',)
 
     def __str__(self):
-        return '%r - SurveyItemOption : item[%s] content[%s] order[%r]' % (self.id, self.item.question, self.content, self.order)
+        return self.survey_item.survey.title

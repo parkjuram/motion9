@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 from foradmin.views import PurchaseUpdateView, PaymentUpdateView
-from supervisor.views import AnalysisView, SupervisorView, ProductAnalysisView, UserSurveyListView
+from supervisor.views import AnalysisView, SupervisorView, ProductAnalysisView, UserSurveyListView, \
+    CreateOrUpdateSurveyResultView
 
 urlpatterns = patterns('',
 
@@ -20,11 +21,15 @@ urlpatterns = patterns('',
         view=ProductAnalysisView.as_view(),
         name='analysis_product'
     ),
-
     url(
-        regex=r'^survey/$',
+        regex=r'^user-survey/$',
         view=UserSurveyListView.as_view(),
         name='user_survey_list'
+    ),
+    url(
+        regex=r'^user-survey/(?P<user_survey_id>(\d+))/$',
+        view=CreateOrUpdateSurveyResultView.as_view(),
+        name='create_or_update_survey_result'
     ),
 
 

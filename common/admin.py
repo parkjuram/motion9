@@ -21,21 +21,3 @@ class ProductAnalysisDetailAdmin(admin.ModelAdmin):
     list_display = ('id', 'content', 'count', 'type')
 
 admin.site.register(ProductAnalysisDetail, ProductAnalysisDetailAdmin)
-
-
-
-
-class NSurveyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'content', 'count', 'type')
-
-admin.site.register(NSurvey, ProductAnalysisDetailAdmin)
-
-class NUserSurveyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'content', 'count', 'type')
-
-admin.site.register(NUserSurvey, ProductAnalysisDetailAdmin)
-
-class SurveyResultAdmin(admin.ModelAdmin):
-    list_display = ('id', 'content', 'count', 'type')
-
-admin.site.register(SurveyResult, ProductAnalysisDetailAdmin)

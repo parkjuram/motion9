@@ -164,7 +164,7 @@ class UserSurvey(models.Model):
 
 @python_2_unicode_compatible
 class SurveyResult(models.Model):
-    user_survey = models.ForeignKey(UserSurvey, unique=True)
+    user_survey = models.ForeignKey(UserSurvey, related_name='results', unique=True)
     general_review = models.TextField(null=False, blank=True)
     budget_max = models.IntegerField(null=False, default=0)
     budget_min = models.IntegerField(null=False, default=0)
@@ -186,7 +186,7 @@ class SurveyResultDetail(models.Model):
 
 @python_2_unicode_compatible
 class UserSurveyDetail(models.Model):
-    user_survey = models.ForeignKey('users.UserSurvey')
+    user_survey = models.ForeignKey('users.UserSurvey', related_name='details')
     survey_item_option = models.ForeignKey('foradmin.SurveyItemOption')
 
     class Meta:

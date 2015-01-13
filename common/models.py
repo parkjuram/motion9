@@ -8,6 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 class NProduct(models.Model):
     name = models.CharField(max_length=20, null=False)
     brand = models.CharField(max_length=20, null=False, blank=True)
+    category = models.ForeignKey('web.Category')
     price = models.IntegerField(null=False, default=0)
     capacity = models.IntegerField(null=False, default=0)
 
@@ -25,8 +26,8 @@ class ProductDetail(models.Model):
 
 @python_2_unicode_compatible
 class ProductAnalysis(models.Model):
-    product = models.ForeignKey(NProduct, related_name='analysis')
-    total_count = models.IntegerField(unique=True, null=False, default=0)
+    product = models.ForeignKey(NProduct,unique=True, related_name='analysis')
+    total_count = models.IntegerField(null=False, default=0)
     skin_type = models.CharField(max_length=4, null=False, blank=True)
     feature = models.CharField(max_length=2, null=False, default='no')
 

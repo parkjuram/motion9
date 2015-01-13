@@ -3,7 +3,7 @@ from braces.views._access import LoginRequiredMixin, SuperuserRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
-from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail, NUserSurvey
+from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
 from common_controller.util import helper_get_survey_result_item, http_response_by_json
@@ -109,22 +109,23 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
 
 class UserSurveyListView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        user_surveys = NUserSurvey.objects.all()
+        user_surveys = UserSurvey.objects.all()
         user_surveys_ = []
         for user_survey in user_surveys:
-            username = user_survey.user.profile().name
+            username = user_survey.user.profile.name
             email = user_survey.user.email
             survey_enter_date = user_survey.created
             user_survey_ = {
+                'id': user_survey.id,
                 'username': username,
                 'email': email,
                 'survey_enter_date': survey_enter_date,
                 'is_entered': False,
                 'entered_date': ''
             }
-            if user_survey.survey_result.exists():
+            if user_survey.results.exists():
                 is_entered = True
-                entered_date = user_survey.survey_result.created
+                entered_date = user_survey.results.created
                 user_survey_.update( {
                     'is_entered': is_entered,
                     'entered_date': entered_date
@@ -139,3 +140,53 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         pass
+
+class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        user_survey_id = self.kwargs['user_survey_id']
+        user_survey = UserSurvey.objects.get(id=user_survey_id)
+        user_survey_detail_list = user_survey.details.all()
+        user_survey_details = []
+        for user_survey_detail in user_survey_detail_list:
+            question = user_survey_detail.survey_item_option.survey_item.question
+            answer = user_survey_detail.survey_item_option.content
+            user_survey_details.append( {
+                'question': question,
+                'answer': answer
+            })
+
+
+        products_ = []
+        products = NProduct.objects.all()
+        for product in products:
+            product_ = {
+                'name': product.name,
+                'price': product.price,
+                'brand': product.brand,
+                'category': product.category.name,
+                'skin_type': "",
+                'feature': "",
+                'keywor': []
+            }
+            name = product.name
+            price = product.price
+            brand = product.brand
+            category = product.category.name
+            if product.analysis.exists():
+                product_analysis = product.analysis.first()
+                product_.update({
+                    'skin_type': product_analysis.skin_type,
+                    'feature': product_analysis.feature
+                })
+                if product_analysis.details.exists():
+                    product_analysis_details = product_analysis.details.all()
+                    for product_analysis_detail in product_analysis_details:
+                        product_.append(product_analysis_detail.content)
+
+            products_.append(product_)
+
+
+        return render(request,
+                      "supervisor/create_or_update_survey_result.html",
+                      {'user_survey_details': user_survey_details,
+                       'products': products_})
