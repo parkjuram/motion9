@@ -118,7 +118,9 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
             user_survey_ = {
                 'username': username,
                 'email': email,
-                'survey_enter_date': survey_enter_date
+                'survey_enter_date': survey_enter_date,
+                'is_entered': False,
+                'entered_date': ''
             }
             if user_survey.survey_result.exists():
                 is_entered = True

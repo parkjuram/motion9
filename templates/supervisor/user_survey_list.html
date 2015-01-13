@@ -22,11 +22,15 @@
     </tr>
         {% for user_survey in user_surveys %}
             <tr>
-                <td>{{ user_survey.userprofile.username }}</td>
-                <td>{{ user_survey.user.email }}</td>
-                <td>{{ user_survey.created }}</td>
-                <td>{{ user_survey. }}</td>
-                <td>{{ user_survey. }}</td>
+                <td>{{ user_survey.username }}</td>
+                <td>{{ user_survey.email }}</td>
+                <td>{{ user_survey.survey_enter_date }}</td>
+                {% if user_survey.is_entered %}
+                    입력완료
+                {% else %}
+                    입력미완료
+                {% endif %}
+                <td>{{ user_survey.entered_date }}</td>
             </tr>
         {% endfor %}
     </table>

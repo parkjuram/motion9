@@ -1,5 +1,7 @@
 from datetime import datetime
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
+
 
 class MainImage(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -24,32 +26,35 @@ class Preference(models.Model):
     def __unicode__(self):
         return '(%r)Preference : name(%s) content(%r)' % (self.id, self.name, self.content)
 
-
+@python_2_unicode_compatible
 class Survey(models.Model):
     title = models.TextField(unique=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
-    def __unicode__(self):
-        return '%r - Survey : title[%s]' % (self.id, self.title)
+    def __str__(self):
+        return self.title
 
+@python_2_unicode_compatible
 class SurveyItem(models.Model):
-    item = models.ForeignKey('foradmin.Survey', related_name='get_questions')
+    survey = models.ForeignKey('foradmin.Survey')
     question = models.TextField()
     type = models.CharField(max_length=20, null=False, default='radio-vertical')
+    order = models.IntegerField(null=False, default=0)
 
     class Meta:
-        unique_together = ('item', 'question',)
+        unique_together = (("survey", "question"),)
 
-    def __unicode__(self):
+    def __str__(self):
         return '%r - SurveyItem : item[%r] question[%s] type[%s]' % (self.id, self.item, self.question, self.type)
 
+@python_2_unicode_compatible
 class SurveyItemOption(models.Model):
-    item = models.ForeignKey('foradmin.SurveyItem', related_name='get_options')
-    content = models.TextField(blank=True)
-    order = models.IntegerField(default=0)
+    survey_item = models.ForeignKey('foradmin.SurveyItem')
+    content = models.TextField(null=False, blank=True)
+    order = models.IntegerField(null=False, default=0)
 
     class Meta:
-        unique_together = ('item', 'content',)
+        unique_together = ('survey_item', 'content',)
 
-    def __unicode__(self):
+    def __str__(self):
         return '%r - SurveyItemOption : item[%s] content[%s] order[%r]' % (self.id, self.item.question, self.content, self.order)

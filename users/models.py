@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models import signals
 
 from datetime import datetime
+from django.utils.encoding import python_2_unicode_compatible
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', related_name='profile')
@@ -146,27 +148,51 @@ class BeforePayment(models.Model):
     def __unicode__(self):
         return '(%r)BeforePayment' % (self.id)
 
+@python_2_unicode_compatible
 class UserSurvey(models.Model):
     user = models.ForeignKey('auth.User', related_name='get_survey_list')
     survey = models.ForeignKey('foradmin.Survey', null=True)
-    comments = models.TextField(blank=True, default='')
-    result_file_name = models.TextField(blank=True, default='')
+    comments = models.TextField(null=False, blank=True)
+    result_file_name = models.TextField(null=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     class Meta:
-        unique_together = ('user', 'survey', 'created', )
+        unique_together = (("user", "survey", "created"),)
 
-    def __unicode__(self):
-        return '%r - UserSurvey : user[%s] survey[%s] result_file_name[%s] comments[%s]' % (self.id, self.user.username, self.survey.title, self.result_file_name, self.comments )
+    def __str__(self):
+        return self.comments
 
+@python_2_unicode_compatible
+class SurveyResult(models.Model):
+    user_survey = models.ForeignKey(UserSurvey, unique=True)
+    general_review = models.TextField(null=False, blank=True)
+    budget_max = models.IntegerField(null=False, default=0)
+    budget_min = models.IntegerField(null=False, default=0)
+    additional_comment = models.TextField(null=False, blank=True)
+
+    def __str__(self):
+        return self.general_review
+
+@python_2_unicode_compatible
+class SurveyResultDetail(models.Model):
+    survey_result = models.ForeignKey(SurveyResult)
+    product = models.ForeignKey('common.NProduct')
+
+    class Meta:
+        unique_together = (("survey_result", "product"),)
+
+    def __str__(self):
+        return self.id
+
+@python_2_unicode_compatible
 class UserSurveyDetail(models.Model):
-    user_survey = models.ForeignKey('users.UserSurvey', related_name='get_survey_detail')
+    user_survey = models.ForeignKey('users.UserSurvey')
     survey_item_option = models.ForeignKey('foradmin.SurveyItemOption')
 
     class Meta:
-        unique_together = ('user_survey', 'survey_item_option', )
+        unique_together = (("user_survey", "survey_item_option"),)
 
-    def __unicode__(self):
+    def __str__(self):
         return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%s]' % (self.id, self.user_survey.id, self.survey_item_option.content)
 
 
