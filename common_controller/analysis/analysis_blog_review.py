@@ -65,24 +65,25 @@ class AnalysisBlogReview:
                 continue
 
             try:
+                raw_str_item = raw_str_item.strip()
                 pos_tuple = kkma.pos(raw_str_item)
                 for pos_tuple_item in pos_tuple:
-                item = pos_tuple_item[0]
-                item_type = pos_tuple_item[1]
+                    item = pos_tuple_item[0]
+                    item_type = pos_tuple_item[1]
 
-                if not(analysis_checker.has_key(item)) and (item_type.startswith('N') or item_type.startswith('V') or item_type.startswith('M') or item_type.startswith('XR') or item_type.startswith('U')):
-                    if self.analysis_result.has_key(item):
-                        analysis_item_count = self.analysis_result.get(item) + 1
-                    else:
-                        analysis_item_count = 1
+                    if not(analysis_checker.has_key(item)) and (item_type.startswith('N') or item_type.startswith('V') or item_type.startswith('M') or item_type.startswith('XR') or item_type.startswith('U')):
+                        if self.analysis_result.has_key(item):
+                            analysis_item_count = self.analysis_result.get(item) + 1
+                        else:
+                            analysis_item_count = 1
 
-                    self.analysis_result.update({
-                                           item: analysis_item_count
-                                           })
+                        self.analysis_result.update({
+                                               item: analysis_item_count
+                                               })
 
-                    analysis_checker.update({
-                        item:1
-                    })
+                        analysis_checker.update({
+                            item:1
+                        })
             except jpype.JavaException as exception:
                 print exception.message()
                 print exception.stacktrace()
