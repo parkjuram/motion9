@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import operator
+import jpype
 from konlpy.tag import Hannanum
 import requests
 from urllib import quote
@@ -65,7 +66,9 @@ class AnalysisBlogReview:
 
             try:
                 pos_tuple = kkma.pos(raw_str_item)
-            except Exception as e:
+            except jpype.JavaException as exception:
+                # print exception.message()
+                # print exception.stacktrace()
                 continue
 
             for pos_tuple_item in pos_tuple:
