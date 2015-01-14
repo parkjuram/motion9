@@ -85,5 +85,6 @@ class AnalysisBlogReview:
                             item:1
                         })
             except jpype.JavaException as exception:
-                print exception.message()
-                print exception.stacktrace()
+                pass
+                # print exception.message()
+                # print exception.stacktrace()
