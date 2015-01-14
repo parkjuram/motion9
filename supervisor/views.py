@@ -207,6 +207,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
         budget_min = request.POST.get('budget_min')
         budget_max = request.POST.get('budget_max')
         additional_comment = request.POST.get('additional_comment')
+        print additional_comment
         selected_product_list = json.loads(request.POST.get('selected_product_list'))
 
         survey_result, created = SurveyResult.objects.get_or_create(user_survey_id=user_survey_id,
@@ -230,3 +231,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
 
 
         return http_response_by_json(None)
+
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(CreateOrUpdateSurveyResultView, self).dispatch(*args, **kwargs)

@@ -3,7 +3,7 @@
 
 {% block javascripts %}
     <script>
-        var urlForCreateOrUpdateSurveyResult = "{% url 'create_or_update_survey_result' user_survey_id=user_survey_id %}"
+        var urlForCreateOrUpdateSurveyResult = "{% url 'supervisor:create_or_update_survey_result' user_survey_id=user_survey_id %}"
     </script>
     {{ block.super }}
     <script src="{% static "common/js/csrf.js" %}" async></script>

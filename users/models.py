@@ -183,7 +183,7 @@ class SurveyResultDetail(models.Model):
         unique_together = (("survey_result", "product", "type"),)
 
     def __str__(self):
-        return self.id
+        return "(%r)SurveyResultDetailself" % self.id
 
 @python_2_unicode_compatible
 class UserSurveyDetail(models.Model):

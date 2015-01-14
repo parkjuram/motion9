@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment
+from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment, \
+    SurveyResult, SurveyResultDetail
 from users.models import UserSurvey, UserSurveyDetail
 
 
@@ -72,5 +73,22 @@ class UserSurveyDetailAdmin(admin.ModelAdmin):
     list_display_links = ('user_survey', 'survey_item_option',)
     
 admin.site.register(UserSurveyDetail, UserSurveyDetailAdmin)
+
+
+
+
+
+class SurveyResultAdmin(admin.ModelAdmin):
+    list_display = ('user_survey', 'general_review', 'budget_max', 'budget_min', 'additional_comment')
+
+admin.site.register(SurveyResult, SurveyResultAdmin)
+
+class SurveyResultDetailAdmin(admin.ModelAdmin):
+    list_display = ('survey_result', 'product', 'type')
+
+admin.site.register(SurveyResultDetail, SurveyResultDetailAdmin)
+
+
+
 
 admin.site.register(Interest)

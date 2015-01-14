@@ -18,9 +18,9 @@
             });
 
             var generalReview = $('#textarea-general-review').val();
-            var budgetMin = $('#textarea-general-review').val();
-            var budgetMax = $('#textarea-general-review').val();
-            var additionalComment = $('#textarea-general-review').val();
+            var budgetMin = $('#budget-min').val();
+            var budgetMax = $('#budget-max').val();
+            var additionalComment = $('#textarea-additional-comment').val();
 
             $.ajax({
                 url: urlForCreateOrUpdateSurveyResult,
