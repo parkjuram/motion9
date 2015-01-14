@@ -894,3 +894,31 @@ def helper_get_survey_result_item(request, survey_id):
 def helper_get_report_count(request):
     report_count = UserSurvey.objects.count()
     return report_count
+
+def convert_skintype_key_to_value(str):
+    key_value_pair_list = [
+        {'key':'d', 'value':'건성' },
+        {'key':'o', 'value':'지성' },
+        {'key':'n', 'value':'중성' },
+        {'key':'c', 'value':'복합성' },
+    ]
+    ret = ""
+    for key_value_pair in key_value_pair_list:
+        if key_value_pair['key'] in str:
+            ret += "["+key_value_pair['value']+"]"
+
+    return ret
+
+def convert_feature_key_to_value(str):
+    key_value_pair_list = [
+        {'key':'wh', 'value':'미백' },
+        {'key':'wr', 'value':'주름' },
+        {'key':'tr', 'value':'트러블' },
+        {'key':'no', 'value':'특징 없음' },
+    ]
+    ret = ""
+    for key_value_pair in key_value_pair_list:
+        if key_value_pair['key'] in str:
+            ret += "["+key_value_pair['value']+"]"
+
+    return ret

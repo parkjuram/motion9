@@ -28,8 +28,8 @@ class ProductDetail(models.Model):
 class ProductAnalysis(models.Model):
     product = models.ForeignKey(NProduct,unique=True, related_name='analysis')
     total_count = models.IntegerField(null=False, default=0)
-    skin_type = models.CharField(max_length=4, null=False, blank=True)
-    feature = models.CharField(max_length=2, null=False, default='no')
+    skin_type = models.CharField(max_length=4, null=False, blank=True) # one start character of ('dry', 'oily', 'neutral', 'complex')
+    feature = models.CharField(max_length=2, null=False, default='no') # two start character of ('whitening', 'wrinkle', 'trouble', 'nothing')
 
     def __str__(self):
         return self.product

@@ -6,9 +6,11 @@ from django.views.generic.base import View
 from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
-from common_controller.util import helper_get_survey_result_item, http_response_by_json
-from users.models import UserSurvey
+from common_controller.util import helper_get_survey_result_item, http_response_by_json, convert_skintype_key_to_value, \
+    convert_feature_key_to_value
+from users.models import UserSurvey, SurveyResult, SurveyResultDetail
 import json
+from web.models import Category
 
 
 class SupervisorView(SuperuserRequiredMixin, View):
@@ -158,15 +160,19 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
 
         products_ = []
         products = NProduct.objects.all()
+        brands = NProduct.objects.distinct('brand').values_list('brand', flat=True)
+        categories = Category.objects.values_list('name', flat=True)
+
         for product in products:
             product_ = {
+                'id': product.id,
                 'name': product.name,
                 'price': product.price,
                 'brand': product.brand,
                 'category': product.category.name,
                 'skin_type': "",
                 'feature': "",
-                'keywor': []
+                'keyword': []
             }
             name = product.name
             price = product.price
@@ -175,18 +181,52 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
             if product.analysis.exists():
                 product_analysis = product.analysis.first()
                 product_.update({
-                    'skin_type': product_analysis.skin_type,
-                    'feature': product_analysis.feature
+                    'skin_type': convert_skintype_key_to_value(product_analysis.skin_type),
+                    'feature': convert_feature_key_to_value(product_analysis.feature)
                 })
                 if product_analysis.details.exists():
                     product_analysis_details = product_analysis.details.all()
                     for product_analysis_detail in product_analysis_details:
-                        product_.append(product_analysis_detail.content)
+                        product_['keyword'].append(product_analysis_detail.content)
 
             products_.append(product_)
 
 
         return render(request,
                       "supervisor/create_or_update_survey_result.html",
-                      {'user_survey_details': user_survey_details,
+                      {'user_survey_id': user_survey_id,
+                       'user_survey_details': user_survey_details,
+                       'brands': brands,
+                       'categories': categories,
                        'products': products_})
+
+    def post(self, request, *args, **kwargs):
+        user_survey_id = self.kwargs['user_survey_id']
+
+        general_review = request.POST.get('general_review')
+        budget_min = request.POST.get('budget_min')
+        budget_max = request.POST.get('budget_max')
+        additional_comment = request.POST.get('additional_comment')
+        selected_product_list = json.loads(request.POST.get('selected_product_list'))
+
+        survey_result, created = SurveyResult.objects.get_or_create(user_survey_id=user_survey_id,
+                                                                          defaults={ 'general_review': general_review,
+                                                                                     'budget_max': budget_max,
+                                                                                     'budget_min': budget_min,
+                                                                                     'additional_comment': additional_comment })
+
+        if not(created):
+            survey_result.general_review= general_review
+            survey_result.budget_max= budget_max
+            survey_result.budget_min= budget_min
+            survey_result.additional_comment= additional_comment
+            survey_result.save()
+
+        SurveyResultDetail.objects.filter(survey_result_id=survey_result.id).delete()
+        for selected_product in selected_product_list:
+            product_analysis_detail, created = SurveyResultDetail.objects.get_or_create(survey_result_id=survey_result.id,
+                                                                                        product_id=selected_product['product-id'],
+                                                                                        type=selected_product['type'] )
+
+
+        return http_response_by_json(None)
