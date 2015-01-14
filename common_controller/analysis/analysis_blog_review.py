@@ -31,11 +31,13 @@ class AnalysisBlogReview:
 
         r = requests.get(blog_review_url)
         soup = BeautifulSoup(r.text)
+        r.close()
 
         try:
             blog_review_url = soup.select('#screenFrame')[0]['src']
             r = requests.get(blog_review_url)
             soup = BeautifulSoup(r.text)
+            r.close()
         except Exception as e:
             pass
 
@@ -47,6 +49,8 @@ class AnalysisBlogReview:
 
         r = requests.get(real_blog_review_url)
         soup = BeautifulSoup(r.text)
+        r.close()
+
         post_view = soup.select('.post-view')[0]
         p_list = post_view.select('p')
 
