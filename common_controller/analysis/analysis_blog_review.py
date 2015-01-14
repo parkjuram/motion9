@@ -66,12 +66,7 @@ class AnalysisBlogReview:
 
             try:
                 pos_tuple = kkma.pos(raw_str_item)
-            except jpype.JavaException as exception:
-                # print exception.message()
-                # print exception.stacktrace()
-                continue
-
-            for pos_tuple_item in pos_tuple:
+                for pos_tuple_item in pos_tuple:
                 item = pos_tuple_item[0]
                 item_type = pos_tuple_item[1]
 
@@ -88,3 +83,6 @@ class AnalysisBlogReview:
                     analysis_checker.update({
                         item:1
                     })
+            except jpype.JavaException as exception:
+                print exception.message()
+                print exception.stacktrace()
