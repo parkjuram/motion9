@@ -63,7 +63,11 @@ class AnalysisBlogReview:
                 self.skip_count+=1
                 continue
 
-            pos_tuple = kkma.pos(raw_str_item, 22)
+            try:
+                pos_tuple = kkma.pos(raw_str_item)
+            except Exception as e:
+                continue
+
             for pos_tuple_item in pos_tuple:
                 item = pos_tuple_item[0]
                 item_type = pos_tuple_item[1]
