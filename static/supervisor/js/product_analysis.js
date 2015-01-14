@@ -43,7 +43,6 @@
         });
         btnSelectProduct.click(function() {
             selectedProductId = selectProduct.val();
-            console.log(selectedProductId);
 
             btnStartAnalysis.removeAttr("disabled");
             return false;
@@ -74,7 +73,6 @@
                     if ( data.success ) {
                         analysisResultList = data.analysis_result_list;
                         totalAnalysedCount = analysisResultList.length;
-                        console.log( totalAnalysedCount );
                         updateAnalysisTable();
                         $('#btn-start-analysis').button('reset');
                     }
@@ -114,8 +112,6 @@
                 skinType += object.value;
             });
             var feature = $('.radio-feature:checked').val();
-
-            console.log(analysisDetailList);
 
             $.ajax({
                 url: urlForProductAnalysis,

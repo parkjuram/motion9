@@ -59,11 +59,10 @@ class AnalysisBlogReview:
         kkma = Hannanum()
 
         for raw_str_item in raw_str_list:
-            if len(raw_str_item) >= 1000:
+            if len(raw_str_item) >= 100:
                 self.skip_count+=1
-                return
+                continue
 
-        for raw_str_item in raw_str_list:
             pos_tuple = kkma.pos(raw_str_item)
             for pos_tuple_item in pos_tuple:
                 item = pos_tuple_item[0]
