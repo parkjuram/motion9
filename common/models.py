@@ -11,6 +11,7 @@ class NProduct(models.Model):
     category = models.ForeignKey('web.Category')
     price = models.IntegerField(null=False, default=0)
     capacity = models.IntegerField(null=False, default=0)
+    capacity_unit = models.CharField(max_length=10, null=False, default='ml')
 
     def __str__(self):
         return self.name
