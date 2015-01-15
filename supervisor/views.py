@@ -36,9 +36,9 @@ class AnalysisView(SuperuserRequiredMixin, View):
                 'comments': item.comments,
                 'created': item.created
             }
-            for detail_item in item.get_survey_detail.all():
+            for detail_item in item.details.all():
                 analysis_['question'].append({
-                    'title': detail_item.survey_item_option.item.question,
+                    'title': detail_item.survey_item_option.survey_item.question,
                     'answer': detail_item.survey_item_option.content
                 })
 

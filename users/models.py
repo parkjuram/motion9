@@ -169,6 +169,7 @@ class SurveyResult(models.Model):
     budget_max = models.IntegerField(null=False, default=0)
     budget_min = models.IntegerField(null=False, default=0)
     additional_comment = models.TextField(null=False, blank=True)
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     def __str__(self):
         return self.general_review
