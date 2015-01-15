@@ -32,7 +32,11 @@ class AnalysisBlogReview:
 
         analysis_checker = {}
 
-        r = requests.get(blog_review_url)
+        try:
+            r = requests.get(blog_review_url)
+        except requests.ConnectionError as e:
+            return
+
         soup = BeautifulSoup(r.text)
         r.close()
 
