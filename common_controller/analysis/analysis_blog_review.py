@@ -29,10 +29,10 @@ class AnalysisBlogReview:
 
     def analysis(self, blog_review_url):
         self.logger.info(blog_review_url)
-        
+
         analysis_checker = {}
 
-        r = requests.get(blog_review_url)
+        r = requests.get(quote(blog_review_url))
         soup = BeautifulSoup(r.text)
         r.close()
 
