@@ -38,6 +38,7 @@ class AnalysisBlogReview:
 
         try:
             blog_review_url = soup.select('#screenFrame')[0]['src']
+            self.logger.info("regenerated:"+blog_review_url)
             r = requests.get(blog_review_url)
             soup = BeautifulSoup(r.text)
             r.close()
