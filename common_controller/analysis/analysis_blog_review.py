@@ -28,6 +28,8 @@ class AnalysisBlogReview:
         return analysis_result_list
 
     def analysis(self, blog_review_url):
+        self.logger.info(blog_review_url)
+        
         analysis_checker = {}
 
         r = requests.get(blog_review_url)
@@ -63,8 +65,6 @@ class AnalysisBlogReview:
                 raw_str_list.append(p_str.decode('utf-8'))
 
         kkma = Hannanum()
-
-        self.logger.info(blog_review_url)
 
         for raw_str_item in raw_str_list:
             if len(raw_str_item) >= 100:
