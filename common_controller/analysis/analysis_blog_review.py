@@ -8,7 +8,8 @@ from bs4 import BeautifulSoup
 
 class AnalysisBlogReview:
 
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.analysis_result = {}
         self.skip_count=0
 
@@ -63,6 +64,8 @@ class AnalysisBlogReview:
 
         kkma = Hannanum()
 
+        self.logger.info(blog_review_url)
+
         for raw_str_item in raw_str_list:
             if len(raw_str_item) >= 100:
                 self.skip_count+=1
@@ -89,6 +92,6 @@ class AnalysisBlogReview:
                             item:1
                         })
             except jpype.JavaException as exception:
-                pass
+                self.logger.info("java exception!")
                 # print exception.message()
                 # print exception.stacktrace()

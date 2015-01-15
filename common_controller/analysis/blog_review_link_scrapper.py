@@ -31,8 +31,6 @@ class BlogReviewLinkScrapper:
                 else:
                     full_url = self.query_start_url + query_item_url + self.query_end_url + str(start)
 
-                print full_url
-
                 r = requests.request(method='GET', url=full_url, headers=self.custom_headers )
                 soup = BeautifulSoup(r.text)
                 r.close()

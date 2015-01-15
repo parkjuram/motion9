@@ -12,6 +12,12 @@ from users.models import UserSurvey, SurveyResult, SurveyResultDetail
 import json
 from web.models import Category
 
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 
 class SupervisorView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -76,7 +82,7 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
             querys = map(lambda x:x.encode('utf-8'), querys)
             blog_review_link_scrapper = BlogReviewLinkScrapper()
             blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list = querys)
-            analysis_blog_review = AnalysisBlogReview()
+            analysis_blog_review = AnalysisBlogReview(logger)
             analysis_result_list = analysis_blog_review.startAnalysis(blog_url_list)
             return http_response_by_json(None, {'analysis_result_list':analysis_result_list} )
         else:

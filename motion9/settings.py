@@ -89,68 +89,47 @@ WSGI_APPLICATION = 'motion9.wsgi.application'
 
 
 # Logging
-
-from datetime import datetime
-
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
     'formatters': {
-        'verbose': {
+        'standard': {
             'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
             'datefmt' : "%d/%b/%Y %H:%M:%S"
         },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
     },
     'handlers': {
-        'file_all': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': datetime.now().strftime('log/all_%d_%m_%Y.log'),
-            'formatter': 'verbose'
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
         },
-        'file_common_controller': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': datetime.now().strftime('log/common_controller_%d_%m_%Y.log'),
-            'formatter': 'verbose'
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR + "/log/logfile",
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'standard',
         },
-        'file_web': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': datetime.now().strftime('log/web_%d_%m_%Y.log'),
-            'formatter': 'verbose'
-        },
-        'file_mobile': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': datetime.now().strftime('log/mobile_%d_%m_%Y.log'),
-            'formatter': 'verbose'
-        },
-        'file_users': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': datetime.now().strftime('log/users_%d_%m_%Y.log'),
-            'formatter': 'verbose'
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'formatter': 'standard'
         },
     },
     'loggers': {
-        'common_controller': {
-            'handlers': ['file_all', 'file_common_controller'],
-            'level': 'DEBUG',
+        'django': {
+            'handlers':['console'],
+            'propagate': True,
+            'level':'WARN',
         },
-        'web': {
-            'handlers': ['file_all', 'file_web'],
+        'django.db.backends': {
+            'handlers': ['console'],
             'level': 'DEBUG',
+            'propagate': False,
         },
-        'mobile': {
-            'handlers': ['file_all', 'file_mobile'],
-            'level': 'DEBUG',
-        },
-        'users': {
-            'handlers': ['file_all', 'file_users'],
+        'supervisor': {
+            'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
         },
     }
