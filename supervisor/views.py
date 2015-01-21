@@ -8,6 +8,7 @@ from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
 from common_controller.util import helper_get_survey_result_item, http_response_by_json, convert_skintype_key_to_value, \
     convert_feature_key_to_value
+from supervisor.tasks import analysis_product
 from users.models import UserSurvey, SurveyResult, SurveyResultDetail
 import json
 from web.models import Category
@@ -80,11 +81,8 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
             querys = request.POST.get('queryConcatString').split("@");
             querys = map(lambda x:'"'+x+'"', querys)
             querys = map(lambda x:x.encode('utf-8'), querys)
-            blog_review_link_scrapper = BlogReviewLinkScrapper()
-            blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list = querys)
-            analysis_blog_review = AnalysisBlogReview(logger)
-            analysis_result_list = analysis_blog_review.startAnalysis(blog_url_list)
-            return http_response_by_json(None, {'analysis_result_list':analysis_result_list} )
+            task = analysis_product.apply_async()
+            return http_response_by_json(None)
         else:
             product_id = request.POST.get('product_id')
             total_count = request.POST.get('total_count')
@@ -132,11 +130,10 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
                 'entered_date': ''
             }
             if user_survey.results.exists():
-                is_entered = True
-                entered_date = user_survey.results.created
+                survey_result = user_survey.results.first()
                 user_survey_.update( {
-                    'is_entered': is_entered,
-                    'entered_date': entered_date
+                    'is_entered': True,
+                    'entered_date': survey_result.created
                 })
 
             user_surveys_.append(user_survey_)
@@ -197,14 +194,24 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
 
             products_.append(product_)
 
+        rendering_params = {'user_survey_id': user_survey_id,
+                            'user_survey_details': user_survey_details,
+                            'brands': brands,
+                            'categories': categories,
+                            'products': products_}
+
+        if user_survey.results.exists():
+            survey_result = user_survey.results.first()
+            rendering_params.update({
+                'general_review': survey_result.general_review,
+                'budget_max': survey_result.budget_max,
+                'budget_min': survey_result.budget_min,
+                'additional_comment': survey_result.additional_comment
+            })
 
         return render(request,
                       "supervisor/create_or_update_survey_result.html",
-                      {'user_survey_id': user_survey_id,
-                       'user_survey_details': user_survey_details,
-                       'brands': brands,
-                       'categories': categories,
-                       'products': products_})
+                      rendering_params )
 
     def post(self, request, *args, **kwargs):
         user_survey_id = self.kwargs['user_survey_id']

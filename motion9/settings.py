@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'mathfilters',
+    'djcelery',
     'registration',
     'bootstrap3',
     'foradmin',
@@ -192,3 +193,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'motion9corp@gmail.com'
 EMAIL_HOST_PASSWORD = '5sb-8lPeNKVbPFapRFkXBg'
 EMAIL_USE_TLS = True
+
+# celery setting
+BROKER_URL = "amqp://ramju:1weekpizza@localhost:5672/kyles-MacBook-Air"
+CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'

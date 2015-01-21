@@ -21,17 +21,17 @@
     </div>
     <div class="row">
         <h3>입력내용</h3>
-        <textarea id="textarea-general-review" class="form-control" rows="4" placeholder="분석총평"></textarea>
+        <textarea id="textarea-general-review" class="form-control" rows="4" placeholder="분석총평">{{ general_review }}</textarea>
         <br>
 
         <form class="form-inline">
             예산
-            <input type="number" class="form-control" id="budget-min" placeholder="Min Budget"> ~
-            <input type="number" class="form-control" id="budget-max" placeholder="Max Budget">
+            <input type="number" class="form-control" id="budget-min" placeholder="Min Budget" value="{{ budget_min }}"> ~
+            <input type="number" class="form-control" id="budget-max" placeholder="Max Budget" value="{{ budget_max }}"> ~
         </form>
         <br>
 
-        <textarea id="textarea-additional-comment" class="form-control" rows="4" placeholder="추가 Comments"></textarea>
+        <textarea id="textarea-additional-comment" class="form-control" rows="4" placeholder="추가 Comments">{{ additional_comment }}</textarea>
         <br>
     </div>
 
