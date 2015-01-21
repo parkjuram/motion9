@@ -9,10 +9,40 @@
     {% load humanize %}
     {% load mathfilters %}
 
+
     <link rel="stylesheet" href="{% static 'common/css/jquery-ui.min.css' %}" />
     <link rel="stylesheet" href="{% static 'common/css/jquery.mobile-1.4.5.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/common_style.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/jquery.glide.style.css' %}"/>
+
+<!--여기부터 새로 추가한 css-->
+
+
+ <link href="{% static 'metronic_assets/global/plugins/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/simple-line-icons/simple-line-icons.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/uniform/css/uniform.default.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css'%}" rel="stylesheet" type="text/css"/>
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+<link href="{% static 'metronic_assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/fullcalendar/fullcalendar.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/jqvmap/jqvmap/jqvmap.css'%}" rel="stylesheet" type="text/css"/>
+<!-- END PAGE LEVEL PLUGIN STYLES -->
+<!-- BEGIN PAGE STYLES -->
+<link href="{% static 'metronic_assets/admin/pages/css/tasks.css'%}" rel="stylesheet" type="text/css"/>
+<!-- END PAGE STYLES -->
+<!-- BEGIN THEME STYLES -->
+<!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+<link href="{% static 'metronic_assets/global/css/components-rounded.css'%}" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/css/plugins.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/admin/layout4/css/layout.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/admin/layout4/css/themes/default.css'%}" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="{% static 'metronic_assets/admin/layout4/css/custom.css'%}" rel="stylesheet" type="text/css"/>
+
+
+
+ <!--여기까지 새로 추가한 css-->
 
     <script src="{% static 'common/js/jquery-1.11.1.min.js' %}"></script>
     <script src="{% static 'common/js/jquery.mobile-1.4.5.min.js' %}"></script>

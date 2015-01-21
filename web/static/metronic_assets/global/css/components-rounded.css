@@ -5622,12 +5622,12 @@ Blue Default
 /* Button */
 .blue.btn {
   color: #FFFFFF;
-  background-color: #4B8DF8;
+  background-color: #4B8DF8 !important;
   border-color: "";
 }
 .blue.btn:hover, .blue.btn:focus, .blue.btn:active, .blue.btn.active {
   color: #FFFFFF;
-  background-color: #2977f7;
+  background-color: #2977f7 !important;
 }
 .open .blue.btn.dropdown-toggle {
   color: #FFFFFF;
@@ -10782,12 +10782,12 @@ Yellow Casablanca
 /* Button */
 .yellow-casablanca.btn {
   color: #FFFFFF;
-  background-color: #f2784b;
-  border-color: "";
+  background-color: #f2784b !important;
+  border-color: "" !important;
 }
 .yellow-casablanca.btn:hover, .yellow-casablanca.btn:focus, .yellow-casablanca.btn:active, .yellow-casablanca.btn.active {
   color: #FFFFFF;
-  background-color: #f05f2a;
+  background-color: #f05f2a !important;
 }
 .open .yellow-casablanca.btn.dropdown-toggle {
   color: #FFFFFF;
