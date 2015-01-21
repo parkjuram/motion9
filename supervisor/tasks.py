@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from celery import shared_task
+from celery import shared_task, task
 
 import time, random
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
@@ -7,7 +7,7 @@ from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkS
 
 
 # def analysis_product(self, logger, querys):
-@shared_task
+@task(bind=True)
 def analysis_product(self):
     """Background task that runs a long function with progress reports."""
     verb = ['Starting up', 'Booting', 'Repairing', 'Loading', 'Checking']

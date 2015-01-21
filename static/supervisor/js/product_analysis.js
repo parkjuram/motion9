@@ -71,9 +71,9 @@
                 },
                 success: function(data) {
                     if ( data.success ) {
-                        analysisResultList = data.analysis_result_list;
-                        totalAnalysedCount = analysisResultList.length;
-                        updateAnalysisTable();
+                        //analysisResultList = data.analysis_result_list;
+                        //totalAnalysedCount = analysisResultList.length;
+                        //updateAnalysisTable();
                         $('#btn-start-analysis').button('reset');
                     }
                 },

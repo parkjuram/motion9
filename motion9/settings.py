@@ -195,5 +195,5 @@ EMAIL_HOST_PASSWORD = '5sb-8lPeNKVbPFapRFkXBg'
 EMAIL_USE_TLS = True
 
 # celery setting
-BROKER_URL = "amqp://ramju:1weekpizza@localhost:5672/kyles-MacBook-Air"
+BROKER_URL = "amqp://ramju:1weekpizza@themotion9.com:5672/qssd-0866"
 CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
