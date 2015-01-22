@@ -8,8 +8,7 @@ from bs4 import BeautifulSoup
 
 class AnalysisBlogReview:
 
-    def __init__(self, logger):
-        self.logger = logger
+    def __init__(self):
         self.analysis_result = {}
         self.skip_count=0
 
@@ -28,7 +27,7 @@ class AnalysisBlogReview:
         return analysis_result_list
 
     def analysis(self, blog_review_url):
-        self.logger.info(blog_review_url)
+        # self.logger.info(blog_review_url)
 
         analysis_checker = {}
 
@@ -42,7 +41,7 @@ class AnalysisBlogReview:
 
         try:
             blog_review_url = soup.select('#screenFrame')[0]['src']
-            self.logger.info("regenerated:"+blog_review_url)
+            # self.logger.info("regenerated:"+blog_review_url)
             r = requests.get(blog_review_url)
             soup = BeautifulSoup(r.text)
             r.close()
@@ -97,6 +96,7 @@ class AnalysisBlogReview:
                             item:1
                         })
             except jpype.JavaException as exception:
-                self.logger.info("java exception!")
+                pass
+                # self.logger.info("java exception!")
                 # print exception.message()
                 # print exception.stacktrace()

@@ -15,7 +15,7 @@ urlpatterns = patterns('',
         view=AnalysisView.as_view(),
         name='analysis'
     ),
-
+    url(r'^analysis/product/status/(?P<task_id>([\w-]+))/$', 'supervisor.views.analysis_status', name='analysis_status'),
     url(
         regex=r'^analysis/product/$',
         view=ProductAnalysisView.as_view(),

@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
 from braces.views._access import LoginRequiredMixin, SuperuserRequiredMixin
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
@@ -81,8 +83,10 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
             querys = request.POST.get('queryConcatString').split("@");
             querys = map(lambda x:'"'+x+'"', querys)
             querys = map(lambda x:x.encode('utf-8'), querys)
-            task = analysis_product.apply_async()
-            return http_response_by_json(None)
+            task = analysis_product.apply_async(args=[querys])
+            response = HttpResponse({}, status=202)
+            response['Location'] = reverse('supervisor:analysis_status', kwargs={'task_id':task.id})
+            return response
         else:
             product_id = request.POST.get('product_id')
             total_count = request.POST.get('total_count')
@@ -248,3 +252,32 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(CreateOrUpdateSurveyResultView, self).dispatch(*args, **kwargs)
+
+def analysis_status(request, task_id):
+    task = analysis_product.AsyncResult(task_id)
+    if task.state == 'PENDING':
+        # job did not start yet
+        response = {
+            'state': task.state,
+            'current': 0,
+            'total': 1,
+            'status': 'Pending...'
+        }
+    elif task.state != 'FAILURE':
+        response = {
+            'state': task.state,
+            'current': task.info.get('current', 0),
+            'total': task.info.get('total', 1),
+            'status': task.info.get('status', '')
+        }
+        if 'result' in task.info:
+            response['result'] = task.info['result']
+    else:
+        # something went wrong in the background job
+        response = {
+            'state': task.state,
+            'current': 1,
+            'total': 1,
+            'status': str(task.info),  # this is the exception raised
+        }
+    return http_response_by_json(None, response)

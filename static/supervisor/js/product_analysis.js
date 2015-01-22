@@ -14,6 +14,7 @@
 
         var result = "<tr><th>-</th><th>키워드</th><th>빈도</th><th>선택하기</th><tr>"
         var analysisResultItem;
+        var i;
         for (i = 0; i < analysisResultList.length; i++) {
             analysisResultItem = analysisResultList[i];
             if ( analysisResultItem.count>=minCount && analysisResultItem.count<=maxCount) {
@@ -47,6 +48,25 @@
             btnStartAnalysis.removeAttr("disabled");
             return false;
         });
+
+        function update_progress(status_url) {
+            $.getJSON(status_url, function (data) {
+                if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                    if ('result' in data) {
+                        analysisResultList = data['result'];
+                        totalAnalysedCount = analysisResultList.length;
+                        updateAnalysisTable();
+                    }
+                }
+                else {
+                    // rerun in 2 seconds
+                    setTimeout(function () {
+                        update_progress(status_url);
+                    }, 5000);
+                }
+            });
+        }
+
         btnStartAnalysis.click(function() {
             $('#table-analysis-result').html("");
             $(this).button('loading');
@@ -69,15 +89,13 @@
                 data: {
                     queryConcatString: queryConcatString
                 },
-                success: function(data) {
-                    if ( data.success ) {
-                        //analysisResultList = data.analysis_result_list;
-                        //totalAnalysedCount = analysisResultList.length;
-                        //updateAnalysisTable();
-                        $('#btn-start-analysis').button('reset');
-                    }
+                success: function (data, status, request) {
+                    $('#btn-start-analysis').button('reset');
+                    status_url = request.getResponseHeader('Location');
+                    update_progress(status_url);
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function () {
+                    alert('Unexpected error');
                     $('#btn-start-analysis').button('reset');
                 }
             });
