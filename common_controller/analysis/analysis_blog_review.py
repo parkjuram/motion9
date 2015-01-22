@@ -12,11 +12,16 @@ class AnalysisBlogReview:
         self.analysis_result = {}
         self.skip_count=0
 
-    def startAnalysis(self, blog_url_list):
+    def startAnalysis(self, celery_task, blog_url_list):
         self.analysis_result = {}
         self.skip_count=0
+        celery_task.update_state(state='PROGRESS',
+                                 meta={'current': 0, 'total': len(blog_url_list)})
         for blog_review_url in blog_url_list:
             self.analysis(blog_review_url)
+            celery_task.update_state(state='PROGRESS',
+                                     meta={'current': blog_url_list.index(blog_review_url),
+                                           'total': len(blog_url_list)})
 
         sorted_analysis_result = sorted(self.analysis_result.items(), key=operator.itemgetter(1), reverse=True)
         analysis_result_list = []

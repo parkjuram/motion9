@@ -35,7 +35,7 @@ def analysis_product(self, querys):
     logger.info( blog_url_list )
 
     analysis_blog_review = AnalysisBlogReview()
-    analysis_result_list = analysis_blog_review.startAnalysis(blog_url_list)
+    analysis_result_list = analysis_blog_review.startAnalysis( self, blog_url_list)
 
 
     return {'current': 100, 'total': 100, 'status': 'Task completed!',

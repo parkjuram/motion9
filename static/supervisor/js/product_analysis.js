@@ -51,6 +51,9 @@
 
         function update_progress(status_url) {
             $.getJSON(status_url, function (data) {
+                percent = parseInt(data['current'] * 100 / data['total']);
+                $('#text-analysis-status').text(percent + '%');
+
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
                     if ('result' in data) {
                         analysisResultList = data['result'];
