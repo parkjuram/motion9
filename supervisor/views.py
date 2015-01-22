@@ -119,7 +119,7 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
 
 class UserSurveyListView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        user_surveys = UserSurvey.objects.all()
+        user_surveys = UserSurvey.objects.order_by('-created').all()
         user_surveys_ = []
         for user_survey in user_surveys:
             username = user_survey.user.profile.name
