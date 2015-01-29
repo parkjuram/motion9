@@ -944,14 +944,13 @@ class SurveyResultDetailView(TemplateView):
         survey_result_detail_ = []
         for item in survey_result_detail:
             item.product.detail = item.product.details.all()[0]
+            item.product.analysis = item.product.analysis.all()[0]
             item.product.unit_price = item.product.price/item.product.capacity
-            # item.product.detail = item.product.details.all()[0]
             survey_result_detail_.append( {
                 'type': item.type,
                 'product': item.product
             })
-        # kwargs['pk']
-        # kwargs['product_type']
+
         context['survey_result_detail'] = survey_result_detail_
         return context
 

@@ -3,7 +3,7 @@ from common.models import NProduct, ProductDetail, ProductAnalysis, ProductAnaly
 
 
 class NProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'brand', 'price', 'capacity', 'capacity_unit')
+    list_display = ('name', 'category', 'brand', 'price', 'capacity', 'capacity_unit')
 
 admin.site.register(NProduct, NProductAdmin)
 
