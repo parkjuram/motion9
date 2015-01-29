@@ -10,6 +10,7 @@ from django.template.loader import get_template
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.template import Context
+from django.views.generic import View, TemplateView
 from common_controller import util
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
@@ -21,7 +22,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items, helper_get_survey_items, \
     helper_get_survey_list, helper_get_survey_result_item, helper_get_report_count
 from .models import Product, Category, BlogReview, Set, Brand
-from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment
+from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment, UserSurvey
 
 from subprocess import call, Popen, PIPE
 import urllib
@@ -907,6 +908,52 @@ def survey_result_view(request, pk):
     return render(request, 'web/survey_result.html', {
         'survey_result_item': survey_result_item
     })
+
+class SurveyResultView(View):
+    def get(self, request, *args, **kwargs):
+        request.pk = kwargs['pk']
+        user_survey = UserSurvey.objects.get(pk=kwargs['pk'])
+        user_survey_result = user_survey.results.all()[0]
+        survey_result_detail = user_survey_result.details.select_related('product')
+
+        survey_result_detail_ = {}
+
+        for item in survey_result_detail:
+            item_ = {
+                'type': item.type,
+                'product': item.product
+            }
+            if not(survey_result_detail_.has_key(item_['type'])):
+                survey_result_detail_.update( {item_['type']:[]} )
+
+            survey_result_detail_[item_['type']].append(item_)
+
+
+        print survey_result_detail_
+        return render(request,
+                      "web/survey2_result.html",
+                    {'user_survey_result': user_survey_result,
+                     'survey_result_detail': survey_result_detail_ })
+
+class SurveyResultDetailView(TemplateView):
+    template_name = "web/survey2_result_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(SurveyResultDetailView, self).get_context_data(**kwargs)
+        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(type=kwargs['product_type'])
+        survey_result_detail_ = []
+        for item in survey_result_detail:
+            item.product.detail = item.product.details.all()[0]
+            item.product.unit_price = item.product.price/item.product.capacity
+            # item.product.detail = item.product.details.all()[0]
+            survey_result_detail_.append( {
+                'type': item.type,
+                'product': item.product
+            })
+        # kwargs['pk']
+        # kwargs['product_type']
+        context['survey_result_detail'] = survey_result_detail_
+        return context
 
 @login_required
 def chart_view(request):

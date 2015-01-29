@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from supervisor.views import CreateOrUpdateSurveyResultView
 
 urlpatterns = patterns('',
 

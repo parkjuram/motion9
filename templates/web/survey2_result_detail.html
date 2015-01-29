@@ -1,0 +1,1218 @@
+{% extends "web_base.html" %}
+
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.1
+Version: 3.6
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+{% block header %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/simple-line-icons/simple-line-icons.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/uniform/css/uniform.default.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css'%}" rel="stylesheet" type="text/css"/>
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+<link href="{% static 'metronic_assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/fullcalendar/fullcalendar.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/plugins/jqvmap/jqvmap/jqvmap.css'%}" rel="stylesheet" type="text/css"/>
+<!-- END PAGE LEVEL PLUGIN STYLES -->
+<!-- BEGIN PAGE STYLES -->
+<link href="{% static 'metronic_assets/admin/pages/css/tasks.css'%}" rel="stylesheet" type="text/css"/>
+<!-- END PAGE STYLES -->
+<!-- BEGIN THEME STYLES -->
+<!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+<link href="{% static 'metronic_assets/global/css/components-rounded.css'%}" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/global/css/plugins.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/admin/layout4/css/layout.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'metronic_assets/admin/layout4/css/themes/default.css'%}" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="{% static 'metronic_assets/admin/layout4/css/custom.css'%}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="{% static 'css/product_detail_web.css' %}"/>
+<link rel="stylesheet" href="{% static 'magnific_popup/magnific-popup.css' %}"/>
+{% block common_style_css %}
+    <link rel="stylesheet" href="{% static "css/report_style_web.css" %}"/>
+{% endblock %}
+<!-- END THEME STYLES -->
+<link rel="shortcut icon" href="favicon.ico"/>
+{% endblock %}
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+{% block content %}
+
+<body>
+<div class="clearfix"></div>
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container margin-top-40">
+	<!-- BEGIN PAGE CONTENT -->
+	<div class="page-content">
+		<div class="container">
+			<!-- BEGIN PAGE BREADCRUMB -->
+			<ul class="page-breadcrumb breadcrumb hide">
+				<li>
+					<a href="#">Home</a><i class="fa fa-circle"></i>
+				</li>
+				<li class="active">
+					 Dashboard
+				</li>
+			</ul>
+			<!-- END PAGE BREADCRUMB -->
+			<!-- BEGIN PAGE CONTENT INNER -->
+			<div class="portlet light tasks-widget">
+
+							<div class="caption caption-md font-grey-gallery">
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                &nbsp아래의 두 제품은 고객님이 입력한 정보를 기반으로 가장 적합한 두 제품을 나열한 것이지 우열을 가리기 위해 비교한 것이 아닙니다.</div></div>
+            <div class="row margin-top-10">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:20px;">{{ survey_result_detail.0.product.name }}</span>
+							</div>
+						</div>
+						<div class="portlet-body">
+                            <div class="row list-separated">
+                                <div class="col-md-3 col-sm-3 col-xs-6">
+                                    <div class="product-x-img" style="height:auto;">
+                                        <img src="{% static 'img/test.jpg' %}" alt="" style="width:70px;"/>
+                                    </div>
+                                </div>
+								<div class="table-scrollable table-scrollable-borderless" style="width:75%">
+								<table class="table table-hover table-light">
+								<tr>
+
+									<td>
+                                        <div class="font-grey-gallery" style="font-size:15px;">
+										{{ survey_result_detail.0.product.price|intcomma }}&nbsp;<span class="font-lg font-grey-mint" style="font-size:13px">원/{{ survey_result_detail.0.product.capacity }}{{ survey_result_detail.0.product.capacity_unit }}&nbsp;({{ survey_result_detail.0.product.unit_price }}원/{{ survey_result_detail.0.product.capacity_unit }})</span></div>
+									</td>
+
+								</tr>
+								<tr>
+
+									<td>
+										<div class="font-blue" style="font-size:15px;">
+                                            기능성 여부: &nbsp;&nbsp;&nbsp;&nbsp;<span class="font-grey-gallery">    {{ survey_result_detail.0.product.detail.function }} </span>
+                                        </div>
+									</td>
+
+								</tr>
+								<tr>
+
+									<td>
+										 <div class="font-blue" style="font-size:15px;">
+                                            사용 기간: &nbsp;&nbsp;&nbsp;&nbsp;<span class="font-grey-gallery">    {{ survey_result_detail.0.product.detail.estimation_period }}일 </span>
+                                        </div>
+                                         <div class="font-grey-cascade" style="font-size:10px; width:85%">
+                                         (*사용 기간은 용량과 일반적인 사용량을 기준으로 측정되었으며 개인에 따라 다를 수 있습니다)</span>
+                                        </div>
+									</td>
+
+								</tr>
+
+								</table>
+							</div>
+
+                            </div>
+                            <div id="sales_statistics" class="portlet-body-morris-fit morris-chart" style="height: 260px; display:none;">
+                            </div>
+                        </div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:20px;">{{ survey_result_detail.1.product.name }}</span>
+							</div>
+						</div>
+						<div class="portlet-body">
+                            <div class="row list-separated">
+                                <div class="col-md-3 col-sm-3 col-xs-6">
+                                    <div class="product-x-img" style="height:auto;">
+                                        <img src="{% static 'img/test.jpg' %}" alt="" style="width:70px;"/>
+                                    </div>
+                                </div>
+								<div class="table-scrollable table-scrollable-borderless" style="width:75%">
+								<table class="table table-hover table-light">
+								<!--<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+										 MEMBER
+									</th>
+									<th>
+										 Earnings
+									</th>
+									<th>
+										 CASES
+									</th>
+									<th>
+										 CLOSED
+									</th>
+									<th>
+										 RATE
+									</th>
+								</tr>
+								</thead>-->
+								<tr>
+
+									<td>
+                                        <div class="font-grey-gallery" style="font-size:15px;">
+										{{ survey_result_detail.1.product.price|intcomma }}&nbsp;<span class="font-lg font-grey-mint" style="font-size:13px">원/{{ survey_result_detail.1.product.capacity }}{{ survey_result_detail.1.product.capacity_unit }}&nbsp;({{ survey_result_detail.1.product.unit_price }}원/{{ survey_result_detail.1.product.capacity_unit }})</span></div>
+									</td>
+
+								</tr>
+								<tr>
+
+									<td>
+										<div class="font-yellow-casablanca" style="font-size:15px;">
+                                            기능성 여부: &nbsp;&nbsp;&nbsp;&nbsp;<span class="font-grey-gallery">    {{ survey_result_detail.1.product.detail.function }} </span>
+                                        </div>
+									</td>
+
+								</tr>
+								<tr>
+
+									<td>
+										 <div class="font-yellow-casablanca" style="font-size:15px;">
+                                            사용 기간: &nbsp;&nbsp;&nbsp;&nbsp;<span class="font-grey-gallery">    {{ survey_result_detail.1.product.detail.estimation_period }}일 </span>
+                                        </div>
+                                         <div class="font-grey-cascade" style="font-size:10px; width:85%">
+                                         (*사용 기간은 용량과 일반적인 사용량을 기준으로 측정되었으며 개인에 따라 다를 수 있습니다)</span>
+                                        </div>
+									</td>
+
+								</tr>
+
+								</table>
+							</div>
+
+                            </div>
+                            <div id="sales_statistics" class="portlet-body-morris-fit morris-chart" style="height: 260px; display:none;">
+                            </div>
+                        </div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+            </div>
+            <div class="row margin-bottom-20">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a href="#" class="btn btn-lg blue" style="width: 49%;">
+                        관심하기
+                        <i class="fa fa-plus"></i>
+
+                    </a>
+                    <a href="#" class="btn btn-lg purple-wisteria" style="width: 49%; float:right;">
+                        리뷰 남기기
+                        <i class="fa fa-edit"></i>
+
+                    </a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a href="#" class="btn btn-lg yellow-casablanca" style="width: 49%;">
+                        관심하기
+                        <i class="fa fa-plus"></i>
+
+                    </a>
+                    <a href="#" class="btn btn-lg purple-wisteria" style="width: 49%; float:right;">
+                        리뷰 남기기
+                        <i class="fa fa-edit"></i>
+
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">제품 분석 총평</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+						</div>
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            <span class="font-blue-steel" style="font-size:20px; font-weight:bold;">"비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++ 1" </span>의 제품 후기들을 분석해본 결과 <span class="font-blue" style="font-size:20px;">"건성"</span>의 피부타입을 가진 사람들이 가장 많이 사용하였고 이 사용자들은 제품의 특징으로 <span class="font-blue" style="font-size:20px;">"촉촉함","발림성","수분감"</span>을 차례로 꼽았습니다. <br>또한 제품을 사용하고 난 후 느낀 효과로는 <span class="font-blue" style="font-size:20px;">"피부진정"</span>이 가장 많이 언급되었으며, <span class="font-blue" style="font-size:20px;">"미백"</span>과 <span class="font-blue" style="font-size:20px;">"보습효과"</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
+
+                            </span>
+
+							</div>
+
+					</div>
+					<!-- END PORTLET-->
+				</div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">제품 분석 총평</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+						</div>
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            <span class="font-yellow-gold" style="font-size:20px; font-weight:bold;">"비오템 옴므 UV 디펜스 울트라 라이트 SPF 50/PA+++ 1" </span>의 제품 후기들을 분석해본 결과 <span class="font-yellow-casablanca" style="font-size:20px;">"건성"</span>의 피부타입을 가진 사람들이 가장 많이 사용하였고 이 사용자들은 제품의 특징으로 <span class="font-yellow-casablanca" style="font-size:20px;">"촉촉함","발림성","수분감"</span>을 차례로 꼽았습니다. <br>또한 제품을 사용하고 난 후 느낀 효과로는 <span class="font-yellow-casablanca" style="font-size:20px;">"피부진정"</span>이 가장 많이 언급되었으며, <span class="font-yellow-casablanca" style="font-size:20px;">"미백"</span>과 <span class="font-yellow-casablanca" style="font-size:20px;">"보습효과"</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
+
+                            </span>
+
+							</div>
+
+					</div>
+					<!-- END PORTLET-->
+				</div>
+			</div>
+            <div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">분석 대상이 된 리뷰</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+						</div>
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            네이버, 다음 등의 포털 사이트에서 검색된 리뷰들을 바탕으로 해당 제품의 보고서가 작성되었습니다.
+
+                            </span>
+                            <div style="text-align:center;">
+                                <br><br>
+								<div class="btn-group btn-group-solid">
+                                    <button type="button" class="btn btn-circle blue" style="border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                        <div style="position:relative;">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+
+                                            <span style="font-size:16px;">리뷰 수</span>
+                                        </div>
+                                        <br>
+                                        <span style="position:relative; top:-30px;">137</span>
+                                    </button>
+                                </div>
+                            </div>
+							</div>
+
+					</div>
+					<!-- END PORTLET-->
+				</div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">분석 대상이 된 리뷰</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+						</div>
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            네이버, 다음 등의 포털 사이트에서 검색된 리뷰들을 바탕으로 해당 제품의 보고서가 작성되었습니다.
+                            </span>
+
+                            <div style="text-align:center;">
+                                <br><br>
+								<div class="btn-group btn-group-solid">
+                                    <button type="button" class="btn btn-circle yellow-casablanca" style="border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                        <div style="position:relative;">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+
+                                            <span style="font-size:16px;">리뷰 수</span>
+                                        </div>
+                                        <br>
+                                        <span style="position:relative; top:-30px;">137</span>
+                                    </button>
+                                </div>
+                            </div>
+							</div>
+
+					</div>
+					<!-- END PORTLET-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">리뷰 작성자들의 피부타입</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+						</div>
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            총 137명의 리뷰 작성자들의 피부타입을 분석한 결과 아래와 같은 비율로 피부타입을 가지고 있습니다.
+                                <span class="font-blue"style="font-size: 18px; font-weight: 200;"> "건성"</span> 피부의 비율이 가장 높게 나타나고 있습니다.
+                            </span>
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+
+								</tr>
+								</thead>
+								<tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										건성&nbsp;</div>
+									</td>
+									<td>
+										 97명/128명
+									</td>
+									<td style="width:40%;">
+                                        <div class="progress-info">
+                               					 <div class="progress" style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 97%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">97%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 97%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										중성&nbsp;</div>
+									</td>
+									<td>
+										 45명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 45%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">45%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 45%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										복합성&nbsp;</div>
+									</td>
+									<td>
+										 27명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 27%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">27%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 27%
+									</td>
+								</tr>
+
+
+
+
+								</table>
+							</div>
+
+					</div>
+					<!-- END PORTLET-->
+				</div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">리뷰 작성자들의 피부타입</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+						</div>
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            총 137명의 리뷰 작성자들의 피부타입을 분석한 결과 아래와 같은 비율로 피부타입을 가지고 있습니다.
+                                <span class="font-yellow-casablanca"style="font-size: 18px; font-weight: 200;"> "건성"</span> 피부의 비율이 가장 높게 나타나고 있습니다.
+                            </span>
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+
+								</tr>
+								</thead>
+								<tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										건성&nbsp;</div>
+									</td>
+									<td>
+										 97명/128명
+									</td>
+									<td style="width:40%;">
+                                        <div class="progress-info">
+                               					 <div class="progress" style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 97%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">97%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 97%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										중성&nbsp;</div>
+									</td>
+									<td>
+										 45명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 45%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">45%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 45%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										복합성&nbsp;</div>
+									</td>
+									<td>
+										 27명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 27%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">27%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 27%
+									</td>
+								</tr>
+
+
+
+
+								</table>
+							</div>
+
+					</div>
+					<!-- END PORTLET-->
+				</div>
+            </div>
+            <div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">리뷰 작성자들이 말하는 제품의 특징</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+
+						</div>
+
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            총 137명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
+                                <span class="font-blue"style="font-size: 18px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span class="font-blue"style="font-size: 18px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                            </span>
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+
+								</tr>
+								</thead>
+								<tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										촉촉함&nbsp;</div>
+									</td>
+									<td>
+										 99명/128명
+									</td>
+									<td style="width:40%;">
+                                        <div class="progress-info">
+                               					 <div class="progress" style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 95%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">95%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 95%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										발림성&nbsp;</div>
+									</td>
+									<td>
+										 49명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 49%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">49%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 49%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										수분감&nbsp;</div>
+									</td>
+									<td>
+										 21명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 29%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">29%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 29%
+									</td>
+								</tr>
+
+
+
+
+								</table>
+							</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">리뷰 작성자들이 말하는 제품의 특징</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+
+						</div>
+
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            총 137명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
+                                <span class="font-yellow-casablanca"style="font-size: 18px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span class="font-yellow-casablanca"style="font-size: 18px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                            </span>
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+
+								</tr>
+								</thead>
+								<tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										촉촉함&nbsp;</div>
+									</td>
+									<td>
+										 99명/128명
+									</td>
+									<td style="width:40%;">
+                                        <div class="progress-info">
+                               					 <div class="progress" style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 95%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">95%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 95%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										발림성&nbsp;</div>
+									</td>
+									<td>
+										 49명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 49%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">49%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 49%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										수분감&nbsp;</div>
+									</td>
+									<td>
+										 21명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 29%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">29%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 29%
+									</td>
+								</tr>
+
+
+
+
+								</table>
+							</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">리뷰 작성자들이 느끼는 효과</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+
+						</div>
+
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            총 137명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
+                                <span class="font-blue"style="font-size: 18px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span class="font-blue"style="font-size: 18px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+                            </span>
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+
+								</tr>
+								</thead>
+								<tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										피부진정&nbsp;</div>
+									</td>
+									<td>
+										 99명/128명
+									</td>
+									<td style="width:40%;">
+                                        <div class="progress-info">
+                               					 <div class="progress" style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 95%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">95%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 95%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										미백&nbsp;</div>
+									</td>
+									<td>
+										 49명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 49%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">49%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 49%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										보습효과&nbsp;</div>
+									</td>
+									<td>
+										 21명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 29%;" class="progress-bar progress-bar-success blue">
+                                                        <span class="sr-only">29%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 29%
+									</td>
+								</tr>
+
+
+
+
+								</table>
+							</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase" style="font-size:18px;">리뷰 작성자들이 느끼는 효과</span>
+							</div>
+                            <div class="fit">
+                            <img class="user-pic" src="/static/img/test.jpg" style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;" >
+                            </div>
+
+						</div>
+
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <span style="font-size:15px;">
+                            총 137명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
+                                <span class="font-yellow-casablanca"style="font-size: 18px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span class="font-yellow-casablanca"style="font-size: 18px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+                            </span>
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase">
+									<th colspan="2">
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+									<th>
+
+									</th>
+
+								</tr>
+								</thead>
+								<tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										피부진정&nbsp;</div>
+									</td>
+									<td>
+										 99명/128명
+									</td>
+									<td style="width:40%;">
+                                        <div class="progress-info">
+                               					 <div class="progress" style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 95%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">95%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 95%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										미백&nbsp;</div>
+									</td>
+									<td>
+										 49명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 49%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">49%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 49%
+									</td>
+								</tr>
+                                    <tr>
+
+									<td>
+
+									</td>
+
+									<td>
+										 <div class="font-grey-gallery" style="font-size:15px;">
+										보습효과&nbsp;</div>
+									</td>
+									<td>
+										 21명/128명
+									</td>
+									<td>
+                                        <div class="progress-info">
+                               					 <div class="progress"  style="height:4px; margin-bottom:0px;">
+                            				        <span style="width: 29%;" class="progress-bar progress-bar-success yellow-casablanca">
+                                                        <span class="sr-only">29%</span>
+                                   				    </span>
+                                                 </div>
+
+                            </div>
+
+									</td>
+                                    <td>
+										 29%
+									</td>
+								</tr>
+
+
+
+
+								</table>
+							</div>
+					</div>
+					<!-- END PORTLET-->
+				</div>
+			</div>
+
+			<!-- END PAGE CONTENT INNER -->
+		</div>
+	</div>
+	<!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->
+<!-- BEGIN JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="{% static 'metronic_assets/global/plugins/respond.min.js' %}"></script>
+<script src="{% static 'metronic_assets/global/plugins/excanvas.min.js' %}"></script>
+<![endif]-->
+{#<script src="{% static 'metronic_assets/global/plugins/jquery.min.js' %}" type="text/javascript"></script>#}
+<script src="{% static 'metronic_assets/global/plugins/jquery-migrate.min.js' %}" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{% static 'metronic_assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/jquery.blockui.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/jquery.cokie.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/uniform/jquery.uniform.min.js' %}" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
+<script src="{% static 'metronic_assets/global/plugins/morris/morris.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/morris/raphael-min.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/global/plugins/jquery.sparkline.min.js' %}" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{% static 'metronic_assets/global/scripts/metronic.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/admin/layout3/scripts/layout.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/admin/layout3/scripts/demo.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/admin/pages/scripts/index3.js' %}" type="text/javascript"></script>
+<script src="{% static 'metronic_assets/admin/pages/scripts/tasks.js' %}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+jQuery(document).ready(function() {    
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   Demo.init(); // init demo(theme settings page)
+   Index.init(); // init index page
+   Tasks.initDashboardWidget(); // init tash dashboard widget
+});
+</script>
+    <script src="{% static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'spinner/jquery.spinner.js' %}"></script>
+    <script src="{% static 'tab/easyResponsiveTabs.js' %}"></script>
+<!-- END JAVASCRIPTS -->
+</body>
+{% endblock %}
+<!-- END BODY -->

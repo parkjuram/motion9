@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from web.views import SurveyResultView, SurveyResultDetailView
 
 urlpatterns = patterns('',
     url(r'^test/$', 'web.views.test_view', name='test'),
@@ -55,6 +56,18 @@ urlpatterns = patterns('',
     url(r'^survey/detail/$', 'web.views.survey_detail_view', name='survey_detail'),
 
     url(r'^survey/(?P<pk>(\d+))/$', 'web.views.survey_result_view', name='survey_result'),
+
+    url(
+        regex=r'^survey2/(?P<pk>(\d+))/$',
+        view=SurveyResultView.as_view(),
+        name='survey2_result'
+    ),
+
+    url(
+        regex=r'^survey2/(?P<pk>(\d+))/(?P<product_type>(\w+))$',
+        view=SurveyResultDetailView.as_view(),
+        name='survey2_result_detail'
+    ),
 
     url(r'^chart/$', 'web.views.chart_view', name='chart'),
 

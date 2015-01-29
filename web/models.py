@@ -14,6 +14,7 @@ class Category(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+
 class Brand(models.Model):
     name_eng = models.CharField(max_length=30, unique=True)
     name_kor = models.CharField(max_length=30, null=False, blank=True)

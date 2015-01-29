@@ -176,7 +176,7 @@ class SurveyResult(models.Model):
 
 @python_2_unicode_compatible
 class SurveyResultDetail(models.Model):
-    survey_result = models.ForeignKey(SurveyResult)
+    survey_result = models.ForeignKey(SurveyResult, related_name='details')
     product = models.ForeignKey('common.NProduct')
     type = models.CharField(max_length=10, null=False, default='skin') # 'skin', 'lotion'
 
@@ -196,5 +196,3 @@ class UserSurveyDetail(models.Model):
 
     def __str__(self):
         return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%s]' % (self.id, self.user_survey.id, self.survey_item_option.content)
-
-

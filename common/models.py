@@ -23,7 +23,7 @@ class ProductDetail(models.Model):
     estimation_period = models.SmallIntegerField(null=False, default=0)
 
     def __str__(self):
-        return self.product
+        return self.product.name
 
 @python_2_unicode_compatible
 class ProductAnalysis(models.Model):
