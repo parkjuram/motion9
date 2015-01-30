@@ -45,7 +45,7 @@ urlpatterns = patterns('',
 
     url(r'^report/detail/(?P<product_id>(\d+))/$', 'web.views.report_detail_view', name='report_detail'),
 
-    url(r'^report/detail/(?P<product_id>(\d+))/modal/$', 'web.views.report_detail_modal_view', name='report_detail_modal'),
+    url(r'^report/detail/(?P<product_id>(\d+))/mbodal/$', 'web.views.report_detail_modal_view', name='report_detail_modal'),
 
     url(r'^report/form/$', 'web.views.report_form_view', name='report_form'),
 

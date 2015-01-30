@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, url
+from mobile.views import SurveyResultView
+from mobile.views import SurveyResultDetailView
 
 urlpatterns = patterns('',
 
@@ -41,6 +43,18 @@ urlpatterns = patterns('',
     url(r'^survey/(?P<pk>(\d+))/$', 'mobile.views.survey_result_view', name='mobile_survey_result'),
 
     url(r'^survey/detail/$', 'mobile.views.survey_detail_view', name='mobile_survey_detail'),
+
+    url(
+        regex=r'^survey2/(?P<pk>(\d+))/$',
+        view=SurveyResultView.as_view(),
+        name='survey2_result'
+    ),
+
+    url(
+        regex=r'^survey2/(?P<pk>(\d+))/(?P<product_type>(\w+))$',
+        view=SurveyResultDetailView.as_view(),
+        name='survey2_result_detail'
+    ),
 
 
     # url(r'^test/$', 'web.views.test_view', name='test'),

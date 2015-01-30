@@ -24,7 +24,7 @@
     <script>
         var csrfToken = "{{ csrf_token }}";
         var surveyListInJsonUrl = "{% url 'survey_list_in_json' %}";
-        var mobileSurveyListUrl = "{% url 'mobile_survey_list' %}";
+        var mobileSurveyListUrl = "{% url 'mobile:mobile_survey_list' %}";
         var url_for_login_next = "{% url 'login_page' %}?next={{ request.get_full_path }}";
         var getUserName = "{{ user.profile.name }}";
         var surveyResultUrl = "{% url 'survey2_result' pk=1987654321 %}";
@@ -201,8 +201,8 @@
                 통신판매업신고 : 2013-서울관악-0392 | 개인정보관리책임자 : 박주람<br/>
                 서울시 강남구 테헤란로 313, 916(역삼동, 성지하이츠 1차 빌딩) <br/> Tel : 02-554-4511 |
                 © Life Engine Corp. All rights reserved.<br/>
-        <a target="_blank" href="{% url 'mobile_agreement_of_utilization' %}">이용약관</a>
-        <a target="_blank" href="{% url 'mobile_privacy' %}">개인정보취급방침</a>
+        <a target="_blank" href="{% url 'mobile:mobile_agreement_of_utilization' %}">이용약관</a>
+        <a target="_blank" href="{% url 'mobile:mobile_privacy' %}">개인정보취급방침</a>
     </div>
 </div>
 

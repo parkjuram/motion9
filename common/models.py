@@ -48,3 +48,4 @@ class ProductAnalysisDetail(models.Model):
 
     class Meta:
         unique_together = (("product_analysis", "content"),)
+        ordering = ['-count']

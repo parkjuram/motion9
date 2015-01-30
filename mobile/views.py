@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View, TemplateView
 from common_controller.decorators import mobile_login_required
 
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
@@ -11,7 +12,7 @@ from common_controller.util import helper_get_products, helper_get_user, helper_
     helper_get_faq_items, helper_get_survey_list, helper_get_survey_result_item, helper_get_report_count
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
-from users.models import Payment
+from users.models import Payment, UserSurvey
 
 from web.models import Category
 
@@ -266,5 +267,66 @@ def survey_result_view(request, pk):
     })
 
 def survey_detail_view(request):
-
     return render(request, 'survey_detail.html')
+
+class SurveyResultView(TemplateView):
+    template_name = "mobile/survey2_result.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(SurveyResultView, self).get_context_data(**kwargs)
+        self.request.pk = kwargs['pk']
+        user_survey = UserSurvey.objects.get(pk=kwargs['pk'])
+        user_survey_result = user_survey.results.all()[0]
+        survey_result_detail = user_survey_result.details.select_related('product')
+
+        survey_result_detail_ = {}
+
+        for item in survey_result_detail:
+            item.product.unit_price = item.product.price/item.product.capacity
+            item_ = {
+                'type': item.type,
+                'product': item.product
+            }
+            if not(survey_result_detail_.has_key(item_['type'])):
+                survey_result_detail_.update( {item_['type']:[]} )
+
+            survey_result_detail_[item_['type']].append(item_)
+
+        context["user_survey_result"] = user_survey_result
+        context["survey_result_detail"] = survey_result_detail_
+        chart_data = []
+        print survey_result_detail_
+        for key in survey_result_detail_:
+            price = 0
+            for item in survey_result_detail_[key]:
+                price = item['product'].price if price < item['product'].price else price
+            chart_data.append({
+                "category": str(key),
+                "value": price
+            })
+        context["chart_data"] = str(chart_data)
+
+        return context
+
+class SurveyResultDetailView(TemplateView):
+    template_name = "mobile/survey2_result_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(SurveyResultDetailView, self).get_context_data(**kwargs)
+        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(type=kwargs['product_type'])
+        survey_result_detail_ = []
+        for item in survey_result_detail:
+            item.product.detail = item.product.details.all()[0] if len(item.product.details.all())>0 else None
+            item.product.analysis_ = item.product.analysis.all()[0]
+            item.product.analysis_.detail_skintype = item.product.analysis.all()[0].details.filter(type='skintype')[:3]
+            item.product.analysis_.detail_feature = item.product.analysis.all()[0].details.filter(type='feature')[:3]
+            item.product.analysis_.detail_effect = item.product.analysis.all()[0].details.filter(type='effect')[:3]
+            item.product.analysis_.detail_etc = item.product.analysis.all()[0].details.filter(type='etc')[:3]
+            item.product.unit_price = item.product.price/item.product.capacity
+            survey_result_detail_.append( {
+                'type': item.type,
+                'product': item.product
+            })
+
+        context['survey_result_detail'] = survey_result_detail_
+        return context

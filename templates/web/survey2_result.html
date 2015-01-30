@@ -215,31 +215,7 @@
             var chart = AmCharts.makeChart("chart_7", {
                 "type": "pie",
                 "theme": "light",
-                "dataProvider": [{
-                    "category": "스킨",
-                    "value": 26000
-                }, {
-                    "category": "로션",
-                    "value": 20100
-                }, {
-                    "category": "수분크림",
-                    "value": 65000
-                }, {
-                    "category": "에센스",
-                    "value": 39000
-                }, {
-                    "category": "선케어/BB",
-                    "value": 19000
-                }, {
-                    "category": "클렌징",
-                    "value": 100000
-                }, {
-                    "category": "색조",
-                    "value": 11000
-                }, {
-                    "category": "기타",
-                    "value": 15000
-                }],
+                "dataProvider": {{ chart_data|safe }},
                 "valueField": "value",
                 "titleField": "category",
                 "outlineAlpha": 0.4,

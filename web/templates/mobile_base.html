@@ -105,7 +105,7 @@
                    ! 로그인이 필요합니다.
                 </div>
                 <div style="text-align : center;">
-                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login 하러가기</a>
+                    <a href="{% url "mobile:mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login 하러가기</a>
                 </div>
 
              {% endif %}
@@ -131,56 +131,56 @@
                 {% endif %}
                    <li>
                      {% if user.is_authenticated %}
-                        <a href="{% url "mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
+                        <a href="{% url "mobile:mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
                      {% else %}
-                        <a href="{% url "mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
+                        <a href="{% url "mobile:mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
                      {% endif %}
                    </li>
                 <li><a href="/mobile/" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>
               <li class="list-collapsible">
                     <a href="#" class="collapse-btn" style="padding: 20px 0px 20px 0px; padding-left: 5%;">  Collection + </a>
                     <ul class="list-collapsed">
-                        <li ><a href="{% url "mobile_shop_set" %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">전체</a></li>
-                        <li ><a href="{% url "mobile_shop_set" category_id=18 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">쿨가이 컬렉션</a></li>
-                        <li ><a href="{% url "mobile_shop_set" category_id=30 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">꽃중년 컬렉션</a></li>
-                        <li ><a href="{% url "mobile_shop_set" category_id=27 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">스포츠 컬렉션</a></li>
-                        <li ><a href="{% url "mobile_shop_set" category_id=28 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">비즈니스맨 컬렉션</a></li>
-                        <li ><a href="{% url "mobile_shop_set" category_id=31 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">계절 컬렉션</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_set" %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">전체</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=18 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">쿨가이 컬렉션</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=30 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">꽃중년 컬렉션</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=27 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">스포츠 컬렉션</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=28 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">비즈니스맨 컬렉션</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=31 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">계절 컬렉션</a></li>
                     </ul>
                 </li>
                 <li class="list-collapsible">
                     <a href="#" class="collapse-btn" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Products +</a>
                     <ul class="list-collapsed">
-                       <li ><a href="{% url "mobile_shop_product" %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">전체</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=1 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">스킨</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=2 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">로션</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=5 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">에센스</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=4 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">비비크림, 선크림</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=14 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left:15%;">수분크림, 아이크림</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=23 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">마스크/팩</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=3 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">클렌징/스크럽</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=33 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">립밤</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=24 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">바디</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=22 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">헤어</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=25 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">향수</a></li>
-                        <li ><a href="{% url "mobile_shop_product" category_id=26 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">기타</a></li>
+                       <li ><a href="{% url "mobile:mobile_shop_product" %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">전체</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=1 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">스킨</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=2 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">로션</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=5 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">에센스</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=4 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">비비크림, 선크림</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=14 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left:15%;">수분크림, 아이크림</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=23 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">마스크/팩</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=3 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">클렌징/스크럽</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=33 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">립밤</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=24 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">바디</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=22 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">헤어</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=25 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">향수</a></li>
+                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=26 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">기타</a></li>
                     </ul>
                 </li>
                 <li>
-{#                    <a href="{% url "mobile_customize_set" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>#}
+{#                    <a href="{% url "mobile:mobile_customize_set" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>#}
                       <a href="javascript:alert('현재 준비중입니다. PC에서 이용해 주세요.');" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
                 {% endif %}
-                <li><a href="{% url 'mobile_faq' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
+                <li><a href="{% url 'mobile:mobile_faq' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
                 <li><a href="mailto:cs@themotion9.com?subject=%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=(%EB%A9%94%EC%9D%BC%EB%A1%9C%20%EB%AC%B8%EC%9D%98%20%EC%A3%BC%EC%8B%9C%EB%A9%B4%2024%EC%8B%9C%EA%B0%84%20%EC%95%88%EC%97%90%20%ED%9A%8C%EC%8B%A0%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4%5E%5E)%0A%0A%0A%0A%0A%0A%0A%0A%0A------------------------------------------%0AMotion9%20%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0%0A02-554-4511%0A%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%84%20%3A%20%ED%8F%89%EC%9D%BC%2010%3A00%20-%2018%3A00" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>
-{#                <li><a href="{% url 'mobile_report' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Report</a></li>#}
+{#                <li><a href="{% url 'mobile:mobile_report' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Report</a></li>#}
             </ul>
         </div>
 	</div><!-- /panel -->
 
-	<div data-role="header" data-position="fixed">
+	<div data-role="header" data-position="fixed" data-tap-toggle="false">
 		<div class="ui-btn-left">
             <a href="#menuPanel" class="top-menu-btn" id="top-menu-btn"><img src="{% static "img/menu.png"%}"/></a>
 		</div>
@@ -188,7 +188,7 @@
         {% block title %}
 
             <div style="text-align:center; height:100%; margin-top:4px">
-                <a href="{% url 'mobile_index' %}" target="_self">
+                <a href="{% url 'mobile:mobile_index' %}" target="_self">
                     <img src ="{% static "img/LOGO_black.png" %}" class="main-logo-img" >
                 </a>
             </div>
@@ -217,8 +217,8 @@
                 개인정보관리책임자 : 박주람<br/>
                 서울시 강남구 테헤란로 313, 916(역삼동, 성지하이츠 1차 빌딩) <br/> Tel : 02-554-4511 <br/>
                 © Life Engine Corp. All rights reserved.<br/>
-                <a target="_blank" href="{% url 'mobile_agreement_of_utilization' %}">이용약관</a>
-                <a target="_blank" href="{% url 'mobile_privacy' %}">개인정보취급방침</a>
+                <a target="_blank" href="{% url 'mobile:mobile_agreement_of_utilization' %}">이용약관</a>
+                <a target="_blank" href="{% url 'mobile:mobile_privacy' %}">개인정보취급방침</a>
         </div>
 	</div>
     {% endblock %}
