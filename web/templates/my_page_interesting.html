@@ -13,13 +13,13 @@
         {% for product in interests.data %}
             <div class="product-item" >
                <div class="item-title" >
-                   <a href="{% url 'mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name|truncatechars:13}}</a>
+                   <a href="{% url 'mobile:mobile_product' product_id=product.id %}"  data-ajax="false" title="{{ product.name }}">{{product.name|truncatechars:13}}</a>
                    <div class="item-price">
                        {{product.discount_price|intcomma}}원 <span class="item-original-price">{{product.original_price|intcomma}}원</span> <span class="discount-rate">{{ discount_rate }}%</span>
                    </div>
                </div>
                <div class="item-image">
-                   <a href="{% url 'mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
+                   <a href="{% url 'mobile:mobile_product' product_id=product.id %}" style="line-height:0;display:block;" data-ajax="false"><img src="{{product.big_img_url}}"/></a>
                </div>
                <div class="interest-btn">
                    <a href="#" class="mypage-interesting-del-btn" data-type="p" data-product="{{ product.id }}">삭제</a>
