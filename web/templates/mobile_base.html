@@ -105,7 +105,7 @@
                    ! 로그인이 필요합니다.
                 </div>
                 <div style="text-align : center;">
-                    <a href="{% url "mobile:mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login 하러가기</a>
+                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login 하러가기</a>
                 </div>
 
              {% endif %}
@@ -133,7 +133,7 @@
                      {% if user.is_authenticated %}
                         <a href="{% url "mobile:mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
                      {% else %}
-                        <a href="{% url "mobile:mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
+                        <a href="{% url "mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
                      {% endif %}
                    </li>
                 <li><a href="/mobile/" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>
