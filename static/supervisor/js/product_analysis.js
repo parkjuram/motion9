@@ -1,4 +1,4 @@
-(function() {
+var ns_prduct_analysis = (function() {
     var analysisResultList;
 
     var selectedProductId;
@@ -18,7 +18,7 @@
         for (i = 0; i < analysisResultList.length; i++) {
             analysisResultItem = analysisResultList[i];
             if ( analysisResultItem.count>=minCount && analysisResultItem.count<=maxCount) {
-                result += "<tr><td><div class=\"checkbox\"><label><input class= \"is-apply\" type=\"checkbox\" value=\"\"></label></div></td><td>"
+                result += "<tr><td><div class=\"checkbox\"><label><input class= \"is-apply\" type=\"checkbox\" onchange=\"ns_prduct_analysis.selectedItemChange()\" value=\"\"></label></div></td><td>"
                 + "<input class=\"text-keyword\" type=\"text\" value=\"" + analysisResultItem.keyword + "\"></td>"
                 + "<td><input class=\"number-count\" type=\"number\" value=\"" + analysisResultItem.count + "\">"
                 + "</td><td><label class=\"checkbox-inline\"><input class=\"checkbox-type\" type=\"checkbox\" value=\"skintype\">피부타입</label>"
@@ -28,6 +28,10 @@
             }
         }
         $('#table-analysis-result').html(result);
+    }
+
+    function resizeSelectedItemContainer() {
+        $("#selected-item-container").height($("#selected-item-content").height());
     }
 
     $(function() {
@@ -58,6 +62,7 @@
                     if ('result' in data) {
                         analysisResultList = data['result'];
                         totalAnalysedCount = analysisResultList.length;
+                        $("#text-analysis-totalcount").text(totalAnalysedCount);
                         updateAnalysisTable();
                     }
                 }
@@ -113,7 +118,7 @@
 
         btnEnterToDatabase.click(function() {
             var analysisDetailList = [];
-            $('#table-analysis-result tr').each(function (index, object) {
+            $('#selected-item-content > table tr').each(function (index, object) {
                 if ($(object).find(".is-apply:checked").length > 0) {
                     var keyword = $(object).find('.text-keyword').val();
                     var count = $(object).find('.number-count').val();
@@ -159,5 +164,22 @@
         });
     });
 
+    var selectedItemChange = function (){
+        $("#selected-item-content > table").html("");
+        $('#table-analysis-result tr').each(function (index, object) {
+            if ($(object).find(".is-apply:checked").length > 0) {
+                $("#selected-item-content > table").append( $(object).clone() );
+            }
+        });
+        resizeSelectedItemContainer();
+    };
+
+    return {
+        selectedItemChange:selectedItemChange
+    };
+
+    //return {
+    //    selectedItemChange
+    //};
 
 })();

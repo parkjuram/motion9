@@ -5,11 +5,22 @@
     {{ block.super }}
     <script>
         var urlForProductAnalysis = "{% url 'supervisor:analysis_product' %}";
+
     </script>
     <script src="{% static "supervisor/js/product_analysis.js" %}" async></script>
 {% endblock javascripts %}
 
 {% block content %}
+    <div id="selected-item-container" style="height:auto;float:left;width:100%;">
+        <div id='selected-item-content' style="position:fixed;background:whitesmoke;">
+            <table class="table">
+    {#            <div>test</div>#}
+    {#            <div>test</div>#}
+    {#            <div>test</div>#}
+    {#            <div>test</div>#}
+            </table>
+        </div>
+    </div>
     <div class='row'>
         <form class="form-inline">
             <div class="form-group">
@@ -61,9 +72,14 @@
         </form>
 
         <br>
+        총 분석한 블로그 수 : <span id="text-analysis-totalcount"></span>
+        <br><br>
 
         <div class="table-responsive">
             <table id="table-analysis-result" class="table">
+{#                <tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr>#}
+{#                <tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr>#}
+{#                <tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr><tr><td>dd</td><td>dd</td></tr>#}
             </table>
         </div>
 
