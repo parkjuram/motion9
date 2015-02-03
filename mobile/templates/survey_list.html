@@ -77,7 +77,7 @@
                                                         <span class="item-status">{% if survey_item.is_analysis_finish%}<span class="badge badge-empty badge-success"></span> 완료{% else %}<span class="badge badge-empty badge-danger"></span> 분석중{% endif %}</span>
                                                     </div>
                                                     <div class="item-body">
-                                                          <a href="{% url "mobile_survey_result" pk=survey_item.id %}"
+                                                          <a href="{% url "mobile:mobile_survey_result" pk=survey_item.id %}"
                                                             target="_self" is-analysis-finish="{{ survey_item.is_analysis_finish }}">{{ survey_item.display_name }}</a>
                                                     </div>
                                                 </div>

@@ -55,7 +55,7 @@ def check_email_view(request):
 
 @csrf_exempt
 def check_facebook_token_view(request):
-    next = request.GET.get('next', 'mobile_index' if request.is_mobile else 'index')
+    next = request.GET.get('next', 'mobile:mobile_index' if request.is_mobile else 'index')
     token = request.POST.get('token', None)
     email = request.POST.get('email', None)
 
@@ -149,7 +149,7 @@ def registration_view(request):
     next = request.GET.get('next', 'mobile_registration_page' if request.is_mobile else 'registration_page')
 
     if request.user.is_authenticated():
-        return redirect('mobile_index' if request.is_mobile else 'index')
+        return redirect('mobile:mobile_index' if request.is_mobile else 'index')
 
     return render(request, 'register_web.html', {
         'next': next
@@ -159,7 +159,7 @@ def registration_view(request):
 def mobile_registration_view(request):
 
     if request.user.is_authenticated():
-        return redirect('mobile_index')
+        return redirect('mobile:mobile_index')
 
     next = request.GET.get('next', 'mobile_registration_page')
 
@@ -699,7 +699,7 @@ def make_custom_set(request):
 def mobile_login_view(request):
 
     if request.user.is_authenticated():
-        return redirect('mobile_index')
+        return redirect('mobile:mobile_index')
 
     next = request.GET.get('next', 'mobile_login_page')
     fail = request.GET.get('fail', 'mobile_registration_page')
@@ -735,7 +735,7 @@ def mobile_mypage_interesting_view(request, page_num=1):
             })
 
     else:
-        return redirect('mobile_index')
+        return redirect('mobile:mobile_index')
 
 @mobile_login_required
 def mobile_mypage_myinfo_view(request, page_num=1):
