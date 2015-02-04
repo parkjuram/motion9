@@ -299,12 +299,12 @@ class SurveyResultView(TemplateView):
             for item in survey_result_detail_[key]:
                 price = item['product'].price if price < item['product'].price else price
 
-# unicode(survey_result_detail_[key][0]['product'].category.name_for_kor)
             chart_data.append({
-                "category": "스킨",
+                "category": survey_result_detail_[key][0]['product'].category.name_for_kor.encode('utf-8'),
                 "value": price
             })
-        context["chart_data"] = str(chart_data)
+
+        context["chart_data"] = chart_data
 
         return context
 
@@ -313,7 +313,7 @@ class SurveyResultDetailView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SurveyResultDetailView, self).get_context_data(**kwargs)
-        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(type=kwargs['product_type'])
+        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(product__category__name=kwargs['product_type'])
         survey_result_detail_ = []
         for item in survey_result_detail:
             item.product.detail = item.product.details.all()[0] if len(item.product.details.all())>0 else None
@@ -324,7 +324,6 @@ class SurveyResultDetailView(TemplateView):
             item.product.analysis_.detail_etc = item.product.analysis.all()[0].details.filter(type='etc')[:3]
             item.product.unit_price = item.product.price/item.product.capacity
             survey_result_detail_.append( {
-                'type': item.type,
                 'product': item.product
             })
 

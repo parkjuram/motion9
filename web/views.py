@@ -924,27 +924,29 @@ class SurveyResultView(TemplateView):
         for item in survey_result_detail:
             item.product.unit_price = item.product.price/item.product.capacity
             item_ = {
-                'type': item.type,
                 'product': item.product
             }
-            if not(survey_result_detail_.has_key(item_['type'])):
-                survey_result_detail_.update( {item_['type']:[]} )
+            if not(survey_result_detail_.has_key(item.product.category.name)):
+                survey_result_detail_.update( {item.product.category.name:[]} )
 
-            survey_result_detail_[item_['type']].append(item_)
+            survey_result_detail_[item.product.category.name].append(item_)
 
         context["user_survey_result"] = user_survey_result
         context["survey_result_detail"] = survey_result_detail_
         chart_data = []
+
         print survey_result_detail_
         for key in survey_result_detail_:
             price = 0
             for item in survey_result_detail_[key]:
                 price = item['product'].price if price < item['product'].price else price
+
             chart_data.append({
-                "category": str(key),
+                "category": survey_result_detail_[key][0]['product'].category.name_for_kor.encode('utf-8'),
                 "value": price
             })
-        context["chart_data"] = str(chart_data)
+
+        context["chart_data"] = chart_data
 
         return context
 

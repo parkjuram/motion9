@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from common.models import NCategory
 from common_controller.decorators import mobile_login_required
 from motion9 import const
 from datetime import datetime
@@ -748,9 +749,14 @@ def mobile_mypage_myinfo_view(request, page_num=1):
         else:
             user.profile.age = ''
 
+        categories = NCategory.objects.values()
+        print categories
+
         return render(request, 'my_page_myinfo.html',
             {
-                'tab_name': 'myinfo'
+                'tab_name': 'myinfo',
+                'categories': categories,
+                'test': 'test'
             })
 
     else:

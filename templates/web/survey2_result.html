@@ -108,7 +108,7 @@
                                 </div>
 
                                 <div class="details">
-                                    <div class="number" style="margin-right:40px;">{{ key }}</div>
+                                    <div class="number" style="margin-right:40px;">{{ value.0.product.category.name_for_kor }}</div>
                                 </div>
                                 <a class="more"
                                    href="{% url "survey2_result_detail" pk=request.pk product_type=key %}">
@@ -212,10 +212,15 @@
             Index.init(); // init index page
             Tasks.initDashboardWidget(); // init tash dashboard widget
 
+            var chart_data = {{ chart_data|safe }};
+            for( var item in chart_data ) {
+                chart_data[item]['category'] = decodeURIComponent(escape(chart_data[item]['category']));
+            }
+
             var chart = AmCharts.makeChart("chart_7", {
                 "type": "pie",
                 "theme": "light",
-                "dataProvider": {{ chart_data|safe }},
+                "dataProvider": chart_data,
                 "valueField": "value",
                 "titleField": "category",
                 "outlineAlpha": 0.4,

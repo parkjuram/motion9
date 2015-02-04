@@ -1,8 +1,8 @@
 {% extends "my_page.html" %}
-{% block header_append %}
 {% load static %}
 {% load humanize %}
 {% load mathfilters %}
+{% block header_append %}
 
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
 <script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
@@ -51,22 +51,14 @@
     <div class="col-sm-12 col-xs-12 col-md-12">
         <div class="tabbable">
             <ul class="nav nav-tabs">
-                <li class="active" style="width: auto;">
-                    <a href="#skin_tab" data-toggle="tab" aria-expanded="true">스킨</a></li>
-                <li class style="width: auto;">
-                    <a href="#lotion_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">로션</a></li>
-                <li class style="width: auto;">
-                    <a href="#cream_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">수분크림</a></li>
-                <li class style="width: auto;">
-                    <a href="#essence_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">에센스</a></li>
-                <li class style="width: auto; ">
-                    <a href="#sun_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">선/비비</a></li>
-                <li class style="width: auto;">
-                    <a href="#color_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">색조</a></li>
-                <li class style="width: auto;">
-                    <a href="#etc_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">기타</a></li>
+                {% for category in categories %}
+                    <li class="{% if forloop.counter0 == 0 %}active{% endif %}" style="width: auto;">
+                        <a href="#{{ category.name }}_tab" data-toggle="tab" aria-expanded="{% if forloop.counter0 == 0 %}yes{% else %}no{% endif %}">{{ category.name_for_kor }}</a>
+                    </li>
+                {% endfor %}
             </ul>
-            </div></div>
+        </div>
+    </div>
 
 
 

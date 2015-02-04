@@ -313,11 +313,15 @@ License: You must have a valid license purchased only from themeforest(the above
             Index.init(); // init index page
             Tasks.initDashboardWidget(); // init tash dashboard widget
 
+            var chart_data = {{ chart_data|safe }};
+            for( var item in chart_data ) {
+                chart_data[item]['category'] = decodeURIComponent(escape(chart_data[item]['category']));
+            }
 
             var chart = AmCharts.makeChart("chart_7", {
                 "type": "pie",
                 "theme": "light",
-                "dataProvider": {{ chart_data|safe }},
+                "dataProvider": chart_data,
                 "valueField": "value",
                 "titleField": "category",
                 "outlineAlpha": 0.4,
