@@ -7,7 +7,8 @@
 <script src="{% static 'js/my_page.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/my_page.css'%}"/>
 <link rel="stylesheet" href="{% static 'swiper/idangerous.swiper.css' %}"/>
-{% block header_append %}
+    <link href="{% static 'metronic_assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+    {% block header_append %}
 {% endblock %}
 
 {% endblock %}
@@ -21,7 +22,7 @@
 {#    <h2 class="ui-title">My Page</h2>#}
 {% endblock %}
 {% block content %}
-
+<!--
 <div class="select-wrapper">
         <select id="mobileMypageList" data-mini="true" data-shadow="false">
             <option {% if tab_name == 'my_info' %} selected="selected" {% endif %} value="{% url 'mobile_mypage_myinfo' %}">내 정보</option>
@@ -30,7 +31,7 @@
             <option {% if tab_name == 'purchase_list' %} selected="selected" {% endif %}  value="{% url 'mobile_mypage_purchase_list' %}">구매 내역</option>
         </select>
 </div>
-
+-->
 
 {% block detail %}
 {% endblock %}

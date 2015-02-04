@@ -3,32 +3,35 @@
 {% load static %}
 {% load humanize %}
 {% load mathfilters %}
+
 <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
 <script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/my_page_interesting_set.css'%}"/>
-<script src="{% static 'js/my_page_interesting_set.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/my_page.css'%}"/>
+<!--<script src="{% static 'js/my_page_interesting_set.js'%}"></script>-->
+
+
 {% endblock %}
 {% block detail %}
     <div class="mypage-wrapper">
         <div class="mypage-user-name">
             {{ user.profile.name }}
+            <span style="font-size:14px;">{{ user.email }}</span>
         </div>
-        <br/>
-        <div class="mypage-user-email">
+        <!--<div class="mypage-user-email">
             {{ user.email }}
-        </div>
-        <br/>
+        </div>-->
         <div class="mypage-user-info">
-          성별 :
-          {% if user.profile.sex == 'M'%}
+            성별 :
+            {% if user.profile.sex == 'M' %}
                 남자
-          {% else %}
+            {% else %}
                 여자
-          {% endif %}
-          <br/>
-{#        {% int test =  now %}#}
-          나이 : {{user.profile.age }} <br/>
-          적립 : {{ user.profile.mileage| intcomma }}원<br/>
+            {% endif %}
+            <br/>
+            {#        {% int test =  now %}#}
+            나이 : {{ user.profile.age }} <br/>
+            <!--적립 : {{ user.profile.mileage| intcomma }}원<br/>
           주소 : {{ user.profile.postcode }}<br/>
 
             <div style="margin-left:37px">
@@ -36,15 +39,197 @@
             </div>
             <div style="margin-left:37px">
                 {{ user.profile.detail_address }}<br/>
-            </div>
+            </div>-->
 
         </div>
 
         <div class="my-page-edit-box">
-            <a href="{% url 'mobile_mypage_myinfo_edit' %}"  target="_self" class="mypage-edit-btn">EDIT</a>
+            <a href="{% url 'mobile_mypage_myinfo_edit' %}" target="_self" class="mypage-edit-btn">EDIT</a>
         </div>
-        <br/>
-        <br/>
     </div>
+
+    <div class="col-sm-12 col-xs-12 col-md-12">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active" style="width: auto;">
+                    <a href="#skin_tab" data-toggle="tab" aria-expanded="true">스킨</a></li>
+                <li class style="width: auto;">
+                    <a href="#lotion_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">로션</a></li>
+                <li class style="width: auto;">
+                    <a href="#cream_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">수분크림</a></li>
+                <li class style="width: auto;">
+                    <a href="#essence_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">에센스</a></li>
+                <li class style="width: auto; ">
+                    <a href="#sun_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">선/비비</a></li>
+                <li class style="width: auto;">
+                    <a href="#color_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">색조</a></li>
+                <li class style="width: auto;">
+                    <a href="#etc_tab" data-toggle="tab" aria-expanded="false" style="font-size:10px;">기타</a></li>
+            </ul>
+            </div></div>
+
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="skin_tab">
+        <div class="list-wrap">
+            <div class="col-xs-6" style="padding: 10px;">
+                <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                    <div class="dashboard-stat2" style="padding-bottom:0px; margin-bottom:0px;">
+                        <div class="row">
+                            <div class="col-xs-12" style="padding-right:5px; padding-left: 5px;">
+                                <div class="product-x-img" style="width:auto; text-align:center;">
+                                    <img src="{% static 'img/test.jpg' %}" alt="" style="width:40px;"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-top:5px;">
+                                <div class="display">
+                                    <div class="number" style="font-size:10px;">
+                                        <h3 class="font-blue" style="font-size:11px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF
+                                            50/PA+++</h3>
+                                        <span>25,000원/100ml</span><br/>
+                                        <span>(250원/ml)</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="btn btn-default" style="font-size: 10px; width:100%;">
+                        삭제
+                        <i class="fa fa-times"></i></div>
+                </a>
+            </div>
+
+            <div class="col-xs-6" style="padding: 10px;">
+                <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                    <div class="dashboard-stat2" style="padding-bottom:0px; margin-bottom:0px;">
+                        <div class="row">
+                            <div class="col-xs-12" style="padding-right:5px; padding-left: 5px;">
+                                <div class="product-x-img" style="width:auto; text-align:center;">
+                                    <img src="{% static 'img/test.jpg' %}" alt="" style="width:40px;"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-top:5px;">
+                                <div class="display">
+                                    <div class="number" style="font-size:10px;">
+                                        <h3 class="font-blue" style="font-size:11px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF
+                                            50/PA+++</h3>
+                                        <span>25,000원/100ml</span><br/>
+                                        <span>(250원/ml)</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="btn btn-default" style="font-size: 10px; width:100%;">
+                        삭제
+                        <i class="fa fa-times"></i></div>
+                </a>
+            </div>
+            <div class="col-xs-6" style="padding: 10px;">
+                <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                    <div class="dashboard-stat2" style="padding-bottom:0px; margin-bottom:0px;">
+                        <div class="row">
+                            <div class="col-xs-12" style="padding-right:5px; padding-left: 5px;">
+                                <div class="product-x-img" style="width:auto; text-align:center;">
+                                    <img src="{% static 'img/test.jpg' %}" alt="" style="width:40px;"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-top:5px;">
+                                <div class="display">
+                                    <div class="number" style="font-size:10px;">
+                                        <h3 class="font-blue" style="font-size:11px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF
+                                            50/PA+++</h3>
+                                        <span>25,000원/100ml</span><br/>
+                                        <span>(250원/ml)</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="btn btn-default" style="font-size: 10px; width:100%;">
+                        삭제
+                        <i class="fa fa-times"></i></div>
+                </a>
+            </div>
+        </div></div>
+    <div class="tab-pane" id="lotion_tab">
+        <div class="list-wrap">
+        <div class="col-xs-6" style="padding: 10px;">
+            <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                <div class="dashboard-stat2" style="padding-bottom:0px; margin-bottom:0px;">
+                    <div class="row">
+                        <div class="col-xs-12" style="padding-right:5px; padding-left: 5px;">
+                            <div class="product-x-img" style="width:auto; text-align:center;">
+                                <img src="{% static 'img/test.jpg' %}" alt="" style="width:40px;"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="margin-top:5px;">
+                            <div class="display">
+                                <div class="number" style="font-size:10px;">
+                                    <h3 class="font-blue" style="font-size:11px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF
+                                        50/PA+++</h3>
+                                    <span>25,000원/100ml</span><br/>
+                                    <span>(250원/ml)</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="btn btn-default" style="font-size: 10px; width:100%;">
+                    삭제
+                    <i class="fa fa-times"></i></div>
+            </a>
+        </div>
+
+        <div class="col-xs-6" style="padding: 10px;">
+            <a href="{% url "mobile_report_detail"  product_id=22 %}" target="_self">
+                <div class="dashboard-stat2" style="padding-bottom:0px; margin-bottom:0px;">
+                    <div class="row">
+                        <div class="col-xs-12" style="padding-right:5px; padding-left: 5px;">
+                            <div class="product-x-img" style="width:auto; text-align:center;">
+                                <img src="{% static 'img/test.jpg' %}" alt="" style="width:40px;"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="margin-top:5px;">
+                            <div class="display">
+                                <div class="number" style="font-size:10px;">
+                                    <h3 class="font-blue" style="font-size:11px;">비오템 옴므 UV 디펜스 울트라 라이트 SPF
+                                        50/PA+++</h3>
+                                    <span>25,000원/100ml</span><br/>
+                                    <span>(250원/ml)</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="btn btn-default" style="font-size: 10px; width:100%;">
+                    삭제
+                    <i class="fa fa-times"></i></div>
+            </a>
+        </div>
+
+    </div></div>
+    </div>
+
+
+    <script src="{% static 'metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+
 {% endblock %}
 
