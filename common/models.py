@@ -8,7 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 class NProduct(models.Model):
     name = models.CharField(max_length=20, null=False)
     brand = models.CharField(max_length=20, null=False, blank=True)
-    category = models.ForeignKey('web.Category')
+    # category = models.ForeignKey('web.Category')
     price = models.IntegerField(null=False, default=0)
     capacity = models.IntegerField(null=False, default=0)
     capacity_unit = models.CharField(max_length=10, null=False, default='ml')
