@@ -5,6 +5,14 @@ from django.utils.encoding import python_2_unicode_compatible
 
 # prefix 'N' in class name means renewal version model(2015/01/07)
 @python_2_unicode_compatible
+class NCategory(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    name_for_kor = models.CharField(max_length=20, default='')
+
+    def __str__(self):
+        return self.name
+
+@python_2_unicode_compatible
 class NProduct(models.Model):
     name = models.CharField(max_length=20, null=False)
     brand = models.CharField(max_length=20, null=False, blank=True)
