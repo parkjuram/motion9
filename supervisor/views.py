@@ -176,7 +176,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
                 'name': product.name,
                 'price': product.price,
                 'brand': product.brand,
-                'category': product.category.name,
+                'category': product.category,
                 'skin_type': "",
                 'feature': "",
                 'keyword': []

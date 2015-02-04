@@ -1,6 +1,8 @@
 from django.contrib import admin
-from common.models import NProduct, ProductDetail, ProductAnalysis, ProductAnalysisDetail
+from common.models import NProduct, ProductDetail, ProductAnalysis, ProductAnalysisDetail, NCategory
 
+
+admin.site.register(NCategory)
 
 class NProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'brand', 'price', 'capacity', 'capacity_unit')

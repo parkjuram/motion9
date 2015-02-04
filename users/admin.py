@@ -83,10 +83,7 @@ class SurveyResultAdmin(admin.ModelAdmin):
 
 admin.site.register(SurveyResult, SurveyResultAdmin)
 
-class SurveyResultDetailAdmin(admin.ModelAdmin):
-    list_display = ('survey_result', 'product', 'type')
-
-admin.site.register(SurveyResultDetail, SurveyResultDetailAdmin)
+admin.site.register(SurveyResultDetail)
 
 
 

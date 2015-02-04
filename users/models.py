@@ -178,13 +178,12 @@ class SurveyResult(models.Model):
 class SurveyResultDetail(models.Model):
     survey_result = models.ForeignKey(SurveyResult, related_name='details')
     product = models.ForeignKey('common.NProduct')
-    type = models.CharField(max_length=10, null=False, default='skin') # 'skin', 'lotion'
 
     class Meta:
-        unique_together = (("survey_result", "product", "type"),)
+        unique_together = (("survey_result", "product"),)
 
     def __str__(self):
-        return "(%r)SurveyResultDetailself" % self.id
+        return "(%r)SurveyResultDetail" % self.id
 
 @python_2_unicode_compatible
 class UserSurveyDetail(models.Model):

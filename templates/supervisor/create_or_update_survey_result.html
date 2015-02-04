@@ -110,25 +110,13 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.brand }}</td>
-                    <td>{{ product.category }}</td>
+                    <td>{{ product.category.name_for_kor }}</td>
                     <td>{{ product.skin_type }}</td>
                     <td>{{ product.feature }}</td>
                     <td>
                         {% for keyword in product.keyword %}
                             ({{ keyword }})
                         {% endfor %}
-                    </td>
-                    <td>
-                        <select id="select-type" class="form-control">
-                            <option value="skin">스킨</option>
-                            <option value="lotion">로션</option>
-                            <option value="essence">에센스</option>
-                            <option value="cream">수분크림</option>
-                            <option value="suncare">썬크림/BB</option>
-                            <option value="cleanser">클렌저</option>
-                            <option value="color">색조</option>
-                            <option value="etc">기타</option>
-                        </select>
                     </td>
                 </tr>
             {% endfor %}
