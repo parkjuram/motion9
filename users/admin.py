@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment, \
-    SurveyResult, SurveyResultDetail
+    SurveyResult, SurveyResultDetail, NInterest
 from users.models import UserSurvey, UserSurveyDetail
 
 
@@ -87,5 +87,5 @@ admin.site.register(SurveyResultDetail)
 
 
 
-
+admin.site.register(NInterest)
 admin.site.register(Interest)

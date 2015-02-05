@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from kombu.async.timer import Entry
 from common.models import NCategory
 from common_controller.decorators import mobile_login_required
 from motion9 import const
@@ -38,7 +39,7 @@ import logging
 import urllib2
 import json
 import time
-from users.models import OrderTempInfo, Cart
+from users.models import OrderTempInfo, Cart, NInterest
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -969,3 +970,24 @@ def request_survey(request):
         return http_response_by_json()
 
     return http_response_by_json(CODE_PARAMS_WRONG)
+
+@csrf_exempt
+@login_required
+def do_interest_product(request):
+    user_id = request.user.id
+    product_id = request.POST.get('product_id')
+    user_survey_id = request.POST.get('user_survey_id')
+    try:
+        NInterest.objects.create(user_id=user_id, product_id = product_id, user_survey_id = user_survey_id)
+        return http_response_by_json()
+    except IntegrityError as e:
+        return http_response_by_json(CODE_INTEGRITY_ERROR)
+
+@csrf_exempt
+@login_required
+def undo_interest_product(request):
+    interest_id = request.POST.get('interest_id')
+    interest = NInterest.objects.get(pk=interest_id)
+    interest.delete()
+
+    return http_response_by_json()

@@ -312,6 +312,7 @@ class SurveyResultDetailView(TemplateView):
     template_name = "mobile/survey2_result_detail.html"
 
     def get_context_data(self, **kwargs):
+        self.request.pk = kwargs['pk']
         context = super(SurveyResultDetailView, self).get_context_data(**kwargs)
         survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(product__category__name=kwargs['product_type'])
         survey_result_detail_ = []

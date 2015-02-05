@@ -48,6 +48,11 @@
 
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
+
+    <script type="text/javascript">
+        var urlForDoInterest = "{% url 'do_interest_product' %}";
+    </script>
+
 {% endblock %}
 
 {% block title %}
@@ -169,7 +174,9 @@
                                         </div>
                                         <div class="row margin-bottom-20">
                                             <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn-lg blue"
+                                                <a href="#" class="btn btn-lg blue" id="btn-interest"
+                                                   product-id="{{ survey_result_detail.0.product.id }}"
+                                                   user-surveyid="{{ request.pk }}"
                                                    style="width: 49%; color: #fff !important;">
                                                     관심하기
                                                     <i class="fa fa-plus"></i>
@@ -887,4 +894,5 @@
         <script src="{% static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
         <script src="{% static 'spinner/jquery.spinner.js' %}"></script>
         <script src="{% static 'tab/easyResponsiveTabs.js' %}"></script>
+    <script src="{% static 'user/js/survey2_result_detail.js' %}"></script>
 {% endblock %}

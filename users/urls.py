@@ -99,4 +99,7 @@ urlpatterns = patterns('',
 
     url(r'^survey/request/$', 'users.views.request_survey', name='request_survey'),
 
+    url(r'^interest/do/$', 'users.views.do_interest_product', name='do_interest_product'),
+    url(r'^interest/undo/$', 'users.views.undo_interest_product', name='undo_interest_product'),
+
 )

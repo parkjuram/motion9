@@ -195,3 +195,17 @@ class UserSurveyDetail(models.Model):
 
     def __str__(self):
         return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%s]' % (self.id, self.user_survey.id, self.survey_item_option.content)
+
+
+@python_2_unicode_compatible
+class NInterest(models.Model):
+    user = models.ForeignKey('auth.User', related_name='interests')
+    product = models.ForeignKey('common.NProduct')
+    user_survey = models.ForeignKey(UserSurvey)
+
+    class Meta:
+        unique_together = (
+            ("user", "product", "user_survey"))
+
+    def __str__(self):
+        return '[%r]NInterest' % self.user
