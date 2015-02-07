@@ -174,13 +174,16 @@
                                         </div>
                                         <div class="row margin-bottom-20">
                                             <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn-lg blue" id="btn-interest"
+                                                <a href="#" class="btn btn-lg blue btn-interest"
                                                    product-id="{{ survey_result_detail.0.product.id }}"
-                                                   user-surveyid="{{ request.pk }}"
+                                                   user-survey-id="{{ request.pk }}"
                                                    style="width: 49%; color: #fff !important;">
-                                                    관심하기
-                                                    <i class="fa fa-plus"></i>
-
+                                                    {% if survey_result_detail.0.product.is_interested %}
+                                                        관심완료
+                                                    {% else %}
+                                                        관심하기
+                                                        <i class="fa fa-plus"></i>
+                                                    {% endif %}
                                                 </a>
                                                 <a href="#" class="btn btn-lg purple-wisteria"
                                                    style="width: 49%; float:right; color: #fff !important;">
@@ -528,11 +531,16 @@
                                         </div>
                                         <div class="row margin-bottom-20">
                                             <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn-lg yellow-casablanca"
+                                                <a href="#" class="btn btn-lg yellow-casablanca btn-interest"
+                                                   product-id="{{ survey_result_detail.1.product.id }}"
+                                                   user-survey-id="{{ request.pk }}"
                                                    style="width: 49%; color: #fff !important;">
-                                                    관심하기
-                                                    <i class="fa fa-plus"></i>
-
+                                                    {% if survey_result_detail.1.product.is_interested %}
+                                                        관심완료
+                                                    {% else %}
+                                                        관심하기
+                                                        <i class="fa fa-plus"></i>
+                                                    {% endif %}
                                                 </a>
                                                 <a href="#" class="btn btn-lg purple-wisteria"
                                                    style="width: 49%; float:right; color: #fff !important;">
@@ -894,5 +902,5 @@
         <script src="{% static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
         <script src="{% static 'spinner/jquery.spinner.js' %}"></script>
         <script src="{% static 'tab/easyResponsiveTabs.js' %}"></script>
-    <script src="{% static 'user/js/survey2_result_detail.js' %}"></script>
+    <script src="{% static 'user/js/interest_product.js' %}"></script>
 {% endblock %}

@@ -67,6 +67,11 @@ License: You must have a valid license purchased only from themeforest(the above
     {% endblock %}
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
+
+    <script type="text/javascript">
+        var urlForDoInterest = "{% url 'do_interest_product' %}";
+    </script>
+
 {% endblock %}
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -259,9 +264,16 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="row margin-bottom-20">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="#" class="btn btn-lg blue" style="width: 49%;">
-                            관심하기
-                            <i class="fa fa-plus"></i>
+                        <a href="#" class="btn btn-lg blue btn-interest"
+                           product-id="{{ survey_result_detail.0.product.id }}"
+                           user-survey-id="{{ request.pk }}"
+                           style="width: 49%;">
+                            {% if survey_result_detail.0.product.is_interested %}
+                                관심완료
+                            {% else %}
+                                관심하기
+                                <i class="fa fa-plus"></i>
+                            {% endif %}
 
                         </a>
                         <a href="#" class="btn btn-lg purple-wisteria" style="width: 49%; float:right;">
@@ -271,9 +283,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="#" class="btn btn-lg yellow-casablanca" style="width: 49%;">
-                            관심하기
-                            <i class="fa fa-plus"></i>
+                        <a href="#" class="btn btn-lg yellow-casablanca btn-interest"
+                           product-id="{{ survey_result_detail.1.product.id }}"
+                           user-survey-id="{{ request.pk }}"
+                           style="width: 49%;">
+                            {% if survey_result_detail.1.product.is_interested %}
+                                관심완료
+                            {% else %}
+                                관심하기
+                                <i class="fa fa-plus"></i>
+                            {% endif %}
 
                         </a>
                         <a href="#" class="btn btn-lg purple-wisteria" style="width: 49%; float:right;">
@@ -855,6 +874,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="{% static 'spinner/jquery.spinner.js' %}"></script>
     <script src="{% static 'tab/easyResponsiveTabs.js' %}"></script>
     <!-- END JAVASCRIPTS -->
+    <script src="{% static 'user/js/interest_product.js' %}"></script>
     </body>
 {% endblock %}
 <!-- END BODY -->

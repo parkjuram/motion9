@@ -922,7 +922,9 @@ class SurveyResultView(TemplateView):
         survey_result_detail_ = {}
 
         for item in survey_result_detail:
-            item.product.unit_price = item.product.price/item.product.capacity
+            if item.product.ninterest_set.filter(user_survey_id=self.request.pk).exists():
+                item.product.is_interested = True
+
             item_ = {
                 'product': item.product
             }
@@ -934,8 +936,6 @@ class SurveyResultView(TemplateView):
         context["user_survey_result"] = user_survey_result
         context["survey_result_detail"] = survey_result_detail_
         chart_data = []
-
-        print survey_result_detail_
         for key in survey_result_detail_:
             price = 0
             for item in survey_result_detail_[key]:
@@ -954,8 +954,9 @@ class SurveyResultDetailView(TemplateView):
     template_name = "web/survey2_result_detail.html"
 
     def get_context_data(self, **kwargs):
+        self.request.pk = kwargs['pk']
         context = super(SurveyResultDetailView, self).get_context_data(**kwargs)
-        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(type=kwargs['product_type'])
+        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(product__category__name=kwargs['product_type'])
         survey_result_detail_ = []
         for item in survey_result_detail:
             item.product.detail = item.product.details.all()[0] if len(item.product.details.all())>0 else None
@@ -964,9 +965,10 @@ class SurveyResultDetailView(TemplateView):
             item.product.analysis_.detail_feature = item.product.analysis.all()[0].details.filter(type='feature')[:3]
             item.product.analysis_.detail_effect = item.product.analysis.all()[0].details.filter(type='effect')[:3]
             item.product.analysis_.detail_etc = item.product.analysis.all()[0].details.filter(type='etc')[:3]
-            item.product.unit_price = item.product.price/item.product.capacity
+            if item.product.ninterest_set.filter(user_survey_id=self.request.pk).exists():
+                item.product.is_interested = True
+
             survey_result_detail_.append( {
-                'type': item.type,
                 'product': item.product
             })
 

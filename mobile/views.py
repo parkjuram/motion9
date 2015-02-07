@@ -282,7 +282,9 @@ class SurveyResultView(TemplateView):
         survey_result_detail_ = {}
 
         for item in survey_result_detail:
-            item.product.unit_price = item.product.price/item.product.capacity
+            if item.product.ninterest_set.filter(user_survey_id=self.request.pk).exists():
+                item.product.is_interested = True
+
             item_ = {
                 'product': item.product
             }
@@ -323,7 +325,9 @@ class SurveyResultDetailView(TemplateView):
             item.product.analysis_.detail_feature = item.product.analysis.all()[0].details.filter(type='feature')[:3]
             item.product.analysis_.detail_effect = item.product.analysis.all()[0].details.filter(type='effect')[:3]
             item.product.analysis_.detail_etc = item.product.analysis.all()[0].details.filter(type='etc')[:3]
-            item.product.unit_price = item.product.price/item.product.capacity
+            if item.product.ninterest_set.filter(user_survey_id=self.request.pk).exists():
+                item.product.is_interested = True
+
             survey_result_detail_.append( {
                 'product': item.product
             })

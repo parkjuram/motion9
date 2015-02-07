@@ -21,6 +21,10 @@ class NProduct(models.Model):
     capacity = models.IntegerField(null=False, default=0)
     capacity_unit = models.CharField(max_length=10, null=False, default='ml')
 
+    @property
+    def unit_price(self):
+        return self.price/self.capacity
+
     def __str__(self):
         return self.name
 

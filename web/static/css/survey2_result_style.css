@@ -1,0 +1,97 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/css?family=Muli);
+
+.wrapper {
+    height: auto;
+    text-shadow: none;
+    /*background: url('../img/profile_bg.png') top center repeat-y #ECECEC;*/
+    background-color: white;
+    font-size: 14px;
+    /*width : 100%;*/
+    line-height: 18px;
+    color: #000000;
+    position: relative;
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #bcbfc3;
+    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
+    border-radius: 0.2em;
+    background: #fff;
+    font-size: 1em;
+}
+
+.wrapper-title {
+    height: auto;
+    text-shadow: none;
+    background-color: #f8f9f9;
+    font-size: 14px;
+    /*width : 100%;*/
+    line-height: 18px;
+    color: #000000;
+    position: relative;
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border: 1px solid #bcbfc3;
+    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
+    border-radius: 0.2em;
+    background: #fff;
+    font-size: 1em;
+}
+
+.wrapper-item {
+    height: auto;
+    text-shadow: none;
+    display: inline-block;
+    /*background: url('../img/profile_bg.png') top center repeat-y #ECECEC;*/
+    background-color: white;
+    font-size: 14px;
+    /*width : 100%;*/
+    line-height: 18px;
+    color: #000000;
+    position: relative;
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    border: 1px solid #bcbfc3;
+    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
+    border-radius: 0.2em;
+    background: #fff;
+    font-size: 1em;
+}
+
+.display {
+    margin-bottom: 5px !important;
+}
+
+.number {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.number > span {
+    float: right;
+}
+
+.check {
+    margin:0px;
+}
+
+.modal-body {
+    display: inline-block;
+}
+.ui-checkbox > input {
+    margin:0px !important;
+}
+
+.checkbox > span {
+    margin-left:35px !important;
+}
+

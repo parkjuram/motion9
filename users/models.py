@@ -199,7 +199,7 @@ class UserSurveyDetail(models.Model):
 
 @python_2_unicode_compatible
 class NInterest(models.Model):
-    user = models.ForeignKey('auth.User', related_name='interests')
+    user = models.ForeignKey('auth.User')
     product = models.ForeignKey('common.NProduct')
     user_survey = models.ForeignKey(UserSurvey)
 

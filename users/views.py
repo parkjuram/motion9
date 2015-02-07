@@ -750,14 +750,13 @@ def mobile_mypage_myinfo_view(request, page_num=1):
         else:
             user.profile.age = ''
 
+        request.user.interest = request.user.ninterest_set.select_related('product').all()
         categories = NCategory.objects.values()
-        print categories
 
         return render(request, 'my_page_myinfo.html',
             {
                 'tab_name': 'myinfo',
-                'categories': categories,
-                'test': 'test'
+                'categories': categories
             })
 
     else:
@@ -978,7 +977,7 @@ def do_interest_product(request):
     product_id = request.POST.get('product_id')
     user_survey_id = request.POST.get('user_survey_id')
     try:
-        NInterest.objects.create(user_id=user_id, product_id = product_id, user_survey_id = user_survey_id)
+        interest = NInterest.objects.create(user_id=user_id, product_id = product_id, user_survey_id = user_survey_id)
         return http_response_by_json()
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)
