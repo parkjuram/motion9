@@ -45,6 +45,11 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+
+    <script type="text/javascript">
+        var urlForSurveyAgain = "{% url 'survey_again' %}"
+    </script>
+
 {% endblock %}
 
 {% block title %}
@@ -77,34 +82,53 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="checkbox">
-                                <input type="checkbox">
+                                <input class="again-item" type="checkbox" value="all">
                                 <span>전체 보고서 다시 요청</span>
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            <div class="checkbox">
-                                <input type="checkbox"><span>스킨</span>
-                                <input type="checkbox"><span>로션</span>
-                                <input type="checkbox"><span>수분크림</span>
-                                <input type="checkbox"><span>에센스</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="checkbox">
-                                <input type="checkbox"><span>선크림/BB</span>
-                                <input type="checkbox"><span>클렌징</span>
-                                <input type="checkbox"><span>색조</span>
-                                <input type="checkbox"><span>기타</span>
-                            </div>
-                        </div>
+                        {% for category in categories %}
+                                {% if forloop.counter0 == 0 %}
+                                    <div class="col-xs-6">
+                                        <div class="checkbox">
+                                            <input class="again-item" type="checkbox" value="{{ category.name }}"><span>{{ category.name_for_kor }}</span>
+                                {% elif forloop.counter0 == 4 %}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="checkbox">
+                                            <input class="again-item" type="checkbox" value="{{ category.name }}"><span>{{ category.name_for_kor }}</span>
+                                {% elif forloop.last %}
+                                            <input class="again-item" type="checkbox" value="{{ category.name }}"><span>{{ category.name_for_kor }}</span>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <input class="again-item" type="checkbox" value="{{ category.name }}"><span>{{ category.name_for_kor }}</span>
+                                {% endif %}
+                        {% endfor %}
+{#                        <div class="col-xs-6">#}
+{#                            <div class="checkbox">#}
+{#                                <input class="again-item" type="checkbox" value="skin"><span>스킨</span>#}
+{#                                <input class="again-item" type="checkbox" value="lotion"><span>로션</span>#}
+{#                                <input class="again-item" type="checkbox" value="cream"><span>수분크림</span>#}
+{#                                <input class="again-item" type="checkbox" value="assence"><span>에센스</span>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-6">#}
+{#                            <div class="checkbox">#}
+{#                                <input class="again-item" type="checkbox"><span>선크림/BB</span>#}
+{#                                <input class="again-item" type="checkbox"><span>클렌징</span>#}
+{#                                <input class="again-item" type="checkbox"><span>색조</span>#}
+{#                                <input class="again-item" type="checkbox"><span>기타</span>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
                     <div class="lise-title">
                         요청 이유
                     </div>
                     <div class="col-xs-12">
-                        <textarea class="form-control" rows="3">ex)추천된 로션은 유분기가 많아서 저에게 안맞는거 같아요</textarea>
+                        <textarea id="text-reason" class="form-control" rows="3">ex)추천된 로션은 유분기가 많아서 저에게 안맞는거 같아요</textarea>
                     </div>
-                    <div class="lise-title">
+                    <div id="text-comments" class="lise-title">
                         추가 요청 사항
                     </div>
                     <div class="col-xs-12">
@@ -113,7 +137,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="modal-footer">
                     <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
-                    <div type="button" class="btn btn-primary btn-usersurvey-again">재분석 요청</div>
+                    <div type="button" class="btn btn-primary btn-survey-again" user-survey-id="{{ request.pk }}" data-dismiss="modal">재분석 요청</div>
                 </div>
             </div>
         </div>
@@ -318,6 +342,7 @@ License: You must have a valid license purchased only from themeforest(the above
     </script>
 
     <script src="{% static 'metronic_assets/admin/pages/scripts/ui-extended-modals.js' %}"></script>
+    <script src="{% static 'user/js/survey.js' %}"></script>
     <!-- END JAVASCRIPTS -->
     </body>
 {% endblock %}

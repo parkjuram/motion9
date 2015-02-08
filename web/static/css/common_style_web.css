@@ -11,7 +11,7 @@ body{
 	font-family: Muli, 'Nanum Gothic', Geneva, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background: #eaeaea;
     font-size: 12px;
     /*background: url(../img/body-bg.png) top left repeat;*/
 }
@@ -143,6 +143,7 @@ a:visited{
     list-style: none;
     width : 360px;
     float : right;
+    margin-bottom: 0px !important;
 
 }
 #header-right-menu-list li{
@@ -186,6 +187,7 @@ a:visited{
     list-style: none;
     width : 480px;
     float :left;
+    margin-bottom: 0px !important;
 }
 
 #header-main-menu-list li{

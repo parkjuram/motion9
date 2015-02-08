@@ -86,6 +86,7 @@
 
 .modal-body {
     display: inline-block;
+
 }
 .ui-checkbox > input {
     margin:0px !important;
@@ -95,3 +96,11 @@
     margin-left:35px !important;
 }
 
+.content-number {
+    padding-top: 25px;
+}
+
+.tabbable-line > .nav-tabs > li.active {
+    border-bottom: 4px solid #212121 !important;
+    position: relative !important;
+}

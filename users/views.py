@@ -39,7 +39,8 @@ import logging
 import urllib2
 import json
 import time
-from users.models import OrderTempInfo, Cart, NInterest
+from users.admin import UserSurveyAdmin
+from users.models import OrderTempInfo, Cart, NInterest, UserSurveyAgain
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -990,3 +991,17 @@ def undo_interest_product(request):
     interest.delete()
 
     return http_response_by_json()
+
+@csrf_exempt
+@login_required
+def survey_again(request):
+    user_survey_id = request.POST.get('user_survey_id')
+    item = request.POST.get('item')
+    reason = request.POST.get('reason')
+    comments = request.POST.get('comments')
+    try:
+        user_survey_again = UserSurveyAgain.objects.create(user_survey_id=user_survey_id, item=item, reason=reason,
+                                                           comments = comments)
+        return http_response_by_json()
+    except IntegrityError as e:
+        return http_response_by_json(CODE_INTEGRITY_ERROR)

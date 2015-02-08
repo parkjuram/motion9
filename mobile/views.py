@@ -4,6 +4,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View, TemplateView
+from common.models import NCategory
 from common_controller.decorators import mobile_login_required
 
 from common_controller.util import helper_get_products, helper_get_user, helper_make_paging_data, helper_get_set_list, \
@@ -307,6 +308,7 @@ class SurveyResultView(TemplateView):
             })
 
         context["chart_data"] = chart_data
+        context["categories"] = NCategory.objects.all()
 
         return context
 
