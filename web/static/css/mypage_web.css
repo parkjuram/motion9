@@ -20,6 +20,29 @@ h2{
     margin : 5px 0;
 }
 
+.container {
+    margin-top: 20px;
+}
+.mypage-wrapper {
+    height: auto;
+    text-shadow: none;
+    /*background: url('../img/profile_bg.png') top center repeat-y #ECECEC;*/
+    background-color: white;
+    font-size: 14px;
+    /*width : 100%;*/
+    line-height: 18px;
+    color: #000000;
+    position: relative;
+    padding-top: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    padding-bottom: 0px;
+    border: 1px solid #bcbfc3;
+    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
+    border-radius: 0.2em;
+    background: #fff;
+    font-size: 1em;
+}
 
 .tab-list{
     background: #d2bb8f;
@@ -88,8 +111,7 @@ h2{
 }
 
 #productGrid{
-    padding : 12px 0;
-    margin-left : 14px;
+
 }
 
 .category-title{
@@ -101,4 +123,44 @@ h2{
     font-weight: bold;
     border-left: 4px solid black;
     color: #999999;
+}
+.nav {
+    border: 1px solid #bcbfc3;
+    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
+    border-radius: 0.2em;
+    background: #fff;
+    font-size: 1em;
+    margin-bottom: 10px!important;
+}
+
+.nav-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: -webkit-box;
+    display: -moz-box;
+
+}
+
+.nav-tabs > li {
+    float: none;
+    border-right: 1px solid #e5e5e6;
+    margin-right: 0px;
+}
+
+.nav-tabs > li > a {
+    float: none;
+    font-size: 12px;
+    margin-right: 0px;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #d2bb8f !important;
+    cursor: default;
+    background-color: #fff;
+    border-color: transparent;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #fff;
+    border-color: transparent;
 }

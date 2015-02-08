@@ -12,47 +12,23 @@
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css"/>
-    <link href="{% static 'metronic_assets/global/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet"
-          type="text/css"/>
     <link href="{% static 'metronic_assets/global/plugins/simple-line-icons/simple-line-icons.min.css' %}"
           rel="stylesheet" type="text/css"/>
     <link href="{% static 'metronic_assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"
           type="text/css"/>
     <link href="{% static 'metronic_assets/global/plugins/uniform/css/uniform.default.css' %}" rel="stylesheet"
           type="text/css"/>
-    <link href="{% static 'metronic_assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}"
-          rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
-    <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
-    <link href="{% static 'metronic_assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css' %}"
-          rel="stylesheet" type="text/css"/>
-    <link href="{% static 'metronic_assets/global/plugins/fullcalendar/fullcalendar.min.css' %}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{% static 'metronic_assets/global/plugins/jqvmap/jqvmap/jqvmap.css' %}" rel="stylesheet"
-          type="text/css"/>
-    <!-- END PAGE LEVEL PLUGIN STYLES -->
-    <!-- BEGIN PAGE STYLES -->
-    <link href="{% static 'metronic_assets/admin/pages/css/tasks.css' %}" rel="stylesheet" type="text/css"/>
-    <!-- END PAGE STYLES -->
     <!-- BEGIN THEME STYLES -->
     <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
-    <link href="{% static 'metronic_assets/global/css/components-rounded.css' %}" id="style_components" rel="stylesheet"
+    <link href="{% static 'metronic_assets/global/css/components.css' %}" id="style_components" rel="stylesheet"
           type="text/css"/>
-    <link href="{% static 'metronic_assets/global/css/plugins.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'metronic_assets/admin/layout4/css/layout.css' %}" rel="stylesheet" type="text/css"/>
-    <link href="{% static 'metronic_assets/admin/layout4/css/themes/default.css' %}" rel="stylesheet" type="text/css"
-          id="style_color"/>
-    <link href="{% static 'metronic_assets/admin/layout4/css/custom.css' %}" rel="stylesheet" type="text/css"/>
-
     <link rel="stylesheet" href="{% static 'css/common_style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/survey2_result_style.css' %}"/>
 
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
-
-    <script type="text/javascript">
-        var urlForDoInterest = "{% url 'do_interest_product' %}";
-    </script>
-
 {% endblock %}
 
 {% block title %}
@@ -64,6 +40,7 @@
 {% endblock %}
 
 {% block content %}
+
         <div class="row" id=choice data-spy="affix" data-offset-top="500"
              style="margin:0px; width:100%; position: fixed !important; top: 49px !important; z-index:100;">
             <div class="col-sm-12 col-md-12 col-xs-12" style="padding:0px;">
@@ -99,8 +76,10 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="pro_1_tab">
                                         <div class="row">
+
                                             <div class="col-md-12  col-xs-12">
                                                 <!-- BEGIN PORTLET-->
+<div class="wrapper">
                                                 <div class="portlet light ">
                                                     <div class="portlet-title">
                                                         <div class="caption caption-md">
@@ -171,21 +150,17 @@
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
+                                                </div>
                                         </div>
                                         <div class="row margin-bottom-20">
                                             <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn-lg blue btn-interest"
-                                                   product-id="{{ survey_result_detail.0.product.id }}"
-                                                   user-survey-id="{{ request.pk }}"
+                                                <a href="#" class="btn btn blue"
                                                    style="width: 49%; color: #fff !important;">
-                                                    {% if survey_result_detail.0.product.is_interested %}
-                                                        관심완료
-                                                    {% else %}
-                                                        관심하기
-                                                        <i class="fa fa-plus"></i>
-                                                    {% endif %}
+                                                    관심하기
+                                                    <i class="fa fa-plus"></i>
+
                                                 </a>
-                                                <a href="#" class="btn btn-lg purple-wisteria"
+                                                <a href="#" class="btn btn purple-wisteria"
                                                    style="width: 49%; float:right; color: #fff !important;">
                                                     리뷰 남기기
                                                     <i class="fa fa-edit"></i>
@@ -194,8 +169,9 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
 
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+<div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -217,9 +193,12 @@
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
+                                                </div>
                                         </div>
                                         <div class="row">
+
                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -243,8 +222,9 @@
                                                             <br><br>
 
                                                             <div class="clearfix">
-                                                                <button type="button" class="btn btn-circle blue"
+                                                                <div type="button" class="btn btn-circle blue"
                                                                         style="border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                                                    <div class="content-number">
                                                                     <div style="position:relative;">
                                                                         <span class="glyphicon glyphicon-pencil"></span>
 
@@ -252,7 +232,8 @@
                                                                     </div>
                                                                     <br>
                                                                     <span style="position:relative; top:-30px;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>
-                                                                </button>
+                                                                </div>
+                                                                    </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -260,9 +241,12 @@
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
+                                                </div>
                                         </div>
                                         <div class="row">
+
                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                             <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -317,8 +301,11 @@
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
+                                        </div>
                                         <div class="row">
+
                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
@@ -384,8 +371,11 @@
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
+                                        </div>
                                         <div class="row">
+
                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
@@ -451,10 +441,12 @@
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane" id="pro_2_tab">
                                         <div class="row">
                                             <div class="col-md-12  col-xs-12">
+                                                <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light ">
                                                     <div class="portlet-title">
@@ -526,23 +518,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                    </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
                                         <div class="row margin-bottom-20">
                                             <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn-lg yellow-casablanca btn-interest"
-                                                   product-id="{{ survey_result_detail.1.product.id }}"
-                                                   user-survey-id="{{ request.pk }}"
+                                                <a href="#" class="btn btn yellow-casablanca"
                                                    style="width: 49%; color: #fff !important;">
-                                                    {% if survey_result_detail.1.product.is_interested %}
-                                                        관심완료
-                                                    {% else %}
-                                                        관심하기
-                                                        <i class="fa fa-plus"></i>
-                                                    {% endif %}
+                                                    관심하기
+                                                    <i class="fa fa-plus"></i>
+
                                                 </a>
-                                                <a href="#" class="btn btn-lg purple-wisteria"
+                                                <a href="#" class="btn btn purple-wisteria"
                                                    style="width: 49%; float:right; color: #fff !important;">
                                                     리뷰 남기기
                                                     <i class="fa fa-edit"></i>
@@ -552,7 +540,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-
+<div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -571,11 +559,13 @@
                                                     </div>
 
                                                 </div>
+    </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -599,9 +589,10 @@
                                                             <br><br>
 
                                                             <div class="btn-group btn-group-solid">
-                                                                <button type="button"
+                                                                <div type="button"
                                                                         class="btn btn-circle yellow-casablanca"
                                                                         style="border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                                                    <div class="content-number">
                                                                     <div style="position:relative;">
                                                                         <span class="glyphicon glyphicon-pencil"></span>
 
@@ -609,17 +600,20 @@
                                                                     </div>
                                                                     <br>
                                                                     <span style="position:relative; top:-30px;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>
-                                                                </button>
+                                                                </div>
+                                                                    </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                 </div>
+                                                    </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -681,11 +675,13 @@
                                                     </div>
 
                                                 </div>
+                                            </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
@@ -749,12 +745,14 @@
                                                         </table>
                                                     </div>
                                                 </div>
+                                            </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 <!-- BEGIN PORTLET-->
+                                            <div class="wrapper">
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
                                                         <div class="caption caption-md">
@@ -817,6 +815,7 @@
                                                         </table>
                                                     </div>
                                                 </div>
+                                            </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
@@ -835,72 +834,16 @@
         <!-- END PAGE CONTENT -->
 
         <!-- END PAGE CONTAINER -->
-        <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-        <!-- BEGIN CORE PLUGINS -->
-        <!--[if lt IE 9]>
-            <script src="{% static 'metronic_assets/global/plugins/respond.min.js' %}"></script>
-            <script src="{% static 'metronic_assets/global/plugins/excanvas.min.js' %}"></script>
-            <![endif]-->
-        {#	<script src="{% static 'metronic_assets/global/plugins/jquery.min.js' %}" type="text/javascript"></script>#}
-        <script src="{% static 'metronic_assets/global/plugins/jquery-migrate.min.js' %}"
-                type="text/javascript"></script>
-        <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-        <script src="{% static 'metronic_assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/jquery.blockui.min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/jquery.cokie.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/uniform/jquery.uniform.min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}"
-                type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{% static 'metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'metronic_assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'metronic_assets/global/scripts/metronic.js' %}" type="text/javascript"></script>
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core componets
 
-        <!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
-        <script src="{% static 'metronic_assets/global/plugins/morris/morris.min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/morris/raphael-min.js' %}"
-                type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/jquery.sparkline.min.js' %}"
-                type="text/javascript"></script>
-        <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        });
+    </script>
 
-        <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="{% static 'metronic_assets/global/scripts/metronic.js' %}" type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/admin/layout4/scripts/layout.js' %}" type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/admin/layout4/scripts/demo.js' %}" type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/admin/pages/scripts/index3.js' %}" type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/admin/pages/scripts/tasks.js' %}" type="text/javascript"></script>
-
-        <script src="{% static 'metronic_assets/admin/layout3/scripts/layout.js' %}" type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/admin/layout3/scripts/demo.js' %}" type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/admin/pages/scripts/charts-flotcharts.js' %}"></script>
-        <!-- END PAGE LEVEL SCRIPTS -->
-        <script>
-            jQuery(document).ready(function () {
-                Metronic.init(); // init metronic core componets
-                Layout.init(); // init layout
-                Demo.init(); // init demo features
-                Index.init(); // init index page
-                Tasks.initDashboardWidget(); // init tash dashboard widget
-                ChartsFlotcharts.init();
-                ChartsFlotcharts.initCharts();
-                ChartsFlotcharts.initPieCharts();
-                ChartsFlotcharts.initBarCharts();
-
-            });
-        </script>
-        <script src="{% static 'magnific_popup/jquery.magnific-popup.min.js' %}"></script>
-        <script src="{% static 'spinner/jquery.spinner.js' %}"></script>
-        <script src="{% static 'tab/easyResponsiveTabs.js' %}"></script>
-    <script src="{% static 'user/js/interest_product.js' %}"></script>
 {% endblock %}
