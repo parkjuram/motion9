@@ -22,7 +22,7 @@
     </tr>
         {% for user_survey in user_surveys %}
             <tr>
-                <td>{{ user_survey.username }}</td>
+                <td>{{ user_survey.username }}{% if user_survey.is_again %}(재요청){% endif %}</td>
                 <td>{{ user_survey.email }}</td>
                 <td>{{ user_survey.survey_enter_date }}</td>
                 <td>{% if user_survey.is_entered %}

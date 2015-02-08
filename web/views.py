@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.template import Context
 from django.views.generic import View, TemplateView
+from common.models import NCategory
 from common_controller import util
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings

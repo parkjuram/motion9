@@ -32,7 +32,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines, helper_get_survey_items, \
     helper_request_survey
 
-from .models import Interest
+from .models import Interest, UserSurvey
 
 from subprocess import call, Popen, PIPE
 import logging
@@ -996,11 +996,20 @@ def undo_interest_product(request):
 @login_required
 def survey_again(request):
     user_survey_id = request.POST.get('user_survey_id')
+    new_user_survey = UserSurvey.objects.filter(id=user_survey_id)[:1][0]
+    new_user_survey.pk = None
+    new_user_survey.save()
+    user_survey = UserSurvey.objects.filter(id=user_survey_id)[:1][0]
+    user_survey_detail_list = user_survey.details.all()
+    for user_survey_detail in user_survey_detail_list:
+        user_survey_detail.user_survey = new_user_survey
+        user_survey_detail.save()
+
     item = request.POST.get('item')
     reason = request.POST.get('reason')
     comments = request.POST.get('comments')
     try:
-        user_survey_again = UserSurveyAgain.objects.create(user_survey_id=user_survey_id, item=item, reason=reason,
+        user_survey_again = UserSurveyAgain.objects.create(user_survey=new_user_survey, item=item, reason=reason,
                                                            comments = comments)
         return http_response_by_json()
     except IntegrityError as e:

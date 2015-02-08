@@ -119,19 +119,17 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
 
 class UserSurveyListView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        user_surveys = UserSurvey.objects.order_by('-created').all()
+        user_surveys = UserSurvey.objects.select_related('user').order_by('-created').all()[:5]
         user_surveys_ = []
         for user_survey in user_surveys:
-            username = user_survey.user.profile.name
-            email = user_survey.user.email
-            survey_enter_date = user_survey.created
             user_survey_ = {
                 'id': user_survey.id,
-                'username': username,
-                'email': email,
-                'survey_enter_date': survey_enter_date,
+                'username': user_survey.user.profile.name,
+                'email': user_survey.user.email,
+                'survey_enter_date': user_survey.created,
                 'is_entered': False,
-                'entered_date': ''
+                'entered_date': '',
+                'is_again': user_survey.usersurveyagain_set.exists()
             }
             if user_survey.results.exists():
                 survey_result = user_survey.results.first()
@@ -163,6 +161,9 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
                 'question': question,
                 'answer': answer
             })
+
+        user_survey_again = user_survey.usersurveyagain_set.all()
+        print user_survey_again
 
 
         products_ = []

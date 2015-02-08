@@ -164,7 +164,7 @@ class UserSurvey(models.Model):
 
 @python_2_unicode_compatible
 class UserSurveyAgain(models.Model):
-    user_survey = models.ForeignKey(UserSurvey)
+    user_survey = models.OneToOneField(UserSurvey)
     item = models.TextField(null=False, blank=True)
     reason = models.TextField(null=False, blank=True)
     comments = models.TextField(null=False, blank=True)
@@ -174,7 +174,7 @@ class UserSurveyAgain(models.Model):
         unique_together = (("user_survey", "created"),)
 
     def __str__(self):
-        return self.user_survey
+        return '[%r]UserSurveyAgain[%r]' % (self.id, self.user_survey.user)
 
 @python_2_unicode_compatible
 class SurveyResult(models.Model):
