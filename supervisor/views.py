@@ -129,7 +129,7 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
                 'survey_enter_date': user_survey.created,
                 'is_entered': False,
                 'entered_date': '',
-                'is_again': user_survey.usersurveyagain_set.exists()
+                'is_again': hasattr(user_survey,'usersurveyagain')
             }
             if user_survey.results.exists():
                 survey_result = user_survey.results.first()
@@ -161,9 +161,6 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
                 'question': question,
                 'answer': answer
             })
-
-        user_survey_again = user_survey.usersurveyagain_set.all()
-        print user_survey_again
 
 
         products_ = []
@@ -200,6 +197,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
             products_.append(product_)
 
         rendering_params = {'user_survey_id': user_survey_id,
+                            'user_survey_again': user_survey.usersurveyagain if hasattr(user_survey,'usersurveyagain') else False,
                             'user_survey_details': user_survey_details,
                             'brands': brands,
                             'categories': categories,

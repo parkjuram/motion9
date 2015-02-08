@@ -19,6 +19,16 @@
         {% endfor %}
         <br>
     </div>
+    {% if user_survey_again %}
+        <div class="row">
+        <h3>재요청 내용</h3>
+            <h6>재요청 항목: {{ user_survey_again.item }}</h6>
+            <h6>이유: {{ user_survey_again.reason }}</h6>
+            <h6>추가comments: {{ user_survey_again.comments }}</h6>
+        <br>
+    </div>
+    {% endif %}
+
     <div class="row">
         <h3>입력내용</h3>
         <textarea id="textarea-general-review" class="form-control" rows="4" placeholder="분석총평">{{ general_review }}</textarea>

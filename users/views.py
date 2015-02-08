@@ -317,10 +317,13 @@ def mypage_view(request, page_num=1):
         else:
             user.profile.age = ''
 
+        request.user.interest = request.user.ninterest_set.select_related('product').all()
+
         return render(request, 'mypage_interesting_web.html',
             {
                 'interests': products,
-                'tab_name': 'interesting_product'
+                'tab_name': 'interesting_product',
+                'categories': NCategory.objects.values()
             })
 
     else:

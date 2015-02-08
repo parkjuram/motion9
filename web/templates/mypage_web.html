@@ -15,29 +15,12 @@
         <div class="col-sm-12 col-xs-12 col-md-12">
             <div class="tabbable">
                 <ul class="nav nav-tabs">
-                    {#            {% if tab_name == "interesting_product"%} #}
-                    <li class="active" style="width: auto;">
-                        <a href="#skin_tab" data-toggle="tab" aria-expanded="true">스킨</a></li>
-                    <li class><a href="#lotion_tab" data-toggle="tab" aria-expanded="true">로션 </a></li>
-                    </li>
-                    <li class><a href="#cream_tab" data-toggle="tab" aria-expanded="true">수분크림</a></li>
-                    <li class><a href="#essence_tab" data-toggle="tab" aria-expanded="true">에센스</a></li>
-                    </li>
-                    <li class><a href="#sun_tab" data-toggle="tab" aria-expanded="true">선/비비</a></li>
-                    <li class><a href="#color_tab" data-toggle="tab" aria-expanded="true">색조</a></li>
-                    <li class><a href="#etc_tab" data-toggle="tab" aria-expanded="true">기타</a></li>
-
-                    <!--{#                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>#}
-{#                //<li><a href="{% url 'mypage_purchase'%}">구매 목록</a></li>#}
-{#             //{% elif tab_name == "interesting_set" %}    #}
-{#                 //<li><a href="{% url 'mypage'%}">관심 제품</a></li>#}
-{#                //<li class="current-category">관심 세트</li>#}
-{#                //<li><a href="{% url 'mypage_purchase'%}">구매 목록</a></li>#}
-{#            //{% elif tab_name == "purchase_list" %}#}
-{#              //  <li><a href="{% url 'mypage'%}">관심 제품</a></li>#}
-{#                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>#}
-                <li class="current-category">구매 목록</li>#}
-{#           //{% endif%}#}-->
+                    {% for category in categories %}
+                        <li class="{% if forloop.counter0 == 0 %}active{% endif %}" style="width: auto;">
+                            <a href="#{{ category.name }}_tab" data-toggle="tab"
+                               aria-expanded="{% if forloop.counter0 == 0 %}yes{% else %}no{% endif %}">{{ category.name_for_kor }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -46,22 +29,21 @@
                 <div class="col-md-8 col-sm-8 col-xs-8">
                     <div class="main-container float-left">
                         <div class="box-css">
-                            <!--<div class="category-title">
-{#                    // {% block  categoryTitle%}#}
-{#                     {% endblock %} #}
-                </div>-->
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="skin_tab">
-                                    <div id="productGrid">
-                                        {% block productGrid %}
-                                        {% endblock %}
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="lotion_tab">
-                                    <div id="productGrid">abc
 
-                                    </div>
-                                </div>
+                            <div class="tab-content">
+                                {% block tab_content %}
+                                {% endblock tab_content %}
+{#                                <div class="tab-pane active" id="skin_tab">#}
+{#                                    <div id="productGrid">#}
+{#                                        {% block productGrid %}#}
+{#                                        {% endblock %}#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="tab-pane" id="lotion_tab">#}
+{#                                    <div id="productGrid">abc#}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
                             </div>
                             <div id="purchaseList">
                                 {% block purchaseList %}

@@ -8,45 +8,106 @@
     <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
     <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
     <script src="{% static 'js/mypage_interesting_web.js' %}"></script>
+
+    <script type="text/javascript">
+        var urlForDoInterest = "{% url 'do_interest_product' %}";
+        var urlForUndoInterest = "{% url 'undo_interest_product' %}";
+    </script>
+
+    <script src="{% static 'user/js/interest_product.js' %}"></script>
+
 {% endblock %}
 {% block categoryTitle %}
     관심 제품
 {% endblock %}
-{% block productGrid %}
-    {% if interests.data|length > 0 %}
-        {% for product in interests.data %}
 
 
-
-            <div class="product effect">
-                <div class="product-img" id="item-{{ product.id }}" data-attr="{{ product.id }}">
-                    <img src="{{ product.big_img_url }}"/>
-                </div>
-                <div class="product-info">
-                    <div class="product-item-brand">
-                        {{ product.brandname }}
-                    </div>
-                    <div class="product-item-name">
-                        <a href="{% url 'product' product_id=product.id %}"
-                           title="{{ product.name }}">{{ product.name }}</a>
-                    </div>
-                    <div class="product-item-info-contents">
-                        <!--카테고리 > {{ product.category_name }}<br/>-->
-                        {{ product.discount_price|intcomma }}원/{{ product.capacity }} <br/>
-                        (200원/ml)
-                    </div>
-                </div>
-                <div class="mask">
-                    <a href="#" class="view_detail"><span><img
-                            src="http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Hover-Effects/img/link.png"/></span>자세히
-                        보기</a>
-                    <a href="#" class="delete"><span>X</span>관심 취소</a>
-                </div>
+{% block tab_content %}
+    {% for category in categories %}
+        <div class="tab-pane {% if forloop.counter0 == 0 %}active{% endif %}" id="{{ category.name }}_tab">
+            <div id="productGrid">
+                {% for interest in user.interest %}
+                    {% if interest.product.category.name == category.name %}
+                        <div class="product effect">
+                            <div class="product-img" id="item-{{ interest.product.id }}" data-attr="{{ interest.product.id }}">
+                                <img src="{{ interest.product.big_img_url }}"/>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-item-brand">
+                                    {{ interest.product.brand }}
+                                </div>
+                                <div class="product-item-name">
+                                    <a href="{% url 'product' product_id=interest.product.id %}"
+                                       title="{{ interest.product.name }}">{{ interest.product.name }}</a>
+                                </div>
+                                <div class="product-item-info-contents">
+                                    <!--카테고리 > {{ interest.product.category.name }}<br/>-->
+                                    {{ interest.product.price|intcomma }}원/{{ interest.product.capacity_unit }} <br/>
+                                    ({{ interest.product.unit_price|intcomma }}원/{{ interest.product.capacity_unit }})
+                                </div>
+                            </div>
+                            <div class="mask">
+                                <a href="{% url "survey2_result_detail" pk=interest.user_survey.id product_type=category.name %}" class="view_detail"><span><img
+                                        src="http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Hover-Effects/img/link.png"/></span>자세히
+                                    보기</a>
+                                <a href="#" class="delete btn-undo-interest" interest-id="{{ interest.id }}">
+                                    <span>X</span>관심 취소
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
+        </div>
+    {% endfor %}
+    {#                                <div class="tab-pane active" id="skin_tab">#}
+{#                                    <div id="productGrid">#}
+{#                                        {% block productGrid %}#}
+{#                                        {% endblock %}#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="tab-pane" id="lotion_tab">#}
+{#                                    <div id="productGrid">abc#}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
+{% endblock tab_content %}
 
-
-
-
+{#{% block productGrid %}#}
+{#    {% if interests.data|length > 0 %}#}
+{#        {% for product in interests.data %}#}
+{##}
+{##}
+{##}
+{#            <div class="product effect">#}
+{#                <div class="product-img" id="item-{{ product.id }}" data-attr="{{ product.id }}">#}
+{#                    <img src="{{ product.big_img_url }}"/>#}
+{#                </div>#}
+{#                <div class="product-info">#}
+{#                    <div class="product-item-brand">#}
+{#                        {{ product.brandname }}#}
+{#                    </div>#}
+{#                    <div class="product-item-name">#}
+{#                        <a href="{% url 'product' product_id=product.id %}"#}
+{#                           title="{{ product.name }}">{{ product.name }}</a>#}
+{#                    </div>#}
+{#                    <div class="product-item-info-contents">#}
+{#                        <!--카테고리 > {{ product.category_name }}<br/>-->#}
+{#                        {{ product.discount_price|intcomma }}원/{{ product.capacity }} <br/>#}
+{#                        (200원/ml)#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="mask">#}
+{#                    <a href="#" class="view_detail"><span><img#}
+{#                            src="http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Hover-Effects/img/link.png"/></span>자세히#}
+{#                        보기</a>#}
+{#                    <a href="#" class="delete"><span>X</span>관심 취소</a>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{##}
+{##}
+{##}
             {#    <div class="product-item" id="item-{{ product.id}}" data-attr="{{ product.id }}">#}
             {#        <div class="product-item-img">#}
             {#            <div class="product-opacity-bg product-hover-area">#}
@@ -72,11 +133,11 @@
             {#            </div>#}
             {#        </div>#}
             {#    </div>#}
-
-        {% endfor %}
-    {% endif %}
-
-{% endblock %}
+{##}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+{##}
+{#{% endblock %}#}
 
 {% block productPaging %}
     {% if interests.data|length > 0 %}
