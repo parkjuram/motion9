@@ -947,6 +947,7 @@ class SurveyResultView(TemplateView):
             })
 
         context["chart_data"] = chart_data
+        context["categories"] = NCategory.objects.all()
 
         return context
 

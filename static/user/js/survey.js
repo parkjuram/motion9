@@ -5,10 +5,7 @@
 
 <script src="{% static 'user/js/survey.js' %}"></script>
 
-user_survey_id = request.POST.get('user_survey_id')
-item = request.POST.get('item')
-reason = request.POST.get('reason')
-comments = request.POST.get('comments')
+class="btn-survey-again"
 
 */
 (function() {
