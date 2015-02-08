@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment, \
-    SurveyResult, SurveyResultDetail, NInterest
+    SurveyResult, SurveyResultDetail, NInterest, UserSurveyAgain
 from users.models import UserSurvey, UserSurveyDetail
 
 
