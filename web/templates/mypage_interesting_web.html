@@ -1,109 +1,108 @@
 {% extends "mypage_web.html" %}
 {% block subHeader %}
-{% load static %}
-{% load humanize %}
-{% load mathfilters %}
-<link rel="stylesheet" href="{% static 'css/mypage_interesting_web.css'%}"/>
+    {% load static %}
+    {% load humanize %}
+    {% load mathfilters %}
+    <link rel="stylesheet" href="{% static 'css/mypage_interesting_web.css' %}"/>
 
-<script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
-<script src="{% static 'js/masonry.pkgd.min.js'%}"></script>
-<script src="{% static 'js/mypage_interesting_web.js'%}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/mypage_interesting_web.js' %}"></script>
 {% endblock %}
 {% block categoryTitle %}
     관심 제품
 {% endblock %}
 {% block productGrid %}
-{% if interests.data|length > 0 %}
-    {% for product in interests.data %}
-        <div class="product-item">
-            <div class="product-item-img"  id="item-{{product.id}}" data-attr="{{product.id}}">
-                <div class="product-opacity-bg product-hover-area">
-                    <a href="{% url 'product' product_id=product.id %}"><img src="{% static "img/detail_black.png" %}" class="icon"/></a>
-                </div>
-                <img src="{{product.big_img_url}}"/>
-            </div>
-            <div class="product-item-info">
-                <div class="product-item-brand">
-                    {{ product.brandname }}
-                </div>
-                <div class="product-item-name">
-                    <a href="{% url 'product' product_id=product.id %}" title="{{ product.name }}">{{product.name}}</a>
-                </div>
-                <div class="product-item-info-contents">
-                   카테고리 > {{ product.category_name }}<br/>
-                   가격 : {{ product.discount_price|intcomma }}원 <br/>
-                   용량 : {{ product.capacity }}
-                </div>
-                <div class="product-hover-area">
-                    <div class="product-item-desc">
-                        {{product.description|truncatechars:60}}
-                    </div>
-                    <div class="product-item-btn-group">
-                        {% if product.is_interested %}
-                            <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest interest-done">관심취소</a>&nbsp;&nbsp;</div>
-                        {% else %}
-                            <div class="product-item-btn"><img src="{% static "img/interested.png" %}"/> <a href="#" data-type="p" data-product="{{ product.id }}" class="btn-for-interest">관심하기</a>&nbsp;&nbsp;</div>
-                        {% endif %}
-                        <div class="product-item-btn">&nbsp;&nbsp;<img src="{% static "img/Add_to_basket_black.png" %}"/><a href="#" data-type='p' data-product="{{ product.id }}" class="btn-for-cart"> 장바구니</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-{#    <div class="product-item" id="item-{{ product.id}}" data-attr="{{ product.id }}">#}
-{#        <div class="product-item-img">#}
-{#            <div class="product-opacity-bg product-hover-area">#}
-{#                <a href="{% url 'product' product_id=product.id %}"><img src="{%  static 'img/detail.png'%}" class="icon"/></a>#}
-{#            </div>#}
-{#            <img src="{{ product.big_img_url}}" alt="" />#}
-{#        </div>#}
-{#        <div class="product-item-info">#}
-{#            <div class="product-item-info-contents product-item-name">#}
-{#                <a href="{% url 'product' product_id=product.id%}" title="{{ product.name }}">{{product.name }}</a>#}
-{#            </div>#}
-{#            <div class="product-item-info-contents">#}
-{#                카테고리 > {{ product.category_name }}#}
-{#            </div>#}
-{#            <div class="product-item-info-contents">#}
-{#                브랜드 : {{ product.brandname }}#}
-{#            </div>#}
-{#            <div class="product-item-info-contents">#}
-{#                가격 : {{ product.original_price|intcomma }}원#}
-{#            </div>#}
-{#            <div class="product-item-info-contents">#}
-{#                용량 : {{ product.capacity}}#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    {% if interests.data|length > 0 %}
+        {% for product in interests.data %}
 
-    {% endfor %}
-{% endif %}
+
+
+            <div class="product effect">
+                <div class="product-img" id="item-{{ product.id }}" data-attr="{{ product.id }}">
+                    <img src="{{ product.big_img_url }}"/>
+                </div>
+                <div class="product-info">
+                    <div class="product-item-brand">
+                        {{ product.brandname }}
+                    </div>
+                    <div class="product-item-name">
+                        <a href="{% url 'product' product_id=product.id %}"
+                           title="{{ product.name }}">{{ product.name }}</a>
+                    </div>
+                    <div class="product-item-info-contents">
+                        <!--카테고리 > {{ product.category_name }}<br/>-->
+                        {{ product.discount_price|intcomma }}원/{{ product.capacity }} <br/>
+                        (200원/ml)
+                    </div>
+                </div>
+                <div class="mask">
+                    <a href="#" class="view_detail"><span><img
+                            src="http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Hover-Effects/img/link.png"/></span>자세히
+                        보기</a>
+                    <a href="#" class="delete"><span>X</span>관심 취소</a>
+                </div>
+            </div>
+
+
+
+
+            {#    <div class="product-item" id="item-{{ product.id}}" data-attr="{{ product.id }}">#}
+            {#        <div class="product-item-img">#}
+            {#            <div class="product-opacity-bg product-hover-area">#}
+            {#                <a href="{% url 'product' product_id=product.id %}"><img src="{%  static 'img/detail.png'%}" class="icon"/></a>#}
+            {#            </div>#}
+            {#            <img src="{{ product.big_img_url}}" alt="" />#}
+            {#        </div>#}
+            {#        <div class="product-item-info">#}
+            {#            <div class="product-item-info-contents product-item-name">#}
+            {#                <a href="{% url 'product' product_id=product.id%}" title="{{ product.name }}">{{product.name }}</a>#}
+            {#            </div>#}
+            {#            <div class="product-item-info-contents">#}
+            {#                카테고리 > {{ product.category_name }}#}
+            {#            </div>#}
+            {#            <div class="product-item-info-contents">#}
+            {#                브랜드 : {{ product.brandname }}#}
+            {#            </div>#}
+            {#            <div class="product-item-info-contents">#}
+            {#                가격 : {{ product.original_price|intcomma }}원#}
+            {#            </div>#}
+            {#            <div class="product-item-info-contents">#}
+            {#                용량 : {{ product.capacity}}#}
+            {#            </div>#}
+            {#        </div>#}
+            {#    </div>#}
+
+        {% endfor %}
+    {% endif %}
 
 {% endblock %}
 
 {% block productPaging %}
-{% if interests.data|length > 0  %}
+    {% if interests.data|length > 0 %}
 
-    <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
-      {% if not interests.page_hasPrev %}
-          <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
-      {% else %}
-          <li><a href="{% url 'mypage' page_num=interests.page_left_count|sub:1 %}" class="previous">Prev</a></li>
-      {% endif %}
+        <ul class="tsc_pagination tsc_paginationC tsc_paginationC09">
+            {% if not interests.page_hasPrev %}
+                <li><a href="#" class="previous disabled" onClick="javascript:return false;">Prev</a></li>
+            {% else %}
+                <li><a href="{% url 'mypage' page_num=interests.page_left_count|sub:1 %}" class="previous">Prev</a></li>
+            {% endif %}
 
-      {% for pageNum in interests.page_range %}
-        <li><a href="{% url 'mypage' page_num=pageNum %}" {% if pageNum == interests.page_num %} class="current" {% endif %}>{{ pageNum  }}</a></li>
-      {% endfor %}
-      {% if not interests.page_hasNext  %}
-        <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
-      {% else %}
-        <li><a href="{% url 'mypage' page_num=interests.page_right_count|add:1 %}" class="next">Next</a></li>
-      {% endif %}
-    </ul>
+            {% for pageNum in interests.page_range %}
+                <li><a href="{% url 'mypage' page_num=pageNum %}" {% if pageNum == interests.page_num %}
+                       class="current" {% endif %}>{{ pageNum }}</a></li>
+            {% endfor %}
+            {% if not interests.page_hasNext %}
+                <li><a href="#" class="next disabled" onClick="javascript:return false;">Next</a></li>
+            {% else %}
+                <li><a href="{% url 'mypage' page_num=interests.page_right_count|add:1 %}" class="next">Next</a></li>
+            {% endif %}
+        </ul>
 
-{% else %}
+    {% else %}
         <div class="clearfix"></div>
         <div style="padding : 20px;">
-            아직 관심하신 단품이 없습니다.
+            아직 관심하신 제품이 없습니다.
         </div>
     {% endif %}
 

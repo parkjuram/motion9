@@ -8,9 +8,9 @@
     {% load static %}
 
     <link rel="stylesheet" href="{% static "common/css/jquery-ui.min.css" %}"/>
-{% block common_style_css %}
-    <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
-{% endblock %}
+    {% block common_style_css %}
+        <link rel="stylesheet" href="{% static "css/common_style_web.css" %}"/>
+    {% endblock %}
     <link rel="stylesheet" href="{% static "jqmodal/jqModal.css" %}"/>
     <link rel="stylesheet" href="{% static "css/login_web.css" %}"/>
     <link rel="stylesheet" href="{% static "css/tsc_pagination.css" %}"/>
@@ -100,20 +100,20 @@
         <div id="header-main-menu">
             <ul id="header-main-menu-list">
 
-{#                {% if current_page and current_page == 'shop_product' %}#}
-{#                    <li><a href="#" data-attr="menuCollection">Collection</a></li>#}
-{#                    <li><a href="#" class="selected" data-attr="menuProduct">Products</a></li>#}
-{#                    <li><a href="#" class="selected" data-attr="menuProduct">Shop</a></li>#}
-{#                {% elif current_page and current_page == 'shop_set' %}#}
-{#                    <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>#}
-{#                    <li><a href="#" data-attr="menuProduct">Products</a></li>#}
-{#                    <li><a href="#" data-attr="menuProduct">Shop</a></li>#}
-{#                {% else %}#}
-{#                    <li><a href="#" data-attr="menuCollection">Collection</a></li>#}
-{#                    <li><a href="#" data-attr="menuProduct">Products</a></li>#}
-{#                    <li><a href="#" data-attr="menuProduct">Shop</a></li>#}
-{#                {% endif %}#}
-{#                <li><a href="{% url 'customize_set' %}" data-directly="true">My Collection</a></li>#}
+                {#                {% if current_page and current_page == 'shop_product' %}#}
+                {#                    <li><a href="#" data-attr="menuCollection">Collection</a></li>#}
+                {#                    <li><a href="#" class="selected" data-attr="menuProduct">Products</a></li>#}
+                {#                    <li><a href="#" class="selected" data-attr="menuProduct">Shop</a></li>#}
+                {#                {% elif current_page and current_page == 'shop_set' %}#}
+                {#                    <li><a href="#" class="selected" data-attr="menuCollection">Collection</a></li>#}
+                {#                    <li><a href="#" data-attr="menuProduct">Products</a></li>#}
+                {#                    <li><a href="#" data-attr="menuProduct">Shop</a></li>#}
+                {#                {% else %}#}
+                {#                    <li><a href="#" data-attr="menuCollection">Collection</a></li>#}
+                {#                    <li><a href="#" data-attr="menuProduct">Products</a></li>#}
+                {#                    <li><a href="#" data-attr="menuProduct">Shop</a></li>#}
+                {#                {% endif %}#}
+                {#                <li><a href="{% url 'customize_set' %}" data-directly="true">My Collection</a></li>#}
 
                 <li><a href="#" data-attr="menuHelp">Help</a></li>
                 <li><a href="#" id="btn-survey-list">피부 관리 보고서</a></li>
@@ -195,12 +195,14 @@
 
     <div class="clearfix"></div>
 </div>
+
+
 <div class="footer-div">
     <div class="footer-contents">
-                라이프엔진(주) | 대표이사 : 한도건 | 사업자 등록번호 : 119-86-58979<br/>
-                통신판매업신고 : 2013-서울관악-0392 | 개인정보관리책임자 : 박주람<br/>
-                서울시 강남구 테헤란로 313, 916(역삼동, 성지하이츠 1차 빌딩) <br/> Tel : 02-554-4511 |
-                © Life Engine Corp. All rights reserved.<br/>
+        라이프엔진(주) | 대표이사 : 한도건 | 사업자 등록번호 : 119-86-58979<br/>
+        통신판매업신고 : 2013-서울관악-0392 | 개인정보관리책임자 : 박주람<br/>
+        서울시 강남구 테헤란로 313, 916(역삼동, 성지하이츠 1차 빌딩) <br/> Tel : 02-554-4511 |
+        © Life Engine Corp. All rights reserved.<br/>
         <a target="_blank" href="{% url 'mobile:mobile_agreement_of_utilization' %}">이용약관</a>
         <a target="_blank" href="{% url 'mobile:mobile_privacy' %}">개인정보취급방침</a>
     </div>

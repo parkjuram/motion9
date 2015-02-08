@@ -1,61 +1,91 @@
 {% extends "web_base.html" %}
 {% block header %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/mypage_web.css'%}"/>
-{% block subHeader %}
-{% endblock %}
+    {% load static %}
+
+    <link href="{% static 'metronic_assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/mypage_web.css' %}"/>
+
+    {% block subHeader %}
+    {% endblock %}
 {% endblock %}
 {% block content %}
-<div class="row">
-    <div class="category-list">
-        <ul>
-            {% if tab_name == "interesting_product"%}
-                <li class="current-category">관심 제품</li>
-{#                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>#}
-                <li><a href="{% url 'mypage_purchase'%}">구매 목록</a></li>
-            {% elif tab_name == "interesting_set" %}
-                <li><a href="{% url 'mypage'%}"    >관심 제품</a></li>
-{#                <li class="current-category">관심 세트</li>#}
-                <li><a href="{% url 'mypage_purchase'%}">구매 목록</a></li>
-            {% elif tab_name == "purchase_list" %}
-                <li><a href="{% url 'mypage'%}">관심 제품</a></li>
-{#                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>#}
-                <li class="current-category">구매 목록</li>
-            {% endif%}
-        </ul>
-        <div class="clearfix"></div>
-    </div>
     <div class="row">
-        <div class="main-container float-left">
-            <div class="box-css">
-                <div class="category-title">
-                    {% block  categoryTitle%}
-                    {% endblock %}
-                </div>
-                <div id="productGrid">
-                    {% block productGrid %}
-                    {% endblock %}
-                </div>
-                <div id="purchaseList">
-                    {% block purchaseList %}
-                    {% endblock %}
-                </div>
-                <div class="paging-area">
-                    {% block productPaging %}
-                    {% endblock %}
+
+        <div class="col-sm-12 col-xs-12 col-md-12">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    {#            {% if tab_name == "interesting_product"%} #}
+                    <li class="active" style="width: auto;">
+                        <a href="#skin_tab" data-toggle="tab" aria-expanded="true">스킨</a></li>
+                    <li class><a href="#lotion_tab" data-toggle="tab" aria-expanded="true">로션 </a></li>
+                    </li>
+                    <li class><a href="#cream_tab" data-toggle="tab" aria-expanded="true">수분크림</a></li>
+                    <li class><a href="#essence_tab" data-toggle="tab" aria-expanded="true">에센스</a></li>
+                    </li>
+                    <li class><a href="#sun_tab" data-toggle="tab" aria-expanded="true">선/비비</a></li>
+                    <li class><a href="#color_tab" data-toggle="tab" aria-expanded="true">색조</a></li>
+                    <li class><a href="#etc_tab" data-toggle="tab" aria-expanded="true">기타</a></li>
+
+                    <!--{#                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>#}
+{#                //<li><a href="{% url 'mypage_purchase'%}">구매 목록</a></li>#}
+{#             //{% elif tab_name == "interesting_set" %}    #}
+{#                 //<li><a href="{% url 'mypage'%}">관심 제품</a></li>#}
+{#                //<li class="current-category">관심 세트</li>#}
+{#                //<li><a href="{% url 'mypage_purchase'%}">구매 목록</a></li>#}
+{#            //{% elif tab_name == "purchase_list" %}#}
+{#              //  <li><a href="{% url 'mypage'%}">관심 제품</a></li>#}
+{#                <li><a href="{% url 'mypage_set'%}">관심 세트</a></li>#}
+                <li class="current-category">구매 목록</li>#}
+{#           //{% endif%}#}-->
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-8">
+                    <div class="main-container float-left">
+                        <div class="box-css">
+                            <!--<div class="category-title">
+{#                    // {% block  categoryTitle%}#}
+{#                     {% endblock %} #}
+                </div>-->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="skin_tab">
+                                    <div id="productGrid">
+                                        {% block productGrid %}
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="lotion_tab">
+                                    <div id="productGrid">abc
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="purchaseList">
+                                {% block purchaseList %}
+                                {% endblock %}
+                            </div>
+                            <div class="paging-area">
+                                {% block productPaging %}
+                                {% endblock %}
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
-            </div>
-        </div>
-        <div class="nav-container float-left">
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            <div class="mypage-wrapper">
             <div class="box-css user-profile">
                 <div class="profile-user-name">{{ user.profile.name }}</div>
                 <div>
                     {{ user.email }}
                 </div>
-                <p class="user-mileage">
+                <!--<p class="user-mileage">
                     적립금 : {{ user.profile.mileage }} 원
-                </p>
+                </p>-->
                 <hr/>
                 <p class="user-sex">
                     성별 :
@@ -68,7 +98,7 @@
                 <p class="user-age">
                        나이 : {{ user.profile.age }}<br/>
                 </p>
-                <p class="user-address">
+                <!--<p class="user-address">
                        주소 : {{ user.profile.postcode }}<br/>
 
                     <div style="margin-left:32px">
@@ -77,7 +107,7 @@
                     <div style="margin-left:32px">
                        {{ user.profile.detail_address }}<br/>
                     </div>
-                </p>
+                </p>-->
 {#                <p class="user-age">#}
 {#                    나이 :#}
 {#                     {% if user.profile.age != none %}#}
@@ -104,9 +134,12 @@
                     <a href="{% url 'account_modify'%}" class="basic-btn">&nbsp;&nbsp;수정하기&nbsp;&nbsp;</a>
                 </p>
             </div>
+            </div>
         </div>
+
     </div>
 </div>
-
+    </div>
+<script src="{% static 'metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
 
 {% endblock %}
