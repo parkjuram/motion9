@@ -163,6 +163,20 @@ class UserSurvey(models.Model):
         return self.comments
 
 @python_2_unicode_compatible
+class UserSurveyAgain(models.Model):
+    user_survey = models.ForeignKey(UserSurvey)
+    item = models.TextField(null=False, blank=True)
+    reason = models.TextField(null=False, blank=True)
+    comments = models.TextField(null=False, blank=True)
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    class Meta:
+        unique_together = (("user_survey", "created"),)
+
+    def __str__(self):
+        return self.user_survey
+
+@python_2_unicode_compatible
 class SurveyResult(models.Model):
     user_survey = models.ForeignKey(UserSurvey, related_name='results', unique=True)
     general_review = models.TextField(null=False, blank=True)

@@ -89,3 +89,4 @@ admin.site.register(SurveyResultDetail)
 
 admin.site.register(NInterest)
 admin.site.register(Interest)
+admin.site.register(UserSurveyAgain)
