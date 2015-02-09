@@ -47,6 +47,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
 
     <script type="text/javascript">
+        var urlForDoInterest = "{% url 'do_interest_product' %}";
+        var urlForUndoInterest = "{% url 'undo_interest_product' %}";
         var urlForSurveyAgain = "{% url 'survey_again' %}"
     </script>
 
@@ -250,9 +252,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             </div>
                         </a>
-                        <a href="#" class="btn btn blue" style="width: 100%; color: white !important;">
-                            관심하기
-                            <i class="fa fa-plus"></i>
+                        <a href="#" class="btn blue btn-interest"
+                           product-id="{{ item.product.id }}"
+                           user-survey-id="{{ request.pk }}"
+                           style="width: 100%; color: white !important;">
+                            {% if item.product.is_interested %}
+                                관심완료
+                            {% else %}
+                                관심하기
+                                <i class="fa fa-plus"></i>
+                            {% endif %}
                         </a>
                     </div>
 
@@ -327,6 +336,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script src="{% static 'metronic_assets/admin/pages/scripts/ui-extended-modals.js' %}"></script>
     <script src="{% static 'user/js/survey.js' %}"></script>
+    <script src="{% static 'user/js/interest_product.js' %}"></script>
     <!-- END JAVASCRIPTS -->
     </body>
 {% endblock %}

@@ -29,6 +29,11 @@
 
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
+
+    <script type="text/javascript">
+        var urlForDoInterest = "{% url 'do_interest_product' %}";
+    </script>
+
 {% endblock %}
 
 {% block title %}
@@ -154,11 +159,16 @@
                                         </div>
                                         <div class="row margin-bottom-20">
                                             <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn blue"
+                                                <a href="#" class="btn blue btn-interest"
+                                                   product-id="{{ survey_result_detail.0.product.id }}"
+                                                   user-survey-id="{{ request.pk }}"
                                                    style="width: 49%; color: #fff !important;">
-                                                    관심하기
-                                                    <i class="fa fa-plus"></i>
-
+                                                    {% if survey_result_detail.0.product.is_interested %}
+                                                        관심완료
+                                                    {% else %}
+                                                        관심하기
+                                                        <i class="fa fa-plus"></i>
+                                                    {% endif %}
                                                 </a>
                                                 <a href="#" class="btn btn purple-wisteria"
                                                    style="width: 49%; float:right; color: #fff !important;">
@@ -524,11 +534,16 @@
                                         </div>
                                         <div class="row margin-bottom-20">
                                             <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn yellow-casablanca"
+                                                <a href="#" class="btn blue btn-interest"
+                                                   product-id="{{ survey_result_detail.1.product.id }}"
+                                                   user-survey-id="{{ request.pk }}"
                                                    style="width: 49%; color: #fff !important;">
-                                                    관심하기
-                                                    <i class="fa fa-plus"></i>
-
+                                                    {% if survey_result_detail.0.product.is_interested %}
+                                                        관심완료
+                                                    {% else %}
+                                                        관심하기
+                                                        <i class="fa fa-plus"></i>
+                                                    {% endif %}
                                                 </a>
                                                 <a href="#" class="btn btn purple-wisteria"
                                                    style="width: 49%; float:right; color: #fff !important;">
@@ -845,5 +860,6 @@
 
         });
     </script>
+    <script src="{% static 'user/js/interest_product.js' %}"></script>
 
 {% endblock %}

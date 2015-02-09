@@ -20,7 +20,9 @@
     {% endblock %}
 
     <script type="text/javascript">
-        var urlForSurveyAgain = "{% url 'survey_again' %}"
+        var urlForDoInterest = "{% url 'do_interest_product' %}";
+        var urlForUndoInterest = "{% url 'undo_interest_product' %}";
+        var urlForSurveyAgain = "{% url 'survey_again' %}";
     </script>
 
 {% endblock %}
@@ -176,7 +178,7 @@
                             <div class="number">{{ value.0.product.category.name_for_kor }}
                             </div>
                         </div>
-                        <a href="{% url "report_detail"  product_id=22 %}" target="_self">
+                        <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
                         <div class="col-md-8" id="view_report">
                             <div type="button" class="more">분석 보고서 보기  ❯
                             </div>
@@ -186,7 +188,7 @@
                 <div class="wrapper-item">
                     {% for item in value %}
                         <div class="col-xs-6" style="padding-left: 5px; padding-right: 5px;">
-                            <a href="{% url "report_detail"  product_id=22 %}" target="_self">
+                            <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
                                 <div class="dashboard-stat2" style="padding-bottom:5px; margin-bottom:0px;">
                                     <div class="row">
                                         <div class="col-xs-12"
@@ -211,9 +213,16 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="#" class="btn btn blue" style="width: 100%; color: white !important;">
-                                관심하기
-                                <i class="fa fa-plus"></i>
+                            <a href="#" class="btn blue btn-interest"
+                               product-id="{{ item.product.id }}"
+                               user-survey-id="{{ request.pk }}"
+                               style="width: 100%;">
+                                {% if item.product.is_interested %}
+                                    관심완료
+                                {% else %}
+                                    관심하기
+                                    <i class="fa fa-plus"></i>
+                                {% endif %}
                             </a>
                         </div>
 
@@ -303,6 +312,7 @@
             });
         </script>
 
+        <script src="{% static 'user/js/interest_product.js' %}"></script>
         <script src="{% static 'user/js/survey.js' %}"></script>
 
     </body>
