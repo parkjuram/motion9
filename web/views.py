@@ -509,7 +509,7 @@ def payment_complete_view(request, payment_id=0):
 @csrf_exempt
 def index_view(request):
     if request.is_mobile:
-        return redirect('mobile_index')
+        return redirect('mobile:mobile_index')
 
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
