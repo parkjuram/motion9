@@ -22,7 +22,7 @@
     <script>
         var csrfToken = "{{ csrf_token }}";
         var surveyListInJsonUrl = "{% url 'survey_list_in_json' %}";
-        var mobileSurveyListUrl = "{% url 'mobile_survey_list' %}";
+        var mobileSurveyListUrl = "{% url 'mobile:mobile_survey_list' %}";
         var url_for_login_next = "{% url 'login_page' %}?next={{ request.get_full_path }}";
 
         var surveyResultUrl = "{% url 'mobile_survey_result' pk=1987654321 %}";
