@@ -8,7 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 class NCategory(models.Model):
     name = models.CharField(max_length=20, unique=True)
     name_for_kor = models.CharField(max_length=20, default='')
-    order = models.SmallIntegerField(null=False, defaul=1)
+    order = models.SmallIntegerField(null=False, default=1)
 
     class Meta:
         ordering = ['order']
