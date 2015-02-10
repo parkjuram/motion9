@@ -199,12 +199,12 @@ a.tab-selected {
 
 .list-wrap {
     display: inline-block;
-    margin: 15px;
     border: 1px solid #bcbfc3;
     box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
     border-radius: 0.2em;
     background: #fff;
-    font-size: 1em;
+    font-size: 12px;
+    width: 100%;
 }
 
 .number > span {
@@ -213,4 +213,31 @@ a.tab-selected {
 
 .btn-default {
     margin-top : 10px;
+}
+
+.tab-content {
+    display : inline-block!important;
+    padding-right : 15px;
+    padding-left: 15px;
+    margin-top: 15px;
+    width: 100%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+}
+
+.tab-content>.active {
+    display: inline-block !important;
+}
+
+.tab-pane {
+    width: 100%!important;
+}
+
+.tab-pane>.active   {
+    width: 100%!important;
+}
+
+.number {
+    min-height:60px;
 }

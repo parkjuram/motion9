@@ -57,3 +57,40 @@ h4.lined-heading-survey span {
 .ui-content{
     background-color : white;
 }
+
+.wrapper {
+    height: auto;
+    text-shadow: none;
+    /*background: url('../img/profile_bg.png') top center repeat-y #ECECEC;*/
+    background-color: white;
+    font-size: 14px;
+    /*width : 100%;*/
+    line-height: 18px;
+    color: #000000;
+    position: relative;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding: 10px;
+    border: 1px solid #bcbfc3;
+    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
+    border-radius: 0.2em;
+    background: #fff;
+    font-size: 1em;
+}
+
+.item {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.item-head {
+    float: right;
+}
+
+.portlet.light {
+    padding-left : 10px !important;
+    padding-right: 10px !important;
+}
+
+.bold {
+font-weight: 200 !important;
+}

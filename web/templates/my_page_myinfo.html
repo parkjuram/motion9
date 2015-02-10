@@ -53,7 +53,7 @@
                 <div class="list-wrap">
                     {% for interest in user.interest %}
                         {% if interest.product.category.name == category.name %}
-                            <div class="col-xs-6" style="padding: 10px;">
+                            <div class="col-xs-6 col-md-6 col-sm-6" style="padding: 10px;">
                                 <a href="{% url "mobile:survey2_result_detail" pk=interest.user_survey.id product_type=category.name %}" target="self">
                                     <div class="dashboard-stat2" style="padding-bottom:0px; margin-bottom:0px;">
                                         <div class="row">

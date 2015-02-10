@@ -632,6 +632,7 @@ h4.lined-heading span {
     box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
     border-radius: 0.2em;
     font-size: 1em;
+
 }
 
 .number {
@@ -687,6 +688,7 @@ h4.lined-heading span {
     border-radius: 0.2em;
     background: #fff;
     font-size: 1em;
+        padding: 10px;
 }
 
 .detail {
@@ -698,4 +700,9 @@ h4.lined-heading span {
 .modal-body {
     display: inline-block;
 
+}
+
+.portlet.light {
+padding-left: 20px !important;
+padding-right: 20px !important;
 }
