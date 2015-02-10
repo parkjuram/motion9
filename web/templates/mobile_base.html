@@ -87,9 +87,9 @@
     </div>
 	<div data-role="panel" id="menuPanel" data-position="left" data-display="overlay" data-position-fixed="true">
 	    <!-- panel content goes here -->
-	   <div class="menu-panel-search-box">
-            <input type="search" name="password" id="menuSearch" value="" placeholder="검색">
-	   </div>
+{#	   <div class="menu-panel-search-box">#}
+{#            <input type="search" name="password" id="menuSearch" value="" placeholder="검색">#}
+{#	   </div>#}
 
        <div>
             <ul class="custom-menu-list">
@@ -147,7 +147,8 @@
                     <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
                 {% endif %}
                 <li><a href="{% url 'mobile:mobile_faq' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
-                <li><a href="mailto:cs@themotion9.com?subject=%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=(%EB%A9%94%EC%9D%BC%EB%A1%9C%20%EB%AC%B8%EC%9D%98%20%EC%A3%BC%EC%8B%9C%EB%A9%B4%2024%EC%8B%9C%EA%B0%84%20%EC%95%88%EC%97%90%20%ED%9A%8C%EC%8B%A0%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4%5E%5E)%0A%0A%0A%0A%0A%0A%0A%0A%0A------------------------------------------%0AMotion9%20%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0%0A02-554-4511%0A%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%84%20%3A%20%ED%8F%89%EC%9D%BC%2010%3A00%20-%2018%3A00" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>
+{#                <li><a href="mailto:cs@themotion9.com?subject=%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=(%EB%A9%94%EC%9D%BC%EB%A1%9C%20%EB%AC%B8%EC%9D%98%20%EC%A3%BC%EC%8B%9C%EB%A9%B4%2024%EC%8B%9C%EA%B0%84%20%EC%95%88%EC%97%90%20%ED%9A%8C%EC%8B%A0%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4%5E%5E)%0A%0A%0A%0A%0A%0A%0A%0A%0A------------------------------------------%0AMotion9%20%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0%0A02-554-4511%0A%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%84%20%3A%20%ED%8F%89%EC%9D%BC%2010%3A00%20-%2018%3A00" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>#}
+                <li><a href="javascript:$('.uv-icon')[0].click();" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>
 {#                <li><a href="{% url 'mobile:mobile_report' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Report</a></li>#}
             </ul>
         </div>
