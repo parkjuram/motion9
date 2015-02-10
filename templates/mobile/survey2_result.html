@@ -282,46 +282,38 @@ License: You must have a valid license purchased only from themeforest(the above
         jQuery(document).ready(function () {
             Metronic.init(); // init metronic core componets
 
+            var chart_data = {{ chart_data|safe }};
+            for( var item in chart_data ) {
+                chart_data[item]['category'] = decodeURIComponent(escape(chart_data[item]['category']));
+            }
+
             var chart = AmCharts.makeChart("chart_7", {
-                        "type": "pie",
-                        "pathToImages": "http://cdn.amcharts.com/lib/3/images/",
-                        "angle": 12,
-                        "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]원</b> ([[percents]]%)</span>",
-                        "depth3D": 10,
-                        "radius": 70,
-                        "baseColor": "#7070FF",
-                        "labelTickAlpha": 0.63,
-                        "marginBottom": 0,
-                        "marginTop": 0,
-                        "pullOutEffect": "elastic",
-                        "startEffect": "easeOutSine",
-                        "titleField": "category",
-                        "valueField": "column-1",
-                        "handDrawScatter": 0,
-                        "handDrawThickness": 0,
-                        "allLabels": [],
-                        "balloon": {},
-                        "legend": {
-                            "align": "center",
-                            "markerType": "circle",
-                            "valueText": "[[value]]원"
-                        },
-                        "titles": [],
-                        "dataProvider": [
-                            {
-                                "category": "스킨",
-                                "column-1": "82800"
-                            },
-                            {
-                                "category": "로션",
-                                "column-1": "45000"
-                            },
-                            {
-                                "category": "수분크림",
-                                "column-1": "80888"
-                            }
-                        ]
-                    }
+                    "type": "pie",
+                    "pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+                    "angle": 12,
+                    "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]원</b> ([[percents]]%)</span>",
+                    "depth3D": 10,
+                    "radius": 70,
+                    "baseColor": "#7070FF",
+                    "labelTickAlpha": 0.63,
+                    "marginBottom": 0,
+                    "marginTop": 0,
+                    "pullOutEffect": "elastic",
+                    "startEffect": "easeOutSine",
+                    "titleField": "category",
+                    "valueField": "column-1",
+                    "handDrawScatter": 0,
+                    "handDrawThickness": 0,
+                    "allLabels": [],
+                    "balloon": {},
+                    "legend": {
+                        "align": "center",
+                        "markerType": "circle",
+                        "valueText": "[[value]]원"
+                    },
+                    "titles": [],
+                    "dataProvider": chart_data
+                }
             );
 
 

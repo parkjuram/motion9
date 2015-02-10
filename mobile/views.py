@@ -254,7 +254,13 @@ def privacy_view(request):
 
 @mobile_login_required
 def survey_list_view(request):
-    survey_list = helper_get_survey_list(request, True)
+    survey_list = request.user.get_survey_list.all()
+    for survey_item in survey_list:
+        survey_item.created_display = survey_item.created.strftime("%Y년 %m월 %d일") + " 분석 보고서 "
+        if survey_item.results.exists():
+            survey_item.is_analysis_finish = True
+        else:
+            survey_item.is_analysis_finish = False
 
     return render(request, 'survey_list.html', {
         'survey_list': survey_list
@@ -304,7 +310,7 @@ class SurveyResultView(TemplateView):
 
             chart_data.append({
                 "category": survey_result_detail_[key][0]['product'].category.name_for_kor.encode('utf-8'),
-                "value": price
+                "column-1": price
             })
 
         context["chart_data"] = chart_data

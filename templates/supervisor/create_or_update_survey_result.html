@@ -115,7 +115,7 @@
                 <th>-</th>
             </tr>
             {% for product in products %}
-                <tr product-id="{{ product.id }}">
+                <tr product-id="{{ product.id }}" select-type="{{ product.category.name }}">
                     <td><input type="checkbox" class="is-apply"></td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>

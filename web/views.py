@@ -944,7 +944,7 @@ class SurveyResultView(TemplateView):
 
             chart_data.append({
                 "category": survey_result_detail_[key][0]['product'].category.name_for_kor.encode('utf-8'),
-                "value": price
+                "column-1": price
             })
 
         context["chart_data"] = chart_data

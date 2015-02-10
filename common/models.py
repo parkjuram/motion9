@@ -20,7 +20,7 @@ class NProduct(models.Model):
     price = models.IntegerField(null=False, default=0)
     capacity = models.IntegerField(null=False, default=0)
     capacity_unit = models.CharField(max_length=10, null=False, default='ml')
-    thumbnail = models.ImageField(null=True, upload_to='thumbnail/product/')
+    thumbnail = models.ImageField(null=True, upload_to='thumbnail/product/', blank=True)
 
     @property
     def unit_price(self):

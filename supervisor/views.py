@@ -241,8 +241,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
         SurveyResultDetail.objects.filter(survey_result_id=survey_result.id).delete()
         for selected_product in selected_product_list:
             product_analysis_detail, created = SurveyResultDetail.objects.get_or_create(survey_result_id=survey_result.id,
-                                                                                        product_id=selected_product['product-id'],
-                                                                                        type=selected_product['type'] )
+                                                                                        product_id=selected_product['product-id'])
 
 
         return http_response_by_json(None)

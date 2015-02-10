@@ -8,7 +8,7 @@
             $('#table-product-list tr').each(function (index, object) {
                 if ($(object).find(".is-apply:checked").length > 0) {
                     var productId = $(object).attr("product-id");
-                    var type = $(object).find("#select-type").val();
+                    var type = $(object).attr("select-type");
 
                     selectedProductList.push( {
                         'product-id': productId,

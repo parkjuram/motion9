@@ -158,6 +158,7 @@ class UserSurvey(models.Model):
 
     class Meta:
         unique_together = (("user", "survey", "created"),)
+        ordering = ['-created']
 
     def __str__(self):
         return self.comments
