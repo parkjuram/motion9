@@ -3,6 +3,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict
 from django.http.request import RAISE_ERROR
 from django.http.response import HttpResponse, Http404
 from django.shortcuts import render, redirect
@@ -896,12 +897,17 @@ def survey_detail_view(request):
 
 @login_required
 def survey_list_in_json(request):
-    survey_list = helper_get_survey_list(request, True)
+    survey_list = request.user.get_survey_list.all()
+    survey_list_ = []
+    for survey_item in survey_list:
+        survey_item_ = {
+            'id': survey_item.id,
+            'created_display': survey_item.created_display,
+            'is_analysis_finish': survey_item.is_analysis_finish
+        }
+        survey_list_.append(survey_item_)
 
-    for item in survey_list:
-        item['created'] = item['created'].strftime("%Y %m %d")
-
-    return http_response_by_json(None, {'data': list(survey_list)})
+    return http_response_by_json(None, {'data': survey_list_})
 
 @login_required
 def survey_result_view(request, pk):

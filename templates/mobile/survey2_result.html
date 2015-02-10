@@ -215,15 +215,18 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- END PAGE TITLE -->
 
             {% for key, value in survey_result_detail.items %}
-                <div class="wrapper-title" style="padding-right:0px; padding-left:0px;">
+                <div class="wrapper-title">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="number">{{ value.0.product.category.name_for_kor }}
+                                </div>
+                            </div>
                     <a href="{% url "mobile:survey2_result_detail" pk=request.pk product_type=key %}" target="self">
                         <!--<div class="dashboard-stat green-meadow" style="margin-top:10px; margin-bottom:10px;">-->
                             <!--<div class="visual"><i class="fa fa-bar-chart-o"></i></div>-->
-                            <div class="details">
-                                <div class="number" style="margin-right:40px;">{{ value.0.product.category.name_for_kor }}</div>
-                            <!--</div>-->
-                            <div class="more">분석 보고서 보기<i class="m-icon-swapright m-icon-white"></i></div>
-                        </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8" id="view_report">
+                                <div type="button" class="more">분석 보고서 보기  ❯
+                                </div>
+                            </div>
                     </a>
                 </div>
 
@@ -232,7 +235,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="col-xs-6" style="padding-left: 5px; padding-right: 5px;">
                         <a href="{% url "mobile:survey2_result_detail" pk=request.pk product_type=key %}"
                            target="_self">
-                            <div class="dashboard-stat2" style="padding-bottom:5px; margin-bottom:0px;">
+                            <div class="dashboard-stat2" style="padding-bottom:5px; margin-bottom:0px; padding-left:0px; padding-right:0px; padding-top:0px;">
                                 <div class="row">
                                     <div class="col-xs-12" style="padding-right:5px; padding-left: 5px;">
                                         <div class="product-x-img" style="width:auto; text-align:center;">
@@ -241,7 +244,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                     <div >
                                         <div class="display">
-                                            <div class="number" style="font-size:10px;">
+                                            <div class="number" style="font-size:10px; padding: 5px; width: 100%;">
                                                 <h3 class="font-blue"
                                                     style="font-size:11px;">{{ item.product.name }}</h3>
                                                 <span>{{ item.product.price|intcomma }}원/{{ item.product.capacity }}{{ item.product.capacity_unit }}</span><br/>

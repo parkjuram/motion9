@@ -872,19 +872,9 @@ def helper_request_survey(request, data):
         UserSurveyDetail.objects.create(user_survey=user_survey, survey_item_option_id=option)
 
 
-def helper_get_survey_list(request, is_display_name_need=False):
-    survey_list = request.user.get_survey_list.values()
-    if is_display_name_need:
-        for item in survey_list:
-            if len(item['result_file_name']) == 0:
-                item['is_analysis_finish'] = False
-            else:
-                item['is_analysis_finish'] = True
+def helper_get_survey_list(request):
 
-            item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 "
-
-            # item['display_name'] = item['created'].strftime("%Y년 %m월 %d일") + " 분석 보고서 " + ( "(분석중)" if item['is_analysis_finish'] == False else "" )
-
+    survey_list = request.user.get_survey_list.all()
     return survey_list
 
 def helper_get_survey_result_item(request, survey_id):

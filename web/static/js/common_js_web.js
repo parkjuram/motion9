@@ -305,8 +305,15 @@ $(document).ready(function () {
                       innerHtml += '<div class="content-title">분석 보고서 목록</div><div class="content-list">';
                     for( i in data.data ) {
                         item = data.data[i];
-                        innerHtml += '<a href="'+ getSurveyResultUrl(item.id) +'" target="_self" is-analysis-finish="'+
-                            item.is_analysis_finish+'" >'+item.display_name+'</a>';
+                        if ( item.is_analysis_finish ) {
+                            item.created_display += "(완료)";
+                            innerHtml += '<a href="'+ getSurveyResultUrl(item.id) +'" target="_self" is-analysis-finish="'+
+                                item.is_analysis_finish+'" >'+item.created_display+'</a>';
+                        } else {
+                            item.created_display += "(분석중)";
+                            innerHtml += '<a target="_self" is-analysis-finish="'+
+                                item.is_analysis_finish+'" >'+item.created_display+'</a>';
+                        }
                         innerHtml += '<br/>';
                         innerHtml += '<div class="login-box-header"><h4 class="lined-heading-survey"><span></span></h4></div>';
                         innerHtml += '<div class="clearfix"></div>';
@@ -323,8 +330,6 @@ $(document).ready(function () {
 //                    }
 //                    innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">보고서 신청</div></a>';
 
-
-                    console.log( innerHtml );
                     $('#analysis-dialog').html(innerHtml);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

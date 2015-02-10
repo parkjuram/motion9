@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import signals
@@ -155,6 +156,14 @@ class UserSurvey(models.Model):
     comments = models.TextField(null=False, blank=True)
     result_file_name = models.TextField(null=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    @property
+    def created_display(self):
+        return self.created.strftime("%Y년 %m월 %d일") + " 분석 보고서 "
+
+    @property
+    def is_analysis_finish(self):
+        return self.results.exists()
 
     class Meta:
         unique_together = (("user", "survey", "created"),)
