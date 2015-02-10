@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(http://fonts.googleapis.com/css?family=Muli);
 
@@ -337,8 +337,8 @@ h4.lined-heading span {
 }
 
 body{
-    font-family: Muli, 'Jeju Gothic', Geneva, sans-serif;
-    _font-family: 'Jeju Gothic', Muli, Geneva, sans-serif;
+    font-family: Muli, 'Nanum Gothic', Geneva, sans-serif;
+    _font-family: 'Nanum Gothic', Muli, Geneva, sans-serif;
 	font-size : 12px;
 	background-color : #F3F3F3;
 }
