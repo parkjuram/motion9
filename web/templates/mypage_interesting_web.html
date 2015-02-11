@@ -30,7 +30,7 @@
                     {% if interest.product.category.name == category.name %}
                         <div class="product effect">
                             <div class="product-img" id="item-{{ interest.product.id }}" data-attr="{{ interest.product.id }}">
-                                <img src="{{ interest.product.thumbnail_url }}"/>
+                                <img src="{{ interest.product.thumbnail_url }}" style="margin-top:10px; max-height:150px;" />
                             </div>
                             <div class="product-info">
                                 <div class="product-item-brand">

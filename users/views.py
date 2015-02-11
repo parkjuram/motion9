@@ -40,7 +40,7 @@ import urllib2
 import json
 import time
 from users.admin import UserSurveyAdmin
-from users.models import OrderTempInfo, Cart, NInterest, UserSurveyAgain
+from users.models import OrderTempInfo, Cart, NInterest, UserSurveyAgain, UserSurveyDetail
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -1005,8 +1005,7 @@ def survey_again(request):
     user_survey = UserSurvey.objects.filter(id=user_survey_id)[:1][0]
     user_survey_detail_list = user_survey.details.all()
     for user_survey_detail in user_survey_detail_list:
-        user_survey_detail.user_survey = new_user_survey
-        user_survey_detail.save()
+        UserSurveyDetail.objects.create(user_survey=new_user_survey, survey_item_option=user_survey_detail.survey_item_option)
 
     item = request.POST.get('item')
     reason = request.POST.get('reason')
