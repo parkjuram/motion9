@@ -28,6 +28,13 @@ class NProduct(models.Model):
     thumbnail = models.ImageField(null=True, upload_to='thumbnail/product/', blank=True)
 
     @property
+    def thumbnail_url(self):
+        if self.thumbnail and hasattr(self.thumbnail, 'url'):
+            return self.thumbnail.url
+        else:
+            return '#'
+
+    @property
     def unit_price(self):
         return self.price/self.capacity
 
