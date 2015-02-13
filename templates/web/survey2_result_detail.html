@@ -124,7 +124,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <tr>
 
                                                 <td>
-                                                    <div class="font-blue" style="font-size:15px;">
+                                                    <div class="font-title-green" style="font-size:15px;">
                                                         기능성 여부: &nbsp;&nbsp;&nbsp;&nbsp;<span
                                                             class="font-grey-gallery">{{ survey_result_detail.0.product.detail.function }}</span>
                                                     </div>
@@ -134,7 +134,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <tr>
 
                                                 <td>
-                                                    <div class="font-blue" style="font-size:15px;">
+                                                    <div class="font-title-green" style="font-size:15px;">
                                                         사용 기간: &nbsp;&nbsp;&nbsp;&nbsp;<span
                                                             class="font-grey-gallery">    {{ survey_result_detail.0.product.detail.estimation_period }}일 </span>
                                                     </div>
@@ -210,7 +210,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <tr>
 
                                                 <td>
-                                                    <div class="font-yellow-casablanca" style="font-size:15px;">
+                                                    <div class="font-title-orange" style="font-size:15px;">
                                                         기능성 여부: &nbsp;&nbsp;&nbsp;&nbsp;<span
                                                             class="font-grey-gallery">    {{ survey_result_detail.1.product.detail.function }} </span>
                                                     </div>
@@ -220,7 +220,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <tr>
 
                                                 <td>
-                                                    <div class="font-yellow-casablanca" style="font-size:15px;">
+                                                    <div class="font-title-orange" style="font-size:15px;">
                                                         사용 기간: &nbsp;&nbsp;&nbsp;&nbsp;<span
                                                             class="font-grey-gallery">    {{ survey_result_detail.1.product.detail.estimation_period }}일 </span>
                                                     </div>
@@ -246,10 +246,10 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="row margin-bottom-20">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="#" class="btn btn blue btn-interest"
+                        <a href="#" class="btn btn-interest-g"
                            product-id="{{ survey_result_detail.0.product.id }}"
                            user-survey-id="{{ request.pk }}"
-                           style="width: 49%;">
+                           ">
                             {% if survey_result_detail.0.product.is_interested %}
                                 관심완료
                             {% else %}
@@ -258,14 +258,14 @@ License: You must have a valid license purchased only from themeforest(the above
                             {% endif %}
 
                         </a>
-                        <a href="#" class="btn btn purple-wisteria" style="width: 49%; float:right;">
+                        <a href="#" class="btn btn-interest-b1" style="width: 49%; float:right;">
                             리뷰 남기기
                             <i class="fa fa-edit"></i>
 
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="#" class="btn btn yellow-casablanca btn-interest"
+                        <a href="#" class="btn btn-interest-o"
                            product-id="{{ survey_result_detail.1.product.id }}"
                            user-survey-id="{{ request.pk }}"
                            style="width: 49%;">
@@ -277,7 +277,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             {% endif %}
 
                         </a>
-                        <a href="#" class="btn btn purple-wisteria" style="width: 49%; float:right;">
+                        <a href="#" class="btn btn-interest-b2" style="width: 49%; float:right;">
                             리뷰 남기기
                             <i class="fa fa-edit"></i>
 
@@ -366,7 +366,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                     <div class="btn-group btn-group-solid">
                                         <button type="button" class="btn btn-circle blue"
-                                                style="border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                                style="background-color : #17bcb8; border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
                                             <div style="position:relative;">
                                                 <span class="glyphicon glyphicon-pencil"></span>
 
@@ -407,7 +407,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                     <div class="btn-group btn-group-solid">
                                         <button type="button" class="btn btn-circle yellow-casablanca"
-                                                style="border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                                style="background-color : #f44e04; border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
                                             <div style="position:relative;">
                                                 <span class="glyphicon glyphicon-pencil"></span>
 
@@ -443,7 +443,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들의 피부타입을 분석한 결과 아래와 같은 비율로 피부타입을 가지고 있습니다.
-                                <span class="font-blue" style="font-size: 18px; font-weight: 200;"> "건성"</span> 피부의 비율이 가장 높게 나타나고 있습니다.
+                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "건성"</span> 피부의 비율이 가장 높게 나타나고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -498,7 +498,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들의 피부타입을 분석한 결과 아래와 같은 비율로 피부타입을 가지고 있습니다.
-                                <span class="font-yellow-casablanca"
+                                <span class="font-title-orange"
                                       style="font-size: 18px; font-weight: 200;"> "건성"</span> 피부의 비율이 가장 높게 나타나고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
@@ -568,8 +568,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
-                                <span class="font-blue" style="font-size: 18px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
-                                    class="font-blue" style="font-size: 18px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
+                                    class="font-title-green" style="font-size: 18px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -636,9 +636,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
-                                <span class="font-yellow-casablanca"
+                                <span class="font-title-orange"
                                       style="font-size: 18px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
-                                    class="font-yellow-casablanca" style="font-size: 18px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -705,8 +705,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
-                                <span class="font-blue" style="font-size: 18px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
-                                    class="font-blue" style="font-size: 18px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
+                                    class="font-title-green" style="font-size: 18px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -771,9 +771,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
-                                <span class="font-yellow-casablanca"
+                                <span class="font-title-orange"
                                       style="font-size: 18px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
-                                    class="font-yellow-casablanca" style="font-size: 18px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>

@@ -115,22 +115,20 @@
                 {#                {% endif %}#}
                 {#                <li><a href="{% url 'customize_set' %}" data-directly="true">My Collection</a></li>#}
 
-                <li><a href="#" data-attr="menuHelp">Help</a></li>
+                <li><a href="#" data-attr="menuHelp">HELP</a></li>
                 <li><a href="#" id="btn-survey-list">피부 관리 보고서</a></li>
-                <li class="clearfix"></li>
             </ul>
             <ul id="header-right-menu-list">
-                <li><a href="#" id="headerSearchBtn" data-attr="menuSearch" style="display: none;">검색</a></li>
+                <!--<li><a href="#" id="headerSearchBtn" data-attr="menuSearch" style="display: none;">검색</a></li>-->
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}" class="">Logout</a></li>
+                    <li><a href="{% url 'logout' %}" class="">LOG OUT</a></li>
                 {% else %}
-                    <li><a href="{% url 'login_page' %}">Login</a></li>
+                    <li><a href="{% url 'login_page' %}">LOG IN</a></li>
                     <li><a href="{% url 'registration_page' %}?next={{ next }}" target="_self">회원가입</a></li>
                 {% endif %}
 {#                <li><a href="{% url 'mypage_cart' %}">Cart</a></li>#}
-                <li><a href="{% url 'mypage' %}">My Page</a></li>
+                <li><a href="{% url 'mypage' %}">MY PAGE</a></li>
 
-                <li class="clearfix"></li>
             </ul>
             <div class="clearfix"></div>
         </div>

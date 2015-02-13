@@ -1,4 +1,6 @@
-
+body {
+    background-color: #fff !important;
+}
 .ad-area {
     margin-top: -66px;
     width: 100%;

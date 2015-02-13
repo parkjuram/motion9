@@ -21,7 +21,7 @@ h2{
 }
 
 .container {
-    margin-top: 20px;
+    margin-top: 60px;
 }
 .mypage-wrapper {
     height: auto;
@@ -36,10 +36,10 @@ h2{
     padding-top: 20px;
     margin-top: 20px;
     padding: 20px;
-    padding-bottom: 0px;
-    border: 1px solid #bcbfc3;
-    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
-    border-radius: 0.2em;
+    padding-bottom: 20px;
+    /*border: 1px solid #bcbfc3;*/
+    /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
+    /*border-radius: 0.2em;*/
     background: #fff;
     font-size: 1em;
 }
@@ -125,12 +125,14 @@ h2{
     color: #999999;
 }
 .nav {
-    border: 1px solid #bcbfc3;
-    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
-    border-radius: 0.2em;
+    /*border: 1px solid #bcbfc3;*/
+    /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
+    /*border-radius: 0.2em;*/
     background: #fff;
-    font-size: 1em;
+    font-size: 20px;
     margin-bottom: 10px!important;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .nav-tabs {
@@ -138,23 +140,25 @@ h2{
     white-space: nowrap;
     display: -webkit-box;
     display: -moz-box;
-
+    border-bottom: 0px!important;
 }
 
 .nav-tabs > li {
     float: none;
-    border-right: 1px solid #e5e5e6;
+    /*border-right: 1px solid #e5e5e6;*/
     margin-right: 0px;
+    padding-left: 10px;
+    padding-right:10px;
 }
 
 .nav-tabs > li > a {
     float: none;
-    font-size: 12px;
+    font-size: 16px;
     margin-right: 0px;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    color: #d2bb8f !important;
+    color: #17bcb8 !important;
     cursor: default;
     background-color: #fff;
     border-color: transparent;
@@ -163,4 +167,8 @@ h2{
 .nav-tabs > li > a:hover {
     background-color: #fff;
     border-color: transparent;
+}
+
+.box-css {
+    padding : 0px!important;
 }

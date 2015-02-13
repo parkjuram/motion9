@@ -1,3 +1,7 @@
+body {
+    background-color: #fafafa !important;
+}
+
 .content-title{
     border : 1px solid #DDD;
     margin : 20px;
@@ -71,8 +75,8 @@ h4.lined-heading-survey span {
     margin-top: 10px;
     padding-top: 20px;
     padding: 10px;
-    border: 1px solid #bcbfc3;
-    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
+    /*border: 1px solid #bcbfc3;*/
+    /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
     border-radius: 0.2em;
     background: #fff;
     font-size: 1em;
@@ -93,4 +97,11 @@ h4.lined-heading-survey span {
 
 .bold {
 font-weight: 200 !important;
+}
+
+.btn-re-g {
+    color: white;
+    padding: 15px;
+    margin-bottom : 15px;
+    background-color: #17bcb8;
 }

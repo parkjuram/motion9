@@ -129,12 +129,12 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 
-    <body style="background-color:#e6e9f2;">
+    <body style="background-color:#fafafa;">
 
     <div class="clearfix"></div>
 
     <!-- BEGIN CONTAINER -->
-    <div class="page-container" style="background-color:#e6e9f2;">
+    <div class="page-container" style="background-color:#fafafa;">
         <!-- BEGIN CONTENT -->
         <div class="page-content">
 
@@ -149,8 +149,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END PAGE TITLE -->
                 <!-- BEGIN PAGE TOOLBAR -->
                 <div class="page-toolbar">
-                    <div type="button" class="btn btn-lg red"
-                            style="background-color: #c63927 !important; font-size:11px; color:#FFFFFF !important;"
+                    <div type="button" class="btn btn-re-g"
                             data-toggle="modal" data-target="#responsive">
                         {#                        <a href="{% url "mobile:survey2_result_detail" pk=request.pk product_type='skin' %}" data-rel="dialog" class="btn btn-lg red" style="font-size:11px; color:#FFFFFF !important;">#}
                         {#                            재분석 요청#}
@@ -245,7 +244,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div >
                                         <div class="display">
                                             <div class="number" style="font-size:10px; padding: 5px; width: 100%;">
-                                                <h3 class="font-blue"
+                                                <h3
                                                     style="font-size:11px;">{{ item.product.name }}</h3>
                                                 <span>{{ item.product.price|intcomma }}원/{{ item.product.capacity }}{{ item.product.capacity_unit }}</span><br/>
                                                 <span>({{ item.product.unit_price }}원/{{ item.product.capacity_unit }})</span>
@@ -255,10 +254,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             </div>
                         </a>
-                        <a href="#" class="btn blue btn-interest"
+                        <a href="#" class="btn btn-interest"
                            product-id="{{ item.product.id }}"
                            user-survey-id="{{ request.pk }}"
-                           style="width: 100%; color: white !important;">
+                           style="width: 100%;">
                             {% if item.product.is_interested %}
                                 관심완료
                             {% else %}

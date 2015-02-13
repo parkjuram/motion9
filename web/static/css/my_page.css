@@ -1,7 +1,10 @@
 .ui-content {
-    background-color: #e6e9f2;
+    background-color: #fafafa;
 }
 
+body {
+    background-color:#fafafa;
+}
 a {
     color: inherit;
     text-shadow: none;
@@ -48,9 +51,9 @@ a:hover {
     margin: 15px;
     padding: 20px;
     padding-bottom: 0px;
-    border: 1px solid #bcbfc3;
-    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
-    border-radius: 0.2em;
+    /*border: 1px solid #bcbfc3;*/
+    /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
+    /*border-radius: 0.2em;*/
     background: #fff;
     font-size: 1em;
 }
@@ -158,9 +161,9 @@ a.tab-selected {
 }
 
 .nav {
-    border: 1px solid #bcbfc3;
-    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
-    border-radius: 0.2em;
+    /*border: 1px solid #bcbfc3;*/
+    /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
+    /*border-radius: 0.2em;*/
     background: #fff;
     font-size: 1em;
 }
@@ -175,7 +178,7 @@ a.tab-selected {
 
 .nav-tabs > li {
     float: none;
-    border-right: 1px solid #e5e5e6;
+    /*border-right: 1px solid #e5e5e6;*/
     margin-right: 0px;
 }
 
@@ -186,7 +189,7 @@ a.tab-selected {
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    color: blue !important;
+    color: #17bcb8 !important;
     cursor: default;
     background-color: #fff;
     border-color: transparent;
@@ -199,9 +202,9 @@ a.tab-selected {
 
 .list-wrap {
     display: inline-block;
-    border: 1px solid #bcbfc3;
-    box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);
-    border-radius: 0.2em;
+    /*border: 1px solid #bcbfc3;*/
+    /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
+    /*border-radius: 0.2em;*/
     background: #fff;
     font-size: 12px;
     width: 100%;
@@ -240,4 +243,20 @@ a.tab-selected {
 
 .number {
     min-height:60px;
+}
+
+.btn-interest {
+    color : #a7a7a8!important;
+    padding: 10px!important;
+    margin-bottom : 15px!important;
+    background-color: transparent!important;
+    border: 2px solid #a7a7a8!important;
+    border-radius: 0px!important;
+}
+
+.btn-interest:hover {
+    color : #17bcb8!important;
+    padding: 10px!important;
+    margin-bottom : 15px!important;
+    border: 2px solid #17bcb8 !important;
 }

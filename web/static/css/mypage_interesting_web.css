@@ -1,5 +1,11 @@
+.row {
+ margin-right: auto !important;
+ margin-left: auto !important;
+}
+
 .main-container {
     margin-top: 10px;
+    background-color : #fff
 }
 
 .product-category {
@@ -196,6 +202,8 @@
 /* 4 */
 
 .product {
+    background-color: #fff;
+
     width: 190px;
     height: 300px;
     margin: 10px;
@@ -204,7 +212,7 @@
     overflow: hidden;
     position: relative;
     text-align: center;
-    box-shadow: 0px 0px 5px #aaa;
+    /*box-shadow: 0px 0px 5px #aaa;*/
     cursor: default;
 }
 
@@ -324,7 +332,7 @@
 }
 
 .view_detail:hover span, .view_detail.active span {
-    background-color: #2A2A2A;
+    background-color: #17bcb8;
     border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -391,7 +399,7 @@
 }
 
 .delete:hover span, .delete.active span {
-    background-color: #2A2A2A;
+    background-color: #17bcb8;
     border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
 
