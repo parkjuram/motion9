@@ -187,7 +187,7 @@
                     <div class="wrapper-item">
                         {% for item in value %}
                             <div class="col-xs-6" style="padding-left: 5px; padding-right: 5px;">
-                                <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
+                                <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_parent">
                                     <div class="dashboard-stat2" style="padding-bottom:5px; margin-bottom:0px;">
                                         <div class="row">
                                             <div class="col-xs-12"

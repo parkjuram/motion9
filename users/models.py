@@ -6,10 +6,10 @@ from django.db.models import signals
 from datetime import datetime
 from django.utils.encoding import python_2_unicode_compatible
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', related_name='profile')
     name = models.TextField(null=False, blank=True, default='')
+
     phone = models.TextField(null=False, blank=True, default='')
     recent_phone = models.TextField(null=False, blank=True, default='')
     postcode = models.CharField(max_length=10, null=True, blank=True, default='')
