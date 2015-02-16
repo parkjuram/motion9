@@ -122,8 +122,8 @@ mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
         </div>
 
         <div id="header-main-menu">
-            <ul id="header-main-menu-list">
-
+{#            <ul id="header-main-menu-list">#}
+{##}
                 {#                {% if current_page and current_page == 'shop_product' %}#}
                 {#                    <li><a href="#" data-attr="menuCollection">Collection</a></li>#}
                 {#                    <li><a href="#" class="selected" data-attr="menuProduct">Products</a></li>#}
@@ -138,11 +138,16 @@ mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
                 {#                    <li><a href="#" data-attr="menuProduct">Shop</a></li>#}
                 {#                {% endif %}#}
                 {#                <li><a href="{% url 'customize_set' %}" data-directly="true">My Collection</a></li>#}
-
-                <li><a href="#" data-attr="menuHelp">HELP</a></li>
-                <li><a href="#" id="btn-survey-list">피부 관리 보고서</a></li>
-            </ul>
+{##}
+{#                <li><a href="#" data-attr="menuHelp">HELP</a></li>#}
+{#                <li><a href="#" id="btn-survey-list">피부 관리 보고서</a></li>#}
+{#            </ul>#}
             <ul id="header-right-menu-list">
+                <li><a href="#" data-attr="menuHelp">HOW IT WORKS</a></li>
+                <li><a href="#" id="btn-survey-list">피부 관리 보고서</a></li>
+                <li><a href="#" data-attr="menuHelp">HELP</a></li>
+                <li><a style="border-left: 2px #17bcb8 solid; padding-top: 20px; padding-bottom: 2px; margin-top: 10px; margin-left: 20px;"></a></li>
+                <li><a href="{% url 'mypage' %}">MY PAGE</a></li>
                 <!--<li><a href="#" id="headerSearchBtn" data-attr="menuSearch" style="display: none;">검색</a></li>-->
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}" class="">LOG OUT</a></li>
@@ -151,7 +156,7 @@ mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
                     <li><a href="{% url 'registration_page' %}?next={{ next }}" target="_self">회원가입</a></li>
                 {% endif %}
 {#                <li><a href="{% url 'mypage_cart' %}">Cart</a></li>#}
-                <li><a href="{% url 'mypage' %}">MY PAGE</a></li>
+
 
             </ul>
             <div class="clearfix"></div>

@@ -4,9 +4,21 @@
 body {
     background-color: #fafafa!important;
 }
+.page-head .page-title > h1 {
+font-size: 100%;
+}
 .dashboard-stat2 {
     height : 200px;
 }
+.page-head .page-title {
+    margin-top: 15px;
+    margin-left: -15px;
+}
+
+.page-head .page-toolbar {
+    margin-right: -15px;
+}
+
 .wrapper {
     height: auto;
     text-shadow: none;
@@ -31,7 +43,7 @@ body {
 
 .wrapper-title {
     display: inline-block;
-    height: auto;
+    height: 60px;
     text-shadow: none;
     background-color: #212121;
     /*background: -webkit-linear-gradient(top, #f4f5f6, #eeeff0);*/
@@ -47,7 +59,7 @@ body {
     position: relative;
     margin-left: 0px;
     margin-right: 0px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 5px;
     /*border: 1px solid #bcbfc3;*/
     /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
@@ -86,7 +98,7 @@ body {
 
 .number {
     float: left;
-    font-size: 16px;
+    font-size: 13px;
     margin-top: 5px;
     padding: 20px;
     color: #fff;
@@ -116,15 +128,22 @@ body {
     padding-top: 25px;
 }
 
+.tabbable-line > .nav-tabs > li {
+
+    height : 60px;
+}
+
 .tabbable-line > .nav-tabs > li.active {
-    border-bottom: 4px solid #212121 !important;
+    border-bottom: 4px solid #17bcb8 !important;
     position: relative !important;
+    height : 60px;
 }
 
 #view_report {
     /*border-left: 1px solid transparent;*/
     color: white;
     text-align: right;
+    height: 60px;
 }
 
 #view_report:hover {
@@ -138,7 +157,7 @@ body {
 
 .more {
     float: left;
-    font-size: 16px;
+    font-size: 13px;
     margin-top: 5px;
     padding: 20px;
     color : white;
@@ -146,8 +165,7 @@ body {
 }
 .btn-re-g {
     color : white;
-    padding: 20px!important;
-    margin-bottom : 15px!important;
+    padding: 15px!important;
     background-color: #17bcb8;
 }
 
@@ -179,33 +197,35 @@ body {
     color : #f44e04;
 }
 
-.btn-interest-g {
+#btn-interest-g {
     width : 49%;
-    background-color: black;
-    color: white;
+    background-color: #212121 !important;
+    color: white !important;
     height: 60px;
-    line-height: 50px;
+    line-height: 45px;
+    border: 0px!important;
 }
 
-.btn-interest-g:hover {
+#btn-interest-g:hover {
     width : 49%;
-    background-color: #17bcb8;
-    color: white;
+    background-color: #17bcb8!important;
+    color: white!important;
     height: 60px;
 }
 
-.btn-interest-o {
+#btn-interest-o {
     width : 49%;
-    background-color: black;
-    color: white;
+    background-color: #212121 !important;
+    color: white !important;
     height: 60px;
-    line-height: 50px;
+    line-height: 45px;
+    border: 0px!important;
 }
 
-.btn-interest-o:hover {
+#btn-interest-o:hover {
     width : 49%;
-    background-color: #f44e04;
-    color: white;
+    background-color: #f44e04!important;
+    color: white!important;
     height: 60px;
 }
 
