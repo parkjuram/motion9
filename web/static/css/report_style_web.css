@@ -111,10 +111,14 @@ a:visited{
 
 #header-main-menu{
     position: relative;
-    font-size: 13px;
-    float : left;
+    font-size: 12px;
+    float :right;
     letter-spacing: 0.1em;
     padding : 0 0 0 12px;
+    margin-top: 10px;
+margin-bottom: 10px;
+height: 35px;
+line-height: 0px;
 }
 
 #header-main-menu a{
@@ -131,13 +135,13 @@ a:visited{
 #header-right-menu-list{
     padding : 0;
     list-style: none;
-    width : 360px;
-    float : right;
+    width : 100%;
+    float : left;
     margin-bottom: 0px !important;
 
 }
 #header-right-menu-list li{
-    float : right;
+    float : left;
     text-align: center;
 }
 
@@ -624,9 +628,9 @@ h4.lined-heading span {
 
 .wrapper-title {
     display: inline-block;
-    height: 80px;
+    height: 60px;
     text-shadow: none;
-    background-color: black;
+    background-color: #373737;
     /*background: -webkit-linear-gradient(top, #f4f5f6, #eeeff0);*/
     /*background: -ms-linear-gradient(top, #f4f5f6, #eeeff0);*/
     /*background: -moz-linear-gradient(top, #f4f5f6, #eeeff0);*/
@@ -635,7 +639,7 @@ h4.lined-heading span {
     /* background-color: #f8f9f9;*/
     font-size: 14px;
     width : 100%;
-    line-height: 40px;
+    line-height: 30px;
     color: white;
     position: relative;
     margin-left: 0px;
@@ -651,7 +655,7 @@ h4.lined-heading span {
 
 .number {
     float: left;
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 5px;
     padding: 15px;
     color: white;
@@ -659,7 +663,7 @@ h4.lined-heading span {
 
 .more {
     float: left;
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 5px;
     padding: 15px;
     width: 100%;
@@ -808,7 +812,7 @@ padding-right: 20px !important;
 
 .portlet.light > .portlet-title > .caption.caption-md > .caption-subject {
     font-size: 20px;
-    color: black;
+    color: #373737;
 }
 
 .font-title-green {
@@ -821,7 +825,7 @@ padding-right: 20px !important;
 
 .btn-interest-g {
     width : 49%;
-    background-color: black;
+    background-color: #373737;
     color: white;
     height: 60px;
     line-height: 50px;
@@ -836,7 +840,7 @@ padding-right: 20px !important;
 
 .btn-interest-o {
     width : 49%;
-    background-color: black;
+    background-color: #373737;
     color: white;
     height: 60px;
     line-height: 50px;
@@ -852,7 +856,7 @@ padding-right: 20px !important;
 .btn-interest-b1 {
     width : 49%;
     background-color: white;
-    color: black;
+    color: #373737;
     height: 60px;
     line-height: 50px;
 }
@@ -867,7 +871,7 @@ padding-right: 20px !important;
 .btn-interest-b2 {
     width : 49%;
     background-color: white;
-    color: black;
+    color: #373737;
     height: 60px;
     line-height: 50px;
 }

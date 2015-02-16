@@ -15,6 +15,7 @@ $(function (){
         mixpanel.track_links("#btn-login", event_namespace + "click btn-login");
         mixpanel.track_links("#btn-logout", event_namespace + "click btn-logout");
         mixpanel.track_links("#btn-signup", event_namespace + "click btn-signup");
+        mixpanel.track_links("#btn-howitworks", event_namespace + "click btn-howitworks");
 
         mixpanel.track_links("#btn-home-logo", event_namespace + "click btn-home-logo");
 
