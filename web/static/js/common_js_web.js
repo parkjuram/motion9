@@ -55,7 +55,7 @@ $(function () {
 
 
     $('.login-submit-btn').click(function (e) {
-        e.preventDefault();
+        //e.preventDefault();
 
         var isEnable = $(this).attr('data-enable');
 
@@ -74,7 +74,6 @@ $(function () {
 
             form.submit();
         }
-
 
     });
 

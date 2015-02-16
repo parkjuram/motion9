@@ -27,7 +27,7 @@ $(function (){
         mixpanel.track_links("#btn-survey-list", event_namespace + "click btn-survey-report-list");
         mixpanel.track_links("#btn-request-survey-finish", event_namespace + "click btn-request-survey-finish");
 
-        mixpanel.track_links("#btn-login-finish", event_namespace + "click btn-login-finish");
+        //mixpanel.track_links("#btn-login-finish", event_namespace + "click btn-login-finish");
         mixpanel.track_links("#btn-facebook-login-finish", event_namespace + "click btn-facebook-login-finish");
 
         //mixpanel.track_links("#btn-survey-result", event_namespace + "click btn-survey-result");
