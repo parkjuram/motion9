@@ -1,4 +1,19 @@
 import re
+from django.core.urlresolvers import resolve
+
+
+class LoginDetectionMiddleware(object):
+
+    def process_request(self, request):
+        is_first_login = False
+        current_url = resolve(request.path_info).url_name
+
+        if request.session.has_key('is_first_login') and request.session['is_first_login']:
+            is_first_login = True
+            if current_url != 'login_page':
+                request.session['is_first_login'] = False
+
+        request.is_first_login = is_first_login
 
 
 class MobileDetectionMiddleware(object):

@@ -41,6 +41,7 @@ import json
 import time
 from users.admin import UserSurveyAdmin
 from users.models import OrderTempInfo, Cart, NInterest, UserSurveyAgain, UserSurveyDetail
+from users import mp
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
@@ -184,6 +185,7 @@ def login_(request, next='login_page'):
         user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
+            request.session['is_first_login'] = True
             return redirect(next)
         else:
             error = '로그인에 실패하였습니다.'

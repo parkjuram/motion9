@@ -70,6 +70,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'middleware.mdetector.MobileDetectionMiddleware',
+    'middleware.mdetector.LoginDetectionMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

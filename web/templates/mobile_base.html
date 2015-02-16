@@ -23,6 +23,9 @@
     <script src="{% static 'js/jquery.glide.js' %}"></script>
     <script src="{% static 'js/common_js.js' %}"></script>
     <script src="{% static 'js/common_js_mobile.js'%}"></script>
+
+    <script src="{% static 'common/js/mobile_mp_event_tracking.js' %}"></script>
+
     <script>
         var url_for_login_next = "{% url 'mobile_login_page' %}?next={{ request.get_full_path }}";
 
@@ -42,8 +45,27 @@
     <script>
         var url_for_cart_info_as_json = "{% url 'mypage_cart_json' %}";
         var urlForUpdateCart = "{% url 'update_cart' %}";
-
     </script>
+
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+    for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+    mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
+
+    <script>
+        {% if user.is_authenticated %}
+            {% if request.is_first_login %}
+                mixpanel.alias("{{ user.id }}");
+            {% endif %}
+            mixpanel.identify("{{ user.id }}");
+            mixpanel.people.set({
+                "$email": "{{ user.email }}",    // only special properties need the $
+                "$created": "{{ user.date_joined }}",
+                "$last_login": new Date()        // properties can be dates...
+{#                "gender": "{{ user.profile.gender }}"                    // feel free to define your own properties#}
+            });
+        {% endif %}
+    </script>
+
     {% block header %}
     {% endblock %}
 
@@ -96,20 +118,20 @@
 
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url "mobile_mypage" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">{{ user.profile.name }}님</a>
+                        <a id='btn-mypage' href="{% url "mobile_mypage" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">{{ user.profile.name }}님</a>
                     </li>
 
                 {% else %}
-                    <li><a href="{% url 'mobile_login_page' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Login</a></li>
+                    <li><a id='btn-login' href="{% url 'mobile_login_page' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Login</a></li>
                 {% endif %}
                    <li>
                      {% if user.is_authenticated %}
-                        <a href="{% url "mobile:mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
+                        <a id="btn-survey-list" href="{% url "mobile:mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
                      {% else %}
                         <a href="{% url "mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
                      {% endif %}
                    </li>
-                <li><a href="/mobile/" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>
+                <li><a id='btn-home' href="/mobile/" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>
 {#              <li class="list-collapsible">#}
 {#                    <a href="#" class="collapse-btn" style="padding: 20px 0px 20px 0px; padding-left: 5%;">  Collection + </a>#}
 {#                    <ul class="list-collapsed">#}
@@ -144,11 +166,11 @@
 {#                      <a href="javascript:alert('현재 준비중입니다. PC에서 이용해 주세요.');" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>#}
 {#                </li>#}
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
+                    <li><a id='btn-logout' href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
                 {% endif %}
-                <li><a href="{% url 'mobile:mobile_faq' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
+                <li><a id='btn-faq' href="{% url 'mobile:mobile_faq' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
 {#                <li><a href="mailto:cs@themotion9.com?subject=%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=(%EB%A9%94%EC%9D%BC%EB%A1%9C%20%EB%AC%B8%EC%9D%98%20%EC%A3%BC%EC%8B%9C%EB%A9%B4%2024%EC%8B%9C%EA%B0%84%20%EC%95%88%EC%97%90%20%ED%9A%8C%EC%8B%A0%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4%5E%5E)%0A%0A%0A%0A%0A%0A%0A%0A%0A------------------------------------------%0AMotion9%20%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0%0A02-554-4511%0A%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%84%20%3A%20%ED%8F%89%EC%9D%BC%2010%3A00%20-%2018%3A00" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>#}
-                <li><a href="javascript:$('.uv-icon')[0].click();" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>
+                <li><a id='btn-inquire' href="javascript:$('.uv-icon')[0].click();" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>
 {#                <li><a href="{% url 'mobile:mobile_report' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Report</a></li>#}
             </ul>
         </div>
@@ -162,7 +184,7 @@
         {% block title %}
 
             <div style="text-align:center; height:100%; margin-top:4px">
-                <a href="{% url 'mobile:mobile_index' %}" target="_self">
+                <a id='btn-home-logo' href="{% url 'mobile:mobile_index' %}" target="_self">
                     <img src ="{% static "img/LOGO_black.png" %}" class="main-logo-img" >
                 </a>
             </div>

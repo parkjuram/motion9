@@ -11,6 +11,7 @@ django-php==0.1
 django-registration==1.0
 django-static-precompiler==0.8
 django-celery==3.1.16
+mixpanel-py==4.0.0
 gunicorn==18.0
 konlpy==0.3.3
 psycopg2==2.5.3

@@ -1,6 +1,6 @@
 $(function () {
 
-    $('#report-btn').click(function (e) {
+    $('#btn-request-survey-finish').click(function (e) {
         e.preventDefault();
 
         var options = [];

@@ -59,7 +59,6 @@
 
     <script src="{% static 'js/common_js.js' %}"></script>
     <script src="{% static 'js/common_js_web.js' %}"></script>
-    <script src="{% static 'js/uservoice.js' %}"></script>
     <script src="{% static 'jqmodal/jqModal.js' %}"></script>
     <script src="{% static 'js/login_web.js' %}"></script>
     <script src="{% static 'js/survey_list.js' %}"></script>
@@ -87,21 +86,24 @@
 
     </script>
 
-<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+    for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+    mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
+
+    <script src="{% static 'js/uservoice.js' %}"></script>
+    <script src="{% static 'common/js/web_mp_event_tracking.js' %}"></script>
 
     <script>
+
         {% if user.is_authenticated %}
-            mixpanel.identify({{ user.id }});
+            {% if request.is_first_login %}
+                mixpanel.alias("{{ user.id }}");
+            {% endif %}
+            mixpanel.identify("{{ user.id }}");
             mixpanel.people.set({
                 "$email": "{{ user.email }}",    // only special properties need the $
-
                 "$created": "{{ user.date_joined }}",
-                "$last_login": new Date(),        // properties can be dates...
-
-                "credits": 150
-
+                "$last_login": new Date()        // properties can be dates...
 {#                "gender": "{{ user.profile.gender }}"                    // feel free to define your own properties#}
             });
         {% endif %}
@@ -117,7 +119,7 @@ mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
 <div id="header">
     <div id="header-wrapper">
         <div id="brand">
-            <a href="{% url 'index' %}"><img style="display:block; max-width:100%;height:100%;"
+            <a id='btn-home-logo' href="{% url 'index' %}"><img style="display:block; max-width:100%;height:100%;"
                                              src="{% static 'img/logo.png' %}"/></a>
         </div>
 
@@ -139,19 +141,20 @@ mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
                 {#                {% endif %}#}
                 {#                <li><a href="{% url 'customize_set' %}" data-directly="true">My Collection</a></li>#}
 
-                <li><a href="#" data-attr="menuHelp">HELP</a></li>
+                <li><a href="#" id="btn-help" data-attr="menuHelp">HELP</a></li>
                 <li><a href="#" id="btn-survey-list">피부 관리 보고서</a></li>
             </ul>
             <ul id="header-right-menu-list">
                 <!--<li><a href="#" id="headerSearchBtn" data-attr="menuSearch" style="display: none;">검색</a></li>-->
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}" class="">LOG OUT</a></li>
+                    <li><a id='btn-logout' href="{% url 'logout' %}" class="">LOG OUT</a></li>
+                    <li><a id='btn-mypage' href="{% url 'mypage' %}">MY PAGE</a></li>
                 {% else %}
-                    <li><a href="{% url 'login_page' %}">LOG IN</a></li>
-                    <li><a href="{% url 'registration_page' %}?next={{ next }}" target="_self">회원가입</a></li>
+                    <li><a id='btn-login' href="{% url 'login_page' %}">LOG IN</a></li>
+                    <li><a id='btn-signup' href="{% url 'registration_page' %}?next={{ next }}" target="_self">회원가입</a></li>
                 {% endif %}
 {#                <li><a href="{% url 'mypage_cart' %}">Cart</a></li>#}
-                <li><a href="{% url 'mypage' %}">MY PAGE</a></li>
+
 
             </ul>
             <div class="clearfix"></div>
@@ -189,9 +192,9 @@ mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
             <a href="{% url 'shop_product' category_id=26 %}">기타</a>
         </div>
         <div id="menuHelp" class="header-sub-menu">
-            <a href="javascript:$('.uv-icon')[0].click();">고객센터</a><span class="header-sub-menu-divider">/</span>
-            <a href="{% url 'help_faq' %}">FAQ</a><span class="header-sub-menu-divider">/</span>
-            <a href="javascript:$('.uv-icon')[0].click();">온라인 문의</a>
+            <a id='btn-customer-center' href="javascript:$('.uv-icon')[0].click();">고객센터</a><span class="header-sub-menu-divider">/</span>
+            <a id='btn-faq' href="{% url 'help_faq' %}">FAQ</a><span class="header-sub-menu-divider">/</span>
+            <a id='btn-inquire' href="javascript:$('.uv-icon')[0].click();">온라인 문의</a>
         </div>
         <div id="headerSearch" class="header-sub-menu">
             <span><b>인기 검색어 : &nbsp;</b></span>
