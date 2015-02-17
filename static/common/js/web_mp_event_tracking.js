@@ -30,15 +30,14 @@ $(function (){
         //mixpanel.track_links("#btn-login-finish", event_namespace + "click btn-login-finish");
         mixpanel.track_links("#btn-facebook-login-finish", event_namespace + "click btn-facebook-login-finish");
 
-        //mixpanel.track_links("#btn-survey-result", event_namespace + "click btn-survey-result");
-        //mixpanel.track_links("#btn-request-survey", event_namespace + "btn-request-survey");
+        mixpanel.track_links("#btn-survey-result", event_namespace + "click btn-survey-result");
+        mixpanel.track_links("#btn-request-survey", event_namespace + "btn-request-survey");
 
 
 
         ////////////////////////////////////////////
-        mixpanel.track_links("#btn-facebook-login-finish", event_namespace + "click btn-facebook-login-finish");
-        btn-product-detail
-        btn-undo-interest
+        mixpanel.track_links("#btn-product-detail", event_namespace + "click btn-product-detail");
+        mixpanel.track_links("#btn-undo-interest", event_namespace + "click btn-undo-interest");
 
     });
     

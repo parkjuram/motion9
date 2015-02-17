@@ -56,7 +56,7 @@
                     {% for interest in user.interest %}
                         {% if interest.product.category.name == category.name %}
                             <div class="col-xs-6 col-md-6 col-sm-6" style="padding: 10px;">
-                                <a href="{% url "mobile:survey2_result_detail" pk=interest.user_survey.id product_type=category.name %}" target="_self">
+                                <a id="btn-product-detail" href="{% url "mobile:survey2_result_detail" pk=interest.user_survey.id product_type=category.name %}" target="_self">
                                     <div class="dashboard-stat2" style="padding-bottom:0px; margin-bottom:0px;">
                                         <div class="row">
                                             <div class="col-xs-12" style="padding-right:5px; padding-left: 5px;">
@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="#" class="btn-undo-interest" interest-id="{{ interest.id }}">
+                                <a id="btn-undo-interest" href="#" class="btn-undo-interest" interest-id="{{ interest.id }}">
                                     <div class="btn btn-default btn-interest" style="font-size: 10px; width:100%;">
                                         삭제<i class="fa fa-times"></i>
                                     </div>

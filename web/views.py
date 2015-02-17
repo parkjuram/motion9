@@ -942,8 +942,6 @@ class SurveyResultView(TemplateView):
         context["user_survey_result"] = user_survey_result
         context["survey_result_detail"] = survey_result_detail_
 
-        print dict(survey_result_detail_)
-
         graphs_min_data = {
             "category": "최소예산"
         }
@@ -966,7 +964,7 @@ class SurveyResultView(TemplateView):
 
             graphs_data.append({
                 "balloonText": "[[title]] : [[value]] 원",
-                "columnWidth": 0.81,
+                "columnWidth": 0.5,
                 "fillAlphas": 1,
                 "id": "AmGraph-" + str(index),
                 "title": survey_result_detail_[key][0]['product'].category.name_for_kor.encode('utf-8'),
