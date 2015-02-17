@@ -190,3 +190,8 @@ class Faq(models.Model):
     content = models.TextField(null=False, blank=True, default='')
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    order = models.SmallIntegerField(null=False, default=1)
+
+    class Meta:
+        ordering = ['order']

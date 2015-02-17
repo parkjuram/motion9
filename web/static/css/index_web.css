@@ -48,12 +48,136 @@ body {
 
 .main-notice {
     position: absolute;
-    top: 70%;
-    left: 9%;
-    font-size: 30px;
-    font-weight: bold text-shadow : 1 px 1 px #FFFFFF;
-    width:100%;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    /*font-size: 30px;*/
+    /*font-weight: bold text-shadow : 1 px 1 px #FFFFFF;*/
+    /*width:100%;*/
 }
+
+.main-notice .main-notice-title {
+    font-size: 40px;
+    color: white;
+}
+.main-notice .main-notice-subtitle {
+    margin-top: 20px;
+    font-size: 20px;
+    color: white;
+}
+.main-notice .main-notice-button-group {
+    margin-top: 30px;
+}
+.main-notice .main-notice-button-group a {
+    /*color: white;*/
+    /*background: blue;*/
+}
+
+
+.how-it-works-container {
+    text-align: center;
+}
+.how-it-works-container .grey-deco-bar {
+    margin: 40px auto 0 auto;
+    width: 70px;
+    height: 10px;
+    background: grey;
+}
+.how-it-works-container .how-it-works-title {
+    margin-top: 30px;
+    font-size: 35px;
+}
+.how-it-works-container .how-it-works-step {
+    margin-top: 30px;
+}
+.how-it-works-container .how-it-works-step > div {
+    width: 33%;
+    float: left;
+}
+.how-it-works-container .how-it-works-step > div .step-title {
+    font-size: 35px;
+    font-weight: 300;
+}
+.how-it-works-container .how-it-works-step > div .step-content {
+    height: 220px;
+    margin: 0 15%;
+    line-height: 220px;
+    text-align: center;
+}
+.how-it-works-container .how-it-works-step > div .step-content span {
+    font-size: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+
+.intro-container > div{
+    display: flex;
+    width:100%;
+    text-align: center;
+}
+.intro-container > div > div {
+    width: 50%;
+    height: 100%;
+}
+.intro-container div img {
+    width: 100%;
+}
+.intro-container .float-left {
+    float: left;
+    left: 0;
+}
+.intro-container .float-right {
+    float: right;
+    right: 0;
+}
+.intro-container div > .grey-deco-bar {
+    margin: 80px auto 0 auto;
+    width: 100px;
+    height: 10px;
+    background: grey;
+}
+.intro-container div > .intro-item-title {
+    margin: 40px 5% 0 5%;
+    font-size: 35px;
+    font-weight: 400;
+}
+.intro-container div > .intro-item-content {
+    margin: 10% 15% 0 15%;
+}
+.intro-container div > .intro-item-content > span {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+
+.closing-container {
+    text-align: center;
+    background: cadetblue;
+    height: auto;
+    padding: 50px 0px 80px 0px;
+}
+.closing-container .grey-deco-bar {
+    margin: 40px auto 0 auto;
+    width: 70px;
+    height: 10px;
+    background: grey;
+}
+.closing-container .closing-title {
+    margin-top: 30px;
+    font-size: 35px;
+}
+.closing-container .closing-content {
+    margin-top: 40px;
+    font-size: 25px;
+}
+.closing-container .closing-button-group {
+    margin-top: 30px;
+}
+
 
 .main-btn {
     width: 170px;

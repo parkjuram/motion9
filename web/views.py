@@ -513,12 +513,6 @@ def index_view(request):
 
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
-    report_count = helper_get_report_count(request);
-
-    try:
-        main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
-    except:
-        main_image=''
 
     set_category_images_row = []
     try:
@@ -539,17 +533,11 @@ def index_view(request):
     except:
         pass
 
-    main_notice = Preference.objects.filter(name='MainNotice').first()
 
     return render(request, 'index_web.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
-                      'main_image': main_image,
-                      'set_category_images_row': set_category_images_row,
-                      'next': 'index',
-                      'main_notice': main_notice,
-                      'report_count' :report_count
                   })
 
 @csrf_exempt
