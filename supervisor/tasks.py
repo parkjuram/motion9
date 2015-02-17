@@ -2,7 +2,6 @@
 from __future__ import absolute_import
 from celery import shared_task, task
 
-import time, random
 from celery.utils.log import get_task_logger
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
@@ -18,9 +17,9 @@ def analysis_product(self, querys):
     logger.info( blog_url_list )
 
     analysis_blog_review = AnalysisBlogReview()
-    analysis_result_list = analysis_blog_review.startAnalysis( self, blog_url_list)
+    analysis_result = analysis_blog_review.startAnalysis( self, blog_url_list)
 
 
     return {'current': 100, 'total': 100, 'status': 'Task completed!',
-            'result': analysis_result_list}
+            'result': analysis_result}
     # return http_response_by_json(None, {'analysis_result_list':analysis_result_list} )

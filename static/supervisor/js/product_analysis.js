@@ -60,8 +60,8 @@ var ns_prduct_analysis = (function() {
 
                 if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
                     if ('result' in data) {
-                        analysisResultList = data['result'];
-                        totalAnalysedCount = analysisResultList.length;
+                        analysisResultList = data['result']['analysis_result_list'];
+                        totalAnalysedCount = data['result']['total_count'];
                         $("#text-analysis-totalcount").text(totalAnalysedCount);
                         updateAnalysisTable();
                     }
