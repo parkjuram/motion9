@@ -28,7 +28,6 @@ from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, Or
 
 from subprocess import call, Popen, PIPE
 import urllib
-import time
 import json
 import logging
 from web.models import Faq
@@ -942,18 +941,45 @@ class SurveyResultView(TemplateView):
 
         context["user_survey_result"] = user_survey_result
         context["survey_result_detail"] = survey_result_detail_
-        chart_data = []
-        for key in survey_result_detail_:
-            price = 0
-            for item in survey_result_detail_[key]:
-                price = item['product'].price if price < item['product'].price else price
 
-            chart_data.append({
-                "category": survey_result_detail_[key][0]['product'].category.name_for_kor.encode('utf-8'),
-                "column-1": price
+        print dict(survey_result_detail_)
+
+        graphs_min_data = {
+            "category": "최소예산"
+        }
+        graphs_max_data = {
+            "category": "최대예산"
+        }
+
+        graphs_data = []
+
+        index = 1
+        for key in survey_result_detail_:
+            min_price = 1987654321
+            max_price = 0
+            for item in survey_result_detail_[key]:
+                min_price = item['product'].price if min_price > item['product'].price else min_price
+                max_price = item['product'].price if max_price < item['product'].price else max_price
+
+            graphs_min_data.update( {"column-"+str(index):min_price })
+            graphs_max_data.update( {"column-"+str(index):max_price })
+
+            graphs_data.append({
+                "balloonText": "[[title]] : [[value]] 원",
+                "columnWidth": 0.81,
+                "fillAlphas": 1,
+                "id": "AmGraph-" + str(index),
+                "title": survey_result_detail_[key][0]['product'].category.name_for_kor.encode('utf-8'),
+                "type": "column",
+                "valueField": "column-" + str(index)
             })
 
-        context["chart_data"] = chart_data
+            index+=1
+
+        context["graphs_data"] = graphs_data
+        context["graphs_min_data"] = graphs_min_data
+        context["graphs_max_data"] = graphs_max_data
+
         context["categories"] = NCategory.objects.all()
 
         return context

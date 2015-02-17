@@ -34,6 +34,12 @@ $(function (){
         //mixpanel.track_links("#btn-request-survey", event_namespace + "btn-request-survey");
 
 
+
+        ////////////////////////////////////////////
+        mixpanel.track_links("#btn-facebook-login-finish", event_namespace + "click btn-facebook-login-finish");
+        btn-product-detail
+        btn-undo-interest
+
     });
     
 });

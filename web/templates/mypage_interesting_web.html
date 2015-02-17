@@ -47,10 +47,10 @@
                                 </div>
                             </div>
                             <div class="mask">
-                                <a href="{% url "survey2_result_detail" pk=interest.user_survey.id product_type=category.name %}" class="view_detail"><span><img
+                                <a id="btn-product-detail" href="{% url "survey2_result_detail" pk=interest.user_survey.id product_type=category.name %}" class="view_detail"><span><img
                                         src="http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Hover-Effects/img/link.png"/></span>자세히
                                     보기</a>
-                                <a href="#" class="delete btn-undo-interest" interest-id="{{ interest.id }}">
+                                <a id="btn-undo-interest" href="#" class="delete btn-undo-interest" interest-id="{{ interest.id }}">
                                     <span>X</span>관심 취소
                                 </a>
                             </div>

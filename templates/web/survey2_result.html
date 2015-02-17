@@ -154,7 +154,8 @@
                                 <h4>예산은 {{ user_survey_result.budget_min|intcomma }}
                                     ~ {{ user_survey_result.budget_max|intcomma }}원 입니다.</h4>
 
-                                <div id="chart_7" style="width: 90%; height:250px; font-size:14px;"></div>
+{#                                <div id="chart_7" style="width: 90%; height:250px; font-size:14px;"></div>#}
+                                <div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
                             </div>
                         </div>
                     </div>
@@ -254,45 +255,99 @@
                 type="text/javascript"></script>
         <script src="{% static 'metronic_assets/global/scripts/metronic.js' %}" type="text/javascript"></script>
         <script src="{% static 'metronic_assets/global/plugins/amcharts/amcharts/amcharts.js' %}"></script>
-        <script src="{% static 'metronic_assets/global/plugins/amcharts/amcharts/pie.js' %}"></script>
+        <script src="{% static 'metronic_assets/global/plugins/amcharts/amcharts/serial.js' %}"></script>
+        <script src="{% static 'metronic_assets/global/plugins/amcharts/amcharts/themes/light.js' %}"></script>
 
         <script>
             jQuery(document).ready(function () {
                 Metronic.init(); // init metronic core componets
 
-                var chart_data = {{ chart_data|safe }};
-                for( var item in chart_data ) {
-                    chart_data[item]['category'] = decodeURIComponent(escape(chart_data[item]['category']));
+                var graphs_min_data = {{ graphs_min_data|safe }};
+                var graphs_max_data = {{ graphs_max_data|safe }};
+                var graphs_data = {{ graphs_data|safe }};
+
+                graphs_min_data['category'] = decodeURIComponent(escape(graphs_min_data['category']));
+                graphs_max_data['category'] = decodeURIComponent(escape(graphs_max_data['category']));
+
+                for( var item in graphs_data ) {
+                    graphs_data[item]['title'] = decodeURIComponent(escape(graphs_data[item]['title']));
                 }
 
-                var chart = AmCharts.makeChart("chart_7", {
-                            "type": "pie",
-                            "pathToImages": "http://cdn.amcharts.com/lib/3/images/",
-                            "angle": 12,
-                            "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]원</b> ([[percents]]%)</span>",
-                            "depth3D": 10,
-                            "radius": 70,
-                            "baseColor": "#7070FF",
-                            "labelTickAlpha": 0.63,
-                            "marginBottom": 0,
-                            "marginTop": 0,
-                            "pullOutEffect": "elastic",
-                            "startEffect": "easeOutSine",
-                            "titleField": "category",
-                            "valueField": "column-1",
-                            "handDrawScatter": 0,
-                            "handDrawThickness": 0,
-                            "allLabels": [],
-                            "balloon": {},
-                            "legend": {
-                                "align": "center",
-                                "markerType": "circle",
-                                "valueText": "[[value]]원"
-                            },
-                            "titles": [],
-                            "dataProvider": chart_data
-                        }
-                );
+                AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+					"categoryField": "category",
+					"columnSpacing": 3,
+					"columnWidth": 1,
+					"rotate": true,
+					"autoMarginOffset": 1,
+					"autoMargins": false,
+					"marginBottom": 10,
+					"marginLeft": 60,
+					"marginRight": 10,
+					"marginTop": 0,
+					"startDuration": 1,
+					"startEffect": "easeOutSine",
+					"theme": "light",
+					"categoryAxis": {
+						"autoRotateAngle": 90,
+						"gridPosition": "start",
+						"position": "left",
+						"autoGridCount": false,
+						"axisAlpha": 0,
+						"dashLength": 7,
+						"labelOffset": -4,
+						"labelRotation": -90,
+						"minHorizontalGap": 0,
+						"minorGridAlpha": 0,
+						"minVerticalGap": 0
+					},
+					"trendLines": [],
+					"graphs": graphs_data,
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"stackType": "regular",
+							"autoGridCount": false,
+							"title": ""
+						},
+						{
+							"id": "ValueAxis-2"
+						}
+					],
+					"allLabels": [],
+					"balloon": {
+						"borderThickness": 1,
+						"fillAlpha": 0,
+						"horizontalPadding": 5,
+						"maxWidth": 3,
+						"offsetX": 4,
+						"verticalPadding": 12
+					},
+					"legend": {
+						"maxColumns": 2,
+						"spacing": -50,
+						"textClickEnabled": true,
+						"useGraphSettings": true,
+						"valueText": "[[value]]원",
+						"verticalGap": 4,
+						"width": 350
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Chart Title"
+						}
+					],
+					"dataProvider": [
+						graphs_min_data,
+						graphs_max_data
+					]
+				}
+			);
 
 
                 $('.total-review').slimScroll({
