@@ -75,10 +75,11 @@ body {
 
 
 .how-it-works-container {
+    padding-top: 100px;
     text-align: center;
 }
 .how-it-works-container .grey-deco-bar {
-    margin: 40px auto 0 auto;
+    margin: 0 auto 0 auto;
     width: 70px;
     height: 10px;
     background: grey;

@@ -1,73 +1,92 @@
 {% extends "mobile_base.html" %}
+
+{% load mathfilters %}
+{% load static %}
 {% block header %}
-    {% load mathfilters %}
-    {% load static %}
+
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
-
     <script src="{% static 'js/index.js' %}"></script>
-{% endblock %}
 
+{% endblock %}
 {% block content %}
 
-    <div id="productList">
-        <div style="border : 1px solid #d8d9dd; width : 100%; height : auto; position:relative;">
-
-            <a href="{% url 'mobile:mobile_survey_detail' %}" class="black-btn index-content-btn"
-               style="position:absolute; top : 70%; left:50%; margin-left:-67.5px;" target="_self">자세히 알아보기</a>
-            <img src='{{ main_image_url }}' style="width:100%; height:auto"/>
-                <div class="main-notice">{{ main_notice.content }}</div>
-        </div>
-        <div style="width:auto; height:auto;  text-align:center; margin:20px;">
-
-            <img src="{% static 'img/main_3_m.png' %}" style="width:100%; height:auto; padding:5px;"/>
-            {#            <div class="index-content-text">* MOTION9은 남성들의 피부 관리를 도와드립니다. <br/>* 개개인의 피부, 라이프스타일, 예산까지 고려하여 <br/>&nbsp;&nbsp;&nbsp;맞는#}
-            {#                화장품을 찾아서 분석해 드립니다.<br/>* 선착순 1000명까지 무료로 보고서를 작성해 드렸습니다! <br/>#}
-            {#            </div>#}
-            <div class="report-count"> 현재 {{ report_count |sub:700 |abs }}명 신청 가능합니다!</div>
-            <br/>
-            <a href="{% if user.is_authenticated %}
-                        {% url 'mobile_report_form' %}
-                       {% else %}
-                        {% url 'mobile_report_form_index' %}
-                       {% endif %}"
-               class="black-btn index-content-btn" target="_self" style="width:30%;">보고서 신청</a>
-            <a href="{% url 'mobile:mobile_survey_list' %}" class="black-btn index-content-btn"
-               style="margin-left:20px; width:30%;" target="_self">보고서 보기</a>
-
-        </div>
-        <div style="border : 1px solid #d8d9dd; width : 95%; height : auto; text-align:center; padding:10px">
-
-
-            <a href="#" class="index-content-img"><img src="{% static 'img/MAIN_2_m.png' %}"
-                                                       style="width:90%; height:auto"/></a>
-
-            <div class="magazine-wrapper-title" style="margin-top : 40px;">
-                <h4 class="lined-heading">
-                    <span>&nbsp;&nbsp;&nbsp;MOTION9&nbsp;&nbsp;&nbsp;COLLECTION&nbsp;&nbsp;&nbsp;</span></h4>
+    <div class="main-notice-container">
+        <img src="{% static 'common/image/main_over.png' %}"/>
+        <div class="main-notice">
+            <div class="main-notice-title">
+                Boys be ambitious<br/>
+                Guys be <span style="color:blue;">FINER</span><br/>
             </div>
-
-            {% for category_images in category_images %}
-                <a href="{% url "mobile_shop_product" category_id=category_images.id %}" class="top-menu-btn"><img
-                        src='{{ category_images.image }}' style="width:100%; height:auto"></a>
-            {% endfor %}
-
-            {% for set_category_image in set_category_images %}
-                <a href="{% url 'mobile:mobile_shop_set' category_id=set_category_image.id %}" class="index-content-img"
-                   target="_self"><img src="{{ set_category_image.image_url }}" style="width:100%; height:auto"/></a>
-            {% endfor %}
+            <div class="main-notice-subtitle">
+                오직 남성을 위한 최적의 피부 관리 서비스
+            </div>
+            <div class="main-notice-button-group">
+                <a class="btn btn-default" href="{% url 'report_form' %}" role="button">시작하기</a>
+            </div>
         </div>
     </div>
 
-    {#    <a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Delete page...</a>#}
-    <div class="selector" data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-history="false"
-         data-dismissible="false"
-         style="max-width:400px; height:100px; text-align:center; background:transparent; border:0px;">
-        {#        <div data-role="header" data-theme="a"#}
-        {#             style="background-color:#e5e5e5 !important; padding:10px; color:black; text-shadow:none;">#}
-        {#            <h1>Test 중입니다. </h1>#}
-        {#        </div>#}
+    <div class="how-it-works-container">
+        <div class="grey-deco-bar"></div>
+            <div class="how-it-works-title">
+                How it works
+            </div>
+            <div class="how-it-works-step">
+                <div class="first-step">
+                    <div class="step-title">보고서 신청을 위한 정보 입력</div>
+                    <div class="step-content">
+                        <span>본인의 피부와 라이프스타일 정보를 입력합니다. 수분 내에 입력 가능합니다.</span>
+                    </div>
+                </div>
+                <div class="second-step">
+                    <div class="step-title">최적화된 보고서 받기</div>
+                    <div class="step-content">
+                        <span>258만개의 리뷰를 분석한 데이터를 바탕으로 최적화된 화장품 보고서를 직접 작성해 드립니다.</span>
+                    </div>
+                </div>
+                <div class="third-step">
+                    <div class="step-title">A/S</div>
+                    <div class="step-content">
+                        <span>보고서가 자신에게 맞지 않는다고 생각하면 언제든지 재분석 요청을 하세요. 본인에게 맞는 화장품을 추천받을 때까지 계속 보고서를 작성해 드립니다.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <a href="#" data-rel="back"><img src="{% static 'img/popup_first.png' %}" style="width:90%; height:auto;"/></a>
+    <div class="intro-container">
+        <div class="intro-top">
+            <img src="{% static 'common/image/tut1.png' %}"/>
+            <div class="intro-top-text">
+                <div class="grey-deco-bar"></div>
+                <div class="text-title">남자들만을 위해 준비했습니다.</div>
+                <div class="text-content">
+                    <span>남성에게도 피부관리가 필수인 시대에 시간과 정보가 부족한 현대 남성들을 위해 만들어진 최적의 피부 관리 서비스입니다.</span>
+                </div>
+            </div>
+        </div>
+        <div class="intro-bottom">
+            <img src="{% static 'common/image/tut3.png' %}"/>
+            <div class="intro-bottom-text">
+                <div class="grey-deco-bar"></div>
+                <div class="text-title">피부타입, 선호브랜드, 예산까지 고려해 분석해 드립니다.</div>
+                <div class="text-content">
+                    <span>258만개의 리뷰를 분석한 데이터를 바탕으로 최적화된 화장품 보고서를 작성해 드립니다.<br/>보고서에 만족하실 때까지 재분석해 드립니다.</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="closing-container">
+        <div class="grey-deco-bar"></div>
+        <div class="closing-title">
+            당신의 피부관리. 이제 간편하게 파이너스로 시작하세요
+        </div>
+        <div class="closing-content">
+            <span>아래 버튼 클릭 후 당신의 피부에 대한 몇 가지 정보만 입력하시면 당신만을 위한 최고의 보고서를 제공해드립니다.</span>
+        </div>
+        <div class="closing-button-group">
+            <a class="btn btn-default" href="{% url 'report_form' %}" role="button">보고서 신청</a>
+        </div>
     </div>
 {% endblock %}

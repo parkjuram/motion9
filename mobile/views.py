@@ -21,9 +21,6 @@ from motion9.const import *
 
 @csrf_exempt
 def index_view(request):
-    # category_images = Category.objects.filter(is_set=True).all()
-    # category_images = list(map(lambda x:settings.MEDIA_URL+x.small_image.name, category_images))
-    # main_image = settings.MEDIA_URL + MainImage.objects.get(name='main').image.name
 
     product_categories = Category.objects.filter(is_set=False).all()
     set_categories = Category.objects.filter(is_set=True).all()
@@ -31,9 +28,8 @@ def index_view(request):
     main_image = MainImage.objects.filter(name='Main_m').all()[0]
     main_image_url = settings.MEDIA_URL + main_image.image.name
 
-    report_count = helper_get_report_count(request);
+    report_count = helper_get_report_count(request)
 
-    # set_category_images_row = []
     try:
         set_categorys = Category.objects.filter(is_set=True).all()
 
@@ -50,15 +46,7 @@ def index_view(request):
 
     main_notice = Preference.objects.filter(name='MainNotice').first()
 
-    return render(request, 'index.html',
-                  {
-                      'product_categories': product_categories,
-                      'set_categories': set_categories,
-                      'main_image_url': main_image_url,
-                      'set_category_images': set_category_images,
-                      'main_notice': main_notice,
-                      'report_count' : report_count
-                  })
+    return render(request, 'index.html' )
 
 @csrf_exempt
 def purchase_view(request):

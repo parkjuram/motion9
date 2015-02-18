@@ -211,4 +211,8 @@ $(function(){
 		});
 	});
 
+    $(".btn-alert-ready").click(function() {
+        alert('준비중입니다.');
+    });
+
 });

@@ -26,11 +26,17 @@
 
                         <div role="main" class="ui-content">
                             {% for survey_items in survey_group %}
-
                                 <div class="report-box">
                                     <fieldset data-role="controlgroup" style="border:0px;">
                                         <label class="report-radio-title"
                                                for="radio-name-{{ survey_items.label_index }}">{{ survey_items.label_index }}. {{ survey_items.question }}</label>
+
+                                        {% if forloop.parentloop.counter0 == 0 and forloop.counter0 == 0 %}
+                                            <div style="width:100%; text-align: center;">
+                                                <img src="{% static 'common/image/skin_type_2.png' %}" style="width:80%;"/>
+                                            </div>
+                                        {% endif %}
+
                                         {% for option in survey_items.options %}
                                             <div class="checkbox-wrapper">
                                                 <input type="radio" name="radio-name-{{ survey_items.label_index }}"
