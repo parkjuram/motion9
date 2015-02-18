@@ -10,8 +10,8 @@
     {% load mathfilters %}
 
 
-    <link rel="stylesheet" href="{% static 'common/css/jquery-ui.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'common/css/jquery.mobile-1.4.5.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'common/css/jquery-ui.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'common/css/jquery.mobile-1.4.5.min.css' %}"/>
 
     <link rel="stylesheet" href="{% static 'css/common_style.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/jquery.glide.style.css' %}"/>
@@ -22,24 +22,31 @@
 
     <script src="{% static 'js/jquery.glide.js' %}"></script>
     <script src="{% static 'js/common_js.js' %}"></script>
-    <script src="{% static 'js/common_js_mobile.js'%}"></script>
+    <script src="{% static 'js/common_js_mobile.js' %}"></script>
 
     <script src="{% static 'common/js/mobile_mp_event_tracking.js' %}"></script>
 
     <script>
         var url_for_login_next = "{% url 'mobile_login_page' %}?next={{ request.get_full_path }}";
 
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-53577084-1', 'auto');
-      ga('require', 'displayfeatures');
-      {% if user.is_authenticated %}
-      ga('set', '&uid', '{{ user.email }}');
-      {% endif %}
-      ga('send', 'pageview');
+        ga('create', 'UA-53577084-1', 'auto');
+        ga('require', 'displayfeatures');
+        {% if user.is_authenticated %}
+            ga('set', '&uid', '{{ user.email }}');
+        {% endif %}
+        ga('send', 'pageview');
 
     </script>
     <script>
@@ -47,9 +54,48 @@
         var urlForUpdateCart = "{% url 'update_cart' %}";
     </script>
 
-    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-    for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-    mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script><!-- end Mixpanel -->
+    <!-- start Mixpanel -->
+    <script type="text/javascript">(function (f, b) {
+        if (!b.__SV) {
+            var a, e, i, g;
+            window.mixpanel = b;
+            b._i = [];
+            b.init = function (a, e, d) {
+                function f(b, h) {
+                    var a = h.split(".");
+                    2 == a.length && (b = b[a[0]], h = a[1]);
+                    b[h] = function () {
+                        b.push([h].concat(Array.prototype.slice.call(arguments, 0)))
+                    }
+                }
+
+                var c = b;
+                "undefined" !== typeof d ? c = b[d] = [] : d = "mixpanel";
+                c.people = c.people || [];
+                c.toString = function (b) {
+                    var a = "mixpanel";
+                    "mixpanel" !== d && (a += "." + d);
+                    b || (a += " (stub)");
+                    return a
+                };
+                c.people.toString = function () {
+                    return c.toString(1) + ".people (stub)"
+                };
+                i = "disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+                for (g = 0; g < i.length; g++)f(c, i[g]);
+                b._i.push([a, e, d])
+            };
+            b.__SV = 1.2;
+            a = f.createElement("script");
+            a.type = "text/javascript";
+            a.async = !0;
+            a.src = "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
+            e = f.getElementsByTagName("script")[0];
+            e.parentNode.insertBefore(a, e)
+        }
+    })(document, window.mixpanel || []);
+    mixpanel.init("5f98afd11a1344fec4d92abbd375ff51");</script>
+    <!-- end Mixpanel -->
 
     <script>
         {% if user.is_authenticated %}
@@ -61,7 +107,7 @@
                 "$email": "{{ user.email }}",    // only special properties need the $
                 "$created": "{{ user.date_joined }}",
                 "$last_login": new Date()        // properties can be dates...
-{#                "gender": "{{ user.profile.gender }}"                    // feel free to define your own properties#}
+                {#                "gender": "{{ user.profile.gender }}"                    // feel free to define your own properties#}
             });
         {% endif %}
     </script>
@@ -77,147 +123,115 @@
             카트
         </div>
         <div>
-             {% if user.is_authenticated  %}
+            {% if user.is_authenticated %}
                 <div class="cart-item-list-wrapper">
-                <form id="cartBuyForm" method="post" data-ajax="false" action="/user/mobile/mypage/before_purchase/">
-                    {% csrf_token %}
-                    <ul class="custom-menu-list"></ul>
+                    <form id="cartBuyForm" method="post" data-ajax="false"
+                          action="/user/mobile/mypage/before_purchase/">
+                        {% csrf_token %}
+                        <ul class="custom-menu-list"></ul>
 
-                    <div>
-                        <div class="cart-footer-bar">
-                            <div style="margin : 16px 0;">
-                                총 결제 금액 : <span id="cartTotalPrice"></span>원
-                            </div>
-                            <div style="text-align : center; margin-bottom : 16px;">
-                                <a href="#" id="cartBuyBtn" style=" width : 80%;" data-ajax="false" class="black-btn">구매 하기</a>
+                        <div>
+                            <div class="cart-footer-bar">
+                                <div style="margin : 16px 0;">
+                                    총 결제 금액 : <span id="cartTotalPrice"></span>원
+                                </div>
+                                <div style="text-align : center; margin-bottom : 16px;">
+                                    <a href="#" id="cartBuyBtn" style=" width : 80%;" data-ajax="false"
+                                       class="black-btn">구매 하기</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
-             {% else %}
+            {% else %}
                 <div style="font-size : 12px; text-align : center; margin : 20px 0;">
-                   ! 로그인이 필요합니다.
+                    ! 로그인이 필요합니다.
                 </div>
                 <div style="text-align : center;">
-                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login 하러가기</a>
+                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login
+                        하러가기</a>
                 </div>
 
-             {% endif %}
+            {% endif %}
 
         </div>
     </div>
-	<div data-role="panel" id="menuPanel" data-position="left" data-display="overlay" data-position-fixed="true">
-	    <!-- panel content goes here -->
-{#	   <div class="menu-panel-search-box">#}
-{#            <input type="search" name="password" id="menuSearch" value="" placeholder="검색">#}
-{#	   </div>#}
-
-       <div>
+    <div data-role="panel" id="menuPanel" data-position="left" data-display="overlay" data-position-fixed="true">
+        <div>
             <ul class="custom-menu-list">
 
                 {% if user.is_authenticated %}
                     <li>
-                        <a id='btn-mypage' href="{% url "mobile_mypage" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">{{ user.profile.name }}님</a>
+                        <a id='btn-mypage' href="{% url "mobile_mypage" %}" data-ajax="false"
+                           style="padding: 20px 0px 20px 0px; padding-left: 5%;">{{ user.profile.name }}님</a>
                     </li>
 
                 {% else %}
-                    <li><a id='btn-login' href="{% url 'mobile_login_page' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Login</a></li>
+                    <li><a id='btn-login' href="{% url 'mobile_login_page' %}" data-ajax="false"
+                           style="padding: 20px 0px 20px 0px; padding-left: 5%;">Login</a></li>
                 {% endif %}
-                   <li>
-                     {% if user.is_authenticated %}
-                        <a id="btn-survey-list" href="{% url "mobile:mobile_survey_list" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
-                     {% else %}
-                        <a href="{% url "mobile_report_form_index" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
-                     {% endif %}
-                   </li>
-                <li><a id='btn-home' href="/mobile/" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>
-{#              <li class="list-collapsible">#}
-{#                    <a href="#" class="collapse-btn" style="padding: 20px 0px 20px 0px; padding-left: 5%;">  Collection + </a>#}
-{#                    <ul class="list-collapsed">#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_set" %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">전체</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=18 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">쿨가이 컬렉션</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=30 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">꽃중년 컬렉션</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=27 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">스포츠 컬렉션</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=28 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">비즈니스맨 컬렉션</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_set" category_id=31 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">계절 컬렉션</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
-{#                <li class="list-collapsible">#}
-{#                    <a href="#" class="collapse-btn" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Products +</a>#}
-{#                    <ul class="list-collapsed">#}
-{#                       <li ><a href="{% url "mobile:mobile_shop_product" %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">전체</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=1 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">스킨</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=2 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">로션</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=5 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">에센스</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=4 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">비비크림, 선크림</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=14 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left:15%;">수분크림, 아이크림</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=23 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">마스크/팩</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=3 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">클렌징/스크럽</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=33 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">립밤</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=24 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">바디</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=22 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">헤어</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=25 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">향수</a></li>#}
-{#                        <li ><a href="{% url "mobile:mobile_shop_product" category_id=26 %}" data-ajax="false" style="padding: 10px 0px 10px 0px; padding-left: 15%;">기타</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
-{#                <li>#}
-{#                    <a href="{% url "mobile:mobile_customize_set" %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>#}
-{#                      <a href="javascript:alert('현재 준비중입니다. PC에서 이용해 주세요.');" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">My Collection</a>#}
-{#                </li>#}
+                <li>
+                    {% if user.is_authenticated %}
+                        <a id="btn-survey-list" href="{% url "mobile:mobile_survey_list" %}" data-ajax="false"
+                           style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
+                    {% else %}
+                        <a href="{% url "mobile_report_form_index" %}" data-ajax="false"
+                           style="padding: 20px 0px 20px 0px; padding-left: 5%;">피부 관리 보고서</a>
+                    {% endif %}
+                </li>
+                <li><a id='btn-home' href="/mobile/" data-ajax="false"
+                       style="padding: 20px 0px 20px 0px; padding-left: 5%;">Home</a></li>
+
                 {% if user.is_authenticated %}
-                    <li><a id='btn-logout' href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
+                    <li><a id='btn-logout' href="{% url 'logout' %}?next={{ request.get_full_path }}" data-ajax="false"
+                           style="padding: 20px 0px 20px 0px; padding-left: 5%;">Logout</a></li>
                 {% endif %}
-                <li><a id='btn-faq' href="{% url 'mobile:mobile_faq' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
-{#                <li><a href="mailto:cs@themotion9.com?subject=%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=(%EB%A9%94%EC%9D%BC%EB%A1%9C%20%EB%AC%B8%EC%9D%98%20%EC%A3%BC%EC%8B%9C%EB%A9%B4%2024%EC%8B%9C%EA%B0%84%20%EC%95%88%EC%97%90%20%ED%9A%8C%EC%8B%A0%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4%5E%5E)%0A%0A%0A%0A%0A%0A%0A%0A%0A------------------------------------------%0AMotion9%20%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0%0A02-554-4511%0A%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%84%20%3A%20%ED%8F%89%EC%9D%BC%2010%3A00%20-%2018%3A00" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>#}
-                <li><a id='btn-inquire' href="javascript:$('.uv-icon')[0].click();" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>
-{#                <li><a href="{% url 'mobile:mobile_report' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Report</a></li>#}
+                <li><a id='btn-faq' href="{% url 'mobile:mobile_faq' %}" data-ajax="false"
+                       style="padding: 20px 0px 20px 0px; padding-left: 5%;">FAQ</a></li>
+                {#                <li><a href="mailto:cs@themotion9.com?subject=%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=(%EB%A9%94%EC%9D%BC%EB%A1%9C%20%EB%AC%B8%EC%9D%98%20%EC%A3%BC%EC%8B%9C%EB%A9%B4%2024%EC%8B%9C%EA%B0%84%20%EC%95%88%EC%97%90%20%ED%9A%8C%EC%8B%A0%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4%5E%5E)%0A%0A%0A%0A%0A%0A%0A%0A%0A------------------------------------------%0AMotion9%20%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0%0A02-554-4511%0A%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%84%20%3A%20%ED%8F%89%EC%9D%BC%2010%3A00%20-%2018%3A00" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>#}
+                <li><a id='btn-inquire' href="javascript:$('.uv-icon')[0].click();" data-ajax="false"
+                       style="padding: 20px 0px 20px 0px; padding-left: 5%;">문의</a></li>
+                {#                <li><a href="{% url 'mobile:mobile_report' %}" data-ajax="false" style="padding: 20px 0px 20px 0px; padding-left: 5%;">Report</a></li>#}
             </ul>
         </div>
-	</div><!-- /panel -->
+    </div>
+    <!-- /panel -->
 
-	<div data-role="header" data-position="fixed" data-tap-toggle="false">
-		<div class="ui-btn-left">
-            <a href="#menuPanel" class="top-menu-btn" id="top-menu-btn"><img src="{% static "img/menu.png"%}"/></a>
-		</div>
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div class="ui-btn-left">
+            <a href="#menuPanel" class="top-menu-btn" id="top-menu-btn"><img src="{% static "img/menu.png" %}"/></a>
+        </div>
 
         {% block title %}
-
             <div style="text-align:center; height:100%; margin-top:4px">
                 <a id='btn-home-logo' href="{% url 'mobile:mobile_index' %}" target="_self">
-                    <img src ="{% static "img/LOGO_black.png" %}" class="main-logo-img" >
+                    <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img">
                 </a>
             </div>
         {% endblock %}
 
-{#    	<div  class="ui-btn-right">#}
-{#             {% if user.is_authenticated  %}#}
-{#	    	    <a href="#" id="btn-open-cart" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>#}
-{#            {% else %}#}
-{#                <a href="#" id="btn-open-cart-logout" class="top-menu-btn"><img src="{% static "img/cart.png" %}"/></a>#}
-{#            {% endif %}#}
-{#    	</div>#}
         {% block special_header %}
         {% endblock %}
-	</div>
-	<div data-role="main" class="ui-content" style="padding : 0;">
+    </div>
+    <div data-role="main" class="ui-content" style="padding : 0;">
 
-		{% block content %}
+        {% block content %}
         {% endblock %}
-	</div>
-    {% block footer %}
-	<div data-role="footer">
-		<div class="footer-div">
-                라이프엔진(주) | 대표이사 : 한도건 <br/> 사업자 등록번호 : 119-86-58979<br/>
-                통신판매업신고 : 2013-서울관악-0392 <br/>
-                개인정보관리책임자 : 박주람<br/>
-                서울시 강남구 테헤란로 313, 916(역삼동, 성지하이츠 1차 빌딩) <br/> Tel : 02-554-4511 <br/>
-                © Life Engine Corp. All rights reserved.<br/>
-                <a target="_blank" href="{% url 'mobile:mobile_agreement_of_utilization' %}">이용약관</a>
-                <a target="_blank" href="{% url 'mobile:mobile_privacy' %}">개인정보취급방침</a>
-        </div>
-	</div>
-    {% endblock %}
+        {% block footer %}
+            <div data-role="footer">
+                <div class="footer-div">
+                    라이프엔진(주) | 대표이사 : 한도건 <br/> 사업자 등록번호 : 119-86-58979<br/>
+                    통신판매업신고 : 2013-서울관악-0392 <br/>
+                    개인정보관리책임자 : 박주람<br/>
+                    서울시 강남구 테헤란로 313, 916(역삼동, 성지하이츠 1차 빌딩) <br/> Tel : 02-554-4511 <br/>
+                    © Life Engine Corp. All rights reserved.<br/>
+                    <a target="_blank" href="{% url 'mobile:mobile_agreement_of_utilization' %}">이용약관</a>
+                    <a target="_blank" href="{% url 'mobile:mobile_privacy' %}">개인정보취급방침</a>
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+
 </div>
 
 {% block multi-page-block %}

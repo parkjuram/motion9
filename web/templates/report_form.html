@@ -64,9 +64,9 @@
                     <div class="report-box">
                         <fieldset data-role="controlgroup">
                             <legend class="report-radio-title">{{ survey_items.label_index }}. {{ survey_items.question }} </legend>
-                            {% if forloop.parentloop.counter0 == 0 and forloop.counter0 == 0 %}
+                            {% if forloop.counter0 == 0 and forloop.parentloop.counter0 == 0 %}
                                 <div style="width:100%; text-align: center;">
-                                    <img src="{% static 'common/image/skin_type_2.png' %}" style="width:80%;"/>
+                                    <img src="{% static 'common/image/skin_type_2.png' %}" style="width:80%;">
                                 </div>
                             {% endif %}
                             {% for option in survey_items.options %}
