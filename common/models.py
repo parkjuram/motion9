@@ -18,7 +18,7 @@ class NCategory(models.Model):
 
 @python_2_unicode_compatible
 class NProduct(models.Model):
-    name = models.CharField(max_length=20, null=False)
+    name = models.CharField(max_length=40, null=False)
     brand = models.CharField(max_length=20, null=False, blank=True)
     category = models.ForeignKey(NCategory)
     price = models.IntegerField(null=False, default=0)
