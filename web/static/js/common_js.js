@@ -215,4 +215,21 @@ $(function(){
         alert('준비중입니다.');
     });
 
+    $('.login-submit-btn').click(function (e) {
+        e.preventDefault();
+
+        var isEnable = $(this).attr('data-enable');
+
+        if (isEnable && isEnable == 'false') {
+            alert('이메일을 확인하세요.');
+        } else {
+            var formType = $(this).attr('data-form');
+            var form = $('form').filter(function () {
+                return $(this).attr('data-form') == formType;
+            });
+            form.submit();
+        }
+
+    });
+
 });

@@ -22,18 +22,19 @@
             <input type="hidden" id="fbEmail" name="email"/>
             <input type="hidden" id="fbToken" name="token"/>
         </form>
-        <form method="post" action="{% url "login" next=next %}" data-ajax="false">
-            <div style="margin : 20px 0px; text-align : center;">
-                <a href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;"
-                   class="fb-login-btn facebook-btn">facebook으로 로그인</a>
-            </div>
-            <div class="login-box-header">
-                <h4 class="lined-heading"><span>Sign in</span></h4>
-            </div>
 
+        <div style="margin : 20px 0px; text-align : center;">
+            <a href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;"
+               class="fb-login-btn facebook-btn">facebook으로 로그인</a>
+        </div>
+        <div class="login-box-header">
+            <h4 class="lined-heading"><span>Sign in</span></h4>
+        </div>
+        <form method="post" data-form="login-page-form" action="{% url 'login' next=next %}" >
+{#        <form method="post" action="{% url "login" next=next %}" data-ajax="false">#}
             <div>
                 E-mail
-                <input type="text" class="login-form" size="40px" name="email" id="name" value="" data-clear-btn="true"
+                <input type="text" class="login-form" size="40px" name="email" id="email" value="" data-clear-btn="true"
                        data-mini="true">
             </div>
             <div>비밀번호
@@ -42,8 +43,15 @@
             </div>
             <div>
                 <div style="margin : 20px 0px; text-align : right;">
-                    <a href="#" class="black-btn" id="loginBtn"
+                    <a id="btn-login-finish"
+                       href="#"
+                       onClick="mixpanel.track('MOBILE:click btn-login-finish'); return false;"
+                       class="basic-btn login-submit-btn"
+                       data-form="login-page-form"
                        style="width : 30%; display:inline-block; padding : 14px 2%;">로그인</a>
+
+{#                    <a href="#" class="black-btn" id="loginBtn"#}
+{#                       style="width : 30%; display:inline-block; padding : 14px 2%;">로그인</a>#}
                 </div>
             </div>
         </form>
