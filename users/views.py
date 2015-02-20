@@ -186,13 +186,13 @@ def login_(request, next='login_page'):
         if user is not None and user.is_active:
             auth_login(request, user)
             request.session['is_first_login'] = True
-            return redirect(next)
+            return redirect(next, permanent=True)
         else:
             error = '로그인에 실패하였습니다.'
             logger.error(error)
 
     messages.info(request, error)
-    return redirect(next)
+    return redirect(next, permanent=True)
 
 @csrf_exempt
 def login_view(request):
@@ -707,7 +707,7 @@ def make_custom_set(request):
 def mobile_login_view(request):
 
     if request.user.is_authenticated():
-        return redirect('mobile:mobile_index')
+        return redirect('mobile:mobile_index', permanent=True)
 
     next = request.GET.get('next', 'mobile_login_page')
     fail = request.GET.get('fail', 'mobile_registration_page')
