@@ -2,6 +2,15 @@ p {
     margin: 0;
 }
 
+body {
+    text-shadow: 0!important;
+}
+
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+text-shadow: none;
+}
+
+
 .main-notice-container {
     position: relative;
 }
@@ -17,6 +26,7 @@ p {
 .main-notice-container .main-notice .main-notice-title {
     font-size: 20px;
     color: white;
+
 }
 .main-notice-container .main-notice .main-notice-subtitle {
     margin-top: 15px;
@@ -24,44 +34,57 @@ p {
     color: white;
 }
 .main-notice-container .main-notice .main-notice-button-group {
-    margin-top: 15px;
+    margin-top: 35px;
 }
 
 
 .how-it-works-container {
     text-align: center;
+    margin-bottom: 100px;
 }
 .how-it-works-container .grey-deco-bar {
-    margin: 30px auto 0 auto;
-    width: 60px;
-    height: 7px;
-    background: grey;
+    margin: 50px auto 0 auto;
+    width: 30px;
+    height: 3px;
+    background: #aab9c0;
 }
 .how-it-works-container .how-it-works-title {
     margin-top: 20px;
     font-size: 28px;
+    font-weight: bold;
 }
 .how-it-works-container .how-it-works-step {
-    margin-top: 15px;
+    margin-top: 20px;
+    display: block;
 }
 .how-it-works-container .how-it-works-step > div {
     margin-top: 15px;
+    display: block;
 }
 .how-it-works-container .how-it-works-step > div .step-title {
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 700;
+    margin-top: 25px;
+    display: block;
 }
 .how-it-works-container .how-it-works-step > div .step-content {
     height: 80px;
-    margin: 0 5%;
+    margin: 0 auto;
     line-height: 80px;
     text-align: center;
+    width: 70%;
+    font-size: 13px;
+    color: #5f666e;
+    /*margin-bottom: 25px;*/
+    display: block;
+    padding-bottom: 20px;
 }
 .how-it-works-container .how-it-works-step > div .step-content span {
-    font-size: 12px;
-    display: inline-block;
+    margin-top: 15px;
+    font-size: 15px;
+    display: block;
     vertical-align: middle;
-    line-height: normal;
+    line-height: 30px;
 }
 
 
@@ -78,55 +101,110 @@ p {
     top: 10%;
     text-align: center;
 }
-.intro-container .grey-deco-bar {
-    margin: 20px auto 0 auto;
-    width: 60px;
-    height: 7px;
-    background: grey;
+.intro-container .yellow-deco-bar {
+    margin: 20px auto 20px auto;
+    width: 30px;
+    height: 3px;
+    background: #f44e04;
 }
 .intro-container .text-title {
     font-size: 18px;
     font-weight: 300;
     color: white;
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 .intro-container .text-content {
     height: 80px;
-    margin: 0 5%;
+    margin: 0 auto;
     line-height: 80px;
     text-align: center;
+    width: 70%;
 }
 .intro-container .text-content span{
-    font-size: 12px;
+    font-size: 15px;
     color: white;
     display: inline-block;
     vertical-align: middle;
-    line-height: normal;
+    line-height: 20px;
 }
 
 
 .closing-container {
     text-align: center;
-    background: cadetblue;
+    background: #15191D;
     height: auto;
     padding: 25px 0px 40px 0px;
+    color: #fff;
 }
-.closing-container .grey-deco-bar {
-    margin: 40px auto 0 auto;
-    width: 70px;
-    height: 10px;
-    background: grey;
+.closing-container .green-deco-bar {
+    margin: 40px auto 20px auto;
+    width: 30px;
+    height: 3px;
+    background: #17bcb8;
 }
 .closing-container .closing-title {
     margin-top: 30px;
     font-size: 18px;
     font-weight: 300;
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 .closing-container .closing-content {
     margin-top: 40px;
+    width: 70%;
+    margin: 0 auto;
 }
 .closing-container .closing-content span{
-    font-size: 12px;
+    font-size: 15px;
+    line-height: 20px;
+    color: #7b808a;
 }
 .closing-container .closing-button-group {
-    margin-top: 30px;
+    margin-top: 50px;
+    width:100%;
+    padding: 0 10px 0 10px;
+}
+
+.btn-start {
+    width: 100%;
+    white-space: nowrap;
+    font-size: .75rem;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    line-height: 2em;
+    letter-spacing: 2px;
+    padding: 14px 30%;
+    background: 0 0;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    border-width: 2px;
+    border-style: solid;
+    border-color: white;
+    color : white!important;
+    text-shadow: none;
+    -webkit-transition: background 80ms ease-out;
+    transition: background 80ms ease-out;
+}
+
+.btn-start:hover {
+    border: 2px solid #17bcb8;
+    background-color: #17bcb8;
+}
+.step-img {
+    content: '';
+    display: block;
+    /*position: absolute;*/
+    margin: 0 auto;
+    margin-bottom:15px;
+    top: 29px;
+    width: 41px;
+    height: 41px;
+    -webkit-background-size: 41px;
+    background-size: 41px;
+    background-repeat: no-repeat;
+    background-image: url(http://playsense.co.kr/ok/m9/check.png);
 }

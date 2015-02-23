@@ -148,7 +148,7 @@
                     ! 로그인이 필요합니다.
                 </div>
                 <div style="text-align : center;">
-                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn">Login
+                    <a href="{% url "mobile_login_page" %}" style=" width : 80%;" data-ajax="false" class="gold-btn"target="_self">Login
                         하러가기</a>
                 </div>
 
@@ -167,7 +167,7 @@
                     </li>
 
                 {% else %}
-                    <li><a id='btn-login' href="{% url 'mobile_login_page' %}" data-ajax="false"
+                    <li><a target="_self" id='btn-login' href="{% url 'mobile_login_page' %}" data-ajax="false"
                            style="padding: 20px 0px 20px 0px; padding-left: 5%;">Login</a></li>
                 {% endif %}
                 <li>
