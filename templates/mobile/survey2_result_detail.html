@@ -55,10 +55,10 @@
                             <ul class="nav nav-tabs">
                                 <li class="active" style="width: 50%; margin-right:0px;">
                                     <a href="#pro_1_tab" data-toggle="tab" aria-expanded="true"
-                                       style="font-size:100%;">{{ survey_result_detail.0.product.name }}</a></li>
+                                       style="font-size:100%;">{{ survey_result_detail.0.product.brand }} {{ survey_result_detail.0.product.name }}</a></li>
                                 <li class style="width: 50%;margin-right:0px;">
                                     <a href="#pro_2_tab" data-toggle="tab" aria-expanded="false"
-                                       style="font-size:100%;">{{ survey_result_detail.1.product.name }}</a></li>
+                                       style="font-size:100%;">{{ survey_result_detail.1.product.brand }} {{ survey_result_detail.1.product.name }}</a></li>
                             </ul>
 
                         </div>
@@ -90,7 +90,7 @@
                                                         <div class="caption caption-md">
                                                             <i class="icon-bar-chart theme-font hide"></i>
                                                             <span class="caption-subject theme-font bold uppercase"
-                                                                  style="font-size:15px;">{{ survey_result_detail.0.product.name }}</span>
+                                                                  style="font-size:15px;">{{ survey_result_detail.0.product.brand }} {{ survey_result_detail.0.product.name }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body">
@@ -463,7 +463,7 @@
                                                         <div class="caption caption-md">
                                                             <i class="icon-bar-chart theme-font hide"></i>
                                                             <span class="caption-subject theme-font bold uppercase"
-                                                                  style="font-size:15px;">{{ survey_result_detail.1.product.name }}</span>
+                                                                  style="font-size:15px;">{{ survey_result_detail.1.product.brand }} {{ survey_result_detail.1.product.name }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body">
@@ -538,7 +538,7 @@
                                                    product-id="{{ survey_result_detail.1.product.id }}"
                                                    user-survey-id="{{ request.pk }}"
                                                    style="width: 49%; color: #fff !important;">
-                                                    {% if survey_result_detail.0.product.is_interested %}
+                                                    {% if survey_result_detail.1.product.is_interested %}
                                                         관심완료
                                                     {% else %}
                                                         관심하기
@@ -676,14 +676,14 @@
                                                                     <td style="width:40%;">
                                                                         <div class="progress-info">
                                                                             <div class="progress" style="height:4px; margin-bottom:0px;">
-                                                                                <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
+                                                                                <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
-                                                                                    <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
+                                                                                    <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
                                    				                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td>{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                             {% endfor %}
                                                         </table>
@@ -747,14 +747,14 @@
                                                                     <td style="width:40%;">
                                                                         <div class="progress-info">
                                                                             <div class="progress" style="height:4px; margin-bottom:0px;">
-                                                                                <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
+                                                                                <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
-                                                                                    <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
+                                                                                    <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
                                    				                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td>{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                             {% endfor %}
                                                         </table>
@@ -817,14 +817,14 @@
                                                                     <td style="width:40%;">
                                                                         <div class="progress-info">
                                                                             <div class="progress" style="height:4px; margin-bottom:0px;">
-                                                                                <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
+                                                                                <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
-                                                                                    <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
+                                                                                    <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
                                    				                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td>{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                             {% endfor %}
                                                         </table>

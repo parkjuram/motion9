@@ -266,7 +266,7 @@ class SurveyResultView(TemplateView):
         self.request.pk = kwargs['pk']
         user_survey = UserSurvey.objects.get(pk=kwargs['pk'])
         user_survey_result = user_survey.results.all()[0]
-        survey_result_detail = user_survey_result.details.select_related('product')
+        survey_result_detail = user_survey_result.details.order_by('-product__category__order').select_related('product')
 
         survey_result_detail_ = {}
 
@@ -321,7 +321,7 @@ class SurveyResultView(TemplateView):
         context["graphs_min_data"] = graphs_min_data
         context["graphs_max_data"] = graphs_max_data
 
-        context["categories"] = NCategory.objects.all()
+        context["categories"] = NCategory.objects.order_by('-order').all()
 
         return context
 

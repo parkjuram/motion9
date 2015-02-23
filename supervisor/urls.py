@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from foradmin.views import PurchaseUpdateView, PaymentUpdateView
 from supervisor.views import AnalysisView, SupervisorView, ProductAnalysisView, UserSurveyListView, \
-    CreateOrUpdateSurveyResultView
+    CreateOrUpdateSurveyResultView, CheckImageSizeView
 
 urlpatterns = patterns('',
 
@@ -31,6 +31,13 @@ urlpatterns = patterns('',
         view=CreateOrUpdateSurveyResultView.as_view(),
         name='create_or_update_survey_result'
     ),
+    url(
+        regex=r'^check-image-size/$',
+        view=CheckImageSizeView.as_view(),
+        name='check_image_size'
+    ),
+
+
 
 
 

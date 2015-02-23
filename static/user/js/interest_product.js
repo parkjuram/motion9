@@ -21,13 +21,13 @@
                 success: function(data) {
                     if ( data.success ) {
                         currentDomObject.text("관심완료");
-                        alert('Interest Success');
+                        alert('관심되었습니다.');
                     } else {
-                        alert('Interest Fail');
+                        //alert('ERROR!');
                     }
                 },
                 error: function() {
-                    alert('Interest Fail');
+                    alert('ERROR!');
                 }
             });
         });
@@ -43,14 +43,14 @@
                 },
                 success: function(data) {
                     if ( data.success ) {
-                        alert('Undo Success');
+                        alert('관심 취소되었습니다.');
                         location.reload();
                     } else {
-                        alert('Undo Fail');
+                        //alert('ERROR!');
                     }
                 },
                 error: function() {
-                    alert('Undo Fail');
+                    alert('ERROR!');
                 }
             });
         });

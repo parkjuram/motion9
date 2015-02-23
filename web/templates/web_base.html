@@ -120,13 +120,13 @@
     <div id="header-wrapper">
         <div id="brand">
             <a id='btn-home-logo' href="{% url 'index' %}"><img style="display:block; max-width:100%;height:100%;"
-                                             src="{% static 'img/logo.png' %}"/></a>
+                                             src="{% static 'img/logo_wht.png' %}"/></a>
         </div>
 
         <div id="header-main-menu">
             <ul id="header-main-menu-list">
 
-                <li><a href="#how-it-works" id="btn-howitworks">HOW IT WORKS</a></li>
+                <li><a href="{% url 'index' %}#how-it-works" id="btn-howitworks">HOW IT WORKS</a></li>
                 <li><a href="javascript:void(0);" id="btn-survey-list">피부 관리 보고서</a></li>
                 <li><a href="#" id="btn-helpp" data-attr="menuHelp">HELP</a></li>
                 <li><a style="border-left: 2px #17bcb8 solid; padding-top: 20px; padding-bottom: 2px; margin-top: 10px; margin-left: 20px;"></a></li>

@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
 from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
@@ -250,6 +250,17 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(CreateOrUpdateSurveyResultView, self).dispatch(*args, **kwargs)
+
+class CheckImageSizeView(SuperuserRequiredMixin, TemplateView):
+    template_name = "supervisor/check_image_size.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CheckImageSizeView, self).get_context_data(**kwargs)
+
+        context['products'] = NProduct.objects.all()
+
+        return context
+
 
 def analysis_status(request, task_id):
     task = analysis_product.AsyncResult(task_id)
