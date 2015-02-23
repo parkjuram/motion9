@@ -163,7 +163,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- END PAGE HEAD -->
             <!-- BEGIN PAGE CONTENT INNER -->
 
-            <div class="row">
+            <div class="row" style="margin-left: 0; margin-right: 0;">
                 <div class="wrapper">
                     <!-- BEGIN PORTLET-->
                     <div class="portlet light">
@@ -173,7 +173,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <span class="caption-subject theme-font-color bold uppercase">분석 총평</span>
                             </div>
                         </div>
-                        <div class="portlet-body total-review">
+                        <div class="portlet-body" style="font-size: 17px; max-height:400px; overflow:scroll; line-height:normal; line-height: 25px;
+white-space: pre-line;">
                             {{ user_survey_result.general_review }}
                         </div>
                         <div id="sales_statistics" class="portlet-body-morris-fit morris-chart"

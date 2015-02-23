@@ -132,7 +132,8 @@
                                     <span class="caption-subject theme-font-color bold uppercase">분석 총평</span>
                                 </div>
                             </div>
-                            <div class="portlet-body total-review">
+                            <div class="portlet-body" style="font-size: 17px; max-height:400px; overflow:scroll; line-height:normal; line-height: 25px;
+white-space: pre-line;">
                                 {{ user_survey_result.general_review }}
                             </div>
                             <div id="sales_statistics" class="portlet-body-morris-fit morris-chart"
@@ -180,7 +181,8 @@
                             </div>
                             <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
                             <div class="col-md-8" id="view_report">
-                                <div type="button" class="more">분석 보고서 보기   <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <div type="button" class="more">분석 보고서 보기  &nbsp <img style="width: 15px;
+height: auto;"src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="true"></span>
                                 </div>
                             </div>
                         </a>
@@ -201,7 +203,7 @@
                                             <div>
                                                 <div class="display">
                                                     <div class="number">
-                                                    <span class="font-blue">{{ item.product.brand }} {{ item.product.name }}</span></br>
+                                                    <div class="product_name">{{ item.product.brand }} {{ item.product.name }}</div></br>
                                                         <div class="detail">
                                                             <span>{{ item.product.price|intcomma }}원/{{ item.product.capacity }}{{ item.product.capacity_unit }}</span><br/>
                                                             <span>({{ item.product.unit_price }}원/{{ item.product.capacity_unit }})</span>
@@ -216,11 +218,12 @@
                                    product-id="{{ item.product.id }}"
                                    user-survey-id="{{ request.pk }}"
                                    style="width: 100%;">
+
                                     {% if item.product.is_interested %}
-                                        관심완료
+                                         <div class="btn-int-f">관심완료</div>
                                     {% else %}
-                                        관심하기
-                                        <i class="fa fa-plus"></i>
+                                        <div class="btn-int-y">관심하기</div>
+
                                     {% endif %}
                                 </a>
                             </div>
