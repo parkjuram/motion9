@@ -73,7 +73,7 @@
                             {% endif %}
                             {% for option in survey_items.options %}
                                 <input type="radio" name="radio-name-{{ survey_items.label_index }}"
-                                       id="radio-id-{{ forloop.counter }}" value="{{ option.id }}" />
+                                       id="radio-id-{{ forloop.counter }}" value="{{ option.id }}"/>
                                 <label class="label-content"
                                        for="radio-id-{{ forloop.counter }}">{{ option.content }}</label>
                             {% endfor %}
@@ -109,7 +109,8 @@
 
             <div style="text-align: center; margin-top : 50px;">
                 <a href="#page-num-{{ survey|length|sub:1 }}" class="black-btn">뒤로가기</a>
-                <a href="#" id="btn-request-survey-finish" survey_length="{{ survey|length }}" survey_id="{{ survey_id }}"
+                <a href="#" id="btn-request-survey-finish" survey_length="{{ survey|length }}"
+                   survey_id="{{ survey_id }}"
                    url="{% url 'mobile:mobile_survey_list' %}" class="black-btn" style="width:70px;">보고서 요청</a>
             </div>
             <div style="text-align: center; margin-top : 20px;">

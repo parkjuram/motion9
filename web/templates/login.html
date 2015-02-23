@@ -1,7 +1,7 @@
 {% extends "mobile_base.html" %}
 {% block header %}
     {% load static %}
-    <script src="{% static 'js/login.js' %}"></script>
+{#    <script src="{% static 'js/login.js' %}"></script>#}
 {% endblock %}
 {% block content %}
 
@@ -55,7 +55,6 @@
                 </div>
             </div>
         </form>
-
 
         <div style="text-align:right; margin : 20px 0px; margin-bottom : 20px;">
             <a href="{% url 'mobile_registration_page' %}?next={{ next }}" data-ajax="false"

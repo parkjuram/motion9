@@ -227,6 +227,7 @@ $(function(){
             var form = $('form').filter(function () {
                 return $(this).attr('data-form') == formType;
             });
+
             form.submit();
         }
 
