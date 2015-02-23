@@ -120,7 +120,10 @@ var ns_prduct_analysis = (function() {
             var analysisDetailList = [];
             $('#selected-item-content > table tr').each(function (index, object) {
                 if ($(object).find(".is-apply:checked").length > 0) {
-                    var keyword = $(object).find('.text-keyword').val();
+                    var keyword = $(object).find('.text-keyword').val().trim();
+                    if( keyword.length == 0 ) {
+                        return;
+                    }
                     var count = $(object).find('.number-count').val();
 
                     $(object).find('.checkbox-type:checked').each(function (index, object) {
