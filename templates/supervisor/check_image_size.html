@@ -5,7 +5,7 @@
 </head>
 <body>
 {% for product in products %}
-    <img src="{{ product.thumbnail_url }}" product-name="{{ product.name }}" style="border:1px solid red;"/>
+    <img src="{{ product.thumbnail_url }}" product-name="{{ product.brand }} {{ product.name }}" style="border:1px solid red;"/>
 {% endfor %}
 </body>
 </html>
