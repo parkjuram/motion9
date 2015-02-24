@@ -30,7 +30,7 @@
         <div class="login-box-header">
             <h4 class="lined-heading"><span>Sign in</span></h4>
         </div>
-        <form method="post" data-form="login-page-form" action="{% url 'login' next=next %}" >
+        <form method="post" data-form="login-page-form" action="{% url 'login' next=next %}" data-ajax="false">
 {#        <form method="post" action="{% url "login" next=next %}" data-ajax="false">#}
             <div>
                 E-mail
