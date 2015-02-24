@@ -181,7 +181,7 @@ white-space: pre-line;">
                             </div>
                             <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
                             <div class="col-md-8" id="view_report">
-                                <div type="button" class="more">분석 보고서 보기  &nbsp <img style="width: 15px;
+                                <div type="button" class="more">분석 보고서 보기  &nbsp; <img style="width: 15px;
 height: auto;"src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="true"></span>
                                 </div>
                             </div>
@@ -276,79 +276,73 @@ height: auto;"src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="tr
                 }
 
                 AmCharts.makeChart("chartdiv",
-				{
-					"type": "serial",
-					"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
-					"categoryField": "category",
-					"columnSpacing": 3,
-					"columnWidth": 1,
-					"rotate": true,
-					"autoMarginOffset": 1,
-					"autoMargins": false,
-					"marginBottom": 10,
-					"marginLeft": 60,
-					"marginRight": 10,
-					"marginTop": 0,
-					"startDuration": 1,
-					"startEffect": "easeOutSine",
-					"theme": "light",
-					"categoryAxis": {
-						"autoRotateAngle": 90,
-						"gridPosition": "start",
-						"position": "left",
-						"autoGridCount": false,
-						"axisAlpha": 0,
-						"dashLength": 7,
-						"labelOffset": -4,
-						"labelRotation": -90,
-						"minHorizontalGap": 0,
-						"minorGridAlpha": 0,
-						"minVerticalGap": 0
-					},
-					"trendLines": [],
-					"graphs": graphs_data,
-					"guides": [],
-					"valueAxes": [
-						{
-							"id": "ValueAxis-1",
-							"stackType": "regular",
-							"autoGridCount": false,
-							"title": ""
-						},
-						{
-							"id": "ValueAxis-2"
-						}
-					],
-					"allLabels": [],
-					"balloon": {
-						"borderThickness": 1,
-						"fillAlpha": 0,
-						"horizontalPadding": 5,
-						"maxWidth": 3,
-						"offsetX": 4,
-						"verticalPadding": 12
-					},
-					"legend": {
-						"maxColumns": 2,
-						"spacing": -50,
-						"textClickEnabled": true,
-						"useGraphSettings": true,
-						"valueText": "[[value]]원",
-						"verticalGap": 4,
-						"width": 350
-					},
-					"titles": [
-						{
-							"id": "Title-1",
-							"size": 15,
-							"text": "Chart Title"
-						}
-					],
-					"dataProvider": [
-						graphs_min_data,
-						graphs_max_data
-					]
-				});
+            {
+                "type": "serial",
+                "pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+                "categoryField": "category",
+                "columnSpacing": 10,
+                "columnWidth": 1,
+                "rotate": true,
+                "autoMarginOffset": 1,
+                "autoMargins": false,
+                "marginBottom": 10,
+                "marginLeft": 60,
+                "marginRight": 10,
+                "marginTop": 0,
+                "startDuration": 1,
+                "startEffect": "easeOutSine",
+                "theme": "light",
+                "categoryAxis": {
+                    "autoRotateAngle": 90,
+                    "gridPosition": "start",
+                    "position": "left",
+                    "autoGridCount": false,
+                    "axisAlpha": 0,
+                    "dashLength": 7,
+                    "labelOffset": -4,
+                    "labelRotation": -90,
+                    "minHorizontalGap": 0,
+                    "minorGridAlpha": 0,
+                    "minVerticalGap": 0
+                },
+                "trendLines": [],
+                "graphs": graphs_data,
+                "guides": [],
+                "valueAxes": [
+                    {
+                        "id": "ValueAxis-1",
+                        "stackType": "regular",
+                        "autoGridCount": false,
+                        "title": ""
+                    },
+                    {
+                        "id": "ValueAxis-2"
+                    }
+                ],
+                "allLabels": [],
+                "balloon": {
+                    "borderThickness": 1,
+                    "fillAlpha": 1,
+                    "horizontalPadding": 5,
+                    "maxWidth": 300,
+                    "offsetX": 4,
+                    "verticalPadding": 12
+                },
+                "legend": {
+                    "maxColumns": 2,
+                    "spacing": -30,
+                    "textClickEnabled": true,
+                    "useGraphSettings": true,
+                    "valueText": "[[value]]원",
+                    "verticalGap": 4,
+                    "width": 350
+                },
+
+                "dataProvider": [
+                    graphs_min_data,
+                    graphs_max_data
+                ]
+            });
 
 
                 $('.total-review').slimScroll({

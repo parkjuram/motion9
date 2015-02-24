@@ -46,45 +46,47 @@
 
 {% block content %}
 
-        <div class="row" id=choice data-spy="affix" data-offset-top="500"
-             style="margin:0px; width:100%; position: fixed !important; top: 49px !important; z-index:100;">
-            <div class="col-sm-12 col-md-12 col-xs-12" style="padding:0px;">
-                <div class="portlet light" style="padding: 0px; padding-bottom:0px; border-radius:0;">
-                    <div class="portlet-body" style="padding-top:0px;">
-                        <div class="tabbable-line" style="width:100%; text-align:center;">
-                            <ul class="nav nav-tabs">
-                                <li class="active" style="width: 50%; margin-right:0px;">
-                                    <a href="#pro_1_tab" data-toggle="tab" aria-expanded="true"
-                                       style="font-size:100%;">{{ survey_result_detail.0.product.brand }} {{ survey_result_detail.0.product.name }}</a></li>
-                                <li class style="width: 50%;margin-right:0px;">
-                                    <a href="#pro_2_tab" data-toggle="tab" aria-expanded="false"
-                                       style="font-size:100%;">{{ survey_result_detail.1.product.brand }} {{ survey_result_detail.1.product.name }}</a></li>
-                            </ul>
+    <div class="row" id=choice data-spy="affix" data-offset-top="500"
+         style="margin:0px; width:100%; position: fixed !important; top: 49px !important; z-index:100;">
+        <div class="col-sm-12 col-md-12 col-xs-12" style="padding:0px;">
+            <div class="portlet light" style="padding: 0px; padding-bottom:0px; border-radius:0;">
+                <div class="portlet-body" style="padding-top:0px;">
+                    <div class="tabbable-line" style="width:100%; text-align:center;">
+                        <ul class="nav nav-tabs">
+                            <li class="active" style="width: 50%; margin-right:0px;">
+                                <a href="#pro_1_tab" data-toggle="tab" aria-expanded="true"
+                                   style="font-size:100%;">{{ survey_result_detail.0.product.brand }} {{ survey_result_detail.0.product.name }}</a>
+                            </li>
+                            <li class style="width: 50%;margin-right:0px;">
+                                <a href="#pro_2_tab" data-toggle="tab" aria-expanded="false"
+                                   style="font-size:100%;">{{ survey_result_detail.1.product.brand }} {{ survey_result_detail.1.product.name }}</a>
+                            </li>
+                        </ul>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- BEGIN PAGE CONTAINER -->
+    </div>
+    <!-- BEGIN PAGE CONTAINER -->
 
-        <div class="page-container" style="background-color:#f2f2f2;">
-            <!-- BEGIN PAGE CONTENT -->
+    <div class="page-container" style="background-color:#f2f2f2;">
+        <!-- BEGIN PAGE CONTENT -->
 
-            <div class="page-content">
+        <div class="page-content">
 
 
-                <div class="row" style="margin-top:70px;">
-                    <div class="col-sm-12 col-md-12 col-xs-12">
-                        <div class="portlet gren">
-                            <div class="portlet-body">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="pro_1_tab">
-                                        <div class="row">
+            <div class="row" style="margin-top:70px;">
+                <div class="col-sm-12 col-md-12 col-xs-12">
+                    <div class="portlet gren">
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="pro_1_tab">
+                                    <div class="row">
 
-                                            <div class="col-md-12  col-xs-12">
-                                                <!-- BEGIN PORTLET-->
-<div class="wrapper">
+                                        <div class="col-md-12  col-xs-12">
+                                            <!-- BEGIN PORTLET-->
+                                            <div class="wrapper">
                                                 <div class="portlet light ">
                                                     <div class="portlet-title">
                                                         <div class="caption caption-md">
@@ -97,7 +99,8 @@
                                                         <div class="row list-separated">
                                                             <div class="col-md-4 col-sm-4 col-xs-4">
                                                                 <div class="product-x-img" style="height:auto;">
-                                                                    <img src="{{ survey_result_detail.0.product.thumbnail_url }}" alt=""
+                                                                    <img src="{{ survey_result_detail.0.product.thumbnail_url }}"
+                                                                         alt=""
                                                                          style="width:auto;max-height: 120px;"/>
                                                                 </div>
                                                             </div>
@@ -155,33 +158,33 @@
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
-                                                </div>
                                         </div>
-                                        <div class="row margin-bottom-20">
-                                            <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn-interest" id="btn-interest-g"
-                                                   product-id="{{ survey_result_detail.0.product.id }}"
-                                                   user-survey-id="{{ request.pk }}"
-                                                   style="width: 49%; color: #fff !important;">
-                                                    {% if survey_result_detail.0.product.is_interested %}
-                                                        관심완료
-                                                    {% else %}
-                                                        관심하기
-                                                        <i class="fa fa-plus"></i>
-                                                    {% endif %}
-                                                </a>
-                                                <a href="javascript:void(0);" class="btn btn-interest-b1 btn-alert-ready"
-                                                   style="width: 49%; float:right;">
-                                                    리뷰 남기기
-                                                    <i class="fa fa-edit"></i>
+                                    </div>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-12  col-xs-12">
+                                            <a href="#" class="btn btn-interest" id="btn-interest-g"
+                                               product-id="{{ survey_result_detail.0.product.id }}"
+                                               user-survey-id="{{ request.pk }}"
+                                               style="width: 49%; color: #fff !important;">
+                                                {% if survey_result_detail.0.product.is_interested %}
+                                                    관심완료
+                                                {% else %}
+                                                    관심하기
+                                                    <i class="fa fa-plus"></i>
+                                                {% endif %}
+                                            </a>
+                                            <a href="javascript:void(0);" class="btn btn-interest-b1 btn-alert-ready"
+                                               style="width: 49%; float:right;">
+                                                리뷰 남기기
+                                                <i class="fa fa-edit"></i>
 
-                                                </a>
-                                            </div>
+                                            </a>
                                         </div>
-                                        <div class="row">
+                                    </div>
+                                    <div class="row">
 
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-<div class="wrapper">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -191,7 +194,8 @@
                                                                   style="font-size:15px;">제품 분석 총평</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.0.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
                                                     </div>
@@ -203,12 +207,12 @@
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
-                                                </div>
                                         </div>
-                                        <div class="row">
+                                    </div>
+                                    <div class="row">
 
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div class="wrapper">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -218,7 +222,8 @@
                                                                   style="font-size:15px;">분석 대상이 된 리뷰</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.0.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
                                                     </div>
@@ -232,18 +237,19 @@
                                                             <br><br>
 
                                                             <div class="clearfix">
-                                                                <div type="button" class="btn btn-circle yellow-casablanca"
-                                                                        style="background-color: #17bcb8; border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                                                <div type="button"
+                                                                     class="btn btn-circle yellow-casablanca"
+                                                                     style="background-color: #17bcb8; border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
                                                                     <div class="content-number">
-                                                                    <div style="position:relative;">
-                                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                                        <div style="position:relative;">
+                                                                            <span class="glyphicon glyphicon-pencil"></span>
 
-                                                                        <span style="font-size:16px;">리뷰 수</span>
+                                                                            <span style="font-size:16px;">리뷰 수</span>
+                                                                        </div>
+                                                                        <br>
+                                                                        <span style="position:relative; top:-30px;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>
                                                                     </div>
-                                                                    <br>
-                                                                    <span style="position:relative; top:-30px;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>
                                                                 </div>
-                                                                    </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -251,12 +257,12 @@
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
-                                                </div>
                                         </div>
-                                        <div class="row">
+                                    </div>
+                                    <div class="row">
 
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                             <div class="wrapper">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -266,7 +272,8 @@
                                                                   style="font-size:13px;">리뷰 작성자들의 피부타입</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.0.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
                                                     </div>
@@ -275,25 +282,22 @@
                             총 137명의 리뷰 작성자들의 피부타입을 분석한 결과 아래와 같은 비율로 피부타입을 가지고 있습니다.
                                 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "건성"</span> 피부의 비율이 가장 높게 나타나고 있습니다.
                             </span>
-                                                        <table class="table table-hover table-light">
-                                                            <thead>
-                                                            <tr class="uppercase">
-                                                                <th colspan="2"></th>
-                                                                <th></th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                            </thead>
+
                                                             {% for item in survey_result_detail.0.product.analysis_.detail_skintype %}
+                                                                 <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <div class="font-grey-gallery" style="font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                    </td>
-                                                                    <td>{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</td>
-                                                                    <td style="width:40%;">
+                                                                   <td><div class="font-grey-gallery"
+                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
+                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
+
+                                                                </tr>
+                                                                </table>
+                                                                <table class="table table-hover table-light">
+                                                                <tr>
+                                                                    <td style="width:70%;">
                                                                         <div class="progress-info">
-                                                                            <div class="progress" style="height:4px; margin-bottom:0px;">
+                                                                            <div class="progress"
+                                                                                 style="height:4px; margin-bottom:0px;">
                                                                                 <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
                                                                                     <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
@@ -301,20 +305,21 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
+                                                                </table>
                                                             {% endfor %}
-                                                        </table>
+
                                                     </div>
 
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
-                                        </div>
-                                        <div class="row">
+                                    </div>
+                                    <div class="row">
 
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light">
@@ -325,7 +330,8 @@
                                                                   style="font-size:13px;">리뷰 작성자들이 말하는 제품의 특징</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.0.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
 
@@ -335,36 +341,25 @@
                             <span style="font-size:13px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
                                 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
-                                    class="font-title-green" style="font-size: 15px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                                    class="font-title-green"
+                                    style="font-size: 15px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
                             </span>
-                                                        <table class="table table-hover table-light">
-                                                            <thead>
-                                                            <tr class="uppercase">
-                                                                <th colspan="2">
 
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-
-                                                            </tr>
-                                                            </thead>
                                                             {% for item in survey_result_detail.0.product.analysis_.detail_feature %}
+                                                                 <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <div class="font-grey-gallery" style="font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                    </td>
-                                                                    <td>{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</td>
-                                                                    <td style="width:40%;">
+                                                                   <td><div class="font-grey-gallery"
+                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
+                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
+
+                                                                </tr>
+                                                                </table>
+                                                                <table class="table table-hover table-light">
+                                                                <tr>
+                                                                    <td style="width:70%;">
                                                                         <div class="progress-info">
-                                                                            <div class="progress" style="height:4px; margin-bottom:0px;">
+                                                                            <div class="progress"
+                                                                                 style="height:4px; margin-bottom:0px;">
                                                                                 <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
                                                                                     <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
@@ -372,19 +367,20 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
+                                                                </table>
                                                             {% endfor %}
-                                                        </table>
+
                                                     </div>
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
-                                        </div>
-                                        <div class="row">
+                                    </div>
+                                    <div class="row">
 
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light">
@@ -395,7 +391,8 @@
                                                                   style="font-size:13px;">리뷰 작성자들이 느끼는 효과</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.0.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
 
@@ -405,36 +402,25 @@
                             <span style="font-size:13px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
                                 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
-                                    class="font-title-green" style="font-size: 15px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+                                    class="font-title-green"
+                                    style="font-size: 15px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
                             </span>
-                                                        <table class="table table-hover table-light">
-                                                            <thead>
-                                                            <tr class="uppercase">
-                                                                <th colspan="2">
 
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-
-                                                            </tr>
-                                                            </thead>
                                                             {% for item in survey_result_detail.0.product.analysis_.detail_effect %}
+                                                                <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <div class="font-grey-gallery" style="font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                    </td>
-                                                                    <td>{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</td>
-                                                                    <td style="width:40%;">
+                                                                   <td><div class="font-grey-gallery"
+                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
+                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
+
+                                                                </tr>
+                                                                </table>
+                                                                <table class="table table-hover table-light">
+                                                                <tr>
+                                                                    <td style="width:70%;">
                                                                         <div class="progress-info">
-                                                                            <div class="progress" style="height:4px; margin-bottom:0px;">
+                                                                            <div class="progress"
+                                                                                 style="height:4px; margin-bottom:0px;">
                                                                                 <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
                                                                                     <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
@@ -442,21 +428,22 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
+                                                                </table>
                                                             {% endfor %}
-                                                        </table>
+
                                                     </div>
                                                 </div>
                                                 <!-- END PORTLET-->
                                             </div>
                                         </div>
-                                        </div>
                                     </div>
-                                    <div class="tab-pane" id="pro_2_tab">
-                                        <div class="row">
-                                            <div class="col-md-12  col-xs-12">
-                                                <div class="wrapper">
+                                </div>
+                                <div class="tab-pane" id="pro_2_tab">
+                                    <div class="row">
+                                        <div class="col-md-12  col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light ">
                                                     <div class="portlet-title">
@@ -470,7 +457,8 @@
                                                         <div class="row list-separated">
                                                             <div class="col-md-4 col-sm-4 col-xs-4">
                                                                 <div class="product-x-img" style="height:auto;">
-                                                                    <img src="{{ survey_result_detail.1.product.thumbnail_url }}" alt=""
+                                                                    <img src="{{ survey_result_detail.1.product.thumbnail_url }}"
+                                                                         alt=""
                                                                          style="width:auto; max-height: 120px;"/>
                                                                 </div>
                                                             </div>
@@ -528,34 +516,34 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    </div>
-                                                <!-- END PORTLET-->
                                             </div>
+                                            <!-- END PORTLET-->
                                         </div>
-                                        <div class="row margin-bottom-20">
-                                            <div class="col-md-12  col-xs-12">
-                                                <a href="#" class="btn btn-interest" id="btn-interest-o"
-                                                   product-id="{{ survey_result_detail.1.product.id }}"
-                                                   user-survey-id="{{ request.pk }}"
-                                                   style="width: 49%; color: #fff !important;">
-                                                    {% if survey_result_detail.1.product.is_interested %}
-                                                        관심완료
-                                                    {% else %}
-                                                        관심하기
-                                                        <i class="fa fa-plus"></i>
-                                                    {% endif %}
-                                                </a>
-                                                <a href="javascript:void(0);" class="btn btn-interest-b2 btn-alert-ready"
-                                                   style="width: 49%; float:right;">
-                                                    리뷰 남기기
-                                                    <i class="fa fa-edit"></i>
+                                    </div>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-12  col-xs-12">
+                                            <a href="#" class="btn btn-interest" id="btn-interest-o"
+                                               product-id="{{ survey_result_detail.1.product.id }}"
+                                               user-survey-id="{{ request.pk }}"
+                                               style="width: 49%; color: #fff !important;">
+                                                {% if survey_result_detail.1.product.is_interested %}
+                                                    관심완료
+                                                {% else %}
+                                                    관심하기
+                                                    <i class="fa fa-plus"></i>
+                                                {% endif %}
+                                            </a>
+                                            <a href="javascript:void(0);" class="btn btn-interest-b2 btn-alert-ready"
+                                               style="width: 49%; float:right;">
+                                                리뷰 남기기
+                                                <i class="fa fa-edit"></i>
 
-                                                </a>
-                                            </div>
+                                            </a>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-<div class="wrapper">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -565,7 +553,8 @@
                                                                   style="font-size:15px;">제품 분석 총평</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.1.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
                                                     </div>
@@ -574,13 +563,13 @@
                                                     </div>
 
                                                 </div>
-    </div>
-                                                <!-- END PORTLET-->
                                             </div>
+                                            <!-- END PORTLET-->
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div class="wrapper">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
                                                     <div class="portlet-title">
@@ -590,7 +579,8 @@
                                                                   style="font-size:15px;">분석 대상이 된 리뷰</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.1.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
                                                     </div>
@@ -605,29 +595,29 @@
 
                                                             <div class="btn-group btn-group-solid">
                                                                 <div type="button"
-                                                                        class="btn btn-circle yellow-casablanca"
-                                                                        style="background-color: #f44e04; border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
+                                                                     class="btn btn-circle yellow-casablanca"
+                                                                     style="background-color: #f44e04; border-radius: 50% !important; width:200px; height:200px; padding: 20px 20px; font-size:40px; line-height:90%">
                                                                     <div class="content-number">
-                                                                    <div style="position:relative;">
-                                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                                        <div style="position:relative;">
+                                                                            <span class="glyphicon glyphicon-pencil"></span>
 
-                                                                        <span style="font-size:13px;">리뷰 수</span>
+                                                                            <span style="font-size:13px;">리뷰 수</span>
+                                                                        </div>
+                                                                        <br>
+                                                                        <span style="position:relative; top:-30px;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>
                                                                     </div>
-                                                                    <br>
-                                                                    <span style="position:relative; top:-30px;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>
                                                                 </div>
-                                                                    </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                                    </div>
-                                                <!-- END PORTLET-->
                                             </div>
+                                            <!-- END PORTLET-->
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light tasks-widget">
@@ -638,7 +628,8 @@
                                                                   style="font-size:13px;">리뷰 작성자들의 피부타입</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.1.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
                                                     </div>
@@ -648,34 +639,22 @@
                                 <span class="font-title-orange"
                                       style="font-size: 15px; font-weight: 200;"> "건성"</span> 피부의 비율이 가장 높게 나타나고 있습니다.
                             </span>
-                                                        <table class="table table-hover table-light">
-                                                            <thead>
-                                                            <tr class="uppercase">
-                                                                <th colspan="2">
 
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-
-                                                            </tr>
-                                                            </thead>
                                                             {% for item in survey_result_detail.1.product.analysis_.detail_skintype %}
+                                                                <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <div class="font-grey-gallery" style="font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                    </td>
-                                                                    <td>{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</td>
-                                                                    <td style="width:40%;">
+                                                                   <td><div class="font-grey-gallery"
+                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
+                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
+
+                                                                </tr>
+                                                                </table>
+                                                                <table class="table table-hover table-light">
+                                                                <tr>
+                                                                    <td style="width:70%;">
                                                                         <div class="progress-info">
-                                                                            <div class="progress" style="height:4px; margin-bottom:0px;">
+                                                                            <div class="progress"
+                                                                                 style="height:4px; margin-bottom:0px;">
                                                                                 <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
                                                                                     <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
@@ -683,19 +662,20 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
+                                                                </table>
                                                             {% endfor %}
-                                                        </table>
+
                                                     </div>
 
                                                 </div>
                                             </div>
-                                                <!-- END PORTLET-->
-                                            </div>
+                                            <!-- END PORTLET-->
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="wrapper">
                                                 <!-- BEGIN PORTLET-->
                                                 <div class="portlet light">
@@ -706,7 +686,8 @@
                                                                   style="font-size:13px;">리뷰 작성자들이 말하는 제품의 특징</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.1.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
 
@@ -717,36 +698,25 @@
                             총 137명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
                                 <span class="font-title-orange"
                                       style="font-size: 15px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
-                                    class="font-title-orange" style="font-size: 15px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                                    class="font-title-orange"
+                                    style="font-size: 15px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
                             </span>
-                                                        <table class="table table-hover table-light">
-                                                            <thead>
-                                                            <tr class="uppercase">
-                                                                <th colspan="2">
 
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-
-                                                            </tr>
-                                                            </thead>
                                                             {% for item in survey_result_detail.1.product.analysis_.detail_feature %}
+                                                                <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <div class="font-grey-gallery" style="font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                    </td>
-                                                                    <td>{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</td>
-                                                                    <td style="width:40%;">
+                                                                   <td><div class="font-grey-gallery"
+                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
+                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
+
+                                                                </tr>
+                                                                </table>
+                                                                <table class="table table-hover table-light">
+                                                                <tr>
+                                                                    <td style="width:70%;">
                                                                         <div class="progress-info">
-                                                                            <div class="progress" style="height:4px; margin-bottom:0px;">
+                                                                            <div class="progress"
+                                                                                 style="height:4px; margin-bottom:0px;">
                                                                                 <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
                                                                                     <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
@@ -754,19 +724,20 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
+                                                                </table>
                                                             {% endfor %}
-                                                        </table>
+
                                                     </div>
                                                 </div>
                                             </div>
-                                                <!-- END PORTLET-->
-                                            </div>
+                                            <!-- END PORTLET-->
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <!-- BEGIN PORTLET-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <!-- BEGIN PORTLET-->
                                             <div class="wrapper">
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
@@ -776,47 +747,38 @@
                                                                   style="font-size:13px;">리뷰 작성자들이 느끼는 효과</span>
                                                         </div>
                                                         <div class="fit">
-                                                            <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
+                                                            <img class="user-pic"
+                                                                 src="{{ survey_result_detail.1.product.thumbnail_url }}"
                                                                  style="width:auto; max-height:50px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
                                                         </div>
 
                                                     </div>
 
                                                     <div class="table-scrollable table-scrollable-borderless">
-                            <span style="font-size:13px;">
+                            <span style="font-size:13px; display: block;padding-bottom: 20px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
                                 <span class="font-title-orange"
                                       style="font-size: 15px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
-                                    class="font-title-orange" style="font-size: 15px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+                                    class="font-title-orange"
+                                    style="font-size: 15px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
                             </span>
-                                                        <table class="table table-hover table-light">
-                                                            <thead>
-                                                            <tr class="uppercase">
-                                                                <th colspan="2">
 
-                                                                </th>
-                                                                <th>
 
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-                                                                <th>
-
-                                                                </th>
-
-                                                            </tr>
-                                                            </thead>
                                                             {% for item in survey_result_detail.1.product.analysis_.detail_effect %}
+                                                                <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <div class="font-grey-gallery" style="font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                    </td>
-                                                                    <td>{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</td>
-                                                                    <td style="width:40%;">
+                                                                   <td><div class="font-grey-gallery"
+                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
+                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
+
+                                                                </tr>
+                                                                </table>
+                                                                <table class="table table-hover table-light">
+                                                                <tr>
+                                                                    <td style="width:70%;">
                                                                         <div class="progress-info">
-                                                                            <div class="progress" style="height:4px; margin-bottom:0px;">
+                                                                            <div class="progress"
+                                                                                 style="height:4px; margin-bottom:0px;">
                                                                                 <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
                                                                                     <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
@@ -824,15 +786,15 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td>{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
+                                                                </table>
                                                             {% endfor %}
-                                                        </table>
+
                                                     </div>
                                                 </div>
                                             </div>
-                                                <!-- END PORTLET-->
-                                            </div>
+                                            <!-- END PORTLET-->
                                         </div>
                                     </div>
                                 </div>
@@ -840,15 +802,16 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- END PAGE BREADCRUMB -->
-
-
             </div>
-        </div>
-        <!-- END PAGE CONTENT -->
 
-        <!-- END PAGE CONTAINER -->
+            <!-- END PAGE BREADCRUMB -->
+
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT -->
+
+    <!-- END PAGE CONTAINER -->
     <script src="{% static 'metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js' %}"
             type="text/javascript"></script>
     <script src="{% static 'metronic_assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}"

@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Muli);
 
 body {
-    background-color: #fafafa!important;
+    background-color: #E9EAED!important;
 }
 .page-head .page-title > h1 {
 font-size: 100%;
@@ -94,6 +94,8 @@ font-size: 100%;
 
 .display {
     margin-bottom: 5px !important;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .number {
@@ -101,7 +103,6 @@ font-size: 100%;
     font-size: 13px;
     margin-top: 5px;
     padding: 20px 2px;
-    color: #fff;
 }
 
 .number > span {
@@ -169,20 +170,21 @@ font-size: 100%;
     background-color: #17bcb8;
 }
 
-.btn-interest {
-    color : #a7a7a8!important;
-    padding: 10px!important;
-    margin-bottom : 15px!important;
-    background-color: transparent!important;
-    border: 2px solid #a7a7a8!important;
-}
 
-.btn-interest:hover {
-    color : #17bcb8!important;
-    padding: 10px!important;
-    margin-bottom : 15px!important;
-    border: 2px solid #17bcb8 !important;
-}
+/*.btn-interest {*/
+    /*color : #a7a7a8!important;*/
+    /*padding: 10px!important;*/
+    /*margin-bottom : 15px!important;*/
+    /*background-color: transparent!important;*/
+    /*border: 2px solid #a7a7a8!important;*/
+/*}*/
+
+/*.btn-interest:hover {*/
+    /*color : #17bcb8!important;*/
+    /*padding: 10px!important;*/
+    /*margin-bottom : 15px!important;*/
+    /*border: 2px solid #17bcb8 !important;*/
+/*}*/
 
 .dashboard-stat2 .display .number h3 {
  color : #212121!important;
@@ -257,4 +259,66 @@ font-size: 100%;
     background-color: #f44e04;
     color: white!important;
     height: 60px;
+}
+
+.btn-int-y {
+    color : #a7a7a8;
+    text-align: center;
+    margin: 0 6px 12px;
+    line-height: 22px;
+    height: 40px;
+    width: 100%;
+    min-height: 22px;
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
+    display: inline-block;
+    background-color: #fff;
+    border: 2px solid #a7a7a8;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-int-y:hover {
+    background-color: #a7a7a8;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-int-f {
+    color : #fff;
+    text-align: center;
+    margin: 0 6px 12px;
+    line-height: 22px;
+    height: 40px;
+    width: 100%;
+    min-height: 22px;
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
+    display: inline-block;
+    background-color: #a7a7a8;
+    border: 2px solid #a7a7a8;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-int-f:hover {
+    background-color: #fff;
+    text-decoration: none;
+    color: #a7a7a8;
+}
+
+#chartdiv > div > div > a {
+    display: none!important;
 }

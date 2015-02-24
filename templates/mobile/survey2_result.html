@@ -173,7 +173,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <span class="caption-subject theme-font-color bold uppercase">분석 총평</span>
                             </div>
                         </div>
-                        <div class="portlet-body" style="font-size: 17px; max-height:400px; overflow:scroll; line-height:normal; line-height: 25px;
+                        <div class="portlet-body" style="font-size: 17px; max-height:300px; overflow:scroll; line-height:normal; line-height: 25px;
 white-space: pre-line;">
                             {{ user_survey_result.general_review }}
                         </div>
@@ -225,7 +225,8 @@ white-space: pre-line;">
                         <!--<div class="dashboard-stat green-meadow" style="margin-top:10px; margin-bottom:10px;">-->
                             <!--<div class="visual"><i class="fa fa-bar-chart-o"></i></div>-->
                             <div class="col-md-8 col-sm-8 col-xs-8" id="view_report">
-                                <div type="button" class="more">분석 보고서 보기 &nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <div type="button" class="more">분석 보고서 보기 &nbsp; <img style="width: 15px;
+height: auto;"src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="true">
                                 </div>
                             </div>
                     </a>
@@ -245,7 +246,7 @@ white-space: pre-line;">
                                     </div>
                                     <div >
                                         <div class="display">
-                                            <div class="number" style="font-size:10px; padding: 5px; width: 100%;">
+                                            <div class="number" style="font-size:10px; width: 100%;">
                                                 <h3
                                                     style="font-size:11px;">{{ item.product.brand }} {{ item.product.name }}</h3>
                                                 <span>{{ item.product.price|intcomma }}원/{{ item.product.capacity }}{{ item.product.capacity_unit }}</span><br/>
@@ -260,11 +261,11 @@ white-space: pre-line;">
                            href="#" class="btn btn-interest"
                            product-id="{{ item.product.id }}"
                            user-survey-id="{{ request.pk }}"
-                           style="width: 100%;">
+                           style="width: 100%; padding:0px;">
                             {% if item.product.is_interested %}
-                                관심완료
+                                <div class="btn-int-f">관심완료</div>
                             {% else %}
-                                관심하기
+                                <div class="btn-int-y">관심하기</div>
                                 <i class="fa fa-plus"></i>
                             {% endif %}
                         </a>
@@ -305,7 +306,7 @@ white-space: pre-line;">
                 "type": "serial",
                 "pathToImages": "http://cdn.amcharts.com/lib/3/images/",
                 "categoryField": "category",
-                "columnSpacing": 3,
+                "columnSpacing": 10,
                 "columnWidth": 1,
                 "rotate": true,
                 "autoMarginOffset": 1,
@@ -347,28 +348,22 @@ white-space: pre-line;">
                 "allLabels": [],
                 "balloon": {
                     "borderThickness": 1,
-                    "fillAlpha": 0,
+                    "fillAlpha": 1,
                     "horizontalPadding": 5,
-                    "maxWidth": 3,
+                    "maxWidth": 200,
                     "offsetX": 4,
                     "verticalPadding": 12
                 },
                 "legend": {
                     "maxColumns": 2,
-                    "spacing": -50,
+                    "spacing": -30,
                     "textClickEnabled": true,
                     "useGraphSettings": true,
                     "valueText": "[[value]]원",
                     "verticalGap": 4,
                     "width": 350
                 },
-                "titles": [
-                    {
-                        "id": "Title-1",
-                        "size": 15,
-                        "text": "Chart Title"
-                    }
-                ],
+
                 "dataProvider": [
                     graphs_min_data,
                     graphs_max_data

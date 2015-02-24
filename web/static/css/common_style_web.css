@@ -8,10 +8,10 @@
 }
 
 body{
-	font-family: Muli, 'Nanum Gothic', Geneva, sans-serif;
+	font-family: Muli, 'Nanum Gothic', Geneva, sans-serif!important;
     margin: 0;
     padding: 0;
-    background: #FAFAFA;
+    background: #E9EAED;
     font-size: 12px;
     /*background: url(../img/body-bg.png) top left repeat;*/
 }

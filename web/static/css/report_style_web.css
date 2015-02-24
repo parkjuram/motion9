@@ -3,10 +3,10 @@
 @import url(http://fonts.googleapis.com/css?family=Muli);
 
 body{
-	font-family: Muli, 'Nanum Gothic', Geneva, sans-serif;
+	font-family: Muli, 'Nanum Gothic', Geneva, sans-serif!important;
     margin: 0;
     padding: 0;
-    background: #FAFAFA;
+    background: #E9EAED;
     font-size: 12px;
     /*background: url(../img/body-bg.png) top left repeat;*/
 }
@@ -885,7 +885,7 @@ padding-right: 20px !important;
 
 .product_name {
     color: #212121;
-    min-height : 40px;
+    min-height : 55px;
 }
 
 .btn-int-y {
@@ -944,4 +944,8 @@ padding-right: 20px !important;
     background-color: #fff;
     text-decoration: none;
     color: #a7a7a8;
+}
+
+#chartdiv > div > div > a {
+    display: none!important;
 }
