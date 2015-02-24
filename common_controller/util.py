@@ -902,8 +902,9 @@ def convert_skintype_key_to_value(str):
 def convert_feature_key_to_value(str):
     key_value_pair_list = [
         {'key':'wh', 'value':'미백' },
-        {'key':'wr', 'value':'주름' },
-        {'key':'tr', 'value':'트러블' },
+        {'key':'wr', 'value':'주름개선' },
+        {'key':'tr', 'value':'트러블' }, # will be deleted
+        {'key':'su', 'value':'자외선차단' },
         {'key':'no', 'value':'특징 없음' },
     ]
     ret = ""

@@ -162,76 +162,73 @@ white-space: pre-line;">
                     </div>
                 </div>
             </div>
-            {% for key, value in survey_result_detail.items %}
-                {% if forloop.counter0|divisibleby:2 %}
-                    {% ifnotequal forloop.count0 0 %}
+            {% for category in categories %}
+                {% for key, value in survey_result_detail.items %}
 
+                    {% if category.name == key %}
                         <div class="row">
-                    {% else %}
-                        <div class="row">
-                    {% endifnotequal %}
-                {% endif %}
 
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div class="wrapper-title">
-
-                            <div class="col-md-4">
-                                <div class="number">{{ value.0.product.category.name_for_kor }}
-                                </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="wrapper-title">
+                                    <div class="col-md-4">
+                                        <div class="number">{{ value.0.product.category.name_for_kor }}
+                                        </div>
+                                    </div>
+                                    <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
+                                    <div class="col-md-8" id="view_report">
+                                        <div type="button" class="more">분석 보고서 보기  &nbsp <img style="width: 15px;
+        height: auto;"src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="true"></span>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                            <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
-                            <div class="col-md-8" id="view_report">
-                                <div type="button" class="more">분석 보고서 보기  &nbsp; <img style="width: 15px;
-height: auto;"src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="true"></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="wrapper-item">
-                        {% for item in value %}
-                            <div class="col-xs-6" style="padding-left: 5px; padding-right: 5px;">
-                                <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_parent">
-                                    <div class="dashboard-stat2" style="padding-bottom:5px; margin-bottom:0px;">
-                                        <div class="row">
-                                            <div class="col-xs-12"
-                                                 style="padding-right:5px; padding-left: 5px; text-align: center;">
+                            <div class="wrapper-item">
+                                {% for item in value %}
+                                    <div class="col-xs-6" style="padding-left: 5px; padding-right: 5px;">
+                                        <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_parent">
+                                            <div class="dashboard-stat2" style="padding-bottom:5px; margin-bottom:0px;">
+                                                <div class="row">
+                                                    <div class="col-xs-12"
+                                                         style="padding-right:5px; padding-left: 5px; text-align: center;">
 
-                                                <img src="{{ item.product.thumbnail_url }}" alt=""
-                                                     style="width:auto; max-height:190px; margin: 0 auto;"/>
+                                                        <img src="{{ item.product.thumbnail_url }}" alt=""
+                                                             style="width:auto; max-height:190px; margin: 0 auto;"/>
 
-                                            </div>
-                                            <div>
-                                                <div class="display">
-                                                    <div class="number">
-                                                    <div class="product_name">{{ item.product.brand }} {{ item.product.name }}</div></br>
-                                                        <div class="detail">
-                                                            <span>{{ item.product.price|intcomma }}원/{{ item.product.capacity }}{{ item.product.capacity_unit }}</span><br/>
-                                                            <span>({{ item.product.unit_price }}원/{{ item.product.capacity_unit }})</span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="display">
+                                                            <div class="number">
+                                                            <div class="product_name">{{ item.product.brand }} {{ item.product.name }}</div></br>
+                                                                <div class="detail">
+                                                                    <span>{{ item.product.price|intcomma }}원/{{ item.product.capacity }}{{ item.product.capacity_unit }}</span><br/>
+                                                                    <span>({{ item.product.unit_price }}원/{{ item.product.capacity_unit }})</span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
+                                        <a href="#" class="btn-int btn-interest"
+                                           product-id="{{ item.product.id }}"
+                                           user-survey-id="{{ request.pk }}"
+                                           style="width: 100%;">
+
+                                            {% if item.product.is_interested %}
+                                                 <div class="btn-int-f">관심완료</div>
+                                            {% else %}
+                                                <div class="btn-int-y">관심하기</div>
+
+                                            {% endif %}
+                                        </a>
                                     </div>
-                                </a>
-                                <a href="#" class="btn-int btn-interest"
-                                   product-id="{{ item.product.id }}"
-                                   user-survey-id="{{ request.pk }}"
-                                   style="width: 100%;">
 
-                                    {% if item.product.is_interested %}
-                                         <div class="btn-int-f">관심완료</div>
-                                    {% else %}
-                                        <div class="btn-int-y">관심하기</div>
-
-                                    {% endif %}
-                                </a>
+                                {% endfor %}
                             </div>
-
-                        {% endfor %}
-                    </div>
-                <!-- END PAGE TITLE -->
-                </div>
+                        <!-- END PAGE TITLE -->
+                        </div>
+                        {% endif %}
+                {% endfor %}
             {% endfor %}
             </div>
 

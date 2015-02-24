@@ -321,7 +321,7 @@ class SurveyResultView(TemplateView):
         context["graphs_min_data"] = graphs_min_data
         context["graphs_max_data"] = graphs_max_data
 
-        context["categories"] = NCategory.objects.order_by('-order').all()
+        context["categories"] = NCategory.objects.all()
 
         return context
 

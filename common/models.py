@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -58,7 +61,7 @@ class ProductAnalysis(models.Model):
     general_review = models.TextField(null=False, blank=True)
 
     def __str__(self):
-        return self.product
+        return unicode(self.product)
 
 @python_2_unicode_compatible
 class ProductAnalysisDetail(models.Model):
@@ -68,7 +71,7 @@ class ProductAnalysisDetail(models.Model):
     type = models.CharField(max_length=20, null=False)
 
     def __str__(self):
-        return self.product_analysis
+        return unicode(self.product_analysis)
 
     class Meta:
         unique_together = (("product_analysis", "content"),)

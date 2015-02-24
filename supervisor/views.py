@@ -193,7 +193,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
                 if product_analysis.details.exists():
                     product_analysis_details = product_analysis.details.all()
                     for product_analysis_detail in product_analysis_details:
-                        product_['keyword'].append(product_analysis_detail.content)
+                        product_['keyword'].append(product_analysis_detail.type + ":" + product_analysis_detail.content)
 
             products_.append(product_)
 
