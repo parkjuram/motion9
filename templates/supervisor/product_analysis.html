@@ -23,7 +23,7 @@
                 제품
                 <select id="select-product" class="form-control">
                     {% for product in products %}
-                        <option value="{{ product.id }}">{{ product.name }}</option>
+                        <option value="{{ product.id }}">{{ product.brand }} {{ product.name }}</option>
                     {% endfor %}
                 </select>
             </div>
