@@ -13,7 +13,7 @@ from common_controller.util import helper_get_products, helper_get_user, helper_
     helper_get_faq_items, helper_get_survey_list, helper_get_survey_result_item, helper_get_report_count
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
-from users.models import Payment, UserSurvey
+from users.models import Payment, UserSurvey, SurveyResult
 
 from web.models import Category
 
@@ -43,10 +43,16 @@ def index_view(request):
     except:
         pass
 
+    survey_status = {
+        'survey_request_count': UserSurvey.objects.count(),
+        'survey_response_count': SurveyResult.objects.count()
+    }
 
     main_notice = Preference.objects.filter(name='MainNotice').first()
 
-    return render(request, 'index.html' )
+    return render(request, 'index.html', {
+        'survey_status': survey_status
+    })
 
 @csrf_exempt
 def purchase_view(request):

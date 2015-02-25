@@ -17,16 +17,21 @@ text-shadow: none;
 .main-notice-container img {
     width: 100%;
 }
+
+
 .main-notice-container .main-notice {
     position: absolute;
-    top: 40%;
+    top: 25%;
     width: 100%;
     text-align: center;
 }
+.main-notice-container .main-notice .main-notice-survey-status {
+    color: white;
+}
 .main-notice-container .main-notice .main-notice-title {
+    margin-top: 5%;
     font-size: 20px;
     color: white;
-
 }
 .main-notice-container .main-notice .main-notice-subtitle {
     margin-top: 15px;

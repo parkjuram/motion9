@@ -24,7 +24,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_add_custom_set_cart, helper_get_adarea_items, helper_get_faq_items, helper_get_survey_items, \
     helper_get_survey_list, helper_get_survey_result_item, helper_get_report_count
 from .models import Product, Category, BlogReview, Set, Brand
-from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment, UserSurvey
+from users.models import CustomSet, CustomSetDetail, Payment, Cart, Purchase, OrderTempInfo, BeforePayment, UserSurvey, \
+    SurveyResult
 
 from subprocess import call, Popen, PIPE
 import urllib
@@ -533,11 +534,16 @@ def index_view(request):
     except:
         pass
 
+    survey_status = {
+        'survey_request_count': UserSurvey.objects.count(),
+        'survey_response_count': SurveyResult.objects.count()
+    }
 
     return render(request, 'index_web.html',
                   {
                       'product_categories': product_categories,
                       'set_categories': set_categories,
+                      'survey_status': survey_status
                   })
 
 @csrf_exempt
@@ -568,7 +574,6 @@ def shop_product_view(request, category_id=None, page_num=1):
 
     return render(request, 'shopping_product_web.html',
                   {
-
                       'products': products_,
                       'current_category': current_category,
                       'current_category_id': category_id,

@@ -29,7 +29,7 @@ $(function (){
 
         //mixpanel.track_links("#btn-login-finish", event_namespace + "click btn-login-finish");
         mixpanel.track_links("#btn-facebook-login-finish", event_namespace + "click btn-facebook-login-finish");
-ㅇ
+
         mixpanel.track_links("#btn-survey-result", event_namespace + "click btn-survey-result");
         mixpanel.track_links("#btn-request-survey", event_namespace + "btn-request-survey");
 

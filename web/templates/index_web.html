@@ -17,6 +17,12 @@
     <div class="ad-area">
         <img src="{% static 'common/image/main_over.png' %}"/>
         <div class="main-notice">
+
+            <div class="main-notice-survey-status">
+                <div class="survey-status-request-count">보고서 신청자 : {{ survey_status.survey_request_count }}</div>
+                <div class="survey-status-response-count">완료된 보고서 : {{ survey_status.survey_response_count }}</div>
+            </div>
+
             <div class="main-notice-title">
                 Boys be ambitious<br/>
                 Guys be <span style="color:#17bcb8;">FINER</span><br/>
