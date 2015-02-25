@@ -105,6 +105,8 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
                 product_analysis.feature= feature
                 product_analysis.save()
 
+            ProductAnalysisDetail.objects.filter(product_analysis_id=product_analysis.id).delete()
+
             for analysis_detail_item in analysis_detail_list:
                 product_analysis_detail, created = ProductAnalysisDetail.objects.get_or_create(product_analysis_id=product_analysis.id, content=analysis_detail_item['keyword'],
                                                            defaults={ 'count': analysis_detail_item['count'],
