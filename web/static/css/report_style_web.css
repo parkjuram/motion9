@@ -949,3 +949,8 @@ padding-right: 20px !important;
 #chartdiv > div > div > a {
     display: none!important;
 }
+
+
+#btn-request-more-info {
+    margin-right: 15px;
+}
