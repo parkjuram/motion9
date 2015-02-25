@@ -200,6 +200,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
             products_.append(product_)
 
         rendering_params = {'user_survey_id': user_survey_id,
+                            'user_survey': user_survey,
                             'user_survey_again': user_survey.usersurveyagain if hasattr(user_survey,'usersurveyagain') else False,
                             'user_survey_details': user_survey_details,
                             'brands': brands,

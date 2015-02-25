@@ -129,6 +129,41 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 
+
+    <div class="modal fade" id="request-more-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></div>
+                    <h4 class="modal-title" id="myModalLabel">추가요청</h4>
+
+{#                    <div>분석이 완료되면 알림을 받을 수 있도록 옐로아이디를 등록해주세요</div>#}
+                </div>
+                <div class="modal-body">
+{#                    <div class="lise-title">#}
+{#                        재분석 요청 항목#}
+{#                    </div>#}
+                    <div class="lise-title">
+                        추가 요청 이유
+                    </div>
+                    <div class="col-xs-12">
+                        <textarea id="text-reason" class="form-control" placeholder="ex)추천된 로션은 유분기가 많아서 저에게 안맞는거 같아요." rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
+                    <div type="button" class="btn btn-primary btn-survey-again" user-survey-id="{{ request.pk }}" data-dismiss="modal">재분석 요청</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- modal end -->
+
     <body style="background-color:#f2f2f2;">
 
     <div class="clearfix"></div>
@@ -152,11 +187,16 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN PAGE TOOLBAR -->
                 <div class="col-md-4 col-xs-4 col-sm-4">
                 <div class="page-toolbar">
-                    <div id="btn-request-more-info" type="button" class="btn btn-re-g float-right"
-                            data-toggle="modal" data-target="#responsive">
-                        추가 요청
+                    <div type="button" class="btn btn-re-g float-right"
+                         id="btn-request-more-info" href="javascript:void(0);"
+                         onClick="mixpanel.track('MOBILE:click btn-request-more-info'); return false;"
+                            data-toggle="modal" data-target="#request-more-info">
+                        추가요청
                     </div>
                     <div id="btn-request-survey-again-start" type="button" class="btn btn-re-g float-right"
+                         href="javascript:void(0);"
+                         onClick="mixpanel.track('MOBILE:click btn-request-survey-again-start'); return false;"
+                         href="#"
                             data-toggle="modal" data-target="#responsive">
                         재분석 요청
                     </div>

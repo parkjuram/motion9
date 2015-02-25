@@ -101,6 +101,36 @@
         </div>
     </div>
 
+    <div class="modal fade" id="request-more-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></div>
+                    <h4 class="modal-title" id="myModalLabel">추가요청</h4>
+
+{#                    <div>분석이 완료되면 알림을 받을 수 있도록 옐로아이디를 등록해주세요</div>#}
+                </div>
+                <div class="modal-body" style="width:100%;">
+                    <div class="lise-title">
+{#                        재분석 요청 항목#}
+                    </div>
+                    <div class="lise-title">
+                        추가 요청 사항
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-xs-12">
+                        <textarea id="text-comments" class="form-control" placeholder="ex)폴라초이스 제품 위주로 추천해주세요." rows="3" style="width:100%;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
+                    <div type="button" class="btn btn-primary btn-survey-again" user-survey-id="{{ request.pk }}" data-dismiss="modal">재분석 요청</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <body>
 
@@ -117,12 +147,15 @@
                 </div>
                 <div class="page-toolbar">
                     <div type="button" class="btn-re float-right"
+                         id="btn-request-survey-again-start" href="javascript:void(0);"
+                         onClick="mixpanel.track('WEB:click btn-request-survey-again-start'); return false;"
                          data-toggle="modal" data-target="#responsive">
                         재분석 요청
                     </div>
                     <div type="button" class="btn-re float-right"
-                         id="btn-request-more-info"
-                         data-toggle="modal" data-target="#responsive">
+                         id="btn-request-more-info" href="javascript:void(0);"
+                         onClick="mixpanel.track('WEB:click btn-request-more-info'); return false;"
+                         data-toggle="modal" data-target="#request-more-info">
                         추가요청
                     </div>
                 </div>

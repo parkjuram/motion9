@@ -39,7 +39,8 @@ $(function (){
         mixpanel.track_links("#btn-product-detail", event_namespace + "click btn-product-detail");
         mixpanel.track_links("#btn-undo-interest", event_namespace + "click btn-undo-interest");
 
-        mixpanel.track_links("#btn-request-more-info", event_namespace + "click btn-request-more-info");
+        //mixpanel.track_links("#btn-request-survey-again-start", event_namespace + "click btn-request-survey-again-start");
+        //mixpanel.track_links("#btn-request-more-info", event_namespace + "click btn-request-more-info");
 
     });
     
