@@ -23,6 +23,7 @@
         var urlForDoInterest = "{% url 'do_interest_product' %}";
         var urlForUndoInterest = "{% url 'undo_interest_product' %}";
         var urlForSurveyAgain = "{% url 'survey_again' %}";
+        var urlForMoreRequest = "{% url 'request_more' %}";
     </script>
 
 {% endblock %}
@@ -120,12 +121,12 @@
                         추가 요청 사항
                     </div>
                     <div class="col-sm-12 col-md-12 col-xs-12">
-                        <textarea id="text-comments" class="form-control" placeholder="ex)폴라초이스 제품 위주로 추천해주세요." rows="3" style="width:100%;"></textarea>
+                        <textarea id="text-more-comments" class="form-control" placeholder="ex)폴라초이스 제품 위주로 추천해주세요." rows="3" style="width:100%;"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
-                    <div type="button" class="btn btn-primary btn-survey-again" user-survey-id="{{ request.pk }}" data-dismiss="modal">재분석 요청</div>
+                    <div type="button" class="btn btn-primary btn-request-more" user-survey-id="{{ request.pk }}" data-dismiss="modal">추가 요청</div>
                 </div>
             </div>
         </div>
@@ -179,6 +180,25 @@ white-space: pre-line;">
                             </div>
                         </div>
                     </div>
+                    {% if user_survey_result.additional_comment|length > 0 %}
+                        <div class="wrapper">
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption caption-md">
+                                        <i class="icon-bar-chart theme-font-color hide"></i>
+                                        <span class="caption-subject theme-font-color bold uppercase">추가 코멘트</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body" style="font-size: 17px; max-height:400px; overflow:scroll; line-height:normal; line-height: 25px;
+    white-space: pre-line;">
+                                    {{ user_survey_result.additional_comment }}
+                                </div>
+                                <div id="sales_statistics" class="portlet-body-morris-fit morris-chart"
+                                     style="height: 260px; display:none;">
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="wrapper">
@@ -308,6 +328,7 @@ white-space: pre-line;">
 
                 for( var item in graphs_data ) {
                     graphs_data[item]['title'] = decodeURIComponent(escape(graphs_data[item]['title']));
+                    graphs_data[item]['balloonText'] = "[[title]] : [[value]] 원";
                 }
 
                 AmCharts.makeChart("chartdiv",

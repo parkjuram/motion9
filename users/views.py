@@ -32,7 +32,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines, helper_get_survey_items, \
     helper_request_survey
 
-from .models import Interest, UserSurvey
+from .models import Interest, UserSurvey, UserSurveyMore
 
 from subprocess import call, Popen, PIPE
 import logging
@@ -1016,6 +1016,20 @@ def survey_again(request):
     try:
         user_survey_again = UserSurveyAgain.objects.create(user_survey=new_user_survey, item=item, reason=reason,
                                                            comments = comments)
+        return http_response_by_json()
+    except IntegrityError as e:
+        return http_response_by_json(CODE_INTEGRITY_ERROR)
+
+@csrf_exempt
+@login_required
+def request_more(request):
+    user_survey_id = request.POST.get('user_survey_id')
+    comments = request.POST.get('comments')
+
+    user_survey = UserSurvey.objects.get(pk=user_survey_id)
+
+    try:
+        UserSurveyMore.objects.create(user_survey=user_survey, comments = comments)
         return http_response_by_json()
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)

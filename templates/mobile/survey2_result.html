@@ -49,7 +49,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script type="text/javascript">
         var urlForDoInterest = "{% url 'do_interest_product' %}";
         var urlForUndoInterest = "{% url 'undo_interest_product' %}";
-        var urlForSurveyAgain = "{% url 'survey_again' %}"
+        var urlForSurveyAgain = "{% url 'survey_again' %}";
+        var urlForMoreRequest = "{% url 'request_more' %}";
     </script>
 
 {% endblock %}
@@ -141,7 +142,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 {#                    <div>분석이 완료되면 알림을 받을 수 있도록 옐로아이디를 등록해주세요</div>#}
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="width:100%;">
 {#                    <div class="lise-title">#}
 {#                        재분석 요청 항목#}
 {#                    </div>#}
@@ -149,12 +150,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         추가 요청 이유
                     </div>
                     <div class="col-xs-12">
-                        <textarea id="text-reason" class="form-control" placeholder="ex)추천된 로션은 유분기가 많아서 저에게 안맞는거 같아요." rows="3"></textarea>
+                        <textarea id="text-more-comment" class="form-control" placeholder="ex)추천된 로션은 유분기가 많아서 저에게 안맞는거 같아요." rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
-                    <div type="button" class="btn btn-primary btn-survey-again" user-survey-id="{{ request.pk }}" data-dismiss="modal">재분석 요청</div>
+                    <div type="button" class="btn btn-primary btn-request-more" user-survey-id="{{ request.pk }}" data-dismiss="modal">추가 요청</div>
                 </div>
             </div>
         </div>
@@ -227,6 +228,27 @@ white-space: pre-line;">
                     </div>
                     <!-- END PORTLET-->
                 </div>
+                {% if user_survey_result.additional_comment|length > 0 %}
+                    <div class="wrapper">
+                        <!-- BEGIN PORTLET-->
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption caption-md">
+                                    <i class="icon-bar-chart theme-font-color hide"></i>
+                                    <span class="caption-subject theme-font-color bold uppercase">추가 코멘트</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body" style="font-size: 17px; max-height:300px; overflow:scroll; line-height:normal; line-height: 25px;
+    white-space: pre-line;">
+                                {{ user_survey_result.additional_comment }}
+                            </div>
+                            <div id="sales_statistics" class="portlet-body-morris-fit morris-chart"
+                                 style="height: 260px; display:none;">
+                            </div>
+                        </div>
+                        <!-- END PORTLET-->
+                    </div>
+                {% endif %}
                 <div class="wrapper">
                     <!-- BEGIN PORTLET-->
                     <div class="portlet light ">
@@ -347,6 +369,7 @@ white-space: pre-line;">
 
             for( var item in graphs_data ) {
                 graphs_data[item]['title'] = decodeURIComponent(escape(graphs_data[item]['title']));
+                graphs_data[item]['balloonText'] = "[[title]] : [[value]] 원";
             }
 
             AmCharts.makeChart("chartdiv",

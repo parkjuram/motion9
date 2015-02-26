@@ -188,7 +188,7 @@ class UserSurveyAgain(models.Model):
 
 @python_2_unicode_compatible
 class UserSurveyMore(models.Model):
-    user_survey = models.OneToOneField(UserSurvey)
+    user_survey = models.ForeignKey(UserSurvey)
     comments = models.TextField(null=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
