@@ -26,13 +26,18 @@ class BlogReviewLinkScrapper:
         for query_item_url in query_item_list:
 
             self.logger.info( query_item_url )
+
             query_item_url = quote(query_item_url)
+
+            self.logger.info( query_item_url )
 
             for start in range(1,1000,10):
                 if start == 1:
                     full_url = self.query_start_url + query_item_url
                 else:
                     full_url = self.query_start_url + query_item_url + self.query_end_url + str(start)
+
+                self.logger.info( full_url )
 
                 r = requests.request(method='GET', url=full_url, headers=self.custom_headers )
                 soup = BeautifulSoup(r.text)
