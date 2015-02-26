@@ -11,7 +11,7 @@ from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkS
 from common_controller.util import helper_get_survey_result_item, http_response_by_json, convert_skintype_key_to_value, \
     convert_feature_key_to_value
 from supervisor.tasks import analysis_product
-from users.models import UserSurvey, SurveyResult, SurveyResultDetail
+from users.models import UserSurvey, SurveyResult, SurveyResultDetail, UserSurveyMore
 import json
 from web.models import Category
 
@@ -133,8 +133,8 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
                 'entered_date': '',
                 'is_again': hasattr(user_survey,'usersurveyagain')
             }
-            if user_survey.results.exists():
-                survey_result = user_survey.results.first()
+            if hasattr(user_survey, 'result'):
+                survey_result = user_survey.result
                 user_survey_.update( {
                     'is_entered': True,
                     'entered_date': survey_result.created
@@ -155,6 +155,7 @@ class UserMoreRequestListView(SuperuserRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(UserMoreRequestListView, self).get_context_data(**kwargs)
+        context['user_survey_mores'] = UserSurveyMore.objects.select_related('user_survey').all()
         return context
 
 class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
@@ -214,8 +215,8 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
                             'categories': categories,
                             'products': products_}
 
-        if user_survey.results.exists():
-            survey_result = user_survey.results.first()
+        if hasattr(user_survey,'result'):
+            survey_result = user_survey.result
             rendering_params.update({
                 'general_review': survey_result.general_review,
                 'budget_max': survey_result.budget_max,

@@ -20,20 +20,20 @@
         <th>입력여부</th>
         <th>완료일</th>
     </tr>
-{#        {% for item in user_survey_mores %}#}
-{#            <tr>#}
-{#                <td>{{ item.user_survey.user.profile.name }}#}
-{#                <td>{{ item.user_survey.user.email }}</td>#}
-{#                <td>{{ item.user_survey.created }}</td>#}
-{#                <td>#}
-{#                    {% if user_survey.is_entered %}#}
-{#                        <a href="{% url 'supervisor:create_or_update_survey_result' user_survey_id=user_survey.id %}" type="button" class="btn btn-success">입력완료</a>#}
-{#                    {% else %}#}
-{#                        <a href="{% url 'supervisor:create_or_update_survey_result' user_survey_id=user_survey.id %}" type="button" class="btn btn-primary">입력미완료</a>#}
-{#                    {% endif %}#}
-{#                </td>#}
-{#                <td>{{ item.user_survey.entered_date }}</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
+        {% for item in user_survey_mores %}
+            <tr>
+                <td>{{ item.user_survey.user.profile.name }}
+                <td>{{ item.user_survey.user.email }}</td>
+                <td>{{ item.user_survey.created }}</td>
+                <td>
+                    {% if item.user_survey.result %}
+                        <a href="{% url 'supervisor:create_or_update_survey_result' user_survey_id=item.user_survey.id %}" type="button" class="btn btn-success">입력완료</a>
+                    {% else %}
+                        <a href="{% url 'supervisor:create_or_update_survey_result' user_survey_id=item.user_survey.id %}" type="button" class="btn btn-primary">입력미완료</a>
+                    {% endif %}
+                </td>
+                <td>{{ item.user_survey.result.created }}</td>
+            </tr>
+        {% endfor %}
     </table>
 {% endblock content %}
