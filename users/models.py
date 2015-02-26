@@ -187,8 +187,20 @@ class UserSurveyAgain(models.Model):
         return '[%r]UserSurveyAgain[%r]' % (self.id, self.user_survey.user)
 
 @python_2_unicode_compatible
+class UserSurveyMore(models.Model):
+    user_survey = models.OneToOneField(UserSurvey)
+    comments = models.TextField(null=False, blank=True)
+    created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
+    class Meta:
+        unique_together = (("user_survey", "created"),)
+
+    def __str__(self):
+        return '[%r]UserSurveyMore[%r]' % (self.id, self.user_survey)
+
+@python_2_unicode_compatible
 class SurveyResult(models.Model):
-    user_survey = models.ForeignKey(UserSurvey, related_name='results', unique=True)
+    user_survey = models.OneToOneField(UserSurvey, related_name='result', unique=True)
     general_review = models.TextField(null=False, blank=True)
     budget_max = models.IntegerField(null=False, default=0)
     budget_min = models.IntegerField(null=False, default=0)

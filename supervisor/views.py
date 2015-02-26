@@ -150,6 +150,13 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         pass
 
+class UserMoreRequestListView(SuperuserRequiredMixin, TemplateView):
+    template_name = "supervisor/user_more_request_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(UserMoreRequestListView, self).get_context_data(**kwargs)
+        return context
+
 class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user_survey_id = self.kwargs['user_survey_id']
