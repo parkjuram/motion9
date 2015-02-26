@@ -4,7 +4,8 @@ from urllib import quote
 from bs4 import BeautifulSoup
 
 class BlogReviewLinkScrapper:
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.custom_headers = {
             'Host': 'cafeblog.search.naver.com',
             'Connection': 'keep-alive',
@@ -23,6 +24,8 @@ class BlogReviewLinkScrapper:
         self.blog_url_list = []
 
         for query_item_url in query_item_list:
+
+            self.logger( query_item_url )
             query_item_url = quote(query_item_url)
 
             for start in range(1,1000,10):

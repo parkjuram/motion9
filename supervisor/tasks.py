@@ -11,7 +11,10 @@ logger = get_task_logger(__name__)
 # def analysis_product(self, logger, querys):
 @task(bind=True)
 def analysis_product(self, querys):
-    blog_review_link_scrapper = BlogReviewLinkScrapper()
+    blog_review_link_scrapper = BlogReviewLinkScrapper(logger)
+
+    logger.info(querys)
+
     blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list = querys)
 
     logger.info( blog_url_list )
