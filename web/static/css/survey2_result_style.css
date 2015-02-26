@@ -322,3 +322,23 @@ font-size: 100%;
 #chartdiv > div > div > a {
     display: none!important;
 }
+
+.product-x-img {
+    width: 80px;
+height: 180px!important;
+background-position: center center;
+background-repeat: no-repeat;
+overflow: hidden;
+position: relative;
+}
+
+.product-x-img img {
+    position: absolute;
+left: -100%;
+right: -100%;
+top: -100%;
+bottom: -100%;
+height: auto!important;
+width: auto!important;
+margin: auto;
+}
