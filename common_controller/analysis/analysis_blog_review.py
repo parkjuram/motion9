@@ -21,7 +21,7 @@ class AnalysisBlogReview:
             self.analysis(blog_review_url)
             celery_task.update_state(state='PROGRESS',
                                      meta={'current': blog_url_list.index(blog_review_url),
-                                           'total': len(blog_url_list)})
+                                           'total': len(blog_url_list[:50])})
 
         sorted_analysis_result = sorted(self.analysis_result.items(), key=operator.itemgetter(1), reverse=True)
         analysis_result_list = []
