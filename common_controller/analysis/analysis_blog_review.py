@@ -17,7 +17,7 @@ class AnalysisBlogReview:
         self.skip_count=0
         celery_task.update_state(state='PROGRESS',
                                  meta={'current': 0, 'total': len(blog_url_list)})
-        for blog_review_url in blog_url_list:
+        for blog_review_url in blog_url_list[:100]:
             self.analysis(blog_review_url)
             celery_task.update_state(state='PROGRESS',
                                      meta={'current': blog_url_list.index(blog_review_url),
