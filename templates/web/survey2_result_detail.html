@@ -103,9 +103,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="portlet-body">
                                 <div class="row list-separated">
-                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
                                         <div class="product-x-img" style="height:auto;">
-                                            <img src="{{ survey_result_detail.0.product.thumbnail_url }}" alt="" style="width:70px;"/>
+                                            <img src="{{ survey_result_detail.0.product.thumbnail_url }}" alt="" style="width:auto; max-height: 190px;"/>
                                         </div>
                                     </div>
                                     <div class="table-scrollable table-scrollable-borderless" style="width:75%">
@@ -170,9 +170,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="portlet-body">
                                 <div class="row list-separated">
-                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
                                         <div class="product-x-img" style="height:auto;">
-                                            <img src="{{ survey_result_detail.1.product.thumbnail_url }}" alt="" style="width:70px;"/>
+                                            <img src="{{ survey_result_detail.1.product.thumbnail_url }}" alt="" style="width:auto; max-height: 190px;"/>
                                         </div>
                                     </div>
                                     <div class="table-scrollable table-scrollable-borderless" style="width:75%">
@@ -248,8 +248,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <a href="#" class="btn btn-interest-g btn-interest"
                            product-id="{{ survey_result_detail.0.product.id }}"
-                           user-survey-id="{{ request.pk }}"
-                           ">
+                           user-survey-id="{{ request.pk }}">
                             {% if survey_result_detail.0.product.is_interested %}
                                 관심완료
                             {% else %}
@@ -296,7 +295,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
                             </div>
                             <div class="table-scrollable table-scrollable-borderless">
@@ -323,7 +322,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
                             </div>
                             <div class="table-scrollable table-scrollable-borderless">
@@ -352,7 +351,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
                             </div>
                             <div class="table-scrollable table-scrollable-borderless">
@@ -394,7 +393,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
                             </div>
                             <div class="table-scrollable table-scrollable-borderless">
@@ -437,7 +436,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
                             </div>
                             <div class="table-scrollable table-scrollable-borderless">
@@ -492,7 +491,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
                             </div>
                             <div class="table-scrollable table-scrollable-borderless">
@@ -560,7 +559,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
 
                             </div>
@@ -628,7 +627,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
 
                             </div>
@@ -697,7 +696,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.0.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
 
                             </div>
@@ -763,7 +762,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="fit">
                                     <img class="user-pic" src="{{ survey_result_detail.1.product.thumbnail_url }}"
-                                         style="width:30px; margin-right:10px; margin-bottom: 10px; margin-top: -5px; float:right;">
+                                         >
                                 </div>
 
                             </div>

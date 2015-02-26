@@ -11,12 +11,11 @@ font-size: 100%;
     height : 200px;
 }
 .page-head .page-title {
-    margin-top: 15px;
-    margin-left: -15px;
+    text-align: center;
 }
 
 .page-head .page-toolbar {
-    margin-right: -15px;
+    width: 100%;
 }
 
 .wrapper {
@@ -165,6 +164,7 @@ font-size: 100%;
     width: 100%;
 }
 .btn-re-g {
+    width: 100%;
     color : white;
     padding: 15px!important;
     background-color: #17bcb8;
@@ -264,7 +264,7 @@ font-size: 100%;
 .btn-int-y {
     color : #a7a7a8;
     text-align: center;
-    margin: 0 6px 12px;
+    margin: 0 0px 12px;
     line-height: 22px;
     height: 40px;
     width: 100%;
@@ -293,7 +293,7 @@ font-size: 100%;
 .btn-int-f {
     color : #fff;
     text-align: center;
-    margin: 0 6px 12px;
+    margin: 0 0px 12px;
     line-height: 22px;
     height: 40px;
     width: 100%;
