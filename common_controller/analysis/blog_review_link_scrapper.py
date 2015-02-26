@@ -39,7 +39,7 @@ class BlogReviewLinkScrapper:
 
                 self.logger.info( full_url )
 
-                r = requests.request(method='GET', url=full_url, headers=self.custom_headers )
+                r = requests.request(method='GET', url=full_url)
                 soup = BeautifulSoup(r.text)
                 r.close()
                 blog_list = soup.select('.sh_blog_top')
