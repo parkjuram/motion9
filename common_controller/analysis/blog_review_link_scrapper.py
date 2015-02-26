@@ -44,6 +44,8 @@ class BlogReviewLinkScrapper:
                 r.close()
                 blog_list = soup.select('.sh_blog_top')
 
+                self.logger.info( blog_list )
+
                 for blog_item in blog_list:
                     if not(blog_item.select('._sp_each_url')[0]['href'] in self.blog_url_list):
                         self.blog_url_list.append(blog_item.select('._sp_each_url')[0]['href'])
