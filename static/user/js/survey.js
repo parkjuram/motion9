@@ -56,5 +56,27 @@ class="btn-survey-again"
                 }
             });
         });
+
+        $('.btn-request-more').click(function() {
+            $.ajax({
+                url: urlForMoreRequest,
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    user_survey_id: $(this).attr('user-survey-id'),
+                    comments: $('#text-more-comment').val().trim()
+                },
+                success: function(data) {
+                    if ( data.success ) {
+                        alert('Success');
+                    } else {
+                        alert('Fail');
+                    }
+                },
+                error: function() {
+                    alert('Fail');
+                }
+            });
+        });
     });
 })();
