@@ -121,7 +121,7 @@
                         추가 요청 사항
                     </div>
                     <div class="col-sm-12 col-md-12 col-xs-12">
-                        <textarea id="text-more-comments" class="form-control" placeholder="ex)폴라초이스 제품 위주로 추천해주세요." rows="3" style="width:100%;"></textarea>
+                        <textarea id="text-more-comment" class="form-control" placeholder="ex)폴라초이스 제품 위주로 추천해주세요." rows="3" style="width:100%;"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -143,7 +143,7 @@
         <div class="page-content">
             <div class="page-head" style="margin-bottom:10px;">
                 <div class="page-title">
-                    <h1>{{ user_survey_result.created|date:"Y년 m월 d일 보고서" }}</h1>
+                    <h1>{{ user_survey.created|date:"Y년 m월 d일 보고서" }}</h1>
                     {#<small>부제목</small>#}
                 </div>
                 <div class="page-toolbar">

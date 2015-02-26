@@ -932,6 +932,7 @@ class SurveyResultView(TemplateView):
 
             survey_result_detail_[item.product.category.name].append(item_)
 
+        context["user_survey"] = user_survey
         context["user_survey_result"] = user_survey_result
         context["survey_result_detail"] = survey_result_detail_
 
