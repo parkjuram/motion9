@@ -29,7 +29,9 @@ class AnalysisBlogReview:
         for item in sorted_analysis_result:
             analysis_result_list.append({'keyword':item[0], 'count':item[1]})
 
-        return { 'analysis_result_list': analysis_result_list, 'total_count':len(blog_url_list) }
+        sorted(analysis_result_list, key=lambda item: item['count'], reverse=True)
+
+        return { 'analysis_result_list': analysis_result_list[:50], 'total_count':len(blog_url_list) }
 
     def analysis(self, blog_review_url):
         # self.logger.info(blog_review_url)
