@@ -177,31 +177,36 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN PAGE HEAD -->
             <div class="page-head" style="margin-bottom:10px;">
                 <!-- BEGIN PAGE TITLE -->
-                <div class="col-md-8 col-xs-8 col-sm-8">
+                <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="page-title">
-                    <h1>2014년 12월 20일 보고서</h1>
+                    <h2>2014년 12월 20일 보고서</h2>
                     {#                         <small>부제목</small>#}
                 </div>
                     </div>
                 <!-- END PAGE TITLE -->
                 <!-- BEGIN PAGE TOOLBAR -->
-                <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="col-md-6 col-xs-6 col-sm-6">
                 <div class="page-toolbar">
-                    <div type="button" class="btn btn-re-g float-right"
+                    <div type="button" class="btn btn-re-g"
                          id="btn-request-more-info" href="javascript:void(0);"
                          onClick="mixpanel.track('MOBILE:click btn-request-more-info'); return false;"
                             data-toggle="modal" data-target="#request-more-info">
-                        추가요청
+                        자료 보완 요청
                     </div>
-                    <div id="btn-request-survey-again-start" type="button" class="btn btn-re-g float-right"
+                    </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 col-sm-6">
+                        <div class="page-toolbar">
+                    <div id="btn-request-survey-again-start" type="button" class="btn btn-re-g"
                          href="javascript:void(0);"
                          onClick="mixpanel.track('MOBILE:click btn-request-survey-again-start'); return false;"
                          href="#"
                             data-toggle="modal" data-target="#responsive">
                         재분석 요청
                     </div>
+                        </div>
                 </div>
-                    </div>
+
                 <!-- END PAGE TOOLBAR -->
             </div>
             <!-- END PAGE HEAD -->
@@ -271,7 +276,7 @@ white-space: pre-line;">
                                 <!--<div class="dashboard-stat green-meadow" style="margin-top:10px; margin-bottom:10px;">-->
                                     <!--<div class="visual"><i class="fa fa-bar-chart-o"></i></div>-->
                                     <div class="col-md-8 col-sm-8 col-xs-8" id="view_report">
-                                        <div type="button" class="more">분석 보고서 보기 &nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <div type="button" class="more">분석 보고서 보기 &nbsp;<img style="width: 12px; height:auto;" src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="true">
                                         </div>
                                     </div>
                             </a>
@@ -302,16 +307,14 @@ white-space: pre-line;">
                                         </div>
                                     </div>
                                 </a>
-                                <a id="btn-do-interest"
-                                   href="#" class="btn btn-interest"
+                                <a href="#" class="btn btn-interest"
                                    product-id="{{ item.product.id }}"
                                    user-survey-id="{{ request.pk }}"
-                                   style="width: 100%;">
+                                   style="width: 100%; padding-left:0px; padding-right:0px;">
                                     {% if item.product.is_interested %}
-                                        관심완료
+                                        <div class="btn-int-f">관심완료</div>
                                     {% else %}
-                                        관심하기
-                                        <i class="fa fa-plus"></i>
+                                        <div class="btn-int-y">관심하기</div>
                                     {% endif %}
                                 </a>
                             </div>
