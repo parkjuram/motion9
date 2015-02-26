@@ -982,7 +982,8 @@ background-position: center center;
 background-repeat: no-repeat;
 overflow: hidden;
 position: relative;
-    float:right; 
+    float:right;
+    margin-bottom:5px;
 
 }
 
