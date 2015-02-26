@@ -17,6 +17,7 @@
         <th>이름</th>
         <th>이메일</th>
         <th>요청일</th>
+        <th>커맨츠</th>
         <th>입력여부</th>
         <th>완료일</th>
     </tr>
@@ -25,6 +26,7 @@
                 <td>{{ item.user_survey.user.profile.name }}
                 <td>{{ item.user_survey.user.email }}</td>
                 <td>{{ item.user_survey.created }}</td>
+                <td><button onClick="javascript:alert('{{ item.comments }}');">커멘트</button></td>
                 <td>
                     {% if item.user_survey.result %}
                         <a href="{% url 'supervisor:create_or_update_survey_result' user_survey_id=item.user_survey.id %}" type="button" class="btn btn-success">입력완료</a>

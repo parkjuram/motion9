@@ -163,7 +163,7 @@ class UserSurvey(models.Model):
 
     @property
     def is_analysis_finish(self):
-        return self.results.exists()
+        return hasattr(self, 'result')
 
     class Meta:
         unique_together = (("user", "survey", "created"),)

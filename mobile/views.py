@@ -271,7 +271,7 @@ class SurveyResultView(TemplateView):
         context = super(SurveyResultView, self).get_context_data(**kwargs)
         self.request.pk = kwargs['pk']
         user_survey = UserSurvey.objects.get(pk=kwargs['pk'])
-        user_survey_result = user_survey.results.all()[0]
+        user_survey_result = user_survey.result
         survey_result_detail = user_survey_result.details.order_by('-product__category__order').select_related('product')
 
         survey_result_detail_ = {}
@@ -337,7 +337,7 @@ class SurveyResultDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         self.request.pk = kwargs['pk']
         context = super(SurveyResultDetailView, self).get_context_data(**kwargs)
-        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).results.all()[0].details.select_related('product',).filter(product__category__name=kwargs['product_type'])
+        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).result.details.select_related('product',).filter(product__category__name=kwargs['product_type'])
         survey_result_detail_ = []
         for item in survey_result_detail:
             item.product.detail = item.product.details.all()[0] if len(item.product.details.all())>0 else None
