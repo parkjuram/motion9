@@ -25,7 +25,7 @@ class BlogReviewLinkScrapper:
 
         for query_item_url in query_item_list:
 
-            self.logger( query_item_url )
+            self.logger.info( query_item_url )
             query_item_url = quote(query_item_url)
 
             for start in range(1,1000,10):
