@@ -741,6 +741,7 @@ h4.lined-heading span {
 .portlet.light {
 padding-left: 20px !important;
 padding-right: 20px !important;
+    line-height: 25px;
 }
 
 .btn-re {
