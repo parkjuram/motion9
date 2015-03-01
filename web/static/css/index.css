@@ -21,7 +21,7 @@ text-shadow: none;
 
 .main-notice-container .main-notice {
     position: absolute;
-    top: 15%;
+    top: 5%;
     width: 100%;
     text-align: center;
 }
@@ -29,7 +29,7 @@ text-shadow: none;
     color: white;
 }
 .main-notice-container .main-notice .main-notice-title {
-    margin-top: 5%;
+    margin-top: 15%;
     font-size: 20px;
     color: white;
 }
@@ -39,7 +39,7 @@ text-shadow: none;
     color: white;
 }
 .main-notice-container .main-notice .main-notice-button-group {
-    margin-top: 45px;
+    margin-top : 25%;
 }
 
 
