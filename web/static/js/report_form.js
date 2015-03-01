@@ -20,6 +20,7 @@ $(function () {
                 type: 'POST',
                 data: {
                     'survey_id': $(this).attr('survey_id'),
+                    'preference_brand': $('#report-preference-brand').val().trim(),
                     'comments': $('#reportText').val().trim(),
                     'options': options
                 },

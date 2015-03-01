@@ -72,6 +72,15 @@
                 <div data-role="page" id="page-num-{{ survey|length }}" data-title="page-num-{{ survey|length }}"
                      style="margin-top:40px; display:none;">
                     <div role="main" class="ui-content">
+
+                        <div class="report-radio-title">
+                            특별히 선호하는 브랜드가 있으신가요?
+                        </div>
+                        <textarea id='report-preference-brand' class="textarea-box"
+                                  onclick="document.getElementById('report-preference-brand').value='';">
+                            선호하는 브랜드를 알려주세요.
+                        </textarea>
+
                         <div class="report-radio-title">
                             그 외 화장품 관련 분석 요청
                         </div>

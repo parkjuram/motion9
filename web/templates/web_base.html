@@ -136,7 +136,7 @@
                     <li><a id='btn-mypage' href="{% url 'mypage' %}">MY PAGE</a></li>
                 {% else %}
                     <li><a id='btn-login' href="{% url 'login_page' %}">LOG IN</a></li>
-                    <li><a id='btn-signup' href="{% url 'registration_page' %}?next={{ next }}" target="_self">회원가입</a></li>
+                    <li><a id='btn-signup' href="{% url 'registration_page' %}?next=index" target="_self">회원가입</a></li>
                 {% endif %}
 
             </ul>

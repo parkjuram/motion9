@@ -965,6 +965,7 @@ def request_survey(request):
 
     data = {
         'survey_id': request.POST.get('survey_id', None),
+        'preference_brand': request.POST.get('preference_brand', None),
         'comments': request.POST.get('comments', ''),
         'options': request.POST.getlist('options[]', None)
     }

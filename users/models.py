@@ -153,6 +153,7 @@ class BeforePayment(models.Model):
 class UserSurvey(models.Model):
     user = models.ForeignKey('auth.User', related_name='get_survey_list')
     survey = models.ForeignKey('foradmin.Survey', null=True)
+    preference_brand = models.TextField(null=False, blank=True)
     comments = models.TextField(null=False, blank=True)
     result_file_name = models.TextField(null=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
