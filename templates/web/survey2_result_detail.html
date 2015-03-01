@@ -302,8 +302,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:15px;">
                                 {{ survey_result_detail.0.product.analysis_.general_review }}
                             이 제품 후기들을 분석해본 결과 <span class="font-blue" style="color:#17bcb8;
- font-size:20px;">"건성"</span>의 피부타입을 가진 사람들이 사용하는 경우가 가장 많았으며  <span class="font-blue" style="color:#17bcb8;
- font-size:16px;">"지성""복합성"</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. 사용자들은 제품의 특징으로 <span class="font-blue" style="font-size:20px;">"촉촉함",</span><span class="font-blue" style="font-size:15px;">"발림성","수분감"</span>을 차례로 꼽았습니다. <br>또한 제품을 사용하고 난 후 느낀 효과로는 <span class="font-blue" style="font-size:20px;">"피부진정"</span>이 가장 많이 언급되었으며, <span class="font-blue" style="font-size:15px;">"미백"</span>과 <span class="font-blue" style="font-size:15px;">"보습효과"</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
+ font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_skintype.0.content }}"</span>의 피부타입을 가진 사람들이 사용하는 경우가 가장 많았으며  <span class="font-blue" style="color:#17bcb8;
+ font-size:16px;">"{{ survey_result_detail.0.product.analysis_.detail_skintype.1.content }}"{% if survey_result_detail.0.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.0.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. 사용자들은 제품의 특징으로 <span class="font-blue" style="font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_feature.0.content }}",</span><span class="font-blue" style="font-size:15px;">"{{ survey_result_detail.0.product.analysis_.detail_feature.1.content }}",{% if survey_result_detail.0.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.0.product.analysis_.detail_feature.2.content }}"{% endif %}</span>을 차례로 꼽았습니다. <br>또한 제품을 사용하고 난 후 느낀 효과로는 <span class="font-blue" style="font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_effect.0.content }}"</span>이 가장 많이 언급되었으며, <span class="font-blue" style="font-size:15px;">"{{ survey_result_detail.0.product.analysis_.detail_effect.1.content }}"</span>과 <span class="font-blue" style="font-size:15px;">{% if survey_result_detail.0.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.0.product.analysis_.detail_effect.2.content }}"{% endif %}</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
 
                             </span>
 
@@ -446,7 +446,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들은 아래와 같은 비율로 피부타입 혹은 피부상태를 가지고 있었습니다.
-                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "건성" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "지성" "복합성" </span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.
+                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_skintype.0.content }}" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_skintype.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.0.product.analysis_.detail_skintype.2.content }}" {% endif %} </span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -501,7 +501,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 <span style="font-size: 21px; color : #f44e04;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>명의 리뷰 작성자들은 아래와 같은 비율로 피부타입 혹은 피부상태를 가지고 있었습니다.
-                                <span class="font-title-green" style="color: #f44e04; font-size: 18px; font-weight: 200;"> "건성" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="color: #f44e04; font-size: 15px; font-weight: 200;"> "지성" "복합성" </span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.
+                                <span class="font-title-green" style="color: #f44e04; font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_skintype.0.content }}" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="color: #f44e04; font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_skintype.1.content }}" {% if survey_result_detail.1.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.1.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -570,7 +570,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
-                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "촉촉함" </span> 을 이 제품의 특징으로 꼽는 사람이 가장 많았으며<span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "수분감" "발림성" </span>을 특징으로 이야기 하는 사람들도 높은 비율로 존재하고 있습니다.
+                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_feature.0.content }}" </span> 을 이 제품의 특징으로 꼽는 사람이 가장 많았으며<span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_feature.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.0.product.analysis_.detail_feature.2.content }}"{% endif %} </span>을 특징으로 이야기 하는 사람들도 높은 비율로 존재하고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -638,8 +638,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
                                 <span class="font-title-orange"
-                                      style="font-size: 18px; font-weight: 200;"> "촉촉함"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
-                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "발림성", "수분감"</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                                      style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_feature.0.content }}"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
+                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_feature.1.content }}", {% if survey_result_detail.1.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.1.product.analysis_.detail_feature.2.content }}"{% endif %}</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -706,7 +706,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:15px;">
                             총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
-                                이 제품은 <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "피부진정" </span> 효과가 가장 크다는 사람이 제일 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "미백" "보습효과" </span>로 제품의 효과를 꼽는 사람들도 높은 비율로 존재하고 있습니다.
+                                이 제품은 <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_effect.0.content }}" </span> 효과가 가장 크다는 사람이 제일 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_effect.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.0.product.analysis_.detail_effect.2.content }}"{% endif %} </span>로 제품의 효과를 꼽는 사람들도 높은 비율로 존재하고 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -772,8 +772,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:15px;">
                             총 137명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
                                 <span class="font-title-orange"
-                                      style="font-size: 18px; font-weight: 200;"> "피부진정"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
-                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "미백", "보습효과"</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+                                      style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_effect.0.content }}"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
+                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_effect.1.content }}", {% if survey_result_detail.1.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.1.product.analysis_.detail_effect.2.content }}"{% endif %}</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
                             </span>
                                 <table class="table table-hover table-light">
                                     <thead>

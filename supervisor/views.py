@@ -174,7 +174,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
 
 
         products_ = []
-        products = NProduct.objects.all()
+        products = NProduct.objects.order_by('category__id').all()
         brands = NProduct.objects.distinct('brand').values_list('brand', flat=True)
         categories = Category.objects.values_list('name', flat=True)
 

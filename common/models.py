@@ -29,6 +29,9 @@ class NProduct(models.Model):
     capacity_unit = models.CharField(max_length=10, null=False, default='ml')
     thumbnail = models.ImageField(null=True, upload_to='thumbnail/product/', blank=True)
 
+    # class Meta:
+    #     ordering = ['-category']
+
     @property
     def thumbnail_url(self):
         if self.thumbnail and hasattr(self.thumbnail, 'url'):

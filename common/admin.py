@@ -22,5 +22,6 @@ admin.site.register(ProductAnalysis, ProductAnalysisAdmin)
 
 class ProductAnalysisDetailAdmin(admin.ModelAdmin):
     list_display = ('product_analysis', 'content', 'count', 'type')
+    list_filter = ['product_analysis']
 
 admin.site.register(ProductAnalysisDetail, ProductAnalysisDetailAdmin)
