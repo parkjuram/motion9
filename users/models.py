@@ -197,7 +197,7 @@ class UserSurveyMore(models.Model):
         unique_together = (("user_survey", "created"),)
 
     def __str__(self):
-        return '[%r]UserSurveyMore[%r]' % (self.id, self.user_survey)
+        return '[%r]UserSurveyMore' % (self.id)
 
 @python_2_unicode_compatible
 class SurveyResult(models.Model):

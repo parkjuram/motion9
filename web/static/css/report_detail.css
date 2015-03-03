@@ -5745,6 +5745,10 @@ Blue Default
 .font-blue {
   color: #4B8DF8 !important;
 }
+.font-green {
+  color: #17bcb8 !important;
+}
+
 
 .progress-bar.blue {
   background: #4B8DF8 !important;

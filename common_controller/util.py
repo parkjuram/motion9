@@ -866,7 +866,7 @@ def helper_get_survey_items(request):
 
 def helper_request_survey(request, data):
 
-    user_survey = UserSurvey.objects.create(user=request.user, survey_id=int(data['survey_id']), preference_barnd=data['preference_brand'], comments=data['comments'] )
+    user_survey = UserSurvey.objects.create(user=request.user, survey_id=int(data['survey_id']), preference_brand=data['preference_brand'], comments=data['comments'] )
 
     for option in data['options']:
         UserSurveyDetail.objects.create(user_survey=user_survey, survey_item_option_id=option)

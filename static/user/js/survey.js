@@ -31,8 +31,8 @@ class="btn-survey-again"
             $(".again-item:checked").each( function() {
                item += $(this).val() + "|";
             });
-            var reason = $('#text-reason').text().trim();
-            var comments = $('#text-comments').text().trim();
+            var reason = $('#text-reason').val().trim();
+            var comments = $('#text-comments').val().trim();
 
             $.ajax({
                 url: urlForSurveyAgain,
@@ -64,7 +64,7 @@ class="btn-survey-again"
                 type: 'POST',
                 data: {
                     user_survey_id: $(this).attr('user-survey-id'),
-                    comments: $('#text-more-comment').val().trim()
+                    comments: $('#text-more-comments').val().trim()
                 },
                 success: function(data) {
                     if ( data.success ) {
