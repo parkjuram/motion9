@@ -946,6 +946,8 @@ class SurveyResultView(TemplateView):
         graphs_data = []
 
         index = 1
+        min_price_sum = 0
+        max_price_sum = 0
         for key in survey_result_detail_:
             min_price = 1987654321
             max_price = 0
@@ -953,6 +955,8 @@ class SurveyResultView(TemplateView):
                 min_price = item['product'].price if min_price > item['product'].price else min_price
                 max_price = item['product'].price if max_price < item['product'].price else max_price
 
+            min_price_sum += min_price
+            max_price_sum += max_price
             graphs_min_data.update( {"column-"+str(index):min_price })
             graphs_max_data.update( {"column-"+str(index):max_price })
 
@@ -968,6 +972,8 @@ class SurveyResultView(TemplateView):
 
             index+=1
 
+        context["min_price_sum"] = min_price_sum
+        context["max_price_sum"] = max_price_sum
         context["graphs_data"] = graphs_data
         context["graphs_min_data"] = graphs_min_data
         context["graphs_max_data"] = graphs_max_data

@@ -266,8 +266,8 @@ white-space: pre-line;">
                             </a>
                         </div>
                         <div class="portlet-body">
-                            <h4>예산은 {{ user_survey_result.budget_min|intcomma }}
-                                ~ {{ user_survey_result.budget_max|intcomma }}원 입니다.</h4>
+                            <h4>예산은 {{ min_price_sum|intcomma }}
+                                ~ {{ max_price_sum|intcomma }}원 입니다.</h4>
 
                             <div id="chartdiv" style="width: 90%; height:250px; font-size:14px;"></div>
                         </div>
