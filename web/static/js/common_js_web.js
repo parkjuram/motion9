@@ -222,7 +222,7 @@ $(document).ready(function () {
 //                    innerHtml += '<div class="portlet-body">';
 //                    innerHtml += '<div class="scroller" style="height: 305px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">';
 //                    innerHtml += '<div class="general-item-list">';
-                      innerHtml += '<div class="content-title">분석 보고서 목록</div><div class="content-list">';
+                      innerHtml += '<div class="content-list">';
                     for( i in data.data ) {
                         item = data.data[i];
                         if ( item.is_analysis_finish ) {
@@ -250,7 +250,7 @@ $(document).ready(function () {
 //                    }
 //                    innerHtml += '</div><a href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">보고서 신청</div></a>';
 
-                    $('#analysis-dialog').html(innerHtml);
+                    $('#analysis-dialog-list').html(innerHtml);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                 },
