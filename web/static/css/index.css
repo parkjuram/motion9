@@ -45,7 +45,6 @@ text-shadow: none;
 
 .how-it-works-container {
     text-align: center;
-    margin-bottom: 100px;
 }
 .how-it-works-container .grey-deco-bar {
     margin: 50px auto 0 auto;
@@ -73,9 +72,10 @@ text-shadow: none;
     display: block;
 }
 .how-it-works-container .how-it-works-step > div .step-content {
-    height: 80px;
+    height: auto;
     margin: 0 auto;
-    line-height: 80px;
+    line-height: 25px;
+    margin-top: 15px;
     text-align: center;
     width: 70%;
     font-size: 13px;
