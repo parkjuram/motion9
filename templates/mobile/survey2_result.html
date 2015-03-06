@@ -106,7 +106,7 @@
                                 <span class="caption-subject theme-font-color bold uppercase">분석 총평</span>
                             </div>
                         </div>
-                        <div class="portlet-body" style="font-size: 17px; max-height:300px; overflow:scroll; line-height:normal; line-height: 25px;
+                        <div class="portlet-body" style="font-size: 17px; max-height:300px; overflow:auto; line-height:normal; line-height: 25px;
 white-space: pre-line;">
                             {{ user_survey_result.general_review }}
                         </div>
@@ -123,10 +123,10 @@ white-space: pre-line;">
                             <div class="portlet-title">
                                 <div class="caption caption-md">
                                     <i class="icon-bar-chart theme-font-color hide"></i>
-                                    <span class="caption-subject theme-font-color bold uppercase">추가 코멘트</span>
+                                    <span class="caption-subject theme-font-color bold uppercase">요청 보완 자료</span>
                                 </div>
                             </div>
-                            <div class="portlet-body" style="font-size: 17px; max-height:300px; overflow:scroll; line-height:normal; line-height: 25px;
+                            <div class="portlet-body" style="font-size: 17px; max-height:300px; overflow:auto; line-height:normal; line-height: 25px;
     white-space: pre-line;">
                                 {{ user_survey_result.additional_comment }}
                             </div>
@@ -410,7 +410,7 @@ white-space: pre-line;">
 
 
     <div class="modal fade" id="request-more-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true" style="z-index:1500;">
+         aria-hidden="true" data-backdrop="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

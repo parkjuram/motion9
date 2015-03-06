@@ -222,14 +222,14 @@ a:visited{
     margin: 16px 5% 16px 5%;
 }
 .intro-container div > .intro-item-content > span {
-    font-size: 15px;
+    font-size: 17px;
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
 }
 
 .intro-right-top{
-        width: 40%!important;
+    width: 40%!important;
     margin: auto;
     text-align: left;
 }
@@ -255,6 +255,8 @@ a:visited{
     margin: 0 auto 40px;
 }
 .closing-container .closing-title {
+    width: 70%;
+    margin:0 auto;
     margin-top: 40px;
     font-size: 30px;
     color: white;

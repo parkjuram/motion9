@@ -186,10 +186,10 @@ white-space: pre-line;">
                                 <div class="portlet-title">
                                     <div class="caption caption-md">
                                         <i class="icon-bar-chart theme-font-color hide"></i>
-                                        <span class="caption-subject theme-font-color bold uppercase">추가 코멘트</span>
+                                        <span class="caption-subject theme-font-color bold uppercase">요청 보완 자료</span>
                                     </div>
                                 </div>
-                                <div class="portlet-body" style="font-size: 17px; max-height:400px; overflow:scroll; line-height:normal; line-height: 25px;
+                                <div class="portlet-body" style="font-size: 17px; max-height:400px; overflow:auto; line-height:normal; line-height: 25px;
     white-space: pre-line;">
                                     {{ user_survey_result.additional_comment }}
                                 </div>
@@ -209,8 +209,8 @@ white-space: pre-line;">
                                     <span class="caption-subject theme-font-color bold uppercase">예산</span>
                                 </div>
                             </div>
-                            <div class="portlet-body">
-                                <h4>예산은 {{ min_price_sum|intcomma }}
+                            <div class="portlet-body" >
+                                <h4 style="line-height:25px;">예산은 {{ min_price_sum|intcomma }}
                                     ~ {{ max_price_sum|intcomma }}원 입니다.
                                 회원님께서 입력하신 정보를 바탕으로 화장품 구입에 소요되는 최소 예산과 최대 예산을 측정해보았습니다. 클릭하시면 각 항목의 가격을 보실 수 있습니다.
                                 </h4>
@@ -310,8 +310,6 @@ white-space: pre-line;">
 
         <script src="{% static 'metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js' %}"
                 type="text/javascript"></script>
-        <script src="{% static 'metronic_assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}"
-                type="text/javascript"></script>
         <script src="{% static 'metronic_assets/global/scripts/metronic.js' %}" type="text/javascript"></script>
         <script src="{% static 'metronic_assets/global/plugins/amcharts/amcharts/amcharts.js' %}"></script>
         <script src="{% static 'metronic_assets/global/plugins/amcharts/amcharts/serial.js' %}"></script>
@@ -403,12 +401,6 @@ white-space: pre-line;">
             });
 
 
-                $('.total-review').slimScroll({
-
-                    height: '250px',
-                    railVisible: true,
-                    alwaysVisible: true
-                });
             });
         </script>
 

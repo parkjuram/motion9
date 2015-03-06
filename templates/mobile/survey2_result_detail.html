@@ -39,7 +39,7 @@
 {% block title %}
     <div style="text-align:center; height:100%; margin-top:4px">
         <a href="{% url 'mobile:mobile_index' %}" target="_self">
-            <img src="{% static "img/LOGO_black.png" %}" class="main-logo-img">
+            <img src="{% static "img/logo_blk.png" %}" class="main-logo-img">
         </a>
     </div>
 {% endblock %}
@@ -121,7 +121,7 @@
                                                                             <td>
                                                                                 <div class="font-title-green"
                                                                                      style="font-size:13px;">
-                                                                                    기능성 여부:
+                                                                                    기능성
                                                                                     &nbsp;<span
                                                                                         class="font-grey-gallery">{{ survey_result_detail.0.product.detail.function }}</span>
                                                                                 </div>
@@ -130,18 +130,18 @@
                                                                         </tr>
                                                                         <tr>
 
-                                                                            <td>
-                                                                                <div class="font-title-green"
-                                                                                     style="font-size:13px;">
-                                                                                    사용 기간:&nbsp;<span
-                                                                                        class="font-grey-gallery">{{ survey_result_detail.0.product.detail.estimation_period }}일</span>
-                                                                                </div>
-                                                                                <div class="font-grey-cascade"
-                                                                                     style="font-size:10px; width:85%">
-                                                                                    (*사용 기간은 용량과 일반적인 사용량을 기준으로 측정되었으며
-                                                                                    개인에 따라 다를 수 있습니다)</span>
-                                                                                </div>
-                                                                            </td>
+{#                                                                            <td>#}
+{#                                                                                <div class="font-title-green"#}
+{#                                                                                     style="font-size:13px;">#}
+{#                                                                                    사용 기간:&nbsp;<span#}
+{#                                                                                        class="font-grey-gallery">{{ survey_result_detail.0.product.detail.estimation_period }}일</span>#}
+{#                                                                                </div>#}
+{#                                                                                <div class="font-grey-cascade"#}
+{#                                                                                     style="font-size:10px; width:85%">#}
+{#                                                                                    (*사용 기간은 용량과 일반적인 사용량을 기준으로 측정되었으며#}
+{#                                                                                    개인에 따라 다를 수 있습니다)</span>#}
+{#                                                                                </div>#}
+{#                                                                            </td>#}
 
                                                                         </tr>
 
@@ -202,9 +202,9 @@
                                                     <div class="table-scrollable table-scrollable-borderless">
                                                         <span style="font-size:13px;">
                                                             {{ survey_result_detail.0.product.analysis_.general_review }}
-                                                        이 제품 후기들을 분석해본 결과 <span class="font-green" style="color:#17bcb8;
-                             font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_skintype.0.content }}"</span>의 피부타입을 가진 사람들이 사용하는 경우가 가장 많았으며  <span class="font-green" style="color:#17bcb8;
-                             font-size:16px;">"{{ survey_result_detail.0.product.analysis_.detail_skintype.1.content }}"{% if survey_result_detail.0.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.0.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. 사용자들은 제품의 특징으로 <span class="font-green" style="font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_feature.0.content }}",</span><span class="font-green" style="font-size:15px;">"{{ survey_result_detail.0.product.analysis_.detail_feature.1.content }}",{% if survey_result_detail.0.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.0.product.analysis_.detail_feature.2.content }}"{% endif %}</span>을 차례로 꼽았습니다. <br>또한 제품을 사용하고 난 후 느낀 효과로는 <span class="font-green" style="font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_effect.0.content }}"</span>이 가장 많이 언급되었으며, <span class="font-green" style="font-size:15px;">"{{ survey_result_detail.0.product.analysis_.detail_effect.1.content }}"</span>과 <span class="font-green" style="font-size:15px;">{% if survey_result_detail.0.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.0.product.analysis_.detail_effect.2.content }}"{% endif %}</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
+                                                        이 제품 후기들을 분석해본 결과 <span style="color:#17bcb8;
+                             font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_skintype.0.content }}"</span>의 피부타입을 가진 사람들이 사용하는 경우가 가장 많았으며  <span style="color:#17bcb8;
+                             font-size:16px;">"{{ survey_result_detail.0.product.analysis_.detail_skintype.1.content }}"{% if survey_result_detail.0.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.0.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. <br><br>사용자들은 제품의 특징으로 <span style="color:#17bcb8; font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_feature.0.content }}",</span><span style="color:#17bcb8; font-size:15px;">"{{ survey_result_detail.0.product.analysis_.detail_feature.1.content }}",{% if survey_result_detail.0.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.0.product.analysis_.detail_feature.2.content }}"{% endif %}</span>을 차례로 꼽았습니다. <br><br>또한 제품을 사용하고 난 후 느낀 효과로는 <span style="color:#17bcb8; font-size:20px;">"{{ survey_result_detail.0.product.analysis_.detail_effect.0.content }}"</span>이 가장 많이 언급되었으며, <span style="color:#17bcb8; font-size:15px;">"{{ survey_result_detail.0.product.analysis_.detail_effect.1.content }}"</span>과 <span style="color:#17bcb8; font-size:15px;">{% if survey_result_detail.0.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.0.product.analysis_.detail_effect.2.content }}"{% endif %}</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
 
                                                         </span>
 
@@ -284,17 +284,18 @@
                                                         </div>
                                                     </div>
                                                     <div class="table-scrollable table-scrollable-borderless">
-                            <span style="font-size:13px;">
-                            총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들은 아래와 같은 비율로 피부타입 혹은 피부상태를 가지고 있었습니다.
-                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_skintype.0.content }}" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_skintype.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.0.product.analysis_.detail_skintype.2.content }}" {% endif %} </span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.
+                            <span style="font-size:15px;">
+{#                            총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들은 아래와 같은 비율로 피부타입 혹은 피부상태를 가지고 있었습니다.#}
+{#                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_skintype.0.content }}" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_skintype.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.0.product.analysis_.detail_skintype.2.content }}" {% endif %} </span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.#}
+                                이 제품은 아래와 같이 회원님과 비슷한 피부타입을 가진 사람들이 많이 사용했습니다.
                             </span>
 
                                                             {% for item in survey_result_detail.0.product.analysis_.detail_skintype %}
                                                                  <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                   <td><div class="font-grey-gallery"
-                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
+                                                                   <td><div class="pd-title-feat"
+                                                                         >{{ item.content }}&nbsp;</div>
+                                                                       <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
 
                                                                 </tr>
                                                                 </table>
@@ -311,7 +312,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td class="pd-percent">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                                 </table>
                                                             {% endfor %}
@@ -344,17 +345,18 @@
                                                     </div>
 
                                                     <div class="table-scrollable table-scrollable-borderless">
-                            <span style="font-size:13px;">
-                            총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
-                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_feature.0.content }}" </span> 을 이 제품의 특징으로 꼽는 사람이 가장 많았으며<span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_feature.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.0.product.analysis_.detail_feature.2.content }}"{% endif %} </span>을 특징으로 이야기 하는 사람들도 높은 비율로 존재하고 있습니다.
+                            <span style="font-size:15px;">
+{#                            총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.#}
+{#                                <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_feature.0.content }}" </span> 을 이 제품의 특징으로 꼽는 사람이 가장 많았으며<span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_feature.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.0.product.analysis_.detail_feature.2.content }}"{% endif %} </span>을 특징으로 이야기 하는 사람들도 높은 비율로 존재하고 있습니다.#}
+                                이 제품을 사용한 사람들은 아래와 같은 제품의 특징을 이야기 하고 있습니다.
                             </span>
 
                                                             {% for item in survey_result_detail.0.product.analysis_.detail_feature %}
                                                                  <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                   <td><div class="font-grey-gallery"
-                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
+                                                                   <td><div class="pd-title-feat"
+                                                                         >{{ item.content }}&nbsp;</div>
+                                                                       <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
 
                                                                 </tr>
                                                                 </table>
@@ -371,7 +373,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td class="pd-percent">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                                 </table>
                                                             {% endfor %}
@@ -403,17 +405,18 @@
                                                     </div>
 
                                                     <div class="table-scrollable table-scrollable-borderless">
-                            <span style="font-size:13px;">
-                            총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
-                                이 제품은 <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_effect.0.content }}" </span> 효과가 가장 크다는 사람이 제일 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_effect.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.0.product.analysis_.detail_effect.2.content }}"{% endif %} </span>로 제품의 효과를 꼽는 사람들도 높은 비율로 존재하고 있습니다.
+                            <span style="font-size:15px;">
+{#                            총 <span style="font-size: 21px; color : #17bcb8;">{{ survey_result_detail.0.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.#}
+{#                                이 제품은 <span class="font-title-green" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_effect.0.content }}" </span> 효과가 가장 크다는 사람이 제일 많았으며 <span class="font-title-green" style="font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.0.product.analysis_.detail_effect.1.content }}" {% if survey_result_detail.0.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.0.product.analysis_.detail_effect.2.content }}"{% endif %} </span>로 제품의 효과를 꼽는 사람들도 높은 비율로 존재하고 있습니다.#}
+                                이 제품을 사용한 사람들은 아래와 같은 효과를 느낀 경우가 많았습니다.
                             </span>
 
                                                             {% for item in survey_result_detail.0.product.analysis_.detail_effect %}
                                                                 <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                   <td><div class="font-grey-gallery"
-                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
+                                                                   <td><div class="pd-title-feat"
+                                                                         >{{ item.content }}&nbsp;</div>
+                                                                       <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div></td>
 
                                                                 </tr>
                                                                 </table>
@@ -422,7 +425,7 @@
                                                                     <td style="width:70%;">
                                                                         <div class="progress-info">
                                                                             <div class="progress"
-                                                                                 style="height:4px; margin-bottom:0px;">
+                                                                                 >
                                                                                 <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
                                                                                       class="progress-bar progress-bar-success blue">
                                                                                     <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
@@ -430,7 +433,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td class="pd-percent">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                                 </table>
                                                             {% endfor %}
@@ -483,7 +486,7 @@
                                                                             <td>
                                                                                 <div class="font-title-orange"
                                                                                      style="font-size:13px;">
-                                                                                    기능성 여부:
+                                                                                    기능성
                                                                                     &nbsp;<span
                                                                                         class="font-grey-gallery">    미백 기능성 </span>
                                                                                 </div>
@@ -492,18 +495,18 @@
                                                                         </tr>
                                                                         <tr>
 
-                                                                            <td>
-                                                                                <div class="font-title-orange"
-                                                                                     style="font-size:13px;">
-                                                                                    사용 기간: &nbsp;<span
-                                                                                        class="font-grey-gallery">    45일 </span>
-                                                                                </div>
-                                                                                <div class="font-grey-cascade"
-                                                                                     style="font-size:10px; width:85%">
-                                                                                    (*사용 기간은 용량과 일반적인 사용량을 기준으로 측정되었으며
-                                                                                    개인에 따라 다를 수 있습니다)</span>
-                                                                                </div>
-                                                                            </td>
+{#                                                                            <td>#}
+{#                                                                                <div class="font-title-orange"#}
+{#                                                                                     style="font-size:13px;">#}
+{#                                                                                    사용 기간: &nbsp;<span#}
+{#                                                                                        class="font-grey-gallery">    45일 </span>#}
+{#                                                                                </div>#}
+{#                                                                                <div class="font-grey-cascade"#}
+{#                                                                                     style="font-size:10px; width:85%">#}
+{#                                                                                    (*사용 기간은 용량과 일반적인 사용량을 기준으로 측정되었으며#}
+{#                                                                                    개인에 따라 다를 수 있습니다)</span>#}
+{#                                                                                </div>#}
+{#                                                                            </td>#}
 
                                                                         </tr>
 
@@ -563,9 +566,9 @@
                                                     <div class="table-scrollable table-scrollable-borderless">
                                                         <span style="font-size:13px;">
                                 {{ survey_result_detail.1.product.analysis_.general_review }}
-                            이 제품 후기들을 분석해본 결과 <span class="font-blue" style="color:#17bcb8;
- font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_skintype.0.content }}"</span>의 피부타입을 가진 사람들이 사용하는 경우가 가장 많았으며  <span class="font-blue" style="color:#17bcb8;
- font-size:16px;">"{{ survey_result_detail.1.product.analysis_.detail_skintype.1.content }}"{% if survey_result_detail.1.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.1.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. 사용자들은 제품의 특징으로 <span class="font-blue" style="font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.0.content }}",</span><span class="font-blue" style="font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.1.content }}",{% if survey_result_detail.1.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.1.product.analysis_.detail_feature.2.content }}"{% endif %}</span>을 차례로 꼽았습니다. <br>또한 제품을 사용하고 난 후 느낀 효과로는 <span class="font-blue" style="font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.0.content }}"</span>이 가장 많이 언급되었으며, <span class="font-blue" style="font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.1.content }}"</span>과 <span class="font-blue" style="font-size:15px;">{% if survey_result_detail.1.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.1.product.analysis_.detail_effect.2.content }}"{% endif %}</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
+                            이 제품 후기들을 분석해본 결과 <span style="color:#f44e04;
+ font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_skintype.0.content }}"</span>의 피부타입을 가진 사람들이 사용하는 경우가 가장 많았으며  <span style="color:#f44e04;
+ font-size:16px;">"{{ survey_result_detail.1.product.analysis_.detail_skintype.1.content }}"{% if survey_result_detail.1.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.1.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. <br><br>사용자들은 제품의 특징으로 <span style="color:#f44e04; font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.0.content }}",</span><span style="color:#f44e04; font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.1.content }}",{% if survey_result_detail.1.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.1.product.analysis_.detail_feature.2.content }}"{% endif %}</span>을 차례로 꼽았습니다. <br><br>또한 제품을 사용하고 난 후 느낀 효과로는 <span style="color:#f44e04; font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.0.content }}"</span>이 가장 많이 언급되었으며, <span style="color:#f44e04; font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.1.content }}"</span>과 <span style="color:#f44e04; font-size:15px;">{% if survey_result_detail.1.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.1.product.analysis_.detail_effect.2.content }}"{% endif %}</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
 
                             </span>
                                                     </div>
@@ -642,17 +645,18 @@
                                                         </div>
                                                     </div>
                                                     <div class="table-scrollable table-scrollable-borderless">
-                            <span style="font-size:13px;">
-                            총 <span style="font-size: 21px; color : #f44e04;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>명의 리뷰 작성자들은 아래와 같은 비율로 피부타입 혹은 피부상태를 가지고 있었습니다.
-                                <span class="font-title-green" style="color: #f44e04; font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_skintype.0.content }}" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="color: #f44e04; font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_skintype.1.content }}" {% if survey_result_detail.1.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.1.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.
+                            <span style="font-size:15px;">
+{#                            총 <span style="font-size: 21px; color : #f44e04;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>명의 리뷰 작성자들은 아래와 같은 비율로 피부타입 혹은 피부상태를 가지고 있었습니다.#}
+{#                                <span class="font-title-green" style="color: #f44e04; font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_skintype.0.content }}" </span> 의 피부타입을 가지고 있는 사람이 가장 많았으며 <span class="font-title-green" style="color: #f44e04; font-size: 15px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_skintype.1.content }}" {% if survey_result_detail.1.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.1.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가지고 있는 리뷰 작성자들도 높은 비율로 존재하고 있습니다.#}
+                                이 제품은 아래와 같이 회원님과 비슷한 피부타입을 가진 사람들이 많이 사용했습니다.
                             </span>
 
                                                             {% for item in survey_result_detail.1.product.analysis_.detail_skintype %}
                                                                 <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                   <td><div class="font-grey-gallery"
-                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
+                                                                   <td><div class="pd-title-feat"
+                                                                        >{{ item.content }}&nbsp;</div>
+                                                                       <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
 
                                                                 </tr>
                                                                 </table>
@@ -669,7 +673,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td class="pd-percent">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                                 </table>
                                                             {% endfor %}
@@ -701,19 +705,20 @@
                                                     </div>
 
                                                     <div class="table-scrollable table-scrollable-borderless">
-                            <span style="font-size:13px;">
-                            총 <span style="font-size: 21px; color : #f44e04;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.
-                                <span class="font-title-orange"
-                                      style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_feature.0.content }}"</span> 이라는 의견이 가장 많이 언급되고 있고 <span
-                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_feature.1.content }}", {% if survey_result_detail.1.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.1.product.analysis_.detail_feature.2.content }}"{% endif %}</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.
+                            <span style="font-size:15px;">
+{#                            총 <span style="font-size: 21px; color : #f44e04;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 특징을 분석해 보았습니다.#}
+{#                                <span class="font-title-orange"#}
+{#                                      style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_feature.0.content }}"</span> 이라는 의견이 가장 많이 언급되고 있고 <span#}
+{#                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_feature.1.content }}", {% if survey_result_detail.1.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.1.product.analysis_.detail_feature.2.content }}"{% endif %}</span> 이 제품의 특징이라는 의견들도 나오고 있습니다.#}
+                                이 제품을 사용한 사람들은 아래와 같은 제품의 특징을 이야기 하고 있습니다.
                             </span>
 
                                                             {% for item in survey_result_detail.1.product.analysis_.detail_feature %}
                                                                 <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                   <td><div class="font-grey-gallery"
+                                                                   <td><div class="pd-title-feat"
                                                                          style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
+                                                                       <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
 
                                                                 </tr>
                                                                 </table>
@@ -730,7 +735,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td class="pd-percent">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                                 </table>
                                                             {% endfor %}
@@ -762,19 +767,20 @@
 
                                                     <div class="table-scrollable table-scrollable-borderless">
                             <span style="font-size:13px;">
-                            총 <span style="font-size: 21px; color : #f44e04;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.
-                                <span class="font-title-orange"
-                                      style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_effect.0.content }}"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span
-                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_effect.1.content }}", {% if survey_result_detail.1.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.1.product.analysis_.detail_effect.2.content }}"{% endif %}</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.
+{#                            총 <span style="font-size: 21px; color : #f44e04;">{{ survey_result_detail.1.product.analysis_.total_count }}</span>명의 리뷰 작성자들이 말하는 제품의 효과들을 분석해 보았습니다.#}
+{#                                <span class="font-title-orange"#}
+{#                                      style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_effect.0.content }}"</span> 의 효과를 느끼는 리뷰 작성자들이 가장 많은 빈도로 나타나고 있고 <span#}
+{#                                    class="font-title-orange" style="font-size: 18px; font-weight: 200;"> "{{ survey_result_detail.1.product.analysis_.detail_effect.1.content }}", {% if survey_result_detail.1.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.1.product.analysis_.detail_effect.2.content }}"{% endif %}</span> 가 제품을 사용한 후 느끼는 효과라는 분들도 있습니다.#}
+                                이 제품을 사용한 사람들은 아래와 같은 효과를 느낀 경우가 많았습니다.
                             </span>
 
 
                                                             {% for item in survey_result_detail.1.product.analysis_.detail_effect %}
                                                                 <table class="table table-hover table-light" style="border-top: 1px solid #eee!important;">
                                                                 <tr>
-                                                                   <td><div class="font-grey-gallery"
-                                                                         style="display: inline-block; font-size:13px;">{{ item.content }}&nbsp;</div>
-                                                                       <div style="display: inline-block; float:right;">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
+                                                                   <td><div class="pd-title-feat"
+                                                                         >{{ item.content }}&nbsp;</div>
+                                                                       <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div></td>
 
                                                                 </tr>
                                                                 </table>
@@ -791,7 +797,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="float:right;">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
+                                                                    <td class="pd-percent">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                                                 </tr>
                                                                 </table>
                                                             {% endfor %}

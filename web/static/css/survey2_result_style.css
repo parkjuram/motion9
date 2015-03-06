@@ -136,7 +136,7 @@ font-size: 100%;
 .tabbable-line > .nav-tabs > li.active {
     border-bottom: 4px solid #17bcb8 !important;
     position: relative !important;
-    height : 60px;
+    height : 80px;
 }
 
 #view_report {
@@ -341,4 +341,41 @@ bottom: -100%;
 height: auto!important;
 width: auto!important;
 margin: auto;
+}
+
+.pd-title-feat {
+    font-size: 16px;
+    color: #212121;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.pd-number {
+    float:right;
+    display: inline-block;
+ font-size: 16px;
+color: #212121;
+font-weight: 700;
+}
+
+.progress {
+    height: 15px!important;
+margin-bottom: 0px;
+background-color: #ECC15F;
+}
+
+.progress-bar.blue {
+background: #F4434B !important;
+color: #FFFFFF !important;
+}
+
+.pd-percent {
+    float: right;
+    font-size: 15px;
+    color: #212121!important;
+    font-weight: 700;
+}
+
+.portlet .light {
+    line-height: 25px;
 }
