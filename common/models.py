@@ -63,6 +63,37 @@ class ProductAnalysis(models.Model):
     feature = models.CharField(max_length=2, null=False, default='no') # two start character of ('whitening', 'wrinkle', 'trouble', 'nothing')
     general_review = models.TextField(null=False, blank=True)
 
+    @property
+    def skin_type_for_display(self):
+        str = ""
+        if 'd' in self.skin_type:
+            str += "[건성]"
+        if 'o' in self.skin_type:
+            str += "[지성]"
+        if 'n' in self.skin_type:
+            str += "[중성]"
+        if 'c' in self.skin_type:
+            str += "[복합성]"
+
+        return str
+
+    @property
+    def feature_for_display(self):
+        str = ""
+        if 'wh' in self.feature:
+            str += "[미백]"
+        if 'wr' in self.feature:
+            str += "[주름개선]"
+        if 'su' in self.feature:
+            str += "[자외선차단]"
+
+        if len(str) == 0:
+            str = '[특징없음]'
+
+        return str
+
+
+
     def __str__(self):
         return unicode(self.product)
 

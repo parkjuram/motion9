@@ -1,3 +1,4 @@
 .sidebar-wrapper {
     float: left;
+    position: fixed;
 }

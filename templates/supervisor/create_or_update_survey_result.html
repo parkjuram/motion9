@@ -18,7 +18,7 @@
 {% block sidebar %}
     <div id="total-price-container">
         <span>총 금액</span>
-        <span id="total-price">135,000원</span>
+        <span id="total-price">0</span>원
     </div>
     <div id="selected-item-list">
 
@@ -27,122 +27,142 @@
 
 {% block content %}
 
-{#    <div class="row">#}
-{#        <table class="table">#}
-{#            <thead>#}
-{#                {% for item in user_survey_details %}#}
-{#                    <th>{{ item.survey_item_option.survey_item.question }}</th>#}
-{#                {% endfor %}#}
-{#            </thead>#}
-{#            <tbody>#}
-{#                {% for item in user_survey_details %}#}
-{#                    <td>{{ item.survey_item_option.content }}</td>#}
-{#                {% endfor %}#}
-{#            </tbody>#}
-{#        </table>#}
-{#    </div>#}
-{##}
-{#    <div class="row">#}
-{#        <table class="table">#}
-{#            <thead>#}
-{#                <th>선호 브랜드</th>#}
-{#                <th>그외 요청</th>#}
-{#            </thead>#}
-{#            <tbody>#}
-{#                <td>{{ user_survey.preference_brand }}</td>#}
-{#                <td>{{ user_survey.comments }}</td>#}
-{#            </tbody>#}
-{#        </table>#}
-{#    </div>#}
-{##}
-{#    <div class="row">#}
-{#        <div class="col-md-6">#}
-{#            <div class="form-group">#}
-{#                <label for="general_review">분석총평</label>#}
-{#                <textarea class="form-control" rows="5"></textarea>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="col-md-6">#}
-{#            <div class="form-group">#}
-{#                <label for="additional_comments">추카 코멘트</label>#}
-{#                <textarea class="form-control" rows="5"></textarea>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        <h2>필터</h2>#}
-{#        <div class="col-md-12">#}
-{#            <form class="form-inline">#}
-{#                <label>가격</label>#}
-{#                <div class="form-group">#}
-{#                    <input type="number" class="form-control" id="min-price" placeholder="최소가격">#}
-{#                </div>#}
-{#                <label> ~ </label>#}
-{#                <div class="form-group">#}
-{#                    <input type="number" class="form-control" id="max-price" placeholder="최대가격">#}
-{#                </div>#}
-{#            </form>#}
-{#        </div>#}
-{#        <div class="col-md-4">#}
-{#            <h4>브랜드</h4>#}
-{#            <ul class="list-unstyled brand-list">#}
-{#                {% for brand in brands %}#}
-{#                    <li><input type="checkbox">{{ brand }}</li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        </div>#}
-{#        <div class="col-md-4">#}
-{#            <h4>피부타입</h4>#}
-{#            <ul class="list-unstyled skin-type-list">#}
-{#                <li><input type="checkbox">건성</li>#}
-{#                <li><input type="checkbox">중성</li>#}
-{#                <li><input type="checkbox">지성</li>#}
-{#                <li><input type="checkbox">복합</li>#}
-{#            </ul>#}
-{#        </div>#}
-{#        <div class="col-md-4">#}
-{#            <h4>카테고리</h4>#}
-{#            <ul class="list-unstyled category-list">#}
-{#                {% for category in categories %}#}
-{#                    <li><input type="checkbox">{{ category.name_for_kor }}</li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="row">#}
-{#        <table class="table table-striped">#}
-{#            <thead>#}
-{#                <th>#</th>#}
-{#                <th>이름</th>#}
-{#                <th>가격</th>#}
-{#                <th>브랜드</th>#}
-{#                <th>피부타입</th>#}
-{#                <th>카테고리</th>#}
-{#                <th>기능성</th>#}
-{#                <th>피부타입(키워드)</th>#}
-{#                <th>특징(키워드)</th>#}
-{#                <th>효과(키워드)</th>#}
-{#                <th>썸네일</th>#}
-{#            </thead>#}
-{#            <tbody>#}
-{#                {% for product in products %}#}
-{#                    <tr>#}
-{#                        <td></td>#}
-{#                        <td>{{ product.name }}</td>#}
-{#                        <td>{{ product.price|intcomma }}</td>#}
-{#                        <td>{{ product.brand }}</td>#}
-{#                        <td>{{ product.name }}</td>#}
-{#                        <td></td>#}
-{#                        <td></td>#}
-{#                        <td></td>#}
-{#                        <td></td>#}
-{#                        <td></td>#}
-{#                        <td></td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
-{#            </tbody>#}
-{#        </table>#}
-{#    </div>#}
+    <div class="row">
+        <table class="table">
+            <thead>
+                {% for item in user_survey_details %}
+                    <th>{{ item.survey_item_option.survey_item.question }}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for item in user_survey_details %}
+                    <td>{{ item.survey_item_option.content }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <table class="table">
+            <thead>
+                <th>선호 브랜드</th>
+                <th>그외 요청</th>
+            </thead>
+            <tbody>
+                <td>{{ user_survey.preference_brand }}</td>
+                <td>{{ user_survey.comments }}</td>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="general_review">분석총평</label>
+                <textarea id="textarea-general-review" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="additional_comments">추가 코멘트</label>
+                <textarea id="textarea-additional-comment" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2>필터</h2>
+        <div class="col-md-12">
+            <form class="form-inline">
+                <label>가격</label>
+                <div class="form-group">
+                    <input id="budget-min" type="number" class="form-control" id="min-price" placeholder="최소가격" value="0">
+                </div>
+                <label> ~ </label>
+                <div class="form-group">
+                    <input id="budget-max" type="number" class="form-control" id="max-price" placeholder="최대가격" value="999999">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h4>브랜드</h4>
+            <ul class="list-unstyled brand-list">
+                {% for brand in brands %}
+                    <li><input type="checkbox" value="{{ brand }}" checked>{{ brand }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h4>피부타입</h4>
+            <ul class="list-unstyled skin-type-list">
+                <li><input type="checkbox" value="d" checked>건성</li>
+                <li><input type="checkbox" value="n" checked>중성</li>
+                <li><input type="checkbox" value="o" checked>지성</li>
+                <li><input type="checkbox" value="c" checked>복합</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h4>카테고리</h4>
+            <ul class="list-unstyled category-list">
+                {% for category in categories %}
+                    <li><input type="checkbox" value="{{ category.id }}" checked>{{ category.name_for_kor }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <input class="btn btn-default" type="button" value="필터적용" onClick="javascript:applyFilter();">
+    </div>
+    <div class="row">
+        <table id="table-product-list" class="table table-striped">
+            <thead>
+                <th>#</th>
+                <th>이름</th>
+                <th>가격</th>
+                <th>브랜드</th>
+                <th>피부타입</th>
+                <th>카테고리</th>
+                <th>기능성</th>
+                <th>피부타입(키워드)</th>
+                <th>특징(키워드)</th>
+                <th>효과(키워드)</th>
+                <th>썸네일</th>
+            </thead>
+            <tbody class="product-list">
+                {% for product in products %}
+                    <tr product-id="{{ product.id }}" select-type="{{ product.category.name }}"
+                            brand="{{ product.brand }}" category-id="{{ product.category.id }}"
+                            skin-type="{{ product.productanalysis.skin_type }}" >
+                        <td><input class="checkbox-enter-product" type="checkbox" product-name="[{{ product.category.name_for_kor }}]{{ product.name }}" product-price="{{ product.price }}"></td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price|intcomma }}</td>
+                        <td>{{ product.brand }}</td>
+                        <td>{{ product.productanalysis.skin_type_for_display }}</td>
+                        <td>{{ product.category.name_for_kor }}</td>
+                        <td>{{ product.productanalysis.feature_for_display }}</td>
+                        <td>
+                            {% for keyword in product.keyword_skintype %}
+                                {{ keyword.content }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for keyword in product.keyword_feature %}
+                                {{ keyword.content }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for keyword in product.keyword_effect %}
+                                {{ keyword.content }}
+                            {% endfor %}
+                        </td>
+                        <td><a href="{{ product.thumbnail_url }}" target="_blank">link</a></a> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <button id="btn-enter-to-database" class="btn btn-primary">DB에 입력하기</button>
+    </div>
+
 {#    <div class="row">#}
 {#        <h3>설문내용</h3>#}
 {#        {% for user_survey_detail in user_survey_details %}#}

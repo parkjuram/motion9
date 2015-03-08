@@ -1,3 +1,4 @@
+var test;
 (function() {
 
     $(function() {
@@ -6,7 +7,7 @@
         btnEnterToDatabase.click(function() {
             var selectedProductList = [];
             $('#table-product-list tr').each(function (index, object) {
-                if ($(object).find(".is-apply:checked").length > 0) {
+                if ($(object).find(".checkbox-enter-product:checked").length > 0) {
                     var productId = $(object).attr("product-id");
                     var type = $(object).attr("select-type");
 
@@ -45,7 +46,73 @@
                 }
             });
         });
+
+        $(".checkbox-enter-product").change(function() {
+            var selectedItemList = $('#selected-item-list');
+            selectedItemList.html("");
+            var totalPrice = 0;
+            $('.product-list tr input.checkbox-enter-product:checked').each(function(index, item) {
+                var name = $(item).attr('product-name')
+                var price = $(item).attr('product-price')
+                totalPrice += parseInt(price);
+                selectedItemList.append("<div>" + name + "</div>");
+            });
+            $('#total-price').text(totalPrice);
+        });
+
+        //$(".brand-list input[type='checkbox']").change(function() {
+        //    var checkedBrandNameList = [];
+        //    $(".brand-list input[type='checkbox']:checked").each(function(index, item) {
+        //        checkedBrandNameList.push(item.value);
+        //    });
+        //});
+
     });
 
+    this.applyFilter = function() {
+        var checkedBrandNameList = [];
+        $(".brand-list input[type='checkbox']:checked").each( function(index, item) {
+            checkedBrandNameList.push(item.value);
+        });
+        var checkedCategoryIdList = [];
+        $(".category-list input[type='checkbox']:checked").each( function(index, item) {
+            checkedCategoryIdList.push(item.value);
+        });
+        var skinType = "";
+        $(".skin-type-list input[type='checkbox']:checked").each( function(index, item) {
+            skinType += item.value;
+        });
+
+        $('.product-list tr').each(function(index, item) {
+           $(item).css('display', 'table-row');
+        });
+
+
+        $('.product-list tr').each(function(index, item) {
+            if ( $.inArray( $(item).attr('brand'), checkedBrandNameList ) == -1 ) {
+                $(item).css('display', 'none');
+            }
+            var productSkinType = $(item).attr('skin-type');
+            var isIn = false;
+
+            for( i=0; i<skinType.length; i++ ) {
+                for ( j=0; j<productSkinType.length; j++ ) {
+                    if ( skinType[i] == productSkinType[j] ) {
+                        isIn = true;
+                        break;
+                    }
+                }
+                if ( isIn ) break;
+            }
+
+            if ( !isIn ) {
+                $(item).css('display', 'none');
+            }
+
+            if ( $.inArray( $(item).attr('category-id'), checkedCategoryIdList ) == -1 ) {
+                $(item).css('display', 'none');
+            }
+        });
+    };
 
 })();

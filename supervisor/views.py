@@ -164,7 +164,12 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
         user_survey_details = user_survey.details.all()
         brands = NProduct.objects.distinct("brand").values_list('brand', flat=True)
         categories = NCategory.objects.all()
-        products = NProduct.objects.all()
+        products = NProduct.objects.select_related('productanalysis', 'productdetail','category').all()
+        for product in products:
+            if hasattr(product, 'productanalysis'):
+                product.keyword_skintype = product.productanalysis.details.filter(type='skintype').all()
+                product.keyword_feature = product.productanalysis.details.filter(type='feature').all()
+                product.keyword_effect= product.productanalysis.details.filter(type='effect').all()
 
         rendering_params = {'user_survey': user_survey,
                             'user_survey_details': user_survey_details,
