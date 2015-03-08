@@ -182,28 +182,50 @@ a:visited{
     line-height: normal;
 }
 
+.intro-top {
+    position: relative;
+}
+
+.intro-right-top {
+    position: absolute;
+    top: 30%;
+    right: 5%;
+}
+
+.intro-bottom {
+    position: relative;
+}
+.intro-left-bottom {
+      position: absolute;
+  top: 30%;
+  left: 5%;
+
+}
+
+.intro-container{
+    font-size: 0;
+}
 
 .intro-container > div{
-    display: flex;
+    display: inline-block;
     width:100%;
     text-align: center;
 }
 .intro-container > div > div {
     width: 50%;
-    height: 100%;
+
 }
 .intro-container div img {
     width: 100%;
 }
 .intro-container .float-left {
     float: left;
-    left: 0;
+
 
 
 }
 .intro-container .float-right {
     float: right;
-    right: 0;
     text-align: left;
 }
 .intro-container div > .grey-deco-bar {
@@ -246,6 +268,8 @@ a:visited{
     background: #15191D;
     height: auto;
     padding: 150px 0px 150px 0px;
+    position: relative;
+
 }
 .closing-container .green-deco-bar {
     margin: 0 auto;

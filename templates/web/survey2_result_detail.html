@@ -333,7 +333,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 {{ survey_result_detail.1.product.analysis_.general_review }}
                             이 제품 후기들을 분석해본 결과 <span style="color:#f44e04;
  font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_skintype.0.content }}"</span>의 피부타입을 가진 사람들이 사용하는 경우가 가장 많았으며  <span style="color:#f44e04;
- font-size:16px;">"{{ survey_result_detail.1.product.analysis_.detail_skintype.1.content }}"{% if survey_result_detail.1.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.1.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. <br><br>사용자들은 제품의 특징으로 <span  style="color:#f44e04; font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.0.content }}",</span><span style="color:#f44e04; font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.1.content }}",{% if survey_result_detail.1.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.1.product.analysis_.detail_feature.2.content }}"{% endif %}</span>을 차례로 꼽았습니다. <br><br>또한 제품을 사용하고 난 후 느낀 효과로는 <span style="color:#f44e04; font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.0.content }}"</span>이 가장 많이 언급되었으며, <span style="font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.1.content }}"</span>과 <span style="color:#f44e04; font-size:15px;">{% if survey_result_detail.1.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.1.product.analysis_.detail_effect.2.content }}"{% endif %}</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
+ font-size:16px;">"{{ survey_result_detail.1.product.analysis_.detail_skintype.1.content }}"{% if survey_result_detail.1.product.analysis_.detail_skintype.2 %}"{{ survey_result_detail.1.product.analysis_.detail_skintype.2.content }}"{% endif %}</span>의 피부타입을 가진 사람들도 많이 사용하고 있었습니다. <br><br>사용자들은 제품의 특징으로 <span  style="color:#f44e04; font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.0.content }}",</span><span style="color:#f44e04; font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_feature.1.content }}",{% if survey_result_detail.1.product.analysis_.detail_feature.2 %}"{{ survey_result_detail.1.product.analysis_.detail_feature.2.content }}"{% endif %}</span>을 차례로 꼽았습니다. <br><br>또한 제품을 사용하고 난 후 느낀 효과로는 <span style="color:#f44e04; font-size:20px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.0.content }}"</span>이 가장 많이 언급되었으며, <span style="color:#f44e04; font-size:15px;">"{{ survey_result_detail.1.product.analysis_.detail_effect.1.content }}"</span> <span style="color:#f44e04; font-size:15px;">{% if survey_result_detail.1.product.analysis_.detail_effect.2 %}"{{ survey_result_detail.1.product.analysis_.detail_effect.2.content }}"{% endif %}</span>의 효과도 경험 하였다는 것을 알 수 있었습니다.
 
                             </span>
 
@@ -449,25 +449,24 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:17px;">
                             이 제품은 아래와 같이 회원님과 비슷한 피부타입을 가진 사람들이 많이 사용했습니다.
                             </span>
+
+                                {% for item in survey_result_detail.0.product.analysis_.detail_skintype %}
                                 <table class="table table-hover table-light">
-                                    <thead>
-                                    <tr class="uppercase">
-                                        <th colspan="2"></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    {% for item in survey_result_detail.0.product.analysis_.detail_skintype %}
+
+
                                         <tr>
 
                                             <td>
-                                                <div class="pd-title-feat">{{ item.content }}</div>
+                                                <div class="pd-title-feat">{{ item.content }}&nbsp;</div>
+                                                <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div>
                                             </td>
-                                            <td class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</td>
-                                            <td style="width:40%;">
+                                            </tr>
+                                        </table>
+                                        <table class="table table-hover table-light">
+                                        <tr>
+                                            <td style="width:70%;">
                                                 <div class="progress-info">
-                                                    <div class="progress">
+                                                    <div class="progress" style="height: 10px; margin-bottom:0px;">
                                                         <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
                                                               class="progress-bar progress-bar-success blue">
                                                             <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
@@ -477,8 +476,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </td>
                                             <td class="pd-percent">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                         </tr>
+                                        </table>
                                     {% endfor %}
-                                </table>
+
                             </div>
 
                         </div>
@@ -503,34 +503,23 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:17px;">
                             이 제품은 아래와 같이 회원님과 비슷한 피부타입을 가진 사람들이 많이 사용했습니다.
                             </span>
+                                {% for item in survey_result_detail.1.product.analysis_.detail_skintype %}
                                 <table class="table table-hover table-light">
-                                    <thead>
-                                    <tr class="uppercase">
-                                        <th colspan="2">
 
-                                        </th>
-                                        <th>
 
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-
-                                    </tr>
-                                    </thead>
-                                    {% for item in survey_result_detail.1.product.analysis_.detail_skintype %}
                                         <tr>
 
                                             <td>
-                                                <div class="pd-title-feat">{{ item.content }}</div>
+                                                <div class="pd-title-feat">{{ item.content }}&nbsp;</div>
+                                                <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div>
                                             </td>
-                                            <td class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</td>
-                                            <td style="width:40%;">
+                                            </tr>
+                                        </table>
+                                        <table class="table table-hover table-light">
+                                        <tr>
+                                            <td style="width:70%;">
                                                 <div class="progress-info">
-                                                    <div class="progress">
+                                                    <div class="progress" style="height: 10px; margin-bottom:0px;">
                                                         <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                               class="progress-bar progress-bar-success blue">
                                                             <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
@@ -540,9 +529,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </td>
                                             <td class="pd-percent">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                         </tr>
+                                        </table>
                                     {% endfor %}
-
-                                </table>
                             </div>
 
                         </div>
@@ -571,34 +559,23 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:17px;">
                             이 제품을 사용한 사람들은 아래와 같은 제품의 특징을 이야기 하고 있습니다.
                             </span>
+                               {% for item in survey_result_detail.0.product.analysis_.detail_feature %}
                                 <table class="table table-hover table-light">
-                                    <thead>
-                                    <tr class="uppercase">
-                                        <th colspan="2">
 
-                                        </th>
-                                        <th>
 
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-
-                                    </tr>
-                                    </thead>
-                                    {% for item in survey_result_detail.0.product.analysis_.detail_feature %}
                                         <tr>
 
                                             <td>
-                                                <div class="pd-title-feat">{{ item.content }}</div>
+                                                <div class="pd-title-feat">{{ item.content }}&nbsp;</div>
+                                                <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div>
                                             </td>
-                                            <td class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</td>
-                                            <td style="width:40%;">
+                                            </tr>
+                                        </table>
+                                        <table class="table table-hover table-light">
+                                        <tr>
+                                            <td style="width:70%;">
                                                 <div class="progress-info">
-                                                    <div class="progress">
+                                                    <div class="progress" style="height: 10px; margin-bottom:0px;">
                                                         <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
                                                               class="progress-bar progress-bar-success blue">
                                                             <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
@@ -608,10 +585,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </td>
                                             <td class="pd-percent">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                         </tr>
+                                        </table>
                                     {% endfor %}
-
-
-                                </table>
                             </div>
                         </div>
                     </div>
@@ -637,34 +612,23 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:17px;">
                             이 제품을 사용한 사람들은 아래와 같은 제품의 특징을 이야기 하고 있습니다.
                             </span>
+                                {% for item in survey_result_detail.1.product.analysis_.detail_feature %}
                                 <table class="table table-hover table-light">
-                                    <thead>
-                                    <tr class="uppercase">
-                                        <th colspan="2">
 
-                                        </th>
-                                        <th>
 
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-
-                                    </tr>
-                                    </thead>
-                                    {% for item in survey_result_detail.1.product.analysis_.detail_feature %}
                                         <tr>
 
                                             <td>
-                                                <div class="pd-title-feat">{{ item.content }}</div>
+                                                <div class="pd-title-feat">{{ item.content }}&nbsp;</div>
+                                                <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div>
                                             </td>
-                                            <td class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</td>
-                                            <td style="width:40%;">
+                                            </tr>
+                                        </table>
+                                        <table class="table table-hover table-light">
+                                        <tr>
+                                            <td style="width:70%;">
                                                 <div class="progress-info">
-                                                    <div class="progress">
+                                                    <div class="progress" style="height: 10px; margin-bottom:0px;">
                                                         <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                               class="progress-bar progress-bar-success blue">
                                                             <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
@@ -674,8 +638,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </td>
                                             <td class="pd-percent">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                         </tr>
+                                        </table>
                                     {% endfor %}
-                                </table>
                             </div>
                         </div>
                     </div>
@@ -703,34 +667,23 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:17px;">
                             이 제품을 사용한 사람들은 아래와 같은 효과를 느낀 경우가 많았습니다.
                             </span>
+                                {% for item in survey_result_detail.0.product.analysis_.detail_effect %}
                                 <table class="table table-hover table-light">
-                                    <thead>
-                                    <tr class="uppercase">
-                                        <th colspan="2">
 
-                                        </th>
-                                        <th>
 
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-
-                                    </tr>
-                                    </thead>
-                                    {% for item in survey_result_detail.0.product.analysis_.detail_effect %}
                                         <tr>
 
                                             <td>
-                                                <div class="pd-title-feat">{{ item.content }}</div>
+                                                <div class="pd-title-feat">{{ item.content }}&nbsp;</div>
+                                                <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</div>
                                             </td>
-                                            <td class="pd-number">{{ item.count }}명/{{ survey_result_detail.0.product.analysis_.total_count }}명</td>
-                                            <td style="width:40%;">
+                                            </tr>
+                                        </table>
+                                        <table class="table table-hover table-light">
+                                        <tr>
+                                            <td style="width:70%;">
                                                 <div class="progress-info">
-                                                    <div class="progress">
+                                                    <div class="progress" style="height: 10px; margin-bottom:0px;">
                                                         <span style="width: {{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%;"
                                                               class="progress-bar progress-bar-success blue">
                                                             <span class="sr-only">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100 }}%</span>
@@ -740,8 +693,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </td>
                                             <td class="pd-percent">{{ item.count|div:survey_result_detail.0.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                         </tr>
+                                        </table>
                                     {% endfor %}
-                                </table>
                             </div>
                         </div>
                     </div>
@@ -767,34 +720,23 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span style="font-size:17px;">
                             이 제품을 사용한 사람들은 아래와 같은 효과를 느낀 경우가 많았습니다.
                             </span>
+                                {% for item in survey_result_detail.1.product.analysis_.detail_effect %}
                                 <table class="table table-hover table-light">
-                                    <thead>
-                                    <tr class="uppercase">
-                                        <th colspan="2">
 
-                                        </th>
-                                        <th>
 
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-
-                                    </tr>
-                                    </thead>
-                                    {% for item in survey_result_detail.1.product.analysis_.detail_effect %}
                                         <tr>
 
                                             <td>
-                                                <div class="pd-title-feat">{{ item.content }}</div>
+                                                <div class="pd-title-feat">{{ item.content }}&nbsp;</div>
+                                                <div class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</div>
                                             </td>
-                                            <td class="pd-number">{{ item.count }}명/{{ survey_result_detail.1.product.analysis_.total_count }}명</td>
-                                            <td style="width:40%;">
+                                            </tr>
+                                        </table>
+                                        <table class="table table-hover table-light">
+                                        <tr>
+                                            <td style="width:70%;">
                                                 <div class="progress-info">
-                                                    <div class="progress">
+                                                    <div class="progress" style="height: 10px; margin-bottom:0px;">
                                                         <span style="width: {{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%;"
                                                               class="progress-bar progress-bar-success blue">
                                                             <span class="sr-only">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100 }}%</span>
@@ -804,8 +746,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </td>
                                             <td class="pd-percent">{{ item.count|div:survey_result_detail.1.product.analysis_.total_count|mul:100|floatformat:2 }}%</td>
                                         </tr>
+                                        </table>
                                     {% endfor %}
-                                </table>
                             </div>
                         </div>
                     </div>

@@ -63,30 +63,30 @@
                 <!-- BEGIN PAGE TITLE -->
                 <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="page-title">
-                    <h1>{{ user_survey.created|date:"Y년 m월 d일 보고서" }}</h1>
+                    <span style="font-size:20px;">{{ user_survey.created|date:"Y년 m월 d일 보고서" }}</span>
                     {#                         <small>부제목</small>#}
                 </div>
                     </div>
                 <!-- END PAGE TITLE -->
                 <!-- BEGIN PAGE TOOLBAR -->
-                <div class="col-md-6 col-xs-6 col-sm-6">
+                <div class="col-md-6 col-xs-6 col-sm-6" style="padding-left: 0px; padding-right:10px">
                 <div class="page-toolbar">
                     <div type="button" class="btn btn-re-g"
                          id="btn-request-more-info" href="javascript:void(0);"
                          onClick="mixpanel.track('MOBILE:click btn-request-more-info'); return false;"
                             data-toggle="modal" data-target="#request-more-info">
-                        자료 보완 요청
+                        더 많은 정보가 필요하다면?
                     </div>
                     </div>
                     </div>
-                    <div class="col-md-6 col-xs-6 col-sm-6">
+                    <div class="col-md-6 col-xs-6 col-sm-6" style="padding-left: 10px; padding-right:0px">
                         <div class="page-toolbar">
-                    <div id="btn-request-survey-again-start" type="button" class="btn btn-re-g"
+                    <div style="line-height: 40px;" id="btn-request-survey-again-start" type="button" class="btn btn-re-g"
                          href="javascript:void(0);"
                          onClick="mixpanel.track('MOBILE:click btn-request-survey-again-start'); return false;"
                          href="#"
                             data-toggle="modal" data-target="#responsive">
-                        재분석 요청
+                        보고서 A/S 받기
                     </div>
                         </div>
                 </div>
@@ -230,6 +230,29 @@ white-space: pre-line;">
                     {% endif %}
                 {% endfor %}
             {% endfor %}
+
+        <div class="col-md-6 col-xs-6 col-sm-6" style="padding-left: 0px; padding-right:10px; margin-bottom:10px;">
+                <div class="page-toolbar">
+                    <div type="button" class="btn btn-re-g"
+                         id="btn-request-more-info" href="javascript:void(0);"
+                         onClick="mixpanel.track('MOBILE:click btn-request-more-info'); return false;"
+                            data-toggle="modal" data-target="#request-more-info">
+                        더 많은 정보가 필요하다면?
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 col-sm-6" style="padding-left: 10px; padding-right:0px; margin-bottom:10px;">
+                        <div class="page-toolbar">
+                    <div style="line-height: 40px;" id="btn-request-survey-again-start" type="button" class="btn btn-re-g"
+                         href="javascript:void(0);"
+                         onClick="mixpanel.track('MOBILE:click btn-request-survey-again-start'); return false;"
+                         href="#"
+                            data-toggle="modal" data-target="#responsive">
+                        보고서 A/S 받기
+                    </div>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -352,14 +375,12 @@ white-space: pre-line;">
                 <div class="modal-header">
                     <div type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></div>
-                    <h4 class="modal-title" id="myModalLabel">재분석 요청</h4>
+                    <h4 class="modal-title" id="myModalLabel">보고서 A/S 신청</h4>
 
-                    <div>분석이 완료되면 알림을 받을 수 있도록 옐로아이디를 등록해주세요</div>
+
                 </div>
                 <div class="modal-body">
-                    <div class="lise-title">
-                        재분석 요청 항목
-                    </div>
+
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="checkbox">
@@ -391,7 +412,7 @@ white-space: pre-line;">
                         요청 이유
                     </div>
                     <div class="col-xs-12">
-                        <textarea id="text-reason" class="form-control" placeholder="ex)추천된 로션은 유분기가 많아서 저에게 안맞는거 같아요." rows="3"></textarea>
+                        <textarea id="text-reason" class="form-control" placeholder="ex) '추천된 로션은 유분기가 많아서 저에게 안맞는거 같아요.'  ,  '보고서에 있는 제품은 이미 써봐서 다른 제품으로 추천해주세요'"  rows="4"></textarea>
                     </div>
                     <div class="lise-title">
                         추가 요청 사항
@@ -399,10 +420,12 @@ white-space: pre-line;">
                     <div class="col-xs-12">
                         <textarea id="text-comments" class="form-control" placeholder="ex)폴라초이스 제품 위주로 추천해주세요." rows="3"></textarea>
                     </div>
+                <div>A/S가 완료되면 알림을 받을 수 있도록 옐로아이디를 등록해주세요<br><a href="http://goto.kakao.com/@파이너스"><img style="width:100%" src="{% static 'common/image/yellow_id_mobile.png' %}"></a></div>
                 </div>
+
                 <div class="modal-footer">
                     <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
-                    <div type="button" class="btn btn-primary btn-survey-again" user-survey-id="{{ request.pk }}" data-dismiss="modal">재분석 요청</div>
+                    <div type="button" class="btn btn-primary btn-survey-again" user-survey-id="{{ request.pk }}" data-dismiss="modal">A/S 신청</div>
                 </div>
             </div>
         </div>
@@ -416,21 +439,23 @@ white-space: pre-line;">
                 <div class="modal-header">
                     <div type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></div>
-                    <h4 class="modal-title" id="myModalLabel">자료 보완 요청</h4>
+                    <h4 class="modal-title" id="myModalLabel">더 많은 정보가 필요한다면?</h4>
 
 {#                    <div>분석이 완료되면 알림을 받을 수 있도록 옐로아이디를 등록해주세요</div>#}
                 </div>
                 <div class="modal-body" style="width:100%;">
                     <div class="lise-title">
-                        보완이 필요한 자료
+
+                        보고서에 작성된 내용 외의 정보가 더 필요하다면 아래에 남겨주세요. 필요하신 정보를 최대한 빨리 추가하여 알려드리겠습니다!
                     </div>
-                    <div class="col-xs-12">
-                        <textarea id="text-more-comment" class="form-control" placeholder="ex)해당 제품들을 사고 싶은데 어디서 살 수 있나요?, 리뷰 정보외에 전문가 의견은 알 수 없나요?" rows="3"></textarea>
+                    <div class="col-xs-12" style="margin-bottom:10px;">
+                        <textarea id="text-more-comments" class="form-control" placeholder="ex) '해당 제품들을 사고 싶은데 어디서 살 수 있나요?'   ,   '리뷰 정보외에 전문가 의견은 알 수 없나요?'   ,   '헤어스타일링 제품이나 바디 제품도 필요해요'" rows="5" style="width:100%;"></textarea>
                     </div>
+                    <div >정보 추가가 완료되면 알림을 받을 수 있도록 옐로아이디를 등록해주세요<br><a href="http://goto.kakao.com/@파이너스"><img style="width:100%" src="{% static 'common/image/yellow_id_mobile.png' %}"></a></div>
                 </div>
                 <div class="modal-footer">
                     <div type="button" class="btn btn-default" data-dismiss="modal">취소</div>
-                    <div type="button" class="btn btn-primary btn-request-more" user-survey-id="{{ request.pk }}" data-dismiss="modal">자료 보완 요청</div>
+                    <div type="button" class="btn btn-primary btn-request-more" user-survey-id="{{ request.pk }}" data-dismiss="modal">신청</div>
                 </div>
             </div>
         </div>
