@@ -83,8 +83,14 @@ var test;
             skinType += item.value;
         });
 
+        var minPrice = parseInt($('#min-price').val());
+        var maxPrice = parseInt($('#max-price').val());
+
         $('.product-list tr').each(function(index, item) {
-           $(item).css('display', 'table-row');
+            $(item).css('display', 'table-row');
+            if (parseInt($(item).attr('product-price'))<minPrice || maxPrice<parseInt($(item).attr('product-price'))) {
+                $(item).css('display', 'none');
+            }
         });
 
 

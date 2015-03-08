@@ -347,7 +347,7 @@ class SurveyResultDetailView(TemplateView):
         survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).result.details.select_related('product',).filter(product__category__name=kwargs['product_type'])
         survey_result_detail_ = []
         for item in survey_result_detail:
-            item.product.detail = item.product.details.all()[0] if len(item.product.details.all())>0 else None
+            item.product.detail = item.product.productdetail if hasattr(item.product,'productdetail') else None
             item.product.analysis_ = item.product.analysis.all()[0]
             item.product.analysis_.detail_skintype = item.product.analysis.all()[0].details.filter(type='skintype')[:3]
             item.product.analysis_.detail_feature = item.product.analysis.all()[0].details.filter(type='feature')[:3]

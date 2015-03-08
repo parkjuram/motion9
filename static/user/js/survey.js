@@ -46,7 +46,7 @@ class="btn-survey-again"
                 },
                 success: function(data) {
                     if ( data.success ) {
-                        alert('Success');
+                        alert('요청이 완료되었습니다. 완료시 메일 혹은 카카오톡으로 알려드리겠습니다.');
                     } else {
                         alert('Fail');
                     }
@@ -68,7 +68,7 @@ class="btn-survey-again"
                 },
                 success: function(data) {
                     if ( data.success ) {
-                        alert('Success');
+                        alert('요청이 완료되었습니다. 완료시 메일 혹은 카카오톡으로 알려드리겠습니다.');
                     } else {
                         alert('Fail');
                     }

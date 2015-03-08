@@ -75,11 +75,11 @@
             <form class="form-inline">
                 <label>가격</label>
                 <div class="form-group">
-                    <input id="budget-min" type="number" class="form-control" id="min-price" placeholder="최소가격" value="0">
+                    <input id="min-price" type="number" class="form-control" placeholder="최소가격" value="0">
                 </div>
                 <label> ~ </label>
                 <div class="form-group">
-                    <input id="budget-max" type="number" class="form-control" id="max-price" placeholder="최대가격" value="999999">
+                    <input id="max-price" type="number" class="form-control" placeholder="최대가격" value="999999">
                 </div>
             </form>
         </div>
@@ -129,6 +129,7 @@
                 {% for product in products %}
                     <tr product-id="{{ product.id }}" select-type="{{ product.category.name }}"
                             brand="{{ product.brand }}" category-id="{{ product.category.id }}"
+                            product-price="{{ product.price }}"
                             skin-type="{{ product.productanalysis.skin_type }}" >
                         <td><input class="checkbox-enter-product" type="checkbox" product-name="[{{ product.category.name_for_kor }}]{{ product.name }}" product-price="{{ product.price }}"></td>
                         <td>{{ product.name }}</td>
