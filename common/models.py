@@ -48,7 +48,7 @@ class NProduct(models.Model):
 
 @python_2_unicode_compatible
 class ProductDetail(models.Model):
-    product = models.ForeignKey(NProduct, related_name='details')
+    product = models.OneToOne(NProduct, related_name='detail')
     function = models.TextField(null=False, blank=True)
     estimation_period = models.SmallIntegerField(null=False, default=0)
 
@@ -57,7 +57,7 @@ class ProductDetail(models.Model):
 
 @python_2_unicode_compatible
 class ProductAnalysis(models.Model):
-    product = models.ForeignKey(NProduct,unique=True, related_name='analysis')
+    product = models.OneToOne(NProduct,unique=True, related_name='analysis')
     total_count = models.IntegerField(null=False, default=0)
     skin_type = models.CharField(max_length=4, null=False, blank=True) # one start character of ('dry', 'oily', 'neutral', 'complex')
     feature = models.CharField(max_length=2, null=False, default='no') # two start character of ('whitening', 'wrinkle', 'trouble', 'nothing')

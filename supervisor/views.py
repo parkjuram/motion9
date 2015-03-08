@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View, TemplateView
-from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail
+from common.models import NProduct, ProductAnalysis, ProductAnalysisDetail, NCategory
 from common_controller.analysis.analysis_blog_review import AnalysisBlogReview
 from common_controller.analysis.blog_review_link_scrapper import BlogReviewLinkScrapper
 from common_controller.util import helper_get_survey_result_item, http_response_by_json, convert_skintype_key_to_value, \
@@ -160,73 +160,94 @@ class UserMoreRequestListView(SuperuserRequiredMixin, TemplateView):
 
 class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        user_survey_id = self.kwargs['user_survey_id']
-        user_survey = UserSurvey.objects.get(id=user_survey_id)
-        user_survey_detail_list = user_survey.details.all()
-        user_survey_details = []
-        for user_survey_detail in user_survey_detail_list:
-            question = user_survey_detail.survey_item_option.survey_item.question
-            answer = user_survey_detail.survey_item_option.content
-            user_survey_details.append( {
-                'question': question,
-                'answer': answer
-            })
+        user_survey = UserSurvey.objects.get(id=self.kwargs['user_survey_id'])
+        user_survey_details = user_survey.details.all()
+        brands = NProduct.objects.distinct("brand").values_list('brand', flat=True)
+        categories = NCategory.objects.all()
+        products = NProduct.objects.all()
 
-
-        products_ = []
-        products = NProduct.objects.order_by('category__id').all()
-        brands = NProduct.objects.distinct('brand').values_list('brand', flat=True)
-        categories = Category.objects.values_list('name', flat=True)
-
-        for product in products:
-            product_ = {
-                'id': product.id,
-                'name': product.name,
-                'price': product.price,
-                'brand': product.brand,
-                'category': product.category,
-                'thumbnail': product.thumbnail,
-                'skin_type': "",
-                'feature': "",
-                'keyword': []
-            }
-            name = product.name
-            price = product.price
-            brand = product.brand
-            category = product.category.name
-            if product.analysis.exists():
-                product_analysis = product.analysis.first()
-                product_.update({
-                    'skin_type': convert_skintype_key_to_value(product_analysis.skin_type),
-                    'feature': convert_feature_key_to_value(product_analysis.feature)
-                })
-                if product_analysis.details.exists():
-                    product_analysis_details = product_analysis.details.all()
-                    for product_analysis_detail in product_analysis_details:
-                        product_['keyword'].append(product_analysis_detail.type + ":" + product_analysis_detail.content)
-
-            products_.append(product_)
-
-        rendering_params = {'user_survey_id': user_survey_id,
-                            'user_survey': user_survey,
-                            'user_survey_again': user_survey.usersurveyagain if hasattr(user_survey,'usersurveyagain') else False,
+        rendering_params = {'user_survey': user_survey,
                             'user_survey_details': user_survey_details,
                             'brands': brands,
                             'categories': categories,
-                            'products': products_}
-
-        if hasattr(user_survey,'result'):
-            survey_result = user_survey.result
-            rendering_params.update({
-                'general_review': survey_result.general_review,
-                'budget_max': survey_result.budget_max,
-                'budget_min': survey_result.budget_min,
-                'additional_comment': survey_result.additional_comment
-            })
+                            'products': products }
 
         return render(request,
                       "supervisor/create_or_update_survey_result.html",
-                      rendering_params )
+                      rendering_params)
+
+
+
+
+
+
+        # user_survey_id = self.kwargs['user_survey_id']
+        # user_survey = UserSurvey.objects.get(id=user_survey_id)
+        # user_survey_detail_list = user_survey.details.all()
+        # user_survey_details = []
+        # for user_survey_detail in user_survey_detail_list:
+        #     question = user_survey_detail.survey_item_option.survey_item.question
+        #     answer = user_survey_detail.survey_item_option.content
+        #     user_survey_details.append( {
+        #         'question': question,
+        #         'answer': answer
+        #     })
+        #
+        #
+        # products_ = []
+        # products = NProduct.objects.order_by('category__id').all()
+        # brands = NProduct.objects.distinct('brand').values_list('brand', flat=True)
+        # categories = Category.objects.values_list('name', flat=True)
+        #
+        # for product in products:
+        #     product_ = {
+        #         'id': product.id,
+        #         'name': product.name,
+        #         'price': product.price,
+        #         'brand': product.brand,
+        #         'category': product.category,
+        #         'thumbnail': product.thumbnail,
+        #         'skin_type': "",
+        #         'feature': "",
+        #         'keyword': []
+        #     }
+        #     name = product.name
+        #     price = product.price
+        #     brand = product.brand
+        #     category = product.category.name
+        #     if product.analysis.exists():
+        #         product_analysis = product.analysis.first()
+        #         product_.update({
+        #             'skin_type': convert_skintype_key_to_value(product_analysis.skin_type),
+        #             'feature': convert_feature_key_to_value(product_analysis.feature)
+        #         })
+        #         if product_analysis.details.exists():
+        #             product_analysis_details = product_analysis.details.all()
+        #             for product_analysis_detail in product_analysis_details:
+        #                 product_['keyword'].append(product_analysis_detail.type + ":" + product_analysis_detail.content)
+        #
+        #     products_.append(product_)
+        #
+        # rendering_params = {'user_survey_id': user_survey_id,
+        #                     'user_survey': user_survey,
+        #                     'user_survey_again': user_survey.usersurveyagain if hasattr(user_survey,'usersurveyagain') else False,
+        #                     'user_survey_details': user_survey_details,
+        #                     'brands': brands,
+        #                     'categories': categories,
+        #                     'products': products_}
+        #
+        # if hasattr(user_survey,'result'):
+        #     survey_result = user_survey.result
+        #     rendering_params.update({
+        #         'general_review': survey_result.general_review,
+        #         'budget_max': survey_result.budget_max,
+        #         'budget_min': survey_result.budget_min,
+        #         'additional_comment': survey_result.additional_comment
+        #     })
+
+        # return render(request,
+        #               "supervisor/create_or_update_survey_result.html",
+        #               rendering_params )
 
     def post(self, request, *args, **kwargs):
         user_survey_id = self.kwargs['user_survey_id']

@@ -1,0 +1,4 @@
+.brand-list, .category-list{
+    height: 120px;
+    overflow: auto;
+}

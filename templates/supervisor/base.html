@@ -7,6 +7,7 @@
     <title>{% block title %}Motion9 Supervisor Page{% endblock title %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'supervisor/css/base.css' %}">
         <style text="text/css">
             body { padding-top: 70px; }
         </style>
@@ -59,6 +60,9 @@
         </div><!-- /.container-fluid -->
     </nav>
 
+    <div class="sidebar-wrapper">
+        {% block sidebar %}{% endblock sidebar %}
+    </div>
     <div class="container">
     {% block content %}{% endblock content %}
     </div>
