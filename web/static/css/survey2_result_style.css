@@ -12,6 +12,7 @@ font-size: 100%;
 }
 .page-head .page-title {
     text-align: center;
+    width: 100%;
 }
 
 .page-head .page-toolbar {
@@ -166,8 +167,10 @@ font-size: 100%;
 .btn-re-g {
     width: 100%;
     color : white;
-    padding: 15px!important;
+    padding: 10px!important;
     background-color: #17bcb8;
+    white-space: normal!important;
+    min-height: 62px;
 }
 
 
@@ -264,7 +267,7 @@ font-size: 100%;
 .btn-int-y {
     color : #a7a7a8;
     text-align: center;
-    margin: 0 0px 12px;
+    margin: 0;
     line-height: 22px;
     height: 40px;
     width: 100%;
@@ -293,7 +296,7 @@ font-size: 100%;
 .btn-int-f {
     color : #fff;
     text-align: center;
-    margin: 0 0px 12px;
+    margin: 0;
     line-height: 22px;
     height: 40px;
     width: 100%;
@@ -356,6 +359,11 @@ margin: auto;
  font-size: 16px;
 color: #212121;
 font-weight: 700;
+}
+
+.btn-interest {
+    padding-bottom: 0!important;
+    padding-top: 0!important;
 }
 
 .progress {
