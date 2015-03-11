@@ -348,11 +348,11 @@ class SurveyResultDetailView(TemplateView):
         survey_result_detail_ = []
         for item in survey_result_detail:
             item.product.detail = item.product.productdetail if hasattr(item.product,'productdetail') else None
-            item.product.analysis_ = item.product.analysis.all()[0]
-            item.product.analysis_.detail_skintype = item.product.analysis.all()[0].details.filter(type='skintype')[:3]
-            item.product.analysis_.detail_feature = item.product.analysis.all()[0].details.filter(type='feature')[:3]
-            item.product.analysis_.detail_effect = item.product.analysis.all()[0].details.filter(type='effect')[:3]
-            item.product.analysis_.detail_etc = item.product.analysis.all()[0].details.filter(type='etc')[:3]
+            item.product.analysis_ = item.product.productanalysis
+            item.product.analysis_.detail_skintype = item.product.productanalysis.details.filter(type='skintype')[:3]
+            item.product.analysis_.detail_feature = item.product.productanalysis.details.filter(type='feature')[:3]
+            item.product.analysis_.detail_effect = item.product.productanalysis.details.filter(type='effect')[:3]
+            item.product.analysis_.detail_etc = item.product.productanalysis.details.filter(type='etc')[:3]
             if item.product.ninterest_set.filter(user_survey_id=self.request.pk).exists():
                 item.product.is_interested = True
 
