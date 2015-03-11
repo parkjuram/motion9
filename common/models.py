@@ -88,7 +88,7 @@ class ProductAnalysis(models.Model):
             str += "[자외선차단]"
 
         if len(str) == 0:
-            str = '[특징없음]'
+            str = '[해당사항 없음]'
 
         return str
 

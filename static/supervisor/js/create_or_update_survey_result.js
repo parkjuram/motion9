@@ -69,6 +69,16 @@ var test;
 
     });
 
+    this.toggleAllList = function( which, how ) {
+        if ( which == 0 ) {
+            $('.brand-list input').prop("checked",how);
+        } else if ( which == 1 ) {
+            $('.skin-type-list input').prop("checked",how);
+        } else if ( which == 2 ) {
+            $('.category-list input').prop("checked",how);
+        }
+    };
+
     this.applyFilter = function() {
         var checkedBrandNameList = [];
         $(".brand-list input[type='checkbox']:checked").each( function(index, item) {

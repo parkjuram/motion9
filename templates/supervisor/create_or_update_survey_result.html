@@ -85,6 +85,8 @@
         </div>
         <div class="col-md-4">
             <h4>브랜드</h4>
+            <input class="btn btn-default" type="button" value="전체선택" onClick="javascript:toggleAllList(0,true);">
+            <input class="btn btn-default" type="button" value="전체해제" onClick="javascript:toggleAllList(0,false);">
             <ul class="list-unstyled brand-list">
                 {% for brand in brands %}
                     <li><input type="checkbox" value="{{ brand }}" checked>{{ brand }}</li>
@@ -93,6 +95,8 @@
         </div>
         <div class="col-md-4">
             <h4>피부타입</h4>
+            <input class="btn btn-default" type="button" value="전체선택" onClick="javascript:toggleAllList(1,true);">
+            <input class="btn btn-default" type="button" value="전체해제" onClick="javascript:toggleAllList(1,false);">
             <ul class="list-unstyled skin-type-list">
                 <li><input type="checkbox" value="d" checked>건성</li>
                 <li><input type="checkbox" value="n" checked>중성</li>
@@ -102,6 +106,8 @@
         </div>
         <div class="col-md-4">
             <h4>카테고리</h4>
+            <input class="btn btn-default" type="button" value="전체선택" onClick="javascript:toggleAllList(2,true);">
+            <input class="btn btn-default" type="button" value="전체해제" onClick="javascript:toggleAllList(2,false);">
             <ul class="list-unstyled category-list">
                 {% for category in categories %}
                     <li><input type="checkbox" value="{{ category.id }}" checked>{{ category.name_for_kor }}</li>

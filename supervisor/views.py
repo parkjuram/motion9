@@ -258,8 +258,8 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
         user_survey_id = self.kwargs['user_survey_id']
 
         general_review = request.POST.get('general_review')
-        budget_min = request.POST.get('budget_min')
-        budget_max = request.POST.get('budget_max')
+        budget_min = 0
+        budget_max = 0
         additional_comment = request.POST.get('additional_comment')
         selected_product_list = json.loads(request.POST.get('selected_product_list'))
 
