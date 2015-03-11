@@ -535,8 +535,8 @@ def index_view(request):
         pass
 
     survey_status = {
-        'survey_request_count': UserSurvey.objects.count(),
-        'survey_response_count': SurveyResult.objects.count()
+        'survey_request_count': UserSurvey.objects.count()+550,
+        'survey_response_count': SurveyResult.objects.count()+460
     }
 
     return render(request, 'index_web.html',
