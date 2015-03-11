@@ -8,6 +8,7 @@ django-bootstrap3==4.10.1
 django-braces==1.4.0
 django-mathfilters==0.2.1
 django-php==0.1
+django-allauth
 django-registration==1.0
 django-static-precompiler==0.8
 django-celery==3.1.16
