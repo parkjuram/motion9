@@ -593,7 +593,10 @@ h4.lined-heading span {
 .notitle-dialog .ui-dialog-titlebar { display: none; }
 .ui-resizable-handle { display: none; }
 
-
+#menuHelp {
+    text-align: right;
+    padding-right: 200px;
+}
 
 /* product modal css */
 .modal-product-description-detail{
