@@ -40,6 +40,11 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -83,6 +88,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.auth.context_processors.auth",
     "django.contrib.messages.context_processors.messages",
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 ROOT_URLCONF = 'motion9.urls'

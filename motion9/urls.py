@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^supervisor/', include('supervisor.urls', namespace='supervisor')),
     url(r'^common/', include('common.urls', namespace='common')),
-
+    url(r'^accounts/', include('allauth.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
