@@ -194,7 +194,7 @@ a.tab-selected {
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     color: #17bcb8 !important;
     cursor: default;
-    background-color: #fff;
+    background-color: transparent;
     border-color: transparent;
 }
 
@@ -262,4 +262,14 @@ a.tab-selected {
     padding: 10px!important;
     margin-bottom : 15px!important;
     border: 2px solid #17bcb8 !important;
+}
+
+.int {
+    padding:10px!important;
+    margin-bottom: 0px;
+    text-align: center;
+    color:#17bcb8;
+    -webkit-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
+  box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
 }
