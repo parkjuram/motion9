@@ -40,12 +40,11 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
-
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
-    'django.contrib.sites',
+    'allauth.socialaccount.providers.facebook',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
