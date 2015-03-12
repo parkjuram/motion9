@@ -183,9 +183,9 @@
             <a href="{% url 'shop_product' category_id=26 %}">기타</a>
         </div>
         <div id="menuHelp" class="header-sub-menu">
-            <a id='btn-customer-center' href="javascript:$('.uv-icon')[0].click();">고객센터</a><span class="header-sub-menu-divider">/</span>
+{#            <a id='btn-customer-center' href="javascript:$('.uv-icon')[0].click();">고객센터</a><span class="header-sub-menu-divider">/</span>#}
             <a id='btn-faq' href="{% url 'help_faq' %}">FAQ</a><span class="header-sub-menu-divider">/</span>
-            <a id='btn-inquire' href="javascript:$('.uv-icon')[0].click();">온라인 문의</a>
+            <a id='btn-inquire' href="javascript:$('.uv-icon')[0].click();">문의</a>
         </div>
         <div id="headerSearch" class="header-sub-menu">
             <span><b>인기 검색어 : &nbsp;</b></span>
@@ -218,7 +218,7 @@
 <div class="footer-div">
     <div class="footer-contents">
         라이프엔진(주) | 대표이사 : 한도건 | 사업자 등록번호 : 119-86-58979<br/>
-        통신판매업신고 : 2015-서울강남-00541 | 개인정보관리책임자 : 박주람<br/>
+        통신판매업신고 : 2015-서울강남-00541 | 개인정보관리책임자 : 김웅휘<br/>
         서울시 강남구 테헤란로 313, 916(역삼동, 성지하이츠 1차 빌딩) <br/>
         © Life Engine Corp. All rights reserved.<br/>
         <a target="_blank" href="{% url 'mobile:mobile_agreement_of_utilization' %}">이용약관</a>
@@ -255,9 +255,9 @@
 <div id="analysis-dialog" style="text-align:center;">
     <div class="content-title">분석 보고서 목록</div>
     <span style="font-size:13px">카카오톡 옐로아이디를 추가하시면<br>
-보고서가 완료될시 카카오톡으로 알려드립니다</span><br>
+파이너스 매니저와 1대1 상담이 가능합니다</span><br>
     <div id="kakao-yellow-id-container-mobile" style="margin-top:10px;">
-        <a href="http://goto.kakao.com/@파이너스"><img src="{% static 'common/image/yellow_id_mobile.png' %}"></a>
+        <a href="http://goto.kakao.com/@파이너스" target="_blank"><img src="{% static 'common/image/yellow_id_mobile.png' %}"></a>
     </div>
     <div id="analysis-dialog-list"></div>
 </div>
