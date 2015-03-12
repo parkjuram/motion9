@@ -207,6 +207,7 @@
     width: 190px;
     height: 300px;
     margin: 10px;
+    margin-left: 0px;
     float: left;
     border: 5px solid #fff;
     overflow: hidden;

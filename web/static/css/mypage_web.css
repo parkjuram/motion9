@@ -147,8 +147,8 @@ h2{
     float: none;
     /*border-right: 1px solid #e5e5e6;*/
     margin-right: 0px;
-    padding-left: 10px;
-    padding-right:10px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .nav-tabs > li > a {
@@ -171,4 +171,13 @@ h2{
 
 .box-css {
     padding : 0px!important;
+}
+
+.int {
+    margin-top:0px!important;
+    text-align: center;
+    border-bottom:1px solid #ececec;
+    font-weight: 500;
+    color:#17bcb8;
+    font-size:16px;
 }
