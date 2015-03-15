@@ -11,6 +11,12 @@
 {#    <script src="{% static 'js/popup_layer.js' %}"></script>#}
     <script src="{% static 'js/index_web.js' %}"></script>
     <script src="{% static 'common/js/bootstrap.min.js' %}"></script>
+    <script>
+    mixpanel.track('Page Viewed', {
+            'page name' : document.title,
+            'url' : window.location.pathname
+        });
+    </script>
 
 {% endblock %}
 {% block ad_area %}
@@ -31,7 +37,7 @@
                 더 나은 남자가 되기 위한 피부 관리 서비스
             </div>
 {#            <div class="main-notice-button-group">#}
-                <a type="button" class="btn-start" href="{% url 'report_form' %}" role="button">보고서 신청</a>
+                <a type="button" id="btn-request-survey" class="btn-start" href="{% url 'report_form' %}" role="button">보고서 신청</a>
 {#            </div>#}
         </div>
     </div>
@@ -112,7 +118,7 @@
             <span>아래 버튼 클릭 후 <br>당신과 당신의 피부에 관한 몇가지 정보만 입력하시면 <br>당신만을 위한 최고의 관리 보고서를 작성해 드립니다.</span>
         </div>
         <div class="closing-button-group">
-            <a type="button" class="btn-start-2" href="{% url 'report_form' %}" role="button">보고서 신청</a>
+            <a id="btn-request-survey" type="button" class="btn-start-2" href="{% url 'report_form' %}" role="button">보고서 신청</a>
         </div>
     </div>
 {% endblock full_width_content %}

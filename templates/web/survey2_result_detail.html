@@ -246,7 +246,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="row margin-bottom-20">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="#" class="btn btn-interest-g btn-interest"
+                        <a id="btn-do-interest" href="#" class="btn btn-interest-g btn-interest"
                            product-id="{{ survey_result_detail.0.product.id }}"
                            user-survey-id="{{ request.pk }}">
                             {% if survey_result_detail.0.product.is_interested %}
@@ -264,7 +264,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="#" class="btn btn-interest-o btn-interest"
+                        <a id="btn-do-interest" href="#" class="btn btn-interest-o btn-interest"
                            product-id="{{ survey_result_detail.1.product.id }}"
                            user-survey-id="{{ request.pk }}"
                            style="width: 49%;">
