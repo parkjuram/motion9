@@ -171,8 +171,13 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
                 product.keyword_feature = product.productanalysis.details.filter(type='feature').all()
                 product.keyword_effect= product.productanalysis.details.filter(type='effect').all()
 
+        selected_item = user_survey.result.details.values_list('product__id', flat=True) if hasattr(user_survey,'result') else []
+
+        print selected_item
+
         rendering_params = {'user_survey': user_survey,
                             'user_survey_details': user_survey_details,
+                            'selected_item': selected_item,
                             'brands': brands,
                             'categories': categories,
                             'products': products }

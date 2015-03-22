@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
+from allauth.account import app_settings
+from allauth.account.forms import SignupForm
+from allauth.account.utils import get_next_redirect_url
+from allauth.account.utils import complete_signup
+from allauth.account.utils import passthrough_next_redirect_url
+from allauth.account.views import RedirectAuthenticatedUserMixin, CloseableSignupMixin, AjaxCapableProcessFormViewMixin, \
+    sensitive_post_parameters_m
+from allauth.utils import get_form_class
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.db.utils import DataError
@@ -10,6 +19,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import FormView
 from kombu.async.timer import Entry
 from common.models import NCategory
 from common_controller.decorators import mobile_login_required
@@ -1034,3 +1044,49 @@ def request_more(request):
         return http_response_by_json()
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)
+
+
+class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin,
+                 AjaxCapableProcessFormViewMixin, FormView):
+    template_name = "account/signup.html"
+    form_class = SignupForm
+    redirect_field_name = "next"
+    success_url = None
+
+    @sensitive_post_parameters_m
+    def dispatch(self, request, *args, **kwargs):
+        # send_mail('subjetc here', 'here is the message', 'from@example.com', ['parkjuram@naver.com'], fail_silently=False)
+        return super(SignupView, self).dispatch(request, *args, **kwargs)
+
+    def get_form_class(self):
+        return get_form_class(app_settings.FORMS, 'signup', self.form_class)
+
+    def get_success_url(self):
+        # Explicitly passed ?next= URL takes precedence
+        ret = (get_next_redirect_url(self.request,
+                                     self.redirect_field_name)
+               or self.success_url)
+        return ret
+
+    def form_valid(self, form):
+        user = form.save(self.request)
+        return complete_signup(self.request, user,
+                               app_settings.EMAIL_VERIFICATION,
+                               self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        form = kwargs['form']
+        form.fields["email"].initial = self.request.session \
+            .get('account_verified_email', None)
+        ret = super(SignupView, self).get_context_data(**kwargs)
+        login_url = passthrough_next_redirect_url(self.request,
+                                                  reverse("account_login"),
+                                                  self.redirect_field_name)
+        redirect_field_name = self.redirect_field_name
+        redirect_field_value = self.request.REQUEST.get(redirect_field_name)
+        ret.update({"login_url": login_url,
+                    "redirect_field_name": redirect_field_name,
+                    "redirect_field_value": redirect_field_value})
+        return ret
+
+signup = SignupView.as_view()

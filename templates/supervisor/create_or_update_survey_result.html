@@ -59,13 +59,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="general_review">분석총평</label>
-                <textarea id="textarea-general-review" class="form-control" rows="5"></textarea>
+                <textarea id="textarea-general-review" class="form-control" rows="5">{{ user_survey.result.general_review }}</textarea>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="additional_comments">추가 코멘트</label>
-                <textarea id="textarea-additional-comment" class="form-control" rows="5"></textarea>
+                <textarea id="textarea-additional-comment" class="form-control" rows="5">{{ user_survey.result.additional_comment }}</textarea>
             </div>
         </div>
     </div>
@@ -137,7 +137,7 @@
                             brand="{{ product.brand }}" category-id="{{ product.category.id }}"
                             product-price="{{ product.price }}"
                             skin-type="{{ product.productanalysis.skin_type }}" >
-                        <td><input class="checkbox-enter-product" type="checkbox" product-name="[{{ product.category.name_for_kor }}]{{ product.name }}" product-price="{{ product.price }}"></td>
+                        <td><input class="checkbox-enter-product" type="checkbox" product-name="[{{ product.category.name_for_kor }}]{{ product.name }}" product-price="{{ product.price }}" {% if product.id in selected_item %}checked{% endif %}></td>
                         <td>{{ product.name }}</td>
                         <td>{{ product.price|intcomma }}</td>
                         <td>{{ product.brand }}</td>

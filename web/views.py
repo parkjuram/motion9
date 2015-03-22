@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from braces.views._access import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -908,11 +909,18 @@ def survey_result_view(request, pk):
         'survey_result_item': survey_result_item
     })
 
-class SurveyResultView(TemplateView):
+class SurveyResultView(LoginRequiredMixin, TemplateView):
     template_name = "web/survey2_result.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not(self.request.user.is_superuser) and self.request.user != UserSurvey.objects.get(pk=kwargs['pk']).user:
+            return redirect('index')
+
+        return super(SurveyResultView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(SurveyResultView, self).get_context_data(**kwargs)
+        print kwargs['pk']
         self.request.pk = kwargs['pk']
         user_survey = UserSurvey.objects.get(pk=kwargs['pk'])
         user_survey_result = user_survey.result
@@ -982,8 +990,14 @@ class SurveyResultView(TemplateView):
 
         return context
 
-class SurveyResultDetailView(TemplateView):
+class SurveyResultDetailView(LoginRequiredMixin, TemplateView):
     template_name = "web/survey2_result_detail.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not(self.request.user.is_superuser) and self.request.user != UserSurvey.objects.get(pk=kwargs['pk']).user:
+            return redirect('index')
+
+        return super(SurveyResultDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         self.request.pk = kwargs['pk']

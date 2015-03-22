@@ -20,7 +20,7 @@
                 },
                 success: function(data) {
                     if ( data.success ) {
-                        currentDomObject.html("<div class='btn-int-f'>관심완료</div>");
+                        currentDomObject.html("관심완료");
                         alert('관심되었습니다.');
                     } else {
                         //alert('ERROR!');

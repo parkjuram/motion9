@@ -62,7 +62,7 @@ admin.site.register(BeforePayment, BeforePaymentAdmin)
 
 
 class UserSurveyAdmin(admin.ModelAdmin):
-    list_display = ('user', 'survey', 'result_file_name', 'comments', 'created')
+    list_display = ('id', 'user', 'survey', 'result_file_name', 'comments', 'created')
     list_editable = ('result_file_name', 'comments',)
     list_display_links = ('user', 'survey',)
 
@@ -79,7 +79,7 @@ admin.site.register(UserSurveyDetail, UserSurveyDetailAdmin)
 
 
 class SurveyResultAdmin(admin.ModelAdmin):
-    list_display = ('user_survey', 'general_review', 'budget_max', 'budget_min', 'additional_comment')
+    list_display = ('id', 'user_survey', 'general_review', 'budget_max', 'budget_min', 'additional_comment')
 
 admin.site.register(SurveyResult, SurveyResultAdmin)
 

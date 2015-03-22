@@ -1,7 +1,10 @@
 from django.conf.urls import patterns, url
 from supervisor.views import CreateOrUpdateSurveyResultView
+from users import views
 
 urlpatterns = patterns('',
+
+    url(r"^signup/$", views.signup, name="account_signup"),
 
     url(r'^check/email/$', 'users.views.check_email_view', name='check_email'),
 

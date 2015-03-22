@@ -41,18 +41,18 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',
+    'registration',
     'mathfilters',
     'djcelery',
-    'registration',
     'bootstrap3',
     'foradmin',
     'south',
@@ -87,8 +87,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.auth.context_processors.auth",
     "django.contrib.messages.context_processors.messages",
-    "allauth.account.context_processors.account",
-    "allauth.socialaccount.context_processors.socialaccount",
+    # "allauth.account.context_processors.account",
+    # "allauth.socialaccount.context_processors.socialaccount",
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -96,7 +96,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
 
     # `allauth` specific authentication methods, such as login by e-mail
-    "allauth.account.auth_backends.AuthenticationBackend",
+    # "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 ROOT_URLCONF = 'motion9.urls'
@@ -203,10 +203,17 @@ MOBILE_LOGIN_URL = '/user/mobile/login_page'
 # Email
 EMAIL_HOST = 'smtp.mandrillapp.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'motion9corp@gmail.com'
-EMAIL_HOST_PASSWORD = '5sb-8lPeNKVbPFapRFkXBg'
+EMAIL_HOST_USER = 'khan1657@naver.com'
+EMAIL_HOST_PASSWORD = 'KEPdaYwxVDgp9jEYvEz5Tw'
 EMAIL_USE_TLS = True
 
 # celery setting
 BROKER_URL = "amqp://ramju:1weekpizza@175.126.82.107:5672/qssd-0866"
 CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+
+# # django-allauth
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+#
+# DEFAULT_FROM_EMAIL = "parkjuram@naver.com"
