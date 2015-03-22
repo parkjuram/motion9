@@ -26,6 +26,7 @@
         var urlForMoreRequest = "{% url 'request_more' %}";
     </script>
 
+
 {% endblock %}
 
 {% block content %}
@@ -155,13 +156,13 @@
                 <div class="page-toolbar">
                     <div type="button" class="btn-re float-right"
                          id="btn-request-survey-again-start" href="javascript:void(0);"
-                         onClick="mixpanel.track('WEB:click btn-request-survey-again-start'); return false;"
+                         onClick="mixpanel.track('WEB:Request_Report_Re'); return false;"
                          data-toggle="modal" data-target="#responsive">
                         보고서 A/S 받기
                     </div>
                     <div type="button" class="btn-re float-right"
                          id="btn-request-more-info" href="javascript:void(0);"
-                         onClick="mixpanel.track('WEB:click btn-request-more-info'); return false;"
+                         onClick="mixpanel.track('WEB:Request_More_Info'); return false;"
                          data-toggle="modal" data-target="#request-more-info">
                         더 많은 정보가 필요하다면?
                     </div>
@@ -240,7 +241,7 @@ white-space: pre-line;">
                                         <div class="number">{{ value.0.product.category.name_for_kor }}
                                         </div>
                                     </div>
-                                    <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
+                                    <a id="btn-survey-result-detail" href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_self">
                                     <div class="col-md-8" id="view_report">
                                         <div type="button" class="more">분석 보고서 보기  &nbsp <img style="width: 15px;
         height: auto;"src="http://playsense.co.kr/ok/m9/right-arrow.png" aria-hidden="true"></span>
@@ -251,7 +252,7 @@ white-space: pre-line;">
                             <div class="wrapper-item">
                                 {% for item in value %}
                                     <div class="col-xs-6" style="padding-left: 5px; padding-right: 5px;">
-                                        <a href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_parent">
+                                        <a id="btn-survey-result-detail" href="{% url "survey2_result_detail" pk=request.pk product_type=key %}" target="_parent">
                                             <div class="dashboard-stat2" style="padding-bottom:5px; margin-bottom:0px;">
                                                 <div class="row">
                                                     <div class="col-xs-12"
@@ -283,7 +284,7 @@ white-space: pre-line;">
                                             {% if item.product.is_interested %}
                                                  <div class="btn-int-f">관심완료</div>
                                             {% else %}
-                                                <div class="btn-int-y">관심하기</div>
+                                                <div id="btn-do-interest" class="btn-int-y">관심하기</div>
 
                                             {% endif %}
                                         </a>

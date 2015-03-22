@@ -24,7 +24,7 @@
         </form>
 
         <div style="margin : 20px 0px; text-align : center;">
-            <a href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;"
+            <a id="btn-facebook-login-finish" href="#" data-ajax="false" style="width : 44%; display:inline-block;padding : 14px 2%;"
                class="fb-login-btn facebook-btn">facebook으로 로그인</a>
         </div>
         <div class="login-box-header">
@@ -45,7 +45,7 @@
                 <div style="margin : 20px 0px; text-align : right;">
                     <a id="btn-login-finish"
                        href="#"
-                       onClick="mixpanel.track('MOBILE:click btn-login-finish'); return false;"
+                       onClick="mixpanel.track('MOBILE:Login_Fin'); return false;"
                        class="basic-btn login-submit-btn"
                        data-form="login-page-form"
                        style="width : 30%; display:inline-block; padding : 14px 2%;">로그인</a>
@@ -57,7 +57,7 @@
         </form>
 
         <div style="text-align:right; margin : 20px 0px; margin-bottom : 20px;">
-            <a href="{% url 'mobile_registration_page' %}?next={{ next }}" data-ajax="false"
+            <a id="btn-signup" href="{% url 'mobile_registration_page' %}?next={{ next }}" data-ajax="false"
                style="width : 30%; display:inline-block; padding : 14px 2%;" class="basic-btn">회원가입</a>
         </div>
 

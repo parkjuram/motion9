@@ -222,7 +222,7 @@ $(document).ready(function () {
 //                    innerHtml += '<div class="portlet-body">';
 //                    innerHtml += '<div class="scroller" style="height: 305px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">';
 //                    innerHtml += '<div class="general-item-list">';
-                      innerHtml += '<div class="content-list">';
+                      innerHtml += '<div id="btn-survey-result" class="content-list">';
                     for( i in data.data ) {
                         item = data.data[i];
                         if ( item.is_analysis_finish ) {
@@ -238,7 +238,7 @@ $(document).ready(function () {
                         innerHtml += '<div class="login-box-header"><h4 class="lined-heading-survey"><span></span></h4></div>';
                         innerHtml += '<div class="clearfix"></div>';
                     }
-                    innerHtml += '</div><a id="btn-request-survey" onclick="mixpanel.track(\'WEB:click btn-request-survey\');" href="'+ getReportFormUrl() +'" target="_self"><div class="content-title" style="color : white; background-color : black;">보고서 신청</div></a>';
+                    innerHtml += '</div><a id="btn-request-survey" onclick="mixpanel.track(\'WEB:click btn-request-survey\');" href="'+ getReportFormUrl() +'" target="_self"><div id="btn-request-survey" class="content-title" style="color : white; background-color : black;">보고서 신청</div></a>';
 
 //                    for( i in data.data ) {
 //                        item = data.data[i];

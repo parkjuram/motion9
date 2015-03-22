@@ -202,7 +202,7 @@ font-size: 100%;
     color : #f44e04;
 }
 
-#btn-interest-g {
+.btn-interest-g {
     width : 49%;
     background-color: #212121 !important;
     color: white !important;
@@ -212,14 +212,14 @@ font-size: 100%;
     border: 0px!important;
 }
 
-#btn-interest-g:hover {
+.btn-interest-g:hover {
     width : 49%;
     background-color: #17bcb8!important;
     color: white!important;
     height: 60px;
 }
 
-#btn-interest-o {
+.btn-interest-o {
     width : 49%;
     background-color: #212121 !important;
     color: white !important;
@@ -229,7 +229,7 @@ font-size: 100%;
     border: 0px!important;
 }
 
-#btn-interest-o:hover {
+.btn-interest-o:hover {
     width : 49%;
     background-color: #f44e04!important;
     color: white!important;
