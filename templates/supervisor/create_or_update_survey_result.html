@@ -30,6 +30,20 @@
     <div class="row">
         <table class="table">
             <thead>
+                <th>요청자 이름</th>
+                <th>요청자 생년월일</th>
+            </thead>
+            <tbody>
+                <td>{{ request.user.profile.name }}</td>
+                <td>{{ request.user.profile.age }}</td>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="row">
+        <table class="table">
+            <thead>
                 {% for item in user_survey_details %}
                     <th>{{ item.survey_item_option.survey_item.question }}</th>
                 {% endfor %}
