@@ -12,7 +12,7 @@ class MyUser(SimpleEmailConfirmationUserMixin, AbstractUser):
     pass
 
 class UserProfile(models.Model):
-    user = models.OneToOneField('user.MyUser', related_name='profile')
+    user = models.OneToOneField('users.MyUser', related_name='profile')
     name = models.TextField(null=False, blank=True, default='')
 
     phone = models.TextField(null=False, blank=True, default='')
