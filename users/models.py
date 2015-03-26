@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db.models import signals
 
 from datetime import datetime
 from django.utils.encoding import python_2_unicode_compatible
+from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
+
+
+class MyUser(SimpleEmailConfirmationUserMixin, AbstractUser):
+    pass
 
 class UserProfile(models.Model):
-    user = models.OneToOneField('auth.User', related_name='profile')
+    user = models.OneToOneField('user.MyUser', related_name='profile')
     name = models.TextField(null=False, blank=True, default='')
 
     phone = models.TextField(null=False, blank=True, default='')
