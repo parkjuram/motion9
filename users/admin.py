@@ -1,9 +1,11 @@
 from django.contrib import admin
 
 from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment, \
-    SurveyResult, SurveyResultDetail, NInterest, UserSurveyAgain, UserSurveyMore
+    SurveyResult, SurveyResultDetail, NInterest, UserSurveyAgain, UserSurveyMore, MyUser
 from users.models import UserSurvey, UserSurveyDetail
 
+
+admin.site.register(MyUser)
 
 class CustomSetAdmin(admin.ModelAdmin):
     list_display = ('user', 'set', 'is_active', 'created')
