@@ -5,6 +5,8 @@ from django.db.models import signals
 
 from datetime import datetime
 from django.utils.encoding import python_2_unicode_compatible
+from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
+
 
 class MyUser(SimpleEmailConfirmationUserMixin, AbstractUser):
     pass
