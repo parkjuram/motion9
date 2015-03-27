@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import User
 from django.db.models import signals
 
 from datetime import datetime
 from django.utils.encoding import python_2_unicode_compatible
-from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
-
 
 class MyUser(SimpleEmailConfirmationUserMixin, AbstractUser):
     pass
 
 class UserProfile(models.Model):
-    user = models.OneToOneField('users.MyUser', related_name='profile')
+    user = models.OneToOneField('auth.User', related_name='profile')
     name = models.TextField(null=False, blank=True, default='')
 
     phone = models.TextField(null=False, blank=True, default='')
@@ -33,7 +31,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 signals.post_save.connect(create_user_profile, sender=User)
 
 class Interest(models.Model):
-    user = models.ForeignKey('users.MyUser')
+    user = models.ForeignKey('auth.User')
     product = models.ForeignKey('web.Product',null=True)
     set = models.ForeignKey('web.Set',null=True)
     custom_set = models.ForeignKey('users.CustomSet',null=True)
@@ -47,7 +45,7 @@ class Interest(models.Model):
             ("user", "custom_set"))
 
 class Cart(models.Model):
-    user = models.ForeignKey('users.MyUser')
+    user = models.ForeignKey('auth.User')
     product = models.ForeignKey('web.Product',null=True)
     set = models.ForeignKey('web.Set',null=True)
     custom_set = models.ForeignKey('users.CustomSet',null=True)
@@ -70,7 +68,7 @@ class OrderTempInfo(models.Model):
     original_amount = models.CharField(max_length=9, null=True)
 
 class Purchase(models.Model):
-    user = models.ForeignKey('users.MyUser')
+    user = models.ForeignKey('auth.User')
     payment = models.ForeignKey('users.Payment', null=True)
     price = models.IntegerField(null=False, default=0)
     product = models.ForeignKey('web.Product',null=True, blank=True)
@@ -87,7 +85,7 @@ class Purchase(models.Model):
     #         ("user", "custom_set"))
 
 class CustomSet(models.Model):
-    user = models.ForeignKey('users.MyUser', related_name='get_custom_sets')
+    user = models.ForeignKey('auth.User', related_name='get_custom_sets')
     set = models.ForeignKey('web.Set')
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
@@ -112,7 +110,7 @@ class CustomSetDetail(models.Model):
         )
 
 class Payment(models.Model):
-    user = models.ForeignKey('users.MyUser')
+    user = models.ForeignKey('auth.User')
     service_id = models.CharField(max_length=20, null=True)
     order_id = models.CharField(max_length=64, null=False, unique=True)
     order_date = models.CharField(max_length=14, null=True)
@@ -140,7 +138,7 @@ class Payment(models.Model):
 
 
 class BeforePayment(models.Model):
-    user = models.ForeignKey('users.MyUser')
+    user = models.ForeignKey('auth.User')
     order_id = models.CharField(max_length=64, null=False, unique=True)
     name = models.TextField(null=False, blank=True, default='')
     phone = models.TextField(null=False, blank=True, default='')
@@ -156,7 +154,7 @@ class BeforePayment(models.Model):
 
 @python_2_unicode_compatible
 class UserSurvey(models.Model):
-    user = models.ForeignKey('users.MyUser', related_name='get_survey_list')
+    user = models.ForeignKey('auth.User', related_name='get_survey_list')
     survey = models.ForeignKey('foradmin.Survey', null=True)
     preference_brand = models.TextField(null=False, blank=True)
     comments = models.TextField(null=False, blank=True)
@@ -241,7 +239,7 @@ class UserSurveyDetail(models.Model):
 
 @python_2_unicode_compatible
 class NInterest(models.Model):
-    user = models.ForeignKey('users.MyUser')
+    user = models.ForeignKey('auth.User')
     product = models.ForeignKey('common.NProduct')
     user_survey = models.ForeignKey(UserSurvey)
 
