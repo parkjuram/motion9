@@ -212,7 +212,7 @@ EMAIL_USE_TLS = True
 BROKER_URL = "amqp://ramju:1weekpizza@175.126.82.107:5672/qssd-0866"
 CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
 
-# AUTH_USER_MODEL = 'users.MyUser'
+AUTH_USER_MODEL = 'users.MyUser'
 
 # # django-allauth
 # ACCOUNT_EMAIL_REQUIRED = True
