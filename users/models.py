@@ -9,7 +9,7 @@ from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 
 
 class MyUser(SimpleEmailConfirmationUserMixin, AbstractUser):
-    groups.db_table = 'auth_user_groups'
+    pass
 
 class UserProfile(models.Model):
     user = models.OneToOneField('users.MyUser', related_name='profile')
