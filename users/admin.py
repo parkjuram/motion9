@@ -3,22 +3,11 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm
 
 from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetDetail, Payment, BeforePayment, \
-    SurveyResult, SurveyResultDetail, NInterest, UserSurveyAgain, UserSurveyMore, MyUser
+    SurveyResult, SurveyResultDetail, NInterest, UserSurveyAgain, UserSurveyMore, User
 from users.models import UserSurvey, UserSurveyDetail
 
 
-class MyUserChangeForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
-        model = MyUser
-
-class MyUserAdmin(UserAdmin):
-    form = MyUserChangeForm
-
-    fieldsets = UserAdmin.fieldsets + (
-            (None, {'fields': ()}),
-    )
-
-admin.site.register(MyUser, MyUserAdmin)
+admin.site.register(User)
 
 class CustomSetAdmin(admin.ModelAdmin):
     list_display = ('user', 'set', 'is_active', 'created')
