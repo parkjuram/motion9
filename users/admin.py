@@ -18,7 +18,7 @@ class MyUserAdmin(UserAdmin):
             (None, {'fields': ()}),
     )
 
-admin.site.register(MyUser)
+admin.site.register(MyUser, MyUserAdmin)
 
 class CustomSetAdmin(admin.ModelAdmin):
     list_display = ('user', 'set', 'is_active', 'created')
