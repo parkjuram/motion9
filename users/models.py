@@ -224,7 +224,7 @@ class SurveyResultDetail(models.Model):
 
 @python_2_unicode_compatible
 class UserSurveyDetail(models.Model):
-    user_survey = models.ForeignKey('auth.UserSurvey', related_name='details')
+    user_survey = models.ForeignKey('users.UserSurvey', related_name='details')
     survey_item_option = models.ForeignKey('foradmin.SurveyItemOption')
 
     class Meta:
