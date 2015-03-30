@@ -9,6 +9,7 @@ from allauth.account.utils import passthrough_next_redirect_url
 from allauth.account.views import RedirectAuthenticatedUserMixin, CloseableSignupMixin, AjaxCapableProcessFormViewMixin, \
     sensitive_post_parameters_m
 from allauth.utils import get_form_class
+import datetime
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -26,7 +27,6 @@ from kombu.async.timer import Entry
 from common.models import NCategory
 from common_controller.decorators import mobile_login_required
 from motion9 import const
-from datetime import datetime
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
 
@@ -128,7 +128,9 @@ def registration(request, next='index'):
 
     if error is None:
         try:
-            user = User.objects.create_user(username=email, email=email, password=password, is_active=False)
+            user = User.objects.create_user(username=email, email=email, password=password)
+            user.is_active = False
+            user.save()
             user.profile.name = name
             user.profile.sex = sex
             user.profile.age = age

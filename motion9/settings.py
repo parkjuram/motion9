@@ -61,7 +61,6 @@ INSTALLED_APPS = (
     'users',
     'supervisor',
     'common',
-    'simple_email_confirmation',
 )
 
 SITE_ID = 1
