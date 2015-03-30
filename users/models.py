@@ -21,6 +21,9 @@ class UserProfile(models.Model):
     skin_color = models.CharField(max_length=10, null=True, blank=True)
     mileage = models.IntegerField(null=False, default=0)
 
+    activation_key = models.CharField(max_length=40, blank=True)
+    key_expires = models.DateTimeField(default=datetime.today())
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
        profile, created = UserProfile.objects.get_or_create(user=instance)

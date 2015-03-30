@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import hashlib
+import random
 from allauth.account import app_settings
 from allauth.account.forms import SignupForm
 from allauth.account.utils import get_next_redirect_url
@@ -113,44 +115,43 @@ def registration(request, next='index'):
     age = request.POST.get('age')
 
     error = None
-
     if User.objects.filter(email=email).exists():
         error = '이미 가입된 E-mail 입니다.'
-    else:
-        if password == password_confirm:
-            try:
-                user = User.objects.create_user(email, email=email)
-                user.password = password
-                # user = User.objects.create_user(username=email, email=email, password=password)
-                user.save()
-                user.profile.name = name
-                user.profile.sex = sex
-                user.profile.age = age
-                user.profile.save()
-            except ValueError as e:
-                logger.error(e)
-                error = 'Registraion ValueError!'
-            except IntegrityError as e:
-                logger.error(e)
-                error = 'Registraion IntegrityError!'
-
-        else:
-            error = '비밀번호를 확인해 주세요.'
-
-    if email=='':
+    elif email=='':
         error = 'E-mail을 입력해 주세요.'
-    else :
-        if password=='' :
+    elif password=='' :
             error = '비밀번호를 입력해 주세요.'
-        else :
-            if name=='':
-                error = '이름을 입력해 주세요.'
+    elif password != password_confirm:
+        error = '비밀번호를 확인해 주세요.'
+    elif name=='':
+        error = '이름을 입력해 주세요.'
 
     if error is None:
-        # print user.is_confirmed
-        # send_mail('confirm email', 'Use %s to confirm your email' % user.confirmation_key, 'parkjuram@gmail.com', [user.email], fail_silently=False)
-        # send_email(user.email, 'Use %s to confirm your email', user.confirmation_key)
-        user = authenticate(username=email, password=password)
+        try:
+            user = User.objects.create_user(username=email, email=email, password=password, is_active=False)
+            user.profile.name = name
+            user.profile.sex = sex
+            user.profile.age = age
+            salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
+            user.profile.activation_key = hashlib.sha1(salt+email).hexdigest()
+            user.profile.key_expires = datetime.datetime.today() + datetime.timedelta(2)
+            user.profile.save()
+        except ValueError as e:
+            logger.error(e)
+            error = 'Registraion ValueError!'
+        except IntegrityError as e:
+            logger.error(e)
+            error = 'Registraion IntegrityError!'
+
+    if error is None:
+        # Send email with activation key
+        user=User.objects.get(username=email)
+
+        email_subject = 'Account confirmation'
+        email_body = "Hey %s, thanks for signing up. To activate your account, click this link within \
+        48hours http://127.0.0.1:8000/accounts/confirm/%s" % (user.username, user.profile.activation_key)
+        send_mail(email_subject, email_body, 'test@finers.com', [user.email], fail_silently=False)
+        # user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
 
@@ -158,16 +159,11 @@ def registration(request, next='index'):
     else:
         messages.info(request, error)
         return redirect(next)
-        # return HttpResponseRedirect(reverse(next))
-        # return HttpResponseRedirect(reverse('mobile_registration_page'))
-
-
 
 
 @csrf_exempt
 def registration_view(request):
     next = request.GET.get('next', 'mobile_registration_page' if request.is_mobile else 'registration_page')
-
     if request.user.is_authenticated():
         return redirect('mobile:mobile_index' if request.is_mobile else 'index')
 
