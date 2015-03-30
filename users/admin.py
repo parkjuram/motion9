@@ -7,7 +7,18 @@ from .models import UserProfile, Interest, Cart, Purchase, CustomSet, CustomSetD
 from users.models import UserSurvey, UserSurveyDetail
 
 
-admin.site.register(User)
+class CustomUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = User
+
+class CustomUserAdmin(UserAdmin):
+    form = CustomUserChangeForm
+
+    fieldsets = UserAdmin.fieldsets + (
+            (None, {'fields': ()}),
+    )
+
+admin.site.register(User, CustomUserAdmin)
 
 class CustomSetAdmin(admin.ModelAdmin):
     list_display = ('user', 'set', 'is_active', 'created')

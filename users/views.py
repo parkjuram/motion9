@@ -8,6 +8,7 @@ from allauth.account.views import RedirectAuthenticatedUserMixin, CloseableSignu
     sensitive_post_parameters_m
 from allauth.utils import get_form_class
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
@@ -16,7 +17,6 @@ from django.db.utils import DataError
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView
@@ -119,7 +119,10 @@ def registration(request, next='index'):
     else:
         if password == password_confirm:
             try:
-                user = User.objects.create_user(username=email, email=email, password=password)
+                user = User.objects.create_user(email, email=email)
+                user.password = password
+                # user = User.objects.create_user(username=email, email=email, password=password)
+                user.save()
                 user.profile.name = name
                 user.profile.sex = sex
                 user.profile.age = age
@@ -144,6 +147,9 @@ def registration(request, next='index'):
                 error = '이름을 입력해 주세요.'
 
     if error is None:
+        # print user.is_confirmed
+        # send_mail('confirm email', 'Use %s to confirm your email' % user.confirmation_key, 'parkjuram@gmail.com', [user.email], fail_silently=False)
+        # send_email(user.email, 'Use %s to confirm your email', user.confirmation_key)
         user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
