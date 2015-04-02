@@ -107,6 +107,7 @@ urlpatterns = patterns('',
 
     url(r'^survey/again/$', 'users.views.survey_again', name='survey_again'),
     url(r'^request/again/$', 'users.views.request_more', name='request_more'),
+    url(r'^confirm/(?P<activation_key>\w+)/', 'users.views.register_confirm', name='register_confirm'),
 
 
 

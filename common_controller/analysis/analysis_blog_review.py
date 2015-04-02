@@ -17,21 +17,22 @@ class AnalysisBlogReview:
         self.skip_count=0
         celery_task.update_state(state='PROGRESS',
                                  meta={'current': 0, 'total': len(blog_url_list)})
-        for blog_review_url in blog_url_list[:50]:
+        for blog_review_url in blog_url_list:
             self.analysis(blog_review_url)
             celery_task.update_state(state='PROGRESS',
                                      meta={'current': blog_url_list.index(blog_review_url),
-                                           'total': len(blog_url_list[:50])})
+                                           'total': len(blog_url_list)})
 
         sorted_analysis_result = sorted(self.analysis_result.items(), key=operator.itemgetter(1), reverse=True)
         analysis_result_list = []
 
         for item in sorted_analysis_result:
-            analysis_result_list.append({'keyword':item[0], 'count':item[1]})
+            if len(item[0])>1:
+                analysis_result_list.append({'keyword':item[0], 'count':item[1]})
 
         sorted(analysis_result_list, key=lambda item: item['count'], reverse=True)
 
-        return { 'analysis_result_list': analysis_result_list[:50], 'total_count':len(blog_url_list) }
+        return { 'analysis_result_list': analysis_result_list, 'total_count':len(blog_url_list) }
 
     def analysis(self, blog_review_url):
         # self.logger.info(blog_review_url)

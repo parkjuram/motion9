@@ -19,16 +19,16 @@ from django.db import IntegrityError
 from django.db.utils import DataError
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.http.response import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView
-from kombu.async.timer import Entry
 from common.models import NCategory
 from common_controller.decorators import mobile_login_required
 from motion9 import const
 from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
+from django.utils import timezone
 
 
 from motion9.const import *
@@ -44,7 +44,7 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines, helper_get_survey_items, \
     helper_request_survey
 
-from .models import Interest, UserSurvey, UserSurveyMore
+from .models import Interest, UserSurvey, UserSurveyMore, UserProfile
 
 from subprocess import call, Popen, PIPE
 import logging
@@ -120,7 +120,7 @@ def registration(request, next='index'):
     elif email=='':
         error = 'E-mail을 입력해 주세요.'
     elif password=='' :
-            error = '비밀번호를 입력해 주세요.'
+        error = '비밀번호를 입력해 주세요.'
     elif password != password_confirm:
         error = '비밀번호를 확인해 주세요.'
     elif name=='':
@@ -129,8 +129,8 @@ def registration(request, next='index'):
     if error is None:
         try:
             user = User.objects.create_user(username=email, email=email, password=password)
-            user.is_active = False
-            user.save()
+            # user.is_active = False
+            # user.save()
             user.profile.name = name
             user.profile.sex = sex
             user.profile.age = age
@@ -147,12 +147,12 @@ def registration(request, next='index'):
 
     if error is None:
         # Send email with activation key
-        user=User.objects.get(username=email)
+        # user=User.objects.get(username=email)
 
-        email_subject = 'Account confirmation'
-        email_body = "Hey %s, thanks for signing up. To activate your account, click this link within \
-        48hours http://127.0.0.1:8000/accounts/confirm/%s" % (user.username, user.profile.activation_key)
-        send_mail(email_subject, email_body, 'test@finers.com', [user.email], fail_silently=False)
+        # email_subject = 'Account confirmation'
+        # email_body = "Hey %s, thanks for signing up. To activate your account, click this link within \
+        # 48hours http://local.finers.co.kr:8000/users/confirm/%s" % (user.username, user.profile.activation_key)
+        # send_mail(email_subject, email_body, 'test@finers.com', [user.email], fail_silently=False)
         # user = authenticate(username=email, password=password)
         if user is not None and user.is_active:
             auth_login(request, user)
@@ -1094,3 +1094,23 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin,
         return ret
 
 signup = SignupView.as_view()
+
+
+
+def register_confirm(request, activation_key):
+    #check if user is already logged in and if he is redirect him to some other url, e.g. home
+    if request.user.is_authenticated():
+        return redirect('index')
+
+    # check if there is UserProfile which matches the activation key (if not then display 404)
+    user_profile = get_object_or_404(UserProfile, activation_key=activation_key)
+
+    #check if the activation key has expired, if it hase then render confirm_expired.html
+    if user_profile.key_expires < timezone.now():
+        pass
+        # return render_to_response('user_profile/confirm_expired.html')
+    #if the key hasn't expired save user and set him as active and render some template to confirm activation
+    user = user_profile.user
+    user.is_active = True
+    user.save()
+    return redirect('index')

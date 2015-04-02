@@ -15,6 +15,8 @@ var ns_prduct_analysis = (function() {
         var result = "<tr><th>-</th><th>키워드</th><th>빈도</th><th>선택하기</th><tr>"
         var analysisResultItem;
         var i;
+
+        result2 = "<tr>";
         for (i = 0; i < analysisResultList.length; i++) {
             analysisResultItem = analysisResultList[i];
             if ( analysisResultItem.count>=minCount && analysisResultItem.count<=maxCount) {
@@ -26,8 +28,12 @@ var ns_prduct_analysis = (function() {
                 + "<label class=\"checkbox-inline\"><input class=\"checkbox-type\" type=\"checkbox\" value=\"effect\">효과</label>"
                 + "<label class=\"checkbox-inline\"><input class=\"checkbox-type\" type=\"checkbox\" value=\"etc\">기타</label></td></tr>";
             }
+            result2 += "<td>"+ analysisResultItem.keyword +"</td><td>"+analysisResultItem.count+"</td>"
+            if ( (i+1)%5 == 0 ) result2+="</tr><tr>";
         }
+        result2 += "</tr>";
         $('#table-analysis-result').html(result);
+        $('#table-analysis-result2').html(result2);
     }
 
     function resizeSelectedItemContainer() {
