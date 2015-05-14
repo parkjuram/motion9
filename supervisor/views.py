@@ -22,6 +22,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+
+# supervisor index 페이지
 class SupervisorView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         return render(request,
@@ -29,6 +31,8 @@ class SupervisorView(SuperuserRequiredMixin, View):
             {},
         )
 
+
+# supervisor페이지 중 analysis정보를 입력하는 페이지
 class AnalysisView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user_survey = UserSurvey.objects.order_by('id').all()
@@ -70,6 +74,7 @@ class AnalysisView(SuperuserRequiredMixin, View):
 
         return redirect("supervisor:analysis")
 
+# supervisor페이지 중 product의 analysis정보를 입력하는 페이지
 class ProductAnalysisView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         products = NProduct.objects.values()
@@ -119,6 +124,7 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
 
             return http_response_by_json(None)
 
+# user들이 요청한 survey의 list를 보는 페이지
 class UserSurveyListView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user_surveys = UserSurvey.objects.select_related('user').order_by('-created').all()
@@ -150,6 +156,8 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         pass
 
+
+# user들이 리포트 페이지에서 추가 정보 요청을 눌러서 요청한 경우의 리스트를 보는 페이지
 class UserMoreRequestListView(SuperuserRequiredMixin, TemplateView):
     template_name = "supervisor/user_more_request_list.html"
 
@@ -158,6 +166,7 @@ class UserMoreRequestListView(SuperuserRequiredMixin, TemplateView):
         context['user_survey_mores'] = UserSurveyMore.objects.select_related('user_survey').all()
         return context
 
+# user들의 survey에 대한 result를 관리자가 입력하는 페이지
 class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user_survey = UserSurvey.objects.get(id=self.kwargs['user_survey_id'])
@@ -185,79 +194,6 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
         return render(request,
                       "supervisor/create_or_update_survey_result.html",
                       rendering_params)
-
-
-
-
-
-
-        # user_survey_id = self.kwargs['user_survey_id']
-        # user_survey = UserSurvey.objects.get(id=user_survey_id)
-        # user_survey_detail_list = user_survey.details.all()
-        # user_survey_details = []
-        # for user_survey_detail in user_survey_detail_list:
-        #     question = user_survey_detail.survey_item_option.survey_item.question
-        #     answer = user_survey_detail.survey_item_option.content
-        #     user_survey_details.append( {
-        #         'question': question,
-        #         'answer': answer
-        #     })
-        #
-        #
-        # products_ = []
-        # products = NProduct.objects.order_by('category__id').all()
-        # brands = NProduct.objects.distinct('brand').values_list('brand', flat=True)
-        # categories = Category.objects.values_list('name', flat=True)
-        #
-        # for product in products:
-        #     product_ = {
-        #         'id': product.id,
-        #         'name': product.name,
-        #         'price': product.price,
-        #         'brand': product.brand,
-        #         'category': product.category,
-        #         'thumbnail': product.thumbnail,
-        #         'skin_type': "",
-        #         'feature': "",
-        #         'keyword': []
-        #     }
-        #     name = product.name
-        #     price = product.price
-        #     brand = product.brand
-        #     category = product.category.name
-        #     if product.analysis.exists():
-        #         product_analysis = product.analysis.first()
-        #         product_.update({
-        #             'skin_type': convert_skintype_key_to_value(product_analysis.skin_type),
-        #             'feature': convert_feature_key_to_value(product_analysis.feature)
-        #         })
-        #         if product_analysis.details.exists():
-        #             product_analysis_details = product_analysis.details.all()
-        #             for product_analysis_detail in product_analysis_details:
-        #                 product_['keyword'].append(product_analysis_detail.type + ":" + product_analysis_detail.content)
-        #
-        #     products_.append(product_)
-        #
-        # rendering_params = {'user_survey_id': user_survey_id,
-        #                     'user_survey': user_survey,
-        #                     'user_survey_again': user_survey.usersurveyagain if hasattr(user_survey,'usersurveyagain') else False,
-        #                     'user_survey_details': user_survey_details,
-        #                     'brands': brands,
-        #                     'categories': categories,
-        #                     'products': products_}
-        #
-        # if hasattr(user_survey,'result'):
-        #     survey_result = user_survey.result
-        #     rendering_params.update({
-        #         'general_review': survey_result.general_review,
-        #         'budget_max': survey_result.budget_max,
-        #         'budget_min': survey_result.budget_min,
-        #         'additional_comment': survey_result.additional_comment
-        #     })
-
-        # return render(request,
-        #               "supervisor/create_or_update_survey_result.html",
-        #               rendering_params )
 
     def post(self, request, *args, **kwargs):
         user_survey_id = self.kwargs['user_survey_id']
@@ -293,6 +229,8 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
     def dispatch(self, *args, **kwargs):
         return super(CreateOrUpdateSurveyResultView, self).dispatch(*args, **kwargs)
 
+
+# product의 이미지를 그냥 나열해서 크기가 맞나 보는 페이지
 class CheckImageSizeView(SuperuserRequiredMixin, TemplateView):
     template_name = "supervisor/check_image_size.html"
 
@@ -304,6 +242,7 @@ class CheckImageSizeView(SuperuserRequiredMixin, TemplateView):
         return context
 
 
+# product analysis의 status를 확인하는 api
 def analysis_status(request, task_id):
     task = analysis_product.AsyncResult(task_id)
     if task.state == 'PENDING':

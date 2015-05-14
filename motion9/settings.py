@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     # 'allauth.account',
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.facebook',
+    'django_extensions',
     'registration',
     'mathfilters',
     'djcelery',

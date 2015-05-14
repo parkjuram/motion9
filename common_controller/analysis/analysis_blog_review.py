@@ -27,7 +27,7 @@ class AnalysisBlogReview:
         analysis_result_list = []
 
         for item in sorted_analysis_result:
-            if len(item[0])>1:
+            if len(item[0]) > 1:
                 analysis_result_list.append({'keyword':item[0], 'count':item[1]})
 
         sorted(analysis_result_list, key=lambda item: item['count'], reverse=True)

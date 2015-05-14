@@ -9,6 +9,8 @@ from motion9 import const
 from users.models import Purchase, BeforePayment, Payment
 
 
+# 배송 관련한 admin page이다
+# 배송상태를 확인하고, 배송정보를 입력할 수 있다.
 def manage_shipping_view(request):
     if request.user.is_superuser:
 
@@ -40,6 +42,9 @@ def manage_shipping_view(request):
     else:
         return HttpResponse('is not superuser!')
 
+
+# payment상태를 update하는 api이다
+# status( 배송대기, 배송중 등등...)과 송장번호(shipping_number)를 update한다.
 @csrf_exempt
 def payment_update(request, pk):
     status = request.POST.get('status',None )
@@ -56,7 +61,8 @@ def payment_update(request, pk):
 
     return http_response_by_json(const.CODE_PARAMS_WRONG)
 
-
+# Purchase관련 내용을 입력하는 Api이다.
+# 예를 들어 어떤 사용자가 어떤 상품을 몇개를 샀는지 같은 정보를 입력하는데 사용한다
 class PurchaseUpdateView(UpdateView):
     model = Purchase
     # fields = ['user', 'payment', 'price', 'product',]
@@ -65,6 +71,8 @@ class PurchaseUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('foradmin:manage_shipping', args=[])
 
+# 위에서는 purchase관련 내용을 입력했으면 이곳에선 payment관련 내용을 입력한다.
+# 위의 Purchase에서 사용한 Payment를 입력한다. 예를 들어 상품을 사는데 무슨 결제수단으로 얼마를 결제했는지 등 이다.
 class PaymentUpdateView(UpdateView):
     model = Payment
     template_name = 'update/basic.html'

@@ -60,6 +60,8 @@ logger = logging.getLogger(__name__)
 #     try:
 #         Cart.objects.create(user=user, )
 
+
+# 이미 가입된 mail인지 확인하는 api
 @csrf_exempt
 def check_email_view(request):
     email = request.POST.get('email')
@@ -69,6 +71,8 @@ def check_email_view(request):
 
     return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
 
+
+# facebook token이 유효한지 확인하는 api
 @csrf_exempt
 def check_facebook_token_view(request):
     next = request.GET.get('next', 'mobile:mobile_index' if request.is_mobile else 'index')
@@ -105,6 +109,7 @@ def check_facebook_token_view(request):
             http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
 
 
+# 회원가입 api
 @csrf_exempt
 def registration(request, next='index'):
     name = request.POST.get('name')
@@ -163,6 +168,7 @@ def registration(request, next='index'):
         return redirect(next)
 
 
+# 회원가입 페이지
 @csrf_exempt
 def registration_view(request):
     next = request.GET.get('next', 'mobile_registration_page' if request.is_mobile else 'registration_page')
@@ -173,6 +179,8 @@ def registration_view(request):
         'next': next
     })
 
+
+# 모바일용 회원가입 페이지
 @csrf_exempt
 def mobile_registration_view(request):
 
@@ -185,6 +193,7 @@ def mobile_registration_view(request):
         'next': next
     })
 
+# 로그인 api
 @csrf_exempt
 def login_(request, next='login_page'):
     email = request.POST.get('email')
@@ -209,6 +218,7 @@ def login_(request, next='login_page'):
     messages.info(request, error)
     return redirect(next)
 
+# 로그인 페이지
 @csrf_exempt
 def login_view(request):
     if request.user.is_authenticated():
@@ -223,12 +233,14 @@ def login_view(request):
             'fail': fail
         })
 
+# 로그아웃 api
 @csrf_exempt
 def logout_(request):
     next = request.GET.get('next', 'index')
     logout(request)
     return redirect( next )
 
+# 계정정보 update 페이짘
 @csrf_exempt
 @login_required
 def account_modify_view(request):
@@ -252,6 +264,7 @@ def account_modify_view(request):
         'next': next
     } )
 
+# user정보 update 페이지, 위의 view와 왜 중복되는지는 모르겠음
 @csrf_exempt
 @login_required
 def update(request, next='mypage'):
@@ -311,6 +324,8 @@ def update(request, next='mypage'):
     else:
         logger.error('have_to_login')
 
+
+# mypage 페이지
 @login_required
 def mypage_view(request, page_num=1):
     page_num = int(page_num)
@@ -346,6 +361,7 @@ def mypage_view(request, page_num=1):
     else:
         logger.error('have_to_login')
 
+# mypage의 set 페이지
 @login_required
 def mypage_set_view(request, page_num=1):
     page_num = int(page_num)
@@ -372,6 +388,7 @@ def mypage_set_view(request, page_num=1):
     else:
         logger.error('have_to_login')
 
+# billgate 결제모듈 연동시 security를 위해 checksum을 구하는 api
 @csrf_exempt
 def billgate_payment_checksum(request):
     service_id=request.POST.get('service_id')
@@ -383,6 +400,7 @@ def billgate_payment_checksum(request):
     return http_response_by_json(None, {'checksum':checksum})
 
 
+# mypage 카트 페이지
 #@mobile_login_required
 @login_required
 def mypage_cart_view(request):
@@ -403,6 +421,7 @@ def mypage_cart_view(request):
         return redirect('login_page')
 
 
+# mypage cart정보를 json 으로 뿌려주는 api
 @csrf_exempt
 def mypage_cart_json_view(request):
     cart_items = helper_get_cart_items(helper_get_user(request))
@@ -412,6 +431,8 @@ def mypage_cart_json_view(request):
     else:
         return http_response_by_json(None, {})
 
+
+# mypage 구매 내역 페이지
 @csrf_exempt
 @login_required
 def mypage_purchase_view(request, page_num=1):
@@ -476,6 +497,7 @@ def mypage_purchase_view(request, page_num=1):
     #             'tab_name':'purchase'
     #         })
 
+# mypage 구매 내역 페이지에서 product 내역 페이지
 @csrf_exempt
 @login_required
 def mypage_purchase_product_view(request, page_num=1):
@@ -510,6 +532,7 @@ def mypage_purchase_product_view(request, page_num=1):
                 'tab_name': 'purchase_product'
             })
 
+# mypage 구매 내역 페이지에서 set 내역 페이지
 @login_required
 def mypage_purchase_set_view(request, page_num=1):
     page_num = int(page_num)
@@ -541,6 +564,8 @@ def mypage_purchase_set_view(request, page_num=1):
                 'tab_name': 'purchase_product'
             })
 
+
+# mypage 구매 내역 페이지에서 custom_set 내역 페이지
 @login_required
 def mypage_purchase_custom_set_view(request, page_num=1):
     page_num = int(page_num)
@@ -572,6 +597,7 @@ def mypage_purchase_custom_set_view(request, page_num=1):
                 'tab_name': 'purchase_product'
             })
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def add_interest(request):
     user = helper_get_user(request)
@@ -588,6 +614,7 @@ def add_interest(request):
 
     return http_response_by_json()
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def delete_interest(request):
     user = helper_get_user(request)
@@ -604,6 +631,7 @@ def delete_interest(request):
 
     return http_response_by_json()
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def update_cart(request):
     cart_item_id = request.POST.get('cart_item_id', '')
@@ -625,6 +653,7 @@ def update_cart(request):
     return http_response_by_json(CODE_PARAMS_WRONG)
 
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def add_cart(request):
     user = helper_get_user(request)
@@ -644,6 +673,7 @@ def add_cart(request):
 
     return http_response_by_json()
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def delete_cart(request):
     user = helper_get_user(request)
@@ -662,6 +692,7 @@ def delete_cart(request):
 
     return http_response_by_json()
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def add_purchase(request):
     user = helper_get_user(request)
@@ -682,6 +713,7 @@ def add_purchase(request):
 
     return http_response_by_json()
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def delete_purchase(request):
     user = helper_get_user(request)
@@ -705,6 +737,7 @@ def delete_purchase(request):
 
 # make custom
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 def make_custom_set(request):
     set_id = request.POST.get('set_id', -1)
@@ -719,6 +752,7 @@ def make_custom_set(request):
 
 # mobile part
 
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 def mobile_login_view(request):
 
     if request.user.is_authenticated():
@@ -732,6 +766,7 @@ def mobile_login_view(request):
         'fail': fail
     })
 
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @login_required
 def mobile_mypage_interesting_view(request, page_num=1):
     page_num = int(page_num)
@@ -760,6 +795,8 @@ def mobile_mypage_interesting_view(request, page_num=1):
     else:
         return redirect('mobile:mobile_index')
 
+
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_mypage_myinfo_view(request, page_num=1):
 
@@ -783,6 +820,8 @@ def mobile_mypage_myinfo_view(request, page_num=1):
     else:
         logger.error('have_to_login')
 
+
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 def mobile_mypage_set_view(request, page_num=1):
     page_num = int(page_num)
     user = helper_get_user(request)
@@ -808,12 +847,15 @@ def mobile_mypage_set_view(request, page_num=1):
     else:
         logger.error('have_to_login')
 
+
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 def mobile_mypage_cart_view(request):
 
     cart_items = helper_get_cart_items( helper_get_user(request) )
     return render(request, 'cart.html', cart_items)
 
 
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_mypage_purchase_list_view(request):
     purchase_items = helper_get_purchase_items(request)
@@ -823,6 +865,8 @@ def mobile_mypage_purchase_list_view(request):
         'tab_name': 'purchase_list'
     })
 
+
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @csrf_exempt
 @mobile_login_required
 def mobile_mypage_before_purchase_view(request):
@@ -840,7 +884,7 @@ def mobile_mypage_before_purchase_view(request):
 
     return render(request, 'purchase.html', cart_items )
 
-
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_mypage_myinfo_edit_view(request, page_num=1):
 
@@ -873,6 +917,7 @@ def mobile_mypage_myinfo_edit_view(request, page_num=1):
 
 
 
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_report_view(request, category_id=None, page_num=1):
 
@@ -899,7 +944,7 @@ def mobile_report_view(request, category_id=None, page_num=1):
     else:
         logger.error('have_to_login')
 
-
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=None):
 
@@ -937,6 +982,8 @@ def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=
     else:
         return render(request, "404.html")
 
+
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @csrf_exempt
 def mobile_report_form_index_view(request):
 
@@ -946,6 +993,7 @@ def mobile_report_form_index_view(request):
                   })
 
 
+# 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_report_form_view(request):
     survey = helper_get_survey_items(request)
@@ -974,6 +1022,7 @@ def mobile_report_form_view(request):
                       'survey_range': survey_range
                   })
 
+# user의 survey에 입력한 정보를 서버에 입력하는 api
 @csrf_exempt
 def request_survey(request):
 
@@ -992,6 +1041,8 @@ def request_survey(request):
 
     return http_response_by_json(CODE_PARAMS_WRONG)
 
+
+# 함수 명 그대로의 기능
 @csrf_exempt
 @login_required
 def do_interest_product(request):
@@ -1004,6 +1055,7 @@ def do_interest_product(request):
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)
 
+# 함수 명 그대로의 기능
 @csrf_exempt
 @login_required
 def undo_interest_product(request):
@@ -1013,6 +1065,7 @@ def undo_interest_product(request):
 
     return http_response_by_json()
 
+# survey를 다시 할 때 호출되는 page
 @csrf_exempt
 @login_required
 def survey_again(request):
@@ -1035,6 +1088,8 @@ def survey_again(request):
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)
 
+
+# 추가정보 요청 api
 @csrf_exempt
 @login_required
 def request_more(request):
@@ -1050,6 +1105,7 @@ def request_more(request):
         return http_response_by_json(CODE_INTEGRITY_ERROR)
 
 
+# 함수 명 그대로의 기능
 class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin,
                  AjaxCapableProcessFormViewMixin, FormView):
     template_name = "account/signup.html"
@@ -1097,6 +1153,7 @@ signup = SignupView.as_view()
 
 
 
+# 이메일 인증시 이메일에 있는 활성링크를 눌렀을때 호출되는 페이지
 def register_confirm(request, activation_key):
     #check if user is already logged in and if he is redirect him to some other url, e.g. home
     if request.user.is_authenticated():

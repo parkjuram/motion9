@@ -36,6 +36,7 @@ from web.models import Faq
 
 logger = logging.getLogger(__name__)
 
+# 여러가지 feasible test를 위해 만들어놓은 view이다.
 @csrf_exempt
 def test_view(request):
 
@@ -47,6 +48,9 @@ def test_view(request):
     # return render(request, 'payment_complete_web.html')
     # return render(request, 'uservoice_test.html')
 
+
+# payment창으로 넘어가기 전 페이지 이다. 여러가지 정보들을 지정하고 결제창을 호출하는데 넘겨준다.
+# 여러가지 정보에는 이름 폰번호 우편번호 주소 등이 있다.
 @csrf_exempt
 @login_required
 def before_payment(request):
@@ -82,6 +86,8 @@ def before_payment(request):
         return http_response_by_json( CODE_PARAMS_WRONG )
 
 
+# payment를 끝내고 return되는 view이다. 결제모듈쪽에서 이곳으로 redirect하는 http response를 보내준다.
+# 그렇기 때문에 before payment에서 이 view를 호출하는 url을 넘겨 주어야 한다.
 @csrf_exempt
 def payment_return_view(request):
 
@@ -274,6 +280,8 @@ def payment_return_view(request):
         else:
             raise Http404
 
+# 위의 view와 같은데
+# mobile이냐 web이냐에 따라 넘어오는 params가 조금 달라 따로 만들었다.
 @csrf_exempt
 def payment_return_mobile_web_view(request):
     transaction_id = None
@@ -464,6 +472,9 @@ def payment_return_mobile_web_view(request):
     #     'detail_response_message': detail_response_message
     # })
 
+
+# payment가 완료되었다는것을 보여주는 view이다.
+# 예로 결제가 완료되었습니다. 라는 문구가 사용자에게 뜨는 페이지를 생각하면 된다.
 @csrf_exempt
 @login_required
 def payment_complete_view(request, payment_id=0):
@@ -508,6 +519,7 @@ def payment_complete_view(request, payment_id=0):
         'user_': request.user
     })
 
+# web용 index page이다.
 @csrf_exempt
 def index_view(request):
     if request.is_mobile:
@@ -547,6 +559,8 @@ def index_view(request):
                       'survey_status': survey_status
                   })
 
+# web용 shop view 이다.
+# shop view는 product용과 set용 2개로 나뉘어 지는데 그 중 product용 이다.
 @csrf_exempt
 def shop_product_view(request, category_id=None, page_num=1):
 
@@ -586,6 +600,8 @@ def shop_product_view(request, category_id=None, page_num=1):
                   })
 
 
+# web용 shop view 이다.
+# shop view는 product용과 set용 2개로 나뉘어 지는데 그 중 set용 이다.
 def shop_set_view(request, category_id=None, page_num=1):
 
     page_num = int(page_num)
@@ -622,6 +638,8 @@ def shop_set_view(request, category_id=None, page_num=1):
                       'adarea_items': adarea_items
                   })
 
+# web용 set view 이다.
+# 넘어온 set_id에 대한 set의 상세 정보를 보여준다.
 @csrf_exempt
 def set_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request))
@@ -631,6 +649,8 @@ def set_view(request, set_id):
                     'set': set
                 })
 
+# web용 product view 이다.
+# 넘어온 product_id에 대한 product의 상세 정보를 보여준다.
 @csrf_exempt
 def product_view(request, product_id=None):
     if product_id is not None:
@@ -655,6 +675,9 @@ def product_view(request, product_id=None):
     else:
         return render(request, "404.html")
 
+# web용 product view for modal 이다.
+# 넘어온 product_id에 대한 product의 상세 정보를 보여주는데 modal을 띄워서 보여준다.
+# modal은 dialog라고 생각하면 된다.
 @csrf_exempt
 def product_modal_view(request, product_id=None):
     if product_id is not None:
@@ -669,6 +692,10 @@ def product_modal_view(request, product_id=None):
     else:
         return render(request, "404.html")
 
+
+# web용 product api이다.
+# product_id에 대한 상세 정보를 보여주는데, 상세 정보를 보여주는 page를 만들어서 돌려주는거이 아니라
+# 상세 정보만은 json으로 보내준다.
 @csrf_exempt
 def product_json_view(request, product_id=None):
     if product_id is not None:
@@ -677,6 +704,8 @@ def product_json_view(request, product_id=None):
     else:
         return render(request, "404.html")
 
+# web용 set custom을 하기위한(make) view
+# set_id에 대한 set의 상세 product들을 custom하는 page를 돌려준다.
 @csrf_exempt
 def customize_set_make_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request), True)
@@ -686,6 +715,8 @@ def customize_set_make_view(request, set_id):
               'set': set
           })
 
+# web용 custom set view
+# custom된 set들을 모아서 보여준다.
 @csrf_exempt
 def customize_set_view(request):
     if helper_get_user(request) is None:
@@ -702,6 +733,8 @@ def customize_set_view(request):
 
     # set =
 
+# web용 custom set detail view
+# set_id에 대한 set의 custom된 set의 상세 정보를 보여준다.
 @csrf_exempt
 def customize_set_detail_view(request, set_id):
     custom_set = helper_get_custom_set(set_id, helper_get_user(request))
@@ -711,6 +744,8 @@ def customize_set_detail_view(request, set_id):
               'custom_set': custom_set
           })
 
+# customize make view에서 customizing을 완료 한 후에
+# save버튼을 눌러서 저장할 때 불리는 view 이다.
 @csrf_exempt
 def customize_set_save_view(request):
     user = helper_get_user(request)
@@ -744,6 +779,7 @@ def customize_set_save_view(request):
         return http_response_by_json(CODE_LOGIN_REQUIRED)
 
 
+# help faq view이다. 전형적인 자주 묻는 질문과 답변을 적어놓는 page이다.
 @csrf_exempt
 def help_faq_view(request):
     faqs = helper_get_faq_items(request)
@@ -751,6 +787,8 @@ def help_faq_view(request):
         'faqs':faqs
     })
 
+# report view이다. 우리가 입력한 report를 사용자에게 보여준다.
+# 예전에 만들고 한참동안 사용하지 않아 제대로 작동하지 않을지도 모른다.
 @login_required
 def report_view(request, category_id=None, page_num=1):
 
@@ -801,6 +839,9 @@ def report_view(request, category_id=None, page_num=1):
     else:
         logger.error('have_to_login')
 
+
+# report view이다. 해당하는 product_id에 대한하는 잡지 정보와 blog review를
+# 한꺼번에 보여준다.
 @login_required
 def report_detail_view(request, product_id=None):
 
@@ -827,6 +868,7 @@ def report_detail_view(request, product_id=None):
         return render(request, "404.html")
 
 
+# 위의 report_detail_view와 똑같은데 modal로 뜬다는것만 다르다.
 @login_required
 def report_detail_modal_view(request, category_id=None, page_num=1, product_id=None):
 
@@ -843,6 +885,7 @@ def report_detail_modal_view(request, category_id=None, page_num=1, product_id=N
         return render(request, "404.html")
 
 
+# report를 시작하기 전 안내 페이지 이다.
 @csrf_exempt
 def report_form_index_view(request):
 
@@ -851,6 +894,7 @@ def report_form_index_view(request):
                       'next': reverse('report_form'),
                   })
 
+# report를 시작한 후의 페이지이다.
 @login_required
 def report_form_view(request):
     survey = helper_get_survey_items(request)
@@ -888,6 +932,7 @@ def survey_detail_view(request):
                   })
 
 
+# 설문조사 내용을 json으로 return해 준다.
 @login_required
 def survey_list_in_json(request):
     survey_list = request.user.get_survey_list.all()
@@ -902,6 +947,8 @@ def survey_list_in_json(request):
 
     return http_response_by_json(None, {'data': survey_list_})
 
+
+# survey에 대한 결과를 관리자가 입력한것을 보는 페이지이다.
 @login_required
 def survey_result_view(request, pk):
     survey_result_item = helper_get_survey_result_item(request, pk)
@@ -909,6 +956,7 @@ def survey_result_view(request, pk):
         'survey_result_item': survey_result_item
     })
 
+# survey에 대한 결과를 관리자가 입력한것을 보는 페이지이다. v2
 class SurveyResultView(LoginRequiredMixin, TemplateView):
     template_name = "web/survey2_result.html"
 
@@ -990,6 +1038,7 @@ class SurveyResultView(LoginRequiredMixin, TemplateView):
 
         return context
 
+# survey에 대한 결과를 관리자가 입력한것을 보는 페이지인데, 그 중 상세 제품의 결과를 보는 페이지 이다.
 class SurveyResultDetailView(LoginRequiredMixin, TemplateView):
     template_name = "web/survey2_result_detail.html"
 
@@ -1021,6 +1070,7 @@ class SurveyResultDetailView(LoginRequiredMixin, TemplateView):
         context['survey_result_detail'] = survey_result_detail_
         return context
 
+# 차트 테스트용
 @login_required
 def chart_view(request):
     return render(request, 'chart_test/charts_flotcharts.html')

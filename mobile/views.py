@@ -20,6 +20,8 @@ from web.models import Category
 
 from motion9.const import *
 
+
+# mobile용 index page
 @csrf_exempt
 def index_view(request):
 
@@ -55,12 +57,17 @@ def index_view(request):
         'survey_status': survey_status
     })
 
+
+# mobile용 purchase page
 @csrf_exempt
 def purchase_view(request):
     return render(request, 'purchase.html',
                   {
                   })
 
+
+# mobile용 shop page
+# shop page는 product, set으로 나누어지게 되는데 product 페이지 이다.
 @csrf_exempt
 def shop_product_view(request, category_id=None, page_num=1):
 
@@ -93,6 +100,8 @@ def shop_product_view(request, category_id=None, page_num=1):
                       'adarea_items': adarea_items
                   })
 
+# mobile용 shop page
+# shop page는 product, set으로 나누어지게 되는데 set 페이지 이다.
 @csrf_exempt
 def shop_set_view(request, category_id=None, page_num=1):
 
@@ -123,6 +132,8 @@ def shop_set_view(request, category_id=None, page_num=1):
                       'adarea_items': adarea_items
                   })
 
+# mobile용 product view
+# product_id에 대한 product의 상세 정보를 보여준다
 @csrf_exempt
 def product_view(request, product_id=None):
     if product_id is not None:
@@ -148,6 +159,9 @@ def product_view(request, product_id=None):
     else:
         return render(request, "404.html")
 
+
+# mobile용 product view for modal
+# product_id 에 대한 product의 상세 정보를 보여주는데 새로운 화면이 아닌 modal을 띄워서 보여준다.
 @csrf_exempt
 def product_modal_view(request, product_id=None):
     if product_id is not None:
@@ -163,6 +177,8 @@ def product_modal_view(request, product_id=None):
     else:
         return render(request, "404.html")
 
+# mobile용 product api
+# product 상세정보를 페이지가 아닌 json으로 정보만을 보내준다.
 @csrf_exempt
 def product_json_view(request, product_id=None):
     if product_id is not None:
@@ -171,6 +187,8 @@ def product_json_view(request, product_id=None):
     else:
         return render(request, "404.html")
 
+# mobile용 set view
+# set_id에 대한 set의 상세 정보를 보여준다
 @csrf_exempt
 def set_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request))
@@ -180,6 +198,9 @@ def set_view(request, set_id):
                     'set': set
                 })
 
+
+# mobile용 set custom을 하기위한(make) view
+# set_id에 대한 set의 상세 product들을 custom하는 page를 돌려준다.
 @mobile_login_required
 @csrf_exempt
 def customize_set_make_view(request, set_id):
@@ -190,6 +211,8 @@ def customize_set_make_view(request, set_id):
               'set': set
           })
 
+# mobile용 custom set view
+# custom된 set들을 모아서 보여준다.
 @mobile_login_required
 @csrf_exempt
 def customize_set_view(request):
@@ -202,6 +225,9 @@ def customize_set_view(request):
 
     # set =
 
+
+# mobile용 custom set detail view
+# set_id에 대한 set의 custom된 set의 상세 정보를 보여준다.
 @csrf_exempt
 def customize_set_detail_view(request, set_id):
     custom_set = helper_get_custom_set(set_id, helper_get_user(request))
@@ -211,6 +237,9 @@ def customize_set_detail_view(request, set_id):
               'custom_set': custom_set
           })
 
+
+# mobile용 결제모듈 관련 view
+# payment가 완료된 후에 redirect되는 페이지
 @mobile_login_required
 @csrf_exempt
 def payment_complete_view(request, payment_id=None):
@@ -221,6 +250,8 @@ def payment_complete_view(request, payment_id=None):
 
     return render(request, 'payment_complete.html', payment_complete_item)
 
+# mobile용 결제모듈 관련 view
+# payment가 완료된 후에 redirect되는 페이지
 def ship_view(request):
     return render(request, 'ship.html')
 
@@ -232,6 +263,7 @@ def mobile_faq_view(request):
     })
 
 
+# mobile용 이용약관 view
 def agreement_of_utilization_view(request):
     service = Preference.objects.filter(name='Service').first()
 
@@ -239,6 +271,7 @@ def agreement_of_utilization_view(request):
         'service': service
     })
 
+# mobile용 privacy view
 def privacy_view(request):
     privacy = Preference.objects.filter(name='Privacy').first()
 
@@ -247,6 +280,7 @@ def privacy_view(request):
     })
 
 
+# mobile용 survey list view
 @mobile_login_required
 def survey_list_view(request):
     survey_list = request.user.get_survey_list.all()
@@ -255,6 +289,8 @@ def survey_list_view(request):
         'survey_list': survey_list
     })
 
+# mobile용 survey result view
+# user가 survey한 내용을 보여주는 view이다.
 @mobile_login_required
 def survey_result_view(request, pk):
     survey_result_item = helper_get_survey_result_item(request, pk)
@@ -262,9 +298,14 @@ def survey_result_view(request, pk):
         'survey_result_item': survey_result_item
     })
 
+# mobile용 survey view
+# 시작하기 버튼을 눌러서 survey를 시작할 수 있다.
 def survey_detail_view(request):
     return render(request, 'survey_detail.html')
 
+
+# mobile용 survey result view
+# 위의 survey result 페이지와 같은 의미인데 조금 다르게 보여준다.
 class SurveyResultView(LoginRequiredMixin, TemplateView):
     template_name = "mobile/survey2_result.html"
 
@@ -345,6 +386,9 @@ class SurveyResultView(LoginRequiredMixin, TemplateView):
 
         return context
 
+
+# mobile용 survey result detail view
+# user가 입력한 survey에 대해서 관리자가 입력한 내용을 보여주는 view이다.
 class SurveyResultDetailView(LoginRequiredMixin, TemplateView):
     template_name = "mobile/survey2_result_detail.html"
 
