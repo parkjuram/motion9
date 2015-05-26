@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Constant (상수) 관련 value를 저장하는 file
 
 ITEM_COUNT_PER_PAGE_FOR_PRODUCT = 6
