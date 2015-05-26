@@ -345,7 +345,7 @@ def mypage_view(request, page_num=1):
             products = {'data':products}
 
         if user.profile.age is not None:
-            user.profile.age = datetime.now().year - user.profile.age + 1
+            user.profile.age = datetime.datetime.now().year - user.profile.age + 1
         else:
             user.profile.age = ''
 
@@ -804,7 +804,7 @@ def mobile_mypage_myinfo_view(request, page_num=1):
     if user is not None:
 
         if user.profile.age is not None:
-            user.profile.age = datetime.now().year - user.profile.age + 1
+            user.profile.age = datetime.datetime.now().year - user.profile.age + 1
         else:
             user.profile.age = ''
 
