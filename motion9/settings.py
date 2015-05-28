@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'users',
     'supervisor',
     'common',
+    'import_export',
 )
 
 SITE_ID = 1

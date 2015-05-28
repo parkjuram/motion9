@@ -15,9 +15,9 @@ class NCategory(models.Model):
     class Meta:
         ordering = ['order']
 
-
     def __str__(self):
         return self.name
+
 
 @python_2_unicode_compatible
 class NProduct(models.Model):
@@ -46,6 +46,7 @@ class NProduct(models.Model):
     def __str__(self):
         return self.name
 
+
 @python_2_unicode_compatible
 class ProductDetail(models.Model):
     product = models.OneToOneField(NProduct)
@@ -54,6 +55,7 @@ class ProductDetail(models.Model):
 
     def __str__(self):
         return self.product.name
+
 
 @python_2_unicode_compatible
 class ProductAnalysis(models.Model):
@@ -96,6 +98,7 @@ class ProductAnalysis(models.Model):
 
     def __str__(self):
         return unicode(self.product)
+
 
 @python_2_unicode_compatible
 class ProductAnalysisDetail(models.Model):
