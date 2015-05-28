@@ -30,7 +30,7 @@ class NProduct(models.Model):
     thumbnail = models.ImageField(null=True, upload_to='thumbnail/product/', blank=True)
 
     # class Meta:
-    #     ordering = ['-category']
+    # ordering = ['-category']
 
     @property
     def thumbnail_url(self):
@@ -41,7 +41,7 @@ class NProduct(models.Model):
 
     @property
     def unit_price(self):
-        return self.price/self.capacity
+        return self.price / self.capacity
 
     def __str__(self):
         return self.name
@@ -61,8 +61,10 @@ class ProductDetail(models.Model):
 class ProductAnalysis(models.Model):
     product = models.OneToOneField(NProduct)
     total_count = models.IntegerField(null=False, default=0)
-    skin_type = models.CharField(max_length=4, null=False, blank=True) # one start character of ('dry', 'oily', 'neutral', 'complex')
-    feature = models.CharField(max_length=2, null=False, default='no') # two start character of ('whitening', 'wrinkle', 'trouble', 'nothing')
+    skin_type = models.CharField(max_length=4, null=False,
+                                 blank=True)  # one start character of ('dry', 'oily', 'neutral', 'complex')
+    feature = models.CharField(max_length=2, null=False,
+                               default='no')  # two start character of ('whitening', 'wrinkle', 'trouble', 'nothing')
     general_review = models.TextField(null=False, blank=True)
 
     @property
@@ -93,7 +95,6 @@ class ProductAnalysis(models.Model):
             str = '[해당사항 없음]'
 
         return str
-
 
 
     def __str__(self):

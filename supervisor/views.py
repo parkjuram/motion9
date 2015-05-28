@@ -29,7 +29,7 @@ class SupervisorView(SuperuserRequiredMixin, View):
         return render(request,
                       "supervisor/index.html",
             {},
-        )
+                      )
 
 
 # supervisor페이지 중 analysis정보를 입력하는 페이지
@@ -43,9 +43,9 @@ class AnalysisView(SuperuserRequiredMixin, View):
                 'username': item.user.profile.name,
                 'email': item.user.email,
                 'sex': item.user.profile.sex,
-                'age':item.user.profile.age,
+                'age': item.user.profile.age,
                 'result_file_name': item.result_file_name,
-                'question':[],
+                'question': [],
                 'comments': item.comments,
                 'created': item.created
             }
@@ -59,7 +59,7 @@ class AnalysisView(SuperuserRequiredMixin, View):
 
         return render(request,
                       "supervisor/analysis.html",
-                      {'analysis_list': analysis_list} )
+                      {'analysis_list': analysis_list})
 
     def post(self, request, *args, **kwargs):
         ids = request.POST.get('ids')
@@ -74,23 +74,24 @@ class AnalysisView(SuperuserRequiredMixin, View):
 
         return redirect("supervisor:analysis")
 
+
 # supervisor페이지 중 product의 analysis정보를 입력하는 페이지
 class ProductAnalysisView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         products = NProduct.objects.values()
         return render(request,
                       "supervisor/product_analysis.html",
-                      {'products': products} )
+                      {'products': products})
 
 
     def post(self, request, *args, **kwargs):
         if ( request.POST.has_key('queryConcatString') ):
             querys = request.POST.get('queryConcatString').split("@");
-            querys = map(lambda x:'"'+x+'"', querys)
-            querys = map(lambda x:x.encode('utf-8'), querys)
+            querys = map(lambda x: '"' + x + '"', querys)
+            querys = map(lambda x: x.encode('utf-8'), querys)
             task = analysis_product.apply_async(args=[querys])
             response = HttpResponse({}, status=202)
-            response['Location'] = reverse('supervisor:analysis_status', kwargs={'task_id':task.id})
+            response['Location'] = reverse('supervisor:analysis_status', kwargs={'task_id': task.id})
             return response
         else:
             product_id = request.POST.get('product_id')
@@ -100,29 +101,31 @@ class ProductAnalysisView(SuperuserRequiredMixin, View):
             analysis_detail_list = json.loads(request.POST.get('analysis_detail_list'))
 
             product_analysis, created = ProductAnalysis.objects.get_or_create(product_id=product_id,
-                                                                              defaults={ 'total_count': total_count,
-                                                                                         'skin_type': skin_type,
-                                                                                         'feature': feature })
+                                                                              defaults={'total_count': total_count,
+                                                                                        'skin_type': skin_type,
+                                                                                        'feature': feature})
 
-            if not(created):
-                product_analysis.total_count= total_count
-                product_analysis.skin_type= skin_type
-                product_analysis.feature= feature
+            if not (created):
+                product_analysis.total_count = total_count
+                product_analysis.skin_type = skin_type
+                product_analysis.feature = feature
                 product_analysis.save()
 
             ProductAnalysisDetail.objects.filter(product_analysis_id=product_analysis.id).delete()
 
             for analysis_detail_item in analysis_detail_list:
-                product_analysis_detail, created = ProductAnalysisDetail.objects.get_or_create(product_analysis_id=product_analysis.id, content=analysis_detail_item['keyword'],
-                                                           defaults={ 'count': analysis_detail_item['count'],
-                                                                      'type': analysis_detail_item['type'] })
+                product_analysis_detail, created = ProductAnalysisDetail.objects.get_or_create(
+                    product_analysis_id=product_analysis.id, content=analysis_detail_item['keyword'],
+                    defaults={'count': analysis_detail_item['count'],
+                              'type': analysis_detail_item['type']})
 
-                if not(created):
-                    product_analysis_detail.count= analysis_detail_item['count']
-                    product_analysis_detail.type= analysis_detail_item['type']
+                if not (created):
+                    product_analysis_detail.count = analysis_detail_item['count']
+                    product_analysis_detail.type = analysis_detail_item['type']
                     product_analysis_detail.save()
 
             return http_response_by_json(None)
+
 
 # user들이 요청한 survey의 list를 보는 페이지
 class UserSurveyListView(SuperuserRequiredMixin, View):
@@ -137,21 +140,20 @@ class UserSurveyListView(SuperuserRequiredMixin, View):
                 'survey_enter_date': user_survey.created,
                 'is_entered': False,
                 'entered_date': '',
-                'is_again': hasattr(user_survey,'usersurveyagain')
+                'is_again': hasattr(user_survey, 'usersurveyagain')
             }
             if hasattr(user_survey, 'result'):
                 survey_result = user_survey.result
-                user_survey_.update( {
+                user_survey_.update({
                     'is_entered': True,
                     'entered_date': survey_result.created
                 })
 
             user_surveys_.append(user_survey_)
 
-
         return render(request,
                       "supervisor/user_survey_list.html",
-                      {'user_surveys': user_surveys_} )
+                      {'user_surveys': user_surveys_})
 
     def post(self, request, *args, **kwargs):
         pass
@@ -166,6 +168,7 @@ class UserMoreRequestListView(SuperuserRequiredMixin, TemplateView):
         context['user_survey_mores'] = UserSurveyMore.objects.select_related('user_survey').all()
         return context
 
+
 # user들의 survey에 대한 result를 관리자가 입력하는 페이지
 class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -173,14 +176,15 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
         user_survey_details = user_survey.details.all()
         brands = NProduct.objects.distinct("brand").values_list('brand', flat=True)
         categories = NCategory.objects.all()
-        products = NProduct.objects.select_related('productanalysis', 'productdetail','category').all()
+        products = NProduct.objects.select_related('productanalysis', 'productdetail', 'category').all()
         for product in products:
             if hasattr(product, 'productanalysis'):
                 product.keyword_skintype = product.productanalysis.details.filter(type='skintype').all()
                 product.keyword_feature = product.productanalysis.details.filter(type='feature').all()
-                product.keyword_effect= product.productanalysis.details.filter(type='effect').all()
+                product.keyword_effect = product.productanalysis.details.filter(type='effect').all()
 
-        selected_item = user_survey.result.details.values_list('product__id', flat=True) if hasattr(user_survey,'result') else []
+        selected_item = user_survey.result.details.values_list('product__id', flat=True) if hasattr(user_survey,
+                                                                                                    'result') else []
 
         print selected_item
 
@@ -189,7 +193,7 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
                             'selected_item': selected_item,
                             'brands': brands,
                             'categories': categories,
-                            'products': products }
+                            'products': products}
 
         return render(request,
                       "supervisor/create_or_update_survey_result.html",
@@ -205,23 +209,23 @@ class CreateOrUpdateSurveyResultView(SuperuserRequiredMixin, View):
         selected_product_list = json.loads(request.POST.get('selected_product_list'))
 
         survey_result, created = SurveyResult.objects.get_or_create(user_survey_id=user_survey_id,
-                                                                          defaults={ 'general_review': general_review,
-                                                                                     'budget_max': budget_max,
-                                                                                     'budget_min': budget_min,
-                                                                                     'additional_comment': additional_comment })
+                                                                    defaults={'general_review': general_review,
+                                                                              'budget_max': budget_max,
+                                                                              'budget_min': budget_min,
+                                                                              'additional_comment': additional_comment})
 
-        if not(created):
-            survey_result.general_review= general_review
-            survey_result.budget_max= budget_max
-            survey_result.budget_min= budget_min
-            survey_result.additional_comment= additional_comment
+        if not (created):
+            survey_result.general_review = general_review
+            survey_result.budget_max = budget_max
+            survey_result.budget_min = budget_min
+            survey_result.additional_comment = additional_comment
             survey_result.save()
 
         SurveyResultDetail.objects.filter(survey_result_id=survey_result.id).delete()
         for selected_product in selected_product_list:
-            product_analysis_detail, created = SurveyResultDetail.objects.get_or_create(survey_result_id=survey_result.id,
-                                                                                        product_id=selected_product['product-id'])
-
+            product_analysis_detail, created = SurveyResultDetail.objects.get_or_create(
+                survey_result_id=survey_result.id,
+                product_id=selected_product['product-id'])
 
         return http_response_by_json(None)
 

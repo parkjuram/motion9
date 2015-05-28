@@ -39,7 +39,6 @@ logger = logging.getLogger(__name__)
 # 여러가지 feasible test를 위해 만들어놓은 view이다.
 @csrf_exempt
 def test_view(request):
-
     http_user_agent = request.META.get('HTTP_USER_AGENT').lower()
     # print request.META.get('HTTP_REFERER')
 
@@ -54,7 +53,6 @@ def test_view(request):
 @csrf_exempt
 @login_required
 def before_payment(request):
-
     print request.POST
 
     order_id = request.POST.get('order_id', '')
@@ -66,8 +64,8 @@ def before_payment(request):
     detail_address = request.POST.get('detail_address', '')
     shipping_requirement = request.POST.get('shipping_requirement', '')
     mileage = request.POST.get('mileage', '')
-    if len(mileage)==0:
-        mileage=0
+    if len(mileage) == 0:
+        mileage = 0
 
     try:
         BeforePayment.objects.create(
@@ -76,21 +74,20 @@ def before_payment(request):
             name=name,
             phone=phone,
             postcode=postcode,
-            address=basic_address+' '+detail_address,
+            address=basic_address + ' ' + detail_address,
             shipping_requirement=shipping_requirement,
             mileage=mileage
         )
         return http_response_by_json()
 
     except Exception as e:
-        return http_response_by_json( CODE_PARAMS_WRONG )
+        return http_response_by_json(CODE_PARAMS_WRONG)
 
 
 # payment를 끝내고 return되는 view이다. 결제모듈쪽에서 이곳으로 redirect하는 http response를 보내준다.
 # 그렇기 때문에 before payment에서 이 view를 호출하는 url을 넘겨 주어야 한다.
 @csrf_exempt
 def payment_return_view(request):
-
     service_id = request.POST.get('SERVICE_ID')
     order_id = request.POST.get('ORDER_ID')
     order_date = request.POST.get('ORDER_DATE')
@@ -106,17 +103,19 @@ def payment_return_view(request):
     is_success = False
 
     if post_response_code == "0000":
-        temp = service_id+order_id+order_date
+        temp = service_id + order_id + order_date
         checksum_command = 'java -cp ./libs/jars/billgateAPI.jar com.galaxia.api.util.ChecksumUtil ' + 'DIFF ' + check_sum + " " + temp
         checksum = (Popen(checksum_command.split(' '), stdout=PIPE).communicate()[0]).strip()
         if checksum == 'SUC':
             credit_card_service_code = '0900'
-            broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini",credit_card_service_code, message]
+            broker_message_command = ["java", "-Dfile.encoding=euc-kr", "-cp", "./libs/jars/billgateAPI.jar",
+                                      "com.galaxia.api.EncryptServiceBroker", "./libs/config/config.ini",
+                                      credit_card_service_code, message]
             return_message = (Popen(broker_message_command, stdout=PIPE).communicate()[0]).strip()
             return_code = return_message[0:5]
 
             this_data = {}
-            if return_code=='ERROR':
+            if return_code == 'ERROR':
                 this_version = "0100"
                 this_merchantId = service_id
                 this_serviceCode = credit_card_service_code
@@ -151,18 +150,20 @@ def payment_return_view(request):
                 ORDER_DATE_INDEX = 68
                 DATA_INDEX = 82
 
-                this_version = set_data_param[VERSION_INDEX:VERSION_INDEX+VERSION_LENGTH].strip()
-                this_merchantId = set_data_param[MERCHANT_ID_INDEX:MERCHANT_ID_INDEX+MERCHANT_ID_LENGTH].strip()
-                this_serviceCode = set_data_param[SERVICE_CODE_INDEX:SERVICE_CODE_INDEX+SERVICE_CODE_LENGTH].strip()
+                this_version = set_data_param[VERSION_INDEX:VERSION_INDEX + VERSION_LENGTH].strip()
+                this_merchantId = set_data_param[MERCHANT_ID_INDEX:MERCHANT_ID_INDEX + MERCHANT_ID_LENGTH].strip()
+                this_serviceCode = set_data_param[SERVICE_CODE_INDEX:SERVICE_CODE_INDEX + SERVICE_CODE_LENGTH].strip()
 
-                decrypted = set_data_param[VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH:VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH+len(set_data_param)]
+                decrypted = set_data_param[
+                            VERSION_LENGTH + MERCHANT_ID_LENGTH + SERVICE_CODE_LENGTH:VERSION_LENGTH + MERCHANT_ID_LENGTH + SERVICE_CODE_LENGTH + len(
+                                set_data_param)]
 
-                this_command = decrypted[COMMAND_INDEX:COMMAND_INDEX+COMMAND_LENGTH].strip()
-                this_orderId = decrypted[ORDER_ID_INDEX:ORDER_ID_INDEX+ORDER_ID_LENGTH].strip()
-                this_orderDate = decrypted[ORDER_DATE_INDEX:ORDER_DATE_INDEX+DATE_LENGTH].strip()
+                this_command = decrypted[COMMAND_INDEX:COMMAND_INDEX + COMMAND_LENGTH].strip()
+                this_orderId = decrypted[ORDER_ID_INDEX:ORDER_ID_INDEX + ORDER_ID_LENGTH].strip()
+                this_orderDate = decrypted[ORDER_DATE_INDEX:ORDER_DATE_INDEX + DATE_LENGTH].strip()
 
-                bodyStr = decrypted[DATA_INDEX:DATA_INDEX+len(decrypted)].strip()
-                #this->parseData($bodyStr);
+                bodyStr = decrypted[DATA_INDEX:DATA_INDEX + len(decrypted)].strip()
+                # this->parseData($bodyStr);
                 parse_data_param = bodyStr
                 arrData = parse_data_param.split("|")
                 for i in range(len(arrData)):
@@ -178,7 +179,7 @@ def payment_return_view(request):
 
                         vt.append(value)
                         this_data[tag] = vt
-                # Message.php }}
+                        # Message.php }}
 
             response_code = this_data.get('1002')[0]
             response_message = this_data.get('1003')
@@ -194,8 +195,8 @@ def payment_return_view(request):
                 is_success = True
 
     try:
-        response_message = map( lambda x: x.decode('euc-kr'), response_message)
-        detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
+        response_message = map(lambda x: x.decode('euc-kr'), response_message)
+        detail_response_message = map(lambda x: x.decode('euc-kr'), detail_response_message)
     except:
         pass
 
@@ -219,25 +220,25 @@ def payment_return_view(request):
             response_message=response_message[0],
             detail_response_code=detail_response_code[0],
             detail_response_message=detail_response_message[0],
-            name= beforePayment.name,
-            postcode = beforePayment.postcode,
-            phone= beforePayment.phone,
-            address= beforePayment.address,
-            shipping_requirement= beforePayment.shipping_requirement,
-            mileage= beforePayment.mileage
+            name=beforePayment.name,
+            postcode=beforePayment.postcode,
+            phone=beforePayment.phone,
+            address=beforePayment.address,
+            shipping_requirement=beforePayment.shipping_requirement,
+            mileage=beforePayment.mileage
         )
 
-        user_profile.mileage = int(user_profile.mileage)-int(beforePayment.mileage)+int(auth_amount[0])/100
+        user_profile.mileage = int(user_profile.mileage) - int(beforePayment.mileage) + int(auth_amount[0]) / 100
         user_profile.save()
 
         carts = Cart.objects.filter(order_id=order_id).all()
         for cart in carts:
 
-            if cart.type=='p':
+            if cart.type == 'p':
                 price = cart.product.discount_price
-            elif cart.type=='s':
+            elif cart.type == 's':
                 price = helper_get_set(cart.set).get('discount_price', 0)
-            elif cart.type=='c':
+            elif cart.type == 'c':
                 price = helper_get_custom_set(cart.custom_set).get('discount_price', 0)
 
             Purchase.objects.create(
@@ -276,9 +277,10 @@ def payment_return_view(request):
         })
     else:
         if is_success:
-            return redirect('payment_complete', payment_id=payment_id )
+            return redirect('payment_complete', payment_id=payment_id)
         else:
             raise Http404
+
 
 # 위의 view와 같은데
 # mobile이냐 web이냐에 따라 넘어오는 params가 조금 달라 따로 만들었다.
@@ -303,12 +305,14 @@ def payment_return_mobile_web_view(request):
 
     if post_response_code == "0000":
         credit_card_service_code = '0900'
-        broker_message_command = ["java","-Dfile.encoding=euc-kr","-cp","./libs/jars/billgateAPI.jar","com.galaxia.api.EncryptServiceBroker","./libs/config/config.ini", credit_card_service_code, message]
+        broker_message_command = ["java", "-Dfile.encoding=euc-kr", "-cp", "./libs/jars/billgateAPI.jar",
+                                  "com.galaxia.api.EncryptServiceBroker", "./libs/config/config.ini",
+                                  credit_card_service_code, message]
         return_message = Popen(broker_message_command, stdout=PIPE).communicate()[0].strip()
         return_code = return_message[0:5]
 
         this_data = {}
-        if return_code=='ERROR':
+        if return_code == 'ERROR':
             this_version = "0100"
             this_merchantId = service_id
             this_serviceCode = credit_card_service_code
@@ -343,18 +347,20 @@ def payment_return_mobile_web_view(request):
             ORDER_DATE_INDEX = 68
             DATA_INDEX = 82
 
-            this_version = set_data_param[VERSION_INDEX:VERSION_INDEX+VERSION_LENGTH].strip()
-            this_merchantId = set_data_param[MERCHANT_ID_INDEX:MERCHANT_ID_INDEX+MERCHANT_ID_LENGTH].strip()
-            this_serviceCode = set_data_param[SERVICE_CODE_INDEX:SERVICE_CODE_INDEX+SERVICE_CODE_LENGTH].strip()
+            this_version = set_data_param[VERSION_INDEX:VERSION_INDEX + VERSION_LENGTH].strip()
+            this_merchantId = set_data_param[MERCHANT_ID_INDEX:MERCHANT_ID_INDEX + MERCHANT_ID_LENGTH].strip()
+            this_serviceCode = set_data_param[SERVICE_CODE_INDEX:SERVICE_CODE_INDEX + SERVICE_CODE_LENGTH].strip()
 
-            decrypted = set_data_param[VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH:VERSION_LENGTH+MERCHANT_ID_LENGTH+SERVICE_CODE_LENGTH+len(set_data_param)]
+            decrypted = set_data_param[
+                        VERSION_LENGTH + MERCHANT_ID_LENGTH + SERVICE_CODE_LENGTH:VERSION_LENGTH + MERCHANT_ID_LENGTH + SERVICE_CODE_LENGTH + len(
+                            set_data_param)]
 
-            this_command = decrypted[COMMAND_INDEX:COMMAND_INDEX+COMMAND_LENGTH].strip()
-            this_orderId = decrypted[ORDER_ID_INDEX:ORDER_ID_INDEX+ORDER_ID_LENGTH].strip()
-            this_orderDate = decrypted[ORDER_DATE_INDEX:ORDER_DATE_INDEX+DATE_LENGTH].strip()
+            this_command = decrypted[COMMAND_INDEX:COMMAND_INDEX + COMMAND_LENGTH].strip()
+            this_orderId = decrypted[ORDER_ID_INDEX:ORDER_ID_INDEX + ORDER_ID_LENGTH].strip()
+            this_orderDate = decrypted[ORDER_DATE_INDEX:ORDER_DATE_INDEX + DATE_LENGTH].strip()
 
-            bodyStr = decrypted[DATA_INDEX:DATA_INDEX+len(decrypted)].strip()
-            #this->parseData($bodyStr);
+            bodyStr = decrypted[DATA_INDEX:DATA_INDEX + len(decrypted)].strip()
+            # this->parseData($bodyStr);
             parse_data_param = bodyStr
             arrData = parse_data_param.split("|")
             for i in range(len(arrData)):
@@ -370,7 +376,7 @@ def payment_return_mobile_web_view(request):
 
                     vt.append(value)
                     this_data[tag] = vt
-            # Message.php }}
+                    # Message.php }}
 
         response_code = this_data.get('1002')[0]
         response_message = this_data.get('1003')
@@ -386,8 +392,8 @@ def payment_return_mobile_web_view(request):
             is_success = True
 
     try:
-        response_message = map( lambda x: x.decode('euc-kr'), response_message)
-        detail_response_message = map( lambda x: x.decode('euc-kr'), detail_response_message)
+        response_message = map(lambda x: x.decode('euc-kr'), response_message)
+        detail_response_message = map(lambda x: x.decode('euc-kr'), detail_response_message)
     except:
         pass
 
@@ -413,25 +419,25 @@ def payment_return_mobile_web_view(request):
             response_message=response_message[0],
             detail_response_code=detail_response_code[0],
             detail_response_message=detail_response_message[0],
-            name= beforePayment.name,
-            postcode = beforePayment.postcode,
-            phone= beforePayment.phone,
-            address= beforePayment.address,
-            shipping_requirement= beforePayment.shipping_requirement,
-            mileage= beforePayment.mileage
+            name=beforePayment.name,
+            postcode=beforePayment.postcode,
+            phone=beforePayment.phone,
+            address=beforePayment.address,
+            shipping_requirement=beforePayment.shipping_requirement,
+            mileage=beforePayment.mileage
         )
 
-        user_profile.mileage = int(user_profile.mileage)-int(beforePayment.mileage)+int(auth_amount[0])/100
+        user_profile.mileage = int(user_profile.mileage) - int(beforePayment.mileage) + int(auth_amount[0]) / 100
         user_profile.save()
 
         carts = Cart.objects.filter(order_id=order_id).all()
         for cart in carts:
 
-            if cart.type=='p':
+            if cart.type == 'p':
                 price = cart.product.discount_price
-            elif cart.type=='s':
+            elif cart.type == 's':
                 price = helper_get_set(cart.set).get('discount_price', 0)
-            elif cart.type=='c':
+            elif cart.type == 'c':
                 price = helper_get_custom_set(cart.custom_set).get('discount_price', 0)
 
             Purchase.objects.create(
@@ -455,22 +461,22 @@ def payment_return_mobile_web_view(request):
     else:
         return redirect('mobile_mypage_before_purchase')
 
-    # return render(request, 'return_explorer.html', {
-    #     'payment_id': payment_id,
-    #     'message': message,
-    #     'return_message': return_message,
-    #     'is_success': is_success,
-    #     'service_id': service_id,
-    #     'order_id': order_id,
-    #     'order_date': order_date,
-    #     'transaction_id': transaction_id,
-    #     'auth_amount': auth_amount,
-    #     'auth_date': auth_date,
-    #     'response_code': response_code,
-    #     'response_message': response_message,
-    #     'detail_response_code': detail_response_code,
-    #     'detail_response_message': detail_response_message
-    # })
+        # return render(request, 'return_explorer.html', {
+        # 'payment_id': payment_id,
+        #     'message': message,
+        #     'return_message': return_message,
+        #     'is_success': is_success,
+        #     'service_id': service_id,
+        #     'order_id': order_id,
+        #     'order_date': order_date,
+        #     'transaction_id': transaction_id,
+        #     'auth_amount': auth_amount,
+        #     'auth_date': auth_date,
+        #     'response_code': response_code,
+        #     'response_message': response_message,
+        #     'detail_response_code': detail_response_code,
+        #     'detail_response_message': detail_response_message
+        # })
 
 
 # payment가 완료되었다는것을 보여주는 view이다.
@@ -519,6 +525,7 @@ def payment_complete_view(request, payment_id=0):
         'user_': request.user
     })
 
+
 # web용 index page이다.
 @csrf_exempt
 def index_view(request):
@@ -534,7 +541,7 @@ def index_view(request):
 
         set_category_images = []
         for set_category in set_categorys:
-            set_category_images.append( {
+            set_category_images.append({
                 'id': set_category.id,
                 'image_url': settings.MEDIA_URL + set_category.small_image.name
             })
@@ -548,8 +555,8 @@ def index_view(request):
         pass
 
     survey_status = {
-        'survey_request_count': UserSurvey.objects.count()+550,
-        'survey_response_count': SurveyResult.objects.count()+460
+        'survey_request_count': UserSurvey.objects.count() + 550,
+        'survey_response_count': SurveyResult.objects.count() + 460
     }
 
     return render(request, 'index_web.html',
@@ -559,19 +566,22 @@ def index_view(request):
                       'survey_status': survey_status
                   })
 
+
 # web용 shop view 이다.
 # shop view는 product용과 set용 2개로 나뉘어 지는데 그 중 product용 이다.
 @csrf_exempt
 def shop_product_view(request, category_id=None, page_num=1):
-
     page_num = int(page_num)
     price_max_filter = request.GET.get('price_max', None)
     price_min_filter = request.GET.get('price_min', None)
     brandname_filter = request.GET.get('brandname', None)
-    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter, brandname_filter)
+    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter,
+                                    brandname_filter)
 
     if page_num is not None:
-        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
+        products_ = helper_make_paging_data(len(products_), products_[(
+                                                                      page_num - 1) * ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_FOR_PRODUCT],
+                                            ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
     else:
         products_ = {'data': products_}
 
@@ -603,14 +613,15 @@ def shop_product_view(request, category_id=None, page_num=1):
 # web용 shop view 이다.
 # shop view는 product용과 set용 2개로 나뉘어 지는데 그 중 set용 이다.
 def shop_set_view(request, category_id=None, page_num=1):
-
     page_num = int(page_num)
     price_max_filter = request.GET.get('price_max', None)
     price_min_filter = request.GET.get('price_min', None)
     sets = helper_get_set_list(category_id, helper_get_user(request), price_max_filter, price_min_filter)
 
     if page_num is not None:
-        sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_SET:page_num*ITEM_COUNT_PER_PAGE_FOR_SET], ITEM_COUNT_PER_PAGE_FOR_SET, page_num)
+        sets = helper_make_paging_data(len(sets), sets[(
+                                                       page_num - 1) * ITEM_COUNT_PER_PAGE_FOR_SET:page_num * ITEM_COUNT_PER_PAGE_FOR_SET],
+                                       ITEM_COUNT_PER_PAGE_FOR_SET, page_num)
     else:
         sets = {'data': sets}
 
@@ -638,6 +649,7 @@ def shop_set_view(request, category_id=None, page_num=1):
                       'adarea_items': adarea_items
                   })
 
+
 # web용 set view 이다.
 # 넘어온 set_id에 대한 set의 상세 정보를 보여준다.
 @csrf_exempt
@@ -645,9 +657,10 @@ def set_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request))
 
     return render(request, 'set_detail_web.html',
-                {
-                    'set': set
-                })
+                  {
+                      'set': set
+                  })
+
 
 # web용 product view 이다.
 # 넘어온 product_id에 대한 product의 상세 정보를 보여준다.
@@ -674,6 +687,7 @@ def product_view(request, product_id=None):
                       })
     else:
         return render(request, "404.html")
+
 
 # web용 product view for modal 이다.
 # 넘어온 product_id에 대한 product의 상세 정보를 보여주는데 modal을 띄워서 보여준다.
@@ -704,6 +718,7 @@ def product_json_view(request, product_id=None):
     else:
         return render(request, "404.html")
 
+
 # web용 set custom을 하기위한(make) view
 # set_id에 대한 set의 상세 product들을 custom하는 page를 돌려준다.
 @csrf_exempt
@@ -711,9 +726,10 @@ def customize_set_make_view(request, set_id):
     set = helper_get_set(set_id, helper_get_user(request), True)
 
     return render(request, "change_product_in_set_web.html",
-          {
-              'set': set
-          })
+                  {
+                      'set': set
+                  })
+
 
 # web용 custom set view
 # custom된 set들을 모아서 보여준다.
@@ -726,12 +742,13 @@ def customize_set_view(request):
     adarea_items = helper_get_adarea_items(request)
 
     return render(request, "shopping_custom_web.html",
-          {
-              'custom_sets': custom_sets,
-              'adarea_items': adarea_items
-          })
+                  {
+                      'custom_sets': custom_sets,
+                      'adarea_items': adarea_items
+                  })
 
     # set =
+
 
 # web용 custom set detail view
 # set_id에 대한 set의 custom된 set의 상세 정보를 보여준다.
@@ -740,9 +757,10 @@ def customize_set_detail_view(request, set_id):
     custom_set = helper_get_custom_set(set_id, helper_get_user(request))
 
     return render(request, "custom_detail_web.html",
-          {
-              'custom_set': custom_set
-          })
+                  {
+                      'custom_set': custom_set
+                  })
+
 
 # customize make view에서 customizing을 완료 한 후에
 # save버튼을 눌러서 저장할 때 불리는 view 이다.
@@ -761,16 +779,18 @@ def customize_set_save_view(request):
 
     if user is not None:
         custom_set, is_created = CustomSet.objects.get_or_create(user=user, set_id=set_id)
-        if not(is_created):
+        if not (is_created):
             Cart.objects.filter(custom_set=custom_set).delete()
 
         for custom_item in custom_list:
             original_id = custom_item.get('original_id')
             new_id = custom_item.get('new_id')
             if CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_id).exists():
-                CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_id).update(new_product=new_id)
+                CustomSetDetail.objects.filter(custom_set=custom_set, original_product_id=original_id).update(
+                    new_product=new_id)
             else:
-                CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_id, new_product_id=new_id)
+                CustomSetDetail.objects.create(custom_set=custom_set, original_product_id=original_id,
+                                               new_product_id=new_id)
 
         if will_added:
             helper_add_custom_set_cart(user, custom_set.id)
@@ -784,24 +804,27 @@ def customize_set_save_view(request):
 def help_faq_view(request):
     faqs = helper_get_faq_items(request)
     return render(request, 'help_faq.html', {
-        'faqs':faqs
+        'faqs': faqs
     })
+
 
 # report view이다. 우리가 입력한 report를 사용자에게 보여준다.
 # 예전에 만들고 한참동안 사용하지 않아 제대로 작동하지 않을지도 모른다.
 @login_required
 def report_view(request, category_id=None, page_num=1):
-
     user = helper_get_user(request)
     user_profile = user.profile
     page_num = int(page_num)
     price_max_filter = request.GET.get('price_max', None)
     price_min_filter = request.GET.get('price_min', None)
     brandname_filter = request.GET.get('brandname', None)
-    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter, brandname_filter)
+    products_ = helper_get_products(helper_get_user(request), category_id, price_max_filter, price_min_filter,
+                                    brandname_filter)
 
     if page_num is not None:
-        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
+        products_ = helper_make_paging_data(len(products_), products_[(
+                                                                      page_num - 1) * ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_FOR_PRODUCT],
+                                            ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
     else:
         products_ = {'data': products_}
 
@@ -823,18 +846,18 @@ def report_view(request, category_id=None, page_num=1):
     if user is not None:
 
         return render(request, 'report_web.html',
-            {
-                'products': products_,
-                'current_category': current_category,
-                'current_category_id': category_id,
-                'categories': categories,
-                'current_page': 'shop_product',
-                'current_brand': brandname_filter,
-                'brands': brands,
-                'adarea_items': adarea_items,
-                'tab_name': 'myinfo',
-                'next': next
-            })
+                      {
+                          'products': products_,
+                          'current_category': current_category,
+                          'current_category_id': category_id,
+                          'categories': categories,
+                          'current_page': 'shop_product',
+                          'current_brand': brandname_filter,
+                          'brands': brands,
+                          'adarea_items': adarea_items,
+                          'tab_name': 'myinfo',
+                          'next': next
+                      })
 
     else:
         logger.error('have_to_login')
@@ -844,7 +867,6 @@ def report_view(request, category_id=None, page_num=1):
 # 한꺼번에 보여준다.
 @login_required
 def report_detail_view(request, product_id=None):
-
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
 
@@ -871,7 +893,6 @@ def report_detail_view(request, product_id=None):
 # 위의 report_detail_view와 똑같은데 modal로 뜬다는것만 다르다.
 @login_required
 def report_detail_modal_view(request, category_id=None, page_num=1, product_id=None):
-
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
         blog_reivews = helper_get_blog_reviews(product_id)
@@ -888,11 +909,11 @@ def report_detail_modal_view(request, category_id=None, page_num=1, product_id=N
 # report를 시작하기 전 안내 페이지 이다.
 @csrf_exempt
 def report_form_index_view(request):
-
     return render(request, 'report_form_index_web.html',
                   {
                       'next': reverse('report_form'),
                   })
+
 
 # report를 시작한 후의 페이지이다.
 @login_required
@@ -956,12 +977,13 @@ def survey_result_view(request, pk):
         'survey_result_item': survey_result_item
     })
 
+
 # survey에 대한 결과를 관리자가 입력한것을 보는 페이지이다. v2
 class SurveyResultView(LoginRequiredMixin, TemplateView):
     template_name = "web/survey2_result.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if not(self.request.user.is_superuser) and self.request.user != UserSurvey.objects.get(pk=kwargs['pk']).user:
+        if not (self.request.user.is_superuser) and self.request.user != UserSurvey.objects.get(pk=kwargs['pk']).user:
             return redirect('index')
 
         return super(SurveyResultView, self).dispatch(request, *args, **kwargs)
@@ -983,8 +1005,8 @@ class SurveyResultView(LoginRequiredMixin, TemplateView):
             item_ = {
                 'product': item.product
             }
-            if not(survey_result_detail_.has_key(item.product.category.name)):
-                survey_result_detail_.update( {item.product.category.name:[]} )
+            if not (survey_result_detail_.has_key(item.product.category.name)):
+                survey_result_detail_.update({item.product.category.name: []})
 
             survey_result_detail_[item.product.category.name].append(item_)
 
@@ -1013,8 +1035,8 @@ class SurveyResultView(LoginRequiredMixin, TemplateView):
 
             min_price_sum += min_price
             max_price_sum += max_price
-            graphs_min_data.update( {"column-"+str(index):min_price })
-            graphs_max_data.update( {"column-"+str(index):max_price })
+            graphs_min_data.update({"column-" + str(index): min_price})
+            graphs_max_data.update({"column-" + str(index): max_price})
 
             graphs_data.append({
                 "balloonText": "[[title]] : [[value]] 원",
@@ -1026,7 +1048,7 @@ class SurveyResultView(LoginRequiredMixin, TemplateView):
                 "valueField": "column-" + str(index)
             })
 
-            index+=1
+            index += 1
 
         context["min_price_sum"] = min_price_sum
         context["max_price_sum"] = max_price_sum
@@ -1038,12 +1060,13 @@ class SurveyResultView(LoginRequiredMixin, TemplateView):
 
         return context
 
+
 # survey에 대한 결과를 관리자가 입력한것을 보는 페이지인데, 그 중 상세 제품의 결과를 보는 페이지 이다.
 class SurveyResultDetailView(LoginRequiredMixin, TemplateView):
     template_name = "web/survey2_result_detail.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if not(self.request.user.is_superuser) and self.request.user != UserSurvey.objects.get(pk=kwargs['pk']).user:
+        if not (self.request.user.is_superuser) and self.request.user != UserSurvey.objects.get(pk=kwargs['pk']).user:
             return redirect('index')
 
         return super(SurveyResultDetailView, self).dispatch(request, *args, **kwargs)
@@ -1051,10 +1074,11 @@ class SurveyResultDetailView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         self.request.pk = kwargs['pk']
         context = super(SurveyResultDetailView, self).get_context_data(**kwargs)
-        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).result.details.select_related('product',).filter(product__category__name=kwargs['product_type'])
+        survey_result_detail = UserSurvey.objects.get(pk=kwargs['pk']).result.details.select_related(
+            'product', ).filter(product__category__name=kwargs['product_type'])
         survey_result_detail_ = []
         for item in survey_result_detail:
-            item.product.detail = item.product.productdetail if hasattr(item.product,'productdetail') else None
+            item.product.detail = item.product.productdetail if hasattr(item.product, 'productdetail') else None
             item.product.analysis_ = item.product.productanalysis
             item.product.analysis_.detail_skintype = item.product.productanalysis.details.filter(type='skintype')[:3]
             item.product.analysis_.detail_feature = item.product.productanalysis.details.filter(type='feature')[:3]
@@ -1063,12 +1087,13 @@ class SurveyResultDetailView(LoginRequiredMixin, TemplateView):
             if item.product.ninterest_set.filter(user_survey_id=self.request.pk).exists():
                 item.product.is_interested = True
 
-            survey_result_detail_.append( {
+            survey_result_detail_.append({
                 'product': item.product
             })
 
         context['survey_result_detail'] = survey_result_detail_
         return context
+
 
 # 차트 테스트용
 @login_required

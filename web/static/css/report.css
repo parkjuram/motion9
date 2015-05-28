@@ -164,7 +164,7 @@ a:hover{
 
 .tab-menu{
     margin : 0;
-    margin-top : 0px;
+    margin-top : 0;
     margin-bottom : 12px;
     padding-top: 6px;
     background-color: white;
@@ -213,7 +213,7 @@ a.tab-selected{
 .item-title{
     min-height : 36px;
     font-size : 13px;
-    padding : 0px 10px;
+    padding : 0 10px;
     line-height: 22px;
     background-color : white;
 
@@ -243,7 +243,7 @@ a.tab-selected{
     vertical-align: middle;
     text-align: center;
     position : relative;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0 10px 0;
 }
 
 .item-image img{
@@ -333,7 +333,7 @@ h4.lined-heading-survey span {
     padding-top : 20px;
     margin : 10px;
     padding : 20px;
-    padding-bottom : 0px;
+    padding-bottom : 0;
     /*border-radius : 4px;*/
     border-bottom: 1px solid #565a5c;
 }
@@ -421,12 +421,12 @@ h4.lined-heading-survey span {
 
 
 .one-btn{
-    padding : .7em 0px;
+    padding : .7em 0;
     border : 1px solid black;
     border-color : black;
 }
 .two-btn{
-    padding : .7em 0px;
+    padding : .7em 0;
     border : 1px solid black;
     border-color : black;
 }
@@ -451,7 +451,7 @@ h4.lined-heading-survey span {
     text-shadow: none ! important;
 }
 .one-btn.ui-btn:focus {
-    padding : .7em 0px;
+    padding : .7em 0;
     border : 1px solid #e5e5e5; !important;
     /*border-color : #292929; !important;*/
     -moz-box-shadow: none !important;
@@ -460,7 +460,7 @@ h4.lined-heading-survey span {
     text-shadow: none ! important;
 }
 .two-btn.ui-btn:focus {
-    padding : .7em 0px;
+    padding : .7em 0;
     border : 1px solid #e5e5e5; !important;
     /*border-color : #292929; !important;*/
     -moz-box-shadow: none !important;

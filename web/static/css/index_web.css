@@ -18,12 +18,12 @@ a:visited{
 }
 
 .container {
-    width: 0px;
+    width: 0;
     padding-right: 0!important;
     padding-left: 0!important;
     margin-right: 0!important;
     margin-left: 0!important;
-    min-height: 0px!important;
+    min-height: 0 !important;
 }
 
 .ad-area {
@@ -267,7 +267,7 @@ a:visited{
     text-align: center;
     background: #15191D;
     height: auto;
-    padding: 150px 0px 150px 0px;
+    padding: 150px 0 150px 0;
     position: relative;
 
 }
@@ -304,7 +304,7 @@ a:visited{
     /*border-radius: 4px;*/
     color: #000 !important;
     font-size: 14px;
-    background: none repeat scroll 0% 0% transparent !important;
+    background: none repeat scroll 0 0 transparent !important;
     padding: 8px 10px;
     border: 2px solid #212121;
     text-decoration: none;
@@ -320,7 +320,7 @@ a.main-btn:hover {
     /*border-radius: 4px;*/
     color: white !important;
     font-size: 14px;
-    background: none repeat scroll 0% 0% black !important;
+    background: none repeat scroll 0 0 black !important;
     padding: 8px 10px;
     border: 2px solid #212121;
     text-decoration: none;

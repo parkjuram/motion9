@@ -31,7 +31,7 @@ $(function(){
 
         var test =  $(this).parent;
         var blog_summary = $('.blog-product-item-contents-summary');
-        var blog_summary_detail = $('.blog-product-item-contents-summary-detail')
+        var blog_summary_detail = $('.blog-product-item-contents-summary-detail');
 
         if ( blog_summary.css('display') == 'none' ) {
             blog_summary.css('display',"block");

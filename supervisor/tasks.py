@@ -15,13 +15,12 @@ def analysis_product(self, querys):
 
     logger.info(querys)
 
-    blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list = querys)
+    blog_url_list = blog_review_link_scrapper.startScrapping(query_item_list=querys)
 
-    logger.info( blog_url_list )
+    logger.info(blog_url_list)
 
     analysis_blog_review = AnalysisBlogReview()
-    analysis_result = analysis_blog_review.startAnalysis( self, blog_url_list)
-
+    analysis_result = analysis_blog_review.startAnalysis(self, blog_url_list)
 
     return {'current': 100, 'total': 100, 'status': 'Task completed!',
             'result': analysis_result}

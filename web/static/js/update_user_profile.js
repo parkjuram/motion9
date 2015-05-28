@@ -37,7 +37,7 @@ $(function(){
         // iframe을 넣은 element를 안보이게 한다.
 //        element.style.display = 'none';
         $(element).jqmHide();
-    }
+    };
 
 
 
@@ -52,12 +52,12 @@ $(function(){
         e.preventDefault();
         var update_form = document.update;
         update_form.submit();
-    })
+    });
 
     $('#btn-cancel').click( function(e) {
         e.preventDefault();
         location.href = url_mypage;
-    })
+    });
 
 //    $('#btnColoseLayer').click( function(e){
 //        e.preventDefault();

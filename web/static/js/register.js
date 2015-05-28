@@ -12,7 +12,7 @@ $(function(){
         } else {
 
         }
-    }
+    };
 
 
     function wireDataWithForm(){

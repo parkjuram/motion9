@@ -6,15 +6,15 @@ import requests
 from urllib import quote
 from bs4 import BeautifulSoup
 
-class AnalysisBlogReview:
 
+class AnalysisBlogReview:
     def __init__(self):
         self.analysis_result = {}
-        self.skip_count=0
+        self.skip_count = 0
 
     def startAnalysis(self, celery_task, blog_url_list):
         self.analysis_result = {}
-        self.skip_count=0
+        self.skip_count = 0
         celery_task.update_state(state='PROGRESS',
                                  meta={'current': 0, 'total': len(blog_url_list)})
         for blog_review_url in blog_url_list:
@@ -28,11 +28,11 @@ class AnalysisBlogReview:
 
         for item in sorted_analysis_result:
             if len(item[0]) > 1:
-                analysis_result_list.append({'keyword':item[0], 'count':item[1]})
+                analysis_result_list.append({'keyword': item[0], 'count': item[1]})
 
         sorted(analysis_result_list, key=lambda item: item['count'], reverse=True)
 
-        return { 'analysis_result_list': analysis_result_list, 'total_count':len(blog_url_list) }
+        return {'analysis_result_list': analysis_result_list, 'total_count': len(blog_url_list)}
 
     def analysis(self, blog_review_url):
         # self.logger.info(blog_review_url)
@@ -59,7 +59,7 @@ class AnalysisBlogReview:
         try:
             real_blog_review_url = "http://blog.naver.com" + soup.select('frame#mainFrame')[0]['src']
         except IndexError as e:
-            self.skip_count+=1
+            self.skip_count += 1
             return
 
         r = requests.get(real_blog_review_url)
@@ -71,16 +71,16 @@ class AnalysisBlogReview:
 
         raw_str_list = []
         for item in p_list:
-            p_str = str(item.text.encode('utf-8')).replace('\xc2\xa0',' ').replace('\xe2\x80\x8b',' ').strip()
-            p_str = p_str.replace('ㅎ','').replace('ㅋ','')
-            if len(p_str)!=0:
+            p_str = str(item.text.encode('utf-8')).replace('\xc2\xa0', ' ').replace('\xe2\x80\x8b', ' ').strip()
+            p_str = p_str.replace('ㅎ', '').replace('ㅋ', '')
+            if len(p_str) != 0:
                 raw_str_list.append(p_str.decode('utf-8'))
 
         kkma = Hannanum()
 
         for raw_str_item in raw_str_list:
             if len(raw_str_item) >= 100:
-                self.skip_count+=1
+                self.skip_count += 1
                 continue
 
             try:
@@ -90,18 +90,20 @@ class AnalysisBlogReview:
                     item = pos_tuple_item[0]
                     item_type = pos_tuple_item[1]
 
-                    if not(analysis_checker.has_key(item)) and (item_type.startswith('N') or item_type.startswith('V') or item_type.startswith('M') or item_type.startswith('XR') or item_type.startswith('U')):
+                    if not (analysis_checker.has_key(item)) and (
+                                    item_type.startswith('N') or item_type.startswith('V') or item_type.startswith(
+                                    'M') or item_type.startswith('XR') or item_type.startswith('U')):
                         if self.analysis_result.has_key(item):
                             analysis_item_count = self.analysis_result.get(item) + 1
                         else:
                             analysis_item_count = 1
 
                         self.analysis_result.update({
-                                               item: analysis_item_count
-                                               })
+                            item: analysis_item_count
+                        })
 
                         analysis_checker.update({
-                            item:1
+                            item: 1
                         })
             except jpype.JavaException as exception:
                 pass

@@ -6,6 +6,7 @@ from django.db.models import signals
 from datetime import datetime
 from django.utils.encoding import python_2_unicode_compatible
 
+
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', related_name='profile')
     name = models.TextField(null=False, blank=True, default='')
@@ -24,17 +25,20 @@ class UserProfile(models.Model):
     activation_key = models.CharField(max_length=40, blank=True)
     key_expires = models.DateTimeField(default=datetime.today())
 
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-       profile, created = UserProfile.objects.get_or_create(user=instance)
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+
 
 signals.post_save.connect(create_user_profile, sender=User)
 
+
 class Interest(models.Model):
     user = models.ForeignKey('auth.User')
-    product = models.ForeignKey('web.Product',null=True)
-    set = models.ForeignKey('web.Set',null=True)
-    custom_set = models.ForeignKey('users.CustomSet',null=True)
+    product = models.ForeignKey('web.Product', null=True)
+    set = models.ForeignKey('web.Set', null=True)
+    custom_set = models.ForeignKey('users.CustomSet', null=True)
     type = models.CharField(max_length=1, null=False, default='p')
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
@@ -44,11 +48,12 @@ class Interest(models.Model):
             ("user", "set"),
             ("user", "custom_set"))
 
+
 class Cart(models.Model):
     user = models.ForeignKey('auth.User')
-    product = models.ForeignKey('web.Product',null=True)
-    set = models.ForeignKey('web.Set',null=True)
-    custom_set = models.ForeignKey('users.CustomSet',null=True)
+    product = models.ForeignKey('web.Product', null=True)
+    set = models.ForeignKey('web.Set', null=True)
+    custom_set = models.ForeignKey('users.CustomSet', null=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
     order_id = models.CharField(max_length=64, null=False, blank=True)
@@ -63,26 +68,29 @@ class Cart(models.Model):
     def __unicode__(self):
         return '[%r]Cart' % (self.id)
 
+
 class OrderTempInfo(models.Model):
     order_id = models.CharField(max_length=64, null=False, unique=True)
     original_amount = models.CharField(max_length=9, null=True)
+
 
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User')
     payment = models.ForeignKey('users.Payment', null=True)
     price = models.IntegerField(null=False, default=0)
-    product = models.ForeignKey('web.Product',null=True, blank=True)
-    set = models.ForeignKey('web.Set',null=True, blank=True)
-    custom_set = models.ForeignKey('users.CustomSet',null=True, blank=True)
+    product = models.ForeignKey('web.Product', null=True, blank=True)
+    set = models.ForeignKey('web.Set', null=True, blank=True)
+    custom_set = models.ForeignKey('users.CustomSet', null=True, blank=True)
     type = models.CharField(max_length=1, null=False, default='p')
     item_count = models.IntegerField(null=False, default=1)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
 
     # class Meta:
-    #     unique_together = (
+    # unique_together = (
     #         ("user", "product"),
     #         ("user", "set"),
     #         ("user", "custom_set"))
+
 
 class CustomSet(models.Model):
     user = models.ForeignKey('auth.User', related_name='get_custom_sets')
@@ -97,7 +105,8 @@ class CustomSet(models.Model):
     def __unicode__(self):
         return '(%r)CustomSet : user(%s) set(%s) is_active(%s)' % (self.id, self.user, self.set, self.is_active)
         # return '(%r)Brand : name_eng(%s) name_kor(%s) is_domestic(%r)' \
-        #        % (self.id, self.name_eng, self.name_kor, self.is_domestic)
+        # % (self.id, self.name_eng, self.name_kor, self.is_domestic)
+
 
 class CustomSetDetail(models.Model):
     custom_set = models.ForeignKey('users.CustomSet')
@@ -108,6 +117,7 @@ class CustomSetDetail(models.Model):
         unique_together = (
             ("custom_set", "original_product")
         )
+
 
 class Payment(models.Model):
     user = models.ForeignKey('auth.User')
@@ -123,7 +133,7 @@ class Payment(models.Model):
     detail_response_message = models.TextField(null=False, blank=True, default='')
 
     name = models.TextField(null=False, blank=True, default='')
-    status = models.CharField(max_length=1, null=True, default='b') # before, ready, ship, finish
+    status = models.CharField(max_length=1, null=True, default='b')  # before, ready, ship, finish
     shipping_number = models.TextField(null=True, blank=True, default='')
     phone = models.TextField(null=False, blank=True, default='')
     postcode = models.CharField(max_length=10, null=True, default='')
@@ -152,6 +162,7 @@ class BeforePayment(models.Model):
     def __unicode__(self):
         return '(%r)BeforePayment' % (self.id)
 
+
 @python_2_unicode_compatible
 class UserSurvey(models.Model):
     user = models.ForeignKey('auth.User', related_name='get_survey_list')
@@ -176,6 +187,7 @@ class UserSurvey(models.Model):
     def __str__(self):
         return self.comments
 
+
 @python_2_unicode_compatible
 class UserSurveyAgain(models.Model):
     user_survey = models.OneToOneField(UserSurvey)
@@ -190,6 +202,7 @@ class UserSurveyAgain(models.Model):
     def __str__(self):
         return '[%r]UserSurveyAgain[%r]' % (self.id, self.user_survey.user)
 
+
 @python_2_unicode_compatible
 class UserSurveyMore(models.Model):
     user_survey = models.ForeignKey(UserSurvey)
@@ -201,6 +214,7 @@ class UserSurveyMore(models.Model):
 
     def __str__(self):
         return '[%r]UserSurveyMore' % (self.id)
+
 
 @python_2_unicode_compatible
 class SurveyResult(models.Model):
@@ -214,6 +228,7 @@ class SurveyResult(models.Model):
     def __str__(self):
         return self.general_review
 
+
 @python_2_unicode_compatible
 class SurveyResultDetail(models.Model):
     survey_result = models.ForeignKey(SurveyResult, related_name='details')
@@ -225,6 +240,7 @@ class SurveyResultDetail(models.Model):
     def __str__(self):
         return "(%r)SurveyResultDetail" % self.id
 
+
 @python_2_unicode_compatible
 class UserSurveyDetail(models.Model):
     user_survey = models.ForeignKey('users.UserSurvey', related_name='details')
@@ -234,7 +250,8 @@ class UserSurveyDetail(models.Model):
         unique_together = (("user_survey", "survey_item_option"),)
 
     def __str__(self):
-        return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%s]' % (self.id, self.user_survey.id, self.survey_item_option.content)
+        return '%r - UserSurveyDetail : user_survey[%r] survey_item_option[%s]' % (
+        self.id, self.user_survey.id, self.survey_item_option.content)
 
 
 @python_2_unicode_compatible

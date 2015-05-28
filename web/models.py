@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 
+
 class Category(models.Model):
     name = models.TextField(null=False)
     is_set = models.BooleanField(null=False, default=False)
@@ -28,6 +29,7 @@ class Brand(models.Model):
 
     def __str__(self):
         return unicode(self).encode('utf-8')
+
 
 class Product(models.Model):
     name = models.TextField(unique=True)
@@ -67,6 +69,7 @@ class Product(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+
 class Magazine(models.Model):
     title = models.CharField(max_length=30, unique=True)
 
@@ -77,6 +80,7 @@ class Magazine(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+
 class ProductMagazine(models.Model):
     product = models.ForeignKey(Product)
     magazine = models.ForeignKey(Magazine)
@@ -86,13 +90,16 @@ class ProductMagazine(models.Model):
     author = models.CharField(max_length=30, null=False, blank=True)
     link = models.URLField(null=False, blank=True)
 
+
 class ProductDescriptionImage(models.Model):
     product = models.ForeignKey(Product)
     image = models.ImageField(null=True, upload_to='product/desc/')
 
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='product_image_set')
     image = models.ImageField(null=True, upload_to='product/image/')
+
 
 class Set(models.Model):
     name = models.TextField(null=False)
@@ -113,10 +120,12 @@ class Set(models.Model):
     def __str__(self):
         return unicode(self)
 
+
 class SetDescriptionImage(models.Model):
     set = models.ForeignKey(Set)
     image = models.ImageField(null=True, upload_to='set/desc/')
     small_image = models.ImageField(null=True, upload_to='set/desc/small/')
+
 
 class Tag(models.Model):
     name = models.TextField(unique=True)
@@ -128,9 +137,11 @@ class Tag(models.Model):
     def __str__(self):
         return unicode(self).encode('utf-8')
 
+
 class SetTag(models.Model):
     set = models.ForeignKey('Set')
     tag = models.ForeignKey('Tag')
+
 
 class SetProduct(models.Model):
     set = models.ForeignKey('Set')
@@ -143,6 +154,7 @@ class SetProduct(models.Model):
 
     def __str__(self):
         return unicode(self).encode('utf-8')
+
 
 class ChangeableProduct(models.Model):
     set = models.ForeignKey('Set')
@@ -158,6 +170,7 @@ class ChangeableProduct(models.Model):
 
     def __str__(self):
         return unicode(self).encode('utf-8')
+
 
 class ChangeableProductInfo(models.Model):
     changeable_product = models.ForeignKey('ChangeableProduct')
@@ -184,6 +197,7 @@ class BlogReview(models.Model):
     review_created_time = models.DateTimeField(default=datetime.now)
     summary = models.TextField(null=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, default=datetime.now)
+
 
 class Faq(models.Model):
     title = models.CharField(max_length=30, unique=True)

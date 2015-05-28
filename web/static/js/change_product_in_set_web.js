@@ -36,13 +36,13 @@ $(function(){
         }else{
             $(target).show();
         }
-    })
+    });
 
     var updateCustomView = function(product, originalKey, newKey){
          var target = $('#customSetTableItem-'+originalKey);
          target.attr('data-new-key', newKey);
          target.find('.set-table-item-img img').attr('src', product.big_img_url);
-         target.find('.set-table-item-category').text(product.category_name)
+         target.find('.set-table-item-category').text(product.category_name);
         var productName = product.name;
         if(productName.length > 16)
             productName = productName.substr(0,16)+'..';

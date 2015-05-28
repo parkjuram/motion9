@@ -7,7 +7,7 @@ $(function () {
 //        element.style.display = 'none';
 
         $(element).jqmHide();
-    }
+    };
 
     function showDaumPostcode() {
         console.log('showDaumPostCode();');

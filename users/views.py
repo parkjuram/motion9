@@ -30,7 +30,6 @@ from foradmin.models import MainImage, Advertisement, Preference
 from motion9 import settings
 from django.utils import timezone
 
-
 from motion9.const import *
 from common_controller.util import helper_get_user, helper_get_product_detail, helper_get_set, helper_make_paging_data, \
     helper_add_product_interest, helper_add_set_interest, helper_delete_product_interest, helper_delete_set_interest, \
@@ -41,7 +40,8 @@ from common_controller.util import helper_get_user, helper_get_product_detail, h
     http_response_by_json, helper_make_custom_set, helper_get_custom_set, validateEmail, helper_get_cart_items, \
     helper_update_cart_items_count, helper_get_purchase_status, helper_get_user_ip, \
     helper_get_billgate_payment_checksum, helper_get_type_name, helper_get_payment_item, helper_get_profile_item, \
-    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, helper_get_product_magazines, helper_get_survey_items, \
+    helper_put_order_id_in_cart, helper_get_purchase_items, helper_get_products, helper_get_blog_reviews, \
+    helper_get_product_magazines, helper_get_survey_items, \
     helper_request_survey
 
 from .models import Interest, UserSurvey, UserSurveyMore, UserProfile
@@ -57,7 +57,7 @@ from users import mp
 
 logger = logging.getLogger(__name__)
 # def helper_add_product_cart(user, product_id):
-#     try:
+# try:
 #         Cart.objects.create(user=user, )
 
 
@@ -67,9 +67,9 @@ def check_email_view(request):
     email = request.POST.get('email')
 
     if User.objects.filter(email=email).exists():
-        return http_response_by_json(None, {'exist':True})
+        return http_response_by_json(None, {'exist': True})
 
-    return http_response_by_json(None, {'isValid': validateEmail(email), 'exist':False})
+    return http_response_by_json(None, {'isValid': validateEmail(email), 'exist': False})
 
 
 # facebook token이 유효한지 확인하는 api
@@ -80,18 +80,18 @@ def check_facebook_token_view(request):
     email = request.POST.get('email', None)
 
     if token is None:
-        http_response_by_json( const.CODE_PARAMS_WRONG )
+        http_response_by_json(const.CODE_PARAMS_WRONG)
     else:
         app_token_url = 'https://graph.facebook.com/v2.0/oauth/access_token?client_id=1450591788523941&client_secret=f99304b17095fd8c2a7d737a9be8c39b&grant_type=client_credentials'
         contents = urllib2.urlopen(app_token_url).read()
         app_token = contents[13:]
 
-        token_check_url = 'https://graph.facebook.com/debug_token?input_token='+token+'&access_token='+app_token
+        token_check_url = 'https://graph.facebook.com/debug_token?input_token=' + token + '&access_token=' + app_token
 
         contents = urllib2.urlopen(token_check_url).read()
         contents_dict = json.loads(contents)
 
-        if contents_dict['data']['is_valid']==True:
+        if contents_dict['data']['is_valid'] == True:
             try:
                 user_ = User.objects.get(username=email)
                 user_.backend = 'django.contrib.auth.backends.ModelBackend'
@@ -106,7 +106,7 @@ def check_facebook_token_view(request):
                     return redirect('registration_page')
 
         else:
-            http_response_by_json( const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID )
+            http_response_by_json(const.CODE_FACEBOOK_TOKEN_IS_NOT_VALID)
 
 
 # 회원가입 api
@@ -122,13 +122,13 @@ def registration(request, next='index'):
     error = None
     if User.objects.filter(email=email).exists():
         error = '이미 가입된 E-mail 입니다.'
-    elif email=='':
+    elif email == '':
         error = 'E-mail을 입력해 주세요.'
-    elif password=='' :
+    elif password == '':
         error = '비밀번호를 입력해 주세요.'
     elif password != password_confirm:
         error = '비밀번호를 확인해 주세요.'
-    elif name=='':
+    elif name == '':
         error = '이름을 입력해 주세요.'
 
     if error is None:
@@ -140,7 +140,7 @@ def registration(request, next='index'):
             user.profile.sex = sex
             user.profile.age = age
             salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-            user.profile.activation_key = hashlib.sha1(salt+email).hexdigest()
+            user.profile.activation_key = hashlib.sha1(salt + email).hexdigest()
             user.profile.key_expires = datetime.datetime.today() + datetime.timedelta(2)
             user.profile.save()
         except ValueError as e:
@@ -183,7 +183,6 @@ def registration_view(request):
 # 모바일용 회원가입 페이지
 @csrf_exempt
 def mobile_registration_view(request):
-
     if request.user.is_authenticated():
         return redirect('mobile:mobile_index')
 
@@ -193,6 +192,7 @@ def mobile_registration_view(request):
         'next': next
     })
 
+
 # 로그인 api
 @csrf_exempt
 def login_(request, next='login_page'):
@@ -201,7 +201,7 @@ def login_(request, next='login_page'):
 
     error = None
 
-    if not(User.objects.filter(email=email).exists()):
+    if not (User.objects.filter(email=email).exists()):
         error = '아이디가 존재하지 않습니다.'
         logger.error(error)
     else:
@@ -218,6 +218,7 @@ def login_(request, next='login_page'):
     messages.info(request, error)
     return redirect(next)
 
+
 # 로그인 페이지
 @csrf_exempt
 def login_view(request):
@@ -228,23 +229,24 @@ def login_view(request):
     fail = request.GET.get('fail', 'registration_page')
 
     return render(request, 'login_web.html',
-        {
-            'next': next,
-            'fail': fail
-        })
+                  {
+                      'next': next,
+                      'fail': fail
+                  })
+
 
 # 로그아웃 api
 @csrf_exempt
 def logout_(request):
     next = request.GET.get('next', 'index')
     logout(request)
-    return redirect( next )
+    return redirect(next)
+
 
 # 계정정보 update 페이짘
 @csrf_exempt
 @login_required
 def account_modify_view(request):
-
     next = request.GET.get('next', 'mypage')
     user_ = helper_get_user(request)
     user_profile = user_.profile
@@ -262,57 +264,57 @@ def account_modify_view(request):
         'phone2': phone2,
         'phone3': phone3,
         'next': next
-    } )
+    })
+
 
 # user정보 update 페이지, 위의 view와 왜 중복되는지는 모르겠음
 @csrf_exempt
 @login_required
 def update(request, next='mypage'):
-
     if helper_get_user(request) is not None:
         user_profile = request.user.profile
 
         name = request.POST.get('name', '')
 
-        if len(name)>0:
-            user_profile.name=name
+        if len(name) > 0:
+            user_profile.name = name
 
-        phone1=request.POST.get('phone1','')
-        phone2=request.POST.get('phone2','')
-        phone3=request.POST.get('phone3','')
-        if len(phone1+phone2+phone3)>0:
-            user_profile.phone = phone1+"-"+phone2+"-"+phone3
-            
+        phone1 = request.POST.get('phone1', '')
+        phone2 = request.POST.get('phone2', '')
+        phone3 = request.POST.get('phone3', '')
+        if len(phone1 + phone2 + phone3) > 0:
+            user_profile.phone = phone1 + "-" + phone2 + "-" + phone3
+
         recent_phone = request.POST.get('recent_phone', '')
-        if len(recent_phone)>0:
+        if len(recent_phone) > 0:
             user_profile.recent_phone = recent_phone
 
         postcode = request.POST.get('postcode', '')
-        if len(postcode)>0:
+        if len(postcode) > 0:
             user_profile.postcode = postcode
-            
+
         basic_address = request.POST.get('basic_address', '')
-        if len(basic_address)>0:
+        if len(basic_address) > 0:
             user_profile.basic_address = basic_address
-            
+
         detail_address = request.POST.get('detail_address', '')
-        if len(detail_address)>0:
+        if len(detail_address) > 0:
             user_profile.detail_address = detail_address
-            
+
         sex = request.POST.get('sex', '')
-        if len(sex)>0:
+        if len(sex) > 0:
             user_profile.sex = sex
-            
+
         age = request.POST.get('age', 0)
-        if age>0:
+        if age > 0:
             user_profile.age = age
-            
+
         skin_type = request.POST.get('skin_type', '')
-        if len(skin_type)>0:
+        if len(skin_type) > 0:
             user_profile.skin_type = skin_type
-            
+
         skin_color = request.POST.get('skin_color', '')
-        if len(skin_color)>0:
+        if len(skin_color) > 0:
             user_profile.skin_color = skin_color
 
         try:
@@ -340,9 +342,11 @@ def mypage_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
+            products = helper_make_paging_data(len(products), products[(
+                                                                       page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT],
+                                               ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
         else:
-            products = {'data':products}
+            products = {'data': products}
 
         if user.profile.age is not None:
             user.profile.age = datetime.datetime.now().year - user.profile.age + 1
@@ -352,14 +356,15 @@ def mypage_view(request, page_num=1):
         request.user.interest = request.user.ninterest_set.select_related('product').all()
 
         return render(request, 'mypage_interesting_web.html',
-            {
-                'interests': products,
-                'tab_name': 'interesting_product',
-                'categories': NCategory.objects.values()
-            })
+                      {
+                          'interests': products,
+                          'tab_name': 'interesting_product',
+                          'categories': NCategory.objects.values()
+                      })
 
     else:
         logger.error('have_to_login')
+
 
 # mypage의 set 페이지
 @login_required
@@ -375,48 +380,50 @@ def mypage_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
+            sets = helper_make_paging_data(len(sets), sets[(
+                                                           page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET],
+                                           ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
         else:
-            sets = {'data':sets}
+            sets = {'data': sets}
 
         return render(request, 'mypage_interesting_set_web.html',
-            {
-                'interests': sets,
-                'tab_name': 'interesting_set'
-            })
+                      {
+                          'interests': sets,
+                          'tab_name': 'interesting_set'
+                      })
 
     else:
         logger.error('have_to_login')
 
+
 # billgate 결제모듈 연동시 security를 위해 checksum을 구하는 api
 @csrf_exempt
 def billgate_payment_checksum(request):
-    service_id=request.POST.get('service_id')
-    order_id=request.POST.get('order_id')
-    amount=request.POST.get('amount')
+    service_id = request.POST.get('service_id')
+    order_id = request.POST.get('order_id')
+    amount = request.POST.get('amount')
 
-    checksum = helper_get_billgate_payment_checksum(service_id+order_id+amount)
+    checksum = helper_get_billgate_payment_checksum(service_id + order_id + amount)
 
-    return http_response_by_json(None, {'checksum':checksum})
+    return http_response_by_json(None, {'checksum': checksum})
 
 
 # mypage 카트 페이지
 #@mobile_login_required
 @login_required
 def mypage_cart_view(request):
-
     cart_items = helper_get_cart_items(helper_get_user(request))
     payment_items = helper_get_payment_item(request, cart_items['total_price'])
-    helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
+    helper_put_order_id_in_cart(request.user, payment_items['order_id'])
     profile_items = helper_get_profile_item(request)
 
     if request.user.is_authenticated():
-        cart_items.update( {
+        cart_items.update({
             'payment_items': payment_items,
             'profile_items': profile_items,
             'user_profile': request.user.profile
-        } )
-        return render(request, 'cart_web.html', cart_items )
+        })
+        return render(request, 'cart_web.html', cart_items)
     else:
         return redirect('login_page')
 
@@ -440,13 +447,13 @@ def mypage_purchase_view(request, page_num=1):
     purchases = request.user.purchase_set.all()
     purchase_list = []
     for purchase in purchases:
-        if purchase.type=='p':
+        if purchase.type == 'p':
             product_ = helper_get_product_detail(purchase.product, request.user)
             purchase_list.append(product_)
-        elif purchase.type=='s':
+        elif purchase.type == 's':
             set_ = helper_get_set(purchase.set, request.user)
             purchase_list.append(set_)
-        elif purchase.type=='c':
+        elif purchase.type == 'c':
             custom_set_ = helper_get_custom_set(purchase.custom_set, request.user)
             purchase_list.append(custom_set_)
 
@@ -456,10 +463,15 @@ def mypage_purchase_view(request, page_num=1):
         item['payment'] = purchase.payment
         item['type_name'] = helper_get_type_name(purchase.type)
         item['status_name'] = helper_get_purchase_status(purchase.payment.status)
-        item['datetime'] = item['payment'].auth_date[:4]+"/"+item['payment'].auth_date[4:6]+"/"+item['payment'].auth_date[6:8]+"\n"+item['payment'].auth_date[8:10]+":"+item['payment'].auth_date[10:12]
+        item['datetime'] = item['payment'].auth_date[:4] + "/" + item['payment'].auth_date[4:6] + "/" + item[
+                                                                                                            'payment'].auth_date[
+                                                                                                        6:8] + "\n" + \
+                           item['payment'].auth_date[8:10] + ":" + item['payment'].auth_date[10:12]
         purchase_list.append(item)
 
-    purchase_list = helper_make_paging_data(len(purchase_list), purchase_list[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
+    purchase_list = helper_make_paging_data(len(purchase_list), purchase_list[(
+                                                                              page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT],
+                                            ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
 
     # return render(request, 'mypage_interesting_set_web.html',
     return render(request, 'mypage_purchase_list_web.html',
@@ -497,6 +509,7 @@ def mypage_purchase_view(request, page_num=1):
     #             'tab_name':'purchase'
     #         })
 
+
 # mypage 구매 내역 페이지에서 product 내역 페이지
 @csrf_exempt
 @login_required
@@ -511,26 +524,29 @@ def mypage_purchase_product_view(request, page_num=1):
             product = purchase.product
             product_ = helper_get_product_detail(product, user)
             product_.update({
-                'item_count':purchase.item_count,
-                'status':helper_get_purchase_status(payment.status),
-                'shipping_number':payment.shipping_number,
-                'price':purchase.price,
-                'created':purchase.created
+                'item_count': purchase.item_count,
+                'status': helper_get_purchase_status(payment.status),
+                'shipping_number': payment.shipping_number,
+                'price': purchase.price,
+                'created': purchase.created
             })
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
+            products = helper_make_paging_data(len(products), products[(
+                                                                       page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT],
+                                               ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
         else:
-            products = {'data':products}
+            products = {'data': products}
 
         # return HttpResponse(json.dumps(products, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
         return render(request, 'mypage_purchase_product_web.html',
-            {
-                'purchases': products,
-                'tab_name': 'purchase_product'
-            })
+                      {
+                          'purchases': products,
+                          'tab_name': 'purchase_product'
+                      })
+
 
 # mypage 구매 내역 페이지에서 set 내역 페이지
 @login_required
@@ -545,24 +561,26 @@ def mypage_purchase_set_view(request, page_num=1):
             set = purchase.set
             set_ = helper_get_set(set, user)
             set_.update({
-                'item_count':purchase.item_count,
-                'status':helper_get_purchase_status(payment.status),
-                'shipping_number':payment.shipping_number,
-                'price':purchase.price,
-                'created':purchase.created
+                'item_count': purchase.item_count,
+                'status': helper_get_purchase_status(payment.status),
+                'shipping_number': payment.shipping_number,
+                'price': purchase.price,
+                'created': purchase.created
             })
             sets.append(set_)
 
         if page_num is not None:
-            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
+            sets = helper_make_paging_data(len(sets), sets[(
+                                                           page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT],
+                                           ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
         else:
-            sets = {'data':sets}
+            sets = {'data': sets}
 
         return render(request, 'mypage_purchase_set_web.html',
-            {
-                'purchases': sets,
-                'tab_name': 'purchase_product'
-            })
+                      {
+                          'purchases': sets,
+                          'tab_name': 'purchase_product'
+                      })
 
 
 # mypage 구매 내역 페이지에서 custom_set 내역 페이지
@@ -578,24 +596,27 @@ def mypage_purchase_custom_set_view(request, page_num=1):
             custom_set = purchase.custom_set
             custom_set_ = helper_get_custom_set(custom_set, user)
             custom_set_.update({
-                'item_count':purchase.item_count,
-                'status':helper_get_purchase_status(payment.status),
-                'shipping_number':payment.shipping_number,
-                'price':purchase.price,
-                'created':purchase.created
+                'item_count': purchase.item_count,
+                'status': helper_get_purchase_status(payment.status),
+                'shipping_number': payment.shipping_number,
+                'price': purchase.price,
+                'created': purchase.created
             })
             custom_sets.append(custom_set_)
 
         if page_num is not None:
-            custom_sets = helper_make_paging_data(len(custom_sets), custom_sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
+            custom_sets = helper_make_paging_data(len(custom_sets), custom_sets[(
+                                                                                page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET],
+                                                  ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
         else:
-            custom_sets = {'data':custom_sets}
+            custom_sets = {'data': custom_sets}
 
         return render(request, 'mypage_purchase_custom_web.html',
-            {
-                'purchases': custom_sets,
-                'tab_name': 'purchase_product'
-            })
+                      {
+                          'purchases': custom_sets,
+                          'tab_name': 'purchase_product'
+                      })
+
 
 # 함수 명 그대로의 기능
 @csrf_exempt
@@ -607,12 +628,13 @@ def add_interest(request):
     type = request.POST.get('type', 'p')
 
     product_or_set_id = request.POST.get('product_or_set_id')
-    if type=='p':
+    if type == 'p':
         helper_add_product_interest(user, product_or_set_id)
-    elif type=='s':
+    elif type == 's':
         helper_add_set_interest(user, product_or_set_id)
 
     return http_response_by_json()
+
 
 # 함수 명 그대로의 기능
 @csrf_exempt
@@ -624,12 +646,13 @@ def delete_interest(request):
     type = request.POST.get('type', 'p')
 
     product_or_set_id = request.POST.get('product_or_set_id')
-    if type=='p':
+    if type == 'p':
         helper_delete_product_interest(user, product_or_set_id)
-    elif type=='s':
+    elif type == 's':
         helper_delete_set_interest(user, product_or_set_id)
 
     return http_response_by_json()
+
 
 # 함수 명 그대로의 기능
 @csrf_exempt
@@ -646,7 +669,7 @@ def update_cart(request):
             return http_response_by_json(CODE_PARAMS_WRONG)
 
         cart_items = helper_get_cart_items(request.user)
-        
+
         return http_response_by_json(None, {
             'total_price': cart_items['total_price']
         })
@@ -664,14 +687,15 @@ def add_cart(request):
     item_count = int(request.POST.get('how_many', 1))
 
     product_or_set_id = request.POST.get('product_or_set_id')
-    if type=='p':
+    if type == 'p':
         helper_add_product_cart(user, product_or_set_id, item_count)
-    elif type=='s':
+    elif type == 's':
         helper_add_set_cart(user, product_or_set_id, item_count)
-    elif type=='c':
+    elif type == 'c':
         helper_add_custom_set_cart(user, product_or_set_id, item_count)
 
     return http_response_by_json()
+
 
 # 함수 명 그대로의 기능
 @csrf_exempt
@@ -683,14 +707,15 @@ def delete_cart(request):
     type = request.POST.get('type', 'p')
     product_or_set_id = request.POST.get('product_or_set_id')
 
-    if type=='p':
+    if type == 'p':
         helper_delete_product_cart(user, product_or_set_id)
-    elif type=='s':
+    elif type == 's':
         helper_delete_set_cart(user, product_or_set_id)
-    elif type=='c':
+    elif type == 'c':
         helper_delete_custom_set_cart(user, product_or_set_id)
 
     return http_response_by_json()
+
 
 # 함수 명 그대로의 기능
 @csrf_exempt
@@ -704,14 +729,15 @@ def add_purchase(request):
     type = request.POST.get('type', 'p')
 
     product_or_set_id = request.POST.get('product_or_set_id')
-    if type=='p':
+    if type == 'p':
         helper_add_product_purchase(user, address, product_or_set_id)
-    elif type=='s':
+    elif type == 's':
         helper_add_set_purchase(user, address, product_or_set_id)
-    elif type=='c':
+    elif type == 'c':
         helper_add_custom_set_purchase(user, address, product_or_set_id)
 
     return http_response_by_json()
+
 
 # 함수 명 그대로의 기능
 @csrf_exempt
@@ -726,14 +752,15 @@ def delete_purchase(request):
     # delete need address ?
 
     product_or_set_id = request.POST.get('product_or_set_id')
-    if type=='p':
+    if type == 'p':
         helper_delete_product_purchase(user, address, product_or_set_id)
-    elif type=='s':
+    elif type == 's':
         helper_delete_set_purchase(user, address, product_or_set_id)
-    elif type=='c':
+    elif type == 'c':
         helper_delete_custom_set_purchase(user, address, product_or_set_id)
 
     return http_response_by_json()
+
 
 # make custom
 
@@ -744,17 +771,17 @@ def make_custom_set(request):
     original_product_id = request.POST.get('original_product_id', -1)
     new_product_id = request.POST.get('new_product_id', -1)
 
-    if set_id==-1 or original_product_id==-1 or new_product_id==-1:
+    if set_id == -1 or original_product_id == -1 or new_product_id == -1:
         return http_response_by_json(CODE_PARAMS_WRONG)
 
-    helper_make_custom_set( helper_get_user(request), set_id, original_product_id, new_product_id)
+    helper_make_custom_set(helper_get_user(request), set_id, original_product_id, new_product_id)
     return http_response_by_json(None)
+
 
 # mobile part
 
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 def mobile_login_view(request):
-
     if request.user.is_authenticated():
         return redirect('mobile:mobile_index')
 
@@ -766,12 +793,12 @@ def mobile_login_view(request):
         'fail': fail
     })
 
+
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @login_required
 def mobile_mypage_interesting_view(request, page_num=1):
     page_num = int(page_num)
     user = helper_get_user(request)
-
 
     if user is not None:
         interests = user.interest_set.filter(type='p').all()
@@ -782,15 +809,17 @@ def mobile_mypage_interesting_view(request, page_num=1):
             products.append(product_)
 
         if page_num is not None:
-            products = helper_make_paging_data(len(products), products[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
+            products = helper_make_paging_data(len(products), products[(
+                                                                       page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT],
+                                               ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_PRODUCT, page_num)
         else:
-            products = {'data':products}
+            products = {'data': products}
 
         return render(request, 'my_page_interesting.html',
-            {
-                'interests': products,
-                'tab_name': 'interesting_product'
-            })
+                      {
+                          'interests': products,
+                          'tab_name': 'interesting_product'
+                      })
 
     else:
         return redirect('mobile:mobile_index')
@@ -799,7 +828,6 @@ def mobile_mypage_interesting_view(request, page_num=1):
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_mypage_myinfo_view(request, page_num=1):
-
     user = helper_get_user(request)
     if user is not None:
 
@@ -812,10 +840,10 @@ def mobile_mypage_myinfo_view(request, page_num=1):
         categories = NCategory.objects.values()
 
         return render(request, 'my_page_myinfo.html',
-            {
-                'tab_name': 'myinfo',
-                'categories': categories
-            })
+                      {
+                          'tab_name': 'myinfo',
+                          'categories': categories
+                      })
 
     else:
         logger.error('have_to_login')
@@ -834,15 +862,17 @@ def mobile_mypage_set_view(request, page_num=1):
             sets.append(set_)
 
         if page_num is not None:
-            sets = helper_make_paging_data(len(sets), sets[(page_num-1)*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num*ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET], ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
+            sets = helper_make_paging_data(len(sets), sets[(
+                                                           page_num - 1) * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET:page_num * ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET],
+                                           ITEM_COUNT_PER_PAGE_MYPAGE_INTEREST_SET, page_num)
         else:
-            sets = {'data':sets}
+            sets = {'data': sets}
 
         return render(request, 'my_page_interesting_set.html',
-            {
-                'interests': sets,
-                'tab_name': 'interesting_set'
-            })
+                      {
+                          'interests': sets,
+                          'tab_name': 'interesting_set'
+                      })
 
     else:
         logger.error('have_to_login')
@@ -850,8 +880,7 @@ def mobile_mypage_set_view(request, page_num=1):
 
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 def mobile_mypage_cart_view(request):
-
-    cart_items = helper_get_cart_items( helper_get_user(request) )
+    cart_items = helper_get_cart_items(helper_get_user(request))
     return render(request, 'cart.html', cart_items)
 
 
@@ -870,24 +899,23 @@ def mobile_mypage_purchase_list_view(request):
 @csrf_exempt
 @mobile_login_required
 def mobile_mypage_before_purchase_view(request):
-
     cart_items = helper_get_cart_items(helper_get_user(request))
     payment_items = helper_get_payment_item(request, cart_items['total_price'], True)
-    helper_put_order_id_in_cart(request.user, payment_items['order_id'] )
+    helper_put_order_id_in_cart(request.user, payment_items['order_id'])
     profile_items = helper_get_profile_item(request)
 
-    cart_items.update( {
+    cart_items.update({
         'payment_items': payment_items,
         'profile_items': profile_items,
         'user_profile': request.user.profile
     })
 
-    return render(request, 'purchase.html', cart_items )
+    return render(request, 'purchase.html', cart_items)
+
 
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_mypage_myinfo_edit_view(request, page_num=1):
-
     user = helper_get_user(request)
     user_profile = user.profile
 
@@ -904,50 +932,49 @@ def mobile_mypage_myinfo_edit_view(request, page_num=1):
     if user is not None:
 
         return render(request, 'my_page_myinfo_edit.html',
-            {
-                'tab_name': 'myinfo',
-                'phone1': phone1,
-                'phone2': phone2,
-                'phone3': phone3,
-                'next': next
-            })
+                      {
+                          'tab_name': 'myinfo',
+                          'phone1': phone1,
+                          'phone2': phone2,
+                          'phone3': phone3,
+                          'next': next
+                      })
 
     else:
         logger.error('have_to_login')
 
 
-
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_report_view(request, category_id=None, page_num=1):
-
     user = helper_get_user(request)
     user_profile = user.profile
 
     products_ = helper_get_products(helper_get_user(request), category_id)
 
     if page_num is not None:
-        products_ = helper_make_paging_data(len(products_), products_[(page_num-1)*ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num*ITEM_COUNT_PER_PAGE_FOR_PRODUCT], ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
+        products_ = helper_make_paging_data(len(products_), products_[(
+                                                                      page_num - 1) * ITEM_COUNT_PER_PAGE_FOR_PRODUCT:page_num * ITEM_COUNT_PER_PAGE_FOR_PRODUCT],
+                                            ITEM_COUNT_PER_PAGE_FOR_PRODUCT, page_num)
     else:
         products_ = {'data': products_}
-
 
     if user is not None:
 
         return render(request, 'report.html',
-            {
-                'products': products_,
-                'tab_name': 'myinfo',
-                'next': next
-            })
+                      {
+                          'products': products_,
+                          'tab_name': 'myinfo',
+                          'next': next
+                      })
 
     else:
         logger.error('have_to_login')
 
+
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @mobile_login_required
 def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=None):
-
     if product_id is not None:
         product = helper_get_product_detail(product_id, helper_get_user(request))
 
@@ -963,18 +990,17 @@ def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=
         user = helper_get_user(request)
         user_profile = user.profile
 
-
         if user is not None:
 
             return render(request, 'report_detail.html',
-                {
-                    'tab_name': 'myinfo',
-                    'next': next,
-                    'product': product,
-                    'magazines': magazines,
-                    'magazines_fold': magazines_fold,
-                    'blog_reviews': blog_reivews
-                })
+                          {
+                              'tab_name': 'myinfo',
+                              'next': next,
+                              'product': product,
+                              'magazines': magazines,
+                              'magazines_fold': magazines_fold,
+                              'blog_reviews': blog_reivews
+                          })
 
         else:
             logger.error('have_to_login')
@@ -986,7 +1012,6 @@ def mobile_report_detail_view(request, category_id=None, page_num=1, product_id=
 # 함수 명 그대로의 기능 ( web과 prefix만 다름 )
 @csrf_exempt
 def mobile_report_form_index_view(request):
-
     return render(request, 'report_form_index.html',
                   {
                       'next': reverse('mobile_report_form'),
@@ -1022,10 +1047,10 @@ def mobile_report_form_view(request):
                       'survey_range': survey_range
                   })
 
+
 # user의 survey에 입력한 정보를 서버에 입력하는 api
 @csrf_exempt
 def request_survey(request):
-
     data = {
         'survey_id': request.POST.get('survey_id', None),
         'preference_brand': request.POST.get('preference_brand', None),
@@ -1050,10 +1075,11 @@ def do_interest_product(request):
     product_id = request.POST.get('product_id')
     user_survey_id = request.POST.get('user_survey_id')
     try:
-        interest = NInterest.objects.create(user_id=user_id, product_id = product_id, user_survey_id = user_survey_id)
+        interest = NInterest.objects.create(user_id=user_id, product_id=product_id, user_survey_id=user_survey_id)
         return http_response_by_json()
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)
+
 
 # 함수 명 그대로의 기능
 @csrf_exempt
@@ -1064,6 +1090,7 @@ def undo_interest_product(request):
     interest.delete()
 
     return http_response_by_json()
+
 
 # survey를 다시 할 때 호출되는 page
 @csrf_exempt
@@ -1076,14 +1103,15 @@ def survey_again(request):
     user_survey = UserSurvey.objects.filter(id=user_survey_id)[:1][0]
     user_survey_detail_list = user_survey.details.all()
     for user_survey_detail in user_survey_detail_list:
-        UserSurveyDetail.objects.create(user_survey=new_user_survey, survey_item_option=user_survey_detail.survey_item_option)
+        UserSurveyDetail.objects.create(user_survey=new_user_survey,
+                                        survey_item_option=user_survey_detail.survey_item_option)
 
     item = request.POST.get('item')
     reason = request.POST.get('reason')
     comments = request.POST.get('comments')
     try:
         user_survey_again = UserSurveyAgain.objects.create(user_survey=new_user_survey, item=item, reason=reason,
-                                                           comments = comments)
+                                                           comments=comments)
         return http_response_by_json()
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)
@@ -1099,7 +1127,7 @@ def request_more(request):
     user_survey = UserSurvey.objects.get(pk=user_survey_id)
 
     try:
-        UserSurveyMore.objects.create(user_survey=user_survey, comments = comments)
+        UserSurveyMore.objects.create(user_survey=user_survey, comments=comments)
         return http_response_by_json()
     except IntegrityError as e:
         return http_response_by_json(CODE_INTEGRITY_ERROR)
@@ -1148,6 +1176,7 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin,
                     "redirect_field_name": redirect_field_name,
                     "redirect_field_value": redirect_field_value})
         return ret
+
 
 signup = SignupView.as_view()
 

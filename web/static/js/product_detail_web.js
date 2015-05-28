@@ -12,7 +12,7 @@ $(function(){
               scrollTop: $(this).offset().top-100
             }, 500);
         });
-    }
+    };
 
 
     $('.product-info-btn').click(function(e){

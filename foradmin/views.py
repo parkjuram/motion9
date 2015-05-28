@@ -32,11 +32,11 @@ def manage_shipping_view(request):
             elif purchase.payment.status == 'f':
                 purchase.payment.status_name = '배송완료'
 
-            purchase.new_mileage = int(purchase.payment.auth_amount)/100
+            purchase.new_mileage = int(purchase.payment.auth_amount) / 100
 
         return render(request, 'manage_shipping.html', {
-            'purchases':purchases
-        } )
+            'purchases': purchases
+        })
 
 
     else:
@@ -47,8 +47,8 @@ def manage_shipping_view(request):
 # status( 배송대기, 배송중 등등...)과 송장번호(shipping_number)를 update한다.
 @csrf_exempt
 def payment_update(request, pk):
-    status = request.POST.get('status',None )
-    shipping_number = request.POST.get('shipping_number',None )
+    status = request.POST.get('status', None)
+    shipping_number = request.POST.get('shipping_number', None)
 
     if status is None or shipping_number is None:
         pass
@@ -61,6 +61,7 @@ def payment_update(request, pk):
 
     return http_response_by_json(const.CODE_PARAMS_WRONG)
 
+
 # Purchase관련 내용을 입력하는 Api이다.
 # 예를 들어 어떤 사용자가 어떤 상품을 몇개를 샀는지 같은 정보를 입력하는데 사용한다
 class PurchaseUpdateView(UpdateView):
@@ -70,6 +71,7 @@ class PurchaseUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('foradmin:manage_shipping', args=[])
+
 
 # 위에서는 purchase관련 내용을 입력했으면 이곳에선 payment관련 내용을 입력한다.
 # 위의 Purchase에서 사용한 Payment를 입력한다. 예를 들어 상품을 사는데 무슨 결제수단으로 얼마를 결제했는지 등 이다.

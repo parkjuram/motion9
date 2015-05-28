@@ -10,14 +10,16 @@ class MainImage(models.Model):
     def __unicode__(self):
         return '(%r)MainImage : name(%s) image(%r)' % (self.id, self.name, self.image)
 
+
 class Advertisement(models.Model):
     title = models.CharField(max_length=100, unique=True, default='default')
-    category = models.ForeignKey('web.Category',null=True)
+    category = models.ForeignKey('web.Category', null=True)
     image = models.ImageField(null=True, upload_to='image/advertisement/')
     mobile_image = models.ImageField(null=True, upload_to='image/advertisement/mobile/')
 
     def __unicode__(self):
         return '(%r)Advertisement : image(%r)' % (self.id, self.image)
+
 
 class Preference(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -26,6 +28,7 @@ class Preference(models.Model):
     def __unicode__(self):
         return '(%r)Preference : name(%s) content(%r)' % (self.id, self.name, self.content)
 
+
 @python_2_unicode_compatible
 class Survey(models.Model):
     title = models.TextField(unique=True)
@@ -33,6 +36,7 @@ class Survey(models.Model):
 
     def __str__(self):
         return self.title
+
 
 @python_2_unicode_compatible
 class SurveyItem(models.Model):
@@ -46,6 +50,7 @@ class SurveyItem(models.Model):
 
     def __str__(self):
         return self.survey.title + "|" + self.question
+
 
 @python_2_unicode_compatible
 class SurveyItemOption(models.Model):

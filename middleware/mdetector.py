@@ -3,7 +3,6 @@ from django.core.urlresolvers import resolve
 
 
 class LoginDetectionMiddleware(object):
-
     def process_request(self, request):
         is_first_login = False
         current_url = resolve(request.path_info).url_name
@@ -59,7 +58,7 @@ class MobileDetectionMiddleware(object):
                                     "keji", "leno", "lg-c", "lg-d", "lg-g", "lge-",
                                     "maui", "maxo", "midp", "mits", "mmef", "mobi",
                                     "mot-", "moto", "mwbp", "nec-", "newt", "noki",
-                                    "xda",  "palm", "pana", "pant", "phil", "play",
+                                    "xda", "palm", "pana", "pant", "phil", "play",
                                     "port", "prox", "qwap", "sage", "sams", "sany",
                                     "sch-", "sec-", "send", "seri", "sgh-", "shar",
                                     "sie-", "siem", "smal", "smar", "sony", "sph-",

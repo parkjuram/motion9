@@ -13,7 +13,7 @@ $(function(){
            var id=  $(this).attr('data-id');
            var cnt = $(this).val();
 
-           var price = parseInt($('#'+id+'-price').text())
+           var price = parseInt($('#'+id+'-price').text());
            totalCost += price * cnt;
         });
         updateTotalCost(totalCost);

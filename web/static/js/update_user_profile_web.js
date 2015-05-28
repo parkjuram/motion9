@@ -29,7 +29,7 @@ $(function(){
         // iframe을 넣은 element를 안보이게 한다.
 //        element.style.display = 'none';
         $(element).jqmHide();
-    }
+    };
 
     $('#searchAddressBtn').click(function(e){
         showDaumPostcode();
@@ -39,7 +39,7 @@ $(function(){
         e.preventDefault();
         var update_form = document.update;
         update_form.submit();
-    })
+    });
 
     $('#btn-cancel').click( function(e) {
         e.preventDefault();

@@ -166,7 +166,7 @@ $(function(){
                   console.log(textStatus);
               }
 		});
-    }
+    };
 
 
     $('.btn-for-purchase').click(function(e){

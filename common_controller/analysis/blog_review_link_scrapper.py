@@ -3,6 +3,7 @@ import requests
 from urllib import quote
 from bs4 import BeautifulSoup
 
+
 class BlogReviewLinkScrapper:
     def __init__(self, logger):
         self.logger = logger
@@ -25,29 +26,29 @@ class BlogReviewLinkScrapper:
 
         for query_item_url in query_item_list:
 
-            self.logger.info( query_item_url )
+            self.logger.info(query_item_url)
 
             query_item_url = quote(query_item_url)
 
-            self.logger.info( query_item_url )
+            self.logger.info(query_item_url)
 
-            for start in range(1,1000,10):
+            for start in range(1, 1000, 10):
                 if start == 1:
                     full_url = self.query_start_url + query_item_url
                 else:
                     full_url = self.query_start_url + query_item_url + self.query_end_url + str(start)
 
-                self.logger.info( full_url )
+                self.logger.info(full_url)
 
                 r = requests.request(method='GET', url=full_url)
                 soup = BeautifulSoup(r.text)
                 r.close()
                 blog_list = soup.select('.sh_blog_top')
 
-                self.logger.info( blog_list )
+                self.logger.info(blog_list)
 
                 for blog_item in blog_list:
-                    if not(blog_item.select('._sp_each_url')[0]['href'] in self.blog_url_list):
+                    if not (blog_item.select('._sp_each_url')[0]['href'] in self.blog_url_list):
                         self.blog_url_list.append(blog_item.select('._sp_each_url')[0]['href'])
 
                 if len(blog_list) != 10:

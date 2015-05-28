@@ -6,7 +6,7 @@ $(function(){
               scrollTop: $(this).offset().top-100
             }, 500);
         });
-    }
+    };
 
    $('a.tab-btn').click(function(e){
         e.preventDefault();

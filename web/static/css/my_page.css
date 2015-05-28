@@ -50,7 +50,7 @@ a:hover {
     padding-top: 20px;
     margin: 15px;
     padding: 20px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     /*border: 1px solid #bcbfc3;*/
     /*box-shadow: 0 0 0.3em rgba(202, 203, 209, 0.2), 0 1px 0.3em rgba(0, 0, 0, 0.1);*/
     /*border-radius: 0.2em;*/
@@ -128,7 +128,7 @@ a:hover {
 
 .tab-menu {
     margin: 0;
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 12px;
     padding-top: 6px;
     background-color: white;
@@ -173,22 +173,22 @@ a.tab-selected {
     white-space: nowrap;
     display: -webkit-box;
     display: -moz-box;
-     -webkit-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
-    -moz-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
-    box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
-    border-bottom: 0px;
+     -webkit-box-shadow: inset 25px 0 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0 25px -25px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: inset 25px 0 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0 25px -25px rgba(0, 0, 0, 0.45);
+    box-shadow: inset 25px 0 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0 25px -25px rgba(0, 0, 0, 0.45);
+    border-bottom: 0;
 }
 
 .nav-tabs > li {
     float: none;
     /*border-right: 1px solid #e5e5e6;*/
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .nav-tabs > li > a {
     float: none;
     font-size: 10px;
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
@@ -254,7 +254,7 @@ a.tab-selected {
     margin-bottom : 15px!important;
     background-color: transparent!important;
     border: 2px solid #a7a7a8!important;
-    border-radius: 0px!important;
+    border-radius: 0 !important;
 }
 
 .btn-interest:hover {
@@ -266,10 +266,10 @@ a.tab-selected {
 
 .int {
     padding:10px!important;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     text-align: center;
     color:#17bcb8;
-    -webkit-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
-  -moz-box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
-  box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: inset 25px 0 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0 25px -25px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: inset 25px 0 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0 25px -25px rgba(0, 0, 0, 0.45);
+  box-shadow: inset 25px 0 25px -25px rgba(0, 0, 0, 0.45), inset -25px 0 25px -25px rgba(0, 0, 0, 0.45);
 }

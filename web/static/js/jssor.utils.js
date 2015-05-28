@@ -422,6 +422,9 @@ var $JssorUtils$ = window.$JssorUtils$ = new function () {
         }
     }
 
+    /**
+     * @return {boolean}
+     */
     function IsBrowserIE() {
         DetectBrowser();
         return browser == $ROWSER_IE$;
@@ -432,11 +435,17 @@ var $JssorUtils$ = window.$JssorUtils$ = new function () {
         return IsBrowserIE() && (browserRuntimeVersion < 6 || document.compatMode == "BackCompat");   //Composite to "CSS1Compat"
     }
 
+    /**
+     * @return {boolean}
+     */
     function IsBrowserFireFox() {
         DetectBrowser();
         return browser == $ROWSER_FIREFOX$;
     }
 
+    /**
+     * @return {boolean}
+     */
     function IsBrowserSafari() {
         DetectBrowser();
         return browser == $ROWSER_SAFARI$;
@@ -2256,7 +2265,7 @@ $JssorAnimator$ = function (delay, duration, options, elmt, fromStyles, toStyles
     function PlayToPosition(toPosition, callback, noStop) {
         if (!_AutoPlay) {
             _AutoPlay = true;
-            _NoStop = noStop
+            _NoStop = noStop;
             _Callback = callback;
             toPosition = Math.max(toPosition, _Position_OuterBegin);
             toPosition = Math.min(toPosition, _Position_OuterEnd);

@@ -12,7 +12,7 @@ $(function(){
         // iframe을 넣은 element를 안보이게 한다.
 //        element.style.display = 'none';
         $(element).jqmHide();
-    }
+    };
 
     function showDaumPostcode() {
         console.log('showDaumPostCode();');

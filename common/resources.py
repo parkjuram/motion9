@@ -7,14 +7,12 @@ from models import NCategory, NProduct
 
 
 class CategoryResource(resources.ModelResource):
-
     class Meta:
         model = NCategory
         fields = ('id', 'name', 'name_for_kor',)
 
 
 class ProductResource(resources.ModelResource):
-
     class Meta:
         model = NProduct
         fields = ('name', 'brand', 'price', 'capacity', 'capacity_unit', 'category__name_for_kor', 'category',)
